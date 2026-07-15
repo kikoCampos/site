@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiko Campos — Programas & Projetos (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0D2137;--navy2:#074A6A;--teal:#1A7A8A;--terra:#C05C20;--ink:#2A2E35;--muted:#5b6572;--line:#e6e9ee;--bg-soft:#f6f8fa;--radius:14px;--shadow:0 10px 30px rgba(13,33,55,.08);--shadow-lg:0 20px 50px rgba(13,33,55,.14)}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Inter',system-ui,Arial,sans-serif;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;color:var(--navy);letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Montserrat';font-weight:600;font-size:15px;padding:13px 24px;border-radius:999px;cursor:pointer;border:1.5px solid transparent;transition:.2s;white-space:nowrap}
+  .btn-primary{background:var(--terra);color:#fff}.btn-primary:hover{background:#a54d18;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}.btn-ghost:hover{border-color:#fff}
+  .btn-ghost-d{background:transparent;color:var(--navy);border-color:var(--line)}.btn-ghost-d:hover{border-color:var(--teal);color:var(--teal)}
+  .eyebrow{font-family:'Montserrat';font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+  .section{padding:82px 0}.center{text-align:center}
+  .lead{font-size:19px;color:var(--muted);max-width:700px}
+  .mock-flag{position:fixed;bottom:16px;right:16px;z-index:200;background:var(--navy);color:#fff;font-family:'Montserrat';font-size:12px;font-weight:600;padding:9px 14px;border-radius:999px;box-shadow:var(--shadow-lg);opacity:.92}
+  /* HEADER */
+  header.site{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{font-family:'Montserrat';font-weight:800;font-size:20px;color:var(--navy);letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--terra)}
+  .menu{display:flex;align-items:center;gap:24px;list-style:none;margin:0;padding:0}
+  .menu>li>a{font-family:'Montserrat';font-weight:600;font-size:14.5px;color:var(--navy);padding:8px 2px}
+  .menu>li>a:hover{color:var(--teal)}.menu>li>a.active{color:var(--terra)}
+  .has-drop{position:relative}.has-drop>a::after{content:"▾";font-size:10px;margin-left:5px;color:var(--muted)}
+  .drop{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);min-width:280px;padding:10px;opacity:0;visibility:hidden;transition:.18s}
+  .has-drop:hover .drop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .drop a{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border-radius:10px}
+  .drop a:hover{background:var(--bg-soft)}.drop .ic{font-size:18px}
+  .drop b{font-family:'Montserrat';font-weight:600;font-size:14px;color:var(--navy);display:block}.drop small{color:var(--muted);font-size:12.5px}
+  .hamb{display:none;font-size:24px;background:none;border:0;color:var(--navy)}
+  /* HERO */
+  .hero{background:linear-gradient(180deg,#fff,var(--bg-soft));padding:78px 0 44px}
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:center}
+  .hero h1{font-size:44px;line-height:1.14;font-weight:800;margin:14px 0 18px}
+  .hero h1 .hl{color:var(--terra)}
+  .hero p.lead{margin-bottom:26px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+  .hero-note{font-size:13.5px;color:var(--muted)}
+  .side{background:var(--navy);color:#fff;border-radius:20px;padding:30px;box-shadow:var(--shadow-lg)}
+  .side h3{color:#fff;font-size:16px;margin:0 0 6px}
+  .side .cap{color:#8fa0b2;font-size:13px;margin-bottom:16px}
+  .side .li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:14.5px;color:#d3dce6}
+  .side .li:last-child{border:0}.side .ck{color:var(--terra);font-weight:800}
+  /* PROGRAMS */
+  .head-block{max-width:740px;margin:0 auto 46px}
+  h2.big{font-size:34px;margin:12px 0 12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .prog{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;transition:.22s}
+  .prog:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .prog.feat{background:var(--navy);border-color:var(--navy)}
+  .prog .tag{font-family:'Montserrat';font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+  .prog.feat .tag{color:#7fd0dc}
+  .prog h3{font-size:22px;margin:0 0 10px}.prog.feat h3{color:#fff}
+  .prog p{color:var(--muted);font-size:15px;margin:0 0 18px}.prog.feat p{color:#c4cdd8}
+  .prog ul{list-style:none;margin:0 0 20px;padding:0;flex:1}
+  .prog li{padding:7px 0 7px 24px;position:relative;font-size:14.5px;color:var(--ink)}
+  .prog.feat li{color:#d3dce6}
+  .prog li::before{content:"→";position:absolute;left:0;color:var(--terra);font-weight:700}
+  .prog .go{font-family:'Montserrat';font-weight:600;font-size:14.5px;color:var(--terra)}
+  .prog.feat .go{color:#fff}
+  /* METHOD */
+  .method{background:var(--navy);color:#fff}
+  .method h2{color:#fff}.method .lead{color:#b9c4d1}
+  .forces{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:12px}
+  .force{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:28px}
+  .force .k{font-family:'Montserrat';font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:#7fd0dc;margin-bottom:10px}
+  .force h3{color:#fff;font-size:20px;margin:0 0 8px}
+  .force p{color:#c4cdd8;font-size:14.5px;margin:0}
+  .formula{margin-top:34px;background:rgba(192,92,32,.14);border:1px solid rgba(192,92,32,.4);border-radius:14px;padding:22px;text-align:center;font-family:'Montserrat';font-weight:600;font-size:17px;color:#fff}
+  .formula .op{color:var(--terra);margin:0 10px}
+  /* DELIVERABLES */
+  .del{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .dcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .dcard .ic{font-size:26px}.dcard h4{margin:12px 0 6px;font-size:16px}.dcard p{margin:0;color:var(--muted);font-size:14px}
+  /* AUDIENCE */
+  .aud{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .aud .a{background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:14px 20px;font-family:'Montserrat';font-weight:600;font-size:15px;color:var(--navy)}
+  /* CASES */
+  .case{border:1px solid var(--line);border-left:4px solid var(--terra);border-radius:12px;padding:26px;background:#fff}
+  .case .co{font-family:'Montserrat';font-weight:700;color:var(--navy);font-size:15px;margin-bottom:8px}.case p{margin:0;color:var(--muted);font-size:15px}
+  /* CTA */
+  .cta{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+  .cta h2{color:#fff;font-size:34px;margin:0 0 10px}.cta .lead{color:#c4cdd8;margin:0 auto 26px}
+  .cta .btn-primary{font-size:16px;padding:15px 30px}.cta small{display:block;margin-top:16px;color:#8fa0b2;font-size:13px}
+  /* FOOTER */
+  footer.site{background:#08121f;color:#c4cdd8;padding:56px 0 26px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+  .foot .brand{color:#fff;margin-bottom:14px}.foot p{font-size:14px;color:#8b98a8;max-width:270px}
+  .foot h5{font-family:'Montserrat';font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#7fd0dc;margin:0 0 14px}
+  .foot ul{list-style:none;margin:0;padding:0}.foot li{margin-bottom:9px}
+  .foot a{font-size:14px;color:#c4cdd8}.foot a:hover{color:#fff}
+  .foot .ext::after{content:"↗";font-size:11px;margin-left:5px;color:#7fd0dc}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#8b98a8}
+  @media(max-width:900px){.hero-grid,.grid-3,.grid-2,.forces,.del,.foot-grid{grid-template-columns:1fr}.menu{display:none}.hamb{display:block}.hero h1{font-size:32px}.section{padding:54px 0}}
+</style>
+
+<style id="mobilenav">
+@media(max-width:900px){
+ .menu.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:flex-start;background:#fff;border-bottom:1px solid var(--line);padding:14px 24px;gap:6px;box-shadow:var(--shadow-lg);z-index:120}
+ .menu.open>li{width:100%}
+ .menu.open .drop{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;min-width:0;padding:4px 0 4px 12px}
+ .menu.open .has-drop>a::after{content:""}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="wrap nav">
+    <a href="https://kikocampos.com" class="brand"><span class="dot"></span>KIKO CAMPOS</a>
+    <ul class="menu">
+      <li><a href="index.html">Início</a></li>
+      <li class="has-drop">
+        <a href="#" class="active">Serviços</a>
+        <div class="drop">
+          <a href="palestras.html"><span class="ic">🎤</span><span><b>Palestras &amp; Keynotes</b><small>Entrada · alto impacto</small></span></a>
+          <a href="programas.html"><span class="ic">🧭</span><span><b>Programas &amp; Projetos</b><small>Transformação e liderança</small></span></a>
+          <a href="advisory.html"><span class="ic">♟️</span><span><b>Advisory</b><small>Conselho contínuo</small></span></a>
+        </div>
+      </li>
+      <li class="has-drop">
+        <a href="#">Conteúdo &amp; Pesquisa</a>
+        <div class="drop">
+          <a href="https://jovens.kikocampos.com?utm_source=programas&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-jovens"><span class="ic">📊</span><span><b>Pesquisa Jovens Talentos</b><small>~5 mil respondentes</small></span></a>
+          <a href="https://mente.kikocampos.com?utm_source=programas&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-mente"><span class="ic">🎙️</span><span><b>Mente no Trabalho</b><small>Lives + newsletter (39 mil)</small></span></a>
+          <a href="https://blog.kikocampos.com"><span class="ic">✍️</span><span><b>Blog</b><small>Artigos e reflexões</small></span></a>
+          <a href="programas.html"><span class="ic">📗</span><span><b>O Livro &amp; o Método</b><small>O Novo Código da Mudança</small></span></a>
+        </div>
+      </li>
+      <li><a href="index.html">Sobre</a></li>
+    </ul>
+    <div><a href="#contato" class="btn btn-primary">Desenhar meu programa</a><button class="hamb">☰</button></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Programas &amp; Projetos</span>
+      <h1>Transformação cultural como <span class="hl">disciplina</span> — com escopo, ritmo e evidência.</h1>
+      <p class="lead">Programas de imersão para mudar a cultura e desenvolver a liderança de verdade: método claro, métricas que dão ritmo e governança que sustenta a mudança depois que eu saio.</p>
+      <div class="hero-cta">
+        <a href="#contato" class="btn btn-primary">Desenhar meu programa</a>
+        <a href="#programas" class="btn btn-ghost-d">Ver as frentes</a>
+      </div>
+      <p class="hero-note">Escopo e cronograma definidos · Baseado em pesquisa e no método do livro</p>
+    </div>
+    <div class="side">
+      <h3>O que diferencia esses programas</h3>
+      <div class="cap">Não é palestra nem workshop avulso. É transformação sustentada.</div>
+      <div class="li"><span class="ck">✓</span><span>Diagnóstico sem ilusões antes de qualquer ação</span></div>
+      <div class="li"><span class="ck">✓</span><span>Rituais mínimos e métricas que criam ritmo</span></div>
+      <div class="li"><span class="ck">✓</span><span>Autoria da mudança fica com a sua liderança</span></div>
+      <div class="li"><span class="ck">✓</span><span>Governança para manter vivo no longo prazo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="section" id="programas">
+  <div class="wrap">
+    <div class="head-block center">
+      <span class="eyebrow">Três frentes</span>
+      <h2 class="big">Por onde a transformação começa</h2>
+      <p class="lead" style="margin:0 auto">Podem ser contratadas isoladamente ou como uma jornada integrada. Sempre a partir do seu desafio real.</p>
+    </div>
+    <div class="grid-3">
+      <div class="prog">
+        <span class="tag">Cultura</span>
+        <h3>Transformação Cultural</h3>
+        <p>Mudar o sistema que existe ao redor das pessoas — do valor declarado ao vivido.</p>
+        <ul>
+          <li>Diagnóstico de cultura e clima</li>
+          <li>Rituais e métricas de cultura</li>
+          <li>Narrativa e histórias que sustentam</li>
+          <li>Governança de longo prazo</li>
+        </ul>
+        <a href="#contato" class="go">Falar sobre cultura →</a>
+      </div>
+      <div class="prog feat">
+        <span class="tag">Mais procurado</span>
+        <h3>Liderança &amp; Times</h3>
+        <p>Desenvolver líderes e times de alta performance com prática, não só teoria.</p>
+        <ul>
+          <li>Trilha de desenvolvimento de líderes</li>
+          <li>Segurança psicológica na prática</li>
+          <li>Rituais de time e cadência</li>
+          <li>Acompanhamento e evidência de mudança</li>
+        </ul>
+        <a href="#contato" class="go">Desenvolver minha liderança →</a>
+      </div>
+      <div class="prog">
+        <span class="tag">Diagnóstico</span>
+        <h3>Diagnóstico de Cultura</h3>
+        <p>Um raio-x do seu sistema cultural, com plano de ação priorizado e donos institucionais.</p>
+        <ul>
+          <li>Medição da distância discurso x prática</li>
+          <li>Mapa de forças a preservar</li>
+          <li>Prioridades e quick wins</li>
+          <li>Plano com metas e responsáveis</li>
+        </ul>
+        <a href="#contato" class="go">Diagnosticar minha cultura →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="section method">
+  <div class="wrap">
+    <div class="head-block center">
+      <span class="eyebrow" style="color:#7fd0dc">O método</span>
+      <h2 class="big">O Novo Código da Mudança</h2>
+      <p class="lead">Todo programa roda sobre o mesmo método — 15 Códigos organizados em três forças. Cultura tratada como sistema vivo, integrado e mensurável.</p>
+    </div>
+    <div class="forces">
+      <div class="force"><div class="k">Consciência</div><h3>Enxergar o sistema</h3><p>Diagnosticar sem ilusões, descobrir o que preservar, criar métricas e rituais, revelar a sombra do líder.</p></div>
+      <div class="force"><div class="k">Coragem</div><h3>Mobilizar as pessoas</h3><p>Conectar-se para liderar, dar autoria, usar a diversidade como legitimidade e contar a cultura em histórias.</p></div>
+      <div class="force"><div class="k">Consistência</div><h3>Sustentar no tempo</h3><p>Medir para manter vivo, acelerar com disciplina, aprender todo dia e criar governança que sustenta.</p></div>
+    </div>
+    <div class="formula">Comportamento observável <span class="op">+</span> Ritual mínimo <span class="op">+</span> Evidência de mudança</div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="section">
+  <div class="wrap">
+    <div class="head-block center">
+      <span class="eyebrow">O que você recebe</span>
+      <h2 class="big">Entregáveis concretos</h2>
+    </div>
+    <div class="del">
+      <div class="dcard"><div class="ic">🔎</div><h4>Diagnóstico</h4><p>Leitura clara da cultura atual e da distância entre discurso e prática.</p></div>
+      <div class="dcard"><div class="ic">📊</div><h4>Métricas &amp; painel</h4><p>Indicadores de cultura e liderança para acompanhar a evolução.</p></div>
+      <div class="dcard"><div class="ic">🔁</div><h4>Rituais mínimos</h4><p>Práticas simples e repetíveis que dão ritmo à mudança.</p></div>
+      <div class="dcard"><div class="ic">🏛️</div><h4>Governança</h4><p>Estrutura e donos para sustentar depois que o programa termina.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="section" style="background:var(--bg-soft)">
+  <div class="wrap center">
+    <span class="eyebrow">Para quem</span>
+    <h2 class="big" style="margin-bottom:26px">Onde esses programas entram</h2>
+    <div class="aud">
+      <div class="a">Empresas em transformação cultural</div>
+      <div class="a">Integração pós-fusão (M&amp;A)</div>
+      <div class="a">Crescimento acelerado / escala</div>
+      <div class="a">Nova liderança ou reestruturação</div>
+      <div class="a">Times executivos de alta performance</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section">
+  <div class="wrap">
+    <div class="head-block center"><span class="eyebrow">Na prática</span><h2 class="big">Cases</h2></div>
+    <div class="grid-2">
+      <div class="case"><div class="co">Walmart Brasil · Grupo BIG</div><p>Programa de transformação cultural em operação de grande porte, com rituais de liderança e métricas sustentadas ao longo do tempo.</p></div>
+      <div class="case"><div class="co">Integração com o Carrefour</div><p>Sustentação cultural durante uma integração complexa — preservar o que dava força e acelerar com disciplina.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta" id="contato">
+  <div class="wrap center">
+    <span class="eyebrow" style="color:#7fd0dc">Vamos desenhar</span>
+    <h2>Qual é o seu desafio de cultura ou liderança?</h2>
+    <p class="lead">Me conte o momento da sua organização e eu desenho o programa certo para ele. Resposta pessoal em até 48h.</p>
+    <div><a href="mailto:kiko@kikocampos.com?subject=Programa%20-%20Transformação%20e%20Liderança" class="btn btn-primary">Desenhar meu programa</a></div>
+    <small>Ou escreva direto para kiko@kikocampos.com</small>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><div class="brand"><span class="dot"></span>KIKO CAMPOS</div><p>Liderança executiva e transformação cultural. Cultura como sistema vivo, integrado e mensurável.</p></div>
+      <div><h5>Serviços</h5><ul><li><a href="palestras.html">Palestras &amp; Keynotes</a></li><li><a href="programas.html">Programas &amp; Projetos</a></li><li><a href="advisory.html">Advisory</a></li><li><a href="#contato">Fale comigo</a></li></ul></div>
+      <div><h5>Conteúdo &amp; Pesquisa</h5><ul><li><a class="ext" href="https://jovens.kikocampos.com?utm_source=programas&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-jovens">Pesquisa Jovens Talentos</a></li><li><a class="ext" href="https://mente.kikocampos.com?utm_source=programas&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-mente">Mente no Trabalho</a></li><li><a href="programas.html">O Livro</a></li><li><a class="ext" href="https://blog.kikocampos.com">Blog</a></li><li><a class="ext" href="https://mente.kikocampos.com?utm_source=programas&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-mente">Newsletter (39 mil)</a></li></ul></div>
+      <div><h5>Contato</h5><ul><li><a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a></li><li><a class="ext" href="#">LinkedIn</a></li><li><a href="privacidade.html">Políticas de Privacidade</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Kiko Campos. Todos os direitos reservados.</span><span>Parte do ecossistema kikocampos.com · jovens · mente</span></div>
+  </div>
+</footer>
+
+
+
+<script>
+document.querySelectorAll('.hamb').forEach(function(b){b.addEventListener('click',function(){var m=document.querySelector('.menu');if(m)m.classList.toggle('open');});});
+</script>
+
+<script>
+document.querySelectorAll('form.form').forEach(function(f){
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var parts=[];
+    f.querySelectorAll('input,select,textarea').forEach(function(el){
+      var lbl=(el.closest('.field')&&el.closest('.field').querySelector('label'))?el.closest('.field').querySelector('label').innerText:'';
+      if(el.value) parts.push((lbl?lbl+': ':'')+el.value);
+    });
+    var subj='Contato pelo site - kikocampos.com';
+    var body=parts.join('\n')||'Olá Kiko, gostaria de falar com você.';
+    window.location.href='mailto:kiko@kikocampos.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+  });
+});
+</script>
+</body>
+</html>
