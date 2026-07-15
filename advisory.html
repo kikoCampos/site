@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiko Campos — Advisory (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0D2137;--navy2:#074A6A;--teal:#1A7A8A;--terra:#C05C20;--ink:#2A2E35;--muted:#5b6572;--line:#e6e9ee;--bg-soft:#f6f8fa;--radius:14px;--shadow:0 10px 30px rgba(13,33,55,.08);--shadow-lg:0 20px 50px rgba(13,33,55,.14)}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Inter',system-ui,Arial,sans-serif;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;color:var(--navy);letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Montserrat';font-weight:600;font-size:15px;padding:13px 24px;border-radius:999px;cursor:pointer;border:1.5px solid transparent;transition:.2s;white-space:nowrap}
+  .btn-primary{background:var(--terra);color:#fff}.btn-primary:hover{background:#a54d18;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}.btn-ghost:hover{border-color:#fff}
+  .btn-ghost-d{background:transparent;color:var(--navy);border-color:var(--line)}.btn-ghost-d:hover{border-color:var(--teal);color:var(--teal)}
+  .eyebrow{font-family:'Montserrat';font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+  .section{padding:82px 0}.center{text-align:center}
+  .lead{font-size:19px;color:var(--muted);max-width:700px}
+  .mock-flag{position:fixed;bottom:16px;right:16px;z-index:200;background:var(--navy);color:#fff;font-family:'Montserrat';font-size:12px;font-weight:600;padding:9px 14px;border-radius:999px;box-shadow:var(--shadow-lg);opacity:.92}
+  /* HEADER */
+  header.site{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{font-family:'Montserrat';font-weight:800;font-size:20px;color:var(--navy);letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--terra)}
+  .menu{display:flex;align-items:center;gap:24px;list-style:none;margin:0;padding:0}
+  .menu>li>a{font-family:'Montserrat';font-weight:600;font-size:14.5px;color:var(--navy);padding:8px 2px}
+  .menu>li>a:hover{color:var(--teal)}.menu>li>a.active{color:var(--terra)}
+  .has-drop{position:relative}.has-drop>a::after{content:"▾";font-size:10px;margin-left:5px;color:var(--muted)}
+  .drop{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);min-width:280px;padding:10px;opacity:0;visibility:hidden;transition:.18s}
+  .has-drop:hover .drop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .drop a{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border-radius:10px}
+  .drop a:hover{background:var(--bg-soft)}.drop .ic{font-size:18px}
+  .drop b{font-family:'Montserrat';font-weight:600;font-size:14px;color:var(--navy);display:block}.drop small{color:var(--muted);font-size:12.5px}
+  .hamb{display:none;font-size:24px;background:none;border:0;color:var(--navy)}
+  /* HERO */
+  .hero{background:linear-gradient(180deg,#fff,var(--bg-soft));padding:78px 0 44px}
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:center}
+  .hero h1{font-size:44px;line-height:1.14;font-weight:800;margin:14px 0 18px}
+  .hero h1 .hl{color:var(--terra)}
+  .hero p.lead{margin-bottom:26px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+  .hero-note{font-size:13.5px;color:var(--muted)}
+  .side{background:var(--navy);color:#fff;border-radius:20px;padding:30px;box-shadow:var(--shadow-lg)}
+  .side h3{color:#fff;font-size:16px;margin:0 0 16px}
+  .side .li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:14.5px;color:#d3dce6}
+  .side .li:last-child{border:0}.side .li b{color:#fff}.side .ck{color:var(--terra);font-weight:800}
+  /* WHAT IS / ISN'T */
+  .head-block{max-width:740px;margin:0 auto 46px}
+  h2.big{font-size:34px;margin:12px 0 12px}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .isbox{border-radius:var(--radius);padding:28px;border:1px solid var(--line)}
+  .is{background:#f4faf9;border-color:#cfe8e6}.isnt{background:#fbf4ef;border-color:#f0dccb}
+  .isbox h3{font-size:18px;margin:0 0 14px;display:flex;align-items:center;gap:8px}
+  .isbox ul{list-style:none;margin:0;padding:0}
+  .isbox li{padding:8px 0 8px 26px;position:relative;font-size:15px;color:var(--ink)}
+  .is li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:800}
+  .isnt li::before{content:"✕";position:absolute;left:0;color:var(--terra);font-weight:800}
+  /* LADDER (2 níveis) */
+  .ladder{background:var(--navy);color:#fff}
+  .ladder h2{color:#fff}.ladder .lead{color:#b9c4d1}
+  .lvl{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:32px;height:100%;display:flex;flex-direction:column}
+  .lvl:hover{background:rgba(255,255,255,.08)}
+  .lvl .badge{display:inline-block;font-family:'Montserrat';font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border-radius:999px;margin-bottom:16px}
+  .b1{background:rgba(255,255,255,.16);color:#fff}.b2{background:rgba(127,208,220,.18);color:#7fd0dc}
+  .lvl h3{color:#fff;font-size:23px;margin:0 0 6px}
+  .lvl .sub{color:#7fd0dc;font-size:14px;margin-bottom:16px;font-family:'Montserrat';font-weight:600}
+  .lvl p{color:#c4cdd8;font-size:15px;margin:0 0 18px}
+  .lvl ul{list-style:none;margin:0 0 20px;padding:0}
+  .lvl li{padding:7px 0 7px 24px;position:relative;font-size:14.5px;color:#d3dce6}
+  .lvl li::before{content:"→";position:absolute;left:0;color:var(--terra);font-weight:700}
+  .lvl .who{margin-top:auto;font-size:13.5px;color:#8fa0b2;border-top:1px solid rgba(255,255,255,.12);padding-top:16px}
+  /* HOW */
+  .how{background:var(--bg-soft)}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .step .n{font-family:'Montserrat';font-weight:800;font-size:13px;color:var(--teal);letter-spacing:.08em}
+  .step h4{margin:10px 0 8px;font-size:17px}.step p{margin:0;color:var(--muted);font-size:14px}
+  /* THEMES */
+  .themes{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .themes .t{background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:14px 20px;font-family:'Montserrat';font-weight:600;font-size:15px;color:var(--navy)}
+  /* PROOF */
+  .proof-band{background:var(--navy);color:#fff;border-radius:20px;padding:44px;box-shadow:var(--shadow-lg)}
+  .proof-band p{font-family:'Montserrat';font-weight:600;font-size:22px;color:#fff;line-height:1.45;max-width:840px;margin:0 auto 20px;text-align:center}
+  .proof-band .who{color:#7fd0dc;font-size:14.5px;text-align:center}
+  .cases{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
+  .case{border:1px solid var(--line);border-left:4px solid var(--terra);border-radius:12px;padding:24px;background:#fff}
+  .case .co{font-family:'Montserrat';font-weight:700;color:var(--navy);font-size:15px;margin-bottom:8px}.case p{margin:0;color:var(--muted);font-size:15px}
+  /* EXCLUSIVITY + CTA */
+  .cta{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+  .cta h2{color:#fff;font-size:34px;margin:0 0 10px}
+  .cta .lead{color:#c4cdd8;margin:0 auto 14px}
+  .slots{display:inline-block;background:rgba(192,92,32,.2);color:#f0a068;font-family:'Montserrat';font-weight:600;font-size:13px;padding:8px 16px;border-radius:999px;margin-bottom:26px}
+  .cta .btn-primary{font-size:16px;padding:15px 30px}
+  .cta small{display:block;margin-top:16px;color:#8fa0b2;font-size:13px}
+  /* FOOTER */
+  footer.site{background:#08121f;color:#c4cdd8;padding:56px 0 26px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+  .foot .brand{color:#fff;margin-bottom:14px}.foot p{font-size:14px;color:#8b98a8;max-width:270px}
+  .foot h5{font-family:'Montserrat';font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#7fd0dc;margin:0 0 14px}
+  .foot ul{list-style:none;margin:0;padding:0}.foot li{margin-bottom:9px}
+  .foot a{font-size:14px;color:#c4cdd8}.foot a:hover{color:#fff}
+  .foot .ext::after{content:"↗";font-size:11px;margin-left:5px;color:#7fd0dc}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#8b98a8}
+  @media(max-width:900px){.hero-grid,.grid-2,.grid-4,.cases,.foot-grid{grid-template-columns:1fr}.menu{display:none}.hamb{display:block}.hero h1{font-size:32px}.section{padding:54px 0}}
+</style>
+
+<style id="mobilenav">
+@media(max-width:900px){
+ .menu.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:flex-start;background:#fff;border-bottom:1px solid var(--line);padding:14px 24px;gap:6px;box-shadow:var(--shadow-lg);z-index:120}
+ .menu.open>li{width:100%}
+ .menu.open .drop{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;min-width:0;padding:4px 0 4px 12px}
+ .menu.open .has-drop>a::after{content:""}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="wrap nav">
+    <a href="https://kikocampos.com" class="brand"><span class="dot"></span>KIKO CAMPOS</a>
+    <ul class="menu">
+      <li><a href="index.html">Início</a></li>
+      <li class="has-drop">
+        <a href="#" class="active">Serviços</a>
+        <div class="drop">
+          <a href="palestras.html"><span class="ic">🎤</span><span><b>Palestras &amp; Keynotes</b><small>Entrada · alto impacto</small></span></a>
+          <a href="programas.html"><span class="ic">🧭</span><span><b>Programas &amp; Projetos</b><small>Transformação e liderança</small></span></a>
+          <a href="advisory.html"><span class="ic">♟️</span><span><b>Advisory</b><small>Conselho contínuo</small></span></a>
+        </div>
+      </li>
+      <li class="has-drop">
+        <a href="#">Conteúdo &amp; Pesquisa</a>
+        <div class="drop">
+          <a href="https://jovens.kikocampos.com?utm_source=advisory&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-jovens"><span class="ic">📊</span><span><b>Pesquisa Jovens Talentos</b><small>~5 mil respondentes</small></span></a>
+          <a href="https://mente.kikocampos.com?utm_source=advisory&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-mente"><span class="ic">🎙️</span><span><b>Mente no Trabalho</b><small>Lives + newsletter (39 mil)</small></span></a>
+          <a href="https://blog.kikocampos.com"><span class="ic">✍️</span><span><b>Blog</b><small>Artigos e reflexões</small></span></a>
+          <a href="programas.html"><span class="ic">📗</span><span><b>O Livro &amp; o Método</b><small>O Novo Código da Mudança</small></span></a>
+        </div>
+      </li>
+      <li><a href="index.html">Sobre</a></li>
+    </ul>
+    <div><a href="#conversa" class="btn btn-primary">Agendar conversa</a><button class="hamb">☰</button></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Advisory</span>
+      <h1>Um conselheiro de confiança para os momentos que <span class="hl">não cabem</span> num projeto.</h1>
+      <p class="lead">Acompanhamento contínuo e reservado a quem lidera a mudança — do board ao líder em transição. Cadência leve, acesso direto e a mesma disciplina de método que sustenta todo o meu trabalho.</p>
+      <div class="hero-cta">
+        <a href="#conversa" class="btn btn-primary">Agendar conversa exploratória</a>
+        <a href="#niveis" class="btn btn-ghost-d">Ver os dois níveis</a>
+      </div>
+      <p class="hero-note">Relação de longo prazo · Confidencial · Vagas limitadas por semestre</p>
+    </div>
+    <div class="side">
+      <h3>Por que advisory (e não um projeto)</h3>
+      <div class="li"><span class="ck">✓</span><span><b>Continuidade.</b> Um interlocutor que conhece seu contexto ao longo do tempo.</span></div>
+      <div class="li"><span class="ck">✓</span><span><b>Acesso.</b> Pensar junto nas decisões, não só nas entregas.</span></div>
+      <div class="li"><span class="ck">✓</span><span><b>Isenção.</b> Uma visão externa, sem agenda política interna.</span></div>
+      <div class="li"><span class="ck">✓</span><span><b>Confidencialidade.</b> O espaço seguro para as conversas difíceis.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS / ISN'T -->
+<section class="section">
+  <div class="wrap">
+    <div class="head-block center">
+      <span class="eyebrow">Para começar com clareza</span>
+      <h2 class="big">O que é — e o que não é</h2>
+      <p class="lead" style="margin:0 auto">Advisory é uma relação, não um escopo fechado. Deixar a fronteira nítida evita frustração dos dois lados.</p>
+    </div>
+    <div class="grid-2">
+      <div class="isbox is">
+        <h3>✓ Advisory é</h3>
+        <ul>
+          <li>Conselho contínuo e reservado a quem decide</li>
+          <li>Cadência leve e previsível (sessões recorrentes)</li>
+          <li>Acesso para pensar junto entre as sessões</li>
+          <li>Uma visão de fora, com repertório e método</li>
+          <li>Relação de confiança de médio/longo prazo</li>
+        </ul>
+      </div>
+      <div class="isbox isnt">
+        <h3>✕ Advisory não é</h3>
+        <ul>
+          <li>Um projeto de consultoria com entregáveis e squad</li>
+          <li>Execução operacional no dia a dia da equipe</li>
+          <li>Um diagnóstico pontual (isso é um Programa)</li>
+          <li>Terceirizar a decisão — a autoria é sempre sua</li>
+          <li>Disponibilidade 24/7 — é foco, não plantão</li>
+        </ul>
+      </div>
+    </div>
+    <p class="center" style="margin-top:22px;color:var(--muted);font-size:15px">Precisa de imersão com escopo e time? Isso é um <a href="programas.html" style="color:var(--teal);font-weight:600">Programa &amp; Projeto</a>. O advisory pode vir antes, durante ou depois dele.</p>
+  </div>
+</section>
+
+<!-- LADDER: 2 NÍVEIS -->
+<section class="section ladder" id="niveis">
+  <div class="wrap">
+    <div class="head-block center">
+      <span class="eyebrow" style="color:#7fd0dc">Dois níveis</span>
+      <h2 class="big">Do conselho estratégico ao acompanhamento do líder</h2>
+      <p class="lead">Uma mesma lógica de relação, em duas alturas. Você começa no nível que faz sentido — e ele evolui com a sua necessidade.</p>
+    </div>
+    <div class="grid-2">
+      <div class="lvl">
+        <span class="badge b1">Nível estratégico</span>
+        <h3>Board &amp; C-Level</h3>
+        <div class="sub">Conselheiro de CEO, CHRO e conselho</div>
+        <p>Um interlocutor de confiança para as decisões de cultura, liderança e mudança que definem a organização.</p>
+        <ul>
+          <li>Sessões estratégicas recorrentes com o executivo</li>
+          <li>Leitura de cultura e clima nas grandes inflexões</li>
+          <li>Apoio em sucessão, integração pós-M&amp;A e reestruturações</li>
+          <li>Sparring nas conversas difíceis de liderança</li>
+        </ul>
+        <div class="who">Para quem: CEO, CHRO, VPs de People, membros de conselho.</div>
+      </div>
+      <div class="lvl">
+        <span class="badge b2">Nível de liderança</span>
+        <h3>Líderes &amp; Times</h3>
+        <div class="sub">Mentoria / fractional de lideranças</div>
+        <p>Acompanhamento próximo de líderes e times-chave que precisam crescer de patamar com apoio recorrente.</p>
+        <ul>
+          <li>Mentoria individual de líderes em ascensão ou transição</li>
+          <li>Rituais mínimos e métricas para times de alta performance</li>
+          <li>Presença fractional em momentos de virada</li>
+          <li>Desenvolvimento de sucessores e novos gestores</li>
+        </ul>
+        <div class="who">Para quem: líderes recém-promovidos, times executivos, sucessores.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how">
+  <div class="wrap">
+    <div class="head-block center">
+      <span class="eyebrow">Como funciona</span>
+      <h2 class="big">Simples de começar, sério de sustentar</h2>
+    </div>
+    <div class="grid-4">
+      <div class="step"><div class="n">01</div><h4>Conversa exploratória</h4><p>Uma conversa sem compromisso para entender o momento e ver se há fit.</p></div>
+      <div class="step"><div class="n">02</div><h4>Desenho do acordo</h4><p>Definimos nível, cadência (ex.: encontros mensais), acesso e período mínimo.</p></div>
+      <div class="step"><div class="n">03</div><h4>Ritmo contínuo</h4><p>Sessões recorrentes + acesso entre elas. Sempre confidencial.</p></div>
+      <div class="step"><div class="n">04</div><h4>Revisão periódica</h4><p>A cada ciclo, revisamos o que está gerando valor e ajustamos o foco.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMAS -->
+<section class="section">
+  <div class="wrap center">
+    <span class="eyebrow">Onde eu aconselho</span>
+    <h2 class="big" style="margin-bottom:26px">Temas em que crio mais valor</h2>
+    <div class="themes">
+      <div class="t">Transformação cultural</div>
+      <div class="t">Liderança &amp; sucessão</div>
+      <div class="t">Integração pós-fusão (M&amp;A)</div>
+      <div class="t">Cultura em escala / crescimento</div>
+      <div class="t">Times executivos de alta performance</div>
+      <div class="t">Discurso x prática</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="section" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="proof-band">
+      <p>“Ter o Kiko como conselheiro me deu o que nenhum relatório dá: alguém de fora, com método, para pensar as decisões de cultura no momento em que elas acontecem.”</p>
+      <div class="who">— Executivo(a) C-level <em>(depoimento ilustrativo — substituir por real)</em></div>
+    </div>
+    <div class="cases">
+      <div class="case"><div class="co">Walmart Brasil · Grupo BIG</div><p>Acompanhamento de liderança e cultura em uma transformação de grande porte, sustentada ao longo do tempo — o tipo de continuidade que só o advisory entrega.</p></div>
+      <div class="case"><div class="co">Integração com o Carrefour</div><p>Conselho de confiança durante uma integração complexa: preservar o que dá força e conduzir a mudança com disciplina, decisão a decisão.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta" id="conversa">
+  <div class="wrap center">
+    <span class="eyebrow" style="color:#7fd0dc">Conversa exploratória</span>
+    <h2>Vamos ver se faz sentido caminharmos juntos</h2>
+    <p class="lead">Advisory é uma relação — começa com uma conversa, não com um formulário. Sem compromisso.</p>
+    <div class="slots">◷ Vagas limitadas — poucos acordos ativos por vez, para garantir presença real</div>
+    <div><a href="mailto:kiko@kikocampos.com?subject=Conversa%20exploratória%20-%20Advisory" class="btn btn-primary">Agendar conversa exploratória</a></div>
+    <small>Ou escreva direto para kiko@kikocampos.com</small>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><div class="brand"><span class="dot"></span>KIKO CAMPOS</div><p>Liderança executiva e transformação cultural. Cultura como sistema vivo, integrado e mensurável.</p></div>
+      <div><h5>Serviços</h5><ul><li><a href="palestras.html">Palestras &amp; Keynotes</a></li><li><a href="programas.html">Programas &amp; Projetos</a></li><li><a href="advisory.html">Advisory</a></li><li><a href="#conversa">Fale comigo</a></li></ul></div>
+      <div><h5>Conteúdo &amp; Pesquisa</h5><ul><li><a class="ext" href="https://jovens.kikocampos.com?utm_source=advisory&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-jovens">Pesquisa Jovens Talentos</a></li><li><a class="ext" href="https://mente.kikocampos.com?utm_source=advisory&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-mente">Mente no Trabalho</a></li><li><a href="programas.html">O Livro</a></li><li><a class="ext" href="https://blog.kikocampos.com">Blog</a></li><li><a class="ext" href="https://mente.kikocampos.com?utm_source=advisory&utm_medium=cross-link&utm_campaign=ecossistema-2026&utm_content=para-mente">Newsletter (39 mil)</a></li></ul></div>
+      <div><h5>Contato</h5><ul><li><a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a></li><li><a class="ext" href="#">LinkedIn</a></li><li><a href="privacidade.html">Políticas de Privacidade</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Kiko Campos. Todos os direitos reservados.</span><span>Parte do ecossistema kikocampos.com · jovens · mente</span></div>
+  </div>
+</footer>
+
+
+
+<script>
+document.querySelectorAll('.hamb').forEach(function(b){b.addEventListener('click',function(){var m=document.querySelector('.menu');if(m)m.classList.toggle('open');});});
+</script>
+
+<script>
+document.querySelectorAll('form.form').forEach(function(f){
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var parts=[];
+    f.querySelectorAll('input,select,textarea').forEach(function(el){
+      var lbl=(el.closest('.field')&&el.closest('.field').querySelector('label'))?el.closest('.field').querySelector('label').innerText:'';
+      if(el.value) parts.push((lbl?lbl+': ':'')+el.value);
+    });
+    var subj='Contato pelo site - kikocampos.com';
+    var body=parts.join('\n')||'Olá Kiko, gostaria de falar com você.';
+    window.location.href='mailto:kiko@kikocampos.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+  });
+});
+</script>
+</body>
+</html>
