@@ -83,9 +83,9 @@
 
   /* ===== LOGO STRIP ===== */
   .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
-  .proof .wrap{display:flex;align-items:center;gap:34px;padding:22px 24px;flex-wrap:wrap;justify-content:center}
-  .proof span.lbl{font-family:'Montserrat';font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .logo-pill{font-family:'Montserrat';font-weight:700;color:var(--navy);opacity:.72;font-size:16px;filter:grayscale(1)}
+  .proof .wrap{max-width:1000px;margin:0 auto;padding:28px 24px;text-align:center}.proof .logos{display:grid;grid-template-columns:repeat(8,1fr);gap:20px 12px;align-items:center;justify-items:center}@media(max-width:860px){.proof .logos{grid-template-columns:repeat(4,1fr)}}@media(max-width:480px){.proof .logos{grid-template-columns:repeat(2,1fr)}}
+  .proof span.lbl{display:block;font-family:'Montserrat';font-weight:600;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 20px}
+  .logo-pill{font-family:'Montserrat';font-weight:700;color:var(--navy);opacity:.74;font-size:15px;filter:grayscale(1);white-space:nowrap;line-height:1.2}
 
   /* ===== OFFERS ===== */
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -235,11 +235,11 @@
 <section class="proof">
   <div class="wrap">
     <span class="lbl">Confiado por operações como</span>
-    <span class="logo-pill">Vale</span>
-    <span class="logo-pill">Carrefour</span>
-    <span class="logo-pill">CBO</span>
-    <span class="logo-pill">Renner</span>
-    <span class="logo-pill">Seara</span><span class="logo-pill">Martin Brower</span><span class="logo-pill">Stanford</span>
+    <div class="logos"><span class="logo-pill">Vale</span><span class="logo-pill">Grupo Carrefour</span><span class="logo-pill">Santander</span><span class="logo-pill">Citibank</span><span class="logo-pill">Heineken</span><span class="logo-pill">Mercedes-Benz</span><span class="logo-pill">Volkswagen</span><span class="logo-pill">MetLife</span><span class="logo-pill">Walmart Brasil</span><span class="logo-pill">Grupo Big</span><span class="logo-pill">Renner</span><span class="logo-pill">Seara</span><span class="logo-pill">CBO</span><span class="logo-pill">Martin Brower</span><span class="logo-pill">Waggl</span><span class="logo-pill">Stanford</span></div>
+    
+    
+    
+    
   </div>
 </section>
 
