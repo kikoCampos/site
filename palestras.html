@@ -53,9 +53,9 @@
   .reel .play::after{content:"";border-left:22px solid #fff;border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:6px}
   /* PROOF */
   .proof{border-bottom:1px solid var(--line);background:#fff}
-  .proof .wrap{display:flex;align-items:center;gap:30px;padding:22px 24px;flex-wrap:wrap;justify-content:center}
-  .proof .lbl{font-family:'Montserrat';font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .logo-pill{font-family:'Montserrat';font-weight:700;color:var(--navy);opacity:.72;font-size:16px}
+  .proof .wrap{max-width:1000px;margin:0 auto;padding:28px 24px;text-align:center}.proof .logos{display:grid;grid-template-columns:repeat(8,1fr);gap:20px 12px;align-items:center;justify-items:center}@media(max-width:860px){.proof .logos{grid-template-columns:repeat(4,1fr)}}@media(max-width:480px){.proof .logos{grid-template-columns:repeat(2,1fr)}}
+  .proof .lbl{display:block;font-family:'Montserrat';font-weight:600;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 20px}
+  .logo-pill{font-family:'Montserrat';font-weight:700;color:var(--navy);opacity:.74;font-size:15px;white-space:nowrap;line-height:1.2}
   /* GENERIC */
   .head-block{max-width:720px;margin:0 auto 46px}
   h2.big{font-size:34px;margin:12px 0 12px}
@@ -175,7 +175,7 @@
 <section class="proof">
   <div class="wrap">
     <span class="lbl">Já subiu ao palco para</span>
-    <span class="logo-pill">Vale</span><span class="logo-pill">Carrefour</span><span class="logo-pill">CBO</span><span class="logo-pill">Renner</span><span class="logo-pill">Seara</span><span class="logo-pill">Martin Brower</span><span class="logo-pill">Stanford</span>
+    <div class="logos"><span class="logo-pill">Vale</span><span class="logo-pill">Grupo Carrefour</span><span class="logo-pill">Santander</span><span class="logo-pill">Citibank</span><span class="logo-pill">Heineken</span><span class="logo-pill">Mercedes-Benz</span><span class="logo-pill">Volkswagen</span><span class="logo-pill">MetLife</span><span class="logo-pill">Walmart Brasil</span><span class="logo-pill">Grupo Big</span><span class="logo-pill">Renner</span><span class="logo-pill">Seara</span><span class="logo-pill">CBO</span><span class="logo-pill">Martin Brower</span><span class="logo-pill">Waggl</span><span class="logo-pill">Stanford</span></div>
     
   </div>
 </section>
