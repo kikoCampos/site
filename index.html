@@ -412,7 +412,7 @@ document.querySelectorAll('form.form').forEach(function(f){
     });
     var subj='Contato pelo site - kikocampos.com';
     var body=parts.join('\n')||'Olá Kiko, gostaria de falar com você.';
-    var b=f.querySelector('button'),o=b?b.innerText:'',s=f.querySelector('small');if(b){b.disabled=true;b.innerText='Enviando...';}fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(f)}).then(function(r){return r.json();}).then(function(d){if(d&&d.success){f.reset();if(b){b.disabled=false;b.innerText='Mensagem enviada!';}if(s)s.innerText='Recebido! Respondo pessoalmente em até 48h.';}else{if(b){b.disabled=false;b.innerText=o;}if(s)s.innerText='Não consegui enviar agora. Escreva para kiko@kikocampos.com';}}).catch(function(){if(b){b.disabled=false;b.innerText=o;}if(s)s.innerText='Não consegui enviar agora. Escreva para kiko@kikocampos.com';});
+    var b=f.querySelector('button'),o=b?b.innerText:'',s=f.querySelector('small');if(b){b.disabled=true;b.innerText='Enviando...';}fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(f)}).then(function(r){return r.json();}).then(function(d){if(d&&d.success){try{gtag('event','envio_formulario');}catch(e){}f.reset();if(b){b.disabled=false;b.innerText='Mensagem enviada!';}if(s)s.innerText='Recebido! Respondo pessoalmente em até 48h.';}else{if(b){b.disabled=false;b.innerText=o;}if(s)s.innerText='Não consegui enviar agora. Escreva para kiko@kikocampos.com';}}).catch(function(){if(b){b.disabled=false;b.innerText=o;}if(s)s.innerText='Não consegui enviar agora. Escreva para kiko@kikocampos.com';});
   });
 });
 </script>
