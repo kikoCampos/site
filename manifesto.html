@@ -23,6 +23,18 @@
   .klabel{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--terra);font-weight:500}
   .hl{color:var(--terra)}
 
+  /* ===== TOPBAR (voltar ao site) ===== */
+  .topbar{position:sticky;top:0;z-index:200;background:rgba(13,26,48,.92);backdrop-filter:saturate(180%) blur(8px);-webkit-backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid rgba(255,255,255,.09)}
+  .tb-inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(24px,5vw,40px);height:62px;display:flex;align-items:center;justify-content:space-between}
+  .tb-brand{font-family:'Fraunces';font-style:italic;font-weight:600;font-size:21px;color:#fff;text-decoration:none;display:inline-flex;align-items:baseline;gap:2px}
+  .tb-brand .dot{color:var(--terra)}
+  .tb-right{display:flex;align-items:center;gap:20px}
+  .tb-right a{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.03em;color:#c7d2e0;text-decoration:none;transition:.15s}
+  .tb-right a:hover{color:#fff}
+  .tb-cta{background:var(--terra);color:#fff !important;padding:9px 16px;border-radius:999px;font-weight:500}
+  .tb-cta:hover{background:#c73c0b}
+  @media(max-width:560px){ .tb-right .txt{display:none} .tb-inner{height:56px} }
+
   /* ===== HERO (split, magazine cover) ===== */
   .hero{display:grid;grid-template-columns:1.22fr .78fr;min-height:560px;background:var(--navy);color:var(--light)}
   .hero .left{display:flex;flex-direction:column;justify-content:center;padding:64px clamp(34px,5vw,80px)}
@@ -124,6 +136,17 @@
 </style>
 </head>
 <body>
+
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <div class="tb-inner">
+      <a href="index.html" class="tb-brand">kiko campos<span class="dot">.</span></a>
+      <div class="tb-right">
+        <a href="index.html" class="txt">← Voltar ao site</a>
+        <a href="index.html#contato" class="tb-cta">Fale comigo</a>
+      </div>
+    </div>
+  </nav>
 
   <!-- HERO -->
   <header class="hero">
