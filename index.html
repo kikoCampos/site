@@ -443,7 +443,7 @@ if(document.cookie.indexOf('kc_cookie=')===-1){document.getElementById('lgpd').s
 document.addEventListener('click',function(e){var a=e.target.closest('a.btn,button.btn,a.go,a.ml,.row .acts a');if(a){gtag('event','cta_click',{cta:(a.textContent||'').trim().slice(0,60),destino:a.getAttribute('href')||'',pagina:location.pathname});}});
 // form submit -> Web3Forms
 var f=document.getElementById('contatoForm');
-if(f){f.addEventListener('submit',function(e){e.preventDefault();var msg=document.getElementById('formMsg');msg.textContent='Enviando...';var data=new FormData(f);
+if(f){f.addEventListener('focusin',function(){gtag('event','form_start',{pagina:location.pathname});},{once:true});f.addEventListener('submit',function(e){e.preventDefault();var msg=document.getElementById('formMsg');msg.textContent='Enviando...';var data=new FormData(f);
  fetch('https://api.web3forms.com/submit',{method:'POST',body:data}).then(r=>r.json()).then(function(j){if(j.success){msg.textContent='Recebido! Respondo pessoalmente em até 48h.';msg.style.color='#4FD1A1';f.reset();gtag('event','envio_formulario',{pagina:location.pathname});}else{msg.textContent='Não consegui enviar agora. Tente de novo ou escreva para kiko@kikocampos.com.';msg.style.color='#FF4A12';}}).catch(function(){msg.textContent='Falha de conexão. Escreva para kiko@kikocampos.com.';msg.style.color='#FF4A12';});});}
 </script>
 </body></html>
