@@ -46,7 +46,7 @@ nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);background:rgba(
 .navlinks a.active{color:var(--ink)}
 .navcta{padding:10px 19px;border:1px solid var(--line2);border-radius:100px;color:var(--ink);font-weight:600}
 .navtoggle{display:none;background:none;border:0;color:var(--ink);font-size:1.6rem;line-height:1;cursor:pointer;padding:4px 8px}
-.navcta.active{color:var(--ink)}
+.navcta.active{color:var(--ink)}.mcta{display:none}@media(max-width:900px){.mcta{display:inline-flex;position:fixed;left:14px;right:14px;bottom:14px;z-index:95;justify-content:center;align-items:center;gap:8px;background:var(--orange);color:#fff;padding:15px 20px;border-radius:100px;font-weight:600;text-decoration:none;box-shadow:0 14px 34px -8px rgba(255,74,18,.7)}}
 .navlinks .navdd{position:relative;display:inline-block}
 .navddtoggle{cursor:pointer;display:inline-flex;align-items:center;gap:5px}
 .navdd .ca{font-size:.7em;opacity:.7;transition:transform .18s}
@@ -229,7 +229,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
 </style></head><body>
 <nav><div class="wrap navin"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none;display:flex;align-items:center;gap:11px"><span class="dot"></span>kiko campos</a></div><button class="navtoggle" aria-label="Abrir menu" onclick="document.body.classList.toggle('navopen')">☰</button><div class="navlinks"><a class="active" href="palestras.html">Palestras</a><a href="programas.html">Programas</a><a href="advisory.html">Advisory</a><div class="navdd"><a href="index.html#ecossistema" class="navddtoggle">Conteúdo &amp; Pesquisa <span class="ca">▾</span></a><div class="navddmenu"><a href="https://mente.kikocampos.com">Mente no Trabalho</a><a href="https://jovens.kikocampos.com">Pesquisa Jovens Talentos</a><a href="livro.html">O Livro</a><a href="manifesto.html">Manifesto</a></div></div><a href="sobre.html">Sobre</a><a href="#contato" class="navcta">Fale comigo</a></div></div></nav>
 
-<header class="wrap hero">
+<a href="#contato" class="mcta" onclick="gtag('event','cta_click',{cta:'CTA fixo mobile',pagina:location.pathname})">Consultar data e tema →</a><header class="wrap hero">
   <div>
     <span class="chip"><span class="lv"></span>Palestrante de cultura organizacional &amp; liderança</span>
     <h1>Uma palestra que sai do palco e vira <span class="grad">decisão na segunda-feira</span>.</h1>
@@ -238,7 +238,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
       <a class="btn btn-p" href="#contato">Consultar data e tema →</a>
       <a class="btn btn-g" href="#temas">Ver temas assinatura</a>
     </div>
-    <div class="tags"><span class="tag">Resposta pessoal em 48h</span><span class="tag">Presencial e online</span><span class="tag">Cachê sob consulta</span></div>
+    <div style="margin-top:16px;font-size:.98rem;color:var(--ink-soft)">Prefere resolver por telefone? <a href="tel:+5511983692989" onclick="gtag('event','tel_click',{pagina:location.pathname})" style="color:var(--amber);font-weight:700;text-decoration:none;white-space:nowrap">(11) 98369-2989</a></div><div class="tags"><span class="tag">Resposta pessoal em 48h</span><span class="tag">Presencial e online</span><span class="tag">Cachê sob consulta</span></div>
   </div>
   <div class="media">
     <div class="frame"><div class="photo"><div class="cap">Kiko Campos — no palco</div></div></div>
@@ -339,7 +339,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
       <span class="eyebrow">Vamos conversar</span>
       <h2>Conte, em <em>uma linha</em>, o que você busca. Eu respondo pessoalmente.</h2>
       <p class="dek" style="margin-top:16px">Sem formulário longo. Me diga o essencial e eu respondo pessoalmente em até 48h.</p>
-      <p class="small">Ou escreva direto para kiko@kikocampos.com</p>
+      <p class="small">Ou escreva para kiko@kikocampos.com · ou ligue <a href="tel:+5511983692989" onclick="gtag('event','tel_click',{pagina:location.pathname})" style="color:var(--amber);font-weight:600;text-decoration:none">(11) 98369-2989</a></p>
     </div>
     <form class="form" id="contatoForm" action="https://api.web3forms.com/submit" method="POST"><input type="hidden" name="access_key" value="3436ebf8-58a6-42b9-b24d-ab6d248f7d7e"><input type="hidden" name="subject" value="Novo contato pelo site - kikocampos.com"><input type="hidden" name="from_name" value="Site kikocampos.com"><input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off"><div class="frow"><input name="Nome" required placeholder="Seu nome"><input name="email" type="email" required placeholder="E-mail corporativo"></div><select name="Interesse" required><option value="" disabled selected>O que você busca?</option><option>Uma palestra / keynote</option><option>Um programa de liderança &amp; times</option><option>Um diagnóstico de cultura</option><option>Advisory / conselho</option><option>Acesso à pesquisa de jovens talentos</option><option>Ainda estou explorando</option></select><textarea name="Mensagem" rows="3" placeholder="Conte em uma linha o que você busca"></textarea><button class="btn btn-p" type="submit">Enviar e falar com o Kiko →</button><div id="formMsg" class="small" style="margin-top:10px"></div></form>
   </div>
