@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /preview/
 
-Sitemap: https://kikocampos.com/sitemap.xml
+Sitemap: https://mente.kikocampos.com/sitemap.xml

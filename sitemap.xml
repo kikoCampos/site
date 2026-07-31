@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://kikocampos.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://kikocampos.com/palestras.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://kikocampos.com/programas.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://kikocampos.com/advisory.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://kikocampos.com/sobre.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://kikocampos.com/livro.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://kikocampos.com/manifesto.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://kikocampos.com/privacidade.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url>
+    <loc>https://mente.kikocampos.com/</loc>
+    <lastmod>2026-07-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 </urlset>
