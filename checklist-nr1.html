@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico de Maturidade NR-1 · Riscos Psicossociais | Mente no Trabalho</title>
+<meta name="description" content="15 perguntas, 4 minutos. Descubra o nível de maturidade da sua empresa na gestão de riscos psicossociais exigida pela NR-1 e receba um plano de 3 passos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1a3a; --navy2:#12294f; --amber:#f4a80b; --amber-d:#c8880a;
+  --ink:#12294f; --muted:#5b6b86; --line:#dfe5ee; --bg:#f4f6fa; --white:#fff;
+  --ok:#1e8e5a; --warn:#c8880a; --bad:#c0392b;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Montserrat',system-ui,-apple-system,Segoe UI,sans-serif;
+  color:var(--ink); background:var(--bg); line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 80px}
+
+/* ---------- Cabeçalho ---------- */
+header{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  color:#fff; padding:34px 0 30px; position:relative; overflow:hidden;
+}
+header:after{
+  content:""; position:absolute; right:-90px; top:-90px; width:260px; height:260px;
+  border:2px solid rgba(244,168,11,.28); border-radius:50%;
+}
+header .wrap{padding-bottom:0; position:relative; z-index:2}
+.pill{
+  display:inline-block; border:1.5px solid var(--amber); color:var(--amber);
+  font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  padding:6px 14px; border-radius:999px; margin-bottom:16px;
+}
+h1{
+  font-family:'Roboto Slab',Georgia,serif; font-weight:800; font-size:clamp(25px,5.2vw,38px);
+  line-height:1.16; margin:0 0 12px;
+}
+h1 em{color:var(--amber); font-style:normal}
+.sub{font-size:15px; opacity:.9; margin:0; max-width:56ch}
+.meta{
+  margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;
+  font-size:12.5px; font-weight:600;
+}
+.meta span{background:rgba(255,255,255,.1); padding:6px 12px; border-radius:999px}
+
+/* ---------- Barra de progresso fixa ---------- */
+.progress-bar{
+  position:sticky; top:0; z-index:30; background:var(--white);
+  border-bottom:1px solid var(--line); box-shadow:0 2px 10px rgba(10,26,58,.06);
+}
+.progress-bar .inner{max-width:760px;margin:0 auto;padding:9px 18px;display:flex;align-items:center;gap:12px}
+.track{flex:1;height:7px;background:#e6ebf3;border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--amber-d));transition:width .28s ease}
+.pcount{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+
+/* ---------- Cartões ---------- */
+.card{
+  background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+  padding:22px; margin:18px 0; box-shadow:0 1px 3px rgba(10,26,58,.05);
+}
+.card h2{
+  font-family:'Roboto Slab',Georgia,serif; font-size:19px; margin:0 0 4px; color:var(--navy);
+}
+.card .hint{font-size:13.5px;color:var(--muted);margin:0 0 16px}
+.dim-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.dim-num{
+  flex:none;width:34px;height:34px;border-radius:9px;background:var(--navy);color:var(--amber);
+  font-family:'Roboto Slab',serif;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;
+}
+.dim-head h2{margin:0}
+.dim-head .dim-sub{font-size:12.5px;color:var(--muted);margin:2px 0 0}
+
+/* ---------- Perguntas ---------- */
+.q{padding:16px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:none;padding-top:4px}
+.q .txt{font-size:14.8px;font-weight:600;margin:0 0 4px;display:block}
+.q .ex{font-size:12.8px;color:var(--muted);margin:0 0 11px}
+.q .crit{
+  display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--amber-d);border:1px solid var(--amber);border-radius:4px;padding:1px 6px;margin-left:7px;vertical-align:middle;
+}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt span{
+  display:block;text-align:center;padding:11px 6px;border:1.5px solid var(--line);border-radius:10px;
+  font-size:13px;font-weight:600;cursor:pointer;background:#fbfcfe;transition:all .15s ease;user-select:none;
+}
+.opt span small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);margin-top:2px}
+.opt input:checked + span{
+  border-color:var(--navy);background:var(--navy);color:#fff;box-shadow:0 3px 10px rgba(10,26,58,.2);
+}
+.opt input:checked + span small{color:rgba(255,255,255,.75)}
+.opt input:focus-visible + span{outline:3px solid rgba(244,168,11,.5);outline-offset:2px}
+.q.pending{background:#fff8e8;border-radius:10px;padding-left:12px;padding-right:12px;margin:0 -12px}
+
+/* ---------- Identificação ---------- */
+.field{margin-bottom:14px}
+label.lbl{display:block;font-size:13px;font-weight:700;margin-bottom:5px}
+input[type=text],input[type=email],select{
+  width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;
+  font-family:inherit;font-size:14.5px;color:var(--ink);background:#fbfcfe;
+}
+input:focus,select:focus{outline:none;border-color:var(--navy);background:#fff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--muted);margin-top:6px}
+.consent input{margin-top:3px;width:17px;height:17px;flex:none;accent-color:var(--navy)}
+
+/* ---------- Botões ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  background:var(--amber);color:var(--navy);border:none;border-radius:12px;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;padding:16px 22px;cursor:pointer;
+  transition:transform .12s ease,box-shadow .12s ease; box-shadow:0 4px 14px rgba(244,168,11,.35);
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(244,168,11,.42)}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy);box-shadow:none;font-size:14px;padding:12px 18px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.err{color:var(--bad);font-size:13px;font-weight:600;margin-top:10px;display:none}
+
+/* ---------- Resultado ---------- */
+#resultado{display:none}
+.score-card{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;
+  border-radius:var(--radius);padding:28px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.score-card:after{content:"";position:absolute;left:-70px;bottom:-70px;width:200px;height:200px;border:2px solid rgba(244,168,11,.25);border-radius:50%}
+.gauge{position:relative;width:170px;height:170px;margin:4px auto 14px}
+.gauge svg{transform:rotate(-90deg)}
+.gauge .val{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.gauge .val b{font-family:'Roboto Slab',serif;font-size:44px;line-height:1}
+.gauge .val small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin-top:2px}
+.band{font-family:'Roboto Slab',serif;font-size:23px;font-weight:700;color:var(--amber);margin:0 0 8px}
+.band-desc{font-size:14.5px;opacity:.92;margin:0;max-width:52ch;margin-inline:auto}
+.alert{
+  background:#fff4f2;border:1px solid #f3c6bd;border-left:4px solid var(--bad);
+  border-radius:10px;padding:14px 16px;margin-top:16px;
+}
+.alert h3{margin:0 0 6px;font-size:14px;color:var(--bad);font-family:'Montserrat',sans-serif}
+.alert ul{margin:0;padding-left:18px;font-size:13.3px}
+.alert li{margin-bottom:4px}
+.dims{margin-top:6px}
+.dimrow{margin-bottom:14px}
+.dimrow .top{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;margin-bottom:5px;gap:10px}
+.dimrow .top span:last-child{white-space:nowrap;font-family:'Roboto Slab',serif}
+.dbar{height:9px;background:#e6ebf3;border-radius:99px;overflow:hidden}
+.dbar i{display:block;height:100%;border-radius:99px;transition:width .5s ease}
+.tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle}
+.tag.f{background:#fdecea;color:var(--bad)}
+.tag.m{background:#fdf3e0;color:var(--warn)}
+.tag.o{background:#e8f5ee;color:var(--ok)}
+.steps{counter-reset:s}
+.step{display:flex;gap:14px;padding:15px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:none}
+.step .n{
+  flex:none;width:30px;height:30px;border-radius:50%;background:var(--amber);color:var(--navy);
+  font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;font-family:'Roboto Slab',serif;
+}
+.step h4{margin:2px 0 4px;font-size:15px;font-family:'Roboto Slab',serif;color:var(--navy)}
+.step p{margin:0;font-size:13.6px;color:#3d4d68}
+.next{background:var(--navy);color:#fff;border-radius:var(--radius);padding:24px}
+.next h2{font-family:'Roboto Slab',serif;font-size:20px;margin:0 0 8px;color:var(--amber)}
+.next p{font-size:14.3px;margin:0 0 14px;opacity:.93}
+.sent{font-size:12.5px;color:var(--muted);text-align:center;margin-top:12px}
+.foot{font-size:11.8px;color:var(--muted);text-align:center;margin-top:26px;line-height:1.6}
+.foot a{color:var(--navy2)}
+
+@media (max-width:560px){
+  .pill{font-size:9.5px;letter-spacing:.09em;padding:5px 11px;white-space:nowrap}
+  header{padding:26px 0 24px}
+  .opts{grid-template-columns:1fr;gap:7px}
+  .opt span{text-align:left;padding:10px 14px}
+  .opt span small{display:inline;margin-left:6px}
+  .row2{grid-template-columns:1fr}
+  .btn-row{grid-template-columns:1fr}
+  .card{padding:18px 16px}
+}
+@media print{
+  header,.progress-bar,#formulario,.next,.btn,.btn-row{display:none!important}
+  body{background:#fff}
+  .card{break-inside:avoid;box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="pill">Mente no Trabalho · Diagnóstico NR-1</div>
+    <h1>Sua empresa está <em>gerindo</em> o risco psicossocial — ou só <em>documentando</em>?</h1>
+    <p class="sub">15 perguntas sobre o que a NR-1 exige na prática. Ao final você recebe um índice de maturidade de 0 a 100, o retrato de cada uma das 5 dimensões e os 3 movimentos que destravam o seu caso.</p>
+    <div class="meta"><span>⏱ 4 minutos</span><span>15 perguntas</span><span>Resultado na hora</span></div>
+  </div>
+</header>
+
+<div class="progress-bar">
+  <div class="inner">
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="pcount" id="pcount">0 de 15</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <form id="formulario" novalidate>
+
+    <div class="card" id="dims"></div>
+
+    <!-- Identificação -->
+    <div class="card">
+      <h2>Para onde enviamos o seu resultado</h2>
+      <p class="hint">Você vê o resultado na tela imediatamente. O e-mail é para receber a versão completa com as recomendações por dimensão.</p>
+      <div class="field">
+        <label class="lbl" for="nome">Nome *</label>
+        <input type="text" id="nome" name="nome" autocomplete="name" placeholder="Como você quer ser chamado(a)">
+      </div>
+      <div class="field">
+        <label class="lbl" for="email">E-mail corporativo *</label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@empresa.com.br">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label class="lbl" for="empresa">Empresa</label>
+          <input type="text" id="empresa" name="empresa" autocomplete="organization" placeholder="Opcional">
+        </div>
+        <div class="field">
+          <label class="lbl" for="porte">Porte</label>
+          <select id="porte" name="porte">
+            <option value="">Selecione</option>
+            <option>Até 100 pessoas</option>
+            <option>101 a 500</option>
+            <option>501 a 2.000</option>
+            <option>2.001 a 10.000</option>
+            <option>Mais de 10.000</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label class="lbl" for="papel">Seu papel</label>
+          <select id="papel" name="papel">
+            <option value="">Selecione</option>
+            <option>RH / Gente e Gestão</option>
+            <option>SESMT / Saúde e Segurança</option>
+            <option>Liderança de área</option>
+            <option>Diretoria / C-level</option>
+            <option>Consultoria / Autônomo</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="lbl" for="setor">Setor</label>
+          <input type="text" id="setor" name="setor" placeholder="Opcional">
+        </div>
+      </div>
+      <label class="consent">
+        <input type="checkbox" id="consent">
+        <span>Autorizo o contato por e-mail com o resultado deste diagnóstico e conteúdos da série <b>Mente no Trabalho</b>. Posso cancelar quando quiser. (LGPD)</span>
+      </label>
+    </div>
+
+    <button type="submit" class="btn" id="submitBtn">Ver meu índice de maturidade →</button>
+    <div class="err" id="erro"></div>
+  </form>
+
+  <!-- ---------- RESULTADO ---------- -->
+  <div id="resultado">
+    <div class="score-card">
+      <div class="gauge">
+        <svg width="170" height="170" viewBox="0 0 170 170">
+          <circle cx="85" cy="85" r="72" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="13"></circle>
+          <circle id="arc" cx="85" cy="85" r="72" fill="none" stroke="#f4a80b" stroke-width="13"
+                  stroke-linecap="round" stroke-dasharray="452" stroke-dashoffset="452"
+                  style="transition:stroke-dashoffset 1s ease"></circle>
+        </svg>
+        <div class="val"><b id="scoreNum">0</b><small>de 100</small></div>
+      </div>
+      <p class="band" id="bandName"></p>
+      <p class="band-desc" id="bandDesc"></p>
+    </div>
+
+    <div id="alertBox"></div>
+
+    <div class="card">
+      <h2>O retrato por dimensão</h2>
+      <p class="hint">A maturidade real é a do elo mais fraco — não a média. Comece pelo vermelho.</p>
+      <div class="dims" id="dimBars"></div>
+    </div>
+
+    <div class="card">
+      <h2>Seus 3 próximos movimentos</h2>
+      <p class="hint">Gerados a partir das suas duas dimensões mais frágeis.</p>
+      <div class="steps" id="stepList"></div>
+    </div>
+
+    <div class="next">
+      <h2>E o passo que quase todo mundo pula</h2>
+      <p id="bridge"></p>
+      <p style="font-size:13.5px;opacity:.85;margin:0">Transformar esse diagnóstico em três contas que o board entende: <b>o que você já paga</b> (afastamento), <b>o que paga duas vezes</b> (turnover evitável) e <b>o que paga sem ver</b> (presenteísmo).</p>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn ghost" onclick="window.print()">Salvar em PDF</button>
+      <button class="btn ghost" id="copiar">Copiar resumo</button>
+    </div>
+    <p class="sent" id="statusEnvio"></p>
+  </div>
+
+  <p class="foot">
+    Instrumento de autoavaliação da série <b>Mente no Trabalho</b> — Kiko Campos &amp; Esabela.<br>
+    Referência: NR-1 / GRO-PGR com fatores de risco psicossocial. Não substitui avaliação técnica de SST nem parecer jurídico.
+  </p>
+</div>
+
+<script>
+/* =====================================================================
+   CONFIGURAÇÃO — 1 linha para ligar o recebimento das respostas
+   ---------------------------------------------------------------------
+   1) Crie uma conta grátis em https://formspree.io (plano free: 50 envios/mês)
+   2) New Form → copie o ID do endpoint (ex.: https://formspree.io/f/xldbqwer)
+   3) Cole o ID abaixo. Enquanto estiver "SEU_ID_AQUI", a página funciona
+      normalmente e apenas não envia (modo demonstração).
+   ===================================================================== */
+const CONFIG = {
+  endpoint: "https://formspree.io/f/SEU_ID_AQUI",
+  assunto: "Diagnóstico NR-1 — nova resposta"
+};
+
+/* ---------- Instrumento ---------- */
+const DIMENSOES = [
+  {
+    id:"gov", nome:"Governança e responsabilidade",
+    sub:"Quem responde, com que orçamento e com que visibilidade na alta liderança",
+    itens:[
+      {t:"Existe um responsável nomeado pela gestão dos riscos psicossociais, e a alta liderança sabe quem é.", e:"Nome e cargo, não “o RH” de forma genérica."},
+      {t:"O tema tem orçamento próprio aprovado para os próximos 12 meses.", e:"Verba dedicada, não sobra de outra rubrica."},
+      {t:"A diretoria/board recebeu nos últimos 6 meses uma leitura formal do risco psicossocial da empresa.", e:"Apresentação ou reporte registrado em ata/pauta."}
+    ]
+  },
+  {
+    id:"ident", nome:"Identificação dos perigos",
+    sub:"O inventário: o que existe, onde existe e com que evidência",
+    itens:[
+      {t:"Há um inventário escrito dos fatores psicossociais por área e função.", e:"Carga e ritmo, autonomia, clareza de papel, apoio da chefia, jornada/escala, assédio e violência, contato com público.", crit:true, falha:"Sem inventário escrito dos fatores psicossociais — é a base de todo o ciclo da NR-1."},
+      {t:"O levantamento cruzou mais de uma fonte de dados.", e:"Escuta/pesquisa somada a dados duros: afastamentos, turnover, horas extras, canal de denúncia, SESMT."},
+      {t:"O inventário distingue áreas e funções — não é um número único da empresa inteira.", e:"O risco do call center não é o risco do administrativo."}
+    ]
+  },
+  {
+    id:"aval", nome:"Avaliação e priorização",
+    sub:"Do inventário para a decisão: o que entra primeiro e por quê",
+    itens:[
+      {t:"Cada fator foi classificado por severidade e probabilidade, com critério escrito.", e:"Matriz de risco documentada, replicável por outra pessoa.", crit:true, falha:"Sem classificação de severidade × probabilidade — não há como justificar prioridade nem decisão."},
+      {t:"As prioridades foram cruzadas com o custo que a empresa já tem hoje.", e:"Afastamentos, substituições, horas extras, presenteísmo."},
+      {t:"Existe uma lista curta de 3 a 5 riscos prioritários, com dono e prazo.", e:"Uma lista de 40 itens sem hierarquia não é priorização."}
+    ]
+  },
+  {
+    id:"acao", nome:"Plano de ação e controles",
+    sub:"O que efetivamente muda no trabalho — e o que fica registrado",
+    itens:[
+      {t:"Há pelo menos uma medida que altera a organização do trabalho, não só o indivíduo.", e:"Metas, escala, jornada, alçada, volume, processo, dimensionamento. Palestra e app não mudam a fonte do risco.", crit:true, falha:"Nenhuma medida atua na fonte do risco — só no indivíduo. É o erro mais caro e mais comum."},
+      {t:"As ações de apoio individual existem e as pessoas sabem como acessar sem constrangimento.", e:"Programa de apoio, encaminhamento, sigilo claro."},
+      {t:"Cada ação tem responsável, prazo e critério de conclusão, e o plano está registrado no PGR.", e:"Se não está no PGR, para o auditor não existe."}
+    ]
+  },
+  {
+    id:"monit", nome:"Liderança, monitoramento e evidência",
+    sub:"O ciclo que se sustenta depois que o projeto acaba",
+    itens:[
+      {t:"Os gestores foram preparados para conduzir a conversa: identificar sinais, acolher, encaminhar e o que não fazer.", e:"Preparação prática com treino de conversa — comunicado não é preparo."},
+      {t:"Há indicadores acompanhados com frequência definida e reavaliação programada quando ocorre um evento relevante.", e:"Afastamento, denúncia, reestruturação, mudança de meta."},
+      {t:"Se um auditor pedir hoje, você entrega em 48 horas o que identificou, o que decidiu e o que fez.", e:"Rastro documental completo do ciclo.", crit:true, falha:"Sem rastro documental pronto — o que não está registrado, para o fiscal e para o juiz, não aconteceu."}
+    ]
+  }
+];
+
+const OPCOES = [
+  {v:0, l:"Não", s:"ou não sei"},
+  {v:1, l:"Em parte", s:"começamos"},
+  {v:2, l:"Sim", s:"com evidência"}
+];
+
+const FAIXAS = [
+  {min:0,  max:34,  nome:"Zona de exposição", cor:"#c0392b",
+   desc:"Existe preocupação com o tema, mas ainda não existe sistema. Hoje a empresa está exposta em dois flancos ao mesmo tempo: o humano e o documental — e nenhum dos dois se resolve com uma campanha.",
+   bridge:"No seu estágio, o board não vai aprovar um programa. Vai aprovar a redução de uma perda que já está acontecendo."},
+  {min:35, max:59,  nome:"Formal no papel", cor:"#c8880a",
+   desc:"Há documentação em construção, mas a prática ainda não mudou o trabalho de ninguém. É o estágio mais arriscado: dá a sensação de conformidade sem a proteção que ela deveria trazer.",
+   bridge:"Você já tem o que mostrar. Falta traduzir: o mesmo material, lido em reais, muda quem senta na mesa com você."},
+  {min:60, max:79,  nome:"Estruturado", cor:"#1e8e5a",
+   desc:"O ciclo existe e roda: você identifica, prioriza, age e registra. O que separa você do próximo nível é consistência entre áreas e a qualidade da evidência ao longo do tempo.",
+   bridge:"Nesse ponto o gargalo deixa de ser técnico e vira orçamentário. Quem sustenta o ciclo é quem consegue defendê-lo em número."},
+  {min:80, max:100, nome:"Integrado ao negócio", cor:"#1e8e5a",
+   desc:"A gestão do risco psicossocial está viva, distribuída na liderança e sustentada por evidência. Seu desafio agora é outro: manter a conversa no nível da decisão de negócio, não da conformidade.",
+   bridge:"Empresas neste estágio ganham quando param de defender o programa e passam a reportar a linha de resultado que ele protege."}
+];
+
+const RECOMENDACOES = {
+  gov:{t:"Nomeie o dono e leve o risco à mesa da diretoria",
+       p:"Sem um responsável com nome, cargo e orçamento, o tema volta a ser tarefa de todo mundo — ou seja, de ninguém. Defina o dono nesta semana e coloque uma leitura do risco psicossocial na próxima pauta de diretoria, com uma página só."},
+  ident:{t:"Feche o inventário por área e função",
+       p:"Comece pelas 3 áreas de maior sinal (afastamento, turnover, horas extras) e mapeie os fatores nessas áreas antes de tentar a empresa inteira. Cruze escuta com dado duro: o que as pessoas dizem e o que os números já mostram."},
+  aval:{t:"Escreva o critério de severidade e probabilidade",
+       p:"Um risco sem classificação documentada não sustenta decisão nem auditoria. Defina a matriz, aplique nos fatores levantados e feche numa lista curta de 3 a 5 prioridades com dono e prazo."},
+  acao:{t:"Escolha uma medida que mude o trabalho, não só a pessoa",
+       p:"Apoio individual é necessário e insuficiente. Selecione um fator prioritário e altere a fonte: meta, escala, volume, alçada ou processo. Registre a ação no PGR com responsável, prazo e critério de conclusão."},
+  monit:{t:"Prepare a liderança e monte o rastro de evidência",
+       p:"O gestor direto é onde o risco vira experiência real. Prepare a conversa (identificar, acolher, encaminhar, o que não fazer) e organize a pasta de evidências: o que você identificou, o que decidiu, o que fez e o que mudou."}
+};
+
+/* ---------- Render ---------- */
+let idx = 0;
+const container = document.getElementById("dims");
+const total = DIMENSOES.reduce((a,d)=>a+d.itens.length,0);
+
+DIMENSOES.forEach((dim,di)=>{
+  const bloco = document.createElement("div");
+  bloco.className = "card";
+  bloco.innerHTML = `<div class="dim-head">
+      <div class="dim-num">${di+1}</div>
+      <div><h2>${dim.nome}</h2><p class="dim-sub">${dim.sub}</p></div>
+    </div>`;
+  dim.itens.forEach((it,ii)=>{
+    idx++;
+    const name = `${dim.id}_${ii}`;
+    const q = document.createElement("div");
+    q.className = "q";
+    q.dataset.name = name;
+    q.innerHTML = `<span class="txt">${idx}. ${it.t}${it.crit?'<span class="crit">não-negociável</span>':''}</span>
+      <p class="ex">${it.e}</p>
+      <div class="opts">${OPCOES.map(o=>`
+        <label class="opt"><input type="radio" name="${name}" value="${o.v}">
+        <span>${o.l}<small>${o.s}</small></span></label>`).join("")}</div>`;
+    bloco.appendChild(q);
+  });
+  container.parentNode.insertBefore(bloco, container);
+});
+container.remove();
+
+/* ---------- Progresso ---------- */
+function atualizaProgresso(){
+  const respondidas = document.querySelectorAll('input[type=radio]:checked').length;
+  document.getElementById("fill").style.width = (respondidas/total*100)+"%";
+  document.getElementById("pcount").textContent = respondidas+" de "+total;
+}
+document.addEventListener("change", e=>{
+  if(e.target.type==="radio"){
+    atualizaProgresso();
+    const q = e.target.closest(".q");
+    if(q) q.classList.remove("pending");
+  }
+});
+
+/* ---------- Cálculo ---------- */
+function calcular(){
+  const porDim = [], criticosFalhos = [], respostas = {};
+  let soma = 0, max = 0;
+  DIMENSOES.forEach(dim=>{
+    let s = 0, m = 0;
+    dim.itens.forEach((it,ii)=>{
+      const el = document.querySelector(`input[name="${dim.id}_${ii}"]:checked`);
+      const v = el ? parseInt(el.value,10) : 0;
+      s += v; m += 2;
+      respostas[`${dim.nome} — ${it.t}`] = OPCOES.find(o=>o.v===v).l;
+      if(it.crit && v===0) criticosFalhos.push(it.falha || it.t);
+    });
+    porDim.push({id:dim.id, nome:dim.nome, pct:Math.round(s/m*100), pts:s, max:m});
+    soma += s; max += m;
+  });
+  const score = Math.round(soma/max*100);
+  const faixa = FAIXAS.find(f=>score>=f.min && score<=f.max);
+  return {score, faixa, porDim, criticosFalhos, respostas, soma, max};
+}
+
+function corPct(p){ return p<40 ? "#c0392b" : p<70 ? "#c8880a" : "#1e8e5a"; }
+function tagPct(p){ return p<40 ? '<span class="tag f">frágil</span>' : p<70 ? '<span class="tag m">em construção</span>' : '<span class="tag o">consistente</span>'; }
+
+/* ---------- Exibição ---------- */
+function mostrar(r){
+  document.getElementById("formulario").style.display="none";
+  document.querySelector("header h1").innerHTML = "Seu diagnóstico de <em>maturidade NR-1</em>";
+  document.querySelector("header .sub").textContent = "Guarde esta tela: ela é o ponto de partida da conversa com a sua liderança.";
+  document.querySelector("header .meta").style.display="none";
+  document.querySelector(".progress-bar").style.display="none";
+  document.getElementById("resultado").style.display="block";
+
+  document.getElementById("scoreNum").textContent = r.score;
+  document.getElementById("bandName").textContent = r.faixa.nome;
+  document.getElementById("bandDesc").textContent = r.faixa.desc;
+  document.getElementById("bridge").textContent = r.faixa.bridge;
+  setTimeout(()=>{ document.getElementById("arc").style.strokeDashoffset = 452 - (452*r.score/100); },120);
+
+  if(r.criticosFalhos.length){
+    document.getElementById("alertBox").innerHTML =
+      `<div class="alert"><h3>Atenção: ${r.criticosFalhos.length} item(ns) não-negociável(is) em zero</h3>
+       <ul>${r.criticosFalhos.map(c=>`<li>${c}</li>`).join("")}</ul>
+       <p style="font-size:12.8px;margin:8px 0 0;color:#5b6b86">Independentemente da sua pontuação geral, estes pontos são os que aparecem primeiro numa fiscalização e numa crise. Trate-os antes de ampliar qualquer programa.</p></div>`;
+  }
+
+  document.getElementById("dimBars").innerHTML = r.porDim.map(d=>`
+    <div class="dimrow">
+      <div class="top"><span>${d.nome}${tagPct(d.pct)}</span><span>${d.pct}%</span></div>
+      <div class="dbar"><i style="width:${d.pct}%;background:${corPct(d.pct)}"></i></div>
+    </div>`).join("");
+
+  const ordenadas = [...r.porDim].sort((a,b)=>a.pct-b.pct);
+  const passos = ordenadas[0].pct >= 80
+    ? [{t:"Passe de conformidade para leitura de negócio",
+        p:"Seu ciclo está de pé. O próximo salto é reportar à diretoria não o que o programa faz, mas a perda que ele evita: afastamento, turnover evitável e presenteísmo em reais, com série histórica."},
+       {t:"Teste a consistência entre áreas",
+        p:"Escolha duas áreas de perfil oposto (operação e corporativo) e refaça o diagnóstico separadamente. Maturidade média alta costuma esconder um bolsão frágil que só aparece na abertura por área."}]
+    : ordenadas.slice(0,2).map(f=>RECOMENDACOES[f.id]);
+  passos.push({t:"Coloque data na próxima revisão",
+    p:"Marque agora, no calendário, a revisão do ciclo em 90 dias — com os mesmos 15 pontos. Maturidade em risco psicossocial não se conquista num projeto; se sustenta numa cadência."});
+  document.getElementById("stepList").innerHTML = passos.map((p,i)=>`
+    <div class="step"><div class="n">${i+1}</div><div><h4>${p.t}</h4><p>${p.p}</p></div></div>`).join("");
+
+  window.scrollTo({top:0, behavior:"smooth"});
+
+  document.getElementById("copiar").onclick = ()=>{
+    const txt = `Diagnóstico de Maturidade NR-1 — Mente no Trabalho\n`+
+      `Índice: ${r.score}/100 — ${r.faixa.nome}\n\n`+
+      r.porDim.map(d=>`• ${d.nome}: ${d.pct}%`).join("\n")+
+      (r.criticosFalhos.length?`\n\nNão-negociáveis em zero:\n`+r.criticosFalhos.map(c=>"- "+c).join("\n"):"")+
+      `\n\nPróximos passos:\n`+passos.map((p,i)=>`${i+1}. ${p.t}`).join("\n");
+    navigator.clipboard.writeText(txt).then(()=>{
+      document.getElementById("copiar").textContent = "Copiado ✓";
+      setTimeout(()=>document.getElementById("copiar").textContent="Copiar resumo",2200);
+    });
+  };
+}
+
+/* ---------- Envio ---------- */
+async function enviar(r){
+  const st = document.getElementById("statusEnvio");
+  if(CONFIG.endpoint.includes("SEU_ID_AQUI")){
+    st.textContent = "Modo demonstração: o envio ainda não está configurado.";
+    return;
+  }
+  st.textContent = "Enviando o seu resultado…";
+  const payload = {
+    _subject: CONFIG.assunto + " — " + (document.getElementById("nome").value||"sem nome") + " (" + r.score + "/100)",
+    Nome: document.getElementById("nome").value,
+    Email: document.getElementById("email").value,
+    Empresa: document.getElementById("empresa").value,
+    Porte: document.getElementById("porte").value,
+    Papel: document.getElementById("papel").value,
+    Setor: document.getElementById("setor").value,
+    "INDICE (0-100)": r.score,
+    "Faixa": r.faixa.nome,
+    "Pontos": r.soma + "/" + r.max,
+    "Nao-negociaveis em zero": r.criticosFalhos.length ? r.criticosFalhos.join(" | ") : "nenhum",
+    "Data": new Date().toLocaleString("pt-BR"),
+    "Origem": location.href
+  };
+  r.porDim.forEach(d=> payload["Dim: "+d.nome] = d.pct + "%");
+  Object.assign(payload, r.respostas);
+
+  try{
+    const res = await fetch(CONFIG.endpoint,{
+      method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body: JSON.stringify(payload)
+    });
+    st.textContent = res.ok
+      ? "✓ Resultado enviado para " + document.getElementById("email").value
+      : "Não conseguimos enviar por e-mail agora — use “Salvar em PDF” para guardar o resultado.";
+  }catch(e){
+    st.textContent = "Não conseguimos enviar por e-mail agora — use “Salvar em PDF” para guardar o resultado.";
+  }
+}
+
+/* ---------- Submit ---------- */
+document.getElementById("formulario").addEventListener("submit", ev=>{
+  ev.preventDefault();
+  const erro = document.getElementById("erro");
+  erro.style.display="none";
+  document.querySelectorAll(".q").forEach(q=>q.classList.remove("pending"));
+
+  const faltantes = [...document.querySelectorAll(".q")].filter(q=>!document.querySelector(`input[name="${q.dataset.name}"]:checked`));
+  const nome = document.getElementById("nome").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+
+  if(faltantes.length){
+    faltantes.forEach(q=>q.classList.add("pending"));
+    erro.textContent = `Faltam ${faltantes.length} resposta(s) — os itens pendentes estão destacados.`;
+    erro.style.display="block";
+    faltantes[0].scrollIntoView({behavior:"smooth", block:"center"});
+    return;
+  }
+  if(!nome || !okEmail){
+    erro.textContent = "Preencha nome e um e-mail válido para receber o resultado.";
+    erro.style.display="block";
+    document.getElementById(nome?"email":"nome").focus();
+    return;
+  }
+  if(!document.getElementById("consent").checked){
+    erro.textContent = "Confirme o aceite de contato (LGPD) para continuar.";
+    erro.style.display="block";
+    return;
+  }
+
+  const r = calcular();
+  mostrar(r);
+  enviar(r);
+});
+
+atualizaProgresso();
+</script>
+</body>
+</html>
