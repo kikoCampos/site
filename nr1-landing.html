@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Palestra NR-1 e Saúde Mental no Trabalho | Kiko Campos</title>
+<link rel="canonical" href="https://kikocampos.com/palestras/nr-1/" />
 <meta name="description" content="Palestra sobre a NR-1 e a gestão de riscos psicossociais e saúde mental no trabalho, com Kiko Campos — executivo de RH que liderou transformações na Vale e no Carrefour. Trate a NR-1 como teste de liderança e cultura, não como formalidade jurídica." />
 
 <!-- ============================================================= -->
@@ -208,24 +209,24 @@
 
       <!-- FORM -->
       <div class="lead-card" id="form-hero">
-        <h3>Leve esta palestra para a sua empresa</h3>
-        <p class="sub">Conte sobre o evento — retorno com uma proposta sob medida.</p>
+        <h3>A NR-1 já está no radar do seu comitê?</h3>
+        <p class="sub">Me diga em uma linha o contexto do seu evento. Eu respondo com formato, disponibilidade e faixa de cachê — em até 48h úteis.</p>
         <form id="lead-form" novalidate>
           <div class="field">
             <label for="nome">Nome</label>
             <input id="nome" name="nome" type="text" autocomplete="name" required />
           </div>
           <div class="field">
-            <label for="empresa">Empresa</label>
-            <input id="empresa" name="empresa" type="text" autocomplete="organization" required />
+            <label for="empresa">Empresa <span style="opacity:.6;font-weight:400">(opcional)</span></label>
+            <input id="empresa" name="empresa" type="text" autocomplete="organization" />
           </div>
           <div class="field">
-            <label for="email">E-mail corporativo</label>
+            <label for="email">Seu e-mail</label>
             <input id="email" name="email" type="email" autocomplete="email" required />
           </div>
           <div class="field">
-            <label for="telefone">Telefone / WhatsApp</label>
-            <input id="telefone" name="telefone" type="tel" autocomplete="tel" required />
+            <label for="telefone">Telefone / WhatsApp <span style="opacity:.6;font-weight:400">(opcional)</span></label>
+            <input id="telefone" name="telefone" type="tel" autocomplete="tel" />
           </div>
           <div class="field">
             <label for="tipo">Tipo de evento</label>
@@ -238,7 +239,7 @@
               <option>Outro</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Solicitar proposta</button>
+          <button type="submit" class="btn btn-primary">Enviar — respondo pessoalmente</button>
           <p class="form-legal">Seus dados são usados apenas para responder a este contato. Sem spam.</p>
         </form>
         <div class="form-ok" id="form-ok">
@@ -429,7 +430,7 @@
   /* ---------- Envio do formulário ---------- */
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    var required = ['nome','empresa','email','telefone'];
+    var required = ['nome','email'];
     for(var i=0;i<required.length;i++){
       var f = document.getElementById(required[i]);
       if(!f.value.trim()){ f.focus(); f.style.borderColor='#c0392b'; return; }

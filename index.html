@@ -2,12 +2,12 @@
 <meta charset="utf-8">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kiko Campos — Cultura, Liderança e Transformação</title>
-<meta name="description" content="Há 20 anos ao lado de CEOs e comitês transformando cultura em resultado — com método, ritmo e evidência. Palestras, programas de liderança, advisory e o livro O Novo Código da Mudança.">
+<title>Kiko Campos — Palestrante e Consultor de Cultura Organizacional e Liderança</title>
+<meta name="description" content="Palestrante e consultor de cultura organizacional e liderança. Palestras, programas de desenvolvimento de líderes, Raio-X de Cultura e advisory para comitês — 20 anos ao lado de CEOs em 11 países.">
 <link rel="canonical" href="https://kikocampos.com/"><link rel="alternate" hreflang="en" href="https://kikocampos.com/en/"><link rel="alternate" hreflang="pt-BR" href="https://kikocampos.com/"><link rel="alternate" hreflang="x-default" href="https://kikocampos.com/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://kikocampos.com/">
-<meta property="og:title" content="Kiko Campos — Cultura vira comportamento. Comportamento vira resultado.">
-<meta property="og:description" content="20 anos ao lado de CEOs e comitês. Palestras, programas, advisory e o livro O Novo Código da Mudança.">
+<meta property="og:title" content="Kiko Campos — Palestrante e Consultor de Cultura Organizacional e Liderança">
+<meta property="og:description" content="Palestrante e consultor de cultura organizacional e liderança. Palestras, programas de desenvolvimento de líderes, Raio-X de Cultura e advisory para comitês — 20 anos ao lado de CEOs em 11 países.">
 <meta property="og:image" content="https://kikocampos.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -287,6 +287,20 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
   </div>
 </section>
 
+<!-- FAIXA DE CONVERSAO (meio da pagina) -->
+<section class="wrap" style="padding:8px 0 34px">
+  <div style="background:linear-gradient(100deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line2);border-radius:var(--radius);padding:28px 30px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+    <div style="max-width:56ch">
+      <div style="font-family:var(--display);font-size:1.5rem;line-height:1.25;color:var(--ink)">Reconheceu o seu problema em algum desses números?</div>
+      <div style="color:var(--ink-soft);margin-top:8px;font-size:.98rem">Me conte em uma linha. Eu leio e respondo pessoalmente — sem intermediário.</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <a class="btn btn-p" href="#contato">Me conte em uma linha →</a>
+      <a class="btn btn-g" href="tel:+5511983692989" onclick="gtag('event','tel_click',{pagina:location.pathname})">(11) 98369-2989</a>
+    </div>
+  </div>
+</section>
+
 <!-- 3 FORMAS -->
 <section class="wrap sec" id="formas">
   <div class="sechead">
@@ -397,19 +411,19 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
   <div class="contact">
     <div>
       <span class="eyebrow">Vamos conversar</span>
-      <h2>Conte, em <em>uma linha</em>, o que você busca. Eu respondo pessoalmente.</h2>
-      <p class="dek" style="margin-top:16px">Sem formulário longo. Me diga o essencial e eu respondo pessoalmente em até 48h.</p>
-      <p class="small">Ou escreva direto para kiko@kikocampos.com</p>
+      <h2>Uma linha basta. Eu leio e respondo — <em>eu mesmo</em>.</h2>
+      <p class="dek" style="margin-top:16px">Não tem SDR, não tem fluxo de nutrição, não tem “um consultor entrará em contato”. Sua mensagem cai na minha caixa e eu respondo em até 48h úteis.</p>
+      <p class="small">Prefere resolver agora? <a href="tel:+5511983692989" onclick="gtag('event','tel_click',{pagina:location.pathname})" style="color:var(--amber);font-weight:600;text-decoration:none;white-space:nowrap">(11) 98369-2989</a> · ou escreva para <a href="mailto:kiko@kikocampos.com" style="color:var(--amber);text-decoration:none">kiko@kikocampos.com</a></p>
     </div>
     <form class="form" id="contatoForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="3436ebf8-58a6-42b9-b24d-ab6d248f7d7e">
       <input type="hidden" name="subject" value="Novo contato pelo site - kikocampos.com">
       <input type="hidden" name="from_name" value="Site kikocampos.com">
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="frow"><input name="Nome" required placeholder="Seu nome"><input name="email" type="email" required placeholder="E-mail corporativo"></div>
-      <select name="Interesse" required><option value="" disabled selected>Por onde começamos?</option><option>Uma palestra / keynote</option><option>Um programa de liderança &amp; times</option><option>Um Raio-X de Cultura</option><option>Advisory / conselho</option><option>Acesso à pesquisa de jovens talentos</option><option>Ainda estou explorando</option></select>
-      <textarea name="Mensagem" rows="3" placeholder="Ex.: uma keynote para a convenção de líderes em outubro"></textarea>
-      <button class="btn btn-p" type="submit">Enviar e falar com o Kiko →</button>
+      <div class="frow"><input name="Nome" required placeholder="Seu nome"><input name="email" type="email" required placeholder="Seu e-mail"></div>
+      <select name="Interesse"><option value="" disabled selected>Por onde começamos?</option><option>Uma palestra / keynote</option><option>Um programa de liderança &amp; times</option><option>Um Raio-X de Cultura</option><option>Advisory / conselho</option><option>Acesso à pesquisa de jovens talentos</option><option>Ainda estou explorando</option></select>
+      <textarea name="Mensagem" rows="4" placeholder="Escreva como você falaria. Ex.: keynote na convenção de outubro, ~300 pessoas."></textarea>
+      <button class="btn btn-p" type="submit">Enviar — respondo pessoalmente</button>
       <div id="formMsg" class="small" style="margin-top:10px"></div>
     </form>
   </div>
