@@ -119,8 +119,15 @@ nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);background:rgba(
 .play{position:relative;width:78px;height:78px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;box-shadow:0 16px 44px -10px rgba(255,74,18,.8)}
 .play:after{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
 .vmeta{position:absolute;left:24px;bottom:20px;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
-.vlinks{display:flex;gap:26px;flex-wrap:wrap;margin-top:20px;font-size:.94rem;color:var(--ink-soft)}
+.vlinks{display:flex;gap:26px;flex-wrap:wrap;margin-top:24px;font-size:.94rem;color:var(--ink-soft)}
 .vlinks a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:2px}
+.clips{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+@media(max-width:820px){.clips{grid-template-columns:1fr}}
+.clip{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.clip video{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;background:#0d2036}
+.clip .cinfo{padding:18px 20px}
+.clip .cinfo .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:7px}
+.clip .cinfo .t{font-family:var(--display);font-size:1.12rem;font-weight:600;line-height:1.25}
 
 /* PRINCIPIOS */
 .princ{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:40px}
@@ -202,7 +209,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;color:var(--ink-soft
       <p class="lead">A pauta de gente chegou ao conselho. E chegou sem a área de gente junto. Uma keynote sobre o que muda na conta de pessoas nos próximos 24 meses — e sobre as decisões que a sua liderança precisa tomar antes que o desenho seja feito por outro.</p>
       <div class="ctas">
         <a class="btn btn-p" href="https://wa.me/5511983692989?text=Oi%20Kiko%2C%20vi%20a%20p%C3%A1gina%20da%20keynote%20sobre%20IA.%20Queria%20consultar%20sua%20agenda.">Consultar data no WhatsApp</a>
-        <a class="btn btn-g" href="#video">Ver 30 segundos de palco</a>
+        <a class="btn btn-g" href="#video">Ver os cortes de palco</a>
       </div>
       <div class="tags">
         <span class="tag">Keynote 45–60 min</span>
@@ -265,21 +272,43 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;color:var(--ink-soft
   <div class="sechead">
     <div>
       <div class="eyebrow">No palco</div>
-      <h2>Se você tem <em>30 segundos,</em><br>comece por aqui.</h2>
+      <h2>Se você tem <em>um minuto,</em><br>comece por aqui.</h2>
     </div>
-    <div class="r">O trecho que resume o posicionamento inteiro. A keynote completa e o Q&amp;A ficam logo abaixo.</div>
+    <div class="r">Dois cortes da keynote no Cubo Itaú. A gravação completa e o Q&amp;A ficam logo abaixo.</div>
   </div>
 
   <div style="margin-top:40px">
-    <a class="videocard" href="#" style="text-decoration:none">
+    <a class="videocard" href="https://www.youtube.com/watch?v=F_eAqHp45HE&amp;t=498s" target="_blank" rel="noopener" style="background-image:url('https://img.youtube.com/vi/F_eAqHp45HE/maxresdefault.jpg');text-decoration:none">
       <span class="veil"></span>
       <span class="play"></span>
-      <span class="vmeta">Corte · 30s · Cubo Itaú, ago 2026</span>
+      <span class="vmeta">Keynote completa · 38 min · Cubo Itaú, ago 2026</span>
     </a>
+
+    <div class="clips">
+      <div class="clip">
+        <video controls preload="metadata" playsinline poster="assets/corte-narnia-poster.jpg">
+          <source src="assets/corte-narnia.mp4" type="video/mp4">
+        </video>
+        <div class="cinfo">
+          <span class="k">Corte · 54s</span>
+          <div class="t">O mundo de Nárnia do LinkedIn</div>
+        </div>
+      </div>
+      <div class="clip">
+        <video controls preload="metadata" playsinline poster="assets/corte-47segundos-poster.jpg">
+          <source src="assets/corte-47segundos.mp4" type="video/mp4">
+        </video>
+        <div class="cinfo">
+          <span class="k">Corte · 1min30</span>
+          <div class="t">47 segundos de atenção</div>
+        </div>
+      </div>
+    </div>
+
     <div class="vlinks">
-      <a href="#">Keynote completa · 38 min</a>
-      <a href="#">Bloco de Q&amp;A · 10 min</a>
-      <a href="#">Baixar o media kit (PDF)</a>
+      <a href="https://www.youtube.com/watch?v=F_eAqHp45HE&amp;t=498s" target="_blank" rel="noopener">Assistir à keynote completa</a>
+      <a href="https://www.youtube.com/watch?v=F_eAqHp45HE&amp;t=2824s" target="_blank" rel="noopener">Ir direto para o Q&amp;A · 10 min</a>
+      <a href="KikoCampos_MidiaKit_PT.pdf" target="_blank" rel="noopener">Baixar o media kit (PDF)</a>
     </div>
   </div>
 </section>
@@ -361,7 +390,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;color:var(--ink-soft
     </div>
     <div class="ctas">
       <a class="btn btn-p" href="https://wa.me/5511983692989?text=Oi%20Kiko%2C%20sou%20de%20produtora%20ou%20curadoria%20e%20queria%20a%20faixa%20de%20cach%C3%AA%20e%20a%20disponibilidade.">Pedir cachê e disponibilidade</a>
-      <a class="btn btn-g" href="#">Baixar media kit</a>
+      <a class="btn btn-g" href="KikoCampos_MidiaKit_PT.pdf" target="_blank" rel="noopener">Baixar media kit</a>
     </div>
   </div>
 </section>
