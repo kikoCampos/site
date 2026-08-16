@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A IA sentou primeiro — Keynote sobre IA, liderança e o futuro do trabalho | Kiko Campos</title>
+<meta name="description" content="Keynote de Kiko Campos sobre a pauta de IA que chegou ao conselho antes da área de gente. Ex-diretor global de RH da Vale. Agenda aberta para o 4º trimestre de 2026.">
+<link rel="canonical" href="https://kikocampos.com/keynote-ia.html">
+<link rel="icon" href="favicon.png">
+<meta property="og:title" content="A IA sentou primeiro — Keynote | Kiko Campos">
+<meta property="og:description" content="A pauta de gente chegou ao conselho. E chegou sem a área de gente junto.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kikocampos.com/keynote-ia.html">
+<!-- ============================================================
+     ANALYTICS — PENDENTE
+     Copie o bloco de Google Analytics + consent que está no <head>
+     das outras páginas (palestras.html) e cole exatamente aqui.
+     Propriedade GA4 do site: G-RD1P3CKLSE
+     Sem isso esta página não aparece nos relatórios.
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A1830; --bg2:#0E2140; --panel:#12294d; --panel2:#16305a;
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.20);
+  --ink:#EAF1FB; --ink-soft:#AFC0DB; --ink-mute:#7D91B4;
+  --orange:#FF4A12; --amber:#F2B33D; --good:#4FD1A1; --blue:#5AA9E6;
+  --display:"Fraunces",Georgia,serif;
+  --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --maxw:1180px; --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(1150px 640px at 82% -12%, rgba(90,169,230,.15), transparent 60%),
+    radial-gradient(900px 560px at 2% -6%, rgba(255,74,18,.13), transparent 55%),
+    var(--bg);}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.grad{background:linear-gradient(100deg,var(--amber),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(2.6rem,5vw,4.3rem);line-height:1.02;letter-spacing:-.02em;margin:24px 0 0}
+h1 em{font-style:italic}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(2rem,3.3vw,2.9rem);line-height:1.06;letter-spacing:-.015em;margin:14px 0 0}
+h2 em{font-style:italic}
+h3{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:0 0 8px}
+.sec{padding:78px 0;scroll-margin-top:90px}
+.sec.tight{padding:56px 0}
+.dek{color:var(--ink-soft);font-size:1.1rem;max-width:46ch}
+.lead{color:var(--ink-soft);font-size:1.16rem;line-height:1.6;max-width:44ch;margin:22px 0 0}
+.lead em{color:var(--ink);font-style:italic;font-family:var(--display)}
+p{margin:0 0 14px}
+a{color:inherit}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);background:rgba(10,24,48,.66);border-bottom:1px solid var(--line)}
+.navin{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.06rem;text-decoration:none;color:var(--ink)}
+.brand .dot{width:11px;height:11px;border-radius:50%;background:var(--orange);box-shadow:0 0 16px rgba(255,74,18,.7)}
+.navlinks{display:flex;align-items:center;gap:26px;font-size:.92rem;color:var(--ink-soft)}
+.navlinks a{text-decoration:none;color:var(--ink-soft)}
+.navlinks a:hover{color:var(--ink)}
+.navcta{padding:10px 18px;border-radius:100px;background:var(--orange);color:#fff!important;font-weight:600}
+@media(max-width:900px){.navlinks{display:none}}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center;padding:72px 0 26px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:36px;padding:44px 0 10px}}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border:1px solid var(--line2);border-radius:100px;font-size:.83rem;color:var(--ink-soft);background:rgba(255,255,255,.03)}
+.chip .lv{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 12px rgba(79,209,161,.8)}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;margin:32px 0 0}
+.btn{padding:15px 26px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none}
+.btn-p{background:var(--orange);color:#fff;box-shadow:0 12px 34px -10px rgba(255,74,18,.6)}
+.btn-g{color:var(--ink);border:1px solid var(--line2);background:transparent}
+.tags{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0}
+.tag{font-size:.82rem;color:var(--ink-mute);padding:7px 14px;border:1px solid var(--line);border-radius:100px}
+.frame{border-radius:24px;padding:1.5px;background:linear-gradient(150deg,rgba(242,179,61,.6),rgba(255,74,18,.35) 40%,rgba(90,169,230,.35));box-shadow:0 40px 90px -30px rgba(0,0,0,.7)}
+.photo{border-radius:23px;aspect-ratio:4/5;background-color:#0d2036;background-size:cover;background-position:center 18%}
+
+/* LOGOS */
+.logos{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:40px auto 0;padding:32px 26px;text-align:center}
+.logos .lab{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.logogrid{display:flex;gap:34px;flex-wrap:wrap;justify-content:center;margin-top:18px;color:var(--ink-soft);font-weight:600;letter-spacing:.04em;font-size:1.02rem;opacity:.82}
+.stats{display:flex;gap:34px;flex-wrap:wrap;justify-content:center;margin-top:22px;font-size:.9rem;color:var(--ink-mute);font-family:var(--mono)}
+
+/* SEC HEAD */
+.sechead{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:end}
+.sechead .r{color:var(--ink-soft);font-size:1.02rem;text-align:right;padding-bottom:6px}
+@media(max-width:820px){.sechead{grid-template-columns:1fr}.sechead .r{text-align:left}}
+
+/* ROWS */
+.rows{margin-top:40px;display:grid;gap:16px}
+.row{display:grid;grid-template-columns:64px 1.1fr 1.4fr;gap:26px;align-items:start;padding:26px 28px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.row .num{font-family:var(--display);font-size:1.9rem;color:var(--ink-mute);line-height:1}
+.row .t{font-family:var(--display);font-size:1.35rem;font-weight:600}
+.row .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px;display:block}
+.row .d{color:var(--ink-soft);font-size:.96rem;line-height:1.5}
+@media(max-width:820px){.row{grid-template-columns:44px 1fr;gap:16px}.row .d{grid-column:1/-1}}
+
+/* IMPACT */
+.impact{text-align:center;padding:96px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.impact .q{font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,4vw,3.3rem);line-height:1.1;letter-spacing:-.02em;max-width:19ch;margin:0 auto}
+.impact .s{color:var(--ink-soft);margin-top:26px;font-size:1.05rem}
+
+/* MARCOS / bullets */
+.marks{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+@media(max-width:900px){.marks{grid-template-columns:1fr}}
+.mark{padding:28px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.mark .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;display:block}
+.mark p{color:var(--ink-soft);font-size:.96rem;margin:0}
+.src{font-family:var(--mono);font-size:.68rem;color:var(--ink-mute);letter-spacing:.04em;margin-top:12px;display:block}
+
+/* VIDEO */
+.videocard{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line2);background:linear-gradient(155deg,var(--panel2),var(--panel));aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 30px 70px -28px rgba(0,0,0,.75);background-size:cover;background-position:center 28%}
+.videocard .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,24,48,.25),rgba(10,24,48,.78))}
+.play{position:relative;width:78px;height:78px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;box-shadow:0 16px 44px -10px rgba(255,74,18,.8)}
+.play:after{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.vmeta{position:absolute;left:24px;bottom:20px;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.vlinks{display:flex;gap:26px;flex-wrap:wrap;margin-top:20px;font-size:.94rem;color:var(--ink-soft)}
+.vlinks a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:2px}
+
+/* PRINCIPIOS */
+.princ{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:40px}
+.pcard{padding:26px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.pcard .n{font-family:var(--mono);font-size:.72rem;color:var(--amber);letter-spacing:.14em;margin-bottom:10px;display:block}
+.pcard h4{font-family:var(--display);font-size:1.08rem;font-weight:600;margin:0 0 8px}
+.pcard p{color:var(--ink-soft);font-size:.9rem;margin:0;line-height:1.5}
+
+/* FORMATOS */
+.fmt{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+@media(max-width:900px){.fmt{grid-template-columns:1fr}}
+.fcard{padding:28px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.fcard .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:10px}
+.fcard p{color:var(--ink-soft);font-size:.94rem;margin:0}
+
+/* PRODUTOR */
+.prod{margin-top:36px;padding:34px;border-radius:16px;border:1px solid rgba(255,74,18,.45);background:linear-gradient(140deg,rgba(255,74,18,.09),rgba(255,255,255,.02))}
+.plist{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:22px;margin-top:22px}
+.plist div span{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:6px}
+.plist div b{font-weight:600;font-size:.98rem}
+
+/* BIO */
+.bio{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center}
+@media(max-width:900px){.bio{grid-template-columns:1fr;gap:32px}}
+
+/* FAQ */
+.faq{margin-top:40px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line);padding:22px 0}
+summary{cursor:pointer;font-family:var(--display);font-size:1.14rem;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:20px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--orange);font-family:var(--body);font-weight:400;font-size:1.6rem;line-height:1}
+details[open] summary:after{content:"–"}
+details p{color:var(--ink-soft);font-size:.98rem;margin:14px 0 0;max-width:70ch}
+
+/* CONTATO */
+.contact{text-align:center;padding:104px 0}
+.contact h2{max-width:20ch;margin:14px auto 0}
+.contact .small{color:var(--ink-mute);font-size:.9rem;margin-top:22px;font-family:var(--mono);letter-spacing:.04em}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:54px 0 40px;color:var(--ink-soft);font-size:.92rem}
+.footgrid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:34px}
+@media(max-width:900px){.footgrid{grid-template-columns:1fr 1fr}}
+.fcol .fh{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
+.fcol a{display:block;color:var(--ink-soft);text-decoration:none;margin-bottom:9px}
+.fbase{border-top:1px solid var(--line);margin-top:36px;padding-top:22px;color:var(--ink-mute);font-size:.84rem}
+
+/* CTA FIXO MOBILE */
+.mcta{display:none}
+@media(max-width:760px){
+  .mcta{display:block;position:fixed;left:16px;right:16px;bottom:16px;z-index:40;
+    background:var(--orange);color:#fff;text-align:center;padding:15px;border-radius:100px;
+    font-weight:600;text-decoration:none;box-shadow:0 16px 40px -12px rgba(255,74,18,.8)}
+  body{padding-bottom:80px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="index.html"><span class="dot"></span>kiko campos</a>
+    <div class="navlinks">
+      <a href="palestras.html">Palestras</a>
+      <a href="programas.html">Programas</a>
+      <a href="advisory.html">Advisory</a>
+      <a href="sobre.html">Sobre</a>
+      <a class="navcta" href="https://wa.me/5511983692989?text=Oi%20Kiko%2C%20vi%20a%20p%C3%A1gina%20da%20keynote%20sobre%20IA.%20Queria%20consultar%20sua%20agenda.">Consultar data</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="wrap">
+  <div class="hero">
+    <div>
+      <div class="chip"><span class="lv"></span> Agenda aberta para o 4º trimestre de 2026</div>
+      <h1>Enquanto o RH pedia assento à mesa, <em class="grad">a IA sentou primeiro.</em></h1>
+      <p class="lead">A pauta de gente chegou ao conselho. E chegou sem a área de gente junto. Uma keynote sobre o que muda na conta de pessoas nos próximos 24 meses — e sobre as decisões que a sua liderança precisa tomar antes que o desenho seja feito por outro.</p>
+      <div class="ctas">
+        <a class="btn btn-p" href="https://wa.me/5511983692989?text=Oi%20Kiko%2C%20vi%20a%20p%C3%A1gina%20da%20keynote%20sobre%20IA.%20Queria%20consultar%20sua%20agenda.">Consultar data no WhatsApp</a>
+        <a class="btn btn-g" href="#video">Ver 30 segundos de palco</a>
+      </div>
+      <div class="tags">
+        <span class="tag">Keynote 45–60 min</span>
+        <span class="tag">Masterclass 90 min–3h</span>
+        <span class="tag">Fireside &amp; painel</span>
+        <span class="tag">Presencial e online</span>
+      </div>
+    </div>
+    <div class="frame">
+      <div class="photo" style="background-image:url('assets/keynote-hero.jpg')"></div>
+    </div>
+  </div>
+
+  <div class="logos">
+    <div class="lab">Já subi ao palco para</div>
+    <div class="logogrid"><span>VALE</span><span>CARREFOUR</span><span>SANTANDER</span><span>VOLKSWAGEN</span><span>RENNER</span><span>CITIBANK</span></div>
+    <div class="stats"><span>170 mil colaboradores sob gestão global de RH</span><span>palestras em 11 países</span><span>4.991 estagiários ouvidos em pesquisa própria</span></div>
+  </div>
+</header>
+
+<!-- O PROBLEMA -->
+<section class="sec wrap">
+  <div class="sechead">
+    <div>
+      <div class="eyebrow">O que está acontecendo</div>
+      <h2>Três décadas pedindo.<br><em>Três anos para perder.</em></h2>
+    </div>
+    <div class="r">A pergunta não é mais se o tema entra na sala. Ele já entrou.</div>
+  </div>
+
+  <div class="rows">
+    <div class="row">
+      <div class="num">01</div>
+      <div><span class="k">A inversão</span><div class="t">A IA não pediu licença</div></div>
+      <div class="d">A nossa profissão passou trinta anos pedindo para participar da decisão. A IA levou três. Não porque seja mais estratégica que gente — porque entrou pela porta da frente, como risco e como valor, direto na pauta do CEO e do conselho.</div>
+    </div>
+    <div class="row">
+      <div class="num">02</div>
+      <div><span class="k">O degrau que sumiu</span><div class="t">O entry-level foi embora</div></div>
+      <div class="d">A IA não tirou o emprego do jovem. Tirou a tarefa em que ele aprendia — e ninguém construiu o degrau novo. Quem não redesenhar onboarding, mentoria e trilha vai contratar júnior a preço de mercado e vê-lo falhar.</div>
+    </div>
+    <div class="row">
+      <div class="num">03</div>
+      <div><span class="k">A ilusão do piloto</span><div class="t">Estar exposto não é ganhar</div></div>
+      <div class="d">Dentro do mesmo grupo de empresas expostas à IA, a distância entre a média e o topo é grande demais para ser explicada por software. Ganho de tempo individual sem redesenho coletivo não é produtividade — é ociosidade mal distribuída.</div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACTO -->
+<section class="impact">
+  <div class="wrap">
+    <div class="q">A pergunta é se a liderança de pessoas <em class="grad">entra junto com ele.</em></div>
+    <div class="s">Cubo Itaú · agosto de 2026 · aula inaugural do Clube RHZ com a UniFECAF</div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="sec wrap" id="video">
+  <div class="sechead">
+    <div>
+      <div class="eyebrow">No palco</div>
+      <h2>Se você tem <em>30 segundos,</em><br>comece por aqui.</h2>
+    </div>
+    <div class="r">O trecho que resume o posicionamento inteiro. A keynote completa e o Q&amp;A ficam logo abaixo.</div>
+  </div>
+
+  <div style="margin-top:40px">
+    <a class="videocard" href="#" style="text-decoration:none">
+      <span class="veil"></span>
+      <span class="play"></span>
+      <span class="vmeta">Corte · 30s · Cubo Itaú, ago 2026</span>
+    </a>
+    <div class="vlinks">
+      <a href="#">Keynote completa · 38 min</a>
+      <a href="#">Bloco de Q&amp;A · 10 min</a>
+      <a href="#">Baixar o media kit (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE A SALA LEVA -->
+<section class="sec wrap">
+  <div class="sechead">
+    <div>
+      <div class="eyebrow">O que a sala leva</div>
+      <h2>Sai do palco e vira <em>decisão na segunda-feira.</em></h2>
+    </div>
+    <div class="r">Sem ferramenta, sem demonstração de prompt, sem futurologia.</div>
+  </div>
+
+  <div class="marks">
+    <div class="mark">
+      <span class="k">01 · Linguagem</span>
+      <h3>Uma leitura de risco que o comitê entende</h3>
+      <p>Custo de oportunidade perdida, receita por FTE, matriz de risco, déficit de capability. A pauta de gente traduzida para a gramática em que o conselho já decide.</p>
+    </div>
+    <div class="mark">
+      <span class="k">02 · Diagnóstico</span>
+      <h3>Onde a sua empresa está de verdade</h3>
+      <p>A distribuição real do mercado entre quem já tem IA operando e quem segue em piloto eterno. Sem constranger a área — com argumento para ela negociar internamente.</p>
+    </div>
+    <div class="mark">
+      <span class="k">03 · Framework</span>
+      <h3>Capital Cerebral, para levar embora</h3>
+      <p>Cinco princípios de gestão da capacidade cognitiva da organização. Sai da sala em uma página e sobrevive à segunda-feira.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAPITAL CEREBRAL -->
+<section class="sec wrap">
+  <div class="sechead">
+    <div>
+      <div class="eyebrow">O framework</div>
+      <h2>Sua empresa tem política de manutenção de ativo físico. <em class="grad">De capacidade de pensar, não tem.</em></h2>
+    </div>
+    <div class="r">Se o trabalho que sobra para as pessoas é intensivo em julgamento, então julgamento é o ativo produtivo principal. E ele se deprecia.</div>
+  </div>
+
+  <div class="princ">
+    <div class="pcard"><span class="n">01</span><h4>Calibrar carga</h4><p>Intercalar deliberadamente alta e baixa intensidade em vez de otimizar tudo. Recuperação ativa não é ociosidade. É manutenção.</p></div>
+    <div class="pcard"><span class="n">02</span><h4>Proteger capacidade</h4><p>Subtrair processo legado antes de adicionar processo novo. Toda transformação adiciona; quase nenhuma subtrai. A conta fecha no cansaço das pessoas.</p></div>
+    <div class="pcard"><span class="n">03</span><h4>Habilitar foco</h4><p>Depois de uma interrupção são 23 minutos até retomar a tarefa. Foco deixou de ser disciplina individual e virou desenho organizacional.<span class="src">Gloria Mark · UC Irvine · 2008</span></p></div>
+    <div class="pcard"><span class="n">04</span><h4>Habilidades adaptativas</h4><p>Praticar deliberadamente o pensar sem a máquina. Quem só usa escada rolante perde a capacidade de subir escada.</p></div>
+    <div class="pcard"><span class="n">05</span><h4>Ambiente positivo</h4><p>Sem segurança psicológica, o aprendizado de IA acontece escondido. E o que é escondido não se difunde.</p></div>
+  </div>
+</section>
+
+<!-- FORMATOS + PRODUTOR -->
+<section class="sec wrap">
+  <div class="sechead">
+    <div>
+      <div class="eyebrow">Formatos</div>
+      <h2>Três formas de <em>colocar isso na sua agenda.</em></h2>
+    </div>
+    <div class="r">A tese é a mesma. Os casos mudam conforme o seu setor.</div>
+  </div>
+
+  <div class="fmt">
+    <div class="fcard"><span class="k">Keynote · 45 a 60 min</span><h3>Abertura ou encerramento</h3><p>Dá o tom do evento e mobiliza a plateia. Formato apresentado no Cubo Itaú.</p></div>
+    <div class="fcard"><span class="k">Masterclass · 90 min a 3h</span><h3>Sessão de trabalho</h3><p>Mais longa e aplicável, com os cinco princípios trabalhados em exercício com o time de liderança.</p></div>
+    <div class="fcard"><span class="k">Fireside · 30 a 60 min</span><h3>Conversa mediada</h3><p>Painel ou fireside com Q&amp;A, com profundidade para comitês executivos e conselhos.</p></div>
+  </div>
+
+  <div class="prod">
+    <div class="eyebrow" style="color:var(--orange)">Para produtoras, agências e curadoria</div>
+    <h3 style="font-size:1.5rem;margin-top:12px">Tudo o que você precisa para fechar a grade</h3>
+    <div class="plist">
+      <div><span>Disponibilidade</span><b>4º trimestre de 2026 e agenda 2027 aberta</b></div>
+      <div><span>Base e deslocamento</span><b>São Paulo · Brasil e exterior</b></div>
+      <div><span>Cachê</span><b>Faixa enviada na primeira resposta, sem reunião prévia</b></div>
+      <div><span>Material para o público</span><b>Uma página com os cinco princípios e as fontes</b></div>
+      <div><span>Rider técnico</span><b>Projeção 16:9, lapela, clicker próprio, 15 min de passagem</b></div>
+      <div><span>Preparação</span><b>Conversa de 30 min com o contratante antes do evento</b></div>
+    </div>
+    <div class="ctas">
+      <a class="btn btn-p" href="https://wa.me/5511983692989?text=Oi%20Kiko%2C%20sou%20de%20produtora%20ou%20curadoria%20e%20queria%20a%20faixa%20de%20cach%C3%AA%20e%20a%20disponibilidade.">Pedir cachê e disponibilidade</a>
+      <a class="btn btn-g" href="#">Baixar media kit</a>
+    </div>
+  </div>
+</section>
+
+<!-- BIO -->
+<section class="sec wrap">
+  <div class="bio">
+    <div class="frame">
+      <div class="photo" style="background-image:url('assets/keynote-palco.jpg');background-position:center 12%"></div>
+    </div>
+    <div>
+      <div class="eyebrow">Quem sobe no palco</div>
+      <h2>Não sou o consultor que estudou o assunto. <em class="grad">Fui o executivo que teve que responder por ele.</em></h2>
+      <p class="lead" style="max-width:56ch">Diretor Global de RH, Transformação e Cultura da Vale: 170 mil pessoas, 12 países, interface direta com o comitê executivo. No Carrefour Brasil, liderei a integração do Grupo BIG — 1,7 bilhão de reais em sinergias, turnover de mais de 70% para 35% e a maior escola corporativa de liderança do país, com 8 mil líderes. Antes disso, McKinsey.</p>
+      <p class="lead" style="max-width:56ch">Duas vezes eleito um dos profissionais de RH mais admirados do Brasil. LinkedIn Top Voice. Membro do Forbes Human Resources Council. Autor de <em>O Novo Código da Mudança</em>.</p>
+      <div class="ctas"><a class="btn btn-g" href="sobre.html">Trajetória completa</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec wrap">
+  <div class="sechead">
+    <div>
+      <div class="eyebrow">Antes de me chamar</div>
+      <h2>As perguntas que <em>sempre chegam.</em></h2>
+    </div>
+    <div class="r">Se a sua não estiver aqui, manda no WhatsApp. Respondo pessoalmente.</div>
+  </div>
+
+  <div class="faq">
+    <details><summary>Isso é uma palestra técnica sobre IA?</summary><p>Não. Não mostro ferramenta, não ensino prompt e não faço demonstração. A palestra é sobre a decisão de gestão que a tecnologia impõe. Se o seu evento precisa de demonstração prática, eu indico quem faz.</p></details>
+    <details><summary>Funciona para uma plateia mista, com RH e negócio na mesma sala?</summary><p>Funciona melhor assim. O argumento inteiro é construído na linguagem de comitê executivo, não na linguagem interna de RH.</p></details>
+    <details><summary>Qual é o cachê?</summary><p>Depende de formato, deslocamento e uso posterior da gravação. Mando a faixa na primeira resposta, sem reunião prévia.</p></details>
+    <details><summary>Você adapta ao meu contexto?</summary><p>Sim, e é condição. Uma conversa de 30 minutos antes do evento para calibrar exemplos ao seu setor e ao momento da empresa. A tese não muda; os casos, sim.</p></details>
+    <details><summary>Online funciona?</summary><p>Funciona, com ajuste de ritmo e mais interação. Não é a mesma palestra com a câmera ligada.</p></details>
+    <details><summary>Com quanta antecedência preciso reservar?</summary><p>Datas de convenção do quarto trimestre costumam fechar com 60 a 90 dias. Fora de pico, duas ou três semanas resolvem.</p></details>
+    <details><summary>Posso gravar e usar depois?</summary><p>Pode, combinando escopo e prazo de uso na proposta.</p></details>
+    <details><summary>Os participantes levam material?</summary><p>Levam. Uma página com os cinco princípios do Capital Cerebral e as fontes dos dados citados no palco.</p></details>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contact wrap" id="contato">
+  <div class="eyebrow">Vamos conversar</div>
+  <h2>A IA sentou primeiro. <em class="grad">Mas ela não lê a sala.</em></h2>
+  <p class="lead" style="max-width:52ch;margin:26px auto 0;text-align:center">Não tem SDR, não tem fluxo de nutrição, não tem “um consultor entrará em contato”. Sua mensagem chega direto em mim. Me manda a data e o tipo de evento.</p>
+  <div class="ctas" style="justify-content:center">
+    <a class="btn btn-p" href="https://wa.me/5511983692989?text=Oi%20Kiko%2C%20quero%20falar%20sobre%20uma%20palestra.%20Data%3A%20___%20%7C%20Evento%3A%20___%20%7C%20P%C3%BAblico%3A%20___">Chamar no WhatsApp</a>
+    <a class="btn btn-g" href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a>
+  </div>
+  <div class="small">Resposta pessoal em até 48 horas úteis · (11) 98369-2989</div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footgrid">
+      <div class="fcol">
+        <a class="brand" href="index.html" style="margin-bottom:14px"><span class="dot"></span>kiko campos</a>
+        <div style="color:var(--ink-mute);font-size:.9rem;max-width:34ch">Liderança executiva e transformação cultural. Cultura como sistema vivo, integrado e mensurável.</div>
+      </div>
+      <div class="fcol">
+        <div class="fh">Serviços</div>
+        <a href="palestras.html">Palestras &amp; Keynotes</a>
+        <a href="keynote-ia.html">Keynote · A IA sentou primeiro</a>
+        <a href="programas.html">Programas &amp; Projetos</a>
+        <a href="advisory.html">Advisory</a>
+      </div>
+      <div class="fcol">
+        <div class="fh">Conteúdo &amp; Pesquisa</div>
+        <a href="https://jovens.kikocampos.com">Pesquisa Jovens Talentos</a>
+        <a href="https://mente.kikocampos.com">Mente no Trabalho</a>
+        <a href="livro.html">O Livro</a>
+        <a href="manifesto.html">Manifesto</a>
+      </div>
+      <div class="fcol">
+        <div class="fh">Contato</div>
+        <a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a>
+        <a href="https://wa.me/5511983692989">WhatsApp</a>
+        <a href="privacidade.html">Política de Privacidade</a>
+      </div>
+    </div>
+    <div class="fbase">© 2026 Kiko Campos. Todos os direitos reservados. · Parte do ecossistema kikocampos.com · jovens · mente</div>
+  </div>
+</footer>
+
+<a class="mcta" href="https://wa.me/5511983692989?text=Oi%20Kiko%2C%20vi%20a%20p%C3%A1gina%20da%20keynote%20sobre%20IA.%20Queria%20consultar%20sua%20agenda.">Consultar data no WhatsApp</a>
+
+</body>
+</html>
