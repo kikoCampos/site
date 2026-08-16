@@ -115,8 +115,9 @@ nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);background:rgba(
 .vmeta{position:absolute;left:24px;bottom:20px;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
 .vlinks{display:flex;gap:26px;flex-wrap:wrap;margin-top:24px;font-size:.94rem;color:var(--ink-soft)}
 .vlinks a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:2px}
-.clips{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
-@media(max-width:820px){.clips{grid-template-columns:1fr}}
+.clips{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+@media(max-width:1000px){.clips{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.clips{grid-template-columns:1fr}}
 .clip{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.025)}
 .clip video{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;background:#0d2036}
 .clip .cinfo{padding:18px 20px}
@@ -268,7 +269,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;color:var(--ink-soft
       <div class="eyebrow">No palco</div>
       <h2>Se você tem <em>um minuto,</em><br>comece por aqui.</h2>
     </div>
-    <div class="r">Dois cortes da keynote no Cubo Itaú, nos dois pontos que mais doem em RH. A gravação completa e o Q&amp;A ficam logo abaixo.</div>
+    <div class="r">Três cortes da keynote no Cubo Itaú, nos pontos que mais doem em RH. A gravação completa e o Q&amp;A ficam logo abaixo.</div>
   </div>
 
   <div style="margin-top:40px">
@@ -295,6 +296,15 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;color:var(--ink-soft
         <div class="cinfo">
           <span class="k">Corte · 27s</span>
           <div class="t">1 em tecnologia. 3 em processo. 5 em gente.</div>
+        </div>
+      </div>
+      <div class="clip">
+        <video controls preload="metadata" playsinline poster="assets/corte-capital-cerebral-poster.jpg">
+          <source src="assets/corte-capital-cerebral.mp4" type="video/mp4">
+        </video>
+        <div class="cinfo">
+          <span class="k">Corte · 42s</span>
+          <div class="t">Capital cerebral: o que o conselho quer ouvir</div>
         </div>
       </div>
     </div>
