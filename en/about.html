@@ -176,7 +176,7 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2.8rem,5.2vw,4.6re
 .contact h2 em{font-style:italic}
 .form{display:grid;gap:14px}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form input,.form select,.form textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:12px;padding:14px 16px;color:var(--ink);font-family:var(--body);font-size:.95rem}
+.form .fld{display:grid;gap:7px}.form label{font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}.form label i{font-style:normal;text-transform:none;letter-spacing:0;color:var(--ink-mute)}@media(max-width:640px){.frow{grid-template-columns:1fr}}.form input,.form select,.form textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:12px;padding:14px 16px;color:var(--ink);font-family:var(--body);font-size:.95rem}
 .form input::placeholder,.form textarea::placeholder{color:var(--ink-mute)}
 .small{color:var(--ink-mute);font-size:.85rem;margin-top:10px}
 footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
@@ -262,9 +262,9 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
       <input type="hidden" name="subject" value="New contact via kikocampos.com (EN)">
       <input type="hidden" name="from_name" value="kikocampos.com website (EN)">
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="frow"><input name="Name" required placeholder="Your name" aria-label="Your name" autocomplete="name"><input name="email" type="email" required placeholder="Work email" aria-label="Work email" autocomplete="email"></div>
-      <select name="Interest" required aria-label="Where do we start?"><option value="" disabled selected>Where do we start?</option><option>A keynote / talk</option><option>A leadership &amp; team program</option><option>A Culture X-Ray</option><option>Advisory / board</option><option>Access to the young talent research</option><option>Just exploring</option></select>
-      <textarea name="Message" rows="3" placeholder="E.g., a keynote for our leadership convention in October" aria-label="E.g., a keynote for our leadership convention in October"></textarea>
+      <div class="frow"><div class="fld"><label for="f-nome">Name</label><input name="Name" required placeholder="First and last name" autocomplete="name" id="f-nome"></div><div class="fld"><label for="f-email">Email</label><input name="email" type="email" required placeholder="you@company.com" autocomplete="email" id="f-email"></div></div>
+      <div class="fld"><label for="f-assunto">Topic <i>(optional)</i></label><select name="Interest" id="f-assunto"><option value="" disabled selected>Where do we start?</option><option>A keynote / talk</option><option>A leadership &amp; team program</option><option>A Culture X-Ray</option><option>Advisory / board</option><option>Access to the young talent research</option><option>Just exploring</option></select></div>
+      <div class="fld"><label for="f-msg">Message <i>(optional)</i></label><textarea id="f-msg" name="Message" rows="4" placeholder="E.g., a keynote for our leadership convention in October"></textarea></div>
       <button class="btn btn-p" type="submit">Send and reach Kiko &rarr;</button>
       <div id="formMsg" class="small" style="margin-top:10px"></div>
     </form></div></section>
