@@ -1,6 +1,7 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kiko Campos — Cultura, Liderança e Transformação</title>
+<meta name="robots" content="noindex,follow">
 <meta name="description" content="Há 20 anos ao lado de CEOs e comitês transformando cultura em resultado — com método, ritmo e evidência. Palestras, programas de liderança, advisory e o livro O Novo Código da Mudança.">
 <link rel="canonical" href="https://kikocampos.com/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://kikocampos.com/">
@@ -14,8 +15,8 @@
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('consent','default',{'analytics_storage':'denied'});
-if(document.cookie.indexOf('kc_cookie=accepted')>-1){gtag('consent','update',{'analytics_storage':'granted'});}
+gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);
+if(document.cookie.indexOf('kc_cookie=accepted')>-1){gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});}
 gtag('config','G-RD1P3CKLSE');
 </script>
 <style>
@@ -431,7 +432,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
 </div>
 <script>
 function setCookie(v){document.cookie='kc_cookie='+v+';path=/;max-age=15552000;samesite=lax';}
-function lgpd(ok){setCookie(ok?'accepted':'declined');document.getElementById('lgpd').style.display='none';if(ok){gtag('consent','update',{'analytics_storage':'granted'});}}
+function lgpd(ok){setCookie(ok?'accepted':'declined');document.getElementById('lgpd').style.display='none';if(ok){gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});}}
 if(document.cookie.indexOf('kc_cookie=')===-1){document.getElementById('lgpd').style.display='block';}
 // cta_click
 document.addEventListener('click',function(e){var a=e.target.closest('a.btn,button.btn,a.go,a.ml,.row .acts a');if(a){gtag('event','cta_click',{cta:(a.textContent||'').trim().slice(0,60),destino:a.getAttribute('href')||'',pagina:location.pathname});}});
