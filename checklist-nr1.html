@@ -27,8 +27,8 @@
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('consent','default',{'analytics_storage':'denied'});
-if(document.cookie.indexOf('kc_cookie=accepted')>-1){gtag('consent','update',{'analytics_storage':'granted'});}
+gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);
+if(document.cookie.indexOf('kc_cookie=accepted')>-1){gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});}
 gtag('config','G-RD1P3CKLSE');
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -648,7 +648,7 @@ atualizaProgresso();
 <script>
 function setCookie(v){document.cookie="kc_cookie="+v+";path=/;domain=.kikocampos.com;max-age=15552000;samesite=lax";}
 function kcSticky(px){var s=document.querySelector('.sticky-cta');if(s){s.style.bottom=px;}}
-function lgpd(ok){setCookie(ok?"accepted":"declined");document.getElementById("lgpd").style.display="none";kcSticky("");if(ok){gtag("consent","update",{"analytics_storage":"granted"});}}
+function lgpd(ok){setCookie(ok?"accepted":"declined");document.getElementById("lgpd").style.display="none";kcSticky("");if(ok){gtag("consent","update",{"ad_storage":"granted","ad_user_data":"granted","ad_personalization":"granted","analytics_storage":"granted"});}}
 if(document.cookie.indexOf("kc_cookie=")===-1){var _b=document.getElementById("lgpd");_b.style.display="block";kcSticky(_b.offsetHeight+"px");}
 document.addEventListener('click',function(e){var a=e.target.closest('a.btn,button.btn,a.mcta,a.navcta,a.videocard,a.nav-cta,button.btn-primary,button.btn-ghost,a[href*="wa.me"]');if(a){gtag('event','cta_click',{cta:(a.textContent||'').trim().slice(0,60),destino:a.getAttribute('href')||'',pagina:location.pathname});}});
 </script>
