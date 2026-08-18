@@ -6,7 +6,7 @@
 <meta property="og:title" content="Privacidade & dados — Kiko Campos"><meta property="og:description" content="Política de Privacidade do site kikocampos.com — como tratamos seus dados, conforme a LGPD.">
 <meta property="og:image" content="https://kikocampos.com/og-image.jpg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RD1P3CKLSE"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied'});gtag('config','G-RD1P3CKLSE');if(document.cookie.indexOf('kc_cookie=accepted')>-1){gtag('consent','update',{'analytics_storage':'granted'});}</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);gtag('config','G-RD1P3CKLSE');if(document.cookie.indexOf('kc_cookie=accepted')>-1){gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});}</script>
 <style>
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;color:#EEF3FB;line-height:1.65;background:#0A1830}
 .wrap{max-width:760px;margin:0 auto;padding:60px 26px 90px}
@@ -35,6 +35,6 @@ p{color:#B7C6DE;margin:8px 0}
 <div style="color:#B7C6DE;font-size:.9rem;max-width:70ch">Usamos cookies para medir e melhorar sua experiência (Google Analytics). Você pode aceitar ou recusar.</div>
 <div style="display:flex;gap:10px"><button onclick="lgpd(false)" style="padding:10px 18px;border-radius:100px;border:1px solid rgba(255,255,255,.22);background:transparent;color:#EEF3FB;font-weight:600;cursor:pointer">Recusar</button><button onclick="lgpd(true)" style="padding:10px 18px;border-radius:100px;border:none;background:#FF4A12;color:#fff;font-weight:600;cursor:pointer">Aceitar</button></div></div></div>
 <script>function setCookie(v){document.cookie="kc_cookie="+v+";path=/;max-age=15552000;samesite=lax";}
-function lgpd(ok){setCookie(ok?"accepted":"declined");document.getElementById("lgpd").style.display="none";if(ok){gtag("consent","update",{"analytics_storage":"granted"});}}
+function lgpd(ok){setCookie(ok?"accepted":"declined");document.getElementById("lgpd").style.display="none";if(ok){gtag("consent","update",{"ad_storage":"granted","ad_user_data":"granted","ad_personalization":"granted","analytics_storage":"granted"});}}
 if(document.cookie.indexOf("kc_cookie=")===-1){document.getElementById("lgpd").style.display="block";}</script>
 </body></html>
