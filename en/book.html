@@ -11,7 +11,20 @@
 <meta property="og:type" content="website"><meta property="og:url" content="https://kikocampos.com/en/book.html">
 <meta property="og:title" content="The New Code of Change.">
 <meta property="og:description" content="A practical, human guide for leaders navigating complexity without losing identity, results and purpose &mdash; awareness, courage and consistency.">
-<meta property="og:image" content="https://kikocampos.com/og-image.jpg"><meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Kiko Campos">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:image" content="https://kikocampos.com/og-image-v2.jpg">
+<meta property="og:image:secure_url" content="https://kikocampos.com/og-image-v2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="The New Code of Change.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The New Code of Change.">
+<meta name="twitter:description" content="A practical, human guide for leaders navigating complexity without losing identity, results and purpose &mdash; awareness, courage and consistency.">
+<meta name="twitter:image" content="https://kikocampos.com/og-image-v2.jpg">
+<meta name="twitter:image:alt" content="The New Code of Change.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RD1P3CKLSE"></script>
@@ -27,7 +40,7 @@ gtag('config','G-RD1P3CKLSE');
   --bg:#0A1830; --bg2:#0E2140; --panel:#12294d; --panel2:#16305a;
   --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.20);
   --ink:#EAF1FB; --ink-soft:#AFC0DB; --ink-mute:#7D91B4;
-  --orange:#FF4A12; --amber:#F2B33D; --good:#4FD1A1; --blue:#5AA9E6;
+  --orange:#FF4A12; --orange-cta:#CE420D; --amber:#F2B33D; --good:#4FD1A1; --blue:#5AA9E6;
   --display:"Fraunces",Georgia,serif;
   --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
@@ -74,7 +87,7 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2.8rem,5.2vw,4.6re
 .lead em{color:var(--ink);font-style:italic;font-family:var(--display)}
 .ctas{display:flex;align-items:center;gap:16px;margin:34px 0 0;flex-wrap:wrap}
 .btn{padding:15px 26px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none}
-.btn-p{background:var(--orange);color:#fff;box-shadow:0 12px 34px -10px rgba(255,74,18,.6)}
+.btn-p{background:var(--orange-cta);color:#fff;box-shadow:0 12px 34px -10px rgba(255,74,18,.6)}
 .btn-g{color:var(--ink);border:1px solid var(--line2);background:transparent}
 .tags{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0}
 .tag{font-size:.82rem;color:var(--ink-mute);padding:7px 14px;border:1px solid var(--line);border-radius:100px}
@@ -240,9 +253,9 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0}
       <input type="hidden" name="subject" value="New contact via kikocampos.com (EN)">
       <input type="hidden" name="from_name" value="kikocampos.com website (EN)">
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="frow"><input name="Name" required placeholder="Your name"><input name="email" type="email" required placeholder="Work email"></div>
-      <select name="Interest" required><option value="" disabled selected>Where do we start?</option><option>A keynote / talk</option><option>A leadership &amp; team program</option><option>A Culture X-Ray</option><option>Advisory / board</option><option>Access to the young talent research</option><option>Just exploring</option></select>
-      <textarea name="Message" rows="3" placeholder="E.g., a keynote for our leadership convention in October"></textarea>
+      <div class="frow"><input name="Name" required placeholder="Your name" aria-label="Your name" autocomplete="name"><input name="email" type="email" required placeholder="Work email" aria-label="Work email" autocomplete="email"></div>
+      <select name="Interest" required aria-label="Where do we start?"><option value="" disabled selected>Where do we start?</option><option>A keynote / talk</option><option>A leadership &amp; team program</option><option>A Culture X-Ray</option><option>Advisory / board</option><option>Access to the young talent research</option><option>Just exploring</option></select>
+      <textarea name="Message" rows="3" placeholder="E.g., a keynote for our leadership convention in October" aria-label="E.g., a keynote for our leadership convention in October"></textarea>
       <button class="btn btn-p" type="submit">Send and reach Kiko &rarr;</button>
       <div id="formMsg" class="small" style="margin-top:10px"></div>
     </form></div></section>
