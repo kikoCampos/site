@@ -116,6 +116,10 @@ a{color:var(--verde);text-decoration-color:rgba(65,135,63,.35);text-underline-of
 .punch p + p{margin-top:20px;font-family:'Inter';font-size:1rem;font-weight:300;line-height:1.66;
   color:rgba(255,255,255,.78);letter-spacing:0}
 .punch .num{color:#F5A94E}
+.punch strong,.punch b{color:#fff;font-weight:600}
+.punch p + p strong{color:#F5A94E}
+.acao strong,.acao b{color:#fff}
+.price .head strong,.price .head b{color:#fff}
 
 /* ============ TIMELINE ============ */
 .tl{list-style:none;margin:36px 0 8px;border-left:1px solid var(--linha);padding-left:0}
@@ -272,9 +276,15 @@ ul.marks li b{color:var(--tinta)}
 .price ul.marks{margin:0}
 .price ul.marks li{font-size:15px;line-height:1.6}
 .linhas{margin:0 0 26px;border-top:1px solid var(--linha)}
-.linhas div{display:flex;justify-content:space-between;gap:18px;align-items:baseline;
-  padding:13px 0;border-bottom:1px solid var(--linha);font-size:15px;color:#414743}
-.linhas div b{color:var(--tinta);font-weight:600;white-space:nowrap}
+.linhas div{position:relative;padding:13px 0 13px 28px;border-bottom:1px solid var(--linha);
+  font-size:15px;line-height:1.55;color:#414743}
+.linhas div::before{content:"";position:absolute;left:4px;top:22px;width:7px;height:7px;
+  border-radius:50%;background:var(--verde)}
+.linhas div b{color:var(--tinta);font-weight:600}
+.linhas .grupo{padding:22px 0 8px 0;border-bottom:none;font-size:10.5px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--dourado)}
+.linhas .grupo::before{display:none}
+.linhas .grupo:first-child{padding-top:14px}
 
 .validade{background:rgba(241,131,21,.1);border:1px solid rgba(241,131,21,.42);border-radius:4px;
   padding:20px 24px;margin:30px 0;font-size:15px;color:#5A3D12}
@@ -325,10 +335,23 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
   .btn{width:100%;justify-content:center}
   .punch{padding:34px 26px}
   .price .head,.price .body{padding:26px 24px}
-  table{font-size:14.5px;display:block;overflow-x:auto;white-space:nowrap}
-  table.roteiro td:nth-child(2),table.inc td:first-child,
-  table.salas td:nth-child(2),table.salas td:nth-child(3){white-space:nowrap}
-  td,th{padding:13px 14px}
+  /* tabelas viram cards empilhados — sem rolagem lateral */
+  .tabela-wrap{border:none;background:transparent;overflow:visible;margin:26px 0}
+  table{font-size:15px;min-width:0;display:block;margin:0}
+  table thead{display:none}
+  table tbody{display:block}
+  table tr{display:block;background:var(--papel);border:1px solid var(--linha);
+    border-radius:4px;padding:18px 20px;margin-bottom:14px}
+  section.alt table tr{background:var(--papel)}
+  table td{display:block;width:auto;padding:0;border:none;white-space:normal;line-height:1.55}
+  table td + td{margin-top:14px;padding-top:14px;border-top:1px solid var(--linha)}
+  table td::before{content:attr(data-l);display:block;font-size:10px;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--verde);margin-bottom:5px}
+  table td:first-child,table.roteiro td:first-child,table.roteiro td:nth-child(2),
+  table.salas td:first-child{white-space:normal;font-weight:600;color:var(--tinta)}
+  table.roteiro td:first-child{font-size:15px}
+  table tbody tr:last-child td{border-bottom:none}
+  .price .head b{font-size:2.5rem}
   .linhas div{flex-direction:column;gap:4px}
 }
 
@@ -383,7 +406,7 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
       <div class="item">Para<b>Oba Hortifruti · Grupo Fartura</b></div>
       <div class="item">Formato<b>4 encontros presenciais · 2h a 2h30</b></div>
       <div class="item">Praças<b>São Paulo · Campinas · Brasília</b></div>
-      <div class="item">Público<b>230 líderes</b></div>
+      <div class="item">Público<b>230 gestores</b></div>
     </div>
   </div>
 </header>
@@ -492,7 +515,8 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
 
   <div class="wrap narrow rv">
     <div class="punch">
-      <p>Ninguém pede demissão de uma empresa. Pede demissão de uma conversa que nunca aconteceu.</p>
+      <p>A rotatividade do Oba não vai ser resolvida por uma política nova. Vai ser resolvida loja a loja,
+        por estes 230 líderes — e pelo que cada um faz com a escala, o reconhecimento e a conversa.</p>
       <p>Por isso esta proposta não vende um workshop de liderança. Vende o treino de três conversas
         específicas, com roteiro, prática em sala e compromisso datado antes de o participante sair.</p>
     </div>
@@ -504,9 +528,8 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
   <div class="wrap narrow rv">
     <div class="eyebrow">Fundamentação</div>
     <h2>De onde vem cada afirmação desta proposta</h2>
-    <p class="big">Nada aqui é opinião de palco. Cada tese acima se apoia em pesquisa publicada, em dado
-      setorial ou em norma vigente — e registramos a fonte para que o RH do Oba possa checar e usar
-      internamente.</p>
+    <p class="big">Cada tese acima se apoia em pesquisa publicada, em dado setorial ou em norma vigente.
+      Registramos a fonte de todas elas para que o RH do Oba possa checar, contestar e usar internamente.</p>
 
     <ol class="refs">
       <li>
@@ -645,18 +668,18 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
     <table>
       <thead><tr><th>Comportamento observável</th><th>Ritual mínimo</th><th>Evidência de mudança</th></tr></thead>
       <tbody>
-        <tr><td>Dar previsibilidade</td>
-          <td>Escala publicada com antecedência acordada; toda alteração comunicada pessoalmente, com motivo.</td>
-          <td>Queda das menções a horário e escala nas entrevistas de desligamento.</td></tr>
-        <tr><td>Perguntar antes de perder</td>
-          <td>Uma conversa de permanência por mês com quem tem menos de seis meses de casa.</td>
-          <td>Rotatividade de colaboradores com até noventa dias de casa.</td></tr>
-        <tr><td>Corrigir sem quebrar</td>
-          <td>Feedback dado em até quarenta e oito horas do fato, em particular e com exemplo concreto.</td>
-          <td>Reincidência de ocorrências e clima do turno.</td></tr>
-        <tr><td>Formar quem vem depois</td>
-          <td>Vinte minutos por semana com quem tem potencial, sobre o próximo passo dele.</td>
-          <td>Percentual de posições preenchidas por promoção interna.</td></tr>
+        <tr><td data-l="Comportamento observável">Dar previsibilidade</td>
+          <td data-l="Ritual mínimo">Escala publicada com antecedência acordada; toda alteração comunicada pessoalmente, com motivo.</td>
+          <td data-l="Evidência de mudança">Queda das menções a horário e escala nas entrevistas de desligamento.</td></tr>
+        <tr><td data-l="Comportamento observável">Perguntar antes de perder</td>
+          <td data-l="Ritual mínimo">Uma conversa de permanência por mês com quem tem menos de seis meses de casa.</td>
+          <td data-l="Evidência de mudança">Rotatividade de colaboradores com até noventa dias de casa.</td></tr>
+        <tr><td data-l="Comportamento observável">Corrigir sem quebrar</td>
+          <td data-l="Ritual mínimo">Feedback dado em até quarenta e oito horas do fato, em particular e com exemplo concreto.</td>
+          <td data-l="Evidência de mudança">Reincidência de ocorrências e clima do turno.</td></tr>
+        <tr><td data-l="Comportamento observável">Formar quem vem depois</td>
+          <td data-l="Ritual mínimo">Vinte minutos por semana com quem tem potencial, sobre o próximo passo dele.</td>
+          <td data-l="Evidência de mudança">Percentual de posições preenchidas por promoção interna.</td></tr>
       </tbody>
     </table>
 
@@ -673,10 +696,10 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
     <h2>A dupla que vocês já viram<br>no Mente no Trabalho</h2>
     <p class="big">O Oba chegou até aqui depois de acompanhar o <strong>Mente no Trabalho</strong> — a série
       que conduzimos juntos, em oito edições, sobre saúde mental, NR-1 e desenho do trabalho.</p>
-    <p>Os quatro encontros são facilitados a quatro mãos, do começo ao fim. Não é um palestrante com
-      apoio: são duas leituras que se completam. Uma vem da psicologia do trabalho e da gestão de riscos
-      psicossociais; a outra, da direção de RH em operações de grande porte e de integração pós-aquisição
-      no varejo alimentar. O problema do Oba fica exatamente no meio das duas.</p>
+    <p>Os quatro encontros são facilitados a quatro mãos, do começo ao fim, por duas leituras que se
+      completam. Uma vem da psicologia do trabalho e da gestão de riscos psicossociais; a outra, da
+      direção de RH em operações de grande porte e de integração pós-aquisição no varejo alimentar.
+      O problema do Oba fica exatamente no meio das duas.</p>
   </div>
 
   <div class="wrap rv">
@@ -728,7 +751,7 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
     <p style="margin-top:36px">O que isso significa para o Oba, na prática: quem vai conduzir as quatro
       salas já enfrentou este mesmo problema — <strong>rotatividade alta, lojas herdadas por aquisição e
       equipes que não escolheram a nova bandeira</strong> — numa operação muitas vezes maior. E já traduziu
-      a norma de riscos psicossociais em rotina de gestão, e não em programa de bem-estar.</p>
+      a norma de riscos psicossociais em rotina de gestão dentro da operação.</p>
 
     <h3>O método</h3>
     <p>Todo o trabalho — palco, programa ou conselho — roda sobre a mesma espinha: <strong>Consciência</strong>
@@ -856,22 +879,22 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
     <table class="roteiro">
       <thead><tr><th>Tempo</th><th>Bloco</th><th>O que acontece</th></tr></thead>
       <tbody>
-        <tr><td>0–20 min</td><td>O espelho</td>
-          <td>Não abrimos falando de nós. Abrimos com a voz de quem saiu do Oba: frases anônimas reais das
+        <tr><td data-l="Tempo">0–20 min</td><td data-l="Bloco">O espelho</td>
+          <td data-l="O que acontece">Não abrimos falando de nós. Abrimos com a voz de quem saiu do Oba: frases anônimas reais das
             entrevistas de desligamento, projetadas na tela. A sala para de achar que é mais um treinamento.</td></tr>
-        <tr><td>20–50 min</td><td>Mente no Trabalho aplicado à gestão</td>
-          <td>Da saúde mental à prática de liderança: o que sustenta e o que desgasta um time de loja.
+        <tr><td data-l="Tempo">20–50 min</td><td data-l="Bloco">Mente no Trabalho aplicado à gestão</td>
+          <td data-l="O que acontece">Da saúde mental à prática de liderança: o que sustenta e o que desgasta um time de loja.
             Aqui entra a NR-1 traduzida para a linguagem do gerente — sobrecarga, imprevisibilidade e
             conduta de chefia como fatores de risco que ele influencia diretamente. Bloco formativo, com
             método e referência, sem palestra longa.</td></tr>
-        <tr><td>50–105 min</td><td>Laboratório de conversas</td>
-          <td>Tríades com casos reais de loja. Cada participante conduz uma conversa, recebe outra e observa
+        <tr><td data-l="Tempo">50–105 min</td><td data-l="Bloco">Laboratório de conversas</td>
+          <td data-l="O que acontece">Tríades com casos reais de loja. Cada participante conduz uma conversa, recebe outra e observa
             a terceira. A dupla de facilitação circula pelas mesas. É o coração do encontro.</td></tr>
-        <tr><td>105–130 min</td><td>Roda dos veteranos</td>
-          <td>Formato <em>fishbowl</em>: quem tem estrada responde a quem está começando. É aqui que a
+        <tr><td data-l="Tempo">105–130 min</td><td data-l="Bloco">Roda dos veteranos</td>
+          <td data-l="O que acontece">Formato <em>fishbowl</em>: quem tem estrada responde a quem está começando. É aqui que a
             integração do Natural da Terra vira conversa, e não comunicado.</td></tr>
-        <tr><td>130–150 min</td><td>O compromisso</td>
-          <td>Cada líder sai com uma conversa agendada — nome, assunto e data escritos no cartão — e o kit
+        <tr><td data-l="Tempo">130–150 min</td><td data-l="Bloco">O compromisso</td>
+          <td data-l="O que acontece">Cada líder sai com uma conversa agendada — nome, assunto e data escritos no cartão — e o kit
             em mãos.</td></tr>
       </tbody>
     </table>
@@ -896,21 +919,21 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
     <table class="salas">
       <thead><tr><th>Nº</th><th>Praça e público</th><th>Recorte específico</th></tr></thead>
       <tbody>
-        <tr><td>01</td>
-          <td><strong>São Paulo · Pinheiros</strong><br>70 líderes de SP e Baixada Santista</td>
-          <td>Mercado de trabalho aquecido e disputa por mão de obra. Como reter quando a loja concorrente
+        <tr><td data-l="Nº">01</td>
+          <td data-l="Praça e público"><strong>São Paulo · Pinheiros</strong><br>70 líderes de SP e Baixada Santista</td>
+          <td data-l="Recorte específico">Mercado de trabalho aquecido e disputa por mão de obra. Como reter quando a loja concorrente
             fica a três quarteirões — e como acolher as equipes que chegam do Natural da Terra.</td></tr>
-        <tr><td>02</td>
-          <td><strong>Sumaré / Campinas</strong><br>60 gerentes de loja</td>
-          <td>O ritmo da operação. Conversa de corredor, escala de fim de semana, gestão de pico.
+        <tr><td data-l="Nº">02</td>
+          <td data-l="Praça e público"><strong>Sumaré / Campinas</strong><br>60 gerentes de loja</td>
+          <td data-l="Recorte específico">O ritmo da operação. Conversa de corredor, escala de fim de semana, gestão de pico.
             Conversas curtas e de alta frequência, não reuniões formais.</td></tr>
-        <tr><td>03</td>
-          <td><strong>Sumaré · Corporativo</strong><br>60 gestores</td>
-          <td>Como o corporativo facilita ou sabota a vida da loja. Decisões de escala, comunicação e
+        <tr><td data-l="Nº">03</td>
+          <td data-l="Praça e público"><strong>Sumaré · Corporativo</strong><br>60 gestores</td>
+          <td data-l="Recorte específico">Como o corporativo facilita ou sabota a vida da loja. Decisões de escala, comunicação e
             prazos vistas pelo olhar de quem executa.</td></tr>
-        <tr><td>04</td>
-          <td><strong>Brasília</strong><br>40 a 60 líderes do Centro-Oeste</td>
-          <td>Distância da matriz e autonomia. Formar sucessores e sustentar a cultura Oba longe do centro
+        <tr><td data-l="Nº">04</td>
+          <td data-l="Praça e público"><strong>Brasília</strong><br>40 a 60 líderes do Centro-Oeste</td>
+          <td data-l="Recorte específico">Distância da matriz e autonomia. Formar sucessores e sustentar a cultura Oba longe do centro
             de decisão.</td></tr>
       </tbody>
     </table>
@@ -933,16 +956,16 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
     <table class="inc">
       <thead><tr><th>Entrega</th><th>Detalhe</th></tr></thead>
       <tbody>
-        <tr><td>Diagnóstico prévio</td><td>Leitura das entrevistas de desligamento dos últimos doze meses, pulse de cinco perguntas com os líderes e três entrevistas de profundidade com gerentes de loja.</td></tr>
-        <tr><td>Customização por público</td><td>Casos, exemplos e pergunta central redesenhados para cada uma das quatro salas — loja, corporativo, São Paulo e Centro-Oeste.</td></tr>
-        <tr><td>Condução em dupla</td><td>Facilitação a quatro mãos nos quatro encontros presenciais, de 2h a 2h30 cada.</td></tr>
-        <tr><td>Espelho ao vivo</td><td>Produção do bloco de abertura com os dados do próprio Oba — arte, curadoria das falas e roteiro de projeção.</td></tr>
-        <tr><td>Cartão de bolso</td><td>Roteiro das três conversas em formato de bolso, para os 230 participantes. Arte e texto entregues prontos.</td></tr>
-        <tr><td>Guia do Líder Oba</td><td>Material de apoio em PDF, com os roteiros ampliados, exemplos e perguntas de referência.</td></tr>
-        <tr><td>Trilha de 30 dias</td><td>Quatro microdesafios semanais, com texto pronto para disparo pelos canais internos do Oba.</td></tr>
-        <tr><td>Relatório executivo</td><td>Leitura do que as quatro salas revelaram sobre a liderança da rede, entregue ao RH após o último encontro.</td></tr>
-        <tr><td>Evidência para a NR-1</td><td>Registro de objetivos de aprendizagem, conteúdo programático, carga horária e material didático — no formato que a gestão de riscos psicossociais do PGR exige como medida de prevenção documentada.</td></tr>
-        <tr><td>Sessão de indicadores</td><td>Leitura conjunta dos indicadores noventa dias após o programa, para que o RH leve o resultado à diretoria com narrativa, e não apenas com número.</td></tr>
+        <tr><td data-l="Entrega">Diagnóstico prévio</td><td data-l="Detalhe">Leitura das entrevistas de desligamento dos últimos doze meses, pulse de cinco perguntas com os líderes e três entrevistas de profundidade com gerentes de loja.</td></tr>
+        <tr><td data-l="Entrega">Customização por público</td><td data-l="Detalhe">Casos, exemplos e pergunta central redesenhados para cada uma das quatro salas — loja, corporativo, São Paulo e Centro-Oeste.</td></tr>
+        <tr><td data-l="Entrega">Condução em dupla</td><td data-l="Detalhe">Facilitação a quatro mãos nos quatro encontros presenciais, de 2h a 2h30 cada.</td></tr>
+        <tr><td data-l="Entrega">Espelho ao vivo</td><td data-l="Detalhe">Produção do bloco de abertura com os dados do próprio Oba — arte, curadoria das falas e roteiro de projeção.</td></tr>
+        <tr><td data-l="Entrega">Cartão de bolso</td><td data-l="Detalhe">Roteiro das três conversas em formato de bolso, para os 230 participantes. Arte e texto entregues prontos.</td></tr>
+        <tr><td data-l="Entrega">Guia do Líder Oba</td><td data-l="Detalhe">Material de apoio em PDF, com os roteiros ampliados, exemplos e perguntas de referência.</td></tr>
+        <tr><td data-l="Entrega">Trilha de 30 dias</td><td data-l="Detalhe">Quatro microdesafios semanais, com texto pronto para disparo pelos canais internos do Oba.</td></tr>
+        <tr><td data-l="Entrega">Relatório executivo</td><td data-l="Detalhe">Leitura do que as quatro salas revelaram sobre a liderança da rede, entregue ao RH após o último encontro.</td></tr>
+        <tr><td data-l="Entrega">Evidência para a NR-1</td><td data-l="Detalhe">Registro de objetivos de aprendizagem, conteúdo programático, carga horária e material didático — no formato que a gestão de riscos psicossociais do PGR exige como medida de prevenção documentada.</td></tr>
+        <tr><td data-l="Entrega">Sessão de indicadores</td><td data-l="Detalhe">Leitura conjunta dos indicadores noventa dias após o programa, para que o RH leve o resultado à diretoria com narrativa, além do número.</td></tr>
       </tbody>
     </table>
 
@@ -979,9 +1002,9 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
     <table>
       <thead><tr><th>Horizonte</th><th>Indicador</th><th>Responsável</th></tr></thead>
       <tbody>
-        <tr><td>Imediato</td><td>NPS do encontro e percentual de líderes que saíram com uma conversa agendada.</td><td>Facilitação</td></tr>
-        <tr><td>30 dias</td><td>Percentual de líderes que conduziram ao menos uma conversa de permanência.</td><td>RH Oba, com apoio da trilha</td></tr>
-        <tr><td>90 dias</td><td>Rotatividade de colaboradores com até noventa dias de casa e taxa de absenteísmo.</td><td>RH Oba</td></tr>
+        <tr><td data-l="Horizonte">Imediato</td><td data-l="Indicador">NPS do encontro e percentual de líderes que saíram com uma conversa agendada.</td><td data-l="Responsável">Facilitação</td></tr>
+        <tr><td data-l="Horizonte">30 dias</td><td data-l="Indicador">Percentual de líderes que conduziram ao menos uma conversa de permanência.</td><td data-l="Responsável">RH Oba, com apoio da trilha</td></tr>
+        <tr><td data-l="Horizonte">90 dias</td><td data-l="Indicador">Rotatividade de colaboradores com até noventa dias de casa e taxa de absenteísmo.</td><td data-l="Responsável">RH Oba</td></tr>
       </tbody>
     </table>
   </div>
@@ -991,22 +1014,67 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
 <section>
   <div class="wrap narrow rv">
     <div class="eyebrow">Investimento</div>
-    <h2>Pacote fechado</h2>
+    <h2>O que a rotatividade já custa</h2>
+    <p>Antes de falar do preço do programa, vale colocar na mesa o preço de não fazer nada. Não temos os
+      números internos do Oba — eles entram no diagnóstico. Mas a ordem de grandeza pode ser estimada com
+      premissas conservadoras e declaradas:</p>
+
+    <div class="tabela-wrap">
+      <table class="inc">
+        <thead><tr><th>Premissa</th><th>Valor adotado</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Premissa">Base de colaboradores</td><td data-l="Valor adotado">Entre 5.000 e 6.000, estimada a partir do porte da rede — <strong>a validar com o RH</strong>.</td></tr>
+          <tr><td data-l="Premissa">Rotatividade anual</td><td data-l="Valor adotado">52,8%, média dos supermercados em São Paulo em 2025. Se a do Oba for maior, a conta sobe.</td></tr>
+          <tr><td data-l="Premissa">Custo por reposição</td><td data-l="Valor adotado">R$ 3.000, somando rescisão, recrutamento, seleção, treinamento e curva de aprendizado até a produtividade plena. É um piso, não um teto.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="punch">
+      <p>Nessas premissas, o Oba gasta entre <span class="num">R$ 8 e R$ 9,5 milhões por ano</span>
+        apenas para repor quem sai.</p>
+      <p>O programa completo custa menos de 2% desse valor. E uma redução de <strong>um único ponto
+        percentual</strong> na rotatividade devolve, em doze meses, mais do que o investimento inteiro.
+        Não é um argumento de treinamento — é um argumento de margem.</p>
+    </div>
+
+    <p>É por isso que propomos medir o resultado em rotatividade de novatos e absenteísmo, e não em
+      avaliação de reação. O que está em jogo tem linha no P&amp;L.</p>
+  </div>
+
+  <div class="wrap narrow rv">
+    <h2 style="margin-top:14px">Pacote fechado</h2>
     <p>Sem escalonamento e sem adicionais sobre o trabalho descrito acima.</p>
 
     <div class="price">
       <div class="head">
-        <span>Diagnóstico, customização, condução em dupla dos quatro encontros, materiais,
-          trilha de 30 dias e leitura de indicadores</span>
-        <b>R$ 140.000</b>
+        <span>Programa completo · quatro encontros presenciais, diagnóstico, materiais para 230 participantes, trilha de 30 dias e leitura de indicadores</span>
+        <b>R$ 150.000</b>
       </div>
       <div class="body">
         <div class="linhas">
-          <div><span>Encontro 01 · São Paulo, Pinheiros — 70 líderes</span><b>R$ 35.000</b></div>
-          <div><span>Encontro 02 · Sumaré/Campinas, gerentes de loja — 60 gestores</span><b>R$ 35.000</b></div>
-          <div><span>Encontro 03 · Sumaré, corporativo — 60 gestores</span><b>R$ 35.000</b></div>
-          <div><span>Encontro 04 · Brasília, Centro-Oeste — 40 a 60 líderes</span><b>R$ 35.000</b></div>
+          <div class="grupo">Os quatro encontros presenciais</div>
+          <div><b>Encontro 01 · São Paulo, Pinheiros</b> — 70 líderes de SP e Baixada Santista, 2h a 2h30</div>
+          <div><b>Encontro 02 · Sumaré / Campinas</b> — 60 gerentes de loja, 2h a 2h30</div>
+          <div><b>Encontro 03 · Sumaré, corporativo</b> — 60 gestores, 2h a 2h30</div>
+          <div><b>Encontro 04 · Brasília</b> — 40 a 60 líderes do Centro-Oeste, 2h a 2h30</div>
+
+          <div class="grupo">Antes das salas</div>
+          <div><b>Diagnóstico de três semanas</b> — leitura das entrevistas de desligamento dos últimos doze meses, pulse de cinco perguntas com os líderes e três entrevistas de profundidade com gerentes de loja</div>
+          <div><b>Customização por público</b> — casos, exemplos e pergunta central redesenhados para cada uma das quatro salas</div>
+          <div><b>Espelho ao vivo</b> — produção do bloco de abertura com os dados do próprio Oba: curadoria das falas, arte e roteiro de projeção</div>
+
+          <div class="grupo">Depois das salas</div>
+          <div><b>Cartão de bolso e Guia do Líder</b> — roteiro das três conversas para os 230 participantes, com arte e texto entregues prontos</div>
+          <div><b>Trilha de 30 dias</b> — quatro microdesafios semanais, com texto pronto para os canais internos do Oba</div>
+          <div><b>Relatório executivo</b> — leitura do que as quatro salas revelaram sobre a liderança da rede</div>
+          <div><b>Evidência para a NR-1</b> — objetivos de aprendizagem, conteúdo programático, carga horária e material didático no formato que o PGR exige</div>
+          <div><b>Sessão de indicadores em 90 dias</b> — leitura conjunta dos resultados com o RH</div>
         </div>
+        <p style="margin-bottom:20px"><strong>O valor é de programa, não de evento.</strong> O que acontece
+          antes e depois das salas responde por boa parte do resultado — é o diagnóstico que faz cada
+          encontro falar do Oba e não de benchmark, e é a trilha de trinta dias que separa treinamento de
+          mudança de comportamento. Por isso o pacote não é fracionado por encontro.</p>
         <ul class="marks">
           <li><b>Pagamento</b> em duas parcelas: 50% na assinatura do contrato e 50% após a realização do último encontro.</li>
           <li>O valor cobre integralmente o diagnóstico, a customização, os materiais conceituais e a condução em dupla — <b>sem cobranças adicionais</b> sobre o trabalho descrito.</li>
@@ -1063,28 +1131,37 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
 <!-- ============================ FECHO ============================ -->
 <section class="fecho">
   <div class="wrap narrow rv">
-    <h2>Vamos juntos</h2>
-    <p class="big" style="color:rgba(255,255,255,.92)">O Oba já sabe medir com precisão de centavos aquilo
-      que importa para o cliente na gôndola. Este programa aplica o mesmo rigor àquilo que importa para as
-      pessoas que fazem as lojas funcionarem todos os dias, às cinco da manhã, em três estados.</p>
+    <h2>A janela é agora</h2>
+    <p class="big" style="color:rgba(255,255,255,.92)">O Oba mede com precisão de centavos aquilo que
+      importa para o cliente na gôndola. Este programa aplica o mesmo rigor àquilo que importa para as
+      pessoas que abrem as lojas às cinco da manhã, em três estados.</p>
     <p>A missão do Grupo diz, com todas as letras, que o Oba quer estar entre as melhores empresas para se
-      trabalhar. Uma rede que acabou de incorporar dez lojas e convive com rotatividade alta tem, agora, a
-      janela mais curta e mais decisiva para provar isso — <strong>e são os 230 líderes destas quatro salas
-      que decidem se a frase vira realidade ou fica na parede.</strong></p>
-    <p>Ficamos à disposição para detalhar qualquer ponto e, no aceite, já entrar na leitura dos dados de
-      desligamento para construir as quatro salas junto com vocês.</p>
+      trabalhar. Uma rede que acabou de incorporar dez lojas, convive com rotatividade acima da média do
+      setor e passou a responder pela NR-1 tem, agora, a janela mais curta e mais decisiva para provar
+      isso — <strong>e são os 230 líderes destas quatro salas que decidem se a frase vira operação ou
+      fica na parede.</strong></p>
+
+    <h3 style="color:#fff">O que acontece quando vocês disserem sim</h3>
+    <p>No aceite, reservamos as quatro datas em agenda e entramos imediatamente na leitura dos dados de
+      desligamento. <strong>O diagnóstico leva três semanas</strong> — é ele que constrói o bloco de
+      abertura de cada sala. Para realizar os encontros ainda neste ciclo, precisamos do aceite e das
+      datas com essa antecedência.</p>
+    <p>Qualquer ponto desta proposta pode ser ajustado antes disso: escopo, formato, sequência das praças.
+      Ficamos à disposição do time de RH do Oba para detalhar o que for necessário.</p>
 
     <div class="sig">
-      <b>Kiko Campos &nbsp;·&nbsp; Esabela Cruz</b>
+      <b>Esabela Cruz &nbsp;·&nbsp; Kiko Campos</b>
       <div class="role">Liderança · Cultura · Mudança</div>
       <div class="contato">
-        <a href="https://kikocampos.com/palestras.html" target="_blank" rel="noopener">kikocampos.com/palestras</a>
+        <a href="https://www.linkedin.com/in/esabela-cruz-msc-93539b2a/" target="_blank" rel="noopener">linkedin.com/in/esabela-cruz</a>
         &nbsp;·&nbsp;
-        <a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a>
-        <br>
         <a href="https://www.linkedin.com/in/kikocampos" target="_blank" rel="noopener">linkedin.com/in/kikocampos</a>
+        <br>
+        <a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a>
         &nbsp;·&nbsp;
-        <a href="https://kikocampos.com/KikoCampos_MidiaKit_PT.pdf" target="_blank" rel="noopener">Mídia kit completo (PDF)</a>
+        <a href="https://mente.kikocampos.com" target="_blank" rel="noopener">Série Mente no Trabalho</a>
+        &nbsp;·&nbsp;
+        <a href="https://kikocampos.com/KikoCampos_MidiaKit_PT.pdf" target="_blank" rel="noopener">Mídia kit (PDF)</a>
       </div>
     </div>
   </div>
@@ -1092,7 +1169,7 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
 
 <footer class="rodape">
   <div class="in">
-    <span>Proposta comercial · Kiko Campos e Esabela Cruz para o Oba Hortifruti · São Paulo/SP, 20 de agosto de 2026</span>
+    <span>Proposta comercial · Esabela Cruz e Kiko Campos para o Oba Hortifruti · São Paulo/SP, 20 de agosto de 2026</span>
     <span>Documento confidencial</span>
   </div>
 </footer>
