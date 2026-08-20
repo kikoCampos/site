@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A conversa que segura o time · Proposta Kiko Campos para o Oba Hortifruti</title>
+<meta name="description" content="Proposta comercial para o programa de liderança do Oba Hortifruti. Quatro encontros presenciais, 230 líderes, São Paulo, Campinas e Brasília.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="A conversa que segura o time · Kiko Campos para o Oba Hortifruti">
+<meta property="og:description" content="Programa de liderança para 230 gestores do Oba Hortifruti. Quatro encontros presenciais em SP, Campinas e Brasília.">
+<meta property="og:url" content="https://kikocampos.com/proposta/oba/">
+<meta property="og:image" content="https://kikocampos.com/proposta/oba/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A conversa que segura o time — proposta de Kiko Campos para o Oba Hortifruti">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- Paleta extraída da identidade do Oba Hortifruti ---- */
+  --verde:#41873F;
+  --verde-claro:#6FB56B;
+  --verde-profundo:#14301A;
+  /* -------------------------------------------------------- */
+  --tinta:#1A1D1B;
+  --grafite:#5A625D;
+  --linha:#E2E7E3;
+  --creme:#F7F8F6;
+  --papel:#FFFFFF;
+  --dourado:#F18315;
+  --max:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--tinta);background:var(--papel);
+  font-size:17px;line-height:1.68;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+.narrow{max-width:790px}
+
+/* ============ KV / HERO ============ */
+.kv{position:relative;min-height:100vh;display:flex;flex-direction:column;
+  justify-content:space-between;overflow:hidden;background:var(--verde-profundo);color:#fff}
+.kv .fallback{position:absolute;inset:0;width:100%;height:100%;z-index:0;
+  background:
+  radial-gradient(1100px 660px at 78% 12%, rgba(241,131,21,.30), transparent 60%),
+  radial-gradient(1000px 620px at 20% 80%, rgba(111,181,107,.34), transparent 62%),
+  linear-gradient(152deg,#0D2412 0%,#14301A 44%,#2B5C2C 100%);}
+.kv::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(7,22,12,.74) 0%,rgba(7,22,12,.48) 38%,rgba(7,22,12,.90) 100%)}
+.kv > *{position:relative;z-index:2}
+
+.kv-top{display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:34px 32px;max-width:var(--max);margin:0 auto;width:100%}
+.lockup{display:flex;align-items:center;gap:22px}
+.lockup img{height:34px;width:auto;display:block;opacity:.98}
+.lockup .x{width:1px;height:26px;background:rgba(255,255,255,.32)}
+.lockup .kiko{font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;line-height:1.35}
+.lockup .kiko small{display:block;font-size:9.5px;font-weight:500;letter-spacing:.26em;
+  color:rgba(255,255,255,.62);margin-top:4px}
+.kv-tag{font-size:10.5px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.26);
+  padding:9px 16px;border-radius:100px;white-space:nowrap}
+
+.kv-core{max-width:var(--max);margin:0 auto;width:100%;padding:0 32px 20px}
+.kicker{font-size:11px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;
+  color:#F5A94E;margin-bottom:26px}
+.kv h1{font-family:'Fraunces',Georgia,serif;font-weight:600;
+  font-size:clamp(3rem,8vw,6.2rem);line-height:.99;letter-spacing:-.025em;margin-bottom:30px}
+.kv h1 em{font-style:normal;color:#8FD48B;display:block}
+.kv .lead{font-size:clamp(1.05rem,2vw,1.32rem);font-weight:300;line-height:1.6;
+  color:rgba(255,255,255,.9);max-width:660px}
+
+.kv-foot{border-top:1px solid rgba(255,255,255,.16);padding:24px 32px 34px}
+.kv-foot .in{max-width:var(--max);margin:0 auto;display:flex;flex-wrap:wrap;gap:14px 44px;
+  align-items:baseline;justify-content:space-between}
+.kv-foot .item{font-size:13px;color:rgba(255,255,255,.62);letter-spacing:.02em}
+.kv-foot .item b{display:block;color:#fff;font-size:15px;font-weight:600;letter-spacing:.01em;margin-top:3px}
+
+/* ============ BARRA DE NÚMEROS ============ */
+.stats{background:var(--verde);color:#fff}
+.stats .in{max-width:var(--max);margin:0 auto;padding:44px 32px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.stat b{display:block;font-family:'Fraunces',serif;font-size:2.5rem;font-weight:600;line-height:1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:9px;font-size:11.5px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.75);line-height:1.5}
+
+/* ============ TIPOGRAFIA DOC ============ */
+section{padding:82px 0}
+section.alt{background:var(--creme)}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(1.9rem,3.6vw,2.75rem);
+  line-height:1.14;letter-spacing:-.02em;margin-bottom:26px}
+h3{font-size:1.05rem;font-weight:700;letter-spacing:-.005em;margin:38px 0 12px}
+.eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--verde-claro);margin-bottom:16px}
+p{margin-bottom:19px;color:#2B302D}
+p.big{font-size:1.22rem;line-height:1.58;color:var(--tinta)}
+strong{font-weight:600;color:var(--tinta)}
+a{color:var(--verde);text-decoration-color:rgba(65,135,63,.35);text-underline-offset:3px}
+
+.quote{border-left:3px solid var(--dourado);padding:6px 0 6px 28px;margin:34px 0}
+.quote p{font-family:'Fraunces',serif;font-size:clamp(1.2rem,2.4vw,1.55rem);line-height:1.44;
+  color:var(--verde-profundo);margin:0;letter-spacing:-.012em}
+.quote cite{display:block;margin-top:14px;font-style:normal;font-size:12.5px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--grafite);font-weight:600}
+
+.punch{background:var(--verde-profundo);color:#fff;border-radius:4px;padding:52px 48px;margin:44px 0}
+.punch p{font-family:'Fraunces',serif;font-size:clamp(1.3rem,2.7vw,1.85rem);line-height:1.42;
+  color:#fff;margin:0;letter-spacing:-.015em}
+.punch p + p{margin-top:20px;font-family:'Inter';font-size:1rem;font-weight:300;line-height:1.66;
+  color:rgba(255,255,255,.78);letter-spacing:0}
+.punch .num{color:#F5A94E}
+
+/* ============ TIMELINE ============ */
+.tl{list-style:none;margin:36px 0 8px;border-left:1px solid var(--linha);padding-left:0}
+.tl li{position:relative;padding:0 0 30px 34px}
+.tl li::before{content:"";position:absolute;left:-5.5px;top:8px;width:10px;height:10px;
+  border-radius:50%;background:var(--verde);border:2px solid var(--papel)}
+section.alt .tl li::before{border-color:var(--creme)}
+.tl b{display:block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--verde);margin-bottom:5px}
+.tl span{color:#2B302D}
+
+/* ============ CARDS ============ */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:36px 0}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin:36px 0}
+.card{border:1px solid var(--linha);border-radius:4px;padding:30px 26px;background:var(--papel)}
+.card .n{font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;color:var(--dourado);
+  letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;display:block}
+.card h4{font-size:1.12rem;font-weight:700;margin-bottom:10px;letter-spacing:-.01em}
+.card p{font-size:15px;line-height:1.62;color:#414743;margin:0}
+.card p + p{margin-top:12px}
+
+.creds{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:34px 0 8px}
+.cred{border-top:2px solid var(--verde);padding-top:16px}
+.cred b{display:block;font-family:'Fraunces',serif;font-size:1.85rem;font-weight:600;
+  line-height:1;letter-spacing:-.02em;color:var(--verde-profundo)}
+.cred span{display:block;margin-top:8px;font-size:12.5px;line-height:1.5;color:var(--grafite)}
+
+.formula{text-align:center;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);
+  padding:34px 20px;margin:38px 0}
+.formula b{font-family:'Fraunces',serif;font-size:clamp(1.05rem,2.3vw,1.5rem);font-weight:600;
+  color:var(--verde);letter-spacing:-.01em}
+
+/* ============ AUTOR / FOTO ============ */
+.autor{display:grid;grid-template-columns:330px 1fr;gap:46px;align-items:start;margin-bottom:14px}
+.autor figure{margin:0}
+.autor figure img{width:100%;height:auto;display:block;border-radius:4px;
+  box-shadow:0 22px 50px -22px rgba(20,48,26,.42)}
+.autor figcaption{margin-top:12px;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--grafite);line-height:1.6}
+.perfil{margin-top:16px;padding-top:15px;border-top:1px solid var(--linha);
+  display:flex;flex-direction:column;gap:9px}
+.perfil a{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;
+  color:var(--verde);text-decoration:none;transition:color .2s}
+.perfil a:hover{color:var(--verde-claro);text-decoration:underline;text-underline-offset:3px}
+.perfil svg{width:15px;height:15px;flex:none;fill:currentColor}
+.autor h2{margin-bottom:22px}
+
+.dupla{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin:36px 0 0}
+.dupla .card{border-top:2px solid var(--dourado);border-radius:0 0 4px 4px;
+  display:flex;flex-direction:column}
+.dupla .card h4{margin-bottom:4px}
+.dupla .card .papel{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--grafite);margin-bottom:14px;display:block}
+.retrato{width:112px;height:112px;border-radius:50%;overflow:hidden;margin-bottom:18px;
+  background:var(--verde-profundo);flex:none;position:relative}
+.retrato img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
+.retrato .iniciais{position:absolute;inset:0;display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-size:2.1rem;font-weight:600;color:#8FD48B;letter-spacing:.02em}
+.li-link{margin-top:auto;padding-top:16px;display:inline-flex;align-items:center;gap:9px;
+  font-size:13.5px;font-weight:600;color:var(--verde);text-decoration:none;transition:color .2s}
+.li-link:hover{color:var(--verde-claro);text-decoration:underline;text-underline-offset:3px}
+.li-link svg{width:15px;height:15px;flex:none;fill:currentColor}
+
+/* ============ PAPEL DO LÍDER ============ */
+.papeis{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin:36px 0;
+  border-top:1px solid var(--linha);border-left:1px solid var(--linha)}
+.papeis .p{border-right:1px solid var(--linha);border-bottom:1px solid var(--linha);padding:30px 28px}
+.papeis .p b{display:block;font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;
+  color:var(--verde-profundo);margin-bottom:10px;letter-spacing:-.012em}
+.papeis .p .rot{font-size:10.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--dourado);display:block;margin-bottom:12px}
+.papeis .p p{font-size:15px;line-height:1.62;color:#414743;margin:0}
+
+/* ============ VEJA EM AÇÃO ============ */
+.acao{position:relative;border-radius:4px;overflow:hidden;margin:8px 0 0;
+  background:var(--verde-profundo);color:#fff}
+.acao img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.42}
+.acao::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(8,26,14,.94) 0%,rgba(8,26,14,.76) 48%,rgba(8,26,14,.42) 100%)}
+.acao .in{position:relative;z-index:2;padding:52px 46px}
+.acao .eyebrow{color:#8FD48B}
+.acao h3{font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.9vw,2rem);font-weight:600;
+  line-height:1.2;letter-spacing:-.018em;margin:0 0 14px;color:#fff}
+.acao p{color:rgba(255,255,255,.8);font-weight:300;max-width:560px;margin-bottom:26px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:100px;
+  font-size:13.5px;font-weight:600;letter-spacing:.01em;text-decoration:none;
+  border:1px solid rgba(255,255,255,.34);color:#fff;transition:background .2s,border-color .2s}
+.btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6)}
+.btn.solid{background:#fff;color:var(--verde-profundo);border-color:#fff}
+.btn.solid:hover{background:#E8F3E8}
+.btn .play{width:19px;height:19px;flex:none}
+.acao small{display:block;margin-top:18px;font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.48)}
+
+/* ============ TABELAS ============ */
+table{width:100%;border-collapse:collapse;margin:30px 0;font-size:15.5px}
+th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--verde);padding:14px 16px;background:rgba(65,135,63,.07);border-bottom:1px solid var(--linha);
+  vertical-align:bottom}
+td{padding:16px;border-bottom:1px solid var(--linha);vertical-align:top;line-height:1.58;color:#2B302D}
+td:first-child{font-weight:600;color:var(--tinta);white-space:nowrap}
+table.roteiro td:first-child{font-variant-numeric:tabular-nums;color:var(--verde);font-weight:700;font-size:14px}
+table.roteiro td:nth-child(2){font-weight:600;color:var(--tinta);white-space:normal;width:22%}
+table.inc td:first-child{width:26%;white-space:normal}
+table.salas td:first-child{width:9%}
+table.salas td:nth-child(2),table.salas td:nth-child(3){white-space:normal;font-weight:400;color:#2B302D}
+tbody tr:last-child td{border-bottom:1px solid var(--linha)}
+
+/* ============ LISTAS ============ */
+ul.marks{list-style:none;margin:26px 0}
+ul.marks li{position:relative;padding-left:26px;margin-bottom:13px;color:#2B302D}
+ul.marks li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;
+  border-radius:50%;background:var(--dourado)}
+ul.marks li b{color:var(--tinta)}
+
+/* ============ INVESTIMENTO ============ */
+.price{border:1px solid var(--verde);border-radius:4px;overflow:hidden;margin:36px 0}
+.price .head{background:var(--verde);color:#fff;padding:30px 36px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+.price .head span{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.8);max-width:430px;line-height:1.6}
+.price .head b{font-family:'Fraunces',serif;font-size:clamp(2.4rem,5.5vw,3.6rem);
+  font-weight:600;line-height:1;letter-spacing:-.03em;white-space:nowrap}
+.price .body{padding:30px 36px 34px}
+.price .body p{font-size:15px;color:#414743;margin-bottom:0}
+.price ul.marks{margin:0}
+.price ul.marks li{font-size:15px;line-height:1.6}
+.linhas{margin:0 0 26px;border-top:1px solid var(--linha)}
+.linhas div{display:flex;justify-content:space-between;gap:18px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid var(--linha);font-size:15px;color:#414743}
+.linhas div b{color:var(--tinta);font-weight:600;white-space:nowrap}
+
+.validade{background:rgba(241,131,21,.1);border:1px solid rgba(241,131,21,.42);border-radius:4px;
+  padding:20px 24px;margin:30px 0;font-size:15px;color:#5A3D12}
+.validade b{color:#7A5210}
+
+/* ============ FECHO ============ */
+.fecho{background:var(--verde-profundo);color:#fff;padding:92px 0 78px}
+.fecho h2{color:#fff}
+.fecho p{color:rgba(255,255,255,.82);font-weight:300}
+.fecho strong{color:#fff}
+.sig{margin-top:52px;padding-top:30px;border-top:1px solid rgba(255,255,255,.18)}
+.sig b{display:block;font-family:'Fraunces',serif;font-size:1.45rem;font-weight:600;letter-spacing:-.01em}
+.sig .role{margin-top:6px;font-size:11.5px;font-weight:600;letter-spacing:.26em;
+  text-transform:uppercase;color:#8FD48B}
+.sig .contato{margin-top:14px;font-size:14px;color:rgba(255,255,255,.6);line-height:2}
+.sig .contato a{color:rgba(255,255,255,.85);text-decoration-color:rgba(255,255,255,.3)}
+
+footer.rodape{background:#0D2412;color:rgba(255,255,255,.42);font-size:12px;padding:26px 0;
+  letter-spacing:.03em}
+footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
+  display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between}
+
+/* ============ REVEAL ============ */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ============ RESPONSIVO ============ */
+@media(max-width:860px){
+  body{font-size:16px}
+  .wrap{padding:0 22px}
+  .kv-top{padding:24px 22px;flex-wrap:wrap}
+  .kv-tag{display:none}
+  .kv-core{padding:0 22px 16px}
+  .kv-foot{padding:20px 22px 26px}
+  .stats .in{grid-template-columns:repeat(2,1fr);padding:34px 22px;gap:24px}
+  .stat b{font-size:2rem}
+  section{padding:58px 0}
+  .grid3,.grid2,.creds,.dupla,.papeis{grid-template-columns:1fr;gap:16px}
+  .papeis{border-left:none;border-top:none;margin:28px 0}
+  .papeis .p{border-right:none;padding:24px 0}
+  .autor{grid-template-columns:1fr;gap:26px}
+  .autor figure img{max-width:300px}
+  .acao .in{padding:34px 26px}
+  .btn{width:100%;justify-content:center}
+  .punch{padding:34px 26px}
+  .price .head,.price .body{padding:26px 24px}
+  table{font-size:14.5px;display:block;overflow-x:auto;white-space:nowrap}
+  table.roteiro td:nth-child(2),table.inc td:first-child,
+  table.salas td:nth-child(2),table.salas td:nth-child(3){white-space:nowrap}
+  td,th{padding:13px 14px}
+  .linhas div{flex-direction:column;gap:4px}
+}
+
+/* ============ IMPRESSÃO / PDF ============ */
+@media print{
+  @page{margin:14mm}
+  body{font-size:10.5pt;line-height:1.5}
+  .kv{min-height:auto;padding:0;background:var(--verde-profundo);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .kv h1{font-size:34pt}
+  .stats,.punch,.price .head,.fecho,footer.rodape,.kv{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section{padding:26px 0;break-inside:avoid}
+  h2{break-after:avoid}
+  table,.card,.punch,.price,.quote{break-inside:avoid}
+  .autor{grid-template-columns:220px 1fr;gap:26px}
+  .acao img{opacity:.3}
+  .acao .in{padding:30px 26px}
+  .btn{border-color:rgba(255,255,255,.5)}
+  .rv{opacity:1;transform:none}
+  .noprint{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ KV ============================ -->
+<header class="kv">
+  <div class="fallback"></div>
+
+  <div class="kv-top">
+    <div class="lockup">
+      <a href="https://www.obahortifruti.com.br/quem-somos" target="_blank" rel="noopener">
+        <img src="https://cdn-sites-assets.mziq.com/wp-content/uploads/sites/463/2021/09/logo-1-1.png"
+             alt="Oba Hortifruti"
+             onerror="this.outerHTML='<span style=&quot;font-family:Fraunces,serif;font-size:20px;font-weight:600;color:#fff&quot;>Oba Hortifruti</span>'">
+      </a>
+      <div class="x"></div>
+      <div class="kiko">Kiko Campos<small>Liderança · Cultura · Mudança</small></div>
+    </div>
+    <div class="kv-tag">Proposta · Confidencial</div>
+  </div>
+
+  <div class="kv-core">
+    <div class="kicker">Programa de liderança · 230 gestores · SP, Campinas e Brasília</div>
+    <h1>A conversa que<em>segura o time.</em></h1>
+    <p class="lead">O Oba cresce por aquisição enquanto perde gente pela porta dos fundos.
+      Quatro encontros presenciais para transformar a qualidade da conversa entre gestor e equipe
+      no principal ativo de retenção da rede.</p>
+  </div>
+
+  <div class="kv-foot">
+    <div class="in">
+      <div class="item">Para<b>Oba Hortifruti · Grupo Fartura</b></div>
+      <div class="item">Formato<b>4 encontros presenciais · 2h a 2h30</b></div>
+      <div class="item">Praças<b>São Paulo · Campinas · Brasília</b></div>
+      <div class="item">Público<b>230 líderes</b></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ NÚMEROS ============================ -->
+<div class="stats">
+  <div class="in">
+    <div class="stat"><b>1979</b><span>Do Varejão Fartura<br>em Limeira até aqui</span></div>
+    <div class="stat"><b>70+</b><span>Lojas em São Paulo,<br>Goiás e Distrito Federal</span></div>
+    <div class="stat"><b>10</b><span>Unidades do Natural da Terra<br>incorporadas em SP</span></div>
+    <div class="stat"><b>230</b><span>Líderes a alcançar<br>em quatro encontros</span></div>
+  </div>
+</div>
+
+<!-- ============================ CONTEXTO ============================ -->
+<section>
+  <div class="wrap narrow rv">
+    <div class="eyebrow">Contexto</div>
+    <h2>O que entendemos do Oba</h2>
+    <p class="big">O Oba não pediu um treinamento de liderança por modismo. Pediu porque está no momento
+      mais exigente da sua história — e descobriu que o gargalo não é operacional.</p>
+    <p>A trajetória é pública e fala por si:</p>
+
+    <ul class="tl">
+      <li><b>1979</b><span>Carlos Alves funda o <strong>Varejão Fartura</strong>, em Limeira, no varejo de
+        produtos frescos.</span></li>
+      <li><b>Anos 90</b><span>Nasce em Campinas a primeira loja com a bandeira <strong>Oba Hortifruti</strong>.</span></li>
+      <li><b>Hoje</b><span>Mais de <strong>70 lojas</strong> em São Paulo, Goiás e Distrito Federal, uma das
+        maiores redes de hortifrúti do país.</span></li>
+      <li><b>2026</b><span>Aquisição de <strong>dez unidades do Hortifruti Natural da Terra</strong> por
+        R$ 69,3 milhões, aprovada sem restrições pelo CADE, com transferência gradual das lojas em São Paulo.</span></li>
+    </ul>
+
+    <p>Crescimento por aquisição é um teste de cultura antes de ser um teste de operação. Dez lojas novas
+      significam equipes que nunca trabalharam sob a bandeira Oba, processos a reaprender e líderes locais
+      a conquistar — no mesmo período em que a rede já convive com rotatividade elevada.</p>
+
+    <div class="quote">
+      <p>“…estar entre as melhores empresas para se trabalhar e gerir o aprendizado contínuo.”</p>
+      <cite>Trecho da missão do Grupo Oba Hortifruti — este programa existe para tornar essa frase operacional</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ O QUE OUVIMOS ============================ -->
+<section class="alt">
+  <div class="wrap narrow rv">
+    <div class="eyebrow">Diagnóstico preliminar</div>
+    <h2>Cinco sinais que contam uma história só</h2>
+    <ul class="marks">
+      <li><b>Rotatividade elevada</b>, com peso concentrado nos primeiros meses de casa.</li>
+      <li><b>Lideranças com até quarenta anos de Oba</b> — repertório e lealdade enormes, formados numa
+        gramática de gestão de outra época.</li>
+      <li><b>Gestores sem repertório para conversas difíceis.</b> Não é falta de vontade: é falta de
+        método, roteiro e prática.</li>
+      <li><b>Entrevistas de desligamento apontando imprevisibilidade de jornada</b> — “cada dia eu
+        trabalhava num horário diferente”.</li>
+      <li><b>Integração cultural das dez unidades adquiridas</b>, com equipes herdadas e expectativas
+        em aberto.</li>
+    </ul>
+    <p>Esses cinco pontos costumam ser tratados como problemas separados: um de RH, um de escala, um de
+      treinamento. Não são. Eles se encontram no mesmo lugar — <strong>na conversa entre o líder e a
+      pessoa que trabalha com ele.</strong></p>
+  </div>
+</section>
+
+<!-- ============================ NOSSA LEITURA ============================ -->
+<section>
+  <div class="wrap narrow rv">
+    <div class="eyebrow">Nossa leitura</div>
+    <h2>Três teses que orientam o desenho</h2>
+    <p>Antes de propor conteúdo, propomos um diagnóstico. É ele que separa um evento inspirador de uma
+      intervenção que move indicador.</p>
+  </div>
+
+  <div class="wrap rv">
+    <div class="grid3">
+      <div class="card">
+        <span class="n">Tese I</span>
+        <h4>Turnover no varejo de frescos raramente é falta de empatia. É falta de previsibilidade.</h4>
+        <p>A pesquisa de Zeynep Ton, do MIT, sobre operações de varejo é consistente: estabilidade de
+          jornada e clareza de escala movem rotatividade mais do que qualquer ação isolada de engajamento.
+          Quem sai porque “cada dia era um horário” está reagindo ao desenho do trabalho.</p>
+        <p>O gestor não controla a escala inteira — mas controla <strong>previsibilidade, aviso prévio,
+          negociação e explicação</strong>. É aí que o treinamento age.</p>
+      </div>
+      <div class="card">
+        <span class="n">Tese II</span>
+        <h4>Duas lojas com a mesma política de RH entregam rotatividade oposta.</h4>
+        <p>A diferença é quem lidera. O corpo de pesquisa da Gallup atribui ao gestor direto a maior parte
+          da variação de engajamento entre equipes.</p>
+        <p>Isso é uma boa notícia para o Oba: significa que existe uma alavanca <strong>dentro</strong> da
+          empresa, exercível na segunda-feira de manhã, sem esperar reestruturação de política.</p>
+      </div>
+      <div class="card">
+        <span class="n">Tese III</span>
+        <h4>Quarenta anos de casa não é o problema. É o ativo mais mal aproveitado da rede.</h4>
+        <p>Um programa que trata o veterano como alguém a ser corrigido perde a sala em dez minutos.
+          Nosso desenho o convida ao papel oposto.</p>
+        <p>Quem tem estrada é quem tem repertório para <strong>integrar as dez lojas do Natural da
+          Terra</strong>. Ele entra como formador, não como aluno em recuperação.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap narrow rv">
+    <div class="punch">
+      <p>Ninguém pede demissão de uma empresa. Pede demissão de uma conversa que nunca aconteceu.</p>
+      <p>Por isso esta proposta não vende um workshop de liderança. Vende o treino de três conversas
+        específicas, com roteiro, prática em sala e compromisso datado antes de o participante sair.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ O PAPEL DO LÍDER ============================ -->
+<section>
+  <div class="wrap narrow rv">
+    <div class="eyebrow">O papel do líder</div>
+    <h2>O líder é a política de RH que a pessoa de fato experimenta</h2>
+    <p class="big">A empresa escreve a política. O líder é quem a entrega. Entre o que o corporativo desenha
+      e o que o repositor vive no turno da manhã existe uma única camada de tradução — e ela tem nome,
+      crachá e escala de trabalho.</p>
+    <p>É por isso que benefício nenhum sobrevive a um chefe que não olha na cara. E é por isso que duas lojas
+      do Oba, com a mesma remuneração, o mesmo uniforme e o mesmo manual, entregam rotatividades opostas.
+      A variável não está no manual.</p>
+
+    <div class="quote">
+      <p>No varejo, cultura não é o que está escrito no quadro da copa. É o que o encarregado faz às seis
+        da manhã, quando falta gente e o caminhão atrasou.</p>
+    </div>
+
+    <p>No Oba, esse papel é exercido hoje por uma liderança que aprendeu a liderar num tempo em que bastava
+      resolver. Chefiar era garantir que a loja abrisse, a gôndola enchesse e o cliente fosse atendido — e,
+      nesse jogo, o Oba se tornou uma das maiores redes de hortifrúti do país. O que mudou não foi a
+      competência do líder. <strong>Foi o que a pessoa do outro lado espera de uma chefia.</strong></p>
+
+    <h3>Quatro funções que só o líder direto consegue exercer</h3>
+    <p>Não são competências abstratas. São quatro coisas que ninguém no corporativo consegue fazer no lugar dele:</p>
+
+    <div class="papeis">
+      <div class="p">
+        <span class="rot">Função 1</span>
+        <b>Dar previsibilidade</b>
+        <p>O líder não define a escala inteira — mas define quanto tempo antes ela é comunicada, se a troca
+          é negociada ou imposta, e se o motivo é explicado. Previsibilidade percebida é, na prática, mais
+          comunicação do que sistema.</p>
+      </div>
+      <div class="p">
+        <span class="rot">Função 2</span>
+        <b>Reconhecer o esforço certo</b>
+        <p>Em loja, reconhecimento é diário e verbal, não trimestral e formal. O que o líder elogia em voz
+          alta é o que a equipe repete na semana seguinte — e o que ele tolera em silêncio também.</p>
+      </div>
+      <div class="p">
+        <span class="rot">Função 3</span>
+        <b>Mostrar o caminho de quem fica</b>
+        <p>O repositor de hoje é o encarregado de amanhã — mas só se alguém disser isso a ele em voz alta.
+          Onde não existe caminho visível dentro da rede, a porta de saída vira o único caminho de carreira.</p>
+      </div>
+      <div class="p">
+        <span class="rot">Função 4</span>
+        <b>Filtrar a pressão, não amplificá-la</b>
+        <p>Meta, auditoria, ruptura, cliente insatisfeito: tudo chega à loja ao mesmo tempo. Líder que apenas
+          repassa a pressão que recebe é um megafone. O trabalho é traduzir a pressão em prioridade.</p>
+      </div>
+    </div>
+
+    <h3>De quem resolve para quem desenvolve</h3>
+    <p>A transição que este programa propõe cabe em uma frase: <strong>o líder do Oba precisa deixar de ser
+      o melhor operador da loja para se tornar o formador da próxima geração de operadores.</strong> Com
+      dez unidades novas entrando na rede, não há alternativa aritmética — não existe expansão sustentável
+      sem líder que forma líder.</p>
+    <p>Essa transição não se faz com discurso. Faz-se com comportamento observável, ritual mínimo e evidência
+      de mudança. É exatamente assim que traduzimos o papel do líder para as quatro salas:</p>
+
+    <table>
+      <thead><tr><th>Comportamento observável</th><th>Ritual mínimo</th><th>Evidência de mudança</th></tr></thead>
+      <tbody>
+        <tr><td>Dar previsibilidade</td>
+          <td>Escala publicada com antecedência acordada; toda alteração comunicada pessoalmente, com motivo.</td>
+          <td>Queda das menções a horário e escala nas entrevistas de desligamento.</td></tr>
+        <tr><td>Perguntar antes de perder</td>
+          <td>Uma conversa de permanência por mês com quem tem menos de seis meses de casa.</td>
+          <td>Rotatividade de colaboradores com até noventa dias de casa.</td></tr>
+        <tr><td>Corrigir sem quebrar</td>
+          <td>Feedback dado em até quarenta e oito horas do fato, em particular e com exemplo concreto.</td>
+          <td>Reincidência de ocorrências e clima do turno.</td></tr>
+        <tr><td>Formar quem vem depois</td>
+          <td>Vinte minutos por semana com quem tem potencial, sobre o próximo passo dele.</td>
+          <td>Percentual de posições preenchidas por promoção interna.</td></tr>
+      </tbody>
+    </table>
+
+    <p>Nenhum desses rituais exige sistema novo, verba ou aprovação de comitê. Todos cabem na rotina de uma
+      loja em operação. <strong>É essa a alavanca que o Oba tem em mãos hoje</strong> — e é ela que os quatro
+      encontros destravam.</p>
+  </div>
+</section>
+
+<!-- ============================ QUEM CONDUZ ============================ -->
+<section class="alt">
+  <div class="wrap rv">
+    <div class="autor">
+      <figure>
+        <img src="/kiko-2026.jpg" alt="Kiko Campos">
+        <figcaption>Kiko Campos<br>Liderança · Cultura · Mudança</figcaption>
+        <div class="perfil">
+          <a href="https://www.linkedin.com/in/kikocampos" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://kikocampos.com/KikoCampos_MidiaKit_PT.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2 4.5 4.5H14V4zM8 13h8v1.5H8V13zm0 3.5h8V18H8v-1.5zm0-7h4V11H8V9.5z"/></svg>
+            Mídia kit completo (PDF)
+          </a>
+        </div>
+      </figure>
+      <div>
+        <div class="eyebrow">Quem conduz</div>
+        <h2>Já reduzimos turnover<br>em varejo alimentar — durante uma aquisição.</h2>
+        <p>Fui Diretor Global de RH, Transformação e Cultura da <strong>Vale</strong> — 170 mil pessoas,
+          12 países, interface direta com o comitê executivo. Antes disso, <strong>McKinsey</strong>.</p>
+        <p>Mas o que mais importa para o Oba é o <strong>Carrefour Brasil</strong>: liderei a integração do
+          Grupo BIG, com R$ 1,7 bilhão em sinergias, <strong>turnover reduzido de mais de 70% para 35%</strong>
+          e a criação da maior escola corporativa de liderança do país. Varejo alimentar, lojas herdadas,
+          equipes que não escolheram a nova bandeira, rotatividade alta. É exatamente o problema que o Oba
+          tem hoje — em escala muito maior.</p>
+        <p>Sou autor de <strong>O Novo Código da Mudança</strong>, com prefácio de Sofia Esteves. Duas vezes
+          eleito um dos profissionais de RH mais admirados do Brasil, LinkedIn Top Voice e membro do Forbes
+          Human Resources Council.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap narrow rv">
+    <div class="creds">
+      <div class="cred"><b>70% &rarr; 35%</b><span>Redução de turnover na integração do Grupo BIG, no Carrefour Brasil</span></div>
+      <div class="cred"><b>R$ 1,7 bi</b><span>Em sinergias capturadas na maior integração do varejo alimentar brasileiro</span></div>
+      <div class="cred"><b>8 mil</b><span>Líderes formados na maior escola corporativa de liderança do país</span></div>
+      <div class="cred"><b>170 mil</b><span>Pessoas sob a diretoria global de RH, Transformação e Cultura da Vale, em 12 países</span></div>
+    </div>
+
+    <h3>Condução em dupla</h3>
+    <p>Sala de sessenta a setenta pessoas em metodologia ativa não se conduz sozinho. Os quatro encontros
+      são facilitados a quatro mãos — um conduz o palco, o outro circula pelas mesas. É o que garante que
+      o Laboratório de conversas seja prática de verdade, e não exercício de faz de conta.</p>
+
+    <div class="dupla">
+      <div class="card">
+        <div class="retrato">
+          <span class="iniciais">KC</span>
+          <img src="/kiko-home.jpg" alt="Kiko Campos" onerror="this.style.display='none'">
+        </div>
+        <h4>Kiko Campos</h4>
+        <span class="papel">Condução · conteúdo · palco</span>
+        <p>Vale, Carrefour Brasil e McKinsey. Autor de <em>O Novo Código da Mudança</em>. Traz o repertório
+          de integração pós-aquisição e de redução de turnover em varejo alimentar.</p>
+        <a class="li-link" href="https://www.linkedin.com/in/kikocampos" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          linkedin.com/in/kikocampos
+        </a>
+      </div>
+
+      <!-- TODO Kiko: salve a foto dela como esabela.jpg nesta mesma pasta e troque a URL do LinkedIn abaixo -->
+      <div class="card">
+        <div class="retrato">
+          <span class="iniciais">EC</span>
+          <img src="esabela.jpg" alt="Esabela Cruz" onerror="this.style.display='none'">
+        </div>
+        <h4>Esabela Cruz</h4>
+        <span class="papel">Facilitação · metodologias ativas</span>
+        <p>Facilitadora de desenvolvimento de liderança com foco em metodologias ativas e aplicação prática
+          no dia seguinte ao encontro. Responsável pelo desenho dos laboratórios e do material de sustentação.</p>
+        <a class="li-link" href="https://www.linkedin.com/in/esabelacruz" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <h3>O método</h3>
+    <p>Todo o trabalho — palco, programa ou conselho — roda sobre a mesma espinha: <strong>Consciência</strong>
+      (enxergar o sistema), <strong>Coragem</strong> (mobilizar as pessoas) e <strong>Consistência</strong>
+      (sustentar no tempo). E sobre uma fórmula única:</p>
+
+    <div class="formula">
+      <b>Comportamento observável &nbsp;+&nbsp; Ritual mínimo &nbsp;+&nbsp; Evidência de mudança</b>
+    </div>
+  </div>
+
+  <!-- ---------- VEJA EM AÇÃO ---------- -->
+  <div class="wrap rv">
+    <div class="acao">
+      <img src="/kiko-palco.jpg" alt="Kiko Campos conduzindo keynote em auditório corporativo">
+      <div class="in">
+        <div class="eyebrow">Veja em ação</div>
+        <h3>Vocês já viram o Mente no Trabalho.<br>Veja também o palco inteiro.</h3>
+        <p>Antes de decidir, vale ver a condução funcionando por completo. As duas keynotes abaixo estão
+          abertas — e é essa a energia que as quatro salas do Oba terão.</p>
+        <div class="btns">
+          <a class="btn solid" href="https://kikocampos.com/palestras.html" target="_blank" rel="noopener">
+            Palestras e temas &rarr;
+          </a>
+          <a class="btn" href="https://www.youtube.com/watch?v=fU0zTw3BXuY" target="_blank" rel="noopener">
+            <svg class="play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Keynote · Grupo Carrefour Brasil
+          </a>
+          <a class="btn" href="https://www.youtube.com/watch?v=2WyR8dPYdl0" target="_blank" rel="noopener">
+            <svg class="play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Keynote completa · CONARH
+          </a>
+          <a class="btn" href="https://kikocampos.com/KikoCampos_MidiaKit_PT.pdf" target="_blank" rel="noopener">
+            Mídia kit completo &rarr;
+          </a>
+        </div>
+        <small>kikocampos.com/palestras</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ AS TRÊS CONVERSAS ============================ -->
+<section>
+  <div class="wrap narrow rv">
+    <div class="eyebrow">O conceito</div>
+    <h2>Três conversas, treinadas à exaustão</h2>
+    <p class="big">Não trabalhamos “liderança” como tema. Trabalhamos três conversas nomeadas, com roteiro,
+      que o gestor consegue conduzir na loja na manhã seguinte.</p>
+  </div>
+
+  <div class="wrap rv">
+    <div class="grid3">
+      <div class="card">
+        <span class="n">Conversa 1</span>
+        <h4>Conversa de permanência</h4>
+        <p>Perguntar antes de perder. O <em>stay interview</em> é a prática de maior retorno e menor custo
+          em varejo — e a mais ausente.</p>
+        <p>Ataca exatamente o que as entrevistas de desligamento do Oba estão revelando tarde demais.</p>
+      </div>
+      <div class="card">
+        <span class="n">Conversa 2</span>
+        <h4>Conversa de carga e escala</h4>
+        <p>Como o líder negocia jornada, antecipa mudanças e explica o que não está sob seu controle sem
+          perder a confiança do time.</p>
+        <p>Previsibilidade tratada como ato de liderança, não como política de RH.</p>
+      </div>
+      <div class="card">
+        <span class="n">Conversa 3</span>
+        <h4>Conversa difícil</h4>
+        <p>Feedback de desempenho e de comportamento que corrige sem quebrar a pessoa.</p>
+        <p>Sem “sanduíche”, sem rodeio e sem a bronca de corredor que hoje ocupa esse espaço.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ JORNADA ============================ -->
+<section class="alt">
+  <div class="wrap narrow rv">
+    <div class="eyebrow">Desenho da experiência</div>
+    <h2>O encontro é o meio da jornada, não a jornada inteira</h2>
+    <p>Treinamento de liderança falha quando começa no slide um e termina no aplauso. Desenhamos três
+      tempos — e boa parte do valor está fora da sala.</p>
+  </div>
+
+  <div class="wrap rv">
+    <div class="grid3">
+      <div class="card">
+        <span class="n">Antes · 3 semanas</span>
+        <h4>O diagnóstico</h4>
+        <p>Leitura das entrevistas de desligamento dos últimos doze meses. Pulse de cinco perguntas aplicado
+          aos líderes participantes. Três entrevistas de profundidade com gerentes de loja.</p>
+        <p>Saída: o retrato real do Oba, que abre cada encontro.</p>
+      </div>
+      <div class="card">
+        <span class="n">Durante · 2h30</span>
+        <h4>O encontro</h4>
+        <p>Abertura com o dado do próprio Oba, não com benchmark genérico. Metodologia ativa em mesas de
+          seis, facilitação em dupla, prática das três conversas com casos reais de loja.</p>
+        <p>Cada líder sai com uma conversa marcada — nome, assunto e data.</p>
+      </div>
+      <div class="card">
+        <span class="n">Depois · 30 dias</span>
+        <h4>A sustentação</h4>
+        <p>Cartão de bolso com os roteiros das três conversas, Guia do Líder em PDF e trilha de quatro
+          microdesafios semanais.</p>
+        <p>Mais um relatório executivo para o RH com o que as quatro salas revelaram.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ROTEIRO ============================ -->
+<section>
+  <div class="wrap rv">
+    <div class="narrow">
+      <div class="eyebrow">Desenho de aprendizagem</div>
+      <h2>O roteiro de 2h30</h2>
+      <p>Construído para segurar sessenta a setenta líderes de varejo, que passaram o dia em pé, numa sala
+        fechada. A curva de atenção é implacável — por isso nada de conteúdo corrido.</p>
+    </div>
+
+    <table class="roteiro">
+      <thead><tr><th>Tempo</th><th>Bloco</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr><td>0–20 min</td><td>O espelho</td>
+          <td>Não abrimos falando de nós. Abrimos com a voz de quem saiu do Oba: frases anônimas reais das
+            entrevistas de desligamento, projetadas na tela. A sala para de achar que é mais um treinamento.</td></tr>
+        <tr><td>20–50 min</td><td>Mente no Trabalho aplicado à gestão</td>
+          <td>Da saúde mental à prática de liderança: o que sustenta e o que desgasta um time de loja.
+            Bloco formativo, com método e referência — enxuto, sem palestra longa.</td></tr>
+        <tr><td>50–105 min</td><td>Laboratório de conversas</td>
+          <td>Tríades com casos reais de loja. Cada participante conduz uma conversa, recebe outra e observa
+            a terceira. A dupla de facilitação circula pelas mesas. É o coração do encontro.</td></tr>
+        <tr><td>105–130 min</td><td>Roda dos veteranos</td>
+          <td>Formato <em>fishbowl</em>: quem tem estrada responde a quem está começando. É aqui que a
+            integração do Natural da Terra vira conversa, e não comunicado.</td></tr>
+        <tr><td>130–150 min</td><td>O compromisso</td>
+          <td>Cada líder sai com uma conversa agendada — nome, assunto e data escritos no cartão — e o kit
+            em mãos.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="narrow">
+      <p><strong>Em formato de 2h:</strong> a Roda dos veteranos reduz para dez minutos e o Laboratório para
+        quarenta e cinco. A estrutura se mantém — nenhum bloco é eliminado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OS QUATRO ENCONTROS ============================ -->
+<section class="alt">
+  <div class="wrap rv">
+    <div class="narrow">
+      <div class="eyebrow">Os quatro encontros</div>
+      <h2>Mesmo esqueleto, quatro recortes diferentes</h2>
+      <p>Rodar o mesmo conteúdo em quatro salas distintas é o erro mais comum e mais caro deste tipo de
+        programa. O que muda entre elas são os casos, os exemplos e a pergunta central.</p>
+    </div>
+
+    <table class="salas">
+      <thead><tr><th>Nº</th><th>Praça e público</th><th>Recorte específico</th></tr></thead>
+      <tbody>
+        <tr><td>01</td>
+          <td><strong>São Paulo · Pinheiros</strong><br>70 líderes de SP e Baixada Santista</td>
+          <td>Mercado de trabalho aquecido e disputa por mão de obra. Como reter quando a loja concorrente
+            fica a três quarteirões — e como acolher as equipes que chegam do Natural da Terra.</td></tr>
+        <tr><td>02</td>
+          <td><strong>Sumaré / Campinas</strong><br>60 gerentes de loja</td>
+          <td>O ritmo da operação. Conversa de corredor, escala de fim de semana, gestão de pico.
+            Conversas curtas e de alta frequência, não reuniões formais.</td></tr>
+        <tr><td>03</td>
+          <td><strong>Sumaré · Corporativo</strong><br>60 gestores</td>
+          <td>Como o corporativo facilita ou sabota a vida da loja. Decisões de escala, comunicação e
+            prazos vistas pelo olhar de quem executa.</td></tr>
+        <tr><td>04</td>
+          <td><strong>Brasília</strong><br>40 a 60 líderes do Centro-Oeste</td>
+          <td>Distância da matriz e autonomia. Formar sucessores e sustentar a cultura Oba longe do centro
+            de decisão.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="narrow">
+      <p><strong>Otimização sugerida:</strong> os encontros 02 e 03, ambos em Sumaré, podem ocorrer no mesmo
+        dia — manhã e tarde — reduzindo deslocamento e hospedagem a uma única diária.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ESCOPO ============================ -->
+<section>
+  <div class="wrap rv">
+    <div class="narrow">
+      <div class="eyebrow">Escopo</div>
+      <h2>O que está incluído</h2>
+    </div>
+
+    <table class="inc">
+      <thead><tr><th>Entrega</th><th>Detalhe</th></tr></thead>
+      <tbody>
+        <tr><td>Diagnóstico prévio</td><td>Leitura das entrevistas de desligamento dos últimos doze meses, pulse de cinco perguntas com os líderes e três entrevistas de profundidade com gerentes de loja.</td></tr>
+        <tr><td>Customização por público</td><td>Casos, exemplos e pergunta central redesenhados para cada uma das quatro salas — loja, corporativo, São Paulo e Centro-Oeste.</td></tr>
+        <tr><td>Condução em dupla</td><td>Facilitação a quatro mãos nos quatro encontros presenciais, de 2h a 2h30 cada.</td></tr>
+        <tr><td>Espelho ao vivo</td><td>Produção do bloco de abertura com os dados do próprio Oba — arte, curadoria das falas e roteiro de projeção.</td></tr>
+        <tr><td>Cartão de bolso</td><td>Roteiro das três conversas em formato de bolso, para os 230 participantes. Arte e texto entregues prontos.</td></tr>
+        <tr><td>Guia do Líder Oba</td><td>Material de apoio em PDF, com os roteiros ampliados, exemplos e perguntas de referência.</td></tr>
+        <tr><td>Trilha de 30 dias</td><td>Quatro microdesafios semanais, com texto pronto para disparo pelos canais internos do Oba.</td></tr>
+        <tr><td>Relatório executivo</td><td>Leitura do que as quatro salas revelaram sobre a liderança da rede, entregue ao RH após o último encontro.</td></tr>
+        <tr><td>Sessão de indicadores</td><td>Leitura conjunta dos indicadores noventa dias após o programa, para que o RH leve o resultado à diretoria com narrativa, e não apenas com número.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="narrow">
+      <h3>O que fica com o Oba</h3>
+      <p>Local, som, projeção e coffee break; produção gráfica dos cartões de bolso e do material impresso,
+        a partir das artes que entregamos; acesso aos dados de desligamento em formato anonimizado; disparo
+        do pulse e da trilha de trinta dias pelos canais internos; deslocamento, hospedagem e alimentação da
+        dupla facilitadora nas praças fora de São Paulo.</p>
+
+      <h3>Condições de sala — e somos diretos sobre isto</h3>
+      <p>Metodologia ativa não sobrevive a formato de auditório. Com setenta pessoas enfileiradas, o
+        Laboratório de conversas perde a maior parte do seu efeito e o encontro vira palestra.</p>
+      <ul class="marks">
+        <li><b>Mesas redondas de seis pessoas</b>, com circulação entre elas. Não auditório, não fileiras.</li>
+        <li><b>Dois microfones sem fio</b> e um microfone volante para a plenária.</li>
+        <li><b>Projetor ou telão</b> visível de todas as mesas.</li>
+        <li><b>Intervalo de dez minutos</b> com água e café — parte do desenho, não pausa administrativa.</li>
+        <li><b>Um representante do RH em cada sala</b>, como ouvinte ativo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MEDIÇÃO ============================ -->
+<section class="alt">
+  <div class="wrap rv">
+    <div class="narrow">
+      <div class="eyebrow">Evidência de mudança</div>
+      <h2>Como saberemos que funcionou</h2>
+      <p>Propomos que o sucesso deste programa não seja avaliado pelo aplauso no fim da sala.</p>
+    </div>
+
+    <table>
+      <thead><tr><th>Horizonte</th><th>Indicador</th><th>Responsável</th></tr></thead>
+      <tbody>
+        <tr><td>Imediato</td><td>NPS do encontro e percentual de líderes que saíram com uma conversa agendada.</td><td>Facilitação</td></tr>
+        <tr><td>30 dias</td><td>Percentual de líderes que conduziram ao menos uma conversa de permanência.</td><td>RH Oba, com apoio da trilha</td></tr>
+        <tr><td>90 dias</td><td>Rotatividade de colaboradores com até noventa dias de casa e taxa de absenteísmo.</td><td>RH Oba</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================ INVESTIMENTO ============================ -->
+<section>
+  <div class="wrap narrow rv">
+    <div class="eyebrow">Investimento</div>
+    <h2>Pacote fechado</h2>
+    <p>Sem escalonamento e sem adicionais sobre o trabalho descrito acima.</p>
+
+    <div class="price">
+      <div class="head">
+        <span>Diagnóstico, customização, condução em dupla dos quatro encontros, materiais,
+          trilha de 30 dias e leitura de indicadores</span>
+        <b>R$ 140.000</b>
+      </div>
+      <div class="body">
+        <div class="linhas">
+          <div><span>Encontro 01 · São Paulo, Pinheiros — 70 líderes</span><b>R$ 35.000</b></div>
+          <div><span>Encontro 02 · Sumaré/Campinas, gerentes de loja — 60 gestores</span><b>R$ 35.000</b></div>
+          <div><span>Encontro 03 · Sumaré, corporativo — 60 gestores</span><b>R$ 35.000</b></div>
+          <div><span>Encontro 04 · Brasília, Centro-Oeste — 40 a 60 líderes</span><b>R$ 35.000</b></div>
+        </div>
+        <ul class="marks">
+          <li><b>Pagamento</b> em duas parcelas: 50% na assinatura do contrato e 50% após a realização do último encontro.</li>
+          <li>O valor cobre integralmente o diagnóstico, a customização, os materiais conceituais e a condução em dupla — <b>sem cobranças adicionais</b> sobre o trabalho descrito.</li>
+          <li>Deslocamento, hospedagem e alimentação da dupla facilitadora nas praças fora de São Paulo por conta da contratante. Caso os encontros 02 e 03 ocorram no mesmo dia, incide <b>uma única diária</b> para a região de Campinas.</li>
+          <li>Produção física dos cartões de bolso e do material impresso por conta da contratante, a partir das artes e textos que entregamos.</li>
+          <li>Autorizamos a <b>gravação profissional</b> dos encontros pelo Oba, para uso interno junto às lojas e turnos que não puderem estar presentes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Continuidade — opcional, a definir após o primeiro ciclo</h3>
+    <p>O programa entrega valor por si só. Mas comportamento de liderança consolida em ciclos, não em
+      eventos. Caso o Oba queira sustentar o movimento, desenhamos uma segunda fase:</p>
+    <ul class="marks">
+      <li>Três clínicas de casos online de noventa minutos, por grupo regional.</li>
+      <li>Acompanhamento mensal dos indicadores de rotatividade e absenteísmo.</li>
+      <li>Formação de multiplicadores internos entre as lideranças veteranas.</li>
+      <li>Sessão de fechamento com o comitê de RH e a diretoria.</li>
+    </ul>
+    <p>Escopo e investimento desenhados em conjunto ao término do primeiro ciclo, com base no que as quatro
+      salas revelarem.</p>
+
+    <div class="validade">
+      <b>Validade:</b> proposta válida por trinta dias a partir de 20 de agosto de 2026.
+      As datas dos quatro encontros ficam reservadas em agenda mediante aceite.
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PRÓXIMOS PASSOS ============================ -->
+<section class="alt">
+  <div class="wrap narrow rv">
+    <div class="eyebrow">Próximos passos</div>
+    <h2>Cinco movimentos para começarmos</h2>
+    <p>Nenhum deles impede a aprovação — o alinhamento fino acontece depois do aceite, e a etapa de
+      diagnóstico já está contemplada no pacote. Registramos aqui porque são as variáveis que mais mexem
+      no desenho das salas.</p>
+    <ul class="marks">
+      <li><b>As quatro datas.</b> Definidas no aceite. A sugestão é concentrar Campinas em um único dia,
+        manhã e tarde.</li>
+      <li><b>Acesso aos dados de desligamento.</b> Últimos doze meses, em formato anonimizado, com no
+        mínimo três semanas de antecedência do primeiro encontro. É o insumo que faz o bloco do Espelho
+        existir.</li>
+      <li><b>Composição das salas.</b> Precisamos saber quantos vêm das dez unidades do Natural da Terra e
+        quantos têm mais de vinte anos de casa. Isso muda o desenho da Roda dos veteranos.</li>
+      <li><b>Formato do espaço.</b> Confirmação de que as quatro salas comportam mesas redondas. Se alguma
+        praça só oferecer auditório, redesenhamos o Laboratório para aquela sala.</li>
+      <li><b>Canal da trilha de 30 dias.</b> WhatsApp corporativo, e-mail ou portal do colaborador —
+        definir qual chega de fato ao gerente de loja.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ FECHO ============================ -->
+<section class="fecho">
+  <div class="wrap narrow rv">
+    <h2>Vamos juntos</h2>
+    <p class="big" style="color:rgba(255,255,255,.92)">O Oba já sabe medir com precisão de centavos aquilo
+      que importa para o cliente na gôndola. Este programa aplica o mesmo rigor àquilo que importa para as
+      pessoas que fazem as lojas funcionarem todos os dias, às cinco da manhã, em três estados.</p>
+    <p>A missão do Grupo diz, com todas as letras, que o Oba quer estar entre as melhores empresas para se
+      trabalhar. Uma rede que acabou de incorporar dez lojas e convive com rotatividade alta tem, agora, a
+      janela mais curta e mais decisiva para provar isso — <strong>e são os 230 líderes destas quatro salas
+      que decidem se a frase vira realidade ou fica na parede.</strong></p>
+    <p>Ficamos à disposição para detalhar qualquer ponto e, no aceite, já entrar na leitura dos dados de
+      desligamento para construir as quatro salas junto com vocês.</p>
+
+    <div class="sig">
+      <b>Kiko Campos &nbsp;·&nbsp; Esabela Cruz</b>
+      <div class="role">Liderança · Cultura · Mudança</div>
+      <div class="contato">
+        <a href="https://kikocampos.com/palestras.html" target="_blank" rel="noopener">kikocampos.com/palestras</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a>
+        <br>
+        <a href="https://www.linkedin.com/in/kikocampos" target="_blank" rel="noopener">linkedin.com/in/kikocampos</a>
+        &nbsp;·&nbsp;
+        <a href="https://kikocampos.com/KikoCampos_MidiaKit_PT.pdf" target="_blank" rel="noopener">Mídia kit completo (PDF)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="in">
+    <span>Proposta comercial · Kiko Campos e Esabela Cruz para o Oba Hortifruti · São Paulo/SP, 20 de agosto de 2026</span>
+    <span>Documento confidencial</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
+  },{threshold:.08, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
