@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A conversa que segura o time · Proposta Kiko Campos para o Oba Hortifruti</title>
-<meta name="description" content="Proposta comercial para o programa de liderança do Oba Hortifruti. Quatro encontros presenciais, 230 líderes, São Paulo, Campinas e Brasília.">
+<title>Formar líderes, reduzir rotatividade · Proposta para o Oba Hortifruti</title>
+<meta name="description" content="Proposta comercial para o programa de desenvolvimento de lideranças do Oba Hortifruti. Quatro encontros presenciais, 230 gestores, São Paulo, Campinas e Brasília.">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="googlebot" content="noindex, nofollow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="A conversa que segura o time · Kiko Campos para o Oba Hortifruti">
-<meta property="og:description" content="Programa de liderança para 230 gestores do Oba Hortifruti. Quatro encontros presenciais em SP, Campinas e Brasília.">
+<meta property="og:title" content="Formar líderes, reduzir rotatividade · Esabela Cruz e Kiko Campos para o Oba Hortifruti">
+<meta property="og:description" content="Programa de desenvolvimento de lideranças para 230 gestores do Oba Hortifruti. Quatro encontros presenciais em SP, Campinas e Brasília.">
 <meta property="og:url" content="https://kikocampos.com/proposta/oba/">
 <meta property="og:image" content="https://kikocampos.com/proposta/oba/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A conversa que segura o time — proposta de Kiko Campos para o Oba Hortifruti">
+<meta property="og:image:alt" content="Formar líderes, reduzir rotatividade — proposta para o Oba Hortifruti">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,6 +163,33 @@ section.alt .tl li::before{border-color:var(--creme)}
 .perfil svg{width:15px;height:15px;flex:none;fill:currentColor}
 .autor h2{margin-bottom:22px}
 
+/* ============ DUPLA EM PARIDADE ============ */
+.duo{display:grid;grid-template-columns:repeat(2,1fr);gap:44px;margin:40px 0 8px;align-items:start}
+.duo .pessoa figure{margin:0}
+.duo .pessoa img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;
+  display:block;border-radius:4px;box-shadow:0 22px 50px -24px rgba(20,48,26,.45)}
+.duo .pessoa h3{font-family:'Fraunces',serif;font-size:1.55rem;font-weight:600;
+  letter-spacing:-.015em;margin:22px 0 6px}
+.duo .pessoa .papel{font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dourado);display:block;margin-bottom:16px;line-height:1.6}
+.duo .pessoa p{font-size:15.5px;line-height:1.62}
+.duo .pessoa .li-link{margin-top:6px}
+
+.fonte-num{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--verde);background:rgba(65,135,63,.09);
+  padding:3px 9px;border-radius:100px;margin-left:6px;white-space:nowrap;vertical-align:1px}
+
+/* ============ REFERÊNCIAS ============ */
+.refs{list-style:none;margin:34px 0 0;counter-reset:r}
+.refs li{counter-increment:r;position:relative;padding:20px 0 20px 46px;
+  border-bottom:1px solid var(--linha);font-size:15px;line-height:1.6;color:#414743}
+.refs li:first-child{border-top:1px solid var(--linha)}
+.refs li::before{content:counter(r);position:absolute;left:0;top:20px;
+  width:28px;height:28px;border-radius:50%;border:1px solid var(--verde);color:var(--verde);
+  display:grid;place-items:center;font-size:12px;font-weight:700;font-family:'Fraunces',serif}
+.refs li b{display:block;color:var(--tinta);font-weight:600;margin-bottom:4px;font-size:15.5px}
+.refs li cite{font-style:normal;color:var(--grafite);font-size:13.5px;display:block;margin-top:6px}
+
 .dupla{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin:36px 0 0}
 .dupla .card{border-top:2px solid var(--dourado);border-radius:0 0 4px 4px;
   display:flex;flex-direction:column}
@@ -286,7 +313,10 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
   .stats .in{grid-template-columns:repeat(2,1fr);padding:34px 22px;gap:24px}
   .stat b{font-size:2rem}
   section{padding:58px 0}
-  .grid3,.grid2,.creds,.dupla,.papeis{grid-template-columns:1fr;gap:16px}
+  .grid3,.grid2,.creds,.dupla,.papeis,.duo{grid-template-columns:1fr;gap:16px}
+  .duo{gap:38px}
+  .duo .pessoa img{max-width:320px}
+  .refs li{padding-left:38px}
   .papeis{border-left:none;border-top:none;margin:28px 0}
   .papeis .p{border-right:none;padding:24px 0}
   .autor{grid-template-columns:1fr;gap:26px}
@@ -335,17 +365,17 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
              onerror="this.outerHTML='<span style=&quot;font-family:Fraunces,serif;font-size:20px;font-weight:600;color:#fff&quot;>Oba Hortifruti</span>'">
       </a>
       <div class="x"></div>
-      <div class="kiko">Kiko Campos<small>Liderança · Cultura · Mudança</small></div>
+      <div class="kiko">Esabela Cruz &amp; Kiko Campos<small>Liderança · Cultura · Mudança</small></div>
     </div>
     <div class="kv-tag">Proposta · Confidencial</div>
   </div>
 
   <div class="kv-core">
-    <div class="kicker">Programa de liderança · 230 gestores · SP, Campinas e Brasília</div>
-    <h1>A conversa que<em>segura o time.</em></h1>
-    <p class="lead">O Oba cresce por aquisição enquanto perde gente pela porta dos fundos.
-      Quatro encontros presenciais para transformar a qualidade da conversa entre gestor e equipe
-      no principal ativo de retenção da rede.</p>
+    <div class="kicker">Programa de desenvolvimento de lideranças · 230 gestores</div>
+    <h1>Formar líderes,<em>reduzir rotatividade.</em></h1>
+    <p class="lead">Um programa presencial para 230 gestores do Oba Hortifruti, focado na variável que
+      mais afeta a rotatividade em operações de varejo: a qualidade da conversa entre o gestor e
+      sua equipe.</p>
   </div>
 
   <div class="kv-foot">
@@ -434,17 +464,18 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
       <div class="card">
         <span class="n">Tese I</span>
         <h4>Turnover no varejo de frescos raramente é falta de empatia. É falta de previsibilidade.</h4>
-        <p>A pesquisa de Zeynep Ton, do MIT, sobre operações de varejo é consistente: estabilidade de
-          jornada e clareza de escala movem rotatividade mais do que qualquer ação isolada de engajamento.
-          Quem sai porque “cada dia era um horário” está reagindo ao desenho do trabalho.</p>
+        <p>A pesquisa de Zeynep Ton, do MIT, e o experimento randomizado conduzido na Gap Inc. convergem:
+          estabilidade de jornada move rotatividade, vendas e produtividade mais do que qualquer ação
+          isolada de engajamento. Quem sai porque “cada dia era um horário” está reagindo ao desenho do
+          trabalho. <span class="fonte-num">Fontes 2 e 3</span></p>
         <p>O gestor não controla a escala inteira — mas controla <strong>previsibilidade, aviso prévio,
           negociação e explicação</strong>. É aí que o treinamento age.</p>
       </div>
       <div class="card">
         <span class="n">Tese II</span>
         <h4>Duas lojas com a mesma política de RH entregam rotatividade oposta.</h4>
-        <p>A diferença é quem lidera. O corpo de pesquisa da Gallup atribui ao gestor direto a maior parte
-          da variação de engajamento entre equipes.</p>
+        <p>A diferença é quem lidera. A Gallup atribui ao gestor direto <strong>pelo menos 70% da variação</strong>
+          de engajamento entre equipes, em base de 27 milhões de colaboradores. <span class="fonte-num">Fonte 4</span></p>
         <p>Isso é uma boa notícia para o Oba: significa que existe uma alavanca <strong>dentro</strong> da
           empresa, exercível na segunda-feira de manhã, sem esperar reestruturação de política.</p>
       </div>
@@ -464,6 +495,88 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
       <p>Ninguém pede demissão de uma empresa. Pede demissão de uma conversa que nunca aconteceu.</p>
       <p>Por isso esta proposta não vende um workshop de liderança. Vende o treino de três conversas
         específicas, com roteiro, prática em sala e compromisso datado antes de o participante sair.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FUNDAMENTAÇÃO ============================ -->
+<section class="alt">
+  <div class="wrap narrow rv">
+    <div class="eyebrow">Fundamentação</div>
+    <h2>De onde vem cada afirmação desta proposta</h2>
+    <p class="big">Nada aqui é opinião de palco. Cada tese acima se apoia em pesquisa publicada, em dado
+      setorial ou em norma vigente — e registramos a fonte para que o RH do Oba possa checar e usar
+      internamente.</p>
+
+    <ol class="refs">
+      <li>
+        <b>Intervenções individuais de bem-estar não movem o ponteiro. Desenho do trabalho, sim.</b>
+        O maior estudo já feito sobre o tema analisou <strong>46.336 trabalhadores em 233 organizações</strong>
+        e não encontrou benefício mensurável em mindfulness, apps de bem-estar, aulas de relaxamento ou
+        treinos de resiliência. O autor aponta o caminho oposto: mudanças em <strong>escala, práticas de
+        gestão, dimensionamento de equipe, avaliação de desempenho e desenho do trabalho</strong>.
+        <cite>Fleming, W. (2024). <em>Employee well-being outcomes from individual-level mental health
+        interventions</em>. Industrial Relations Journal — Wellbeing Research Centre, Universidade de Oxford.</cite>
+      </li>
+      <li>
+        <b>Escala previsível aumenta vendas e produtividade — não é só um benefício para o funcionário.</b>
+        Primeiro experimento randomizado controlado sobre estabilidade de jornada no varejo, conduzido em
+        <strong>28 lojas da Gap Inc.</strong>: a intervenção elevou as vendas medianas em <strong>7%</strong>
+        e a produtividade do trabalho em <strong>5%</strong>, com redução de horas trabalhadas. É a base
+        empírica da Tese I.
+        <cite>Kesavan, S. (UNC Kenan-Flagler), Lambert, S. (Univ. de Chicago), Williams, J. C. (UC Law SF)
+        &amp; Pendem, P. — <em>The Stable Scheduling Study</em>; publicado em Management Science (2022).</cite>
+      </li>
+      <li>
+        <b>Bons empregos reduzem rotatividade entre 25% e 60% — e a escala previsível é um dos quatro pilares.</b>
+        A pesquisa de Zeynep Ton, do MIT Sloan, documenta há mais de quinze anos operações de varejo que
+        invertem o modelo de mão de obra barata e descartável. As quatro necessidades básicas de um bom
+        emprego: <strong>remuneração justa, jornada estável e previsível, caminho de carreira claro e
+        segurança</strong>.
+        <cite>Ton, Z. — <em>The Good Jobs Strategy</em> (2014) e <em>The Case for Good Jobs</em> (2023),
+        MIT Sloan School of Management / Good Jobs Institute.</cite>
+      </li>
+      <li>
+        <b>O gestor direto explica pelo menos 70% da variação de engajamento entre equipes.</b>
+        Base de <strong>27 milhões de colaboradores e mais de 2,5 milhões de unidades de trabalho</strong>
+        analisadas ao longo de duas décadas. É o que sustenta a Tese II: mesma política de RH, resultados
+        opostos, conforme quem lidera.
+        <cite>Gallup — <em>State of the American Manager: Analytics and Advice for Leaders</em> (2015).</cite>
+      </li>
+      <li>
+        <b>A conversa de permanência é uma prática estruturada, não uma conversa informal.</b>
+        O <em>stay interview</em> é definido como uma discussão estruturada que o líder conduz com cada
+        pessoa da equipe para descobrir as ações concretas que fortalecem o vínculo dela — antes do pedido
+        de demissão, e não depois. Diferente da pesquisa de clima, gera informação acionável no mesmo dia
+        e um plano individual de permanência.
+        <cite>Finnegan, R. P. — <em>The Power of Stay Interviews for Engagement and Retention</em>, SHRM;
+        e <em>The Stay Interview: A Manager's Guide</em> (AMACOM).</cite>
+      </li>
+      <li>
+        <b>A rotatividade do setor é o benchmark contra o qual o Oba será medido.</b>
+        A rotatividade nos supermercados brasileiros fechou 2025 em <strong>58,2%</strong> — em São Paulo,
+        <strong>52,8%</strong>. No varejo paulistano como um todo, o índice atingiu <strong>60,3%</strong>,
+        o mais alto desde a adoção do Novo CAGED, num mercado de trabalho aquecido que favorece quem troca
+        de emprego.
+        <cite>Levantamento Future Tank / Asserj (2025) e dados de rotatividade do varejo paulistano,
+        Sindilojas-SP (2025), com base no Novo CAGED.</cite>
+      </li>
+      <li>
+        <b>Gestão de riscos psicossociais deixou de ser boa prática e virou obrigação legal.</b>
+        A NR-1 atualizada tornou obrigatória a inclusão dos fatores de risco psicossocial no inventário de
+        riscos do PGR, para <strong>todas as empresas com empregados CLT</strong>, independentemente de
+        porte ou grau de risco. Encerrada a fase educativa, a fiscalização passou a ter caráter punitivo em
+        <strong>26 de maio de 2026</strong>. Sobrecarga, imprevisibilidade de jornada e conduta de chefia
+        estão entre os fatores a inventariar — o que coloca a formação de líderes dentro do escopo de
+        conformidade, e não apenas de desenvolvimento.
+        <cite>Portaria MTE nº 1.419/2024 e Portaria MTE nº 765/2025, que definiu 26/05/2026 como termo final
+        da fase orientativa. Há discussão judicial em curso sobre critérios de fiscalização.</cite>
+      </li>
+    </ol>
+
+    <div class="quote">
+      <p>A leitura conjunta dessas fontes é simples: o que reduz rotatividade em varejo não é cuidar mais
+        do indivíduo. É mudar o que o líder faz com a escala, com o reconhecimento e com a conversa.</p>
     </div>
   </div>
 </section>
@@ -555,35 +668,51 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
 
 <!-- ============================ QUEM CONDUZ ============================ -->
 <section class="alt">
+  <div class="wrap narrow rv">
+    <div class="eyebrow">Quem conduz</div>
+    <h2>A dupla que vocês já viram<br>no Mente no Trabalho</h2>
+    <p class="big">O Oba chegou até aqui depois de acompanhar o <strong>Mente no Trabalho</strong> — a série
+      que conduzimos juntos, em oito edições, sobre saúde mental, NR-1 e desenho do trabalho.</p>
+    <p>Os quatro encontros são facilitados a quatro mãos, do começo ao fim. Não é um palestrante com
+      apoio: são duas leituras que se completam. Uma vem da psicologia do trabalho e da gestão de riscos
+      psicossociais; a outra, da direção de RH em operações de grande porte e de integração pós-aquisição
+      no varejo alimentar. O problema do Oba fica exatamente no meio das duas.</p>
+  </div>
+
   <div class="wrap rv">
-    <div class="autor">
-      <figure>
-        <img src="/kiko-2026.jpg" alt="Kiko Campos">
-        <figcaption>Kiko Campos<br>Liderança · Cultura · Mudança</figcaption>
-        <div class="perfil">
-          <a href="https://www.linkedin.com/in/kikocampos" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-            LinkedIn
-          </a>
-          <a href="https://kikocampos.com/KikoCampos_MidiaKit_PT.pdf" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2 4.5 4.5H14V4zM8 13h8v1.5H8V13zm0 3.5h8V18H8v-1.5zm0-7h4V11H8V9.5z"/></svg>
-            Mídia kit completo (PDF)
-          </a>
-        </div>
-      </figure>
-      <div>
-        <div class="eyebrow">Quem conduz</div>
-        <h2>Já reduzimos turnover<br>em varejo alimentar — durante uma aquisição.</h2>
-        <p>Fui Diretor Global de RH, Transformação e Cultura da <strong>Vale</strong> — 170 mil pessoas,
-          12 países, interface direta com o comitê executivo. Antes disso, <strong>McKinsey</strong>.</p>
-        <p>Mas o que mais importa para o Oba é o <strong>Carrefour Brasil</strong>: liderei a integração do
-          Grupo BIG, com R$ 1,7 bilhão em sinergias, <strong>turnover reduzido de mais de 70% para 35%</strong>
-          e a criação da maior escola corporativa de liderança do país. Varejo alimentar, lojas herdadas,
-          equipes que não escolheram a nova bandeira, rotatividade alta. É exatamente o problema que o Oba
-          tem hoje — em escala muito maior.</p>
-        <p>Sou autor de <strong>O Novo Código da Mudança</strong>, com prefácio de Sofia Esteves. Duas vezes
+    <div class="duo">
+      <div class="pessoa">
+        <figure><img src="esabela.jpg" alt="Esabela Cruz"></figure>
+        <h3>Esabela Cruz, MSc</h3>
+        <span class="papel">Psicóloga do trabalho · riscos psicossociais · formação de lideranças</span>
+        <p>Atua em saúde mental, bem-estar e <strong>gestão de riscos psicossociais relacionados ao
+          trabalho (NR-1)</strong>, além de cultura organizacional, business partner estratégico, atração
+          e seleção e DE&amp;I. Traz para a sala a leitura clínica do que adoece e do que sustenta uma
+          equipe — e o método de metodologias ativas que faz o conteúdo virar prática.</p>
+        <p>É dela o conceito de <strong>plano de ação vivo</strong>: mapear a distância entre o trabalho
+          prescrito e o trabalho real, e transformar isso em desenho de trabalho — não em mais um programa
+          de bem-estar.</p>
+        <a class="li-link" href="https://www.linkedin.com/in/esabela-cruz-msc-93539b2a/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="pessoa">
+        <figure><img src="/kiko-2026.jpg" alt="Kiko Campos"></figure>
+        <h3>Kiko Campos</h3>
+        <span class="papel">Diretor de RH · cultura, liderança e transformação pós-M&amp;A</span>
+        <p>Foi Diretor Global de RH, Transformação e Cultura da <strong>Vale</strong> — 170 mil pessoas,
+          12 países. Antes, <strong>McKinsey</strong>. No <strong>Carrefour Brasil</strong>, liderou a
+          integração do Grupo BIG: R$ 1,7 bilhão em sinergias, <strong>turnover reduzido de mais de 70%
+          para 35%</strong> e a maior escola corporativa de liderança do país.</p>
+        <p>Autor de <strong>O Novo Código da Mudança</strong>, com prefácio de Sofia Esteves. Duas vezes
           eleito um dos profissionais de RH mais admirados do Brasil, LinkedIn Top Voice e membro do Forbes
           Human Resources Council.</p>
+        <a class="li-link" href="https://www.linkedin.com/in/kikocampos" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          linkedin.com/in/kikocampos
+        </a>
       </div>
     </div>
   </div>
@@ -592,46 +721,14 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
     <div class="creds">
       <div class="cred"><b>70% &rarr; 35%</b><span>Redução de turnover na integração do Grupo BIG, no Carrefour Brasil</span></div>
       <div class="cred"><b>R$ 1,7 bi</b><span>Em sinergias capturadas na maior integração do varejo alimentar brasileiro</span></div>
-      <div class="cred"><b>8 mil</b><span>Líderes formados na maior escola corporativa de liderança do país</span></div>
-      <div class="cred"><b>170 mil</b><span>Pessoas sob a diretoria global de RH, Transformação e Cultura da Vale, em 12 países</span></div>
+      <div class="cred"><b>8 edições</b><span>Da série Mente no Trabalho, conduzida pelos dois em 2026</span></div>
+      <div class="cred"><b>NR-1</b><span>Checklist de riscos psicossociais para o RH, construído em conjunto</span></div>
     </div>
 
-    <h3>Condução em dupla</h3>
-    <p>Sala de sessenta a setenta pessoas em metodologia ativa não se conduz sozinho. Os quatro encontros
-      são facilitados a quatro mãos — um conduz o palco, o outro circula pelas mesas. É o que garante que
-      o Laboratório de conversas seja prática de verdade, e não exercício de faz de conta.</p>
-
-    <div class="dupla">
-      <div class="card">
-        <div class="retrato">
-          <span class="iniciais">KC</span>
-          <img src="/kiko-home.jpg" alt="Kiko Campos" onerror="this.style.display='none'">
-        </div>
-        <h4>Kiko Campos</h4>
-        <span class="papel">Condução · conteúdo · palco</span>
-        <p>Vale, Carrefour Brasil e McKinsey. Autor de <em>O Novo Código da Mudança</em>. Traz o repertório
-          de integração pós-aquisição e de redução de turnover em varejo alimentar.</p>
-        <a class="li-link" href="https://www.linkedin.com/in/kikocampos" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-          linkedin.com/in/kikocampos
-        </a>
-      </div>
-
-      <div class="card">
-        <div class="retrato">
-          <span class="iniciais">EC</span>
-          <img src="esabela.jpg" alt="Esabela Cruz" onerror="this.style.display='none'">
-        </div>
-        <h4>Esabela Cruz</h4>
-        <span class="papel">Facilitação · metodologias ativas</span>
-        <p>Facilitadora de desenvolvimento de liderança com foco em metodologias ativas e aplicação prática
-          no dia seguinte ao encontro. Responsável pelo desenho dos laboratórios e do material de sustentação.</p>
-        <a class="li-link" href="https://www.linkedin.com/in/esabela-cruz-msc-93539b2a/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-    </div>
+    <p style="margin-top:36px">O que isso significa para o Oba, na prática: quem vai conduzir as quatro
+      salas já enfrentou este mesmo problema — <strong>rotatividade alta, lojas herdadas por aquisição e
+      equipes que não escolheram a nova bandeira</strong> — numa operação muitas vezes maior. E já traduziu
+      a norma de riscos psicossociais em rotina de gestão, e não em programa de bem-estar.</p>
 
     <h3>O método</h3>
     <p>Todo o trabalho — palco, programa ou conselho — roda sobre a mesma espinha: <strong>Consciência</strong>
@@ -653,8 +750,8 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
         <p>Antes de decidir, vale ver a condução funcionando por completo. As duas keynotes abaixo estão
           abertas — e é essa a energia que as quatro salas do Oba terão.</p>
         <div class="btns">
-          <a class="btn solid" href="https://kikocampos.com/palestras.html" target="_blank" rel="noopener">
-            Palestras e temas &rarr;
+          <a class="btn solid" href="https://mente.kikocampos.com" target="_blank" rel="noopener">
+            Série Mente no Trabalho &rarr;
           </a>
           <a class="btn" href="https://www.youtube.com/watch?v=fU0zTw3BXuY" target="_blank" rel="noopener">
             <svg class="play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -690,7 +787,8 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
         <h4>Conversa de permanência</h4>
         <p>Perguntar antes de perder. O <em>stay interview</em> é a prática de maior retorno e menor custo
           em varejo — e a mais ausente.</p>
-        <p>Ataca exatamente o que as entrevistas de desligamento do Oba estão revelando tarde demais.</p>
+        <p>Ataca exatamente o que as entrevistas de desligamento do Oba estão revelando tarde demais.
+          <span class="fonte-num">Fonte 5</span></p>
       </div>
       <div class="card">
         <span class="n">Conversa 2</span>
@@ -763,7 +861,9 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
             entrevistas de desligamento, projetadas na tela. A sala para de achar que é mais um treinamento.</td></tr>
         <tr><td>20–50 min</td><td>Mente no Trabalho aplicado à gestão</td>
           <td>Da saúde mental à prática de liderança: o que sustenta e o que desgasta um time de loja.
-            Bloco formativo, com método e referência — enxuto, sem palestra longa.</td></tr>
+            Aqui entra a NR-1 traduzida para a linguagem do gerente — sobrecarga, imprevisibilidade e
+            conduta de chefia como fatores de risco que ele influencia diretamente. Bloco formativo, com
+            método e referência, sem palestra longa.</td></tr>
         <tr><td>50–105 min</td><td>Laboratório de conversas</td>
           <td>Tríades com casos reais de loja. Cada participante conduz uma conversa, recebe outra e observa
             a terceira. A dupla de facilitação circula pelas mesas. É o coração do encontro.</td></tr>
@@ -841,6 +941,7 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
         <tr><td>Guia do Líder Oba</td><td>Material de apoio em PDF, com os roteiros ampliados, exemplos e perguntas de referência.</td></tr>
         <tr><td>Trilha de 30 dias</td><td>Quatro microdesafios semanais, com texto pronto para disparo pelos canais internos do Oba.</td></tr>
         <tr><td>Relatório executivo</td><td>Leitura do que as quatro salas revelaram sobre a liderança da rede, entregue ao RH após o último encontro.</td></tr>
+        <tr><td>Evidência para a NR-1</td><td>Registro de objetivos de aprendizagem, conteúdo programático, carga horária e material didático — no formato que a gestão de riscos psicossociais do PGR exige como medida de prevenção documentada.</td></tr>
         <tr><td>Sessão de indicadores</td><td>Leitura conjunta dos indicadores noventa dias após o programa, para que o RH leve o resultado à diretoria com narrativa, e não apenas com número.</td></tr>
       </tbody>
     </table>
