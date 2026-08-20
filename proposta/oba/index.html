@@ -350,6 +350,9 @@ footer.rodape .in{max-width:var(--max);margin:0 auto;padding:0 32px;
   table td:first-child,table.roteiro td:first-child,table.roteiro td:nth-child(2),
   table.salas td:first-child{white-space:normal;font-weight:600;color:var(--tinta)}
   table.roteiro td:first-child{font-size:15px}
+  /* zera larguras fixas de coluna herdadas do desktop */
+  table.roteiro td:nth-child(2),table.inc td:first-child,table.salas td:first-child,
+  table.salas td:nth-child(2),table.salas td:nth-child(3),table td{width:auto}
   table tbody tr:last-child td{border-bottom:none}
   .price .head b{font-size:2.5rem}
   .linhas div{flex-direction:column;gap:4px}
