@@ -159,14 +159,14 @@ button.acao:hover{background:var(--cinza-claro);}
         <span class="status" id="status1">carregando…</span>
         <a class="cta" id="cta1" href="/workbook-ato1.html">Começar →</a>
       </div>
-      <div class="ato-card travado" id="cardAto2">
-        <span class="breve">Em preparação</span>
+      <div class="ato-card" id="cardAto2">
+        <span class="aqui" id="badge2" style="display:none;">Você está aqui</span>
         <span class="num">II</span>
         <h3>Coragem</h3>
-        <p class="sub">Transformar intenção em prática. Você vai ensaiar — no seguro — as conversas que destravam o gap que nomeou na Consciência. Códigos 5–9.</p>
-        <div class="barra"><div></div></div>
-        <span class="status">Começa quando enxergar já não basta</span>
-        <span class="cta">Em breve</span>
+        <p class="sub">Transformar intenção em prática. Ensaie — no seguro — a conversa que você vem adiando, e saia com acordo, multiplicadores e história. Códigos 5–9.</p>
+        <div class="barra"><div id="barra2"></div></div>
+        <span class="status" id="status2">carregando…</span>
+        <a class="cta" id="cta2" href="/workbook-ato2.html">Começar →</a>
       </div>
       <div class="ato-card travado" id="cardAto3">
         <span class="breve">Em preparação</span>
@@ -186,6 +186,11 @@ button.acao:hover{background:var(--cinza-claro);}
       <div class="evid"><span class="rotulo">Código 2 · Não-negociáveis</span><p id="ev2" class="vazio">Ainda em branco — nasce na triagem 2.3.</p></div>
       <div class="evid"><span class="rotulo">Código 3 · Alavancas do sistema</span><p id="ev3" class="vazio">Ainda em branco — nasce no exercício 3.4.</p></div>
       <div class="evid"><span class="rotulo">Código 4 · Compromisso de sombra</span><p id="ev4" class="vazio">Ainda em branco — nasce no compromisso 4.4.</p></div>
+      <div class="evid"><span class="rotulo">Código 5 · Ritual de conexão</span><p id="ev5" class="vazio">Ainda em branco — nasce no exercício 5.3 do Ato II.</p></div>
+      <div class="evid"><span class="rotulo">Código 6 · Conversa destravada</span><p id="ev6" class="vazio">Ainda em branco — nasce no roteiro 6.2.</p></div>
+      <div class="evid"><span class="rotulo">Código 7 · Autoria entregue</span><p id="ev7" class="vazio">Ainda em branco — nasce no exercício 7.2.</p></div>
+      <div class="evid"><span class="rotulo">Código 8 · Microprática inclusiva</span><p id="ev8" class="vazio">Ainda em branco — nasce no exercício 8.2.</p></div>
+      <div class="evid"><span class="rotulo">Código 9 · Micro-história</span><p id="ev9" class="vazio">Ainda em branco — nasce na cena 9.2.</p></div>
     </div>
 
     <h2 class="secao">Seu ciclo, com você</h2>
@@ -285,6 +290,34 @@ if (!iniciou) {
   document.getElementById('badge1').style.display = 'inline-block';
 }
 
+/* ---- progresso do Ato II ---- */
+var a2 = carrega(CHAVES[1]);
+var prog2 = parseInt(a2._progresso || 0);
+var iniciou2 = (a2._tela || 0) > 0 || prog2 > 0 || Object.keys(a2).length > 2;
+var completo2 = !!a2._atoOk;
+var barra2 = document.getElementById('barra2');
+var status2 = document.getElementById('status2');
+var cta2 = document.getElementById('cta2');
+if (barra2) {
+  var nEv2 = ['_ev5','_ev6','_ev7','_ev8','_ev9'].filter(function(k){ return a2[k]; }).length;
+  barra2.style.width = (nEv2 / 5 * 100) + '%';
+  if (!iniciou2) {
+    status2.textContent = completo ? 'Pronto para você — a Consciência abriu o caminho' : 'Rende mais depois do Ato I · ≈ 20 min por código';
+    cta2.textContent = 'Começar a Coragem →';
+    cta2.addEventListener('click', function(){ evento('sc_next_act_intent', { act_number: 2 }); });
+  } else if (completo2) {
+    status2.textContent = 'Ato completo — ' + nEv2 + '/5 evidências entregues';
+    cta2.textContent = 'Ver meu Mapa de Coragem';
+    cta2.href = '/workbook-ato2.html#continuar';
+  } else {
+    status2.textContent = 'Em andamento · ' + nEv2 + '/5 evidências';
+    cta2.textContent = 'Continuar de onde parei →';
+    cta2.href = '/workbook-ato2.html#continuar';
+    var b2 = document.getElementById('badge2'); if (b2) b2.style.display = 'inline-block';
+    var b1 = document.getElementById('badge1'); if (b1) b1.style.display = 'none';
+  }
+}
+
 /* ---- lemniscata ---- */
 var st1 = document.getElementById('st1');
 st1.textContent = !iniciou ? 'comece por aqui' : (completo ? '✓ completo' : prog + '% percorrido');
@@ -292,6 +325,18 @@ if (completo) {
   document.getElementById('no1').setAttribute('fill', '#231f20');
   document.getElementById('aqui1').textContent = '✓ CONSCIÊNCIA ENTREGUE';
   document.getElementById('aqui1').setAttribute('fill', '#231f20');
+}
+var st2 = document.getElementById('st2');
+if (iniciou2) {
+  document.getElementById('no2').setAttribute('fill', completo2 ? '#231f20' : '#2b7dbf');
+  document.getElementById('no2').setAttribute('stroke', completo2 ? '#231f20' : '#2b7dbf');
+  document.getElementById('no2t').setAttribute('fill', '#ffffff');
+  st2.textContent = completo2 ? '✓ completo' : (['_ev5','_ev6','_ev7','_ev8','_ev9'].filter(function(k){ return a2[k]; }).length) + '/5 evidências';
+  if (!completo2) {
+    document.getElementById('aqui1').textContent = completo ? '✓ ENTREGUE' : '';
+  }
+} else {
+  st2.textContent = completo ? 'seu próximo passo' : 'depois da Consciência';
 }
 
 /* ---- evidências (handoff visível) ---- */
@@ -308,6 +353,13 @@ if (v(a1,'c3_alavanca1') || v(a1,'c3_alavanca2')) {
 if (v(a1,'c4_comportamento')) {
   mostra('ev4', '<b>' + v(a1,'c4_comportamento') + '</b>' + (v(a1,'c4_evidencia') ? '<br><span style="font-weight:400; font-size:15px;">O time percebe quando: ' + v(a1,'c4_evidencia') + '</span>' : ''));
 }
+
+/* ---- evidências do Ato II ---- */
+if (v(a2,'c5_ritual')) mostra('ev5', '<b>' + v(a2,'c5_ritual') + '</b>' + (v(a2,'c5_evidencia') ? '<br><span style="font-weight:400; font-size:15px;">Evidência: ' + v(a2,'c5_evidencia') + '</span>' : ''));
+if (v(a2,'c6_clareza')) mostra('ev6', 'Vou dizer: <b>' + v(a2,'c6_clareza') + '</b>' + (v(a2,'c6_acordo') ? '<br><span style="font-weight:400; font-size:15px;">Acordo: ' + v(a2,'c6_acordo') + '</span>' : ''));
+if (v(a2,'c7_entrega')) mostra('ev7', '<b>' + v(a2,'c7_entrega') + '</b>');
+if (v(a2,'c8_micropratica')) mostra('ev8', '<b>' + v(a2,'c8_micropratica') + '</b>');
+if (v(a2,'c9_contexto') || v(a2,'missao9')) mostra('ev9', '<b>' + (v(a2,'missao9') || 'Micro-história') + '</b>' + (v(a2,'c9_onde') ? '<br><span style="font-weight:400; font-size:15px;">Contada em: ' + v(a2,'c9_onde') + '</span>' : ''));
 
 /* ---- exportar / importar ciclo completo ---- */
 function exportarCiclo() {
