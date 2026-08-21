@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workbook · O Novo Código da Mudança · Ato II — Coragem</title>
+<meta name="description" content="Ato II do workbook Seu Código: transforme os Códigos 5–9 (Coragem) em rede, conversa destravada, autoria, inclusão e narrativa.">
+<meta property="og:title" content="Workbook · O Novo Código da Mudança — Ato II">
+<meta property="og:description" content="Enxergar já não basta. Ensaie a conversa que você vem adiando — e saia com acordo, multiplicadores e história.">
+<meta name="robots" content="noindex">
+<!-- Google tag + consentimento (LGPD, mesmo padrão do site) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RD1P3CKLSE"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{analytics_storage:'denied'});
+gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
+(function(){try{
+  var c=localStorage.getItem('kc_cookie');
+  if(c==='accepted'){gtag('consent','update',{analytics_storage:'granted'});return;}
+  if(c==='declined'){return;}
+  window.addEventListener('DOMContentLoaded',function(){
+    var b=document.createElement('div');
+    b.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;max-width:680px;margin:0 auto;background:#231f20;color:#fff;padding:14px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:13px Lato,sans-serif;z-index:9999;box-shadow:0 12px 34px rgba(0,0,0,.3)';
+    b.innerHTML='<span style="flex:1;min-width:200px">Usamos cookies para medir o uso e melhorar o Seu Código. <a href="/privacidade.html" style="color:#8fc1e9">Saiba mais</a>.</span>';
+    var g=document.createElement('span');g.style.cssText='display:inline-flex;gap:8px;flex-shrink:0';
+    var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:8px 16px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:8px 18px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
+    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
+    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
+  });
+}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --preto:#231f20; --azul:#2b7dbf; --vermelho:#d2232a; --cinza:#6d6e71; --cinza-claro:#f2f2f2;
+  --linha:#dedede; --branco:#ffffff;
+  --serif:'Source Serif 4', Georgia, serif;
+  --sans:'Lato', 'Helvetica Neue', Arial, sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+:focus-visible{outline:3px solid var(--azul); outline-offset:2px;}
+body{font-family:var(--serif); color:var(--preto); background:var(--branco); line-height:1.65; font-size:17px;}
+
+/* ===== moldura editorial ===== */
+.fita{position:fixed; left:0; top:0; bottom:0; width:12px; background:var(--azul); z-index:60;}
+.fita span{position:absolute; top:22px; left:50%; transform:translateX(-50%) rotate(180deg);
+  writing-mode:vertical-rl; font-family:var(--sans); font-weight:900; font-size:9px;
+  letter-spacing:.28em; color:var(--branco); white-space:nowrap;}
+
+/* ===== topo ===== */
+.topo{position:fixed; top:0; left:12px; right:0; z-index:50; background:var(--branco); border-bottom:2px solid var(--preto);}
+.topo-inner{display:flex; align-items:center; gap:16px; padding:10px 22px; font-family:var(--sans);}
+.topo .marca{font-weight:900; font-size:12px; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap;}
+.topo .marca b{color:var(--azul);}
+.trilho{flex:1; height:5px; background:var(--cinza-claro); overflow:hidden;}
+.trilho .fill{height:100%; width:0%; background:var(--azul); transition:width .4s;}
+.pct{font-weight:900; font-size:12px; min-width:38px; text-align:right;}
+.btn-mapa{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  background:var(--preto); color:var(--branco); border:0; padding:8px 16px; cursor:pointer;}
+.btn-mapa:hover{background:var(--azul);}
+
+/* ===== telas ===== */
+main{margin-left:12px; padding:64px 0 96px;}
+.etapa{display:none; animation:surge .25s ease;}
+.etapa.ativa{display:block;}
+@keyframes surge{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+.pagina{max-width:780px; margin:0 auto; padding:40px 34px;}
+
+/* ===== barra de navegação inferior ===== */
+.rodape-nav{position:fixed; bottom:0; left:12px; right:0; z-index:50; background:var(--branco);
+  border-top:2px solid var(--preto); font-family:var(--sans);}
+.rodape-inner{max-width:900px; margin:0 auto; display:flex; align-items:center; gap:16px; padding:12px 22px;}
+.rodape-nav button{font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em;
+  text-transform:uppercase; padding:12px 20px; cursor:pointer; border:2px solid var(--preto); background:var(--branco); color:var(--preto);}
+.rodape-nav button:hover{background:var(--cinza-claro);}
+.rodape-nav button.avancar{background:var(--preto); color:var(--branco); margin-left:auto;}
+.rodape-nav button.avancar:hover{background:var(--azul); border-color:var(--azul);}
+.rodape-nav button:disabled{opacity:.25; cursor:default;}
+.onde-estou{flex:1; text-align:center; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--cinza); line-height:1.4;}
+.onde-estou b{color:var(--preto); display:block; font-size:13px;}
+.migalhas{display:flex; gap:5px; justify-content:center; margin-top:5px;}
+.migalhas i{width:18px; height:4px; background:var(--cinza-claro);}
+.migalhas i.feita{background:var(--preto);}
+.migalhas i.atual{background:var(--azul);}
+
+/* ===== mapa (overlay) ===== */
+.mapa{position:fixed; inset:0; z-index:100; background:var(--preto); color:var(--branco); display:none; overflow-y:auto;}
+.mapa.aberto{display:block;}
+.mapa .pagina{max-width:780px; padding-top:56px;}
+.mapa h1{font-family:var(--sans); font-weight:900; font-size:26px; text-transform:uppercase; margin:6px 0 4px;}
+.mapa .sub{font-family:var(--sans); font-size:13px; color:#b9b6b7; text-transform:uppercase; letter-spacing:.1em; margin-bottom:28px;}
+.mapa-item{display:flex; align-items:center; gap:16px; width:100%; text-align:left; background:none; border:0;
+  border-bottom:1px solid #4a4647; color:var(--branco); padding:16px 4px; cursor:pointer; font-family:var(--sans);}
+.mapa-item:hover{background:#332f30;}
+.mapa-item .num{font-weight:900; font-size:20px; color:#6d6e71; width:34px; flex-shrink:0;}
+.mapa-item .tit{flex:1;}
+.mapa-item .tit b{display:block; font-weight:900; font-size:15px; text-transform:uppercase; letter-spacing:.04em;}
+.mapa-item .tit span{font-size:12px; color:#b9b6b7;}
+.mapa-item .status{font-weight:900; font-size:10px; letter-spacing:.14em; text-transform:uppercase; padding:4px 10px; border:1px solid #4a4647; color:#b9b6b7; white-space:nowrap;}
+.mapa-item .status.andamento{border-color:var(--branco); color:var(--branco);}
+.mapa-item .status.entregue{background:var(--branco); border-color:var(--branco); color:var(--preto);}
+.mapa-fechar{position:fixed; top:18px; right:22px; z-index:101; background:var(--branco); color:var(--preto);
+  border:0; font-family:var(--sans); font-weight:900; font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:10px 18px; cursor:pointer;}
+
+/* ===== tipografia editorial ===== */
+.chip{display:inline-block; background:var(--preto); color:var(--branco); font-family:var(--sans);
+  font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:4px 10px;}
+.chip.vermelho{background:var(--azul);}
+.titulo .az{color:var(--azul);}
+.kicker{font-family:var(--sans); font-weight:400; font-size:14px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--cinza); margin-top:18px;}
+h1.titulo{font-family:var(--sans); font-weight:900; font-size:clamp(28px,4.6vw,42px); line-height:1.08;
+  text-transform:uppercase; margin:10px 0 6px;}
+.subtitulo{font-family:var(--sans); font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:var(--cinza);}
+.subtitulo b{color:var(--preto);}
+.regua{width:64px; border:0; border-top:2px solid var(--preto); margin:26px 0;}
+h2.secao{font-family:var(--sans); font-weight:900; font-size:15px; letter-spacing:.05em;
+  text-transform:uppercase; margin:38px 0 14px; padding-top:16px; border-top:2px solid var(--preto); max-width:460px;}
+p{margin-bottom:14px;}
+.destaque{font-weight:600; font-size:20px; line-height:1.5; margin:26px 0;}
+.destaque::before{content:""; display:block; width:40px; border-top:1px dotted var(--cinza); margin-bottom:10px;}
+
+/* capas — layout da capa do livro: branco, circuito claro, preto + azul */
+.capa-bloco{background:var(--branco); color:var(--preto); position:relative; overflow:hidden; border-bottom:1px solid var(--linha);}
+.capa-bloco .pagina{padding:64px 34px 72px;}
+.capa-bloco h1.titulo{color:var(--preto);}
+.capa-bloco .kicker{color:var(--cinza);}
+.capa-bloco .subtitulo{color:var(--cinza);}
+.capa-bloco .subtitulo b{color:var(--preto);}
+.circuito{position:absolute; right:-20px; bottom:-10px; opacity:.9; pointer-events:none;}
+
+/* boxes */
+.box-vermelho{background:var(--preto); color:var(--branco); padding:20px 24px; margin:26px 0;}
+.box-vermelho .rotulo{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8fc1e9; margin-bottom:8px;}
+.box-vermelho p{font-weight:600; font-size:19px; line-height:1.5; margin:0;}
+.box-vermelho .credito{font-family:var(--sans); font-size:12px; margin-top:12px; opacity:.85; font-weight:700;}
+.box-preto{background:var(--preto); color:var(--branco); padding:20px 24px; margin:26px 0;}
+.box-preto .rotulo{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--branco); margin-bottom:8px;
+  background:var(--azul); display:inline-block; padding:2px 8px;}
+.box-cinza{background:var(--cinza-claro); border-left:4px solid var(--preto); padding:16px 20px; margin:22px 0; font-family:var(--sans); font-size:14px;}
+.box-cinza b{font-weight:900;}
+
+/* objetivos */
+.objetivos{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin:18px 0;}
+.obj{border:2px solid var(--preto); padding:16px;}
+.obj .num{font-family:var(--sans); font-weight:900; font-size:22px; color:var(--azul);}
+.obj p{font-family:var(--sans); font-size:14px; line-height:1.45; margin:6px 0 0;}
+
+/* vídeos */
+.videos{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px; margin:18px 0;}
+.video{border:1px solid var(--linha);}
+.video .frame{position:relative; padding-top:56.25%; background:var(--preto);}
+.video iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.video .leg{padding:12px 14px; font-family:var(--sans); font-size:13px; line-height:1.45;}
+.video .leg b{font-weight:900; display:block; text-transform:uppercase; font-size:12px; letter-spacing:.05em;}
+.video .leg .porque{color:var(--cinza); display:block; margin-top:4px;}
+.video .dur{display:inline-block; background:var(--cinza-claro); color:var(--preto); font-weight:900; font-size:10px; letter-spacing:.08em; padding:2px 8px; margin-left:6px; vertical-align:middle;}
+.assisti{display:flex; align-items:center; gap:8px; border-top:1px solid var(--linha); margin-top:10px; padding-top:10px;
+  font-family:var(--sans); font-weight:700; font-size:12px; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; color:var(--cinza);}
+.assisti input{accent-color:var(--preto); width:17px; height:17px; cursor:pointer;}
+.assisti.feito{color:var(--preto);}
+a.cartao-link{display:block; border:2px solid var(--preto); padding:16px; text-decoration:none; color:var(--preto); font-family:var(--sans); font-size:14px;}
+a.cartao-link b{display:block; font-weight:900; text-transform:uppercase; font-size:12px; letter-spacing:.05em;}
+a.cartao-link:hover{background:var(--cinza-claro);}
+a.cartao-link .porque{color:var(--cinza); display:block; margin-top:4px;}
+a.cartao-link .url{color:var(--azul); font-weight:700; display:block; margin-top:8px; font-size:12px;}
+
+/* formulários */
+textarea, input[type=text]{width:100%; border:1px solid #c9c9c9; border-left:4px solid var(--preto);
+  background:#fbfbfb; font-family:var(--serif); font-size:16px; padding:12px 14px; color:var(--preto);}
+textarea:focus, input[type=text]:focus{outline:2px solid var(--preto); background:var(--branco);}
+textarea{min-height:84px; resize:vertical;}
+label.campo{display:block; font-family:var(--sans); font-weight:700; font-size:13px;
+  letter-spacing:.03em; text-transform:uppercase; margin:20px 0 8px;}
+label.campo small{display:block; font-weight:400; text-transform:none; letter-spacing:0; color:var(--cinza); font-size:13px; margin-top:2px;}
+.exercicio{border:2px solid var(--preto); margin:28px 0;}
+.exercicio .cabeca{background:var(--preto); color:var(--branco); padding:12px 20px;
+  font-family:var(--sans); display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.exercicio .cabeca .tag{background:var(--branco); color:var(--preto); font-weight:900; font-size:10px; letter-spacing:.16em; text-transform:uppercase; padding:3px 8px;}
+.exercicio .cabeca .tag.campo-real{background:var(--azul); color:var(--branco);}
+.exercicio .cabeca h3{font-weight:900; font-size:15px; text-transform:uppercase; letter-spacing:.04em;}
+.exercicio .corpo{padding:8px 22px 24px;}
+.exercicio .instrucao{font-family:var(--sans); font-size:14px; color:var(--cinza); margin:14px 0 4px;}
+.tempo{margin-left:auto; font-size:11px; font-weight:700; color:#b9b6b7; letter-spacing:.06em;}
+
+/* quiz */
+.quiz-item{margin:18px 0; padding:16px; background:var(--cinza-claro);}
+.quiz-item .afirmacao{font-weight:600; margin-bottom:10px;}
+.quiz-op{display:flex; gap:10px; flex-wrap:wrap;}
+.quiz-op button{font-family:var(--sans); font-weight:700; font-size:13px; padding:8px 16px;
+  border:2px solid var(--preto); background:var(--branco); cursor:pointer;}
+.quiz-op button:hover{background:var(--preto); color:var(--branco);}
+.quiz-op button.certo{background:var(--preto); border-color:var(--preto); color:var(--branco);}
+.quiz-op button.certo::after{content:" ✓";}
+.quiz-op button.errado{background:var(--vermelho); border-color:var(--vermelho); color:var(--branco);}
+.quiz-fb{font-family:var(--sans); font-size:13px; margin-top:10px; display:none; line-height:1.5;}
+.quiz-fb.show{display:block;}
+.quiz-fb b{font-weight:900;}
+
+/* likert */
+table.likert{width:100%; border-collapse:collapse; font-family:var(--sans); font-size:14px; margin:16px 0;}
+table.likert th{font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:.04em; padding:8px 6px; border-bottom:2px solid var(--preto); text-align:center;}
+table.likert th:first-child{text-align:left;}
+table.likert td{padding:10px 6px; border-bottom:1px solid var(--linha); text-align:center;}
+table.likert td:first-child{text-align:left; line-height:1.4;}
+table.likert input{accent-color:var(--preto); width:17px; height:17px; cursor:pointer;}
+
+/* checklists / seletores */
+.check-lista{list-style:none;}
+.check-lista li{display:flex; gap:12px; align-items:flex-start; padding:10px 0; border-bottom:1px solid var(--linha); font-family:var(--sans); font-size:15px;}
+.check-lista input{accent-color:var(--preto); width:18px; height:18px; margin-top:3px; flex-shrink:0; cursor:pointer;}
+select{font-family:var(--sans); font-weight:700; font-size:13px; padding:8px 10px; border:2px solid var(--preto); background:var(--branco); cursor:pointer;}
+.classif{display:grid; grid-template-columns:1fr 170px; gap:10px; margin:10px 0; align-items:center;}
+
+/* engrenagens */
+.engrenagem{display:grid; grid-template-columns:150px 1fr; gap:8px 16px; align-items:center; padding:12px 0; border-bottom:1px solid var(--linha); font-family:var(--sans);}
+.engrenagem .nome{font-weight:900; font-size:13px; text-transform:uppercase; letter-spacing:.04em;}
+.engrenagem .ops{display:flex; gap:14px; flex-wrap:wrap; font-size:13px;}
+.engrenagem .ops label{display:flex; gap:6px; align-items:center; cursor:pointer;}
+.engrenagem input{accent-color:var(--preto);}
+
+/* chave do capítulo (prova de leitura) */
+.chave{border:2px dashed var(--preto); padding:18px 22px; margin:24px 0;}
+.chave .rotulo{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:8px;}
+.chave .rotulo span{color:var(--azul);}
+.chave p.pergunta{font-weight:600; font-size:17px; margin-bottom:10px;}
+.chave input{border-left-color:var(--azul); max-width:340px;}
+.chave .fb{font-family:var(--sans); font-size:13px; margin-top:10px; display:none; line-height:1.5;}
+.chave .fb.show{display:block;}
+.chave.aberta{border-style:solid; border-color:var(--preto);}
+.chave.aberta .fb{color:var(--preto);}
+
+/* missão no livro */
+.missao{background:var(--cinza-claro); border-left:5px solid var(--azul); padding:20px 24px; margin:26px 0;}
+.missao .rotulo{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:8px;}
+.missao .rotulo span{color:var(--azul);}
+.missao p{font-family:var(--sans); font-size:15px; line-height:1.55;}
+
+/* rotas 7/30/90 — a lemniscata do livro como modo de uso */
+.rotas{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin:18px 0;}
+.rota-card{border:2px solid var(--preto); background:var(--branco); padding:16px; text-align:left; cursor:pointer; font-family:var(--sans);}
+.rota-card:hover{background:var(--cinza-claro);}
+.rota-card .n{font-weight:900; font-size:26px; display:block;}
+.rota-card .t{font-weight:900; font-size:12px; text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:6px;}
+.rota-card .d{font-size:13px; color:var(--cinza); line-height:1.45; display:block;}
+.rota-card.escolhida{background:var(--preto); color:var(--branco);}
+.rota-card.escolhida .d{color:#b9b6b7;}
+.rota-card.escolhida .n{color:#8fc1e9;}
+
+/* medidores / resultados */
+.medidor{margin:18px 0; font-family:var(--sans);}
+.medidor .barra{height:14px; background:var(--cinza-claro); overflow:hidden;}
+.medidor .barra div{height:100%; width:0%; background:var(--preto); transition:width .5s;}
+.medidor .leg{font-size:13px; margin-top:6px; color:var(--cinza);}
+.resultado{background:var(--cinza-claro); padding:18px 20px; margin:16px 0; font-family:var(--sans); font-size:14px; display:none;}
+.resultado.show{display:block;}
+.resultado b{font-weight:900;}
+
+/* síntese */
+.sintese{border:3px solid var(--preto); padding:22px; margin:24px 0; position:relative;}
+.sintese .rotulo{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--branco); background:var(--azul); display:inline-block; padding:3px 10px; position:absolute; top:-12px; left:16px;}
+.sintese p{font-size:18px; font-weight:600; margin:8px 0 0;}
+.sintese .vazio{color:var(--cinza); font-weight:400; font-style:italic; font-size:15px;}
+
+/* botões de ação */
+.botoes{display:flex; gap:12px; flex-wrap:wrap; margin:26px 0; align-items:center;}
+button.acao{font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em;
+  text-transform:uppercase; padding:14px 26px; border:2px solid var(--preto);
+  background:var(--preto); color:var(--branco); cursor:pointer;}
+button.acao:hover{background:var(--azul); border-color:var(--azul);}
+button.acao.vazado{background:var(--branco); color:var(--preto);}
+button.acao.vazado:hover{background:var(--cinza-claro); border-color:var(--preto); color:var(--preto);}
+.salvo-aviso{font-family:var(--sans); font-size:12px; color:var(--cinza); font-weight:700; opacity:0; transition:opacity .3s;}
+.salvo-aviso.show{opacity:1;}
+button.acao.perigo{background:var(--branco); color:var(--vermelho); border-color:var(--vermelho);}
+button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
+
+/* modal de confirmação */
+.veu{position:fixed; inset:0; z-index:120; background:rgba(35,31,32,.75); display:none; align-items:center; justify-content:center; padding:24px;}
+.veu.aberto{display:flex;}
+.modal{background:var(--branco); max-width:480px; width:100%; padding:28px; border-top:6px solid var(--vermelho);}
+.modal h3{font-family:var(--sans); font-weight:900; font-size:17px; text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;}
+.modal p{font-family:var(--sans); font-size:14px; color:var(--cinza); line-height:1.5;}
+.modal .botoes{margin:20px 0 0;}
+
+/* selo */
+.selo{display:flex; align-items:center; gap:14px; margin:16px 0 0;}
+.selo .disco{width:52px; height:52px; border-radius:50%; background:var(--azul); color:var(--branco);
+  font-family:var(--sans); font-weight:900; font-size:24px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.selo .rota{font-family:var(--sans); font-size:12px; color:var(--cinza); text-transform:uppercase; letter-spacing:.08em; line-height:1.5;}
+
+.pe{font-family:var(--sans); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--cinza); text-align:right; padding:14px 34px 0; max-width:780px; margin:0 auto;}
+.pe b{color:var(--preto); font-weight:900;}
+
+@media (max-width:640px){
+  .classif{grid-template-columns:1fr;}
+  .engrenagem{grid-template-columns:1fr;}
+  .topo .marca{display:none;}
+  .onde-estou{display:none;}
+}
+@media print{
+  .fita,.topo,.rodape-nav,.videos,.botoes,.mapa,.btn-mapa{display:none !important;}
+  .etapa{display:block !important;}
+  main{margin:0; padding:0;}
+  .capa-bloco{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  textarea{border:1px solid #999; min-height:60px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="fita"><span>WORKBOOK &nbsp;·&nbsp; ATO II &nbsp;·&nbsp; CORAGEM</span></div>
+
+<header class="topo">
+  <div class="topo-inner">
+    <a class="marca" href="/seucodigo/" style="text-decoration:none; color:inherit;" title="Voltar ao hub Seu Código">SEU <b>CÓDIGO</b> · ATO II</a>
+    <div class="trilho"><div class="fill" id="progressoFill"></div></div>
+    <div class="pct" id="progressoPct">0/5</div>
+    <button class="btn-mapa" onclick="abrirMapa()">☰ Mapa</button>
+  </div>
+</header>
+
+<div class="mapa" id="mapa">
+  <button class="mapa-fechar" onclick="fecharMapa()">Fechar ✕</button>
+  <div class="pagina">
+    <span class="chip vermelho">ÍNDICE</span>
+    <h1>Mapa do percurso</h1>
+    <p class="sub">Toque em qualquer etapa para ir direto a ela</p>
+    <div id="mapaLista"></div>
+    <div class="botoes" style="margin-top:32px;">
+      <button class="acao perigo" style="background:transparent;" onclick="fecharMapa(); pedirReset();">Apagar todos os meus registros</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== modal: aviso/requisito ===== -->
+<div class="veu" id="veuAviso">
+  <div class="modal" style="border-top-color:var(--azul);" role="dialog" aria-modal="true" aria-labelledby="avisoTitulo">
+    <h3 id="avisoTitulo"></h3>
+    <p id="avisoTexto"></p>
+    <div class="botoes" id="avisoBotoes"></div>
+  </div>
+</div>
+
+<!-- ===== modal: trava suave ===== -->
+<div class="veu" id="veuTrava">
+  <div class="modal" style="border-top-color:var(--azul);" role="dialog" aria-modal="true" aria-labelledby="travaTitulo">
+    <h3 id="travaTitulo">Falta a sua evidência</h3>
+    <p id="travaTexto"></p>
+    <div class="botoes">
+      <button class="acao" onclick="travaConcluir()">Concluir minha evidência</button>
+      <button class="acao vazado" onclick="travaSeguir()">Continuar sem concluir</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== modal: apagar ===== -->
+<div class="veu" id="veuReset">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="resetTitulo">
+    <h3 id="resetTitulo">Apagar todas as respostas?</h3>
+    <p id="resetTexto">Isso limpa o Ato II deste navegador — termômetros, exercícios, ensaios e progresso — e você recomeça do zero. <b>Não tem desfazer.</b> O Ato I não é alterado.</p>
+    <p>Se quiser guardar uma cópia do trabalho atual, exporte antes.</p>
+    <div class="botoes">
+      <button class="acao vazado" onclick="exportar()">Exportar cópia antes</button>
+      <button class="acao perigo" id="resetConfirmar" onclick="executarReset()">Apagar tudo</button>
+      <button class="acao vazado" onclick="fecharReset()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<main id="conteudo">
+
+<!-- ============ TELA 0 · CAPA ============ -->
+<section class="etapa" data-titulo="Capa" data-grupo="Início">
+  <div class="capa-bloco">
+    <svg class="circuito" width="420" height="300" viewBox="0 0 420 300" fill="none">
+      <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/><path d="M210 290 V260 H300 V220 H390"/></g>
+      <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
+      <g fill="#231f20"><circle cx="110" cy="150" r="4"/><circle cx="260" cy="110" r="4"/><circle cx="320" cy="140" r="4"/></g>
+    </svg>
+    <div class="pagina">
+      <span class="chip">WORKBOOK · ATO II</span>
+      <p class="kicker">Kiko Campos</p>
+      <h1 class="titulo">O Novo Código<br><span class="az">da Mudança</span></h1>
+      <p class="subtitulo">Workbook do Ato II · <b>Coragem — transformar intenção em prática</b> · Códigos 5–9</p>
+      <hr class="regua" style="border-color:#2b7dbf;">
+      <p style="max-width:540px;">Enxergar já não basta. Transforme os cinco códigos da Coragem em <b>uma rede que funciona, uma conversa destravada, multiplicadores com autoria, decisões mais inclusivas e uma história que circula sozinha</b>.</p>
+
+      <!-- lemniscata: nó 2 ativo -->
+      <div style="margin:34px 0 6px; max-width:640px;">
+        <p style="font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--cinza); margin-bottom:2px;">As três forças que operam juntas</p>
+        <svg viewBox="0 0 640 300" width="100%" style="display:block;" role="img" aria-label="Framework dos 3Cs — você está na Coragem">
+          <path d="M 90,140 C 90,78 240,78 320,140 C 400,202 550,202 550,140 C 550,78 400,78 320,140 C 240,202 90,202 90,140 Z" fill="none" stroke="#c9c9c9" stroke-width="2.5"/>
+          <circle id="lemNo1" cx="90" cy="140" r="26" fill="#ffffff" stroke="#231f20" stroke-width="2.5"/>
+          <text id="lemNo1t" x="90" y="149" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="22" fill="#231f20">1</text>
+          <text x="90" y="205" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="15" letter-spacing="1" fill="#231f20">CONSCIÊNCIA</text>
+          <text id="lemSt1" x="90" y="224" text-anchor="middle" font-family="Lato,Arial" font-size="11" fill="#6d6e71">Códigos 1–4</text>
+          <circle cx="320" cy="140" r="30" fill="#2b7dbf"/>
+          <text x="320" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#ffffff">2</text>
+          <text x="320" y="205" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="15" letter-spacing="1" fill="#231f20">CORAGEM</text>
+          <text x="320" y="224" text-anchor="middle" font-family="Lato,Arial" font-size="11" fill="#6d6e71">Códigos 5–9</text>
+          <text x="320" y="76" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf">VOCÊ ESTÁ AQUI</text>
+          <circle cx="550" cy="140" r="26" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
+          <text x="550" y="149" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="22" fill="#c9c9c9">3</text>
+          <text x="550" y="205" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="15" letter-spacing="1" fill="#231f20">CONSISTÊNCIA</text>
+          <text x="550" y="224" text-anchor="middle" font-family="Lato,Arial" font-size="11" fill="#6d6e71">Códigos 10–15</text>
+        </svg>
+      </div>
+
+      <!-- handoff: o que você trouxe da Consciência -->
+      <div id="heranca" style="display:none; max-width:600px; margin:10px 0 18px;">
+        <div class="sintese" style="margin:18px 0;"><div class="rotulo">O que você trouxe da Consciência</div>
+          <p id="herancaGap" style="display:none; font-size:16px;"></p>
+          <p id="herancaCompromisso" style="display:none; font-size:15px; font-weight:400;"></p>
+        </div>
+      </div>
+      <p id="semHeranca" style="display:none; font-family:var(--sans); font-size:13px; color:var(--cinza); max-width:540px;">Você ainda não tem evidências do Ato I neste navegador. Dá para começar a Coragem mesmo assim — mas o percurso rende mais depois do <a href="/workbook-ato1.html" style="color:var(--azul); font-weight:700;">diagnóstico da Consciência</a>.</p>
+
+      <div class="destaque">Coragem, na prática, é escolher o que é <b>verdadeiro e útil</b> — não o que é confortável.</div>
+      <div class="botoes">
+        <button class="acao" style="background:var(--azul); border-color:var(--azul);" onclick="estado.modo='completo'; irPara(1)">Começar minha travessia →</button>
+        <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
+        <button class="acao vazado" onclick="estado.modo='essencial'; evento('sc_shortcut_activation'); irPara(6)">Sem tempo? Ensaie sua conversa em 10 min →</button>
+      </div>
+      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Faça o <b>essencial em ≈ 20 minutos por código</b> — ou aprofunde no seu ritmo. Suas respostas ficam neste navegador.</p>
+      <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TELA 1 · PONTO DE PARTIDA ============ -->
+<section class="etapa" data-titulo="Ponto de partida" data-grupo="Início">
+  <div class="pagina">
+    <span class="chip">Antes de começar</span>
+    <h1 class="titulo" style="font-size:28px;">Seu ponto de partida</h1>
+
+    <h2 class="secao" style="margin-top:22px;">1 · Nomeie o que você adia</h2>
+    <label class="campo">Qual conversa você está adiando — e com quem?<small>Um conflito, uma decisão, uma expectativa, um comportamento tolerado. É ela que você vai ensaiar e destravar neste ato.</small></label>
+    <input type="text" data-save="c0_conversa" data-prog="1" placeholder="ex.: a prioridade contraditória com o diretor de operações">
+    <p class="instrucao" style="font-family:var(--sans); font-size:14px; color:var(--cinza); margin-top:10px;">Ao final deste ato, você terá essa conversa ensaiada e com acordo desenhado, três multiplicadores nomeados, uma decisão mais inclusiva e uma história pronta para circular.</p>
+
+    <h2 class="secao">2 · Sua rota continua</h2>
+    <div class="resultado show" id="rotaInfo">Carregando sua rota…</div>
+
+    <div id="termoWrap2">
+      <h2 class="secao">3 · Termômetro de coragem</h2>
+      <p class="instrucao" style="font-family:var(--sans); font-size:14px; color:var(--cinza);">Avalie com honestidade (1 = discordo totalmente · 5 = concordo totalmente). Você refaz no final e compara.</p>
+      <table class="likert" id="likertInicial">
+        <tr><th>Afirmação</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      </table>
+      <div class="medidor"><div class="barra"><div id="termoIniBar"></div></div><div class="leg" id="termoIniLeg">Responda as 8 afirmações para ver seu ponto de partida.</div></div>
+    </div>
+  </div>
+  <div class="pe">TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<!-- ============ CÓDIGO 5 ============ -->
+<section class="etapa" data-titulo="Prepare o olhar" data-grupo="Código 5 · Conecte-se para liderar">
+  <div class="capa-bloco">
+    <svg class="circuito" width="340" height="230" viewBox="0 0 420 300" fill="none">
+      <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/></g>
+      <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
+    </svg>
+    <div class="pagina" style="padding-bottom:56px;">
+      <span class="chip vermelho">ATO II · CAPÍTULO 5</span>
+      <h1 class="titulo">Conecte-se<br><span class="az">para liderar</span></h1>
+      <p class="subtitulo">Saia do <b>comando e controle</b> absolutos</p>
+      <div class="selo"><div class="disco">5</div><div class="rota">Função: liderar por conexão e rede,<br>não pelo centro</div></div>
+    </div>
+  </div>
+  <div class="pagina">
+    <div class="box-vermelho">
+      <div class="rotulo">Epígrafe</div>
+      <p>"O melhor líder é aquele que as pessoas mal percebem que existe; feito o trabalho, elas dirão: nós mesmos fizemos."</p>
+      <div class="credito">Lao Tzu | Tao Te Ching</div>
+    </div>
+    <h2 class="secao">O que você leva deste código</h2>
+    <div class="objetivos">
+      <div class="obj"><span class="num">①</span><p><b>Localizar</b> onde as decisões travam — e qual interface do sistema gera mais ruído.</p></div>
+      <div class="obj"><span class="num">②</span><p><b>Sair</b> do centro: fazer a informação circular sem depender só de você.</p></div>
+      <div class="obj"><span class="num">③</span><p><b>Instalar</b> um ritual mínimo de conexão esta semana, com evidência de que a rede funcionou.</p></div>
+    </div>
+    <h2 class="secao">Prepare o olhar</h2>
+    <div class="videos">
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/margaret_heffernan_forget_the_pecking_order_at_work" title="Margaret Heffernan — Forget the pecking order at work" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Margaret Heffernan · TED <span class="dur">16 MIN</span> <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>Forget the pecking order at work<span class="porque">Times vencem por coesão social, não por super-heróis. É o argumento científico do "conexão é a nova coordenação".</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v51"> Concluído</label></div>
+      </div>
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/simon_sinek_why_good_leaders_make_you_feel_safe" title="Simon Sinek — Why good leaders make you feel safe" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Simon Sinek · TED <span class="dur">12 MIN</span></b>Why good leaders make you feel safe<span class="porque">O círculo de segurança: por que a rede só circula informação quando ninguém precisa se proteger do centro.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v52" data-opt="1"> Concluído</label></div>
+      </div>
+    </div>
+    <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece pelo vídeo <b>recomendado</b> — marcá-lo como concluído fecha esta etapa. Os demais são opcionais.</p>
+  </div>
+  <div class="pe">CÓDIGO 5 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Pratique" data-grupo="Código 5 · Conecte-se para liderar">
+  <div class="pagina">
+    <span class="chip">Código 5 · Pratique</span>
+    <div class="chave">
+      <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
+      <p class="pergunta">Segundo o Capítulo 5, conexão é a nova…?</p>
+      <input type="text" class="chave-input" data-save="chave5" data-prog="1" data-resposta="coordenacao" placeholder="complete a frase">
+      <p class="fb" data-certo="<b>✓ Chave certa.</b> Em sistemas complexos, coordenar tudo pelo centro trava; conectar as pontas destrava. Vamos achar onde o seu sistema trava." data-errado="<b>Ainda não.</b> Releia <i>Conexão é a nova coordenação</i>, no Capítulo 5 — a seção dá o nome do jogo deste código."></p>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Aquecimento</span><h3>5.1 · Centro ou rede?</h3><span class="tempo">~5 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">O líder-centro sente que coordena; o sistema sente o gargalo. Classifique cada cena:</p>
+        <div class="quiz-item" data-q="q51a">
+          <p class="afirmacao">Toda decisão entre duas áreas sobe para você desempatar.</p>
+          <div class="quiz-op"><button data-v="centro">Líder-centro</button><button data-v="rede">Líder-rede</button></div>
+          <p class="quiz-fb"><b>Líder-centro.</b> Você virou a interface entre as áreas — e interfaces humanas únicas são gargalos. A pergunta do capítulo: quem precisava estar conectado antes de o problema escalar?</p>
+        </div>
+        <div class="quiz-item" data-q="q51b">
+          <p class="afirmacao">Dois coordenadores resolvem um conflito de prioridade num check-in quinzenal que você criou — e você só fica sabendo depois.</p>
+          <div class="quiz-op"><button data-v="rede">Líder-rede</button><button data-v="centro">Líder-centro</button></div>
+          <p class="quiz-fb"><b>Líder-rede.</b> "Feito o trabalho, elas dirão: nós mesmos fizemos." Você desenhou a interface; a rede operou. É exatamente a evidência deste código.</p>
+        </div>
+        <div class="quiz-item" data-q="q51c">
+          <p class="afirmacao">Você encaminha todas as informações importantes — e por isso todas passam por você.</p>
+          <div class="quiz-op"><button data-v="centro">Líder-centro</button><button data-v="rede">Líder-rede</button></div>
+          <p class="quiz-fb"><b>Líder-centro.</b> Ser o hub de informação parece serviço, mas é dependência. Conectar é fazer a informação circular <i>sem</i> você.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 5 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 5 · Conecte-se para liderar">
+  <div class="pagina">
+    <span class="chip vermelho">Código 5 · Campo real</span>
+    <div class="missao">
+      <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
+      <p>No Capítulo 5, <b>sublinhe a lista de travas</b> ("na hierarquia, na falta de informação, no medo de discordar…") e marque na margem: <b>AQUI TRAVA</b> — ao lado da que mais aparece na sua operação.</p>
+      <label class="campo">Traga para cá a trava que você marcou</label>
+      <textarea data-save="missao5" data-prog="1"></textarea>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>5.2 · O raio da sua rede</h3><span class="tempo">~15 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Escolha uma decisão ou projeto recente que exigiu mais de uma área.</p>
+        <label class="campo">Onde a decisão travou — e quem precisava ter sido conectado antes de o problema escalar?</label>
+        <textarea data-save="c5_travou" data-prog="1"></textarea>
+        <label class="campo">Qual interface do sistema gera mais ruído hoje?<small>Entre quais áreas, papéis ou níveis a informação se perde.</small></label>
+        <textarea data-save="c5_interface" data-prog="1"></textarea>
+        <label class="campo">Em quais momentos você ainda age como o centro da informação?</label>
+        <textarea data-save="c5_centro" data-prog="1"></textarea>
+      </div>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>5.3 · Seu ritual mínimo de conexão</h3><span class="tempo">~10 MIN</span></div>
+      <div class="corpo">
+        <label class="campo">Qual ritual mínimo reduziria a fricção esta semana?<small>1:1, check-in, fórum transversal, conversa de alinhamento — escolha um e diga entre quem.</small></label>
+        <input type="text" data-save="c5_ritual" data-prog="1" placeholder="ex.: check-in quinzenal de 20 min entre comercial e operações">
+        <label class="campo">Qual evidência mostraria que a rede começou a funcionar melhor?<small>Algo observável: uma decisão que não subiu, um ruído que não virou retrabalho.</small></label>
+        <input type="text" data-save="c5_evidencia" data-prog="1" placeholder="ex.: o próximo conflito de prioridade se resolve sem mim">
+        <div class="sintese"><div class="rotulo">Sua rede em movimento</div><p id="sintC5" class="vazio">Preencha o ritual e a evidência para fechar o Código 5.</p></div>
+        <div class="box-preto"><div class="rotulo">Ritual mínimo desta semana</div><p style="margin:0;">Agende o ritual que você escreveu acima <b>ainda hoje</b> — com convite na agenda dos envolvidos. Conexão não se declara; se agenda.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 5 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<!-- ============ CÓDIGO 6 ============ -->
+<section class="etapa" data-titulo="Prepare o olhar" data-grupo="Código 6 · Enfrente as conversas">
+  <div class="capa-bloco">
+    <svg class="circuito" width="340" height="230" viewBox="0 0 420 300" fill="none">
+      <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/></g>
+      <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
+    </svg>
+    <div class="pagina" style="padding-bottom:56px;">
+      <span class="chip vermelho">ATO II · CAPÍTULO 6</span>
+      <h1 class="titulo">Enfrente as conversas<br><span class="az">que destravam a mudança</span></h1>
+      <p class="subtitulo">Decisões difíceis, <b>conflitos úteis</b> e acordos claros</p>
+      <div class="selo"><div class="disco">6</div><div class="rota">Função: conversas francas com método —<br>clareza, escuta e acordo explícito</div></div>
+    </div>
+  </div>
+  <div class="pagina">
+    <div class="box-vermelho">
+      <div class="rotulo">Epígrafe</div>
+      <p>"Importe-se pessoalmente e confronte diretamente."</p>
+      <div class="credito">Kim Scott | Radical Candor</div>
+    </div>
+    <h2 class="secao">O que você leva deste código</h2>
+    <div class="objetivos">
+      <div class="obj"><span class="num">①</span><p><b>Nomear</b> a conversa adiada — e o custo do adiamento que o sistema já está pagando.</p></div>
+      <div class="obj"><span class="num">②</span><p><b>Ensaiar</b> a conversa no simulador, errando onde errar não custa nada.</p></div>
+      <div class="obj"><span class="num">③</span><p><b>Sair</b> com o roteiro real: tema claro, escuta planejada e acordo verificável.</p></div>
+    </div>
+    <h2 class="secao">Prepare o olhar</h2>
+    <div class="videos">
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/william_ury_the_walk_from_no_to_yes" title="William Ury — The walk from no to yes" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>William Ury · TED <span class="dur">19 MIN</span> <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>The walk from no to yes<span class="porque">O coautor de "Como chegar ao sim" mostra o caminho do não ao acordo — o terceiro elemento do método deste capítulo.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v61"> Concluído</label></div>
+      </div>
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/julia_dhar_how_to_disagree_productively_and_find_common_ground" title="Julia Dhar — How to disagree productively" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Julia Dhar · TED <span class="dur">15 MIN</span></b>How to disagree productively and find common ground<span class="porque">Conflito útil não é guerra: separar ideia de identidade é o que torna a tensão fonte de informação.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v62" data-opt="1"> Concluído</label></div>
+      </div>
+    </div>
+    <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece pelo vídeo <b>recomendado</b> — marcá-lo como concluído fecha esta etapa. Os demais são opcionais.</p>
+  </div>
+  <div class="pe">CÓDIGO 6 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Ensaie no simulador" data-grupo="Código 6 · Enfrente as conversas">
+  <div class="pagina">
+    <span class="chip">Código 6 · Pratique</span>
+    <div class="chave">
+      <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
+      <p class="pergunta">A conversa que destrava tem método. São três elementos: clareza, escuta e acordo…?</p>
+      <input type="text" class="chave-input" data-save="chave6" data-prog="1" data-resposta="explicito" placeholder="complete o método">
+      <p class="fb" data-certo="<b>✓ Chave certa.</b> Sem clareza, a conversa gira; sem escuta, vira imposição; sem acordo explícito, vira bate-papo. Agora ensaie — o simulador testa os três." data-errado="<b>Ainda não.</b> Releia <i>A conversa que destrava tem método</i>, no Capítulo 6 — são as três palavras que você vai usar no ensaio a seguir."></p>
+    </div>
+
+    <!-- ===== SIMULADOR DE CONVERSA ===== -->
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Simulador</span><h3>6.1 · Ensaie a conversa — errar aqui não custa nada</h3><span class="tempo">~10 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao" id="simIntro">Você marcou a conversa que vem adiando. Nas quatro cenas a seguir, escolha o que diria — e veja o que cada escolha ensina ao sistema. Não existe reprovação: existe ensaio.</p>
+        <div id="simPalco"></div>
+        <div class="resultado" id="simResultado"></div>
+        <div class="botoes"><button class="acao vazado" id="simReiniciar" style="display:none;" onclick="simIniciar(true)">Ensaiar de novo</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 6 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 6 · Enfrente as conversas">
+  <div class="pagina">
+    <span class="chip vermelho">Código 6 · Campo real</span>
+    <div class="missao">
+      <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
+      <p><b>Dobre o canto da página</b> do método (clareza, escuta, acordo explícito) no Capítulo 6. Na margem, escreva as iniciais de quem é a sua conversa adiada. Antes da conversa real, releia essa página — ela é o seu roteiro de bolso.</p>
+      <label class="campo">O que a releitura do método mudou no seu plano?</label>
+      <textarea data-save="missao6" data-prog="1"></textarea>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>6.2 · O roteiro da conversa real</h3><span class="tempo">~15 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Do ensaio para o real. Monte o roteiro com o método do capítulo:</p>
+        <label class="campo">CLAREZA — qual é o tema real, em uma frase?<small>Sem rodeio e sem acusação. O que precisa ser nomeado.</small></label>
+        <input type="text" data-save="c6_clareza" data-prog="1" placeholder="ex.: temos duas prioridades que se contradizem e o time paga o preço">
+        <label class="campo">ESCUTA — o que você precisa perguntar e está pronto para ouvir?<small>Qual verdade o outro lado pode mostrar que você ainda não viu?</small></label>
+        <textarea data-save="c6_escuta" data-prog="1"></textarea>
+        <label class="campo">ACORDO — qual acordo concreto precisa sair da conversa?<small>Decisão, comportamento ou compromisso verificável.</small></label>
+        <input type="text" data-save="c6_acordo" data-prog="1" placeholder="ex.: uma prioridade única por trimestre, revisada em conjunto">
+        <label class="campo">Como saberei que o acordo foi cumprido?</label>
+        <input type="text" data-save="c6_verificacao" data-prog="1" placeholder="ex.: nenhuma demanda conflitante chega ao time por 30 dias">
+        <label class="campo">Quando será a conversa?<small>Uma data. Conversa sem data é adiamento com boa intenção.</small></label>
+        <input type="text" data-save="c6_data" data-prog="1" placeholder="dd/mm">
+        <div class="sintese"><div class="rotulo">Seu roteiro em uma frase</div><p id="sintC6" class="vazio">Preencha clareza e acordo para gerar o roteiro.</p></div>
+        <div class="box-preto"><div class="rotulo">Ritual mínimo desta semana</div><p style="margin:0;">Convide a pessoa <b>hoje</b> — sem pauta dramática: <i>"quero alinhar um tema que está nos custando caro; 30 minutos na quinta?"</i>. O convite é a metade da coragem.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 6 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<!-- ============ CÓDIGO 7 ============ -->
+<section class="etapa" data-titulo="Prepare o olhar" data-grupo="Código 7 · Multiplique e dê autoria">
+  <div class="capa-bloco">
+    <svg class="circuito" width="340" height="230" viewBox="0 0 420 300" fill="none">
+      <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/></g>
+      <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
+    </svg>
+    <div class="pagina" style="padding-bottom:56px;">
+      <span class="chip vermelho">ATO II · CAPÍTULO 7</span>
+      <h1 class="titulo">Multiplique<br><span class="az">e dê autoria</span></h1>
+      <p class="subtitulo">A mudança só se sustenta quando <b>deixa de ter um único dono</b></p>
+      <div class="selo"><div class="disco">7</div><div class="rota">Função: mudança conduzida por muitos,<br>não centralizada no líder</div></div>
+    </div>
+  </div>
+  <div class="pagina">
+    <div class="box-vermelho">
+      <div class="rotulo">Epígrafe</div>
+      <p>"Se quer ir rápido, vá sozinho; se quer ir longe, vá acompanhado."</p>
+      <div class="credito">Provérbio africano</div>
+    </div>
+    <h2 class="secao">O que você leva deste código</h2>
+    <div class="objetivos">
+      <div class="obj"><span class="num">①</span><p><b>Identificar</b> quem já vive a cultura pelo exemplo — mesmo sem título formal.</p></div>
+      <div class="obj"><span class="num">②</span><p><b>Converter</b> conformidade em autoria: de "eu cumpro" para "eu assumo".</p></div>
+      <div class="obj"><span class="num">③</span><p><b>Entregar</b> uma parte real da mudança a três multiplicadores, com liberdade e direção.</p></div>
+    </div>
+    <h2 class="secao">Prepare o olhar</h2>
+    <div class="videos">
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/derek_sivers_how_to_start_a_movement" title="Derek Sivers — How to start a movement" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Derek Sivers · TED <span class="dur">3 MIN</span> <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>How to start a movement<span class="porque">Três minutos que explicam o capítulo: o movimento não nasce do líder — nasce do primeiro seguidor tratado como igual.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v71"> Concluído</label></div>
+      </div>
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/drew_dudley_everyday_leadership" title="Drew Dudley — Everyday leadership" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Drew Dudley · TED <span class="dur">6 MIN</span></b>Everyday leadership<span class="porque">Autoria começa quando liderança deixa de ser cargo e vira gesto cotidiano que qualquer um pode assumir.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v72" data-opt="1"> Concluído</label></div>
+      </div>
+    </div>
+    <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece pelo vídeo <b>recomendado</b> — marcá-lo como concluído fecha esta etapa. Os demais são opcionais.</p>
+  </div>
+  <div class="pe">CÓDIGO 7 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Pratique" data-grupo="Código 7 · Multiplique e dê autoria">
+  <div class="pagina">
+    <span class="chip">Código 7 · Pratique</span>
+    <div class="chave">
+      <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
+      <p class="pergunta">Segundo o Capítulo 7, autoria é a passagem de "eu cumpro" para "eu…"?</p>
+      <input type="text" class="chave-input" data-save="chave7" data-prog="1" data-resposta="assumo" placeholder="complete a frase">
+      <p class="fb" data-certo="<b>✓ Chave certa.</b> É quando as pessoas deixam de assistir à transformação e começam a conduzir uma parte dela. Vamos descobrir quem já está pronto para assumir." data-errado="<b>Ainda não.</b> Releia <i>Quando o pertencimento vira autoria</i>, no Capítulo 7 — a passagem está lá, em quatro palavras."></p>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Aquecimento</span><h3>7.1 · Comunicado, cumprido ou assumido?</h3><span class="tempo">~5 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Três estágios da mesma mudança. Classifique:</p>
+        <div class="quiz-item" data-q="q71a">
+          <p class="afirmacao">O time repete o comportamento novo quando o chefe está na sala.</p>
+          <div class="quiz-op"><button data-v="cumprido">Cumprido</button><button data-v="assumido">Assumido</button><button data-v="comunicado">Comunicado</button></div>
+          <p class="quiz-fb"><b>Cumprido.</b> Repetição por conformidade ainda não é autoria — some o observador, some o comportamento. Falta dono.</p>
+        </div>
+        <div class="quiz-item" data-q="q71b">
+          <p class="afirmacao">Uma supervisora adapta o ritual à realidade da loja dela — e o dela funciona melhor que o original.</p>
+          <div class="quiz-op"><button data-v="assumido">Assumido</button><button data-v="cumprido">Cumprido</button><button data-v="comunicado">Comunicado</button></div>
+          <p class="quiz-fb"><b>Assumido.</b> Tradução local com liberdade e direção — é assim que nasce um embaixador. A mudança ganhou mais um dono.</p>
+        </div>
+        <div class="quiz-item" data-q="q71c">
+          <p class="afirmacao">O vídeo do CEO sobre a mudança bateu recorde de visualizações.</p>
+          <div class="quiz-op"><button data-v="comunicado">Comunicado</button><button data-v="assumido">Assumido</button><button data-v="cumprido">Cumprido</button></div>
+          <p class="quiz-fb"><b>Comunicado.</b> Alcance não é adesão. Grandes transformações não falham por falta de estratégia — falham por falta de donos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 7 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 7 · Multiplique e dê autoria">
+  <div class="pagina">
+    <span class="chip vermelho">Código 7 · Campo real</span>
+    <div class="missao">
+      <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
+      <p>Releia <i>É assim que nasce um embaixador</i> no Capítulo 7. Na margem, <b>escreva as iniciais das três pessoas</b> que vieram à sua cabeça durante a leitura. Se ninguém veio, releia — o capítulo diz onde procurar: quem já vive a cultura pelo exemplo, sem título.</p>
+      <label class="campo">Quem são? O que cada uma já faz que a torna multiplicadora natural?</label>
+      <textarea data-save="missao7" data-prog="1"></textarea>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>7.2 · A entrega de autoria</h3><span class="tempo">~15 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Escolha uma mudança que hoje ainda depende demais de você (ou do RH).</p>
+        <label class="campo">Que parte real dessa mudança você vai entregar — e para quem?<small>Parte real = com decisão dentro, não só divulgação.</small></label>
+        <textarea data-save="c7_entrega" data-prog="1"></textarea>
+        <label class="campo">Que liberdade essa pessoa terá para traduzir à realidade local?</label>
+        <input type="text" data-save="c7_liberdade" data-prog="1" placeholder="ex.: redesenhar o ritual do jeito do time, mantendo o propósito">
+        <label class="campo">Qual evidência simples mostraria que a mudança passou a ser conduzida por muitos?</label>
+        <input type="text" data-save="c7_evidencia" data-prog="1" placeholder="ex.: em 30 dias, uma versão local que eu não criei está rodando">
+        <div class="sintese"><div class="rotulo">Sua multiplicação</div><p id="sintC7" class="vazio">Preencha a entrega e a evidência para fechar o Código 7.</p></div>
+        <div class="box-preto"><div class="rotulo">Ritual mínimo desta semana</div><p style="margin:0;">Faça o convite a um dos três multiplicadores <b>em conversa individual</b> — não por e-mail. Autoria se oferece olhando no olho: <i>"quero que esta parte seja sua."</i></p></div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 7 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<!-- ============ CÓDIGO 8 ============ -->
+<section class="etapa" data-titulo="Prepare o olhar" data-grupo="Código 8 · Amplie o nós com inclusão real">
+  <div class="capa-bloco">
+    <svg class="circuito" width="340" height="230" viewBox="0 0 420 300" fill="none">
+      <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/></g>
+      <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
+    </svg>
+    <div class="pagina" style="padding-bottom:56px;">
+      <span class="chip vermelho">ATO II · CAPÍTULO 8</span>
+      <h1 class="titulo">Amplie o nós<br><span class="az">com inclusão real</span></h1>
+      <p class="subtitulo">Aumente a <b>diversidade, o pertencimento e o repertório</b></p>
+      <div class="selo"><div class="disco">8</div><div class="rota">Função: inclusão real<br>nos espaços de decisão</div></div>
+    </div>
+  </div>
+  <div class="pagina">
+    <div class="box-vermelho">
+      <div class="rotulo">Epígrafe</div>
+      <p>"Diversidade é ser convidado para a festa; inclusão é ser convidado para dançar."</p>
+      <div class="credito">Vernā Myers</div>
+    </div>
+    <h2 class="secao">O que você leva deste código</h2>
+    <div class="objetivos">
+      <div class="obj"><span class="num">①</span><p><b>Auditar</b> uma decisão real: quem participou, quem foi afetado sem ter voz.</p></div>
+      <div class="obj"><span class="num">②</span><p><b>Distinguir</b> presença numérica de voz, espaço e poder — estética de essência.</p></div>
+      <div class="obj"><span class="num">③</span><p><b>Adotar</b> uma microprática inclusiva na próxima decisão crítica, com evidência.</p></div>
+    </div>
+    <h2 class="secao">Prepare o olhar</h2>
+    <div class="videos">
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/verna_myers_how_to_overcome_our_biases_walk_boldly_toward_them" title="Vernā Myers — How to overcome our biases" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Vernā Myers · TED <span class="dur">18 MIN</span> <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>How to overcome our biases? Walk boldly toward them<span class="porque">A autora da epígrafe do capítulo, na fonte: vieses não se negam — se atravessam, andando na direção deles.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v81"> Concluído</label></div>
+      </div>
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/janet_stovall_how_to_get_serious_about_diversity_and_inclusion_in_the_workplace" title="Janet Stovall — How to get serious about diversity and inclusion" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Janet Stovall · TED <span class="dur">11 MIN</span></b>How to get serious about diversity and inclusion<span class="porque">Metas de inclusão com o mesmo rigor das metas de negócio — diversidade é potencial; inclusão é conversão.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v82" data-opt="1"> Concluído</label></div>
+      </div>
+    </div>
+    <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece pelo vídeo <b>recomendado</b> — marcá-lo como concluído fecha esta etapa. Os demais são opcionais.</p>
+  </div>
+  <div class="pe">CÓDIGO 8 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Pratique" data-grupo="Código 8 · Amplie o nós com inclusão real">
+  <div class="pagina">
+    <span class="chip">Código 8 · Pratique</span>
+    <div class="chave">
+      <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
+      <p class="pergunta">Complete a epígrafe de Vernā Myers: "Diversidade é ser convidado para a festa; inclusão é ser convidado para…"</p>
+      <input type="text" class="chave-input" data-save="chave8" data-prog="1" data-resposta="dancar|dançar" placeholder="complete a frase">
+      <p class="fb" data-certo="<b>✓ Chave certa.</b> Presença sem voz é estética. O caso do capítulo — PcD de 3,3% para 5%, com pilotos a 8% e 10% — só virou cultura quando mudou quem decide. Agora audite a sua mesa." data-errado="<b>Ainda não.</b> É a epígrafe que abre o Capítulo 8 — e o teste de tudo o que vem depois."></p>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>8.1 · Auditoria da última decisão</h3><span class="tempo">~15 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Escolha uma decisão importante recente — ou uma que está prestes a ser tomada.</p>
+        <label class="campo">Quem participou da decisão?</label>
+        <textarea data-save="c8_participou" data-prog="1"></textarea>
+        <label class="campo">Quem foi afetado por ela, mas não teve voz no processo?<small>Operação, cliente, loja, periferia, PcD, mulheres, pessoas negras, gerações, áreas menos visíveis…</small></label>
+        <textarea data-save="c8_semvoz" data-prog="1"></textarea>
+        <label class="campo">Onde a decisão teria melhorado com mais repertórios na mesa?</label>
+        <textarea data-save="c8_melhoraria" data-prog="1"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 8 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 8 · Amplie o nós com inclusão real">
+  <div class="pagina">
+    <span class="chip vermelho">Código 8 · Campo real</span>
+    <div class="missao">
+      <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
+      <p><b>Sublinhe a epígrafe de Vernā Myers</b> no Capítulo 8 e escreva na margem o nome (ou papel) da voz ausente da sua última decisão. O livro guarda o lembrete que a próxima pauta vai cobrar.</p>
+      <label class="campo">Qual voz você escreveu na margem — e por que ela faltou?</label>
+      <textarea data-save="missao8" data-prog="1"></textarea>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>8.2 · A microprática da próxima decisão</h3><span class="tempo">~10 MIN</span></div>
+      <div class="corpo">
+        <label class="campo">Que microprática inclusiva você adota na próxima decisão crítica?<small>Ex.: cadeira fixa da operação no comitê; rodada obrigatória de quem discorda; revisão por quem será afetado.</small></label>
+        <input type="text" data-save="c8_micropratica" data-prog="1" placeholder="ex.: nenhuma decisão de loja sem ouvir duas lojas antes">
+        <label class="campo">Qual evidência mostraria mais pertencimento e repertório na decisão?</label>
+        <input type="text" data-save="c8_evidencia" data-prog="1" placeholder="ex.: a decisão mudou por causa de uma voz que antes não era ouvida">
+        <div class="sintese"><div class="rotulo">Seu nós ampliado</div><p id="sintC8" class="vazio">Preencha a microprática e a evidência para fechar o Código 8.</p></div>
+        <div class="box-preto"><div class="rotulo">Ritual mínimo desta semana</div><p style="margin:0;">Na próxima reunião de decisão, faça a pergunta do capítulo <b>em voz alta</b>: <i>"quem é afetado por isso e não está nesta sala?"</i> — e aja sobre a resposta.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 8 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<!-- ============ CÓDIGO 9 ============ -->
+<section class="etapa" data-titulo="Prepare o olhar" data-grupo="Código 9 · Conte sua cultura em histórias">
+  <div class="capa-bloco">
+    <svg class="circuito" width="340" height="230" viewBox="0 0 420 300" fill="none">
+      <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/></g>
+      <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
+    </svg>
+    <div class="pagina" style="padding-bottom:56px;">
+      <span class="chip vermelho">ATO II · CAPÍTULO 9</span>
+      <h1 class="titulo">Conte sua cultura<br><span class="az">em histórias</span></h1>
+      <p class="subtitulo">Consolide a identidade por meio de <b>símbolos e narrativas</b></p>
+      <div class="selo"><div class="disco">9</div><div class="rota">Função: uma narrativa compartilhada<br>que circule sozinha</div></div>
+    </div>
+  </div>
+  <div class="pagina">
+    <div class="box-vermelho">
+      <div class="rotulo">Epígrafe</div>
+      <p>"As histórias importam. Muitas histórias importam."</p>
+      <div class="credito">Chimamanda Ngozi Adichie | O perigo de uma história única</div>
+    </div>
+    <h2 class="secao">O que você leva deste código</h2>
+    <div class="objetivos">
+      <div class="obj"><span class="num">①</span><p><b>Ouvir</b> a história que as pessoas contam hoje — e decidir se ela ajuda ou trava a mudança.</p></div>
+      <div class="obj"><span class="num">②</span><p><b>Transformar</b> um valor em cena: contexto, conflito, escolha, impacto e sentido.</p></div>
+      <div class="obj"><span class="num">③</span><p><b>Colocar</b> a sua micro-história em circulação — e medir se ela anda sozinha.</p></div>
+    </div>
+    <h2 class="secao">Prepare o olhar</h2>
+    <div class="videos">
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/chimamanda_ngozi_adichie_the_danger_of_a_single_story" title="Chimamanda Ngozi Adichie — The danger of a single story" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Chimamanda Ngozi Adichie · TED <span class="dur">19 MIN</span> <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>The danger of a single story<span class="porque">A autora da epígrafe: quem controla as histórias controla o que parece possível — em países e em empresas.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v91"> Concluído</label></div>
+      </div>
+      <div class="video">
+        <div class="frame"><iframe src="https://embed.ted.com/talks/nancy_duarte_the_secret_structure_of_great_talks" title="Nancy Duarte — The secret structure of great talks" allowfullscreen loading="lazy"></iframe></div>
+        <div class="leg"><b>Nancy Duarte · TED <span class="dur">18 MIN</span></b>The secret structure of great talks<span class="porque">A estrutura "o que é × o que poderia ser" — a mecânica narrativa que faz uma mudança parecer inevitável.</span>
+        <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v92" data-opt="1"> Concluído</label></div>
+      </div>
+    </div>
+    <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece pelo vídeo <b>recomendado</b> — marcá-lo como concluído fecha esta etapa. Os demais são opcionais.</p>
+  </div>
+  <div class="pe">CÓDIGO 9 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Pratique" data-grupo="Código 9 · Conte sua cultura em histórias">
+  <div class="pagina">
+    <span class="chip">Código 9 · Pratique</span>
+    <div class="chave">
+      <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
+      <p class="pergunta">Segundo o Capítulo 9, uma boa história transforma valor em…?</p>
+      <input type="text" class="chave-input" data-save="chave9" data-prog="1" data-resposta="cena" placeholder="complete a frase">
+      <p class="fb" data-certo="<b>✓ Chave certa.</b> Cena tem contexto, conflito, escolha, impacto e sentido — frase de mural não tem nada disso. Hora de escrever a sua." data-errado="<b>Ainda não.</b> Releia <i>Histórias transformam valores em possibilidades</i>, no Capítulo 9 — a palavra é curta e muda tudo."></p>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Aquecimento</span><h3>9.1 · Frase de mural ou cena?</h3><span class="tempo">~5 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Qual das versões faria alguém recontar no corredor?</p>
+        <div class="quiz-item" data-q="q91a">
+          <p class="afirmacao">"Aqui, o cliente está no centro de tudo o que fazemos."</p>
+          <div class="quiz-op"><button data-v="mural">Frase de mural</button><button data-v="cena">Cena</button></div>
+          <p class="quiz-fb"><b>Frase de mural.</b> Sem contexto, sem conflito, sem escolha. Ninguém reconta um slogan.</p>
+        </div>
+        <div class="quiz-item" data-q="q91b">
+          <p class="afirmacao">"Na sexta à noite, a gerente da loja 12 abriu o caixa fechado para uma cliente que precisava do remédio do filho — e no sábado o diretor ligou para agradecer, não para cobrar o procedimento."</p>
+          <div class="quiz-op"><button data-v="cena">Cena</button><button data-v="mural">Frase de mural</button></div>
+          <p class="quiz-fb"><b>Cena.</b> Contexto, conflito, escolha, impacto — e o detalhe decisivo: a reação da liderança, que é o que a história de fato ensina. Essa circula sozinha.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 9 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 9 · Conte sua cultura em histórias">
+  <div class="pagina">
+    <span class="chip vermelho">Código 9 · Campo real</span>
+    <div class="missao">
+      <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
+      <p>Releia <i>O poder das micro-histórias</i> no Capítulo 9. Na margem, <b>escreva o título da sua</b> — a micro-história recente que mostra "isso aqui acontece de verdade". Se não vier nenhuma, sua primeira missão é sair para caçar uma esta semana.</p>
+      <label class="campo">Qual é o título que você escreveu na margem?</label>
+      <input type="text" data-save="missao9" data-prog="1" placeholder="ex.: O caixa da loja 12">
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>9.2 · Construa a cena</h3><span class="tempo">~15 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Monte a micro-história com a anatomia do capítulo:</p>
+        <label class="campo">CONTEXTO — onde e quando aconteceu?</label>
+        <input type="text" data-save="c9_contexto" data-prog="1">
+        <label class="campo">CONFLITO — o que estava em jogo?</label>
+        <input type="text" data-save="c9_conflito" data-prog="1">
+        <label class="campo">ESCOLHA — o que a pessoa decidiu fazer (e podia não ter feito)?</label>
+        <textarea data-save="c9_escolha" data-prog="1"></textarea>
+        <label class="campo">IMPACTO E SENTIDO — o que mudou, e que valor essa cena prova?</label>
+        <textarea data-save="c9_impacto" data-prog="1"></textarea>
+        <label class="campo">Onde essa história será contada primeiro — e por quem?</label>
+        <input type="text" data-save="c9_onde" data-prog="1" placeholder="ex.: abertura da reunião mensal, contada pela própria gerente">
+        <div class="sintese"><div class="rotulo">Sua micro-história</div><p id="sintC9" class="vazio">Preencha a cena para fechar o Código 9.</p></div>
+        <div class="box-preto"><div class="rotulo">Ritual mínimo desta semana</div><p style="margin:0;">Conte a história <b>uma vez, em voz alta</b>, na próxima reunião — e repare quem a reconta depois. História que circula sozinha é a evidência deste código.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 9 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<!-- ============ RECAP ============ -->
+<section class="etapa" data-titulo="Seu mapa de coragem" data-grupo="Recapitulação">
+  <div class="capa-bloco">
+    <svg class="circuito" width="420" height="300" viewBox="0 0 420 300" fill="none">
+      <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/><path d="M210 290 V260 H300 V220 H390"/></g>
+      <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/><circle cx="390" cy="220" r="5"/></g>
+    </svg>
+    <div class="pagina" style="padding-bottom:56px;">
+      <span class="chip vermelho">ATO II · RECAPITULAÇÃO</span>
+      <h1 class="titulo">Seu mapa de<br><span class="az">coragem</span></h1>
+      <p class="subtitulo">O que <b>você</b> colocou em movimento — reunido em uma página</p>
+    </div>
+  </div>
+  <div class="pagina">
+    <p>Toda transformação chega ao ponto em que enxergar já não basta. A Coragem, neste livro, não é um momento de exceção — é disciplina: conversas que protegem a verdade útil, redes que substituem dependência por corresponsabilidade, decisões que ampliam o coletivo e histórias que mostram o que a organização realmente valoriza. Abaixo, o retrato do que você registrou.</p>
+    <div class="sintese"><div class="rotulo">Código 5 · Sua rede</div><p id="mapaC5" class="vazio">Ainda não preenchido — exercício 5.3.</p></div>
+    <div class="sintese"><div class="rotulo">Código 6 · Sua conversa destravada</div><p id="mapaC6" class="vazio">Ainda não preenchido — exercício 6.2.</p></div>
+    <div class="sintese"><div class="rotulo">Código 7 · Seus multiplicadores</div><p id="mapaC7" class="vazio">Ainda não preenchido — exercício 7.2.</p></div>
+    <div class="sintese"><div class="rotulo">Código 8 · Seu nós ampliado</div><p id="mapaC8" class="vazio">Ainda não preenchido — exercício 8.2.</p></div>
+    <div class="sintese"><div class="rotulo">Código 9 · Sua história</div><p id="mapaC9" class="vazio">Ainda não preenchido — exercício 9.2.</p></div>
+
+    <h2 class="secao">Termômetro final — refaça e compare</h2>
+    <table class="likert" id="likertFinal">
+      <tr><th>Afirmação</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+    </table>
+    <div class="medidor"><div class="barra"><div id="termoFimBar"></div></div><div class="leg" id="termoFimLeg">Responda as 8 afirmações para comparar com o ponto de partida.</div></div>
+    <div class="resultado" id="comparativo"></div>
+
+    <div class="box-vermelho" style="margin-top:36px;">
+      <div class="rotulo">A pergunta muda outra vez</div>
+      <p>No Ato I, era: "o que realmente está acontecendo aqui?". No Ato II: "que coragem esse sistema pede de mim agora?". A próxima é mais exigente: "como sustentar essa mudança com consistência?"</p>
+      <div class="credito">A Coragem colocou a cultura em movimento. O Ato III começa quando agir já não basta.</div>
+    </div>
+    <div class="botoes">
+      <a href="/seucodigo/" onclick="evento('sc_next_act_intent')" class="acao" style="text-decoration:none; display:inline-block; background:var(--azul); border-color:var(--azul); color:var(--branco); font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border:2px solid var(--azul);">Agir já não basta → Ver minha jornada</a>
+    </div>
+
+    <h2 class="secao">Uma pergunta, só uma</h2>
+    <p style="font-family:var(--sans); font-size:14px; color:var(--cinza);">Quanto este Ato mudou a sua disposição de enfrentar o que vinha adiando? (1 = nada · 5 = a conversa já está marcada)</p>
+    <div class="quiz-op" id="feedbackAto" style="margin-bottom:8px;">
+      <button data-fb="1">1</button><button data-fb="2">2</button><button data-fb="3">3</button><button data-fb="4">4</button><button data-fb="5">5</button>
+    </div>
+    <p id="feedbackObrigado" style="display:none; font-family:var(--sans); font-size:13px; font-weight:700;">Registrado — isso melhora o workbook para o próximo leitor.</p>
+
+    <h2 class="secao">Leve isto com você</h2>
+    <div class="botoes">
+      <button class="acao" onclick="gerarBrief()">Gerar meu Mapa de Coragem (A4)</button>
+      <button class="acao" onclick="enviarEmail()">Abrir rascunho no meu e-mail</button>
+      <button class="acao" onclick="baixarICS()">Agendar ações no calendário</button>
+    </div>
+    <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">O calendário baixa um arquivo .ics com 3 compromissos: seu ritual de conexão (cadência da sua rota), a conversa que você marcou e o reencontro com este workbook. Nada é enviado a servidores — seus dados ficam com você.</p>
+    <div class="botoes">
+      <button class="acao vazado" onclick="window.print()">Imprimir tudo / salvar PDF</button>
+      <button class="acao vazado" onclick="exportar()">Exportar respostas (.json)</button>
+      <button class="acao vazado" onclick="document.getElementById('importFile').click()">Importar respostas</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importar(event)">
+      <button class="acao perigo" onclick="pedirReset()">Apagar todos os meus registros</button>
+      <span class="salvo-aviso" id="salvoAviso" aria-live="polite">✓ salvo neste navegador</span>
+    </div>
+  </div>
+  <div class="pe">SEU CÓDIGO · WORKBOOK ATO II — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<!-- ============ REENCONTRO ============ -->
+<section class="etapa" data-titulo="O acordo aconteceu?" data-grupo="Reencontro de 30 dias">
+  <div class="capa-bloco">
+    <div class="pagina" style="padding-bottom:56px;">
+      <span class="chip vermelho">CICLO DE 30 DIAS</span>
+      <h1 class="titulo">A conversa<br><span class="az">aconteceu?</span></h1>
+      <p class="subtitulo">Volte aqui em <b id="reencontroDataCapa">30 dias</b> — o acordo é a prova da conversa</p>
+    </div>
+  </div>
+  <div class="pagina">
+    <p>Você desenhou um roteiro, marcou uma data e definiu como saberia que o acordo foi cumprido. Agora compare com o real. Dado honesto vale mais que vitória narrada.</p>
+    <div class="sintese"><div class="rotulo">O que você planejou</div><p id="reencontroPromessa" class="vazio">Complete o exercício 6.2 e seu plano aparece aqui.</p></div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Fechamento do ciclo</span><h3>R.1 · O confronto com o real</h3><span class="tempo">~10 MIN</span></div>
+      <div class="corpo">
+        <label class="campo">Data do seu reencontro</label>
+        <input type="text" data-save="c10_data" placeholder="dd/mm/aaaa">
+        <label class="campo">A conversa aconteceu?</label>
+        <div class="quiz-op" id="reencontroOpcoes" style="margin-bottom:6px;">
+          <button data-rv="sim">Sim — e houve acordo</button>
+          <button data-rv="parcial">Aconteceu, sem acordo ainda</button>
+          <button data-rv="nao">Ainda não aconteceu</button>
+        </div>
+        <div class="resultado" id="reencontroFeedback"></div>
+        <label class="campo">O que aconteceu de fato — e o acordo está sendo cumprido?</label>
+        <textarea data-save="c10_fato" data-prog="1"></textarea>
+        <label class="campo">A rede, os multiplicadores e a história: o que já anda sem você?</label>
+        <textarea data-save="c10_rede" data-prog="1"></textarea>
+        <label class="campo">Próximo ciclo: qual é a próxima conversa que precisa de coragem?</label>
+        <textarea data-save="c10_proximo" data-prog="1"></textarea>
+        <div class="box-preto"><div class="rotulo">A ponte para o Ato III</div><p style="margin:0;">Coragem com acordo cumprido é o bilhete de entrada da Consistência. A pergunta que abre o próximo ato: <i>"como sustentar essa mudança quando o impulso inicial passar?"</i></p></div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">REENCONTRO — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+</main>
+
+<footer class="rodape-nav">
+  <div class="rodape-inner">
+    <button id="btnVoltar" onclick="mover(-1)">← Voltar</button>
+    <div class="onde-estou">
+      <b id="ondeGrupo"></b><span id="ondeTitulo"></span>
+      <div class="migalhas" id="migalhas"></div>
+    </div>
+    <button class="avancar" id="btnAvancar" onclick="mover(1)">Continuar →</button>
+  </div>
+</footer>
+
+<script>
+
+/* ================= persistência ================= */
+var STORE_KEY = 'ncc-workbook-ato2';
+var estado = {};
+try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) { estado = {}; }
+estado._v = estado._v || 1; /* versão do contrato de dados */
+
+/* ================= plataforma Seu Código: config + instrumentação ================= */
+var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.0.0' };
+var SC_ATO = 2;
+function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
+/* identificador anônimo + versão de esquema */
+if (!scGet('seucodigo_anon_id')) scSet('seucodigo_anon_id', 'sc-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10));
+scSet('seucodigo_schema_version', 1);
+/* primeira origem conhecida (UTMs, referenciador, página de entrada) */
+(function(){
+  if (scGet('seucodigo_first_touch')) return;
+  var q = new URLSearchParams(location.search);
+  var ft = { entrada: location.pathname, ref: document.referrer || '', em: new Date().toISOString() };
+  ['utm_source','utm_medium','utm_campaign','utm_content'].forEach(function(u){ if (q.get(u)) ft[u] = q.get(u); });
+  scSet('seucodigo_first_touch', ft);
+})();
+var SC_SESSION = (function(){
+  var loc = scGet('seucodigo_last_location');
+  var dias = (loc && loc.ts) ? Math.floor((Date.now() - loc.ts) / 86400000) : null;
+  return { tipo: loc ? 'retorno' : 'nova', dias: dias };
+})();
+/* NUNCA enviar texto digitado pelo leitor — apenas rótulos estruturais */
+function evento(nome, params) {
+  try {
+    if (typeof gtag !== 'function') return;
+    var ft = scGet('seucodigo_first_touch') || {};
+    var base = {
+      act_number: SC_ATO,
+      route: estado.rota || null,
+      cycle_number: 1,
+      session_type: SC_SESSION.tipo,
+      days_since_last_visit: SC_SESSION.dias,
+      progress_percentage: estado._progresso || 0,
+      mode: estado.modo || null,
+      platform_version: SC_CONFIG.platformVersion,
+      traffic_source: ft.utm_source || (ft.ref ? 'referral' : 'direto')
+    };
+    var p = params || {};
+    for (var k in p) base[k] = p[k];
+    gtag('event', nome, base);
+  } catch(e) {}
+}
+function registraLocal() { scSet('seucodigo_last_location', { ato: SC_ATO, tela: estado._tela || 0, ts: Date.now() }); }
+
+function salvar() {
+  estado._ts = Date.now();
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(estado)); } catch(e) {}
+  registraLocal();
+  var av = document.getElementById('salvoAviso');
+  if (av) {
+    var ag = new Date();
+    av.textContent = 'Salvo neste navegador às ' + ('0'+ag.getHours()).slice(-2) + ':' + ('0'+ag.getMinutes()).slice(-2);
+    av.classList.add('show'); setTimeout(function(){ av.classList.remove('show'); }, 1600);
+  }
+  atualizarSinteses(); atualizarProgresso();
+  try { renderNav(); } catch(e) {}
+}
+function v(k){ return (estado[k] || '').toString().trim(); }
+
+/* ================= router de telas ================= */
+var telas = Array.prototype.slice.call(document.querySelectorAll('.etapa'));
+var atual = 0;
+
+function irPara(i, semSalvar) {
+  if (i < 0 || i >= telas.length) return;
+  telas[atual].classList.remove('ativa');
+  atual = i;
+  telas[atual].classList.add('ativa');
+  window.scrollTo({ top: 0 });
+  if (i > 0 && !estado.vis0) { /* primeira saída da capa = início da jornada */
+    estado.vis0 = true;
+    estado._inicioTs = estado._inicioTs || Date.now();
+    evento('sc_journey_started');
+  }
+  /* início de código (telas Prepare: 2/5/8/11) */
+  var mapaCod = { 2: 5, 5: 6, 8: 7, 11: 8, 14: 9 };
+  if (mapaCod[i] && !estado['_cs' + mapaCod[i]]) {
+    estado['_cs' + mapaCod[i]] = true;
+    evento('sc_code_started', { code_number: mapaCod[i] });
+  }
+  if (!semSalvar) { estado._tela = i; salvar(); }
+  evento('sc_screen_view', { screen_id: i + 1 });
+  renderNav();
+}
+/* trava suave: sair de um código sem a evidência pede decisão consciente */
+var telasEvidencia = { 4: 5, 7: 6, 10: 7, 13: 8, 16: 9 };
+function mover(d) {
+  if (d > 0 && atual === 1 && !checaPartida()) return;
+  if (d > 0 && telasEvidencia[atual] && !estado['_ev' + telasEvidencia[atual]]) {
+    abrirTrava(telasEvidencia[atual]);
+    return;
+  }
+  irPara(atual + d);
+}
+/* requisito mínimo do ponto de partida: desafio + rota */
+function checaPartida() {
+  if (!v('c0_conversa')) {
+    abrirAviso('Nomeie a conversa', 'Escreva a conversa que você vem adiando — é ela que você vai ensaiar, destravar e transformar em acordo neste ato.', 'c0_conversa');
+    return false;
+  }
+  var li = somaTermo('li');
+  if (li.n < 8 && !estado._termoDepois) {
+    abrirTermoEscolha();
+    return false;
+  }
+  return true;
+}
+var avisoAlvo = null, avisoScroll = null;
+function abrirAviso(titulo, texto, campo, bloco) {
+  avisoAlvo = campo; avisoScroll = bloco;
+  document.getElementById('avisoTitulo').textContent = titulo;
+  document.getElementById('avisoTexto').textContent = texto;
+  document.getElementById('avisoBotoes').innerHTML = '<button class="acao" onclick="fecharAviso(true)">Entendi</button>';
+  abrirModal('veuAviso');
+}
+function abrirTermoEscolha() {
+  document.getElementById('avisoTitulo').textContent = 'Termômetro de consciência';
+  document.getElementById('avisoTexto').textContent = 'São 8 afirmações rápidas — é o que permite comparar o seu antes e depois no fim do Ato. Você pode responder agora ou deixar para depois.';
+  document.getElementById('avisoBotoes').innerHTML =
+    '<button class="acao" onclick="fecharAviso(true); document.getElementById(\'termoWrap\').scrollIntoView({behavior:\'smooth\',block:\'center\'});">Responder o termômetro</button>' +
+    '<button class="acao vazado" onclick="estado._termoDepois=true; salvar(); fecharAviso(false); irPara(2);">Fazer depois e continuar</button>';
+  abrirModal('veuAviso');
+}
+function fecharAviso(focar) {
+  fecharModal('veuAviso');
+  if (focar && avisoAlvo) {
+    var el = document.querySelector('[data-save="' + avisoAlvo + '"]');
+    if (el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(function(){ el.focus(); }, 400); }
+  } else if (focar && avisoScroll) {
+    var bl = document.getElementById(avisoScroll);
+    if (bl) bl.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  avisoAlvo = null; avisoScroll = null;
+}
+
+var travaCodigo = null;
+function abrirTrava(n) {
+  travaCodigo = n;
+  document.getElementById('travaTexto').innerHTML = 'Sua evidência do <b>Código ' + n + '</b> ainda não está pronta. É ela que você leva deste código — o resto é preparação.';
+  abrirModal('veuTrava');
+  evento('sc_soft_gate', { code_number: n });
+}
+function travaConcluir() {
+  fecharModal('veuTrava');
+  focarEvidencia(travaCodigo);
+  evento('sc_soft_gate_choice', { code_number: travaCodigo, choice: 'concluir' });
+}
+function travaSeguir() {
+  fecharModal('veuTrava');
+  evento('sc_soft_gate_choice', { code_number: travaCodigo, choice: 'seguir' });
+  irPara(atual + 1);
+}
+function continuar() { evento('sc_resume_clicked', { via: 'capa' }); irPara(estado._tela || 0); }
+
+function renderNav() {
+  var t = telas[atual];
+  document.getElementById('ondeGrupo').textContent = t.getAttribute('data-grupo');
+  document.getElementById('ondeTitulo').textContent = t.getAttribute('data-titulo') + ' · tela ' + (atual + 1) + ' de ' + telas.length;
+  document.getElementById('btnVoltar').disabled = (atual === 0);
+  var av = document.getElementById('btnAvancar');
+  if (atual === telas.length - 1) { av.disabled = true; av.textContent = 'Ciclo fechado ✓'; }
+  else {
+    av.disabled = false;
+    var prox = telas[atual + 1];
+    var proxGrupo = prox.getAttribute('data-grupo');
+    if (atual === 1) {
+      av.textContent = 'Continuar para o Código 1 →';
+    } else if (proxGrupo !== t.getAttribute('data-grupo') && proxGrupo.indexOf('Código') === 0) {
+      var nAtual = telasEvidencia[atual];
+      av.textContent = (nAtual && estado['_ev' + nAtual]) ? 'Ir para o ' + proxGrupo.split(' · ')[0] + ' →' : 'Concluir o Código ' + (nAtual || '') + ' →';
+    } else {
+      av.textContent = 'Continuar →';
+    }
+  }
+  var m = document.getElementById('migalhas'); m.innerHTML = '';
+  telas.forEach(function(_, i) {
+    var b = document.createElement('i');
+    if (i < atual) b.className = 'feita';
+    if (i === atual) b.className = 'atual';
+    m.appendChild(b);
+  });
+}
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowRight') mover(1);
+  if (e.key === 'ArrowLeft') mover(-1);
+});
+
+/* ================= mapa ================= */
+function abrirMapa() { montarMapa(); document.getElementById('mapa').classList.add('aberto'); }
+function fecharMapa() { document.getElementById('mapa').classList.remove('aberto'); }
+function statusGrupo(idx) {
+  /* devolve: '', 'andamento' ou 'entregue' por tela */
+  if (idx === 0) return estado.vis0 ? 'entregue' : '';
+  var t = telas[idx];
+  var campos = t.querySelectorAll('[data-save]');
+  var quizzes = t.querySelectorAll('.quiz-item');
+  var vids = t.querySelectorAll('.vid-check');
+  var tot = 0, ok = 0;
+  campos.forEach(function(el){ tot++; if (v(el.getAttribute('data-save'))) ok++; });
+  quizzes.forEach(function(el){ tot++; if (estado['quiz_' + el.getAttribute('data-q')]) ok++; });
+  vids.forEach(function(el){ if (el.getAttribute('data-opt')) return; tot++; if (estado['vid_' + el.getAttribute('data-vid')]) ok++; });
+  if (idx === 1) { tot += 8; for (var i = 0; i < 8; i++) if (estado['li' + i]) ok++; }
+  var temLikertFinal = t.querySelector('#likertFinal');
+  if (temLikertFinal) { tot += 8; for (var j = 0; j < 8; j++) if (estado['lf' + j]) ok++; }
+  if (tot === 0) return '';
+  if (ok === 0) return '';
+  return ok >= tot ? 'entregue' : 'andamento';
+}
+function montarMapa() {
+  var l = document.getElementById('mapaLista'); l.innerHTML = '';
+  telas.forEach(function(t, i) {
+    var b = document.createElement('button'); b.className = 'mapa-item';
+    var st = statusGrupo(i);
+    var rotStatus = st === 'entregue' ? '✓ completo' : st === 'andamento' ? 'em andamento' : 'a fazer';
+    var nEvTela = (typeof telasEvidencia !== 'undefined') ? telasEvidencia[i] : null;
+    if (nEvTela) rotStatus = estado['_ev' + nEvTela] ? '✓ evidência pronta' : (st === 'andamento' ? 'em andamento' : 'sem evidência');
+    b.innerHTML = '<span class="num">' + (i + 1) + '</span>'
+      + '<span class="tit"><b>' + t.getAttribute('data-grupo') + '</b><span>' + t.getAttribute('data-titulo') + '</span></span>'
+      + '<span class="status ' + st + '">' + rotStatus + '</span>';
+    b.addEventListener('click', function(){ fecharMapa(); irPara(i); });
+    l.appendChild(b);
+  });
+}
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modalAberto) fecharMapa(); });
+
+/* ================= termômetro ================= */
+var afirmacoes = [
+  'Sei onde as decisões travam no meu sistema — e quem precisa estar conectado antes de escalarem.',
+  'A informação circula no meu time sem depender de mim como ponto central.',
+  'Sei nomear a conversa que venho adiando — e o custo que o adiamento já está cobrando.',
+  'Conduzo conversas difíceis com método: clareza, escuta e acordo explícito.',
+  'A mudança que eu conduzo tem mais de um dono — outras pessoas assumiram partes reais.',
+  'Sei quem já vive a cultura pelo exemplo, mesmo sem título formal.',
+  'Nas decisões importantes, sei quem foi afetado sem ter tido voz.',
+  'Tenho uma história concreta que mostra a cultura que quero — e ela circula sem mim.'
+];
+function montaLikert(tabelaId, prefixo) {
+  var t = document.getElementById(tabelaId);
+  afirmacoes.forEach(function(a, i) {
+    var tr = document.createElement('tr');
+    var td = document.createElement('td'); td.textContent = a; tr.appendChild(td);
+    for (var val = 1; val <= 5; val++) {
+      var c = document.createElement('td');
+      var r = document.createElement('input');
+      r.type = 'radio'; r.name = prefixo + i; r.value = val;
+      r.setAttribute('aria-label', a + ' — opção ' + val + ' de 5');
+      if (estado[prefixo + i] == val) r.checked = true;
+      r.addEventListener('change', (function(key, valor){ return function(){ estado[key] = valor; salvar(); calcTermos(); }; })(prefixo + i, val));
+      c.appendChild(r); tr.appendChild(c);
+    }
+    t.appendChild(tr);
+  });
+}
+function somaTermo(prefixo) {
+  var soma = 0, n = 0;
+  for (var i = 0; i < afirmacoes.length; i++) {
+    if (estado[prefixo + i]) { soma += parseInt(estado[prefixo + i]); n++; }
+  }
+  return { soma: soma, n: n };
+}
+function calcTermos() {
+  var ini = somaTermo('li'), fim = somaTermo('lf');
+  var bi = document.getElementById('termoIniBar'), li = document.getElementById('termoIniLeg');
+  if (ini.n === afirmacoes.length) {
+    var p = Math.round(ini.soma / 40 * 100);
+    bi.style.width = p + '%';
+    li.innerHTML = '<b>' + ini.soma + '/40.</b> ' + (p < 50 ? 'Você está entrando no Ato certo: consciência é exatamente o que este percurso constrói.' : p < 75 ? 'Boa base — os exercícios vão transformar percepção em evidência.' : 'Nível alto — use o workbook para testar se é consciência ou narrativa confortável.');
+  }
+  var bf = document.getElementById('termoFimBar'), lf = document.getElementById('termoFimLeg');
+  if (fim.n === afirmacoes.length) {
+    var pf = Math.round(fim.soma / 40 * 100);
+    bf.style.width = pf + '%';
+    lf.innerHTML = '<b>' + fim.soma + '/40.</b>';
+    if (ini.n === afirmacoes.length) {
+      var d = fim.soma - ini.soma;
+      var comp = document.getElementById('comparativo');
+      comp.classList.add('show');
+      comp.innerHTML = d > 0
+        ? '<b>+' + d + ' pontos</b> em relação ao ponto de partida. Consciência não é entender melhor: é mudar o lugar de onde se observa. Seus registros acima são a evidência.'
+        : (d === 0 ? '<b>Mesmo escore.</b> Releia suas respostas: o ganho pode estar na qualidade da evidência, não no número.' : '<b>' + d + ' pontos.</b> Escore menor após o percurso costuma ser bom sinal: você trocou confiança narrativa por lucidez. É o efeito "diagnosticar sem ilusões".');
+    }
+  }
+}
+
+/* ================= inputs com autosave ================= */
+document.querySelectorAll('[data-save]').forEach(function(el) {
+  var k = el.getAttribute('data-save');
+  if (estado[k] !== undefined) el.value = estado[k];
+  el.addEventListener('input', function(){ estado[k] = el.value; salvar(); });
+  el.addEventListener('change', function(){ estado[k] = el.value; salvar(); });
+});
+
+/* ================= quizzes ================= */
+document.querySelectorAll('.quiz-item').forEach(function(item) {
+  var q = item.getAttribute('data-q');
+  var botoes = item.querySelectorAll('.quiz-op button');
+  var certoV = botoes[0].getAttribute('data-v');
+  function marcar(valor) {
+    botoes.forEach(function(b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-v') === valor ? 'true' : 'false');
+      b.disabled = true;
+      if (b.getAttribute('data-v') === certoV) b.classList.add('certo');
+      else if (b.getAttribute('data-v') === valor && valor !== certoV) b.classList.add('errado');
+    });
+    item.querySelector('.quiz-fb').classList.add('show');
+  }
+  if (estado['quiz_' + q]) marcar(estado['quiz_' + q]);
+  botoes.forEach(function(b) {
+    b.addEventListener('click', function() {
+      estado['quiz_' + q] = b.getAttribute('data-v');
+      marcar(b.getAttribute('data-v')); salvar();
+    });
+  });
+});
+
+/* ================= chaves do capítulo (prova de leitura) ================= */
+function normaliza(s) {
+  return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+}
+document.querySelectorAll('.chave').forEach(function(box) {
+  var inp = box.querySelector('.chave-input');
+  var fb = box.querySelector('.fb');
+  function checa(silencioso) {
+    var resp = normaliza(inp.value);
+    if (!resp) { fb.classList.remove('show'); box.classList.remove('aberta'); return; }
+    var alvo = inp.getAttribute('data-resposta').split('|').map(normaliza);
+    var certo = alvo.some(function(a){ return resp.indexOf(a) !== -1; });
+    fb.classList.add('show');
+    box.classList.toggle('aberta', certo);
+    fb.innerHTML = certo ? fb.getAttribute('data-certo') : fb.getAttribute('data-errado');
+    fb.style.color = certo ? 'var(--preto)' : 'var(--vermelho)';
+  }
+  inp.addEventListener('change', function(){ checa(); });
+  inp.addEventListener('blur', function(){ checa(); });
+  if (inp.value) checa(true);
+});
+
+/* ================= rotas 7/30/90 ================= */
+var rotaTextos = {
+  '7': '<b>Rota 7 — Sprint.</b> Um código por dia, ritual diário e reencontro em uma semana.',
+  '30': '<b>Rota 30 — Travessia.</b> Um código por semana, ritual semanal e reencontro em 30 dias.',
+  '90': '<b>Rota 90 — Ciclo.</b> Cada código vira pauta com o time; reencontro fechando o trimestre.'
+};
+function bindRotas() {
+  var el = document.getElementById('rotaInfo');
+  if (!el) return;
+  var a1 = {};
+  try { a1 = JSON.parse(localStorage.getItem('ncc-workbook-ato1') || '{}'); } catch(e) {}
+  if (!estado.rota && a1.rota) estado.rota = a1.rota;
+  if (estado.rota) {
+    el.innerHTML = rotaTextos[estado.rota] + ' <i>Herdada do Ato I — para mudar, refaça a escolha na Consciência.</i>';
+  } else {
+    estado.rota = '30';
+    el.innerHTML = rotaTextos['30'] + ' <i>Rota padrão — você definiu a sua no Ato I.</i>';
+  }
+}
+
+/* ================= vídeos assistidos ================= *//* ================= vídeos assistidos ================= */
+document.querySelectorAll('.vid-check').forEach(function(b) {
+  var k = 'vid_' + b.getAttribute('data-vid');
+  var lab = b.closest('.assisti');
+  if (estado[k]) { b.checked = true; if (lab) lab.classList.add('feito'); }
+  b.addEventListener('change', function() {
+    estado[k] = b.checked; salvar();
+    if (lab) lab.classList.toggle('feito', b.checked);
+  });
+});
+
+/* ================= checklists ================= */
+function ligaChecklist(listaId, resultadoId, mensagens) {
+  var lista = document.getElementById(listaId);
+  if (!lista) return;
+  var boxes = lista.querySelectorAll('input[type=checkbox]');
+  var res = document.getElementById(resultadoId);
+  function render() {
+    var n = 0;
+    boxes.forEach(function(b){ if (b.checked) n++; });
+    if (n > 0) { res.classList.add('show'); res.innerHTML = mensagens(n); } else res.classList.remove('show');
+  }
+  boxes.forEach(function(b) {
+    var k = listaId + '_' + b.getAttribute('data-k');
+    if (estado[k]) b.checked = true;
+    b.addEventListener('change', function(){ estado[k] = b.checked; salvar(); render(); });
+  });
+  render();
+}
+ligaChecklist('escudos', 'escudosResultado', function(n) {
+  if (n <= 1) return '<b>' + n + ' frase-escudo.</b> Sinal de sistema relativamente aberto — ou de que você ainda não está escutando os corredores.';
+  if (n <= 3) return '<b>' + n + ' frases-escudo.</b> A imunidade à mudança está ativa. Cada frase dessas é menos um fato e mais um mecanismo de gestão de ansiedade (Kegan & Lahey).';
+  return '<b>' + n + ' frases-escudo.</b> Alerta: quando o passado vira prisão, o legado deixou de ser matéria-prima e virou desculpa. Complacência é uma força silenciosa (Kotter) — reintroduza urgência sem pânico.';
+});
+ligaChecklist('momentos', 'momentosResultado', function(n) {
+  return '<b>' + n + ' momento(s) da verdade marcados.</b> É neles que a sua escuta deve se concentrar: a cultura real aparece sob pressão, não no mural.';
+});
+
+/* ================= engrenagens ================= */
+var listaEng = ['Liderança', 'Incentivos', 'Governança', 'Rituais', 'Comunicação', 'Talento', 'Símbolos'];
+(function() {
+  var cont = document.getElementById('engrenagens');
+  if (!cont) return;
+  listaEng.forEach(function(nome, i) {
+    var div = document.createElement('div'); div.className = 'engrenagem';
+    var n = document.createElement('div'); n.className = 'nome'; n.textContent = nome; div.appendChild(n);
+    var ops = document.createElement('div'); ops.className = 'ops';
+    [['reforca', 'Reforça o desejado'], ['neutra', 'Neutra'], ['contradiz', 'Contradiz']].forEach(function(op) {
+      var l = document.createElement('label');
+      var r = document.createElement('input'); r.type = 'radio'; r.name = 'eng' + i; r.value = op[0];
+      if (estado['eng' + i] === op[0]) r.checked = true;
+      r.addEventListener('change', function(){ estado['eng' + i] = op[0]; salvar(); renderEng(); });
+      l.appendChild(r); l.appendChild(document.createTextNode(op[1])); ops.appendChild(l);
+    });
+    div.appendChild(ops); cont.appendChild(div);
+  });
+  renderEng();
+})();
+function renderEng() {
+  var res = document.getElementById('engrenagensResultado');
+  if (!res) return;
+  var contra = [], n = 0;
+  listaEng.forEach(function(nome, i) {
+    if (estado['eng' + i]) { n++; if (estado['eng' + i] === 'contradiz') contra.push(nome); }
+  });
+  if (n === 0) { res.classList.remove('show'); return; }
+  res.classList.add('show');
+  res.innerHTML = contra.length
+    ? '<b>Engrenagens em contradição: ' + contra.join(', ') + '.</b> Quando duas engrenagens se contradizem, a mais forte vence. Suas alavancas (exercício 3.4) provavelmente estão aqui.'
+    : '<b>Nenhuma contradição marcada' + (n < 7 ? ' até agora' : '') + '.</b> Ou o sistema está alinhado — ou o diagnóstico ainda está gentil demais. Teste contra os momentos da verdade do exercício 3.1.';
+}
+
+/* ================= sínteses ================= */
+function atualizarSinteses() {
+  renderReencontroSintese();
+  function set(id, cond, html) {
+    var el = document.getElementById(id);
+    if (el && cond) { el.className = ''; el.innerHTML = html; }
+  }
+  set('sintC5', v('c5_ritual') && v('c5_evidencia'),
+      'Ritual: <b>' + v('c5_ritual') + '</b>.<br><span style="font-weight:400; font-size:15px;">Funcionou quando: ' + v('c5_evidencia') + '</span>');
+  set('sintC6', v('c6_clareza') && v('c6_acordo'),
+      'Vou dizer: <b>' + v('c6_clareza') + '</b><br><span style="font-weight:400; font-size:15px;">Acordo esperado: ' + v('c6_acordo') + (v('c6_data') ? ' — em ' + v('c6_data') : '') + '</span>');
+  set('sintC7', v('c7_entrega') && v('c7_evidencia'),
+      '<b>' + v('c7_entrega') + '</b><br><span style="font-weight:400; font-size:15px;">Evidência: ' + v('c7_evidencia') + '</span>');
+  set('sintC8', v('c8_micropratica') && v('c8_evidencia'),
+      '<b>' + v('c8_micropratica') + '</b><br><span style="font-weight:400; font-size:15px;">Evidência: ' + v('c8_evidencia') + '</span>');
+  set('sintC9', v('c9_contexto') && v('c9_escolha'),
+      '<b>' + (v('missao9') || 'Sua micro-história') + '</b><br><span style="font-weight:400; font-size:15px;">' + v('c9_contexto') + ' — ' + v('c9_escolha') + '</span>');
+  /* mapa final */
+  set('mapaC5', v('c5_ritual'), '<b>' + v('c5_ritual') + '</b>' + (v('c5_evidencia') ? '<br><span style="font-weight:400; font-size:15px;">Evidência: ' + v('c5_evidencia') + '</span>' : ''));
+  set('mapaC6', v('c6_clareza'), '<b>' + v('c6_clareza') + '</b>' + (v('c6_acordo') ? '<br><span style="font-weight:400; font-size:15px;">Acordo: ' + v('c6_acordo') + '</span>' : ''));
+  set('mapaC7', v('c7_entrega'), '<b>' + v('c7_entrega') + '</b>');
+  set('mapaC8', v('c8_micropratica'), '<b>' + v('c8_micropratica') + '</b>');
+  set('mapaC9', v('c9_contexto') || v('missao9'), '<b>' + (v('missao9') || 'Micro-história') + '</b>' + (v('c9_onde') ? '<br><span style="font-weight:400; font-size:15px;">Contada em: ' + v('c9_onde') + '</span>' : ''));
+
+  /* ATIVAÇÃO do Ato II: roteiro da conversa pronto (clareza + acordo) */
+  if (v('c6_clareza') && v('c6_acordo') && !estado._ativado) {
+    estado._ativado = true;
+    var min = estado._inicioTs ? Math.round((Date.now() - estado._inicioTs) / 60000) : null;
+    evento('sc_first_evidence_created', { time_to_activation_min: min });
+  }
+  /* evidências entregues */
+  [['_ev5', v('c5_ritual') && v('c5_evidencia'), 5],
+   ['_ev6', v('c6_clareza') && v('c6_acordo'), 6],
+   ['_ev7', v('c7_entrega') && v('c7_evidencia'), 7],
+   ['_ev8', v('c8_micropratica') && v('c8_evidencia'), 8],
+   ['_ev9', v('c9_contexto') && v('c9_escolha'), 9]
+  ].forEach(function(par) {
+    if (par[1] && !estado[par[0]]) {
+      estado[par[0]] = true;
+      evento('sc_evidence_created', { code_number: par[2] });
+      evento('sc_code_completed', { code_number: par[2] });
+    }
+  });
+  if (estado._ev5 && estado._ev6 && estado._ev7 && estado._ev8 && estado._ev9 && !estado._atoOk) {
+    estado._atoOk = true;
+    evento('sc_act_completed');
+  }
+}
+
+/* ================= progresso ================= */
+var camposProg = Array.prototype.slice.call(document.querySelectorAll('[data-prog]')).map(function(el){ return el.getAttribute('data-save'); });
+var quizIds = Array.prototype.slice.call(document.querySelectorAll('.quiz-item')).map(function(el){ return 'quiz_' + el.getAttribute('data-q'); });
+var vidIds = Array.prototype.slice.call(document.querySelectorAll('.vid-check:not([data-opt])')).map(function(el){ return 'vid_' + el.getAttribute('data-vid'); });
+function atualizarProgresso() {
+  var total = camposProg.length + quizIds.length + vidIds.length + 8;
+  var ok = 0;
+  camposProg.forEach(function(k){ if (v(k)) ok++; });
+  quizIds.forEach(function(k){ if (estado[k]) ok++; });
+  vidIds.forEach(function(k){ if (estado[k]) ok++; });
+  for (var i = 0; i < 8; i++) { if (estado['li' + i]) ok++; }
+  var p = Math.round(ok / total * 100);
+  /* na interface, o que conta são as evidências — a % fica interna (GA/hub) */
+  var nEv = ['_ev5','_ev6','_ev7','_ev8','_ev9'].filter(function(k){ return estado[k]; }).length;
+  document.getElementById('progressoFill').style.width = (nEv / 5 * 100) + '%';
+  document.getElementById('progressoPct').textContent = nEv + '/5';
+  document.getElementById('progressoPct').setAttribute('title', nEv + ' de 5 evidências concluídas');
+  if (estado._progresso !== p) {
+    estado._progresso = p;
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(estado)); } catch(e) {}
+  }
+}
+
+/* ================= brief executivo ================= */
+function coletaBrief() {
+  var l = [];
+  if (v('c0_conversa')) l.push(['A conversa que eu adiava', v('c0_conversa')]);
+  if (v('c5_ritual')) l.push(['Código 5 · Ritual de conexão', v('c5_ritual') + (v('c5_evidencia') ? ' — Evidência: ' + v('c5_evidencia') : '')]);
+  if (v('c6_clareza')) l.push(['Código 6 · Conversa destravada', 'Clareza: ' + v('c6_clareza') + (v('c6_acordo') ? ' | Acordo: ' + v('c6_acordo') : '') + (v('c6_verificacao') ? ' | Verificação: ' + v('c6_verificacao') : '') + (v('c6_data') ? ' | Data: ' + v('c6_data') : '')]);
+  if (v('c7_entrega')) l.push(['Código 7 · Autoria entregue', v('c7_entrega') + (v('c7_evidencia') ? ' — Evidência: ' + v('c7_evidencia') : '')]);
+  if (v('c8_micropratica')) l.push(['Código 8 · Microprática inclusiva', v('c8_micropratica') + (v('c8_evidencia') ? ' — Evidência: ' + v('c8_evidencia') : '')]);
+  if (v('c9_contexto')) l.push(['Código 9 · Micro-história', (v('missao9') ? '"' + v('missao9') + '" — ' : '') + v('c9_contexto') + ' ' + v('c9_escolha') + (v('c9_onde') ? ' | Onde: ' + v('c9_onde') : '')]);
+  return l;
+}
+
+function gerarBrief() {
+  var linhas = coletaBrief();
+  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" para gerar o brief.'); return; }
+  evento('sc_brief_generated');
+  var hoje = new Date().toLocaleDateString('pt-BR');
+  var htm = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Brief — Meu Código de Consciência</title><style>'
+    + 'body{font-family:Georgia,serif;color:#231f20;max-width:700px;margin:40px auto;padding:0 24px;line-height:1.6;}'
+    + 'h1{font-family:Arial,Helvetica,sans-serif;text-transform:uppercase;font-size:24px;border-bottom:3px solid #231f20;padding-bottom:10px;}'
+    + '.meta{font-family:Arial,sans-serif;font-size:12px;color:#6d6e71;text-transform:uppercase;letter-spacing:.1em;margin-bottom:30px;}'
+    + 'h2{font-family:Arial,sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;background:#231f20;color:#fff;display:inline-block;padding:4px 10px;margin:24px 0 8px;}'
+    + 'p{margin:6px 0 0;font-size:16px;} .rodape{margin-top:40px;font-family:Arial,sans-serif;font-size:11px;color:#6d6e71;text-transform:uppercase;letter-spacing:.1em;border-top:1px solid #ddd;padding-top:12px;}'
+    + '@media print{.no-print{display:none;}}</style></head><body>'
+    + '<h1>Meu Código de Consciência — Ato I</h1><div class="meta">O Novo Código da Mudança · Workbook · ' + hoje + '</div>';
+  linhas.forEach(function(l){ htm += '<h2>' + l[0] + '</h2><p>' + l[1] + '</p>'; });
+  htm += '<h2>O 16º código é seu</h2><p>O livro tem 15 códigos. Esta página é o décimo sexto — o que só você podia escrever. <b>Dobre-a e guarde-a dentro do livro, como marcador:</b> toda vez que voltar a ele, sua promessa volta junto.</p>'
+    + '<div class="rodape">Toda mudança é humana — gerado pelo workbook do Ato I</div>'
+    + '<p class="no-print" style="margin-top:24px;"><button onclick="window.print()" style="font-family:Arial;font-weight:bold;padding:12px 24px;background:#231f20;color:#fff;border:0;cursor:pointer;">Imprimir / salvar PDF</button></p></body></html>';
+  var w = window.open('', '_blank');
+  if (w) { w.document.write(htm); w.document.close(); }
+  else {
+    var blob = new Blob([htm], { type: 'text/html' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'brief-codigo-coragem.html'; a.click();
+  }
+}
+function enviarEmail() {
+  var linhas = coletaBrief();
+  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" antes de enviar.'); return; }
+  var corpo = 'MEU CÓDIGO DE CORAGEM — ATO II\nO Novo Código da Mudança · Seu Código\n\n';
+  linhas.forEach(function(l){ corpo += l[0].toUpperCase() + '\n' + l[1] + '\n\n'; });
+  corpo += 'Reencontro em 30 dias: a evidência apareceu?\nToda mudança é humana.';
+  if (corpo.length > 1800) corpo = corpo.slice(0, 1800) + '…';
+  evento('sc_email_intent');
+  location.href = 'mailto:?subject=' + encodeURIComponent('Meu Código de Coragem — Ato II') + '&body=' + encodeURIComponent(corpo);
+}
+
+/* ================= calendário (.ics) ================= */
+function fmtICS(d) {
+  function p(n){ return (n < 10 ? '0' : '') + n; }
+  return d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + 'T' + p(d.getHours()) + p(d.getMinutes()) + '00';
+}
+function proximaSegunda(base) {
+  var d = new Date(base);
+  d.setDate(d.getDate() + ((8 - d.getDay()) % 7 || 7));
+  d.setHours(9, 0, 0, 0);
+  return d;
+}
+function baixarICS() {
+  var agora = new Date();
+  var rota = estado.rota || '30';
+  var offsetReencontro = { '7': 7, '30': 30, '90': 90 }[rota];
+  var regra = { '7': 'RRULE:FREQ=DAILY;COUNT=7', '30': 'RRULE:FREQ=WEEKLY;COUNT=4', '90': 'RRULE:FREQ=WEEKLY;COUNT=12' }[rota];
+  var inicioRitual = rota === '7' ? (function(){ var d = new Date(agora); d.setDate(d.getDate() + 1); d.setHours(9, 0, 0, 0); return d; })() : proximaSegunda(agora);
+  var d7 = new Date(agora); d7.setDate(d7.getDate() + (rota === '7' ? 3 : 7)); d7.setHours(9, 0, 0, 0);
+  var d30 = new Date(agora); d30.setDate(d30.getDate() + offsetReencontro); d30.setHours(9, 0, 0, 0);
+  /* respeita a data escolhida na tela de reencontro, se houver */
+  var m = v('c10_data').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m) { var dd = new Date(+m[3], +m[2] - 1, +m[1], 9, 0, 0); if (dd > agora) d30 = dd; }
+  else { estado.c10_data = d30.toLocaleDateString('pt-BR'); salvar(); }
+  var comp = v('c5_ritual') || 'praticar o ritual de conexão escolhido no workbook';
+  var evid = v('c5_evidencia') || 'a evidência definida no exercício 5.3';
+  var par = v('c0_conversa') || 'a conversa que você vem adiando';
+  function esc(s){ return s.replace(/([,;])/g, '\\$1'); }
+  var stamp = fmtICS(agora);
+  var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//NCC//Workbook Ato I//PT',
+    'BEGIN:VEVENT', 'UID:ncc-ritual-' + Date.now() + '@workbook', 'DTSTAMP:' + stamp,
+    'DTSTART:' + fmtICS(inicioRitual), 'DURATION:PT15M', regra,
+    'SUMMARY:' + esc('Ritual de conexão · Ato II — ' + comp),
+    'DESCRIPTION:' + esc('Compromisso do Código 4: ' + comp + '. O time percebe quando: ' + evid + '. (O Novo Código da Mudança — Workbook)'),
+    'END:VEVENT',
+    'BEGIN:VEVENT', 'UID:ncc-pacto-' + Date.now() + '@workbook', 'DTSTAMP:' + stamp,
+    'DTSTART:' + fmtICS(d7), 'DURATION:PT30M',
+    'SUMMARY:' + esc('A conversa que destrava — ' + par),
+    'DESCRIPTION:' + esc('Use o roteiro do exercício 6.2: clareza (' + (v('c6_clareza') || 'tema real') + '), escuta e acordo (' + (v('c6_acordo') || 'a definir') + ').'),
+    'END:VEVENT',
+    'BEGIN:VEVENT', 'UID:ncc-reencontro-' + Date.now() + '@workbook', 'DTSTAMP:' + stamp,
+    'DTSTART:' + fmtICS(d30), 'DURATION:PT30M',
+    'SUMMARY:' + esc('Reencontro com o workbook: a evidência apareceu?'),
+    'DESCRIPTION:' + esc('Abra o workbook do Ato I na tela "Reencontro de 30 dias" e compare a previsão com o real. Evidência prevista: ' + evid),
+    'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  var blob = new Blob([ics], { type: 'text/calendar' });
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ncc-acoes-ato2.ics'; a.click();
+  evento('sc_calendar_downloaded', { route: rota });
+}
+
+/* ================= reencontro ================= */
+var reencontroMsgs = {
+  sim: '<b>Conversa feita, acordo firmado.</b> Registre abaixo como o acordo está sendo cumprido — no Ato III isso vira cadência e métrica. O sistema aprendeu que falar tem consequência útil.',
+  parcial: '<b>A conversa aconteceu — e isso já muda o sistema.</b> Sem acordo explícito, porém, ela ainda não destravou. Releia o método do Capítulo 6: qual critério precisa ficar explícito para o acordo sair?',
+  nao: '<b>Dado honesto vale mais que vitória narrada.</b> Três hipóteses: o custo do adiamento ainda parece menor que o da conversa? Falta clareza sobre o tema real? Ou falta a data na agenda — que é onde a coragem costuma morrer?'
+};
+function renderReencontroSintese() {
+  var p = document.getElementById('reencontroPromessa');
+  if (p && v('c6_clareza')) {
+    p.className = '';
+    p.innerHTML = 'Você diria: <b>' + v('c6_clareza') + '</b>'
+      + (v('c6_acordo') ? '<br><span style="font-weight:400; font-size:15px;">Acordo esperado: ' + v('c6_acordo') + '</span>' : '')
+      + (v('c6_verificacao') ? '<br><span style="font-weight:400; font-size:15px;">Cumprido quando: ' + v('c6_verificacao') + '</span>' : '')
+      + (v('c6_data') ? '<br><span style="font-weight:400; font-size:15px;">Data marcada: ' + v('c6_data') + '</span>' : '');
+  }
+  var capa = document.getElementById('reencontroDataCapa');
+  if (capa && v('c10_data')) capa.textContent = v('c10_data');
+}
+function bindReencontro() {
+  var fb = document.getElementById('reencontroFeedback');
+  var ops = document.getElementById('reencontroOpcoes');
+  if (!ops) return;
+  ops.querySelectorAll('button').forEach(function(b) {
+    var val = b.getAttribute('data-rv');
+    if (estado.c10_resultado === val) b.classList.add('certo');
+    b.addEventListener('click', function() {
+      estado.c10_resultado = val; salvar();
+      ops.querySelectorAll('button').forEach(function(x){ x.classList.remove('certo'); });
+      b.classList.add('certo');
+      fb.classList.add('show'); fb.innerHTML = reencontroMsgs[val];
+    });
+  });
+  if (estado.c10_resultado) { fb.classList.add('show'); fb.innerHTML = reencontroMsgs[estado.c10_resultado]; }
+}
+
+/* ================= modo essencial (atalho de 10 min) ================= */
+function modoEssencial() {
+  estado.modo = 'essencial';
+  salvar();
+  evento('sc_shortcut_activation');
+  irPara(6);
+  focarEvidencia(6, true);
+}
+function aplicarModoEssencial() {
+  if (estado.modo !== 'essencial') return;
+  var selo = document.getElementById('seloEssencial');
+  if (selo) selo.style.display = 'inline-block';
+  var apro = document.getElementById('aprofundamento13');
+  if (apro && !apro.open) apro.open = false;
+}
+
+/* ================= foco na evidência do código ================= */
+var camposEvidencia = { 5: 'c5_ritual', 6: 'c6_clareza', 7: 'c7_entrega', 8: 'c8_micropratica', 9: 'c9_contexto' };
+function focarEvidencia(n, semDestaque) {
+  var k = camposEvidencia[n];
+  if (!k) return;
+  var el = document.querySelector('[data-save="' + k + '"]');
+  if (!el) return;
+  var caixa = el.closest('.exercicio') || el;
+  caixa.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(function() {
+    el.focus();
+    if (!semDestaque) {
+      caixa.style.transition = 'box-shadow .3s';
+      caixa.style.boxShadow = '0 0 0 4px rgba(43,125,191,.35)';
+      setTimeout(function(){ caixa.style.boxShadow = 'none'; }, 1800);
+    }
+  }, 420);
+}
+
+/* ================= gestor de modais acessíveis ================= */
+var modalAberto = null, focoAnterior = null;
+function abrirModal(id) {
+  focoAnterior = document.activeElement;
+  var el = document.getElementById(id);
+  el.classList.add('aberto');
+  modalAberto = el;
+  var mp = document.getElementById('conteudo'); if (mp) mp.setAttribute('aria-hidden', 'true');
+  var alvo = el.querySelector('button');
+  if (alvo) setTimeout(function(){ alvo.focus(); }, 60);
+}
+function fecharModal(id) {
+  var el = id ? document.getElementById(id) : modalAberto;
+  if (!el) return;
+  el.classList.remove('aberto');
+  modalAberto = null;
+  var mp2 = document.getElementById('conteudo'); if (mp2) mp2.removeAttribute('aria-hidden');
+  if (focoAnterior && focoAnterior.focus) focoAnterior.focus();
+}
+document.addEventListener('keydown', function(e) {
+  if (!modalAberto) return;
+  if (e.key === 'Escape') { fecharModal(); return; }
+  if (e.key !== 'Tab') return;
+  var foc = modalAberto.querySelectorAll('button, [href], input, select, textarea');
+  if (!foc.length) return;
+  var primeiro = foc[0], ultimo = foc[foc.length - 1];
+  if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+  else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+});
+
+/* ================= apagar: tudo ou uma etapa ================= */
+var resetEscopo = 'tudo';
+function pedirReset() {
+  resetEscopo = 'tudo';
+  document.getElementById('resetTitulo').textContent = 'Apagar todas as respostas?';
+  document.getElementById('resetTexto').innerHTML = 'Isso limpa o workbook deste navegador — termômetros, exercícios, compromissos e progresso — e você recomeça do zero. <b>Não tem desfazer.</b>';
+  document.getElementById('resetConfirmar').textContent = 'Apagar tudo';
+  abrirModal('veuReset');
+}
+function pedirResetEtapa(idx) {
+  resetEscopo = idx;
+  var t = telas[idx];
+  document.getElementById('resetTitulo').textContent = 'Limpar só esta etapa?';
+  document.getElementById('resetTexto').innerHTML = 'Isso apaga apenas as respostas de <b>' + t.getAttribute('data-grupo') + ' · ' + t.getAttribute('data-titulo') + '</b>. O restante do workbook fica intacto. <b>Não tem desfazer.</b>';
+  document.getElementById('resetConfirmar').textContent = 'Limpar esta etapa';
+  abrirModal('veuReset');
+}
+function fecharReset() { fecharModal('veuReset'); }
+function chavesDaEtapa(idx) {
+  var t = telas[idx], ks = [];
+  t.querySelectorAll('[data-save]').forEach(function(el){ ks.push(el.getAttribute('data-save')); });
+  t.querySelectorAll('.quiz-item').forEach(function(el){ ks.push('quiz_' + el.getAttribute('data-q')); });
+  t.querySelectorAll('.vid-check').forEach(function(el){ ks.push('vid_' + el.getAttribute('data-vid')); });
+  t.querySelectorAll('.check-lista input[data-k]').forEach(function(el){ ks.push(el.closest('.check-lista').id + '_' + el.getAttribute('data-k')); });
+  if (t.querySelector('#engrenagens')) for (var e = 0; e < 7; e++) ks.push('eng' + e);
+  if (t.querySelector('#likertInicial')) for (var i = 0; i < 8; i++) ks.push('li' + i);
+  if (t.querySelector('#likertFinal')) for (var j = 0; j < 8; j++) ks.push('lf' + j);
+  if (t.querySelector('#reencontroOpcoes')) ks.push('c10_resultado');
+  return ks;
+}
+function executarReset() {
+  if (resetEscopo === 'tudo') {
+    try { localStorage.removeItem(STORE_KEY); } catch(e) {}
+    location.reload();
+    return;
+  }
+  chavesDaEtapa(resetEscopo).forEach(function(k){ delete estado[k]; });
+  estado._tela = resetEscopo;
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(estado)); } catch(e) {}
+  location.reload(); /* volta na mesma etapa, limpa */
+}
+document.getElementById('veuReset').addEventListener('click', function(e){ if (e.target === this) fecharReset(); });
+
+/* injeta o botão "limpar esta etapa" em cada tela com respostas */
+telas.forEach(function(t, i) {
+  if (i === 0) return;
+  var pag = t.querySelectorAll('.pagina');
+  var alvo = pag[pag.length - 1];
+  if (!alvo) return;
+  var linha = document.createElement('details');
+  linha.style.cssText = 'font-family:var(--sans); font-size:12px; margin-top:34px; border-top:1px solid var(--linha); padding-top:14px; color:var(--cinza);';
+  var sum = document.createElement('summary');
+  sum.textContent = 'Opções desta etapa';
+  sum.style.cssText = 'cursor:pointer; font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:11px;';
+  linha.appendChild(sum);
+  var b = document.createElement('button');
+  b.textContent = 'Limpar respostas desta etapa';
+  b.style.marginTop = '10px';
+  b.style.cssText = 'font-family:var(--sans); font-weight:700; font-size:12px; letter-spacing:.04em; text-transform:uppercase; background:none; border:0; color:var(--cinza); cursor:pointer; text-decoration:underline; padding:0;';
+  b.addEventListener('mouseover', function(){ b.style.color = 'var(--vermelho)'; });
+  b.addEventListener('mouseout', function(){ b.style.color = 'var(--cinza)'; });
+  b.addEventListener('click', function(){ pedirResetEtapa(i); });
+  linha.appendChild(b);
+  alvo.appendChild(linha);
+});
+
+/* ================= exportar / importar ================= */
+function exportar() {
+  evento('sc_export_completed');
+  var blob = new Blob([JSON.stringify(estado, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ncc-workbook-ato2-respostas.json';
+  a.click();
+}
+function importar(ev) {
+  var f = ev.target.files[0];
+  if (!f) return;
+  var r = new FileReader();
+  r.onload = function() {
+    try {
+      var novo = JSON.parse(r.result);
+      /* aceita o pacote do ciclo (hub) ou o export do módulo */
+      if (novo && novo.formato === 'seucodigo-ciclo') novo = novo[STORE_KEY] || null;
+      if (!novo || typeof novo !== 'object' || Array.isArray(novo)) throw new Error('estrutura');
+      /* cópia de segurança antes de sobrescrever — nunca importar parcialmente em silêncio */
+      try { localStorage.setItem(STORE_KEY + '__backup', localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {}
+      novo._v = novo._v || 1;
+      estado = novo;
+      evento('sc_import_completed');
+      salvar();
+      alert('Seu progresso foi recuperado. Você pode continuar de onde parou.');
+      location.reload();
+    } catch(e) {
+      evento('sc_import_failed');
+      alert('Não conseguimos ler este arquivo. Seus dados atuais continuam protegidos.');
+    }
+  };
+  r.readAsText(f);
+}
+
+/* ================= acessibilidade programática ================= */
+(function(){
+  var uid = 0;
+  document.querySelectorAll('[data-save]').forEach(function(el) {
+    if (!el.id) { uid++; el.id = 'campo_' + uid; }
+    var lab = el.previousElementSibling;
+    if (lab && lab.tagName !== 'LABEL') lab = lab.previousElementSibling;
+    if (lab && lab.tagName === 'LABEL' && lab.classList.contains('campo')) lab.setAttribute('for', el.id);
+  });
+})();
+
+/* pré-preenche a tensão do 3.3 com o desafio escolhido na entrada */
+(function(){
+  var el = document.querySelector('[data-save="c3_tensao"]');
+  if (el && !el.value && v('c0_tensao')) { el.value = v('c0_tensao'); estado.c3_tensao = el.value; }
+})();
+
+/* ================= feedback do ato ================= */
+(function(){
+  var fbx = document.getElementById('feedbackAto');
+  if (!fbx) return;
+  var obg = document.getElementById('feedbackObrigado');
+  function marca(valor) {
+    fbx.querySelectorAll('button').forEach(function(x){ x.disabled = true; if (x.getAttribute('data-fb') === valor) x.classList.add('certo'); });
+    obg.style.display = 'block';
+  }
+  if (estado._feedback) marca(String(estado._feedback));
+  fbx.querySelectorAll('button').forEach(function(bt) {
+    bt.addEventListener('click', function() {
+      estado._feedback = parseInt(bt.getAttribute('data-fb'));
+      salvar();
+      evento('sc_feedback_submitted', { score: estado._feedback });
+      marca(bt.getAttribute('data-fb'));
+    });
+  });
+})();
+
+/* ================= herança do Ato I ================= */
+(function(){
+  var a1 = {};
+  try { a1 = JSON.parse(localStorage.getItem('ncc-workbook-ato1') || '{}'); } catch(e) {}
+  function w(k){ return (a1[k] || '').toString().trim(); }
+  var box = document.getElementById('heranca');
+  var temGap = w('c1_gap_declara') && w('c1_gap_pratica');
+  var temComp = w('c4_comportamento');
+  if (temGap || temComp) {
+    box.style.display = 'block';
+    if (temGap) {
+      var g = document.getElementById('herancaGap');
+      g.style.display = 'block';
+      g.innerHTML = 'Você nomeou: declaramos que <b>' + w('c1_gap_declara') + '</b>, mas na prática <b>' + w('c1_gap_pratica') + '</b>.';
+      /* pré-preenche a conversa adiada com o gap, se ainda vazio */
+      var campo = document.querySelector('[data-save="c0_conversa"]');
+      if (campo && !campo.value) campo.placeholder = 'ex.: a conversa sobre ' + w('c1_gap_pratica');
+    }
+    if (temComp) {
+      var c = document.getElementById('herancaCompromisso');
+      c.style.display = 'block';
+      c.innerHTML = 'E se comprometeu a <b>' + w('c4_comportamento') + '</b>. A Coragem começa por aí.';
+    }
+  } else {
+    document.getElementById('semHeranca').style.display = 'block';
+  }
+})();
+
+
+/* ================= simulador de conversa (Código 6) ================= */
+var SIM_CENAS = [
+  {
+    titulo: 'Cena 1 · A abertura',
+    contexto: 'Vocês dois, sala fechada, 30 minutos. A pessoa senta e olha para o relógio. Você abre a conversa dizendo:',
+    opcoes: [
+      { t: '"Preciso te dar um feedback sobre um comportamento seu."', v: 'julgamento',
+        fb: '<b>Cuidado.</b> Abrir por "feedback sobre comportamento" põe a outra pessoa em posição de julgada — e ela vai passar a conversa defendendo a identidade, não resolvendo o tema. O capítulo é direto: feedback não é julgamento de caráter.', p: 1 },
+      { t: '"Queria alinhar um tema que está custando caro para os dois times — e ouvir sua leitura antes."', v: 'clareza',
+        fb: '<b>Clareza + escuta.</b> Você nomeou o tema real, colocou o custo no sistema (não na pessoa) e sinalizou que a leitura dela importa. É exatamente a abertura que o método pede.', p: 3 },
+      { t: '"Tudo bem? Como estão as coisas por aí? Quero saber como você está…"', v: 'rodeio',
+        fb: '<b>Rodeio.</b> Aquecer é humano, mas quando a conversa começa sem tema, ela costuma terminar sem acordo. Sem clareza, a conversa gira sem destino.', p: 2 }
+    ]
+  },
+  {
+    titulo: 'Cena 2 · A defesa',
+    contexto: 'Ela responde na hora: "Olha, se o meu time não entrega é porque vocês mudam a prioridade toda semana. O problema não é meu." O tom subiu. Você:',
+    opcoes: [
+      { t: '"Espera — me dá um exemplo concreto de uma semana em que a prioridade mudou?"', v: 'escuta',
+        fb: '<b>Escuta que vira dado.</b> Você transformou a acusação em evidência examinável — e, de quebra, mostrou que a leitura dela pode mudar a sua. Conflito útil não busca vencer pessoas: busca melhorar decisões.', p: 3 },
+      { t: '"Não é bem assim. As prioridades mudam porque o mercado muda."', v: 'contra',
+        fb: '<b>Contra-ataque.</b> Justificar aqui é natural — e transforma a conversa em disputa de versões. O sistema aprende que discordar é combate, e a próxima verdade não chega até você.', p: 1 },
+      { t: 'Silêncio. Você recua e muda de assunto para não escalar.', v: 'recuo',
+        fb: '<b>Recuo.</b> A tensão que não entra na reunião surge no corredor. Ao evitar o desconforto agora, você adia o custo — com juros.', p: 1 }
+    ]
+  },
+  {
+    titulo: 'Cena 3 · O ponto cego',
+    contexto: 'No exemplo que ela dá, você percebe: parte do problema é uma decisão que <b>você</b> tomou e não comunicou. Você:',
+    opcoes: [
+      { t: '"Isso é meu. Mudei o critério e não comuniquei — e o seu time pagou. Vou corrigir isso."', v: 'assume',
+        fb: '<b>Assumir muda o jogo.</b> Quando o líder reconhece o próprio impacto no meio da conversa, ele autoriza todo mundo a fazer o mesmo. Lembre do Código 4: impacto é mais relevante que intenção.', p: 3 },
+      { t: '"Pode ter havido uma falha de comunicação na cadeia."', v: 'passiva',
+        fb: '<b>Voz passiva.</b> "Houve uma falha" não tem dono — e a outra pessoa percebe. Meia responsabilidade produz meio acordo.', p: 2 },
+      { t: 'Anota mentalmente para corrigir depois, sem dizer nada.', v: 'cala',
+        fb: '<b>Oportunidade perdida.</b> Você corrige o processo, mas o sistema não aprende que aqui é seguro nomear erros. A cena que ensina cultura é a que acontece na frente das pessoas.', p: 1 }
+    ]
+  },
+  {
+    titulo: 'Cena 4 · O fechamento',
+    contexto: 'Faltam cinco minutos. A conversa foi boa, o clima melhorou. Você:',
+    opcoes: [
+      { t: '"Combinado assim: uma prioridade única por trimestre, revisada por nós dois toda primeira segunda. Eu mando o resumo hoje. Se mudar algo, aviso antes, não depois."', v: 'acordo',
+        fb: '<b>Acordo explícito.</b> Decisão, critério, dono e verificação — em duas frases. É a prova de que a conversa aconteceu: sem acordo, ela vira pausa com conteúdo emocional.', p: 3 },
+      { t: '"Foi ótimo conversar. Vamos manter esse canal aberto."', v: 'vago',
+        fb: '<b>Sem acordo.</b> A maioria das conversas corporativas falha exatamente aqui: fala-se muito, decide-se pouco. Sem acordo, o sistema volta ao padrão antigo em uma semana.', p: 1 },
+      { t: '"Vou pensar no que você trouxe e te retorno."', v: 'adia',
+        fb: '<b>Adiamento elegante.</b> Às vezes é legítimo — mas só com data. Sem data, "te retorno" é a forma educada de não decidir.', p: 2 }
+    ]
+  }
+];
+var simPasso = 0, simPontos = 0, simEscolhas = [];
+
+function simIniciar(reset) {
+  if (reset) { simPasso = 0; simPontos = 0; simEscolhas = []; estado._simFeito = false; salvar(); }
+  var pal = document.getElementById('simPalco');
+  if (!pal) return;
+  document.getElementById('simResultado').classList.remove('show');
+  document.getElementById('simReiniciar').style.display = 'none';
+  /* personaliza com a conversa que o leitor nomeou */
+  var quem = v('c0_conversa');
+  var intro = document.getElementById('simIntro');
+  if (quem && intro) intro.innerHTML = 'Sua conversa adiada: <b>' + quem + '</b>. As quatro cenas a seguir são um ensaio dela — escolha o que você diria e veja o que cada escolha ensina ao sistema. Errar aqui não custa nada.';
+  simRender();
+}
+function simRender() {
+  var pal = document.getElementById('simPalco');
+  var c = SIM_CENAS[simPasso];
+  if (!c) return simFinalizar();
+  var h = '<div class="quiz-item" style="background:var(--branco); border:2px solid var(--preto);">';
+  h += '<p style="font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--azul); margin-bottom:6px;">' + c.titulo + ' · ' + (simPasso + 1) + ' de ' + SIM_CENAS.length + '</p>';
+  h += '<p class="afirmacao" style="font-weight:400;">' + c.contexto + '</p>';
+  h += '<div class="sim-opcoes" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">';
+  c.opcoes.forEach(function(o, i) {
+    h += '<button class="sim-op" data-i="' + i + '" style="font-family:var(--serif); font-size:16px; text-align:left; padding:12px 14px; border:2px solid var(--linha); background:var(--branco); cursor:pointer; line-height:1.5;">' + o.t + '</button>';
+  });
+  h += '</div><p class="sim-fb" style="display:none; font-family:var(--sans); font-size:14px; line-height:1.55; margin-top:12px; padding:12px 14px; background:var(--cinza-claro);"></p>';
+  h += '<div class="botoes sim-next" style="display:none; margin:12px 0 0;"><button class="acao" onclick="simAvancar()">' + (simPasso === SIM_CENAS.length - 1 ? 'Ver meu ensaio →' : 'Próxima cena →') + '</button></div>';
+  h += '</div>';
+  pal.innerHTML = h;
+  pal.querySelectorAll('.sim-op').forEach(function(b) {
+    b.addEventListener('click', function() {
+      var o = c.opcoes[parseInt(b.getAttribute('data-i'))];
+      simPontos += o.p; simEscolhas.push(o.v);
+      pal.querySelectorAll('.sim-op').forEach(function(x) {
+        x.disabled = true;
+        if (x === b) { x.style.borderColor = o.p === 3 ? 'var(--preto)' : 'var(--vermelho)'; x.style.background = o.p === 3 ? 'var(--cinza-claro)' : '#fdeaea'; }
+        else x.style.opacity = '.45';
+      });
+      var fb = pal.querySelector('.sim-fb');
+      fb.style.display = 'block'; fb.innerHTML = o.fb;
+      pal.querySelector('.sim-next').style.display = 'flex';
+      evento('sc_sim_choice', { code_number: 6, scene: simPasso + 1, quality: o.p });
+    });
+  });
+}
+function simAvancar() { simPasso++; simRender(); }
+function simFinalizar() {
+  var max = SIM_CENAS.length * 3;
+  var r = document.getElementById('simResultado');
+  var msg;
+  if (simPontos >= max - 2) msg = '<b>Ensaio forte (' + simPontos + '/' + max + ').</b> Você abriu com clareza, transformou defesa em dado, assumiu o próprio impacto e fechou com acordo verificável. Leve esse mesmo desenho para o roteiro real, na próxima tela.';
+  else if (simPontos >= max * 0.6) msg = '<b>Ensaio consistente (' + simPontos + '/' + max + ').</b> A base está lá. Releia os retornos das cenas em que você recuou — costuma ser o mesmo ponto que trava a conversa real: nomear o tema ou fechar o acordo.';
+  else msg = '<b>Ensaio revelador (' + simPontos + '/' + max + ').</b> E isso é bom: você acabou de descobrir, sem custo, o padrão que provavelmente adia a conversa real. Refaça o ensaio escolhendo o desconforto — depois monte o roteiro.';
+  r.innerHTML = msg + '<br><br><span style="font-size:13px;">Padrão do seu ensaio: ' + simEscolhas.join(' → ') + '</span>';
+  r.classList.add('show');
+  document.getElementById('simPalco').innerHTML = '';
+  document.getElementById('simReiniciar').style.display = 'inline-block';
+  estado._simFeito = true; estado._simPontos = simPontos; salvar();
+  evento('sc_sim_completed', { code_number: 6, score: simPontos });
+}
+
+/* ================= init ================= */
+montaLikert('likertInicial', 'li');
+montaLikert('likertFinal', 'lf');
+calcTermos();
+bindRotas();
+bindReencontro();
+simIniciar(false);
+atualizarSinteses();
+atualizarProgresso();
+telas[0].classList.add('ativa');
+renderNav();
+if (estado._tela && estado._tela > 0) {
+  var btn = document.getElementById('btnContinuar');
+  btn.style.display = 'inline-block';
+  btn.textContent = 'Continuar em ' + telas[estado._tela].getAttribute('data-grupo') + ' · ' + telas[estado._tela].getAttribute('data-titulo');
+  /* retorno após pausa longa: a provocação na voz do livro */
+  if (estado._ts) {
+    var dias = Math.floor((Date.now() - estado._ts) / 86400000);
+    if (dias >= 30) evento('retorno_d30');
+    else if (dias >= 7) evento('retorno_d7');
+    if (dias >= 7) {
+      var av = document.getElementById('retornoAviso');
+      av.style.display = 'block';
+      av.textContent = 'Você parou em "' + telas[estado._tela].getAttribute('data-grupo') + '" há ' + dias + ' dias. A cultura da sua empresa não parou — e as suas respostas estão aqui.';
+    }
+  }
+}
+/* deep-link do hub: /workbook-ato1.html#continuar */
+if (location.hash === '#continuar' && estado._tela > 0) { evento('sc_resume_clicked', { via: 'hub' }); irPara(estado._tela, true); }
+
+</script>
+</body>
+</html>
