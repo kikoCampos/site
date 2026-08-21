@@ -58,6 +58,13 @@ body{font-family:var(--serif); color:var(--preto); background:var(--branco); lin
 .trilho{flex:1; height:5px; background:var(--cinza-claro); overflow:hidden;}
 .trilho .fill{height:100%; width:0%; background:var(--azul); transition:width .4s;}
 .pct{font-weight:900; font-size:12px; min-width:38px; text-align:right;}
+.atos-nav{display:flex; gap:4px; font-family:var(--sans); flex-shrink:0;}
+.ato-tab{font-weight:900; font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:7px 11px;
+  border:1px solid var(--linha); color:var(--cinza); text-decoration:none; white-space:nowrap;}
+.ato-tab.ativo{background:var(--preto); color:var(--branco); border-color:var(--preto);}
+.ato-tab:hover:not(.ativo):not(.off){border-color:var(--azul); color:var(--azul);}
+.ato-tab.off{opacity:.4; cursor:default;}
+@media (max-width:860px){ .ato-tab{padding:6px 8px; font-size:10px;} .ato-tab.off{display:none;} }
 .btn-mapa{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
   background:var(--preto); color:var(--branco); border:0; padding:8px 16px; cursor:pointer;}
 .btn-mapa:hover{background:var(--azul);}
@@ -304,7 +311,14 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   .onde-estou{display:none;}
 }
 @media print{
-  .fita,.topo,.rodape-nav,.videos,.botoes,.mapa,.btn-mapa{display:none !important;}
+  .fita,.topo,.rodape-nav,.videos,.botoes,.mapa,.atos-nav{display:flex; gap:4px; font-family:var(--sans); flex-shrink:0;}
+.ato-tab{font-weight:900; font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:7px 11px;
+  border:1px solid var(--linha); color:var(--cinza); text-decoration:none; white-space:nowrap;}
+.ato-tab.ativo{background:var(--preto); color:var(--branco); border-color:var(--preto);}
+.ato-tab:hover:not(.ativo):not(.off){border-color:var(--azul); color:var(--azul);}
+.ato-tab.off{opacity:.4; cursor:default;}
+@media (max-width:860px){ .ato-tab{padding:6px 8px; font-size:10px;} .ato-tab.off{display:none;} }
+.btn-mapa{display:none !important;}
   .etapa{display:block !important;}
   main{margin:0; padding:0;}
   .capa-bloco{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
@@ -319,7 +333,12 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <header class="topo">
   <div class="topo-inner">
-    <a class="marca" href="/seucodigo/" style="text-decoration:none; color:inherit;" title="Voltar ao hub Seu Código">SEU <b>CÓDIGO</b> · ATO II</a>
+    <a class="marca" href="/seucodigo/" style="text-decoration:none; color:inherit;" title="Voltar ao hub Seu Código">SEU <b>CÓDIGO</b></a>
+    <nav class="atos-nav" aria-label="Atos">
+      <a class="ato-tab" href="/workbook-ato1.html" id="tabAto1" title="Ato I · Consciência">I · Consciência</a>
+      <span class="ato-tab ativo" aria-current="page">II · Coragem</span>
+      <span class="ato-tab off" title="Em preparação">III</span>
+    </nav>
     <div class="trilho"><div class="fill" id="progressoFill"></div></div>
     <div class="pct" id="progressoPct">0/5</div>
     <button class="btn-mapa" onclick="abrirMapa()">☰ Mapa</button>
@@ -420,7 +439,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
           <p id="herancaCompromisso" style="display:none; font-size:15px; font-weight:400;"></p>
         </div>
       </div>
-      <p id="semHeranca" style="display:none; font-family:var(--sans); font-size:13px; color:var(--cinza); max-width:540px;">Você ainda não tem evidências do Ato I neste navegador. Dá para começar a Coragem mesmo assim — mas o percurso rende mais depois do <a href="/workbook-ato1.html" style="color:var(--azul); font-weight:700;">diagnóstico da Consciência</a>.</p>
+      <p id="semHeranca" style="display:none; font-family:var(--sans); font-size:13px; color:var(--cinza); max-width:540px;">Você ainda não tem evidências do Ato I neste navegador. Dá para começar a Coragem mesmo assim — mas o percurso rende muito mais depois do <a href="/workbook-ato1.html" style="color:var(--azul); font-weight:700;">diagnóstico da Consciência (≈10 min no modo essencial)</a>.</p>
 
       <div class="destaque">Coragem, na prática, é escolher o que é <b>verdadeiro e útil</b> — não o que é confortável.</div>
       <div class="botoes">
@@ -2072,6 +2091,17 @@ function simFinalizar() {
   estado._simFeito = true; estado._simPontos = simPontos; salvar();
   evento('sc_sim_completed', { code_number: 6, score: simPontos });
 }
+
+/* ================= travessia entre atos ================= */
+(function(){
+  var t = document.getElementById('tabAto1');
+  if (!t) return;
+  var a1 = {};
+  try { a1 = JSON.parse(localStorage.getItem('ncc-workbook-ato1') || '{}'); } catch(e) {}
+  var n = ['_ev1','_ev2','_ev3','_ev4'].filter(function(k){ return a1[k]; }).length;
+  if (n) t.textContent = 'I · Consciência ' + n + '/4';
+  if ((a1._tela || 0) > 0) t.href = '/workbook-ato1.html#continuar';
+})();
 
 /* ================= init ================= */
 montaLikert('likertInicial', 'li');
