@@ -339,13 +339,22 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
 </div>
 
+<!-- ===== modal: aviso/requisito ===== -->
+<div class="veu" id="veuAviso">
+  <div class="modal" style="border-top-color:var(--azul);" role="dialog" aria-modal="true" aria-labelledby="avisoTitulo">
+    <h3 id="avisoTitulo"></h3>
+    <p id="avisoTexto"></p>
+    <div class="botoes" id="avisoBotoes"></div>
+  </div>
+</div>
+
 <!-- ===== modal: trava suave da evidência ===== -->
 <div class="veu" id="veuTrava">
-  <div class="modal" style="border-top-color:var(--azul);">
-    <h3>Falta a sua evidência</h3>
+  <div class="modal" style="border-top-color:var(--azul);" role="dialog" aria-modal="true" aria-labelledby="travaTitulo">
+    <h3 id="travaTitulo">Falta a sua evidência</h3>
     <p id="travaTexto"></p>
     <div class="botoes">
-      <button class="acao" onclick="travaConcluir()">Concluir minha evidência</button>
+      <button class="acao" id="travaBtnConcluir" onclick="travaConcluir()">Concluir minha evidência</button>
       <button class="acao vazado" onclick="travaSeguir()">Continuar sem concluir</button>
     </div>
   </div>
@@ -353,7 +362,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <!-- ===== modal: apagar (tudo ou etapa) ===== -->
 <div class="veu" id="veuReset">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="resetTitulo">
     <h3 id="resetTitulo">Apagar todas as respostas?</h3>
     <p id="resetTexto">Isso limpa o workbook deste navegador — termômetros, exercícios, compromissos e progresso — e você recomeça do zero. <b>Não tem desfazer.</b></p>
     <p>Se quiser guardar uma cópia do trabalho atual, exporte antes.</p>
@@ -423,7 +432,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="botoes">
         <button class="acao" style="background:var(--azul); border-color:var(--azul);" onclick="estado.modo='completo'; irPara(1)">Começar meu diagnóstico →</button>
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
-        <button class="acao vazado" id="btnAtalho" onclick="estado.modo='essencial'; evento('sc_shortcut_activation'); irPara(4)">Sem tempo? Nomeie seu gap em 10 min →</button>
+        <button class="acao vazado" id="btnAtalho" onclick="modoEssencial()">Sem tempo? Nomeie seu gap em 10 min →</button>
       </div>
       <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece com um desafio real. Faça o <b>essencial em ≈ 20 minutos por código</b> — ou aprofunde no seu ritmo com vídeos e exercícios adicionais. Suas respostas ficam neste navegador.</p>
       <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
@@ -444,10 +453,10 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
     <h2 class="secao">2 · Escolha sua rota</h2>
     <p class="instrucao" style="font-family:var(--sans); font-size:14px; color:var(--cinza);">Escolha o ritmo que combina com o desafio que você está vivendo — você poderá mudar depois. A rota define a <b>cadência do seu ciclo</b> (lembretes e reencontro); exercícios contínuos, como observações de duas semanas, atravessam qualquer rota.</p>
-    <div class="rotas" id="rotas">
-      <button class="rota-card" data-rota="7"><span class="n">7</span><span class="t">Sprint</span><span class="d">Um código por dia. Para quem está no meio de uma decisão e precisa de clareza esta semana.</span></button>
-      <button class="rota-card" data-rota="30"><span class="n">30</span><span class="t">Travessia</span><span class="d">Um código por semana, com o ritual mínimo rodando entre eles. O ritmo recomendado.</span></button>
-      <button class="rota-card" data-rota="90"><span class="n">90</span><span class="t">Ciclo</span><span class="d">Para conduzir junto com o time: cada código vira pauta de reunião, o reencontro fecha o trimestre.</span></button>
+    <div class="rotas" id="rotas" role="radiogroup" aria-label="Escolha sua rota">
+      <button class="rota-card" role="radio" aria-checked="false" data-rota="7"><span class="n">7</span><span class="t">Sprint</span><span class="d">Um código por dia. Para quem está no meio de uma decisão e precisa de clareza esta semana.</span></button>
+      <button class="rota-card" role="radio" aria-checked="false" data-rota="30"><span class="n">30</span><span class="t">Travessia</span><span class="d">Um código por semana, com o ritual mínimo rodando entre eles. O ritmo recomendado.</span></button>
+      <button class="rota-card" role="radio" aria-checked="false" data-rota="90"><span class="n">90</span><span class="t">Ciclo</span><span class="d">Para conduzir junto com o time: cada código vira pauta de reunião, o reencontro fecha o trimestre.</span></button>
     </div>
     <div class="resultado" id="rotaFeedback"></div>
 
@@ -495,16 +504,19 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="video">
         <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/LhoLuui9gX8" title="Amy Edmondson — Building a psychologically safe workplace" allowfullscreen loading="lazy"></iframe></div>
         <div class="leg"><b>Amy Edmondson · TEDxHGSE <span class="dur">11 MIN</span> <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>Building a psychologically safe workplace<span class="porque">Sem segurança psicológica, qualquer diagnóstico vira teatro — as pessoas respondem o que é seguro, não o que é verdadeiro.</span>
+        <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:12px; font-weight:700; color:var(--azul); text-decoration:none; display:block; margin-top:8px;">Abrir vídeo no YouTube ↗</a>
         <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v11"> Concluído</label></div>
       </div>
       <div class="video">
         <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/gPqz315HSdg" title="Edgar Schein — Culture Fundamentals" allowfullscreen loading="lazy"></iframe></div>
         <div class="leg"><b>Edgar Schein · Culture University</b>Culture Fundamentals<span class="porque">Os três níveis da cultura são o mapa do que o seu diagnóstico precisa atravessar.</span>
+        <a href="https://www.youtube.com/watch?v=gPqz315HSdg" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:12px; font-weight:700; color:var(--azul); text-decoration:none; display:block; margin-top:8px;">Abrir vídeo no YouTube ↗</a>
         <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v12" data-opt="1"> Concluído</label></div>
       </div>
       <div class="video">
         <div class="frame"><iframe src="https://embed.ted.com/talks/celeste_headlee_10_ways_to_have_a_better_conversation" title="Celeste Headlee — 10 ways to have a better conversation" allowfullscreen loading="lazy"></iframe></div>
         <div class="leg"><b>Celeste Headlee · TED <span class="dur">12 MIN</span></b>10 ways to have a better conversation<span class="porque">Diagnosticar é escutar — e suportar o silêncio. Dez regras para o real aparecer.</span>
+        <a href="https://www.ted.com/talks/celeste_headlee_10_ways_to_have_a_better_conversation" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:12px; font-weight:700; color:var(--azul); text-decoration:none; display:block; margin-top:8px;">Abrir vídeo no TED ↗</a>
         <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v13" data-opt="1"> Concluído</label></div>
       </div>
     </div>
@@ -576,8 +588,10 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <label class="campo">Traga para cá a incoerência que você sublinhou</label>
       <textarea data-save="missao1" data-prog="1"></textarea>
     </div>
-    <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>1.3 · As quatro fontes de evidência</h3><span class="tempo">~20 MIN</span></div>
+    <p id="seloEssencial" style="display:none; font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.14em; text-transform:uppercase; background:var(--azul); color:#fff; padding:5px 12px; margin-bottom:6px;">Modo essencial · ≈10 min — o exercício 1.4 é o que importa agora</p>
+    <details id="aprofundamento13" class="exercicio" style="padding:0;">
+      <summary style="cursor:pointer; padding:12px 20px; background:var(--preto); color:var(--branco); font-family:var(--sans); font-weight:900; font-size:13px; text-transform:uppercase; letter-spacing:.04em;">1.3 · As quatro fontes de evidência — aprofundamento (~20 min)</summary>
+      <div class="cabeca" style="display:none;"><span class="tag campo-real">Campo real</span><h3>1.3</h3></div>
       <div class="corpo">
         <p class="instrucao">Escolha um valor que a sua organização declara como importante e triangule. Quando as quatro fontes apontam para o mesmo lugar, você não tem opiniões — tem evidências.</p>
         <label class="campo">Valor ou comportamento declarado<small>Ex.: colaboração, cliente no centro, inovação, segurança, diversidade…</small></label>
@@ -591,7 +605,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <label class="campo">4 · O que a empresa TOLERA (o que não é confrontado)<small>Sob pressão, qual comportamento vence: o declarado ou o praticado?</small></label>
         <textarea data-save="c1_toleram" data-prog="1"></textarea>
       </div>
-    </div>
+    </details>
     <div class="exercicio">
       <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>1.4 · Nomeie o gap em uma frase</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
@@ -653,6 +667,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="video">
         <div class="frame"><iframe src="https://embed.ted.com/talks/simon_sinek_how_great_leaders_inspire_action" title="Simon Sinek — How great leaders inspire action" allowfullscreen loading="lazy"></iframe></div>
         <div class="leg"><b>Simon Sinek · TED <span class="dur">18 MIN</span> <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>How great leaders inspire action<span class="porque">O "porquê" é o núcleo que não se negocia. Preservar a essência é proteger o porquê enquanto tudo o mais evolui.</span>
+        <a href="https://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:12px; font-weight:700; color:var(--azul); text-decoration:none; display:block; margin-top:8px;">Abrir vídeo no TED ↗</a>
         <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v21"> Concluído</label></div>
       </div>
       <div class="video" style="border:2px solid var(--preto);">
@@ -778,11 +793,13 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="video">
         <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/Zs3ML5ZJ_QY" title="Peter Senge — Systems Thinking in a Digital World" allowfullscreen loading="lazy"></iframe></div>
         <div class="leg"><b>Peter Senge · MIT <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>Systems Thinking in a Digital World<span class="porque">O pai da organização que aprende explica por que intervenções isoladas fracassam — e onde mora a alavancagem.</span>
+        <a href="https://www.youtube.com/watch?v=Zs3ML5ZJ_QY" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:12px; font-weight:700; color:var(--azul); text-decoration:none; display:block; margin-top:8px;">Abrir vídeo no YouTube ↗</a>
         <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v31"> Concluído</label></div>
       </div>
       <div class="video">
         <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/MKRo8n8qZi8" title="Edgar Schein's Model of Organisational Culture Explained" allowfullscreen loading="lazy"></iframe></div>
         <div class="leg"><b>Modelo de Schein · explicado</b>Organisational Culture Explained<span class="porque">Revisão rápida dos níveis da cultura antes de mapear as engrenagens do seu sistema.</span>
+        <a href="https://www.youtube.com/watch?v=MKRo8n8qZi8" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:12px; font-weight:700; color:var(--azul); text-decoration:none; display:block; margin-top:8px;">Abrir vídeo no YouTube ↗</a>
         <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v32" data-opt="1"> Concluído</label></div>
       </div>
     </div>
@@ -898,11 +915,13 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="video">
         <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/Hwb-6LGRpxs" title="Shadow of a Leader — Senn Delaney" allowfullscreen loading="lazy"></iframe></div>
         <div class="leg"><b>Senn Delaney <span class="dur" style="background:var(--azul);color:#fff;">RECOMENDADO</span></b>Shadow of a Leader<span class="porque">O conceito-âncora do capítulo, na fonte: organizações se tornam sombras dos seus líderes.</span>
+        <a href="https://www.youtube.com/watch?v=Hwb-6LGRpxs" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:12px; font-weight:700; color:var(--azul); text-decoration:none; display:block; margin-top:8px;">Abrir vídeo no YouTube ↗</a>
         <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v41"> Concluído</label></div>
       </div>
       <div class="video">
         <div class="frame"><iframe src="https://embed.ted.com/talks/brene_brown_the_power_of_vulnerability" title="Brené Brown — The power of vulnerability" allowfullscreen loading="lazy"></iframe></div>
         <div class="leg"><b>Brené Brown · TED <span class="dur">20 MIN</span></b>The power of vulnerability<span class="porque">Quando o líder assume vulnerabilidade, libera o time da máscara da perfeição — e cria segurança para aprender.</span>
+        <a href="https://www.ted.com/talks/brene_brown_the_power_of_vulnerability" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:12px; font-weight:700; color:var(--azul); text-decoration:none; display:block; margin-top:8px;">Abrir vídeo no TED ↗</a>
         <label class="assisti"><input type="checkbox" class="vid-check" data-vid="v42" data-opt="1"> Concluído</label></div>
       </div>
     </div>
@@ -1220,25 +1239,72 @@ function irPara(i, semSalvar) {
 /* trava suave: sair de um código sem a evidência pede decisão consciente */
 var telasEvidencia = { 4: 1, 7: 2, 10: 3, 13: 4 };
 function mover(d) {
+  if (d > 0 && atual === 1 && !checaPartida()) return;
   if (d > 0 && telasEvidencia[atual] && !estado['_ev' + telasEvidencia[atual]]) {
     abrirTrava(telasEvidencia[atual]);
     return;
   }
   irPara(atual + d);
 }
+/* requisito mínimo do ponto de partida: desafio + rota */
+function checaPartida() {
+  if (!v('c0_tensao')) {
+    abrirAviso('Escolha seu desafio', 'Escreva a tensão cultural que está exigindo sua atenção agora — é ela que dá sentido a todo o percurso.', 'c0_tensao');
+    return false;
+  }
+  if (!estado.rota) {
+    abrirAviso('Escolha sua rota', 'Selecione 7, 30 ou 90 dias. A rota define a cadência dos seus lembretes e do reencontro — e você poderá mudar depois.', null, 'rotas');
+    return false;
+  }
+  var li = somaTermo('li');
+  if (li.n < 8 && !estado._termoDepois) {
+    abrirTermoEscolha();
+    return false;
+  }
+  return true;
+}
+var avisoAlvo = null, avisoScroll = null;
+function abrirAviso(titulo, texto, campo, bloco) {
+  avisoAlvo = campo; avisoScroll = bloco;
+  document.getElementById('avisoTitulo').textContent = titulo;
+  document.getElementById('avisoTexto').textContent = texto;
+  document.getElementById('avisoBotoes').innerHTML = '<button class="acao" onclick="fecharAviso(true)">Entendi</button>';
+  abrirModal('veuAviso');
+}
+function abrirTermoEscolha() {
+  document.getElementById('avisoTitulo').textContent = 'Termômetro de consciência';
+  document.getElementById('avisoTexto').textContent = 'São 8 afirmações rápidas — é o que permite comparar o seu antes e depois no fim do Ato. Você pode responder agora ou deixar para depois.';
+  document.getElementById('avisoBotoes').innerHTML =
+    '<button class="acao" onclick="fecharAviso(true); document.getElementById(\'termoWrap\').scrollIntoView({behavior:\'smooth\',block:\'center\'});">Responder o termômetro</button>' +
+    '<button class="acao vazado" onclick="estado._termoDepois=true; salvar(); fecharAviso(false); irPara(2);">Fazer depois e continuar</button>';
+  abrirModal('veuAviso');
+}
+function fecharAviso(focar) {
+  fecharModal('veuAviso');
+  if (focar && avisoAlvo) {
+    var el = document.querySelector('[data-save="' + avisoAlvo + '"]');
+    if (el) { el.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(function(){ el.focus(); }, 400); }
+  } else if (focar && avisoScroll) {
+    var bl = document.getElementById(avisoScroll);
+    if (bl) bl.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  avisoAlvo = null; avisoScroll = null;
+}
+
 var travaCodigo = null;
 function abrirTrava(n) {
   travaCodigo = n;
   document.getElementById('travaTexto').innerHTML = 'Sua evidência do <b>Código ' + n + '</b> ainda não está pronta. É ela que você leva deste código — o resto é preparação.';
-  document.getElementById('veuTrava').classList.add('aberto');
+  abrirModal('veuTrava');
   evento('sc_soft_gate', { code_number: n });
 }
 function travaConcluir() {
-  document.getElementById('veuTrava').classList.remove('aberto');
+  fecharModal('veuTrava');
+  focarEvidencia(travaCodigo);
   evento('sc_soft_gate_choice', { code_number: travaCodigo, choice: 'concluir' });
 }
 function travaSeguir() {
-  document.getElementById('veuTrava').classList.remove('aberto');
+  fecharModal('veuTrava');
   evento('sc_soft_gate_choice', { code_number: travaCodigo, choice: 'seguir' });
   irPara(atual + 1);
 }
@@ -1255,7 +1321,9 @@ function renderNav() {
     av.disabled = false;
     var prox = telas[atual + 1];
     var proxGrupo = prox.getAttribute('data-grupo');
-    if (proxGrupo !== t.getAttribute('data-grupo') && proxGrupo.indexOf('Código') === 0) {
+    if (atual === 1) {
+      av.textContent = 'Continuar para o Código 1 →';
+    } else if (proxGrupo !== t.getAttribute('data-grupo') && proxGrupo.indexOf('Código') === 0) {
       var nAtual = telasEvidencia[atual];
       av.textContent = (nAtual && estado['_ev' + nAtual]) ? 'Ir para o ' + proxGrupo.split(' · ')[0] + ' →' : 'Concluir o Código ' + (nAtual || '') + ' →';
     } else {
@@ -1312,7 +1380,7 @@ function montarMapa() {
     l.appendChild(b);
   });
 }
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { fecharMapa(); fecharReset(); } });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modalAberto) fecharMapa(); });
 
 /* ================= termômetro ================= */
 var afirmacoes = [
@@ -1438,7 +1506,9 @@ function bindRotas() {
   var fb = document.getElementById('rotaFeedback');
   function render() {
     cont.querySelectorAll('.rota-card').forEach(function(c) {
-      c.classList.toggle('escolhida', estado.rota === c.getAttribute('data-rota'));
+      var sel = estado.rota === c.getAttribute('data-rota');
+      c.classList.toggle('escolhida', sel);
+      c.setAttribute('aria-checked', sel ? 'true' : 'false');
     });
     if (estado.rota) { fb.classList.add('show'); fb.innerHTML = rotaTextos[estado.rota] + ' <i>Você poderá mudar depois.</i>'; }
     /* revelação progressiva: termômetro aparece após a rota */
@@ -1533,7 +1603,7 @@ function atualizarSinteses() {
   renderReencontroSintese();
   var g = document.getElementById('gapSintese');
   if (v('c1_gap_declara') && v('c1_gap_pratica') && v('c1_gap_evidencia')) {
-    g.className = ''; g.innerHTML = 'Declaramos <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>. Evidência: ' + v('c1_gap_evidencia') + '.';
+    g.className = ''; g.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>. Evidência: ' + v('c1_gap_evidencia') + '.';
     /* ATIVAÇÃO: primeira evidência útil produzida */
     if (!estado._ativado) {
       estado._ativado = true;
@@ -1568,7 +1638,7 @@ function atualizarSinteses() {
     c.className = ''; c.innerHTML = 'Nas próximas 4 semanas vou <b>' + v('c4_comportamento') + '</b>. O time vai perceber quando: ' + v('c4_evidencia') + '.' + (v('c4_feedback') ? ' Feedback combinado com: ' + v('c4_feedback') + '.' : '');
   }
   var mg = document.getElementById('mapaGap');
-  if (v('c1_gap_declara') && v('c1_gap_pratica')) { mg.className=''; mg.innerHTML = 'Declaramos <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>.' + (v('c1_gap_evidencia') ? ' Evidência: ' + v('c1_gap_evidencia') + '.' : ''); }
+  if (v('c1_gap_declara') && v('c1_gap_pratica')) { mg.className=''; mg.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>.' + (v('c1_gap_evidencia') ? ' Evidência: ' + v('c1_gap_evidencia') + '.' : ''); }
   var essencias = [];
   for (var i = 1; i <= 5; i++) { if (v('c2_s' + i) === 'Essência' && v('c2_p' + i)) essencias.push(v('c2_p' + i)); }
   var mp = document.getElementById('mapaPreservar');
@@ -1605,7 +1675,7 @@ function atualizarProgresso() {
 /* ================= brief executivo ================= */
 function coletaBrief() {
   var linhas = [];
-  if (v('c1_gap_declara') && v('c1_gap_pratica')) linhas.push(['Código 1 · Gap nomeado', 'Declaramos "' + v('c1_gap_declara') + '", mas na prática ' + v('c1_gap_pratica') + '.' + (v('c1_gap_evidencia') ? ' Evidência: ' + v('c1_gap_evidencia') + '.' : '')]);
+  if (v('c1_gap_declara') && v('c1_gap_pratica')) linhas.push(['Código 1 · Gap nomeado', 'Declaramos que "' + v('c1_gap_declara') + '", mas na prática ' + v('c1_gap_pratica') + '.' + (v('c1_gap_evidencia') ? ' Evidência: ' + v('c1_gap_evidencia') + '.' : '')]);
   var ess = [];
   for (var i = 1; i <= 5; i++) if (v('c2_s' + i) === 'Essência' && v('c2_p' + i)) ess.push(v('c2_p' + i));
   if (ess.length) linhas.push(['Código 2 · Não-negociáveis (essência)', ess.join(' · ') + (v('c2_evidencia') ? ' — Evidência de valor: ' + v('c2_evidencia') : '')]);
@@ -1753,6 +1823,72 @@ function bindReencontro() {
   if (estado.c5_resultado) { fb.classList.add('show'); fb.innerHTML = reencontroMsgs[estado.c5_resultado]; }
 }
 
+/* ================= modo essencial (atalho de 10 min) ================= */
+function modoEssencial() {
+  estado.modo = 'essencial';
+  salvar();
+  evento('sc_shortcut_activation');
+  irPara(4);
+  aplicarModoEssencial();
+  focarEvidencia(1, true);
+}
+function aplicarModoEssencial() {
+  if (estado.modo !== 'essencial') return;
+  var selo = document.getElementById('seloEssencial');
+  if (selo) selo.style.display = 'inline-block';
+  var apro = document.getElementById('aprofundamento13');
+  if (apro && !apro.open) apro.open = false;
+}
+
+/* ================= foco na evidência do código ================= */
+var camposEvidencia = { 1: 'c1_gap_declara', 2: 'c2_p1', 3: 'c3_alavanca1', 4: 'c4_comportamento' };
+function focarEvidencia(n, semDestaque) {
+  var k = camposEvidencia[n];
+  if (!k) return;
+  var el = document.querySelector('[data-save="' + k + '"]');
+  if (!el) return;
+  var caixa = el.closest('.exercicio') || el;
+  caixa.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(function() {
+    el.focus();
+    if (!semDestaque) {
+      caixa.style.transition = 'box-shadow .3s';
+      caixa.style.boxShadow = '0 0 0 4px rgba(43,125,191,.35)';
+      setTimeout(function(){ caixa.style.boxShadow = 'none'; }, 1800);
+    }
+  }, 420);
+}
+
+/* ================= gestor de modais acessíveis ================= */
+var modalAberto = null, focoAnterior = null;
+function abrirModal(id) {
+  focoAnterior = document.activeElement;
+  var el = document.getElementById(id);
+  el.classList.add('aberto');
+  modalAberto = el;
+  var mp = document.getElementById('conteudo'); if (mp) mp.setAttribute('aria-hidden', 'true');
+  var alvo = el.querySelector('button');
+  if (alvo) setTimeout(function(){ alvo.focus(); }, 60);
+}
+function fecharModal(id) {
+  var el = id ? document.getElementById(id) : modalAberto;
+  if (!el) return;
+  el.classList.remove('aberto');
+  modalAberto = null;
+  var mp2 = document.getElementById('conteudo'); if (mp2) mp2.removeAttribute('aria-hidden');
+  if (focoAnterior && focoAnterior.focus) focoAnterior.focus();
+}
+document.addEventListener('keydown', function(e) {
+  if (!modalAberto) return;
+  if (e.key === 'Escape') { fecharModal(); return; }
+  if (e.key !== 'Tab') return;
+  var foc = modalAberto.querySelectorAll('button, [href], input, select, textarea');
+  if (!foc.length) return;
+  var primeiro = foc[0], ultimo = foc[foc.length - 1];
+  if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+  else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+});
+
 /* ================= apagar: tudo ou uma etapa ================= */
 var resetEscopo = 'tudo';
 function pedirReset() {
@@ -1760,7 +1896,7 @@ function pedirReset() {
   document.getElementById('resetTitulo').textContent = 'Apagar todas as respostas?';
   document.getElementById('resetTexto').innerHTML = 'Isso limpa o workbook deste navegador — termômetros, exercícios, compromissos e progresso — e você recomeça do zero. <b>Não tem desfazer.</b>';
   document.getElementById('resetConfirmar').textContent = 'Apagar tudo';
-  document.getElementById('veuReset').classList.add('aberto');
+  abrirModal('veuReset');
 }
 function pedirResetEtapa(idx) {
   resetEscopo = idx;
@@ -1768,9 +1904,9 @@ function pedirResetEtapa(idx) {
   document.getElementById('resetTitulo').textContent = 'Limpar só esta etapa?';
   document.getElementById('resetTexto').innerHTML = 'Isso apaga apenas as respostas de <b>' + t.getAttribute('data-grupo') + ' · ' + t.getAttribute('data-titulo') + '</b>. O restante do workbook fica intacto. <b>Não tem desfazer.</b>';
   document.getElementById('resetConfirmar').textContent = 'Limpar esta etapa';
-  document.getElementById('veuReset').classList.add('aberto');
+  abrirModal('veuReset');
 }
-function fecharReset() { document.getElementById('veuReset').classList.remove('aberto'); }
+function fecharReset() { fecharModal('veuReset'); }
 function chavesDaEtapa(idx) {
   var t = telas[idx], ks = [];
   t.querySelectorAll('[data-save]').forEach(function(el){ ks.push(el.getAttribute('data-save')); });
@@ -1920,6 +2056,7 @@ montaLikert('likertFinal', 'lf');
 calcTermos();
 bindRotas();
 bindReencontro();
+aplicarModoEssencial();
 atualizarSinteses();
 atualizarProgresso();
 telas[0].classList.add('ativa');
@@ -1927,7 +2064,7 @@ renderNav();
 if (estado._tela && estado._tela > 0) {
   var btn = document.getElementById('btnContinuar');
   btn.style.display = 'inline-block';
-  btn.textContent = 'Continuar de onde parei (tela ' + (estado._tela + 1) + ')';
+  btn.textContent = 'Continuar em ' + telas[estado._tela].getAttribute('data-grupo') + ' · ' + telas[estado._tela].getAttribute('data-titulo');
   /* retorno após pausa longa: a provocação na voz do livro */
   if (estado._ts) {
     var dias = Math.floor((Date.now() - estado._ts) / 86400000);
