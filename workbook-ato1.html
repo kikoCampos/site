@@ -8,6 +8,29 @@
 <meta property="og:title" content="Workbook · O Novo Código da Mudança — Ato I">
 <meta property="og:description" content="Desenhado para ser usado, não apenas lido. Diagnóstico, âncoras culturais, sistema e sombra do líder — interativo.">
 <meta name="robots" content="noindex">
+<!-- Google tag + consentimento (LGPD, mesmo padrão do site) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RD1P3CKLSE"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{analytics_storage:'denied'});
+gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
+(function(){try{
+  var c=localStorage.getItem('kc_cookie');
+  if(c==='accepted'){gtag('consent','update',{analytics_storage:'granted'});return;}
+  if(c==='declined'){return;}
+  window.addEventListener('DOMContentLoaded',function(){
+    var b=document.createElement('div');
+    b.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;max-width:680px;margin:0 auto;background:#231f20;color:#fff;padding:14px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:13px Lato,sans-serif;z-index:9999;box-shadow:0 12px 34px rgba(0,0,0,.3)';
+    b.innerHTML='<span style="flex:1;min-width:200px">Usamos cookies para medir o uso e melhorar o Seu Código. <a href="/privacidade.html" style="color:#8fc1e9">Saiba mais</a>.</span>';
+    var g=document.createElement('span');g.style.cssText='display:inline-flex;gap:8px;flex-shrink:0';
+    var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:8px 16px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:8px 18px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
+    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
+    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
+  });
+}catch(e){}})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
@@ -294,7 +317,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <header class="topo">
   <div class="topo-inner">
-    <div class="marca">O NOVO <b>CÓDIGO</b> DA MUDANÇA</div>
+    <a class="marca" href="/seucodigo/" style="text-decoration:none; color:inherit;" title="Voltar ao hub Seu Código">SEU <b>CÓDIGO</b> · ATO I</a>
     <div class="trilho"><div class="fill" id="progressoFill"></div></div>
     <div class="pct" id="progressoPct">0%</div>
     <button class="btn-mapa" onclick="abrirMapa()">☰ Mapa</button>
@@ -387,8 +410,10 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="botoes">
         <button class="acao" style="background:var(--azul); border-color:var(--azul);" onclick="irPara(1)">Começar →</button>
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
+        <button class="acao vazado" id="btnAtalho" onclick="evento('sc_shortcut_activation'); irPara(4)">Sem tempo? Nomeie seu gap em 10 min →</button>
       </div>
-      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">≈ 25 minutos por código · suas respostas ficam salvas neste navegador</p>
+      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">≈ 25 minutos por código · Seus registros ficam neste navegador — exporte uma cópia para não perder seu progresso ao trocar de dispositivo.</p>
+      <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
     </div>
   </div>
 </section>
@@ -561,6 +586,18 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <label class="campo">Evidência concreta que sustenta esse diagnóstico</label>
         <input type="text" data-save="c1_gap_evidencia" data-prog="1" placeholder="ex.: os 3 últimos promovidos venceram disputas, não construíram pontes">
         <div class="sintese"><div class="rotulo">Seu diagnóstico em uma frase</div><p id="gapSintese" class="vazio">Preencha os três campos acima e sua frase-diagnóstico aparece aqui.</p></div>
+        <div id="capturaAto2" style="display:none; background:var(--cinza-claro); border-left:4px solid var(--azul); padding:18px 20px; margin:16px 0; font-family:var(--sans);">
+          <p style="font-weight:900; font-size:14px; margin-bottom:4px;">Seu Código começou a operar.</p>
+          <p style="font-size:13px; color:var(--cinza); margin-bottom:0;">Agora existe uma evidência, não apenas uma intenção. Seus registros ficam neste navegador — exporte uma cópia no fim para não perdê-los ao trocar de dispositivo.</p>
+          <div id="capturaForm" style="display:none; margin-top:12px;">
+            <p style="font-size:13px; color:var(--cinza); margin-bottom:10px;">Quer receber o Ato II (Coragem) assim que sair? Deixe seu e-mail — enviamos só o aviso de lançamento, nada mais.</p>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <input type="email" id="leadEmail" placeholder="voce@empresa.com" style="flex:1; min-width:200px; border:1px solid #c9c9c9; border-left:4px solid var(--azul); padding:10px 12px; font-family:var(--serif); font-size:15px;">
+              <button class="acao" style="padding:10px 18px;" onclick="enviarLead()">Quero o Ato II</button>
+            </div>
+            <p id="leadFeedback" style="font-size:12px; font-weight:700; margin-top:8px; display:none;"></p>
+          </div>
+        </div>
         <div class="box-preto"><div class="rotulo">Ritual mínimo desta semana</div><p style="margin:0;">Devolva o que ouviu a uma pessoa do seu time com o pacto do capítulo: <i>"isso foi o que ouvi, isso é o que reconheço, isso é o que vamos fazer agora."</i> Escutar e não agir destrói confiança.</p></div>
       </div>
     </div>
@@ -990,6 +1027,16 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <p>No início, era: "o que realmente está acontecendo aqui?". Agora ela se torna mais exigente: "que coragem esse sistema pede de mim agora?"</p>
       <div class="credito">A Consciência preparou o terreno. O Ato II — Coragem — começa quando enxergar já não basta.</div>
     </div>
+    <div class="botoes">
+      <a href="/seucodigo/" onclick="evento('sc_next_act_intent')" class="acao" style="text-decoration:none; display:inline-block; background:var(--azul); border-color:var(--azul); color:var(--branco); font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border:2px solid var(--azul);">Enxergar já não basta → Ver minha jornada</a>
+    </div>
+
+    <h2 class="secao">Uma pergunta, só uma</h2>
+    <p style="font-family:var(--sans); font-size:14px; color:var(--cinza);">Quanto este Ato mudou o jeito como você enxerga a cultura da sua empresa? (1 = nada · 5 = mudou meu diagnóstico)</p>
+    <div class="quiz-op" id="feedbackAto" style="margin-bottom:8px;">
+      <button data-fb="1">1</button><button data-fb="2">2</button><button data-fb="3">3</button><button data-fb="4">4</button><button data-fb="5">5</button>
+    </div>
+    <p id="feedbackObrigado" style="display:none; font-family:var(--sans); font-size:13px; font-weight:700;">Registrado — isso melhora o workbook para o próximo leitor.</p>
 
     <h2 class="secao">Leve isto com você</h2>
     <p style="font-family:var(--sans); font-size:14px; color:var(--cinza);">O aprendizado só vira mudança se sair desta tela. Três formas de garantir:</p>
@@ -1005,7 +1052,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <button class="acao vazado" onclick="document.getElementById('importFile').click()">Importar respostas</button>
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importar(event)">
       <button class="acao perigo" onclick="pedirReset()">Apagar e começar de novo</button>
-      <span class="salvo-aviso" id="salvoAviso">✓ salvo</span>
+      <span class="salvo-aviso" id="salvoAviso">✓ progresso salvo neste navegador</span>
     </div>
   </div>
   <div class="pe">O NOVO CÓDIGO DA MUDANÇA · WORKBOOK ATO I — TODA MUDANÇA É <b>HUMANA</b></div>
@@ -1067,9 +1114,55 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 var STORE_KEY = 'ncc-workbook-ato1';
 var estado = {};
 try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) { estado = {}; }
+estado._v = estado._v || 1; /* versão do contrato de dados */
+
+/* ================= plataforma Seu Código: config + instrumentação ================= */
+var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.0.0' };
+var SC_ATO = 1;
+function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
+/* identificador anônimo + versão de esquema */
+if (!scGet('seucodigo_anon_id')) scSet('seucodigo_anon_id', 'sc-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10));
+scSet('seucodigo_schema_version', 1);
+/* primeira origem conhecida (UTMs, referenciador, página de entrada) */
+(function(){
+  if (scGet('seucodigo_first_touch')) return;
+  var q = new URLSearchParams(location.search);
+  var ft = { entrada: location.pathname, ref: document.referrer || '', em: new Date().toISOString() };
+  ['utm_source','utm_medium','utm_campaign','utm_content'].forEach(function(u){ if (q.get(u)) ft[u] = q.get(u); });
+  scSet('seucodigo_first_touch', ft);
+})();
+var SC_SESSION = (function(){
+  var loc = scGet('seucodigo_last_location');
+  var dias = (loc && loc.ts) ? Math.floor((Date.now() - loc.ts) / 86400000) : null;
+  return { tipo: loc ? 'retorno' : 'nova', dias: dias };
+})();
+/* NUNCA enviar texto digitado pelo leitor — apenas rótulos estruturais */
+function evento(nome, params) {
+  try {
+    if (typeof gtag !== 'function') return;
+    var ft = scGet('seucodigo_first_touch') || {};
+    var base = {
+      act_number: SC_ATO,
+      route: estado.rota || null,
+      cycle_number: 1,
+      session_type: SC_SESSION.tipo,
+      days_since_last_visit: SC_SESSION.dias,
+      progress_percentage: estado._progresso || 0,
+      platform_version: SC_CONFIG.platformVersion,
+      traffic_source: ft.utm_source || (ft.ref ? 'referral' : 'direto')
+    };
+    var p = params || {};
+    for (var k in p) base[k] = p[k];
+    gtag('event', nome, base);
+  } catch(e) {}
+}
+function registraLocal() { scSet('seucodigo_last_location', { ato: SC_ATO, tela: estado._tela || 0, ts: Date.now() }); }
 
 function salvar() {
+  estado._ts = Date.now();
   try { localStorage.setItem(STORE_KEY, JSON.stringify(estado)); } catch(e) {}
+  registraLocal();
   var av = document.getElementById('salvoAviso');
   if (av) { av.classList.add('show'); setTimeout(function(){ av.classList.remove('show'); }, 1200); }
   atualizarProgresso(); atualizarSinteses();
@@ -1086,12 +1179,23 @@ function irPara(i, semSalvar) {
   atual = i;
   telas[atual].classList.add('ativa');
   window.scrollTo({ top: 0 });
-  if (i > 0) estado.vis0 = true; /* capa concluída ao avançar */
+  if (i > 0 && !estado.vis0) { /* primeira saída da capa = início da jornada */
+    estado.vis0 = true;
+    estado._inicioTs = estado._inicioTs || Date.now();
+    evento('sc_journey_started');
+  }
+  /* início de código (telas Prepare: 2/5/8/11) */
+  var mapaCod = { 2: 1, 5: 2, 8: 3, 11: 4 };
+  if (mapaCod[i] && !estado['_cs' + mapaCod[i]]) {
+    estado['_cs' + mapaCod[i]] = true;
+    evento('sc_code_started', { code_number: mapaCod[i] });
+  }
   if (!semSalvar) { estado._tela = i; salvar(); }
+  evento('sc_screen_view', { screen_id: i + 1 });
   renderNav();
 }
 function mover(d) { irPara(atual + d); }
-function continuar() { irPara(estado._tela || 0); }
+function continuar() { evento('sc_resume_clicked', { via: 'capa' }); irPara(estado._tela || 0); }
 
 function renderNav() {
   var t = telas[atual];
@@ -1285,6 +1389,7 @@ function bindRotas() {
   cont.querySelectorAll('.rota-card').forEach(function(c) {
     c.addEventListener('click', function() {
       estado.rota = c.getAttribute('data-rota'); salvar(); render();
+      evento('sc_route_selected', { route: estado.rota });
     });
   });
   render();
@@ -1369,6 +1474,34 @@ function atualizarSinteses() {
   var g = document.getElementById('gapSintese');
   if (v('c1_gap_declara') && v('c1_gap_pratica') && v('c1_gap_evidencia')) {
     g.className = ''; g.innerHTML = 'Declaramos <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>. Evidência: ' + v('c1_gap_evidencia') + '.';
+    /* ATIVAÇÃO: primeira evidência útil produzida */
+    if (!estado._ativado) {
+      estado._ativado = true;
+      var min = estado._inicioTs ? Math.round((Date.now() - estado._inicioTs) / 60000) : null;
+      evento('sc_first_evidence_created', { time_to_activation_min: min });
+      var cap = document.getElementById('capturaAto2');
+      if (cap) {
+        cap.style.display = 'block';
+        var form = document.getElementById('capturaForm');
+        if (form) form.style.display = SC_CONFIG.leadCapture ? 'block' : 'none';
+      }
+    }
+  }
+  /* evidências entregues → código concluído; as quatro → ato concluído */
+  [['_ev1', v('c1_gap_declara') && v('c1_gap_pratica') && v('c1_gap_evidencia')],
+   ['_ev2', (function(){ for (var j = 1; j <= 5; j++) if (v('c2_s' + j) === 'Essência' && v('c2_p' + j) && v('c2_evidencia')) return true; return false; })()],
+   ['_ev3', v('c3_alavanca1') && v('c3_evidencia')],
+   ['_ev4', v('c4_comportamento') && v('c4_evidencia')]
+  ].forEach(function(par, idx) {
+    if (par[1] && !estado[par[0]]) {
+      estado[par[0]] = true;
+      evento('sc_evidence_created', { code_number: idx + 1 });
+      evento('sc_code_completed', { code_number: idx + 1 });
+    }
+  });
+  if (estado._ev1 && estado._ev2 && estado._ev3 && estado._ev4 && !estado._atoOk) {
+    estado._atoOk = true;
+    evento('sc_act_completed');
   }
   var c = document.getElementById('compromissoSintese');
   if (v('c4_comportamento') && v('c4_evidencia')) {
@@ -1400,6 +1533,11 @@ function atualizarProgresso() {
   var p = Math.round(ok / total * 100);
   document.getElementById('progressoFill').style.width = p + '%';
   document.getElementById('progressoPct').textContent = p + '%';
+  /* persiste para o hub Seu Código ler */
+  if (estado._progresso !== p) {
+    estado._progresso = p;
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(estado)); } catch(e) {}
+  }
 }
 
 /* ================= brief executivo ================= */
@@ -1417,6 +1555,7 @@ function coletaBrief() {
 function gerarBrief() {
   var linhas = coletaBrief();
   if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" para gerar o brief.'); return; }
+  evento('sc_brief_generated');
   var hoje = new Date().toLocaleDateString('pt-BR');
   var htm = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Brief — Meu Código de Consciência</title><style>'
     + 'body{font-family:Georgia,serif;color:#231f20;max-width:700px;margin:40px auto;padding:0 24px;line-height:1.6;}'
@@ -1444,6 +1583,7 @@ function enviarEmail() {
   linhas.forEach(function(l){ corpo += l[0].toUpperCase() + '\n' + l[1] + '\n\n'; });
   corpo += 'Reencontro em 30 dias: a evidência apareceu?\nToda mudança é humana.';
   if (corpo.length > 1800) corpo = corpo.slice(0, 1800) + '…';
+  evento('sc_email_intent');
   location.href = 'mailto:?subject=' + encodeURIComponent('Meu Código de Consciência — Ato I') + '&body=' + encodeURIComponent(corpo);
 }
 
@@ -1493,6 +1633,7 @@ function baixarICS() {
     'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
   var blob = new Blob([ics], { type: 'text/calendar' });
   var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ncc-acoes-ato1.ics'; a.click();
+  evento('sc_calendar_downloaded', { route: rota });
 }
 
 /* ================= pacto com um par ================= */
@@ -1611,8 +1752,32 @@ telas.forEach(function(t, i) {
   alvo.appendChild(linha);
 });
 
+/* ================= captura opcional (teste de acesso) ================= */
+function enviarLead() {
+  var em = (document.getElementById('leadEmail').value || '').trim();
+  var fb = document.getElementById('leadFeedback');
+  if (!em || em.indexOf('@') < 1) { fb.style.display = 'block'; fb.style.color = 'var(--vermelho)'; fb.textContent = 'Confira o e-mail e tente de novo.'; return; }
+  var fd = new FormData();
+  fd.append('access_key', '3436ebf8-58a6-42b9-b24d-ab6d248f7d7e');
+  fd.append('subject', 'Seu Código — lead para o Ato II');
+  fd.append('from_name', 'Seu Código (workbook Ato I)');
+  fd.append('email', em);
+  fd.append('Origem', 'workbook-ato1 · progresso ' + (estado._progresso || 0) + '%');
+  fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
+    .then(function(r){ return r.json(); })
+    .then(function(d) {
+      fb.style.display = 'block';
+      if (d && d.success) { fb.style.color = 'var(--preto)'; fb.textContent = '✓ Você será o primeiro a saber. Agora, de volta ao trabalho.'; estado._lead = true; salvar(); evento('sc_lead_captured'); }
+      else { fb.style.color = 'var(--vermelho)'; fb.textContent = 'Não consegui enviar agora — escreva para kiko@kikocampos.com'; }
+    })
+    .catch(function() { fb.style.display = 'block'; fb.style.color = 'var(--vermelho)'; fb.textContent = 'Não consegui enviar agora — escreva para kiko@kikocampos.com'; });
+}
+/* lead: evento renomeado no padrão sc_* */
+
+
 /* ================= exportar / importar ================= */
 function exportar() {
+  evento('sc_export_completed');
   var blob = new Blob([JSON.stringify(estado, null, 2)], { type: 'application/json' });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -1624,11 +1789,46 @@ function importar(ev) {
   if (!f) return;
   var r = new FileReader();
   r.onload = function() {
-    try { estado = JSON.parse(r.result); salvar(); location.reload(); }
-    catch(e) { alert('Arquivo inválido.'); }
+    try {
+      var novo = JSON.parse(r.result);
+      /* aceita o pacote do ciclo (hub) ou o export do módulo */
+      if (novo && novo.formato === 'seucodigo-ciclo') novo = novo[STORE_KEY] || null;
+      if (!novo || typeof novo !== 'object' || Array.isArray(novo)) throw new Error('estrutura');
+      /* cópia de segurança antes de sobrescrever — nunca importar parcialmente em silêncio */
+      try { localStorage.setItem(STORE_KEY + '__backup', localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {}
+      novo._v = novo._v || 1;
+      estado = novo;
+      evento('sc_import_completed');
+      salvar();
+      alert('Seu progresso foi recuperado. Você pode continuar de onde parou.');
+      location.reload();
+    } catch(e) {
+      evento('sc_import_failed');
+      alert('Não conseguimos ler este arquivo. Seus dados atuais continuam protegidos.');
+    }
   };
   r.readAsText(f);
 }
+
+/* ================= feedback do ato ================= */
+(function(){
+  var fbx = document.getElementById('feedbackAto');
+  if (!fbx) return;
+  var obg = document.getElementById('feedbackObrigado');
+  function marca(valor) {
+    fbx.querySelectorAll('button').forEach(function(x){ x.disabled = true; if (x.getAttribute('data-fb') === valor) x.classList.add('certo'); });
+    obg.style.display = 'block';
+  }
+  if (estado._feedback) marca(String(estado._feedback));
+  fbx.querySelectorAll('button').forEach(function(bt) {
+    bt.addEventListener('click', function() {
+      estado._feedback = parseInt(bt.getAttribute('data-fb'));
+      salvar();
+      evento('sc_feedback_submitted', { score: estado._feedback });
+      marca(bt.getAttribute('data-fb'));
+    });
+  });
+})();
 
 /* ================= init ================= */
 montaLikert('likertInicial', 'li');
@@ -1644,7 +1844,20 @@ if (estado._tela && estado._tela > 0) {
   var btn = document.getElementById('btnContinuar');
   btn.style.display = 'inline-block';
   btn.textContent = 'Continuar de onde parei (tela ' + (estado._tela + 1) + ')';
+  /* retorno após pausa longa: a provocação na voz do livro */
+  if (estado._ts) {
+    var dias = Math.floor((Date.now() - estado._ts) / 86400000);
+    if (dias >= 30) evento('retorno_d30');
+    else if (dias >= 7) evento('retorno_d7');
+    if (dias >= 7) {
+      var av = document.getElementById('retornoAviso');
+      av.style.display = 'block';
+      av.textContent = 'Você parou em "' + telas[estado._tela].getAttribute('data-grupo') + '" há ' + dias + ' dias. A cultura da sua empresa não parou.';
+    }
+  }
 }
+/* deep-link do hub: /workbook-ato1.html#continuar */
+if (location.hash === '#continuar' && estado._tela > 0) { evento('sc_resume_clicked', { via: 'hub' }); irPara(estado._tela, true); }
 </script>
 </body>
 </html>
