@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seu Código · O Novo Código da Mudança · Kiko Campos</title>
+<meta name="description" content="O livro traz 15 códigos. Aqui você escreve o seu. A plataforma de prática de O Novo Código da Mudança: diagnóstico, coragem e consistência — com o seu material, no seu ritmo.">
+<meta property="og:title" content="Seu Código — a plataforma de prática do livro">
+<meta property="og:description" content="O livro traz 15 códigos. Aqui você escreve o seu.">
+<meta name="robots" content="noindex">
+<!-- Google tag + consentimento (LGPD, mesmo padrão do site) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RD1P3CKLSE"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{analytics_storage:'denied'});
+gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
+(function(){try{
+  var c=localStorage.getItem('kc_cookie');
+  if(c==='accepted'){gtag('consent','update',{analytics_storage:'granted'});return;}
+  if(c==='declined'){return;}
+  window.addEventListener('DOMContentLoaded',function(){
+    var b=document.createElement('div');
+    b.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;max-width:680px;margin:0 auto;background:#231f20;color:#fff;padding:14px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:13px Lato,sans-serif;z-index:9999;box-shadow:0 12px 34px rgba(0,0,0,.3)';
+    b.innerHTML='<span style="flex:1;min-width:200px">Usamos cookies para medir o uso e melhorar o Seu Código. <a href="/privacidade.html" style="color:#8fc1e9">Saiba mais</a>.</span>';
+    var g=document.createElement('span');g.style.cssText='display:inline-flex;gap:8px;flex-shrink:0';
+    var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:8px 16px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:8px 18px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
+    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
+    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
+  });
+}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --preto:#231f20; --azul:#2b7dbf; --vermelho:#d2232a; --cinza:#6d6e71; --cinza-claro:#f2f2f2;
+  --linha:#dedede; --branco:#ffffff;
+  --serif:'Source Serif 4', Georgia, serif;
+  --sans:'Lato', 'Helvetica Neue', Arial, sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:var(--serif); color:var(--preto); background:var(--branco); line-height:1.65; font-size:17px;}
+.fita{position:fixed; left:0; top:0; bottom:0; width:12px; background:var(--azul); z-index:60;}
+.fita span{position:absolute; top:22px; left:50%; transform:translateX(-50%) rotate(180deg);
+  writing-mode:vertical-rl; font-family:var(--sans); font-weight:900; font-size:9px;
+  letter-spacing:.28em; color:var(--branco); white-space:nowrap;}
+main{margin-left:12px;}
+.pagina{max-width:860px; margin:0 auto; padding:56px 34px;}
+.chip{display:inline-block; background:var(--preto); color:var(--branco); font-family:var(--sans);
+  font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:4px 10px;}
+.kicker{font-family:var(--sans); font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--cinza); margin-top:18px;}
+h1{font-family:var(--sans); font-weight:900; font-size:clamp(34px,6vw,56px); line-height:1.05; text-transform:uppercase; margin:8px 0 6px;}
+h1 .az{color:var(--azul);}
+.promessa{font-family:var(--sans); font-size:clamp(16px,2.4vw,20px); color:var(--cinza); margin-bottom:8px;}
+.promessa b{color:var(--preto);}
+h2.secao{font-family:var(--sans); font-weight:900; font-size:15px; letter-spacing:.05em;
+  text-transform:uppercase; margin:44px 0 16px; padding-top:16px; border-top:2px solid var(--preto); max-width:460px;}
+p{margin-bottom:14px;}
+
+/* circuito de fundo do hero */
+.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--linha);}
+.circuito{position:absolute; right:-20px; bottom:-10px; opacity:.9; pointer-events:none;}
+
+/* cards dos atos */
+.atos{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin:22px 0;}
+.ato-card{border:2px solid var(--preto); padding:20px; display:flex; flex-direction:column; gap:10px; font-family:var(--sans); position:relative;}
+.ato-card .num{font-weight:900; font-size:30px; color:var(--azul);}
+.ato-card h3{font-weight:900; font-size:17px; text-transform:uppercase; letter-spacing:.04em;}
+.ato-card .sub{font-size:13px; color:var(--cinza); line-height:1.45;}
+.ato-card .barra{height:8px; background:var(--cinza-claro); overflow:hidden; margin-top:6px;}
+.ato-card .barra div{height:100%; width:0%; background:var(--azul); transition:width .6s;}
+.ato-card .status{font-weight:700; font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--cinza);}
+.ato-card a.cta, .ato-card span.cta{display:inline-block; margin-top:auto; text-align:center; font-weight:900; font-size:13px;
+  letter-spacing:.06em; text-transform:uppercase; padding:12px 18px; text-decoration:none;
+  background:var(--preto); color:var(--branco); cursor:pointer;}
+.ato-card a.cta:hover{background:var(--azul);}
+.ato-card.travado{border-color:var(--linha);}
+.ato-card.travado .num{color:var(--cinza);}
+.ato-card.travado span.cta{background:var(--cinza-claro); color:var(--cinza); cursor:default;}
+.ato-card .breve{position:absolute; top:14px; right:14px; font-weight:900; font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; background:var(--cinza-claro); padding:3px 8px; color:var(--cinza);}
+.ato-card .aqui{position:absolute; top:14px; right:14px; font-weight:900; font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; background:var(--azul); padding:3px 8px; color:var(--branco);}
+
+/* evidências */
+.evidencias{display:grid; gap:14px;}
+.evid{border:2px solid var(--preto); padding:18px 20px; position:relative;}
+.evid .rotulo{font-family:var(--sans); font-weight:900; font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--branco); background:var(--azul); display:inline-block; padding:3px 10px; position:absolute; top:-11px; left:14px;}
+.evid p{font-size:17px; font-weight:600; margin:6px 0 0;}
+.evid .vazio{color:var(--cinza); font-weight:400; font-style:italic; font-size:14px; font-family:var(--sans);}
+.evid .vazio a{color:var(--azul); font-weight:700;}
+
+/* ciclo */
+.botoes{display:flex; gap:12px; flex-wrap:wrap; margin:22px 0; align-items:center;}
+button.acao{font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em;
+  text-transform:uppercase; padding:13px 24px; border:2px solid var(--preto);
+  background:var(--branco); color:var(--preto); cursor:pointer;}
+button.acao:hover{background:var(--cinza-claro);}
+.nota{font-family:var(--sans); font-size:12px; color:var(--cinza);}
+.pe{font-family:var(--sans); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--cinza); text-align:right; padding:20px 34px 40px; max-width:860px; margin:0 auto;}
+.pe b{color:var(--preto); font-weight:900;}
+.volta{font-family:var(--sans); font-size:13px;}
+.volta a{color:var(--azul); font-weight:700; text-decoration:none;}
+.volta a:hover{text-decoration:underline;}
+@media (max-width:640px){ .lem-svg{margin:0 -10px;} }
+</style>
+</head>
+<body>
+<div class="fita"><span>SEU CÓDIGO &nbsp;·&nbsp; A PLATAFORMA DE PRÁTICA DO LIVRO</span></div>
+<main>
+
+<section class="hero">
+  <svg class="circuito" width="420" height="300" viewBox="0 0 420 300" fill="none">
+    <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/><path d="M210 290 V260 H300 V220 H390"/></g>
+    <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
+    <g fill="#231f20"><circle cx="110" cy="150" r="4"/><circle cx="260" cy="110" r="4"/><circle cx="390" cy="220" r="4"/></g>
+  </svg>
+  <div class="pagina" style="padding-bottom:40px;">
+    <span class="chip">A plataforma de prática do livro</span>
+    <p class="kicker">O Novo Código da Mudança · Kiko Campos</p>
+    <h1>Seu <span class="az">Código</span></h1>
+    <p class="promessa">O livro traz 15 códigos. <b>Aqui você escreve o seu</b> — com o seu caso, o seu time e a sua evidência.</p>
+
+    <!-- lemniscata viva -->
+    <svg class="lem-svg" viewBox="0 0 640 300" width="100%" style="display:block; max-width:680px; margin-top:10px;" role="img" aria-label="Seu progresso nas três forças">
+      <path d="M 90,140 C 90,78 240,78 320,140 C 400,202 550,202 550,140 C 550,78 400,78 320,140 C 240,202 90,202 90,140 Z"
+            fill="none" stroke="#c9c9c9" stroke-width="2.5"/>
+      <circle id="no1" cx="90" cy="140" r="30" fill="#2b7dbf"/>
+      <text id="no1t" x="90" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#ffffff">1</text>
+      <text x="90" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CONSCIÊNCIA</text>
+      <text id="st1" x="90" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">…</text>
+      <text id="aqui1" x="90" y="80" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf">VOCÊ ESTÁ AQUI</text>
+      <circle id="no2" cx="320" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
+      <text id="no2t" x="320" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">2</text>
+      <text x="320" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CORAGEM</text>
+      <text id="st2" x="320" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">em preparação</text>
+      <circle id="no3" cx="550" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
+      <text id="no3t" x="550" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">3</text>
+      <text x="550" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CONSISTÊNCIA</text>
+      <text id="st3" x="550" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">em preparação</text>
+      <text x="320" y="282" text-anchor="middle" font-family="Lato,Arial" font-size="12" font-style="italic" fill="#6d6e71">O ciclo não termina: consistência devolve consciência — em um nível acima.</text>
+    </svg>
+  </div>
+</section>
+
+<section>
+  <div class="pagina" style="padding-top:34px;">
+    <div class="atos">
+      <div class="ato-card" id="cardAto1">
+        <span class="aqui" id="badge1" style="display:none;">Você está aqui</span>
+        <span class="num">I</span>
+        <h3>Consciência</h3>
+        <p class="sub">Enxergar o sistema real. Diagnóstico sem ilusões, âncoras culturais, engrenagens do sistema e a sombra do líder. Códigos 1–4.</p>
+        <div class="barra"><div id="barra1"></div></div>
+        <span class="status" id="status1">carregando…</span>
+        <a class="cta" id="cta1" href="/workbook-ato1.html">Começar →</a>
+      </div>
+      <div class="ato-card travado" id="cardAto2">
+        <span class="breve">Em preparação</span>
+        <span class="num">II</span>
+        <h3>Coragem</h3>
+        <p class="sub">Transformar intenção em prática. Você vai ensaiar — no seguro — as conversas que destravam o gap que nomeou na Consciência. Códigos 5–9.</p>
+        <div class="barra"><div></div></div>
+        <span class="status">Começa quando enxergar já não basta</span>
+        <span class="cta">Em breve</span>
+      </div>
+      <div class="ato-card travado" id="cardAto3">
+        <span class="breve">Em preparação</span>
+        <span class="num">III</span>
+        <h3>Consistência</h3>
+        <p class="sub">Sustentar até virar cultura. Cadência, métricas suas e o Código do Leitor — as 15 evidências em uma página. Códigos 10–15.</p>
+        <div class="barra"><div></div></div>
+        <span class="status">O ciclo se fecha — e reabre</span>
+        <span class="cta">Em breve</span>
+      </div>
+    </div>
+
+    <h2 class="secao">O que você já escreveu</h2>
+    <p class="nota" style="margin-bottom:18px;">Suas evidências ficam neste navegador e atravessam a jornada: o que você escreve na Consciência vira matéria-prima da Coragem.</p>
+    <div class="evidencias">
+      <div class="evid"><span class="rotulo">Código 1 · Gap nomeado</span><p id="ev1" class="vazio">Ainda em branco — <a href="/workbook-ato1.html">nasce no exercício 1.4 do Ato I</a>.</p></div>
+      <div class="evid"><span class="rotulo">Código 2 · Não-negociáveis</span><p id="ev2" class="vazio">Ainda em branco — nasce na triagem 2.3.</p></div>
+      <div class="evid"><span class="rotulo">Código 3 · Alavancas do sistema</span><p id="ev3" class="vazio">Ainda em branco — nasce no raio-X 3.4.</p></div>
+      <div class="evid"><span class="rotulo">Código 4 · Compromisso de sombra</span><p id="ev4" class="vazio">Ainda em branco — nasce no compromisso 4.4.</p></div>
+    </div>
+
+    <h2 class="secao">Seu ciclo, com você</h2>
+    <p class="nota">Seus registros ficam neste navegador — nada é enviado a servidores. Exporte uma cópia para não perder seu progresso ao trocar de dispositivo, e importe onde quiser.</p>
+    <div class="botoes">
+      <button class="acao" onclick="exportarCiclo()">Exportar meu ciclo</button>
+      <button class="acao" onclick="document.getElementById('importFile').click()">Importar ciclo</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importarCiclo(event)">
+    </div>
+
+    <p class="volta" style="margin-top:36px;">← <a href="/livro.html">Conhecer o livro</a> &nbsp;·&nbsp; <a href="/index.html">kikocampos.com</a></p>
+  </div>
+</section>
+
+</main>
+<div class="pe">SEU CÓDIGO · O NOVO CÓDIGO DA MUDANÇA — TODA MUDANÇA É <b>HUMANA</b></div>
+
+<script>
+var SC_CONFIG = { accessMode: 'open', platformVersion: '1.0.0' };
+var CHAVES = ['ncc-workbook-ato1', 'ncc-workbook-ato2', 'ncc-workbook-ato3'];
+function carrega(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
+function v(o,k){ return (o[k] || '').toString().trim(); }
+function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
+
+/* plataforma: id anônimo, esquema, primeira origem */
+if (!scGet('seucodigo_anon_id')) scSet('seucodigo_anon_id', 'sc-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10));
+scSet('seucodigo_schema_version', 1);
+(function(){
+  if (scGet('seucodigo_first_touch')) return;
+  var q = new URLSearchParams(location.search);
+  var ft = { entrada: location.pathname, ref: document.referrer || '', em: new Date().toISOString() };
+  ['utm_source','utm_medium','utm_campaign','utm_content'].forEach(function(u){ if (q.get(u)) ft[u] = q.get(u); });
+  scSet('seucodigo_first_touch', ft);
+})();
+
+var a1 = carrega(CHAVES[0]);
+
+/* instrumentação — nunca envia texto do leitor */
+var SC_SESSION = (function(){
+  var loc = scGet('seucodigo_last_location');
+  var dias = (loc && loc.ts) ? Math.floor((Date.now() - loc.ts) / 86400000) : null;
+  return { tipo: loc ? 'retorno' : 'nova', dias: dias };
+})();
+function evento(nome, params) {
+  try {
+    if (typeof gtag !== 'function') return;
+    var ft = scGet('seucodigo_first_touch') || {};
+    var base = {
+      route: a1.rota || null, cycle_number: 1,
+      session_type: SC_SESSION.tipo, days_since_last_visit: SC_SESSION.dias,
+      progress_percentage: parseInt(a1._progresso || 0),
+      platform_version: SC_CONFIG.platformVersion,
+      traffic_source: ft.utm_source || (ft.ref ? 'referral' : 'direto')
+    };
+    var p = params || {};
+    for (var k in p) base[k] = p[k];
+    gtag('event', nome, base);
+  } catch(e) {}
+}
+evento('sc_hub_view');
+
+/* ---- progresso do Ato I ---- */
+var prog = parseInt(a1._progresso || 0);
+var tela = parseInt(a1._tela || 0);
+var iniciou = tela > 0 || prog > 0 || Object.keys(a1).length > 2;
+var completo = prog >= 100;
+
+var barra1 = document.getElementById('barra1');
+var status1 = document.getElementById('status1');
+var cta1 = document.getElementById('cta1');
+barra1.style.width = Math.max(prog, iniciou ? 4 : 0) + '%';
+var nomesRota = { '7': 'Rota 7 · Sprint', '30': 'Rota 30 · Travessia', '90': 'Rota 90 · Ciclo' };
+var detalhes = [];
+if (a1.rota) detalhes.push(nomesRota[a1.rota] || 'Rota ' + a1.rota);
+detalhes.push('Ciclo 1');
+if (a1._ts) {
+  var dd = Math.floor((Date.now() - a1._ts) / 86400000);
+  detalhes.push(dd === 0 ? 'última atividade hoje' : 'última atividade há ' + dd + ' dia' + (dd > 1 ? 's' : ''));
+}
+if (!iniciou) {
+  status1.textContent = 'Não iniciado · ≈ 25 min por código';
+  cta1.textContent = 'Começar pela Consciência →';
+  cta1.addEventListener('click', function(){ evento('sc_next_act_intent', { act_number: 1 }); });
+} else if (completo) {
+  status1.textContent = 'Ato completo — evidências entregues · ' + detalhes.join(' · ');
+  cta1.textContent = 'Ver meu Mapa de Consciência';
+  cta1.href = '/workbook-ato1.html#continuar';
+  cta1.addEventListener('click', function(){ evento('sc_resume_clicked', { via: 'hub' }); });
+  /* mensagem do próximo ato indisponível */
+  document.querySelector('#cardAto2 .status').textContent = 'Você concluiu a Consciência. A Coragem está sendo preparada.';
+} else {
+  status1.textContent = 'Em andamento · ' + prog + '% · ' + detalhes.join(' · ');
+  cta1.textContent = 'Continuar de onde parei →';
+  cta1.href = '/workbook-ato1.html#continuar';
+  cta1.addEventListener('click', function(){ evento('sc_resume_clicked', { via: 'hub' }); });
+  document.getElementById('badge1').style.display = 'inline-block';
+}
+
+/* ---- lemniscata ---- */
+var st1 = document.getElementById('st1');
+st1.textContent = !iniciou ? 'comece por aqui' : (completo ? '✓ completo' : prog + '% percorrido');
+if (completo) {
+  document.getElementById('no1').setAttribute('fill', '#231f20');
+  document.getElementById('aqui1').textContent = '✓ CONSCIÊNCIA ENTREGUE';
+  document.getElementById('aqui1').setAttribute('fill', '#231f20');
+}
+
+/* ---- evidências (handoff visível) ---- */
+function mostra(id, html){ var el = document.getElementById(id); el.className = ''; el.innerHTML = html; }
+if (v(a1,'c1_gap_declara') && v(a1,'c1_gap_pratica')) {
+  mostra('ev1', 'Declaramos <b>' + v(a1,'c1_gap_declara') + '</b>, mas na prática <b>' + v(a1,'c1_gap_pratica') + '</b>.' + (v(a1,'c1_gap_evidencia') ? ' Evidência: ' + v(a1,'c1_gap_evidencia') + '.' : ''));
+}
+var ess = [];
+for (var i = 1; i <= 5; i++) { if (v(a1,'c2_s' + i) === 'Essência' && v(a1,'c2_p' + i)) ess.push(v(a1,'c2_p' + i)); }
+if (ess.length) mostra('ev2', '<b>' + ess.join(' · ') + '</b>');
+if (v(a1,'c3_alavanca1') || v(a1,'c3_alavanca2')) {
+  mostra('ev3', [v(a1,'c3_alavanca1'), v(a1,'c3_alavanca2')].filter(Boolean).map(function(x){ return '• ' + x; }).join('<br>'));
+}
+if (v(a1,'c4_comportamento')) {
+  mostra('ev4', '<b>' + v(a1,'c4_comportamento') + '</b>' + (v(a1,'c4_evidencia') ? '<br><span style="font-weight:400; font-size:15px;">O time percebe quando: ' + v(a1,'c4_evidencia') + '</span>' : ''));
+}
+
+/* ---- exportar / importar ciclo completo ---- */
+function exportarCiclo() {
+  var pacote = { formato: 'seucodigo-ciclo', versao: 1, exportadoEm: new Date().toISOString() };
+  ['seucodigo_first_touch', 'seucodigo_last_location'].forEach(function(k){ var d = scGet(k); if (d) pacote[k] = d; });
+  CHAVES.forEach(function(k){ var d = carrega(k); if (Object.keys(d).length) pacote[k] = d; });
+  var blob = new Blob([JSON.stringify(pacote, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'seu-codigo-ciclo.json';
+  a.click();
+  evento('sc_export_completed');
+}
+function importarCiclo(ev) {
+  var f = ev.target.files[0];
+  if (!f) return;
+  var r = new FileReader();
+  r.onload = function() {
+    try {
+      var pacote = JSON.parse(r.result);
+      if (!pacote || typeof pacote !== 'object' || Array.isArray(pacote)) throw new Error('estrutura');
+      /* cópia de segurança antes de sobrescrever — nunca importar parcialmente em silêncio */
+      CHAVES.forEach(function(k){
+        try { var atual = localStorage.getItem(k); if (atual) localStorage.setItem(k + '__backup', atual); } catch(e) {}
+      });
+      if (pacote.formato === 'seucodigo-ciclo') {
+        var achou = false;
+        CHAVES.forEach(function(k){ if (pacote[k] && typeof pacote[k] === 'object') { localStorage.setItem(k, JSON.stringify(pacote[k])); achou = true; } });
+        if (pacote.seucodigo_last_location) scSet('seucodigo_last_location', pacote.seucodigo_last_location);
+        if (!achou) throw new Error('vazio');
+      } else if (pacote._v || pacote._tela !== undefined || pacote.c1_valor !== undefined) {
+        /* export antigo do módulo Ato I */
+        localStorage.setItem(CHAVES[0], JSON.stringify(pacote));
+      } else { throw new Error('formato'); }
+      evento('sc_import_completed');
+      alert('Seu progresso foi recuperado. Você pode continuar de onde parou.');
+      location.reload();
+    } catch(e) {
+      evento('sc_import_failed');
+      alert('Não conseguimos ler este arquivo. Seus dados atuais continuam protegidos.');
+    }
+  };
+  r.readAsText(f);
+}
+</script>
+</body>
+</html>
