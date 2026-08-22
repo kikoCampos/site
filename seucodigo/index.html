@@ -58,6 +58,15 @@ h2.secao{font-weight:900; font-size:22px; letter-spacing:.01em; margin:0 0 6px;}
 .sub-secao{font-size:15px; color:var(--cinza); margin-bottom:20px; max-width:62ch;}
 h3{font-family:var(--sans);}
 
+/* ===================== NAVEGAÇÃO DE TOPO ===================== */
+.topo{border-bottom:1px solid #2c2829; position:relative; z-index:3;}
+.topo .interna{max-width:960px; margin:0 auto; padding:13px 36px; display:flex; justify-content:space-between;
+  align-items:center; gap:18px; flex-wrap:wrap;}
+.topo a{color:#b9b6b7; text-decoration:none; font-size:13px; font-weight:700; padding:4px 0;}
+.topo a:hover{color:#fff;}
+.topo a.marca{color:#fff;}
+.topo .atos-nav{display:flex; gap:20px; flex-wrap:wrap;}
+
 /* ===================== HERÓI ===================== */
 .hero{background:var(--tinta); color:#fff; position:relative; overflow:hidden;}
 .hero .circuito{position:absolute; right:-30px; bottom:-20px; pointer-events:none;}
@@ -95,14 +104,25 @@ h1 .az{color:var(--azul-claro);}
 .forca .linha{font-size:14px; color:var(--cinza); line-height:1.45; min-height:40px;}
 .forca.atual{background:var(--branco); box-shadow:var(--elev); padding:24px 20px 20px; margin:-24px -20px 0;}
 .forca.atual::after{top:45px; left:66px; width:calc(100% - 38px);}
+/* entregue = fechado: bloco em tinta cheia, o oposto visual do que ainda está por construir */
+.forca.feita{background:var(--tinta); color:#fff; padding:24px 20px 20px; margin:-24px -20px 0;}
+.forca.feita::after{top:45px; left:66px; width:calc(100% - 38px); background:#6d6e71;}
+.forca.feita .no{background:transparent; border-color:var(--azul-claro); color:var(--azul-claro);}
+.forca.feita h3{color:#fff;}
+.forca.feita .linha, .forca.feita .meta{color:#b9b6b7;}
+.forca.feita .carimbo{border-color:var(--azul-claro); color:var(--azul-claro);}
+.forca.feita .pontos button{background:transparent; border-color:#4a4546; color:#8f8b8c;}
+.forca.feita .pontos button.ok{background:var(--azul-claro); border-color:var(--azul-claro); color:var(--tinta);}
+.forca.feita .pontos button:hover{border-color:#fff;}
+.forca.feita a.ir{color:var(--azul-claro);}
 .forca.atual .aqui{display:inline-block; font-weight:900; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--azul-acao); margin-top:10px;}
 .pontos{display:flex; gap:6px; flex-wrap:wrap; margin:14px 0 10px;}
 .pontos button{width:27px; height:27px; padding:0; cursor:pointer; background:var(--papel);
   border:1px solid var(--linha); font-family:var(--sans); font-weight:900; font-size:11.5px; color:var(--cinza-fraco);}
 .forca.atual .pontos button{background:var(--branco);}
-.pontos button.ok{background:var(--tinta); border-color:var(--tinta); color:#fff;}
-.pontos button.prox{border:2px solid var(--azul-acao); color:var(--azul-acao); background:var(--branco);}
+.pontos button.ok, .forca.atual .pontos button.ok{background:var(--tinta); border-color:var(--tinta); color:#fff;}
+.pontos button.prox, .forca.atual .pontos button.prox{border:2px solid var(--azul-acao); color:var(--azul-acao); background:var(--branco);}
 .pontos button:hover{border-color:var(--preto);}
 .forca .meta{font-size:13px; color:var(--cinza); font-weight:700;}
 .forca a.ir{display:inline-block; margin-top:11px; font-weight:900; font-size:14.5px; text-decoration:none; color:var(--azul-acao);}
@@ -126,11 +146,25 @@ details.forca-lista > summary .cnt{font-weight:700; font-size:13px; color:var(--
 .codigo .n{font-weight:900; font-size:15px; color:var(--linha); padding-top:2px;}
 .codigo.ok{border-left:3px solid var(--azul); padding-left:13px; margin-left:-16px; background:var(--branco);}
 .codigo.ok .n{color:var(--azul-acao);}
-.codigo .tit{font-weight:900; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--cinza); display:block; margin-bottom:3px;}
-.codigo .txt{font-family:var(--serif); font-size:17px; line-height:1.5;}
+.codigo.prox{border-left:3px solid var(--azul-acao); padding-left:13px; margin-left:-16px;}
+.codigo .tit{font-weight:900; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--cinza); display:block; margin-bottom:4px;}
+.codigo .txt{font-family:var(--serif); font-size:17px; line-height:1.5; display:block;}
+.codigo .oculto{display:block; font-size:14.5px; color:var(--cinza-fraco); font-style:italic;}
+.codigo .meta-cod{display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin-top:8px; font-size:12.5px; color:var(--cinza-fraco);}
+.codigo .meta-cod a{color:var(--azul-acao); font-weight:700; text-decoration:none;}
+.codigo .meta-cod a:hover{text-decoration:underline;}
 .codigo .vazio{font-size:14px; color:var(--cinza);}
+.codigo .vazio b{color:var(--azul-acao); font-weight:900;}
 .codigo .vazio a{color:var(--azul-acao); font-weight:700;}
 .codigo:target{background:#eef5fb;}
+.barra-port{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:16px;}
+button.discreto{font-family:var(--sans); font-size:13px; font-weight:700; color:var(--cinza); background:none;
+  border:0; border-bottom:1px solid var(--linha); padding:5px 0; cursor:pointer;}
+button.discreto:hover{color:var(--preto); border-color:var(--preto);}
+.carimbo{display:inline-block; border:2px solid var(--tinta); color:var(--tinta); font-weight:900; font-size:10px;
+  letter-spacing:.14em; text-transform:uppercase; padding:6px 10px; transform:rotate(-2deg); margin:12px 0 0;}
+.marco{background:#edf4fa; border-left:3px solid var(--azul-acao); padding:14px 18px; font-size:14.5px; color:var(--cinza); margin-bottom:22px;}
+.marco b{display:block; font-weight:900; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--azul-acao); margin-bottom:3px;}
 
 /* ===================== BACKUP / RODAPÉ ===================== */
 .caixa{background:var(--superficie); padding:20px 22px;}
@@ -163,7 +197,8 @@ button.acao:hover{background:var(--branco);}
   .forca .linha{min-height:0;}
   .forca.atual{margin:0 -20px; padding:18px 20px 22px;}
   .forca.atual::after{left:41px; top:66px; height:calc(100% - 80px);}
-  .forca.atual .no{margin-top:0;}
+  .forca.feita{margin:0 -20px; padding:18px 20px 22px;}
+  .forca.feita::after{left:41px; top:66px; height:calc(100% - 80px);}
   .ciclo-arco{display:none;}
   .ciclo-legenda{text-align:left; margin-top:16px; font-size:14.5px;}
   h2.secao{font-size:20px;}
@@ -183,6 +218,17 @@ button.acao:hover{background:var(--branco);}
     <g fill="#5cb3f0"><circle cx="200" cy="95" r="5"/><circle cx="350" cy="115" r="5"/><circle cx="420" cy="150" r="5"/></g>
     <g fill="#4a4546"><circle cx="115" cy="160" r="4"/><circle cx="275" cy="115" r="4"/><circle cx="410" cy="235" r="4"/></g>
   </svg>
+  <nav class="topo" aria-label="Navegação da plataforma">
+    <div class="interna">
+      <a class="marca" href="/index.html">← kikocampos.com</a>
+      <span class="atos-nav">
+        <a href="/workbook-ato1.html">Consciência</a>
+        <a href="/workbook-ato2.html">Coragem</a>
+        <a href="/workbook-ato3.html">Consistência</a>
+        <a href="/livro.html">O livro</a>
+      </span>
+    </div>
+  </nav>
   <div class="pagina hero-grid">
     <div>
       <span class="chip">A plataforma de prática do livro</span>
@@ -221,7 +267,11 @@ button.acao:hover{background:var(--branco);}
     <div class="bloco">
       <h2 class="secao">Seus 15 códigos</h2>
       <p class="sub-secao">O livro pessoal que você está escrevendo enquanto pratica.</p>
-      <p class="contador" id="contador"><span>0 de 15</span> evidências registradas</p>
+      <div id="marco"></div>
+      <div class="barra-port">
+        <p class="contador" id="contador"><span>0 de 15</span> evidências registradas</p>
+        <button class="discreto" id="btnRespostas" onclick="alternarRespostas()" style="display:none">Ocultar minhas respostas</button>
+      </div>
       <div id="listaCodigos"></div>
       <div id="historicoCiclos"></div>
     </div>
@@ -251,7 +301,7 @@ button.acao:hover{background:var(--branco);}
 <div class="pe">SEU CÓDIGO · O NOVO CÓDIGO DA MUDANÇA — TODA MUDANÇA É <b>HUMANA</b></div>
 
 <script>
-var SC_CONFIG = { accessMode: 'open', platformVersion: '1.2.0' };
+var SC_CONFIG = { accessMode: 'open', platformVersion: '1.3.0' };
 var CHAVES = ['ncc-workbook-ato1', 'ncc-workbook-ato2', 'ncc-workbook-ato3'];
 function carrega(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
 function v(o,k){ return (o[k] || '').toString().trim(); }
@@ -381,6 +431,34 @@ function proximoCodigo(i){
   for (var k = 0; k < cods.length; k++) { if (!dados['_ev' + cods[k]]) return cods[k]; }
   return null;
 }
+var PROX = tudoCompleto ? null : proximoCodigo(idxAtual);
+
+/* datas de registro por código: o hub anota quando vê a evidência pela primeira vez.
+   O que já existia antes desta versão fica marcado como 'anterior' — melhor omitir a data do que inventá-la. */
+var EVDATAS = scGet('seucodigo_ev_datas');
+var primeiraLeitura = !EVDATAS;
+if (!EVDATAS) EVDATAS = {};
+(function(){
+  var mudou = false, hoje = new Date().toISOString().slice(0, 10);
+  [a1, a2, a3].forEach(function(d, i){
+    CODS[i].forEach(function(c){
+      if (d['_ev' + c] && !EVDATAS[c]) { EVDATAS[c] = primeiraLeitura ? 'anterior' : hoje; mudou = true; }
+    });
+  });
+  if (mudou || primeiraLeitura) scSet('seucodigo_ev_datas', EVDATAS);
+})();
+
+/* privacidade das respostas: visível por padrão, ocultável em um clique e lembrado */
+var MOSTRAR = scGet('seucodigo_mostrar_respostas');
+if (MOSTRAR === null) MOSTRAR = true;
+function alternarRespostas(){
+  MOSTRAR = !MOSTRAR;
+  scSet('seucodigo_mostrar_respostas', MOSTRAR);
+  document.getElementById('btnRespostas').textContent = MOSTRAR ? 'Ocultar minhas respostas' : 'Mostrar minhas respostas';
+  Array.prototype.forEach.call(document.querySelectorAll('.codigo .txt'), function(e){ e.style.display = MOSTRAR ? 'block' : 'none'; });
+  Array.prototype.forEach.call(document.querySelectorAll('.codigo .oculto'), function(e){ e.style.display = MOSTRAR ? 'none' : 'block'; });
+  evento('sc_answers_toggled', { visible: MOSTRAR });
+}
 
 /* ================= PAINEL DO PRÓXIMO PASSO ================= */
 (function(){
@@ -420,13 +498,14 @@ function proximoCodigo(i){
 (function(){
   var nomesRota = { '7': 'ritmo de 7 dias', '30': 'ritmo de 30 dias', '90': 'ritmo de 90 dias' };
   var alvo = tudoCompleto ? -1 : idxAtual;
-  var proxGlobal = tudoCompleto ? null : proximoCodigo(idxAtual);
+  var proxGlobal = PROX;
   var html = '';
   for (var i = 0; i < 3; i++) {
     var a = A[i], atual = (i === alvo), cls = a.completo ? 'feita' : (atual ? 'atual' : (i > idxAtual ? 'futura' : ''));
     html += '<article class="forca ' + cls + '">';
     html += '<div class="no" aria-hidden="true">' + (a.completo ? '✓' : ROMANOS[i]) + '</div>';
     if (atual) html += '<span class="aqui">Você está aqui</span>';
+    if (a.completo) html += '<div><span class="carimbo">Ato ' + ROMANOS[i] + " · entregue</span></div>";
     html += '<h3>' + NOMES[i] + '</h3><p class="linha">' + LINHAS[i] + '</p>';
 
     html += '<div class="pontos" role="group" aria-label="Códigos da ' + NOMES[i] + '">';
@@ -511,15 +590,43 @@ function irCodigo(n){
     html += '<details class="forca-lista"' + aberto + '><summary>' + NOMES[f]
       + ' <span class="cnt">' + nOk + ' de ' + doAto.length + '</span></summary>';
     doAto.forEach(function(c) {
-      html += '<div class="codigo ' + (c[3] ? 'ok' : '') + '" id="cod-' + c[1] + '"><span class="n">' + c[1] + '</span>'
-        + '<span><span class="tit">' + c[2] + '</span>'
-        + (c[3] ? '<span class="txt">' + c[3] + '</span>'
-                : '<span class="vazio">Você construirá este código no <a href="' + ARQ[c[0]] + '">' + c[4] + '</a>.</span>')
-        + '</span></div>';
+      var eProx = (c[1] === PROX);
+      var corpo;
+      if (c[3]) {
+        var dt = EVDATAS[c[1]];
+        var quando = (dt && dt !== 'anterior') ? 'registrado em ' + dt.split('-').reverse().join('/') : 'registrado';
+        corpo = '<span class="txt"' + (MOSTRAR ? '' : ' style="display:none"') + '>' + c[3] + '</span>'
+              + '<span class="oculto"' + (MOSTRAR ? ' style="display:none"' : '') + '>Suas palavras estão ocultas nesta tela.</span>'
+              + '<span class="meta-cod"><span>' + NOMES[c[0]] + ' · ' + quando + '</span>'
+              + '<a href="' + ARQ[c[0]] + '#continuar">Revisar →</a></span>';
+      } else {
+        corpo = '<span class="vazio">' + (eProx ? '<b>Sua próxima prática.</b> ' : '')
+              + 'Você construirá este código no <a href="' + ARQ[c[0]] + '">' + c[4] + '</a>.</span>';
+      }
+      html += '<div class="codigo ' + (c[3] ? 'ok' : (eProx ? 'prox' : '')) + '" id="cod-' + c[1] + '">'
+        + '<span class="n">' + c[1] + '</span>'
+        + '<span><span class="tit">' + c[2] + '</span>' + corpo + '</span></div>';
     });
     html += '</details>';
   }
   lista.innerHTML = html;
+  var btn = document.getElementById('btnRespostas');
+  if (preenchidos > 0) {
+    btn.style.display = '';
+    btn.textContent = MOSTRAR ? 'Ocultar minhas respostas' : 'Mostrar minhas respostas';
+  }
+})();
+
+/* ================= marcos: reconhecer sem infantilizar ================= */
+(function(){
+  var el = document.getElementById('marco'), h = '';
+  if (tudoCompleto) h = '<b>Ciclo completo</b>Os quinze códigos estão escritos. Baixe uma cópia e escolha a próxima tensão cultural para recomeçar em um nível acima.';
+  else if (totalEv === 1) h = '<b>Primeira evidência registrada</b>Você transformou uma reflexão em prática. É por aqui que um código deixa de ser conceito.';
+  else if (A[2].completo) h = '<b>Consistência entregue</b>Falta pouco para o seu Código do Leitor ficar completo.';
+  else if (A[1].completo) h = '<b>Coragem entregue</b>Você já teve a conversa. Agora é sustentar até virar cultura.';
+  else if (A[0].completo) h = '<b>Consciência entregue</b>Você enxergou o sistema real. O que vem agora exige coragem, não mais diagnóstico.';
+  else if (totalEv >= 5) h = '<b>' + totalEv + ' evidências registradas</b>Um terço do seu código já saiu do papel para a prática.';
+  if (h) el.innerHTML = '<div class="marco">' + h + '</div>';
 })();
 
 /* ================= histórico de ciclos ================= */
