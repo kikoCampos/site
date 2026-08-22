@@ -308,7 +308,8 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 @media (max-width:640px){
   .classif{grid-template-columns:1fr;}
   .engrenagem{grid-template-columns:1fr;}
-  .topo .marca{display:none;}
+  .topo .marca{font-size:15px; letter-spacing:0; padding:2px 6px 2px 0;}
+  .topo .marca .txt-marca{display:none;}
   .onde-estou{display:none;}
 }
 @media print{
@@ -334,7 +335,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <header class="topo">
   <div class="topo-inner">
-    <a class="marca" href="/seucodigo/" style="text-decoration:none; color:inherit;" title="Voltar ao hub Seu Código">SEU <b>CÓDIGO</b></a>
+    <a class="marca" href="/seucodigo/" style="text-decoration:none; color:inherit;" title="Voltar ao Seu Código" aria-label="Voltar ao Seu Código"><span aria-hidden="true">←</span> <span class="txt-marca">SEU <b>CÓDIGO</b></span></a>
     <nav class="atos-nav" aria-label="Atos">
       <a class="ato-tab" href="/workbook-ato1.html" id="tabAto1" title="Ato I · Consciência">I · Consciência</a>
       <a class="ato-tab" href="/workbook-ato2.html" id="tabAto2" title="Ato II · Coragem">II · Coragem</a>
