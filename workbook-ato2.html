@@ -337,7 +337,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
     <nav class="atos-nav" aria-label="Atos">
       <a class="ato-tab" href="/workbook-ato1.html" id="tabAto1" title="Ato I · Consciência">I · Consciência</a>
       <span class="ato-tab ativo" aria-current="page">II · Coragem</span>
-      <span class="ato-tab off" title="Em preparação">III</span>
+      <a class="ato-tab" href="/workbook-ato3.html" id="tabAto3" title="Ato III · Consistência">III · Consistência</a>
     </nav>
     <div class="trilho"><div class="fill" id="progressoFill"></div></div>
     <div class="pct" id="progressoPct">0/5</div>
@@ -1028,7 +1028,8 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="credito">A Coragem colocou a cultura em movimento. O Ato III começa quando agir já não basta.</div>
     </div>
     <div class="botoes">
-      <a href="/seucodigo/" onclick="evento('sc_next_act_intent')" class="acao" style="text-decoration:none; display:inline-block; background:var(--azul); border-color:var(--azul); color:var(--branco); font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border:2px solid var(--azul);">Agir já não basta → Ver minha jornada</a>
+      <a href="/workbook-ato3.html" onclick="evento('sc_next_act_intent', { act_number: 3 })" class="acao" style="text-decoration:none; display:inline-block; background:var(--azul); border-color:var(--azul); color:var(--branco); font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border:2px solid var(--azul);">Agir já não basta → Começar a Consistência</a>
+      <a href="/seucodigo/" class="acao vazado" style="text-decoration:none; display:inline-block; font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border:2px solid var(--preto);">Ver minha jornada</a>
     </div>
 
     <h2 class="secao">Uma pergunta, só uma</h2>
@@ -2101,6 +2102,16 @@ function simFinalizar() {
   var n = ['_ev1','_ev2','_ev3','_ev4'].filter(function(k){ return a1[k]; }).length;
   if (n) t.textContent = 'I · Consciência ' + n + '/4';
   if ((a1._tela || 0) > 0) t.href = '/workbook-ato1.html#continuar';
+})();
+
+(function(){
+  var t = document.getElementById('tabAto3');
+  if (!t) return;
+  var a3 = {};
+  try { a3 = JSON.parse(localStorage.getItem('ncc-workbook-ato3') || '{}'); } catch(e) {}
+  var n = ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15'].filter(function(k){ return a3[k]; }).length;
+  if (n) t.textContent = 'III · Consistência ' + n + '/6';
+  if ((a3._tela || 0) > 0) t.href = '/workbook-ato3.html#continuar';
 })();
 
 /* ================= init ================= */
