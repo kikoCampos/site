@@ -20,11 +20,11 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
   if(c==='declined'){return;}
   window.addEventListener('DOMContentLoaded',function(){
     var b=document.createElement('div');
-    b.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;max-width:680px;margin:0 auto;background:#231f20;color:#fff;padding:14px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:13px Lato,sans-serif;z-index:9999;box-shadow:0 12px 34px rgba(0,0,0,.3)';
+    b.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;max-width:680px;margin:0 auto;background:#151314;color:#fff;padding:14px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:13px Lato,sans-serif;z-index:9999;box-shadow:0 12px 34px rgba(0,0,0,.3)';
     b.innerHTML='<span style="flex:1;min-width:200px">Usamos cookies para medir o uso e melhorar o Seu Código. <a href="/privacidade.html" style="color:#8fc1e9">Saiba mais</a>.</span>';
     var g=document.createElement('span');g.style.cssText='display:inline-flex;gap:8px;flex-shrink:0';
-    var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:10px 18px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
-    var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:10px 20px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:11px 18px;font:700 13px Lato,sans-serif;cursor:pointer';
+    var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#1f6aa6;color:#fff;border:0;padding:11px 20px;font:900 13px Lato,sans-serif;cursor:pointer';
     g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
     a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
     d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
@@ -35,132 +35,140 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --preto:#231f20; --azul:#2b7dbf; --vermelho:#d2232a; --cinza:#6d6e71; --cinza-claro:#f2f2f2;
-  --linha:#dedede; --branco:#ffffff;
+  --tinta:#151314; --preto:#231f20; --papel:#f7f7f5; --branco:#ffffff;
+  --azul:#2b7dbf; --azul-acao:#1f6aa6; --azul-claro:#5cb3f0;
+  --vermelho:#d2232a; --cinza:#626366; --cinza-fraco:#9a9799; --linha:#d8d6d1; --superficie:#eeedea;
   --serif:'Source Serif 4', Georgia, serif;
   --sans:'Lato', 'Helvetica Neue', Arial, sans-serif;
+  --elev:0 12px 28px rgba(0,0,0,.14);
 }
 *{box-sizing:border-box; margin:0; padding:0;}
-:focus-visible{outline:3px solid var(--azul); outline-offset:2px;}
-body{font-family:var(--serif); color:var(--preto); background:var(--branco); line-height:1.65; font-size:17px;}
+:focus-visible{outline:3px solid var(--azul-acao); outline-offset:3px;}
+body{font-family:var(--sans); color:var(--preto); background:var(--papel); line-height:1.55; font-size:16.5px;}
 
-/* fita: assinatura vertical no desktop, horizontal no mobile */
+/* assinatura */
 .fita{position:fixed; left:0; top:0; bottom:0; width:12px; background:var(--azul); z-index:60;}
 .fita span{position:absolute; top:22px; left:50%; transform:translateX(-50%) rotate(180deg);
-  writing-mode:vertical-rl; font-family:var(--sans); font-weight:900; font-size:9px;
-  letter-spacing:.28em; color:var(--branco); white-space:nowrap;}
+  writing-mode:vertical-rl; font-weight:900; font-size:9px; letter-spacing:.28em; color:#fff; white-space:nowrap;}
 .assinatura-topo{display:none;}
 main{margin-left:12px;}
-.pagina{max-width:860px; margin:0 auto; padding:44px 34px;}
+.pagina{max-width:960px; margin:0 auto; padding:40px 36px;}
 
-.chip{display:inline-block; background:var(--preto); color:var(--branco); font-family:var(--sans);
-  font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:5px 11px;}
-.kicker{font-family:var(--sans); font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--cinza); margin-top:14px;}
-h1{font-family:var(--sans); font-weight:900; font-size:clamp(34px,6vw,56px); line-height:1.05; text-transform:uppercase; margin:6px 0 6px;}
-h1 .az{color:var(--azul);}
-.promessa{font-family:var(--sans); font-size:clamp(16px,2.2vw,19px); color:var(--cinza); margin-bottom:6px; max-width:620px;}
-.promessa b{color:var(--preto);}
-h2.secao{font-family:var(--sans); font-weight:900; font-size:20px; letter-spacing:.04em;
-  text-transform:uppercase; margin:40px 0 14px; padding-top:16px; border-top:2px solid var(--preto); max-width:520px;}
+h2.secao{font-weight:900; font-size:22px; letter-spacing:.01em; margin:0 0 6px;}
+.sub-secao{font-size:15px; color:var(--cinza); margin-bottom:20px; max-width:62ch;}
 h3{font-family:var(--sans);}
-p{margin-bottom:12px;}
 
-.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--linha);}
-.circuito{position:absolute; right:-20px; bottom:-10px; opacity:.9; pointer-events:none;}
+/* ===================== HERÓI ===================== */
+.hero{background:var(--tinta); color:#fff; position:relative; overflow:hidden;}
+.hero .circuito{position:absolute; right:-30px; bottom:-20px; pointer-events:none;}
+.hero-grid{display:grid; grid-template-columns:1fr 372px; gap:52px; align-items:center; position:relative; z-index:2;
+  padding-top:52px; padding-bottom:56px;}
+.chip{display:inline-block; border:1px solid rgba(255,255,255,.34); color:#fff;
+  font-weight:900; font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; padding:5px 11px;}
+.kicker{font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--cinza-fraco); margin-top:16px;}
+h1{font-weight:900; font-size:clamp(38px,5.4vw,60px); line-height:.98; text-transform:uppercase; margin:8px 0 14px; letter-spacing:-.01em;}
+h1 .az{color:var(--azul-claro);}
+.promessa{font-size:16.5px; color:#c6c3c4; max-width:36ch; line-height:1.6;}
+.promessa b{color:#fff; font-weight:700;}
 
-/* ===== PAINEL PESSOAL — o próximo passo ===== */
-.painel{border:3px solid var(--preto); padding:22px 24px; margin:26px 0 8px; max-width:620px; background:var(--branco); position:relative;}
-.painel .onde{font-family:var(--sans); font-weight:900; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--branco); background:var(--azul); display:inline-block; padding:4px 11px; position:absolute; top:-13px; left:18px;}
-.painel .passo{font-family:var(--sans); font-size:15px; color:var(--cinza); margin:6px 0 4px;}
-.painel .passo b{color:var(--preto); font-size:19px; display:block; font-weight:900; line-height:1.3; margin-bottom:2px;}
-.painel a.principal{display:inline-block; margin-top:14px; background:var(--azul); color:var(--branco); text-decoration:none;
-  font-family:var(--sans); font-weight:900; font-size:14px; letter-spacing:.06em; text-transform:uppercase; padding:16px 28px;
-  white-space:nowrap;}
-.painel a.principal:hover{background:var(--preto);}
-.painel .privacidade{font-family:var(--sans); font-size:12px; color:var(--cinza); margin:12px 0 0;}
+/* painel do próximo passo */
+.painel{background:var(--branco); color:var(--preto); padding:22px 24px 20px; box-shadow:var(--elev);}
+.painel .onde{display:block; font-weight:900; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--azul-acao); margin-bottom:14px;}
+.painel .rot{font-weight:700; font-size:11.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--cinza-fraco);}
+.painel .pratica{font-weight:900; font-size:23px; line-height:1.18; margin:3px 0 7px;}
+.painel .benef{font-size:15px; color:var(--cinza); line-height:1.5;}
+.painel .tempo{font-weight:700; font-size:13.5px; color:var(--preto); margin-top:9px;}
+.painel a.principal{display:block; text-align:center; margin-top:16px; background:var(--azul-acao); color:#fff; text-decoration:none;
+  font-weight:900; font-size:16px; padding:15px 20px;}
+.painel a.principal:hover{background:var(--tinta);}
+.painel .privacidade{font-size:12px; color:var(--cinza-fraco); margin-top:12px; line-height:1.45;}
 
-/* ===== jornada: lemniscata (desktop) × stepper (mobile) ===== */
-.lem-svg{display:block; max-width:680px; margin-top:6px;}
-.stepper{display:none; margin:14px 0 4px; max-width:520px;}
-.step{display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:start; padding:11px 0; border-bottom:1px solid var(--linha); font-family:var(--sans);}
-.step .n{width:28px; height:28px; border-radius:50%; border:2px solid var(--linha); color:var(--cinza);
-  display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px;}
-.step.feito .n{background:var(--preto); border-color:var(--preto); color:var(--branco);}
-.step.atual .n{background:var(--azul); border-color:var(--azul); color:var(--branco);}
-.step b{display:block; font-weight:900; font-size:14px; text-transform:uppercase; letter-spacing:.04em;}
-.step span{font-size:13px; color:var(--cinza);}
-.step.atual span{color:var(--azul); font-weight:700;}
+/* ===================== JORNADA UNIFICADA ===================== */
+.jornada{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:26px;}
+.forca{position:relative; padding-bottom:18px;}
+.forca:not(:last-child)::after{content:""; position:absolute; top:21px; left:46px; width:calc(100% - 18px); height:2px; background:var(--linha);}
+.forca .no{width:44px; height:44px; border-radius:50%; background:var(--papel); border:2px solid var(--linha);
+  display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px; color:var(--cinza-fraco); position:relative; z-index:2;}
+.forca.feita .no{background:var(--tinta); border-color:var(--tinta); color:#fff;}
+.forca.atual .no{background:var(--azul-acao); border-color:var(--azul-acao); color:#fff;}
+.forca h3{font-weight:900; font-size:19px; margin:14px 0 3px;}
+.forca .linha{font-size:14px; color:var(--cinza); line-height:1.45; min-height:40px;}
+.forca.atual{background:var(--branco); box-shadow:var(--elev); padding:0 20px 20px; margin:-4px -20px 0;}
+.forca.atual::after{left:66px; width:calc(100% - 38px);}
+.forca.atual .no{margin-top:20px;}
+.forca.atual .aqui{display:inline-block; font-weight:900; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--azul-acao); margin-top:10px;}
+.pontos{display:flex; gap:6px; flex-wrap:wrap; margin:14px 0 10px;}
+.pontos button{width:27px; height:27px; padding:0; cursor:pointer; background:var(--papel);
+  border:1px solid var(--linha); font-family:var(--sans); font-weight:900; font-size:11.5px; color:var(--cinza-fraco);}
+.forca.atual .pontos button{background:var(--branco);}
+.pontos button.ok{background:var(--tinta); border-color:var(--tinta); color:#fff;}
+.pontos button.prox{border:2px solid var(--azul-acao); color:var(--azul-acao); background:var(--branco);}
+.pontos button:hover{border-color:var(--preto);}
+.forca .meta{font-size:13px; color:var(--cinza); font-weight:700;}
+.forca a.ir{display:inline-block; margin-top:11px; font-weight:900; font-size:14.5px; text-decoration:none; color:var(--azul-acao);}
+.forca a.ir:hover{text-decoration:underline;}
+.forca.futura a.ir{color:var(--cinza); font-weight:700;}
+.ciclo-arco{display:block; width:100%; height:auto; margin-top:-2px;}
+.ciclo-legenda{font-family:var(--serif); font-style:italic; font-size:15px; color:var(--cinza); text-align:center; margin-top:-6px;}
 
-/* ===== cards dos atos ===== */
-.atos{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin:18px 0;}
-.ato-card{border:2px solid var(--linha); padding:20px; display:flex; flex-direction:column; gap:9px; font-family:var(--sans); position:relative;}
-.ato-card.ativo{border-color:var(--preto);}
-.ato-card .num{font-weight:900; font-size:28px; color:var(--cinza);}
-.ato-card.ativo .num{color:var(--azul);}
-.ato-card h3{font-weight:900; font-size:17px; text-transform:uppercase; letter-spacing:.04em;}
-.ato-card .sub{font-size:13.5px; color:var(--cinza); line-height:1.5;}
-.ato-card .barra{height:8px; background:var(--cinza-claro); overflow:hidden; margin-top:4px;}
-.ato-card .barra div{height:100%; width:0%; background:var(--azul); transition:width .6s;}
-.ato-card .status{font-weight:700; font-size:12.5px; letter-spacing:.03em; color:var(--cinza);}
-.ato-card a.cta{display:inline-block; margin-top:auto; text-align:center; font-weight:900; font-size:13px;
-  letter-spacing:.06em; text-transform:uppercase; padding:14px 18px; text-decoration:none;
-  background:var(--branco); color:var(--preto); border:2px solid var(--preto);}
-.ato-card a.cta:hover{background:var(--cinza-claro);}
-.ato-card.ativo a.cta{background:var(--preto); color:var(--branco);}
-.ato-card.ativo a.cta:hover{background:var(--azul); border-color:var(--azul);}
-.ato-card .aqui{position:absolute; top:14px; right:14px; font-weight:900; font-size:10.5px; letter-spacing:.12em;
-  text-transform:uppercase; background:var(--azul); padding:4px 9px; color:var(--branco);}
+/* ===================== PORTFÓLIO ===================== */
+.bloco{margin-top:52px;}
+.contador{font-weight:900; font-size:15px; margin-bottom:16px;}
+.contador span{color:var(--azul-acao);}
+details.forca-lista{border-bottom:1px solid var(--linha);}
+details.forca-lista > summary{cursor:pointer; padding:15px 2px; font-weight:900; font-size:15px;
+  display:flex; justify-content:space-between; gap:10px; align-items:center; list-style:none;}
+details.forca-lista > summary::-webkit-details-marker{display:none;}
+details.forca-lista > summary::after{content:"+"; font-size:19px; color:var(--cinza-fraco); font-weight:400;}
+details.forca-lista[open] > summary::after{content:"–";}
+details.forca-lista > summary .cnt{font-weight:700; font-size:13px; color:var(--cinza);}
+.codigo{display:grid; grid-template-columns:34px 1fr; gap:12px; padding:13px 2px 15px; border-top:1px solid #e8e7e4; align-items:start; scroll-margin-top:20px;}
+.codigo .n{font-weight:900; font-size:15px; color:var(--linha); padding-top:2px;}
+.codigo.ok{border-left:3px solid var(--azul); padding-left:13px; margin-left:-16px; background:var(--branco);}
+.codigo.ok .n{color:var(--azul-acao);}
+.codigo .tit{font-weight:900; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--cinza); display:block; margin-bottom:3px;}
+.codigo .txt{font-family:var(--serif); font-size:17px; line-height:1.5;}
+.codigo .vazio{font-size:14px; color:var(--cinza);}
+.codigo .vazio a{color:var(--azul-acao); font-weight:700;}
+.codigo:target{background:#eef5fb;}
 
-/* ===== 15 códigos ===== */
-.contador{font-family:var(--sans); font-weight:900; font-size:14px; margin-bottom:14px;}
-.contador span{color:var(--azul);}
-details.forca{border:1px solid var(--linha); margin-bottom:10px;}
-details.forca > summary{cursor:pointer; padding:14px 18px; font-family:var(--sans); font-weight:900; font-size:13.5px;
-  letter-spacing:.04em; text-transform:uppercase; display:flex; justify-content:space-between; gap:10px; align-items:center; list-style:none;}
-details.forca > summary::-webkit-details-marker{display:none;}
-details.forca > summary::after{content:"+"; font-size:18px; color:var(--cinza);}
-details.forca[open] > summary::after{content:"–";}
-details.forca[open] > summary{background:var(--cinza-claro);}
-details.forca > summary .cnt{font-weight:700; font-size:12px; color:var(--cinza); text-transform:none; letter-spacing:0;}
-.codigo{display:grid; grid-template-columns:36px 1fr; gap:12px; padding:13px 18px; border-top:1px solid var(--linha); align-items:start;}
-.codigo .n{font-family:var(--sans); font-weight:900; font-size:16px; color:var(--linha);}
-.codigo.ok .n{color:var(--azul);}
-.codigo .tit{font-family:var(--sans); font-weight:900; font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--cinza); display:block;}
-.codigo .txt{font-size:16px; font-weight:600;}
-.codigo .vazio{font-family:var(--sans); font-size:13.5px; color:var(--cinza);}
-.codigo .vazio a{color:var(--azul); font-weight:700;}
-
-/* ===== ciclo / backup ===== */
-.botoes{display:flex; gap:12px; flex-wrap:wrap; margin:18px 0; align-items:center;}
-button.acao{font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em;
-  text-transform:uppercase; padding:15px 24px; border:2px solid var(--preto);
-  background:var(--branco); color:var(--preto); cursor:pointer;}
-button.acao:hover{background:var(--cinza-claro);}
-.nota{font-family:var(--sans); font-size:13px; color:var(--cinza);}
-.historico{font-family:var(--sans); font-size:13.5px; color:var(--cinza); border-left:4px solid var(--preto);
-  padding:14px 18px; background:var(--cinza-claro); margin:14px 0;}
+/* ===================== BACKUP / RODAPÉ ===================== */
+.caixa{background:var(--superficie); padding:20px 22px;}
+.nota{font-size:14px; color:var(--cinza); max-width:66ch;}
+.botoes{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
+button.acao{font-family:var(--sans); font-weight:700; font-size:14.5px; padding:13px 20px;
+  border:1px solid var(--preto); background:transparent; color:var(--preto); cursor:pointer;}
+button.acao:hover{background:var(--branco);}
+.historico{font-size:14px; color:var(--cinza); border-left:3px solid var(--preto); padding:14px 18px; background:var(--superficie); margin:16px 0;}
 .historico b{color:var(--preto);}
-.pe{font-family:var(--sans); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--cinza); text-align:right; padding:20px 34px 40px; max-width:860px; margin:0 auto;}
-.pe b{color:var(--preto); font-weight:900;}
-.volta{font-family:var(--sans); font-size:14px; display:flex; gap:20px; flex-wrap:wrap;}
-.volta a{color:var(--azul); font-weight:700; text-decoration:none; padding:12px 0; display:inline-block;}
+.volta{font-size:15px; display:flex; gap:22px; flex-wrap:wrap;}
+.volta a{color:var(--azul-acao); font-weight:700; text-decoration:none; padding:10px 0; display:inline-block;}
 .volta a:hover{text-decoration:underline;}
+.pe{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--cinza-fraco); text-align:right;
+  padding:26px 36px 44px; max-width:960px; margin:0 auto;}
+.pe b{color:var(--preto); font-weight:900;}
 
-@media (max-width:760px){
+@media (max-width:860px){
   .fita{display:none;}
   main{margin-left:0;}
-  .assinatura-topo{display:block; background:var(--azul); color:var(--branco); font-family:var(--sans);
-    font-weight:900; font-size:10px; letter-spacing:.2em; text-transform:uppercase; padding:7px 18px;}
-  #chipTopo{display:none;} /* no celular a faixa azul já cumpre esse papel */
-  .pagina{padding:30px 20px;}
-  .lem-svg{display:none;}
-  .stepper{display:block;}
-  h2.secao{font-size:18px; margin:34px 0 12px;}
-  .painel{padding:20px 18px;}
-  .painel a.principal{display:block; text-align:center; padding:17px 14px; font-size:13.5px; letter-spacing:.04em; white-space:nowrap;}
-  .circuito{opacity:.35; width:260px;}
+  .assinatura-topo{display:block; background:var(--azul); color:#fff; font-weight:900; font-size:10px;
+    letter-spacing:.2em; text-transform:uppercase; padding:8px 18px;}
+  .pagina{padding:28px 20px;}
+  .hero-grid{grid-template-columns:1fr; gap:26px; padding-top:34px; padding-bottom:36px;}
+  .hero .circuito{opacity:.3; width:250px;}
+  .promessa{max-width:100%;}
+  .jornada{grid-template-columns:1fr; gap:0;}
+  .forca{padding:18px 0 20px;}
+  .forca:not(:last-child)::after{top:46px; left:21px; width:2px; height:calc(100% - 34px);}
+  .forca .linha{min-height:0;}
+  .forca.atual{margin:0 -20px; padding:18px 20px 22px;}
+  .forca.atual::after{left:41px; top:64px;}
+  .forca.atual .no{margin-top:0;}
+  .ciclo-arco{display:none;}
+  .ciclo-legenda{text-align:left; margin-top:16px; font-size:14.5px;}
+  h2.secao{font-size:20px;}
+  .painel .pratica{font-size:21px;}
 }
 </style>
 </head>
@@ -169,99 +177,74 @@ button.acao:hover{background:var(--cinza-claro);}
 <div class="assinatura-topo">Seu Código</div>
 <main>
 
+<!-- ===================== HERÓI ===================== -->
 <section class="hero">
-  <svg class="circuito" width="420" height="300" viewBox="0 0 420 300" fill="none" aria-hidden="true">
-    <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/><path d="M210 290 V260 H300 V220 H390"/></g>
-    <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
-    <g fill="#231f20"><circle cx="110" cy="150" r="4"/><circle cx="260" cy="110" r="4"/><circle cx="390" cy="220" r="4"/></g>
+  <svg class="circuito" width="440" height="320" viewBox="0 0 440 320" fill="none" aria-hidden="true">
+    <g stroke="#34302f" stroke-width="2"><path d="M30 310 V225 H115 V160 H200 V95"/><path d="M95 310 V255 H180 V190 H275 V115 H350"/><path d="M160 310 V265 H255 V210 H340 V150 H420"/><path d="M225 310 V275 H315 V235 H410"/></g>
+    <g fill="#5cb3f0"><circle cx="200" cy="95" r="5"/><circle cx="350" cy="115" r="5"/><circle cx="420" cy="150" r="5"/></g>
+    <g fill="#4a4546"><circle cx="115" cy="160" r="4"/><circle cx="275" cy="115" r="4"/><circle cx="410" cy="235" r="4"/></g>
   </svg>
-  <div class="pagina" style="padding-bottom:28px;">
-    <span class="chip" id="chipTopo">A plataforma de prática do livro</span>
-    <p class="kicker">O Novo Código da Mudança · Kiko Campos</p>
-    <h1>Seu <span class="az">Código</span></h1>
-    <p class="promessa">O livro traz 15 códigos. <b>Aqui você escreve o seu</b> — transformando conceitos em decisões, conversas e evidências reais, no seu caso e com o seu time.</p>
-
-    <!-- PAINEL PESSOAL: onde estou e o que faço agora -->
-    <div class="painel">
-      <span class="onde" id="painelOnde">Primeiro acesso</span>
-      <p class="passo" id="painelPasso"><b>Comece pela Consciência</b>Enxergar o sistema real é o que dá sentido a tudo o que vem depois.</p>
-      <a class="principal" id="painelCta" href="/workbook-ato1.html">Começar meu código →</a>
-      <p class="privacidade">Seu progresso fica salvo apenas neste navegador. <span id="dicaBackup"></span></p>
+  <div class="pagina hero-grid">
+    <div>
+      <span class="chip">A plataforma de prática do livro</span>
+      <p class="kicker">O Novo Código da Mudança · Kiko Campos</p>
+      <h1>Seu <span class="az">Código</span></h1>
+      <p class="promessa">O livro traz 15 códigos. <b>Aqui você escreve o seu</b> — transformando conceitos em decisões, conversas e evidências reais, no seu caso e com o seu time.</p>
     </div>
+    <aside class="painel" aria-labelledby="painelPratica">
+      <span class="onde" id="painelOnde">Primeiro acesso</span>
+      <p class="rot" id="painelRot">Próxima prática</p>
+      <p class="pratica" id="painelPratica">Gap nomeado</p>
+      <p class="benef" id="painelBenef">Separe o que vocês declaram do que de fato praticam.</p>
+      <p class="tempo" id="painelTempo">≈ 8 minutos</p>
+      <a class="principal" id="painelCta" href="/workbook-ato1.html">Começar minha prática →</a>
+      <p class="privacidade">Seu progresso fica salvo apenas neste navegador. <span id="dicaBackup"></span></p>
+    </aside>
   </div>
 </section>
 
 <section>
-  <div class="pagina" style="padding-top:26px;">
+  <div class="pagina">
+
+    <!-- ===================== JORNADA UNIFICADA ===================== -->
     <h2 class="secao">Sua jornada</h2>
+    <p class="sub-secao">Três forças, quinze códigos. Cada quadrado é um código — ele escurece quando você registra a evidência dele.</p>
 
-    <!-- desktop: lemniscata -->
-    <svg class="lem-svg" viewBox="0 0 640 300" width="100%" role="img" aria-label="Seu progresso nas três forças">
-      <path d="M 90,140 C 90,78 240,78 320,140 C 400,202 550,202 550,140 C 550,78 400,78 320,140 C 240,202 90,202 90,140 Z" fill="none" stroke="#c9c9c9" stroke-width="2.5"/>
-      <circle id="no1" cx="90" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
-      <text id="no1t" x="90" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">1</text>
-      <text x="90" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CONSCIÊNCIA</text>
-      <text id="st1" x="90" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">…</text>
-      <text id="aqui1" x="90" y="80" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf"></text>
-      <circle id="no2" cx="320" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
-      <text id="no2t" x="320" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">2</text>
-      <text x="320" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CORAGEM</text>
-      <text id="st2" x="320" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">—</text>
-      <text id="aqui2" x="320" y="80" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf"></text>
-      <circle id="no3" cx="550" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
-      <text id="no3t" x="550" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">3</text>
-      <text x="550" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CONSISTÊNCIA</text>
-      <text id="st3" x="550" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">—</text>
-      <text id="aqui3" x="550" y="80" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf"></text>
-      <text x="320" y="282" text-anchor="middle" font-family="Lato,Arial" font-size="12" font-style="italic" fill="#6d6e71">O ciclo não termina: consistência devolve consciência — em um nível acima.</text>
+    <div class="jornada" id="jornada"></div>
+
+    <svg class="ciclo-arco" viewBox="0 0 900 62" fill="none" aria-hidden="true" preserveAspectRatio="none">
+      <path d="M792 4 C 900 62, 20 62, 46 12" stroke="#d8d6d1" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <path d="M46 4 L41 15 L52 14 Z" fill="#d8d6d1"/>
     </svg>
+    <p class="ciclo-legenda">O ciclo não termina: consistência devolve consciência — em um nível acima.</p>
 
-    <!-- mobile: stepper vertical -->
-    <div class="stepper" id="stepper"></div>
+    <!-- ===================== PORTFÓLIO ===================== -->
+    <div class="bloco">
+      <h2 class="secao">Seus 15 códigos</h2>
+      <p class="sub-secao">O livro pessoal que você está escrevendo enquanto pratica.</p>
+      <p class="contador" id="contador"><span>0 de 15</span> evidências registradas</p>
+      <div id="listaCodigos"></div>
+      <div id="historicoCiclos"></div>
+    </div>
 
-    <h2 class="secao">As três forças</h2>
-    <div class="atos">
-      <div class="ato-card" id="cardAto1">
-        <span class="num">I</span>
-        <h3>Consciência</h3>
-        <p class="sub">Enxergar o sistema real. Diagnóstico sem ilusões, âncoras culturais, engrenagens e a sombra do líder. Códigos 1–4.</p>
-        <div class="barra"><div id="barra1"></div></div>
-        <span class="status" id="status1">carregando…</span>
-        <a class="cta" id="cta1" href="/workbook-ato1.html">Abrir</a>
-      </div>
-      <div class="ato-card" id="cardAto2">
-        <span class="num">II</span>
-        <h3>Coragem</h3>
-        <p class="sub">Transformar intenção em prática. Ensaie a conversa que você vem adiando e saia com acordo, multiplicadores e história. Códigos 5–9.</p>
-        <div class="barra"><div id="barra2"></div></div>
-        <span class="status" id="status2">carregando…</span>
-        <a class="cta" id="cta2" href="/workbook-ato2.html">Abrir</a>
-      </div>
-      <div class="ato-card" id="cardAto3">
-        <span class="num">III</span>
-        <h3>Consistência</h3>
-        <p class="sub">Sustentar até virar cultura. Medição, ciclo de 90 dias, sistemas alinhados, governança — e o seu Código do Leitor. Códigos 10–15.</p>
-        <div class="barra"><div id="barra3"></div></div>
-        <span class="status" id="status3">carregando…</span>
-        <a class="cta" id="cta3" href="/workbook-ato3.html">Abrir</a>
+    <!-- ===================== BACKUP ===================== -->
+    <div class="bloco">
+      <h2 class="secao">Backup e portabilidade</h2>
+      <div class="caixa">
+        <p class="nota">Seus registros ficam neste navegador — nada é enviado a servidores. Baixe uma cópia para não perder o progresso ao trocar de dispositivo ou limpar o navegador.</p>
+        <div class="botoes">
+          <button class="acao" onclick="exportarCiclo()">Baixar cópia do meu progresso</button>
+          <button class="acao" onclick="document.getElementById('importFile').click()">Restaurar uma cópia</button>
+          <input type="file" id="importFile" accept=".json" style="display:none" onchange="importarCiclo(event)">
+        </div>
       </div>
     </div>
 
-    <h2 class="secao">Seus 15 códigos</h2>
-    <p class="contador" id="contador"><span>0 de 15</span> evidências registradas</p>
-    <div id="listaCodigos"></div>
-    <div id="historicoCiclos"></div>
-
-    <h2 class="secao">Backup e portabilidade</h2>
-    <p class="nota">Seus registros ficam neste navegador — nada é enviado a servidores. Baixe uma cópia para não perder o progresso ao trocar de dispositivo ou limpar o navegador.</p>
-    <div class="botoes">
-      <button class="acao" onclick="exportarCiclo()">Baixar cópia do meu progresso</button>
-      <button class="acao" onclick="document.getElementById('importFile').click()">Restaurar uma cópia</button>
-      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importarCiclo(event)">
+    <div class="bloco">
+      <h2 class="secao">Mais do ecossistema</h2>
+      <p class="volta"><a href="/livro.html">Conhecer o livro →</a> <a href="/index.html">kikocampos.com →</a></p>
     </div>
 
-    <h2 class="secao">Mais do ecossistema</h2>
-    <p class="volta"><a href="/livro.html">Conhecer o livro →</a> <a href="/index.html">kikocampos.com →</a></p>
   </div>
 </section>
 
@@ -269,12 +252,13 @@ button.acao:hover{background:var(--cinza-claro);}
 <div class="pe">SEU CÓDIGO · O NOVO CÓDIGO DA MUDANÇA — TODA MUDANÇA É <b>HUMANA</b></div>
 
 <script>
-var SC_CONFIG = { accessMode: 'open', platformVersion: '1.1.0' };
+var SC_CONFIG = { accessMode: 'open', platformVersion: '1.2.0' };
 var CHAVES = ['ncc-workbook-ato1', 'ncc-workbook-ato2', 'ncc-workbook-ato3'];
 function carrega(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
 function v(o,k){ return (o[k] || '').toString().trim(); }
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 if (!scGet('seucodigo_anon_id')) scSet('seucodigo_anon_id', 'sc-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10));
 scSet('seucodigo_schema_version', 1);
@@ -343,6 +327,7 @@ evento('sc_hub_view');
 
 /* ================= estado de cada ato ================= */
 var EVS = [['_ev1','_ev2','_ev3','_ev4'], ['_ev5','_ev6','_ev7','_ev8','_ev9'], ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15']];
+var CODS = [[1,2,3,4], [5,6,7,8,9], [10,11,12,13,14,15]];
 function estadoAto(dados, i) {
   var evs = EVS[i];
   var n = evs.filter(function(k){ return dados[k]; }).length;
@@ -360,8 +345,31 @@ function estadoAto(dados, i) {
 }
 var A = [estadoAto(a1,0), estadoAto(a2,1), estadoAto(a3,2)];
 var NOMES = ['Consciência','Coragem','Consistência'];
+var ROMANOS = ['I','II','III'];
+var LINHAS = ['Enxergar o sistema real, sem ilusões. Códigos 1 a 4.',
+              'Transformar intenção em conversa e prática. Códigos 5 a 9.',
+              'Sustentar até virar cultura. Códigos 10 a 15.'];
 var ARQ = ['/workbook-ato1.html','/workbook-ato2.html','/workbook-ato3.html'];
 var totalEv = A[0].n + A[1].n + A[2].n;
+
+/* nome, benefício e duração de cada prática — o que cria intenção antes do clique */
+var PRAT = {
+  1:  ['Gap nomeado', 'Separe o que vocês declaram do que de fato praticam.', 8],
+  2:  ['Não-negociáveis', 'Escolha o que precisa sobreviver a qualquer mudança.', 7],
+  3:  ['Alavancas do sistema', 'Ache os dois pontos onde o seu esforço rende mais.', 8],
+  4:  ['Compromisso de sombra', 'Nomeie um comportamento seu que trava o time.', 6],
+  5:  ['Ritual de conexão', 'Desenhe um encontro que devolve sentido ao time.', 7],
+  6:  ['Conversa destravada', 'Ensaie a conversa que você vem adiando.', 12],
+  7:  ['Autoria entregue', 'Escolha o que passa a ser decidido por quem faz.', 6],
+  8:  ['Microprática inclusiva', 'Uma prática pequena que muda quem é ouvido.', 6],
+  9:  ['Micro-história', 'Transforme um fato do time em história que circula.', 8],
+  10: ['Indicador vivo', 'Escolha o sinal que mostra a mudança acontecendo.', 7],
+  11: ['Ciclo de 90 dias', 'Defina a primeira microvitória do trimestre.', 10],
+  12: ['Plano de aprendizado', 'Distribua a competência que falta em 70-20-10.', 7],
+  13: ['Decisão com critério', 'Registre uma decisão e o critério por trás dela.', 6],
+  14: ['Contrato de delegação', 'Combine o que você decide e o que o time decide.', 7],
+  15: ['Legado', 'Escreva o que continua quando você não está.', 8]
+};
 
 /* qual é o ato atual: o primeiro não-completo que já começou; senão o primeiro não-completo */
 var idxAtual = 0;
@@ -369,98 +377,106 @@ for (var i = 0; i < 3; i++) { if (A[i].iniciou && !A[i].completo) { idxAtual = i
 var nunca = !A[0].iniciou && !A[1].iniciou && !A[2].iniciou;
 var tudoCompleto = A[0].completo && A[1].completo && A[2].completo;
 
-/* ================= PAINEL PESSOAL ================= */
+function proximoCodigo(i){
+  var cods = CODS[i], dados = A[i].dados;
+  for (var k = 0; k < cods.length; k++) { if (!dados['_ev' + cods[k]]) return cods[k]; }
+  return null;
+}
+
+/* ================= PAINEL DO PRÓXIMO PASSO ================= */
 (function(){
   var onde = document.getElementById('painelOnde');
-  var passo = document.getElementById('painelPasso');
+  var rot = document.getElementById('painelRot');
+  var prat = document.getElementById('painelPratica');
+  var benef = document.getElementById('painelBenef');
+  var tempo = document.getElementById('painelTempo');
   var cta = document.getElementById('painelCta');
   var dica = document.getElementById('dicaBackup');
-  if (nunca) {
-    onde.textContent = 'Primeiro acesso';
-    passo.innerHTML = '<b>Comece a construir seu código</b>Enxergar o sistema real é o que dá sentido a tudo o que vem depois. Cerca de 20 minutos no essencial.';
-    cta.innerHTML = 'Começar meu código <span aria-hidden="true">→</span>';
-    cta.href = ARQ[0];
-  } else if (tudoCompleto) {
+
+  if (tudoCompleto) {
     onde.textContent = 'Ciclo completo';
-    passo.innerHTML = '<b>Seu Código do Leitor está pronto</b>15 de 15 evidências. O próximo passo é fechar o ciclo e escolher a próxima tensão cultural.';
+    rot.textContent = 'Seu resultado';
+    prat.textContent = 'Seu Código do Leitor está pronto';
+    benef.textContent = '15 de 15 evidências registradas. O próximo passo é fechar o ciclo e escolher a próxima tensão cultural.';
+    tempo.textContent = '';
     cta.innerHTML = 'Ver meu Código do Leitor <span aria-hidden="true">→</span>';
     cta.href = ARQ[2] + '#continuar';
   } else {
     var at = A[idxAtual];
-    onde.textContent = 'Você está na ' + NOMES[idxAtual];
-    var restam = at.total - at.n;
-    var detalhe = at.n + ' de ' + at.total + ' evidências deste ato' + (restam ? ' · faltam ' + restam : '')
-      + (at.n === 0 && at.progresso > 0 ? ' · ' + at.progresso + '% do percurso feito' : '') + '.';
-    passo.innerHTML = '<b>' + (at.iniciou ? 'Continue de onde parou' : 'Comece a construir seu código') + '</b>' + detalhe;
-    cta.innerHTML = (at.iniciou ? 'Continuar agora' : 'Começar a ' + NOMES[idxAtual]) + ' <span aria-hidden="true">→</span>';
+    var cod = proximoCodigo(idxAtual) || CODS[idxAtual][0];
+    var pr = PRAT[cod];
+    onde.textContent = nunca ? 'Primeiro acesso' : 'Você está na ' + NOMES[idxAtual];
+    rot.textContent = 'Próxima prática · código ' + cod;
+    prat.textContent = pr[0];
+    benef.textContent = pr[1];
+    tempo.textContent = '≈ ' + pr[2] + ' minutos';
+    cta.innerHTML = (at.iniciou ? 'Continuar minha prática' : 'Começar minha prática') + ' <span aria-hidden="true">→</span>';
     cta.href = ARQ[idxAtual] + (at.iniciou ? '#continuar' : '');
   }
   cta.addEventListener('click', function(){ evento(nunca ? 'sc_next_act_intent' : 'sc_resume_clicked', { act_number: idxAtual + 1, via: 'painel' }); });
   if (totalEv > 0) dica.textContent = 'Baixe uma cópia ao final para não perdê-lo.';
 })();
 
-/* ================= JORNADA: lemniscata + stepper ================= */
-(function(){
-  var st = [document.getElementById('st1'), document.getElementById('st2'), document.getElementById('st3')];
-  var no = [document.getElementById('no1'), document.getElementById('no2'), document.getElementById('no3')];
-  var not = [document.getElementById('no1t'), document.getElementById('no2t'), document.getElementById('no3t')];
-  var aqui = [document.getElementById('aqui1'), document.getElementById('aqui2'), document.getElementById('aqui3')];
-  var stepper = document.getElementById('stepper');
-  var h = '';
-  for (var i = 0; i < 3; i++) {
-    var a = A[i], atual = (i === idxAtual && !tudoCompleto);
-    var legenda = a.completo ? '✓ completo' : (a.iniciou ? a.n + ' de ' + a.total + ' evidências' : (atual ? 'seu próximo passo' : (i === 0 ? 'comece por aqui' : 'depois da ' + NOMES[i-1])));
-    st[i].textContent = legenda;
-    if (a.completo) { no[i].setAttribute('fill', '#231f20'); no[i].setAttribute('stroke', '#231f20'); not[i].setAttribute('fill', '#ffffff'); }
-    else if (atual) { no[i].setAttribute('fill', '#2b7dbf'); no[i].setAttribute('stroke', '#2b7dbf'); not[i].setAttribute('fill', '#ffffff'); }
-    aqui[i].textContent = atual ? 'VOCÊ ESTÁ AQUI' : (a.completo ? '✓ ENTREGUE' : '');
-    aqui[i].setAttribute('fill', atual ? '#2b7dbf' : '#231f20');
-    h += '<div class="step ' + (a.completo ? 'feito' : (atual ? 'atual' : '')) + '">'
-      + '<span class="n">' + (a.completo ? '✓' : (i + 1)) + '</span>'
-      + '<span><b>' + NOMES[i] + '</b><span>' + legenda + (atual ? ' · você está aqui' : '') + '</span></span></div>';
-  }
-  stepper.innerHTML = h;
-})();
-
-/* ================= CARDS DOS ATOS ================= */
+/* ================= JORNADA UNIFICADA: 3 forças × 15 códigos ================= */
 (function(){
   var nomesRota = { '7': 'ritmo de 7 dias', '30': 'ritmo de 30 dias', '90': 'ritmo de 90 dias' };
+  var alvo = tudoCompleto ? -1 : idxAtual;
+  var proxGlobal = tudoCompleto ? null : proximoCodigo(idxAtual);
+  var html = '';
   for (var i = 0; i < 3; i++) {
-    var a = A[i], atual = (i === idxAtual && !tudoCompleto);
-    var card = document.getElementById('cardAto' + (i + 1));
-    var barra = document.getElementById('barra' + (i + 1));
-    var status = document.getElementById('status' + (i + 1));
-    var cta = document.getElementById('cta' + (i + 1));
-    barra.style.width = (a.n / a.total * 100) + '%';
-    if (atual) {
-      card.classList.add('ativo');
-      var badge = document.createElement('span');
-      badge.className = 'aqui'; badge.textContent = 'Você está aqui';
-      card.appendChild(badge);
-    }
-    /* status enxuto */
+    var a = A[i], atual = (i === alvo), cls = a.completo ? 'feita' : (atual ? 'atual' : (i > idxAtual ? 'futura' : ''));
+    html += '<article class="forca ' + cls + '">';
+    html += '<div class="no" aria-hidden="true">' + (a.completo ? '✓' : ROMANOS[i]) + '</div>';
+    if (atual) html += '<span class="aqui">Você está aqui</span>';
+    html += '<h3>' + NOMES[i] + '</h3><p class="linha">' + LINHAS[i] + '</p>';
+
+    html += '<div class="pontos" role="group" aria-label="Códigos da ' + NOMES[i] + '">';
+    CODS[i].forEach(function(c){
+      var feito = !!a.dados['_ev' + c];
+      var eProx = (c === proxGlobal);
+      var rotulo = 'Código ' + c + ' · ' + PRAT[c][0] + ' · ' + (feito ? 'evidência registrada' : (eProx ? 'sua próxima prática' : 'a construir'));
+      html += '<button type="button" class="' + (feito ? 'ok' : (eProx ? 'prox' : '')) + '" title="' + rotulo + '" aria-label="' + rotulo + '" onclick="irCodigo(' + c + ')">' + c + '</button>';
+    });
+    html += '</div>';
+
     var partes = [];
-    if (a.completo) partes.push('Completo · ' + a.n + '/' + a.total + ' evidências');
+    if (a.completo) partes.push('Completa · ' + a.n + ' de ' + a.total + ' evidências');
     else if (a.iniciou) {
-      partes.push(a.n + '/' + a.total + ' evidências');
-      /* nada se perde: se há percurso mas ainda nenhuma evidência fechada, mostramos os dois */
+      partes.push(a.n + ' de ' + a.total + ' evidências');
       if (a.n === 0 && a.progresso > 0) partes.push(a.progresso + '% percorrido');
-    }
-    else partes.push(atual ? 'Pronto para começar' : 'Não iniciado');
+    } else partes.push(atual ? 'Pronta para começar' : 'A construir');
     if (i === 0 && a.dados.rota && nomesRota[a.dados.rota]) partes.push(nomesRota[a.dados.rota]);
     if (a.iniciou && a.dados._ts) {
       var dd = Math.floor((Date.now() - a.dados._ts) / 86400000);
-      partes.push(dd === 0 ? 'atualizado hoje' : dd === 1 ? 'atualizado ontem' : 'atualizado há ' + dd + ' dias');
+      partes.push(dd === 0 ? 'atualizada hoje' : dd === 1 ? 'atualizada ontem' : 'atualizada há ' + dd + ' dias');
     }
-    status.textContent = partes.join(' · ');
-    /* CTA por posição na jornada */
-    if (a.completo) { cta.textContent = 'Rever a ' + NOMES[i]; cta.href = ARQ[i] + '#continuar'; }
-    else if (atual) { cta.textContent = a.iniciou ? 'Continuar na ' + NOMES[i] : 'Começar a ' + NOMES[i]; cta.href = ARQ[i] + (a.iniciou ? '#continuar' : ''); }
-    else if (i > idxAtual) { cta.textContent = 'Ver o que vem depois'; cta.href = ARQ[i]; }
-    else { cta.textContent = 'Voltar à ' + NOMES[i]; cta.href = ARQ[i] + '#continuar'; }
-    (function(idx){ cta.addEventListener('click', function(){ evento('sc_act_open', { act_number: idx + 1, via: 'card' }); }); })(i);
+    html += '<p class="meta">' + partes.join(' · ') + '</p>';
+
+    var txt, href = ARQ[i];
+    if (a.completo) { txt = 'Rever a ' + NOMES[i]; href += '#continuar'; }
+    else if (atual) { txt = a.iniciou ? 'Ir para a prática' : 'Começar a ' + NOMES[i]; href += (a.iniciou ? '#continuar' : ''); }
+    else if (i > idxAtual) { txt = 'Ver o que vem depois'; }
+    else { txt = 'Voltar à ' + NOMES[i]; href += '#continuar'; }
+    html += '<a class="ir" href="' + href + '" data-ato="' + (i + 1) + '">' + txt + ' <span aria-hidden="true">→</span></a>';
+    html += '</article>';
   }
+  var el = document.getElementById('jornada');
+  el.innerHTML = html;
+  Array.prototype.forEach.call(el.querySelectorAll('a.ir'), function(a){
+    a.addEventListener('click', function(){ evento('sc_act_open', { act_number: parseInt(a.getAttribute('data-ato')), via: 'jornada' }); });
+  });
 })();
+
+/* clique no quadrado de um código → abre o portfólio naquele código */
+function irCodigo(n){
+  var alvo = document.getElementById('cod-' + n);
+  if (!alvo) return;
+  var det = alvo.closest('details');
+  if (det) det.open = true;
+  alvo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  history.replaceState(null, '', '#cod-' + n);
+  evento('sc_code_peek', { code_number: n });
+}
 
 /* ================= OS 15 CÓDIGOS ================= */
 (function(){
@@ -468,21 +484,21 @@ var tudoCompleto = A[0].completo && A[1].completo && A[2].completo;
   var ess = [];
   for (var i = 1; i <= 5; i++) { if (v(a1,'c2_s' + i) === 'Essência' && v(a1,'c2_p' + i)) ess.push(v(a1,'c2_p' + i)); }
   var CODIGOS = [
-    [0, 1, 'Gap nomeado', (w(a1,'c1_gap_declara') && w(a1,'c1_gap_pratica')) ? 'Declaramos que <b>' + w(a1,'c1_gap_declara') + '</b>, mas na prática <b>' + w(a1,'c1_gap_pratica') + '</b>.' : '', 'exercício 1.4'],
-    [0, 2, 'Não-negociáveis', ess.length ? '<b>' + ess.join(' · ') + '</b>' : '', 'triagem 2.3'],
-    [0, 3, 'Alavancas do sistema', (w(a1,'c3_alavanca1') || w(a1,'c3_alavanca2')) ? [w(a1,'c3_alavanca1'), w(a1,'c3_alavanca2')].filter(Boolean).map(function(x){ return '• ' + x; }).join('<br>') : '', 'exercício 3.4'],
-    [0, 4, 'Compromisso de sombra', w(a1,'c4_comportamento') ? '<b>' + w(a1,'c4_comportamento') + '</b>' : '', 'compromisso 4.4'],
-    [1, 5, 'Ritual de conexão', w(a2,'c5_ritual') ? '<b>' + w(a2,'c5_ritual') + '</b>' : '', 'exercício 5.3'],
-    [1, 6, 'Conversa destravada', w(a2,'c6_clareza') ? 'Vou dizer: <b>' + w(a2,'c6_clareza') + '</b>' + (w(a2,'c6_acordo') ? ' · Acordo: ' + w(a2,'c6_acordo') : '') : '', 'roteiro 6.2'],
-    [1, 7, 'Autoria entregue', w(a2,'c7_entrega') ? '<b>' + w(a2,'c7_entrega') + '</b>' : '', 'exercício 7.2'],
-    [1, 8, 'Microprática inclusiva', w(a2,'c8_micropratica') ? '<b>' + w(a2,'c8_micropratica') + '</b>' : '', 'exercício 8.2'],
-    [1, 9, 'Micro-história', (w(a2,'missao9') || w(a2,'c9_contexto')) ? '<b>' + (w(a2,'missao9') || w(a2,'c9_contexto')) + '</b>' : '', 'cena 9.2'],
-    [2, 10, 'Indicador vivo', w(a3,'c10_indicador') ? '<b>' + w(a3,'c10_indicador') + '</b>' : '', 'exercício 10.2'],
-    [2, 11, 'Ciclo de 90 dias', w(a3,'c11_p1') ? '<b>' + w(a3,'c11_p1') + '</b>' + (w(a3,'c11_microvitoria') ? ' · Em 90 dias: ' + w(a3,'c11_microvitoria') : '') : '', 'canvas 11.1'],
-    [2, 12, 'Plano de aprendizado', w(a3,'c12_competencia') ? '<b>' + w(a3,'c12_competencia') + '</b>' : '', '70-20-10'],
-    [2, 13, 'Decisão com critério', w(a3,'c13_decisao') ? '<b>' + w(a3,'c13_decisao') + '</b>' : '', 'exercício 13.1'],
-    [2, 14, 'Contrato de delegação', w(a3,'c14_decisao') ? '<b>' + w(a3,'c14_decisao') + '</b>' : '', 'exercício 14.2'],
-    [2, 15, 'Legado', w(a3,'c15_continua') ? '<b>' + w(a3,'c15_continua') + '</b>' : '', 'exercício 15.1']
+    [0, 1, 'Gap nomeado', (w(a1,'c1_gap_declara') && w(a1,'c1_gap_pratica')) ? 'Declaramos que <b>' + esc(w(a1,'c1_gap_declara')) + '</b>, mas na prática <b>' + esc(w(a1,'c1_gap_pratica')) + '</b>.' : '', 'exercício 1.4'],
+    [0, 2, 'Não-negociáveis', ess.length ? '<b>' + esc(ess.join(' · ')) + '</b>' : '', 'triagem 2.3'],
+    [0, 3, 'Alavancas do sistema', (w(a1,'c3_alavanca1') || w(a1,'c3_alavanca2')) ? [w(a1,'c3_alavanca1'), w(a1,'c3_alavanca2')].filter(Boolean).map(function(x){ return '• ' + esc(x); }).join('<br>') : '', 'exercício 3.4'],
+    [0, 4, 'Compromisso de sombra', w(a1,'c4_comportamento') ? '<b>' + esc(w(a1,'c4_comportamento')) + '</b>' : '', 'compromisso 4.4'],
+    [1, 5, 'Ritual de conexão', w(a2,'c5_ritual') ? '<b>' + esc(w(a2,'c5_ritual')) + '</b>' : '', 'exercício 5.3'],
+    [1, 6, 'Conversa destravada', w(a2,'c6_clareza') ? 'Vou dizer: <b>' + esc(w(a2,'c6_clareza')) + '</b>' + (w(a2,'c6_acordo') ? ' · Acordo: ' + esc(w(a2,'c6_acordo')) : '') : '', 'roteiro 6.2'],
+    [1, 7, 'Autoria entregue', w(a2,'c7_entrega') ? '<b>' + esc(w(a2,'c7_entrega')) + '</b>' : '', 'exercício 7.2'],
+    [1, 8, 'Microprática inclusiva', w(a2,'c8_micropratica') ? '<b>' + esc(w(a2,'c8_micropratica')) + '</b>' : '', 'exercício 8.2'],
+    [1, 9, 'Micro-história', (w(a2,'missao9') || w(a2,'c9_contexto')) ? '<b>' + esc(w(a2,'missao9') || w(a2,'c9_contexto')) + '</b>' : '', 'cena 9.2'],
+    [2, 10, 'Indicador vivo', w(a3,'c10_indicador') ? '<b>' + esc(w(a3,'c10_indicador')) + '</b>' : '', 'exercício 10.2'],
+    [2, 11, 'Ciclo de 90 dias', w(a3,'c11_p1') ? '<b>' + esc(w(a3,'c11_p1')) + '</b>' + (w(a3,'c11_microvitoria') ? ' · Em 90 dias: ' + esc(w(a3,'c11_microvitoria')) : '') : '', 'canvas 11.1'],
+    [2, 12, 'Plano de aprendizado', w(a3,'c12_competencia') ? '<b>' + esc(w(a3,'c12_competencia')) + '</b>' : '', '70-20-10'],
+    [2, 13, 'Decisão com critério', w(a3,'c13_decisao') ? '<b>' + esc(w(a3,'c13_decisao')) + '</b>' : '', 'exercício 13.1'],
+    [2, 14, 'Contrato de delegação', w(a3,'c14_decisao') ? '<b>' + esc(w(a3,'c14_decisao')) + '</b>' : '', 'exercício 14.2'],
+    [2, 15, 'Legado', w(a3,'c15_continua') ? '<b>' + esc(w(a3,'c15_continua')) + '</b>' : '', 'exercício 15.1']
   ];
   var preenchidos = CODIGOS.filter(function(c){ return c[3]; }).length;
   document.getElementById('contador').innerHTML = '<span>' + preenchidos + ' de 15</span> evidências registradas'
@@ -493,10 +509,10 @@ var tudoCompleto = A[0].completo && A[1].completo && A[2].completo;
     var doAto = CODIGOS.filter(function(c){ return c[0] === f; });
     var nOk = doAto.filter(function(c){ return c[3]; }).length;
     var aberto = (f === idxAtual || nOk > 0) ? ' open' : '';
-    html += '<details class="forca"' + aberto + '><summary>' + NOMES[f]
+    html += '<details class="forca-lista"' + aberto + '><summary>' + NOMES[f]
       + ' <span class="cnt">' + nOk + ' de ' + doAto.length + '</span></summary>';
     doAto.forEach(function(c) {
-      html += '<div class="codigo ' + (c[3] ? 'ok' : '') + '"><span class="n">' + c[1] + '</span>'
+      html += '<div class="codigo ' + (c[3] ? 'ok' : '') + '" id="cod-' + c[1] + '"><span class="n">' + c[1] + '</span>'
         + '<span><span class="tit">' + c[2] + '</span>'
         + (c[3] ? '<span class="txt">' + c[3] + '</span>'
                 : '<span class="vazio">Você construirá este código no <a href="' + ARQ[c[0]] + '">' + c[4] + '</a>.</span>')
@@ -513,7 +529,7 @@ var tudoCompleto = A[0].completo && A[1].completo && A[2].completo;
   if (!hist.length) return;
   var el = document.getElementById('historicoCiclos');
   var h = '<div class="historico"><b>Ciclos anteriores</b><br>';
-  hist.forEach(function(c){ h += '· Ciclo ' + c.ciclo + (c.tensao ? ' — ' + c.tensao : '') + ' · ' + c.evidencias.length + ' evidências · encerrado em ' + new Date(c.encerradoEm).toLocaleDateString('pt-BR') + '<br>'; });
+  hist.forEach(function(c){ h += '· Ciclo ' + c.ciclo + (c.tensao ? ' — ' + esc(c.tensao) : '') + ' · ' + c.evidencias.length + ' evidências · encerrado em ' + new Date(c.encerradoEm).toLocaleDateString('pt-BR') + '<br>'; });
   el.innerHTML = h + '</div>';
 })();
 
