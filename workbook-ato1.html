@@ -89,7 +89,8 @@ main{margin-left:12px; padding:64px 0 96px;}
 .onde-estou{flex:1; text-align:center; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--cinza); line-height:1.4;}
 .onde-estou b{color:var(--preto); display:block; font-size:13px;}
 .migalhas{display:flex; gap:5px; justify-content:center; margin-top:5px;}
-.migalhas i{width:18px; height:4px; background:var(--cinza-claro);}
+.migalhas i{width:26px; height:5px; background:var(--cinza-claro);}
+@media (max-width:640px){ .migalhas i{width:20px;} }
 .migalhas i.feita{background:var(--preto);}
 .migalhas i.atual{background:var(--azul);}
 
@@ -340,12 +341,12 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
     </nav>
     <div class="trilho"><div class="fill" id="progressoFill"></div></div>
     <div class="pct" id="progressoPct">0%</div>
-    <button class="btn-mapa" onclick="abrirMapa()">☰ Mapa</button>
+    <button class="btn-mapa" id="btnMapa" aria-expanded="false" aria-controls="mapa" onclick="abrirMapa()">☰ Mapa</button>
   </div>
 </header>
 
 <!-- ===== MAPA / ÍNDICE ===== -->
-<div class="mapa" id="mapa">
+<div class="mapa" id="mapa" role="dialog" aria-modal="true" aria-label="Mapa do percurso">
   <button class="mapa-fechar" onclick="fecharMapa()">Fechar ✕</button>
   <div class="pagina">
     <span class="chip vermelho">ÍNDICE</span>
@@ -1235,6 +1236,14 @@ function v(k){ return (estado[k] || '').toString().trim(); }
 var telas = Array.prototype.slice.call(document.querySelectorAll('.etapa'));
 var atual = 0;
 
+function atualizaBotaoContinuar() {
+  var btn = document.getElementById('btnContinuar');
+  if (!btn) return;
+  if ((estado._tela || 0) > 0) {
+    btn.style.display = 'inline-block';
+    btn.textContent = 'Continuar em ' + telas[estado._tela].getAttribute('data-grupo') + ' · ' + telas[estado._tela].getAttribute('data-titulo');
+  }
+}
 function irPara(i, semSalvar) {
   if (i < 0 || i >= telas.length) return;
   telas[atual].classList.remove('ativa');
@@ -1253,6 +1262,7 @@ function irPara(i, semSalvar) {
     evento('sc_code_started', { code_number: mapaCod[i] });
   }
   if (!semSalvar) { estado._tela = i; salvar(); }
+  atualizaBotaoContinuar();
   evento('sc_screen_view', { screen_id: i + 1 });
   renderNav();
 }
@@ -1350,11 +1360,20 @@ function renderNav() {
       av.textContent = 'Continuar →';
     }
   }
+  /* migalhas por GRUPO (código), não por tela — legível no celular */
   var m = document.getElementById('migalhas'); m.innerHTML = '';
-  telas.forEach(function(_, i) {
+  var grupos = [], vistos = {};
+  telas.forEach(function(t, i) {
+    var g = t.getAttribute('data-grupo');
+    if (!(g in vistos)) { vistos[g] = grupos.length; grupos.push({ nome: g, telas: [i] }); }
+    else grupos[vistos[g]].telas.push(i);
+  });
+  var gAtual = vistos[telas[atual].getAttribute('data-grupo')];
+  grupos.forEach(function(g, gi) {
     var b = document.createElement('i');
-    if (i < atual) b.className = 'feita';
-    if (i === atual) b.className = 'atual';
+    if (gi < gAtual) b.className = 'feita';
+    if (gi === gAtual) b.className = 'atual';
+    b.setAttribute('title', g.nome);
     m.appendChild(b);
   });
 }
@@ -1365,8 +1384,17 @@ document.addEventListener('keydown', function(e) {
 });
 
 /* ================= mapa ================= */
-function abrirMapa() { montarMapa(); document.getElementById('mapa').classList.add('aberto'); }
-function fecharMapa() { document.getElementById('mapa').classList.remove('aberto'); }
+function abrirMapa() {
+  montarMapa();
+  document.getElementById('mapa').classList.add('aberto');
+  var b = document.getElementById('btnMapa'); if (b) b.setAttribute('aria-expanded', 'true');
+  var fech = document.querySelector('.mapa-fechar'); if (fech) setTimeout(function(){ fech.focus(); }, 60);
+}
+function fecharMapa() {
+  document.getElementById('mapa').classList.remove('aberto');
+  var b = document.getElementById('btnMapa');
+  if (b) { b.setAttribute('aria-expanded', 'false'); b.focus(); }
+}
 function statusGrupo(idx) {
   /* devolve: '', 'andamento' ou 'entregue' por tela */
   if (idx === 0) return estado.vis0 ? 'entregue' : '';
@@ -2038,9 +2066,31 @@ function importar(ev) {
   var uid = 0;
   document.querySelectorAll('[data-save]').forEach(function(el) {
     if (!el.id) { uid++; el.id = 'campo_' + uid; }
+    /* 1. label.campo imediatamente antes */
     var lab = el.previousElementSibling;
     if (lab && lab.tagName !== 'LABEL') lab = lab.previousElementSibling;
-    if (lab && lab.tagName === 'LABEL' && lab.classList.contains('campo')) lab.setAttribute('for', el.id);
+    if (lab && lab.tagName === 'LABEL' && lab.classList.contains('campo')) { lab.setAttribute('for', el.id); return; }
+    /* 2. chave do capítulo: usa a pergunta como nome acessível */
+    var chave = el.closest('.chave');
+    if (chave && el.classList.contains('chave-input')) {
+      var perg = chave.querySelector('.pergunta');
+      if (perg) { if (!perg.id) perg.id = 'perg_' + uid; el.setAttribute('aria-labelledby', perg.id); }
+      return;
+    }
+    /* 3. linha de triagem (prática + classificação) */
+    var linha = el.closest('.classif');
+    if (linha) {
+      var idx = Array.prototype.indexOf.call(linha.parentNode.querySelectorAll('.classif'), linha) + 1;
+      el.setAttribute('aria-label', (el.tagName === 'SELECT' ? 'Classificar prática ' : 'Prática ') + idx);
+      return;
+    }
+    /* 4. fallback: placeholder ou rótulo do bloco */
+    if (el.placeholder) el.setAttribute('aria-label', el.placeholder);
+    else {
+      var ex = el.closest('.exercicio, .missao, .corpo');
+      var h = ex && ex.querySelector('h3, .rotulo');
+      if (h) el.setAttribute('aria-label', h.textContent.trim());
+    }
   });
 })();
 
