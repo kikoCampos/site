@@ -84,7 +84,7 @@ h1 .az{color:var(--azul-claro);}
 .painel .privacidade{font-size:12px; color:var(--cinza-fraco); margin-top:12px; line-height:1.45;}
 
 /* ===================== JORNADA UNIFICADA ===================== */
-.jornada{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:26px;}
+.jornada{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:44px;}
 .forca{position:relative; padding-bottom:18px;}
 .forca:not(:last-child)::after{content:""; position:absolute; top:21px; left:46px; width:calc(100% - 18px); height:2px; background:var(--linha);}
 .forca .no{width:44px; height:44px; border-radius:50%; background:var(--papel); border:2px solid var(--linha);
@@ -93,9 +93,8 @@ h1 .az{color:var(--azul-claro);}
 .forca.atual .no{background:var(--azul-acao); border-color:var(--azul-acao); color:#fff;}
 .forca h3{font-weight:900; font-size:19px; margin:14px 0 3px;}
 .forca .linha{font-size:14px; color:var(--cinza); line-height:1.45; min-height:40px;}
-.forca.atual{background:var(--branco); box-shadow:var(--elev); padding:0 20px 20px; margin:-4px -20px 0;}
-.forca.atual::after{left:66px; width:calc(100% - 38px);}
-.forca.atual .no{margin-top:20px;}
+.forca.atual{background:var(--branco); box-shadow:var(--elev); padding:24px 20px 20px; margin:-24px -20px 0;}
+.forca.atual::after{top:45px; left:66px; width:calc(100% - 38px);}
 .forca.atual .aqui{display:inline-block; font-weight:900; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--azul-acao); margin-top:10px;}
 .pontos{display:flex; gap:6px; flex-wrap:wrap; margin:14px 0 10px;}
@@ -160,10 +159,10 @@ button.acao:hover{background:var(--branco);}
   .promessa{max-width:100%;}
   .jornada{grid-template-columns:1fr; gap:0;}
   .forca{padding:18px 0 20px;}
-  .forca:not(:last-child)::after{top:46px; left:21px; width:2px; height:calc(100% - 34px);}
+  .forca:not(:last-child)::after{top:66px; left:21px; width:2px; height:calc(100% - 78px);}
   .forca .linha{min-height:0;}
   .forca.atual{margin:0 -20px; padding:18px 20px 22px;}
-  .forca.atual::after{left:41px; top:64px;}
+  .forca.atual::after{left:41px; top:66px; height:calc(100% - 80px);}
   .forca.atual .no{margin-top:0;}
   .ciclo-arco{display:none;}
   .ciclo-legenda{text-align:left; margin-top:16px; font-size:14.5px;}
