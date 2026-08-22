@@ -168,14 +168,14 @@ button.acao:hover{background:var(--cinza-claro);}
         <span class="status" id="status2">carregando…</span>
         <a class="cta" id="cta2" href="/workbook-ato2.html">Começar →</a>
       </div>
-      <div class="ato-card travado" id="cardAto3">
-        <span class="breve">Em preparação</span>
+      <div class="ato-card" id="cardAto3">
+        <span class="aqui" id="badge3" style="display:none;">Você está aqui</span>
         <span class="num">III</span>
         <h3>Consistência</h3>
-        <p class="sub">Sustentar até virar cultura. Cadência, métricas suas e o Código do Leitor — as 15 evidências em uma página. Códigos 10–15.</p>
-        <div class="barra"><div></div></div>
-        <span class="status">O ciclo se fecha — e reabre</span>
-        <span class="cta">Em breve</span>
+        <p class="sub">Sustentar até virar cultura. Medição que gera ação, ciclo de 90 dias, sistemas alinhados, governança — e o Código do Leitor com as suas 15 evidências. Códigos 10–15.</p>
+        <div class="barra"><div id="barra3"></div></div>
+        <span class="status" id="status3">carregando…</span>
+        <a class="cta" id="cta3" href="/workbook-ato3.html">Começar →</a>
       </div>
     </div>
 
@@ -191,6 +191,12 @@ button.acao:hover{background:var(--cinza-claro);}
       <div class="evid"><span class="rotulo">Código 7 · Autoria entregue</span><p id="ev7" class="vazio">Ainda em branco — nasce no exercício 7.2.</p></div>
       <div class="evid"><span class="rotulo">Código 8 · Microprática inclusiva</span><p id="ev8" class="vazio">Ainda em branco — nasce no exercício 8.2.</p></div>
       <div class="evid"><span class="rotulo">Código 9 · Micro-história</span><p id="ev9" class="vazio">Ainda em branco — nasce na cena 9.2.</p></div>
+      <div class="evid"><span class="rotulo">Código 10 · Indicador vivo</span><p id="ev10" class="vazio">Ainda em branco — nasce no exercício 10.2 do Ato III.</p></div>
+      <div class="evid"><span class="rotulo">Código 11 · Ciclo de 90 dias</span><p id="ev11" class="vazio">Ainda em branco — nasce no canvas 11.1.</p></div>
+      <div class="evid"><span class="rotulo">Código 12 · Plano de aprendizado</span><p id="ev12" class="vazio">Ainda em branco — nasce no 70-20-10.</p></div>
+      <div class="evid"><span class="rotulo">Código 13 · Decisão com critério</span><p id="ev13" class="vazio">Ainda em branco — nasce no exercício 13.1.</p></div>
+      <div class="evid"><span class="rotulo">Código 14 · Contrato de delegação</span><p id="ev14" class="vazio">Ainda em branco — nasce no exercício 14.2.</p></div>
+      <div class="evid"><span class="rotulo">Código 15 · Legado</span><p id="ev15" class="vazio">Ainda em branco — nasce no exercício 15.1.</p></div>
     </div>
 
     <h2 class="secao">Seu ciclo, com você</h2>
@@ -318,6 +324,33 @@ if (barra2) {
   }
 }
 
+/* ---- progresso do Ato III ---- */
+var a3 = carrega(CHAVES[2]);
+var iniciou3 = (a3._tela || 0) > 0 || Object.keys(a3).length > 2;
+var completo3 = !!a3._atoOk;
+var nEv3 = ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15'].filter(function(k){ return a3[k]; }).length;
+var barra3 = document.getElementById('barra3');
+if (barra3) {
+  barra3.style.width = (nEv3 / 6 * 100) + '%';
+  var status3 = document.getElementById('status3'), cta3 = document.getElementById('cta3');
+  if (!iniciou3) {
+    status3.textContent = completo2 ? 'Pronto para você — a Coragem abriu o caminho' : 'Sustenta o que os atos anteriores começaram';
+    cta3.textContent = 'Começar a Consistência →';
+    cta3.addEventListener('click', function(){ evento('sc_next_act_intent', { act_number: 3 }); });
+  } else if (completo3) {
+    status3.textContent = 'Ato completo — Código do Leitor disponível';
+    cta3.textContent = 'Ver meu Código do Leitor';
+    cta3.href = '/workbook-ato3.html#continuar';
+  } else {
+    status3.textContent = 'Em andamento · ' + nEv3 + '/6 evidências';
+    cta3.textContent = 'Continuar de onde parei →';
+    cta3.href = '/workbook-ato3.html#continuar';
+    var b3 = document.getElementById('badge3'); if (b3) b3.style.display = 'inline-block';
+    var b2x = document.getElementById('badge2'); if (b2x) b2x.style.display = 'none';
+    var b1x = document.getElementById('badge1'); if (b1x) b1x.style.display = 'none';
+  }
+}
+
 /* ---- lemniscata ---- */
 var st1 = document.getElementById('st1');
 st1.textContent = !iniciou ? 'comece por aqui' : (completo ? '✓ completo' : prog + '% percorrido');
@@ -325,6 +358,15 @@ if (completo) {
   document.getElementById('no1').setAttribute('fill', '#231f20');
   document.getElementById('aqui1').textContent = '✓ CONSCIÊNCIA ENTREGUE';
   document.getElementById('aqui1').setAttribute('fill', '#231f20');
+}
+var st3 = document.getElementById('st3');
+if (iniciou3) {
+  document.getElementById('no3').setAttribute('fill', completo3 ? '#231f20' : '#2b7dbf');
+  document.getElementById('no3').setAttribute('stroke', completo3 ? '#231f20' : '#2b7dbf');
+  document.getElementById('no3t').setAttribute('fill', '#ffffff');
+  st3.textContent = completo3 ? '✓ completo' : nEv3 + '/6 evidências';
+} else {
+  st3.textContent = completo2 ? 'seu próximo passo' : 'depois da Coragem';
 }
 var st2 = document.getElementById('st2');
 if (iniciou2) {
@@ -361,10 +403,33 @@ if (v(a2,'c7_entrega')) mostra('ev7', '<b>' + v(a2,'c7_entrega') + '</b>');
 if (v(a2,'c8_micropratica')) mostra('ev8', '<b>' + v(a2,'c8_micropratica') + '</b>');
 if (v(a2,'c9_contexto') || v(a2,'missao9')) mostra('ev9', '<b>' + (v(a2,'missao9') || 'Micro-história') + '</b>' + (v(a2,'c9_onde') ? '<br><span style="font-weight:400; font-size:15px;">Contada em: ' + v(a2,'c9_onde') + '</span>' : ''));
 
+/* ---- evidências do Ato III ---- */
+if (v(a3,'c10_indicador')) mostra('ev10', '<b>' + v(a3,'c10_indicador') + '</b>');
+if (v(a3,'c11_p1')) mostra('ev11', '<b>' + v(a3,'c11_p1') + '</b>' + (v(a3,'c11_microvitoria') ? '<br><span style="font-weight:400; font-size:15px;">Em 90 dias: ' + v(a3,'c11_microvitoria') + '</span>' : ''));
+if (v(a3,'c12_competencia')) mostra('ev12', '<b>' + v(a3,'c12_competencia') + '</b>');
+if (v(a3,'c13_decisao')) mostra('ev13', '<b>' + v(a3,'c13_decisao') + '</b>');
+if (v(a3,'c14_decisao')) mostra('ev14', '<b>' + v(a3,'c14_decisao') + '</b>');
+if (v(a3,'c15_continua')) mostra('ev15', '<b>' + v(a3,'c15_continua') + '</b>');
+
+/* ---- histórico de ciclos ---- */
+(function(){
+  var hist = [];
+  try { hist = JSON.parse(localStorage.getItem('seucodigo_ciclos') || '[]'); } catch(e) {}
+  if (!hist.length) return;
+  var alvo = document.querySelector('.evidencias');
+  if (!alvo) return;
+  var d = document.createElement('div');
+  d.style.cssText = 'font-family:var(--sans); font-size:13px; color:var(--cinza); border-left:4px solid var(--preto); padding:12px 16px; background:var(--cinza-claro); margin-top:6px;';
+  var h2 = '<b style="color:var(--preto);">Ciclos anteriores</b><br>';
+  hist.forEach(function(c){ h2 += '· Ciclo ' + c.ciclo + (c.tensao ? ' — ' + c.tensao : '') + ' · ' + c.evidencias.length + ' evidências<br>'; });
+  d.innerHTML = h2;
+  alvo.parentNode.insertBefore(d, alvo.nextSibling);
+})();
+
 /* ---- exportar / importar ciclo completo ---- */
 function exportarCiclo() {
   var pacote = { formato: 'seucodigo-ciclo', versao: 1, exportadoEm: new Date().toISOString() };
-  ['seucodigo_first_touch', 'seucodigo_last_location'].forEach(function(k){ var d = scGet(k); if (d) pacote[k] = d; });
+  ['seucodigo_first_touch', 'seucodigo_last_location', 'seucodigo_ciclos'].forEach(function(k){ var d = scGet(k); if (d) pacote[k] = d; });
   CHAVES.forEach(function(k){ var d = carrega(k); if (Object.keys(d).length) pacote[k] = d; });
   var blob = new Blob([JSON.stringify(pacote, null, 2)], { type: 'application/json' });
   var a = document.createElement('a');
