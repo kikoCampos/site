@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seu Código · O Novo Código da Mudança · Kiko Campos</title>
-<meta name="description" content="O livro traz 15 códigos. Aqui você escreve o seu. A plataforma de prática de O Novo Código da Mudança: diagnóstico, coragem e consistência — com o seu material, no seu ritmo.">
+<meta name="description" content="O livro traz 15 códigos. Aqui você escreve o seu. A plataforma de prática de O Novo Código da Mudança: diagnóstico, coragem e consistência — com o seu caso, no seu ritmo.">
 <meta property="og:title" content="Seu Código — a plataforma de prática do livro">
 <meta property="og:description" content="O livro traz 15 códigos. Aqui você escreve o seu.">
 <meta name="robots" content="noindex">
@@ -23,8 +23,8 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
     b.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;max-width:680px;margin:0 auto;background:#231f20;color:#fff;padding:14px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:13px Lato,sans-serif;z-index:9999;box-shadow:0 12px 34px rgba(0,0,0,.3)';
     b.innerHTML='<span style="flex:1;min-width:200px">Usamos cookies para medir o uso e melhorar o Seu Código. <a href="/privacidade.html" style="color:#8fc1e9">Saiba mais</a>.</span>';
     var g=document.createElement('span');g.style.cssText='display:inline-flex;gap:8px;flex-shrink:0';
-    var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:8px 16px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
-    var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:8px 18px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:10px 18px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
+    var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:10px 20px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
     g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
     a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
     d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
@@ -41,173 +41,225 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
   --sans:'Lato', 'Helvetica Neue', Arial, sans-serif;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
+:focus-visible{outline:3px solid var(--azul); outline-offset:2px;}
 body{font-family:var(--serif); color:var(--preto); background:var(--branco); line-height:1.65; font-size:17px;}
+
+/* fita: assinatura vertical no desktop, horizontal no mobile */
 .fita{position:fixed; left:0; top:0; bottom:0; width:12px; background:var(--azul); z-index:60;}
 .fita span{position:absolute; top:22px; left:50%; transform:translateX(-50%) rotate(180deg);
   writing-mode:vertical-rl; font-family:var(--sans); font-weight:900; font-size:9px;
   letter-spacing:.28em; color:var(--branco); white-space:nowrap;}
+.assinatura-topo{display:none;}
 main{margin-left:12px;}
-.pagina{max-width:860px; margin:0 auto; padding:56px 34px;}
-.chip{display:inline-block; background:var(--preto); color:var(--branco); font-family:var(--sans);
-  font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:4px 10px;}
-.kicker{font-family:var(--sans); font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--cinza); margin-top:18px;}
-h1{font-family:var(--sans); font-weight:900; font-size:clamp(34px,6vw,56px); line-height:1.05; text-transform:uppercase; margin:8px 0 6px;}
-h1 .az{color:var(--azul);}
-.promessa{font-family:var(--sans); font-size:clamp(16px,2.4vw,20px); color:var(--cinza); margin-bottom:8px;}
-.promessa b{color:var(--preto);}
-h2.secao{font-family:var(--sans); font-weight:900; font-size:15px; letter-spacing:.05em;
-  text-transform:uppercase; margin:44px 0 16px; padding-top:16px; border-top:2px solid var(--preto); max-width:460px;}
-p{margin-bottom:14px;}
+.pagina{max-width:860px; margin:0 auto; padding:44px 34px;}
 
-/* circuito de fundo do hero */
+.chip{display:inline-block; background:var(--preto); color:var(--branco); font-family:var(--sans);
+  font-weight:900; font-size:11px; letter-spacing:.18em; text-transform:uppercase; padding:5px 11px;}
+.kicker{font-family:var(--sans); font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--cinza); margin-top:14px;}
+h1{font-family:var(--sans); font-weight:900; font-size:clamp(34px,6vw,56px); line-height:1.05; text-transform:uppercase; margin:6px 0 6px;}
+h1 .az{color:var(--azul);}
+.promessa{font-family:var(--sans); font-size:clamp(16px,2.2vw,19px); color:var(--cinza); margin-bottom:6px; max-width:620px;}
+.promessa b{color:var(--preto);}
+h2.secao{font-family:var(--sans); font-weight:900; font-size:16px; letter-spacing:.05em;
+  text-transform:uppercase; margin:40px 0 14px; padding-top:16px; border-top:2px solid var(--preto); max-width:520px;}
+h3{font-family:var(--sans);}
+p{margin-bottom:12px;}
+
 .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--linha);}
 .circuito{position:absolute; right:-20px; bottom:-10px; opacity:.9; pointer-events:none;}
 
-/* cards dos atos */
-.atos{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin:22px 0;}
-.ato-card{border:2px solid var(--preto); padding:20px; display:flex; flex-direction:column; gap:10px; font-family:var(--sans); position:relative;}
-.ato-card .num{font-weight:900; font-size:30px; color:var(--azul);}
+/* ===== PAINEL PESSOAL — o próximo passo ===== */
+.painel{border:3px solid var(--preto); padding:22px 24px; margin:26px 0 8px; max-width:620px; background:var(--branco); position:relative;}
+.painel .onde{font-family:var(--sans); font-weight:900; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--branco); background:var(--azul); display:inline-block; padding:4px 11px; position:absolute; top:-13px; left:18px;}
+.painel .passo{font-family:var(--sans); font-size:15px; color:var(--cinza); margin:6px 0 4px;}
+.painel .passo b{color:var(--preto); font-size:19px; display:block; font-weight:900; line-height:1.3; margin-bottom:2px;}
+.painel a.principal{display:inline-block; margin-top:14px; background:var(--azul); color:var(--branco); text-decoration:none;
+  font-family:var(--sans); font-weight:900; font-size:14px; letter-spacing:.06em; text-transform:uppercase; padding:16px 28px;}
+.painel a.principal:hover{background:var(--preto);}
+.painel .privacidade{font-family:var(--sans); font-size:12px; color:var(--cinza); margin:12px 0 0;}
+
+/* ===== jornada: lemniscata (desktop) × stepper (mobile) ===== */
+.lem-svg{display:block; max-width:680px; margin-top:6px;}
+.stepper{display:none; margin:14px 0 4px; max-width:520px;}
+.step{display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:start; padding:11px 0; border-bottom:1px solid var(--linha); font-family:var(--sans);}
+.step .n{width:28px; height:28px; border-radius:50%; border:2px solid var(--linha); color:var(--cinza);
+  display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px;}
+.step.feito .n{background:var(--preto); border-color:var(--preto); color:var(--branco);}
+.step.atual .n{background:var(--azul); border-color:var(--azul); color:var(--branco);}
+.step b{display:block; font-weight:900; font-size:14px; text-transform:uppercase; letter-spacing:.04em;}
+.step span{font-size:13px; color:var(--cinza);}
+.step.atual span{color:var(--azul); font-weight:700;}
+
+/* ===== cards dos atos ===== */
+.atos{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin:18px 0;}
+.ato-card{border:2px solid var(--linha); padding:20px; display:flex; flex-direction:column; gap:9px; font-family:var(--sans); position:relative;}
+.ato-card.ativo{border-color:var(--preto);}
+.ato-card .num{font-weight:900; font-size:28px; color:var(--cinza);}
+.ato-card.ativo .num{color:var(--azul);}
 .ato-card h3{font-weight:900; font-size:17px; text-transform:uppercase; letter-spacing:.04em;}
-.ato-card .sub{font-size:13px; color:var(--cinza); line-height:1.45;}
-.ato-card .barra{height:8px; background:var(--cinza-claro); overflow:hidden; margin-top:6px;}
+.ato-card .sub{font-size:13.5px; color:var(--cinza); line-height:1.5;}
+.ato-card .barra{height:8px; background:var(--cinza-claro); overflow:hidden; margin-top:4px;}
 .ato-card .barra div{height:100%; width:0%; background:var(--azul); transition:width .6s;}
-.ato-card .status{font-weight:700; font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--cinza);}
-.ato-card a.cta, .ato-card span.cta{display:inline-block; margin-top:auto; text-align:center; font-weight:900; font-size:13px;
-  letter-spacing:.06em; text-transform:uppercase; padding:12px 18px; text-decoration:none;
-  background:var(--preto); color:var(--branco); cursor:pointer;}
-.ato-card a.cta:hover{background:var(--azul);}
-.ato-card.travado{border-color:var(--linha);}
-.ato-card.travado .num{color:var(--cinza);}
-.ato-card.travado span.cta{background:var(--cinza-claro); color:var(--cinza); cursor:default;}
-.ato-card .breve{position:absolute; top:14px; right:14px; font-weight:900; font-size:10px; letter-spacing:.14em;
-  text-transform:uppercase; background:var(--cinza-claro); padding:3px 8px; color:var(--cinza);}
-.ato-card .aqui{position:absolute; top:14px; right:14px; font-weight:900; font-size:10px; letter-spacing:.14em;
-  text-transform:uppercase; background:var(--azul); padding:3px 8px; color:var(--branco);}
+.ato-card .status{font-weight:700; font-size:12.5px; letter-spacing:.03em; color:var(--cinza);}
+.ato-card a.cta{display:inline-block; margin-top:auto; text-align:center; font-weight:900; font-size:13px;
+  letter-spacing:.06em; text-transform:uppercase; padding:14px 18px; text-decoration:none;
+  background:var(--branco); color:var(--preto); border:2px solid var(--preto);}
+.ato-card a.cta:hover{background:var(--cinza-claro);}
+.ato-card.ativo a.cta{background:var(--preto); color:var(--branco);}
+.ato-card.ativo a.cta:hover{background:var(--azul); border-color:var(--azul);}
+.ato-card .aqui{position:absolute; top:14px; right:14px; font-weight:900; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; background:var(--azul); padding:4px 9px; color:var(--branco);}
 
-/* evidências */
-.evidencias{display:grid; gap:14px;}
-.evid{border:2px solid var(--preto); padding:18px 20px; position:relative;}
-.evid .rotulo{font-family:var(--sans); font-weight:900; font-size:10px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--branco); background:var(--azul); display:inline-block; padding:3px 10px; position:absolute; top:-11px; left:14px;}
-.evid p{font-size:17px; font-weight:600; margin:6px 0 0;}
-.evid .vazio{color:var(--cinza); font-weight:400; font-style:italic; font-size:14px; font-family:var(--sans);}
-.evid .vazio a{color:var(--azul); font-weight:700;}
+/* ===== 15 códigos ===== */
+.contador{font-family:var(--sans); font-weight:900; font-size:14px; margin-bottom:14px;}
+.contador span{color:var(--azul);}
+details.forca{border:1px solid var(--linha); margin-bottom:10px;}
+details.forca > summary{cursor:pointer; padding:14px 18px; font-family:var(--sans); font-weight:900; font-size:13.5px;
+  letter-spacing:.04em; text-transform:uppercase; display:flex; justify-content:space-between; gap:10px; align-items:center; list-style:none;}
+details.forca > summary::-webkit-details-marker{display:none;}
+details.forca > summary::after{content:"+"; font-size:18px; color:var(--cinza);}
+details.forca[open] > summary::after{content:"–";}
+details.forca[open] > summary{background:var(--cinza-claro);}
+details.forca > summary .cnt{font-weight:700; font-size:12px; color:var(--cinza); text-transform:none; letter-spacing:0;}
+.codigo{display:grid; grid-template-columns:36px 1fr; gap:12px; padding:13px 18px; border-top:1px solid var(--linha); align-items:start;}
+.codigo .n{font-family:var(--sans); font-weight:900; font-size:16px; color:var(--linha);}
+.codigo.ok .n{color:var(--azul);}
+.codigo .tit{font-family:var(--sans); font-weight:900; font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--cinza); display:block;}
+.codigo .txt{font-size:16px; font-weight:600;}
+.codigo .vazio{font-family:var(--sans); font-size:13.5px; color:var(--cinza);}
+.codigo .vazio a{color:var(--azul); font-weight:700;}
 
-/* ciclo */
-.botoes{display:flex; gap:12px; flex-wrap:wrap; margin:22px 0; align-items:center;}
+/* ===== ciclo / backup ===== */
+.botoes{display:flex; gap:12px; flex-wrap:wrap; margin:18px 0; align-items:center;}
 button.acao{font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em;
-  text-transform:uppercase; padding:13px 24px; border:2px solid var(--preto);
+  text-transform:uppercase; padding:15px 24px; border:2px solid var(--preto);
   background:var(--branco); color:var(--preto); cursor:pointer;}
 button.acao:hover{background:var(--cinza-claro);}
-.nota{font-family:var(--sans); font-size:12px; color:var(--cinza);}
+.nota{font-family:var(--sans); font-size:13px; color:var(--cinza);}
+.historico{font-family:var(--sans); font-size:13.5px; color:var(--cinza); border-left:4px solid var(--preto);
+  padding:14px 18px; background:var(--cinza-claro); margin:14px 0;}
+.historico b{color:var(--preto);}
 .pe{font-family:var(--sans); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
   color:var(--cinza); text-align:right; padding:20px 34px 40px; max-width:860px; margin:0 auto;}
 .pe b{color:var(--preto); font-weight:900;}
-.volta{font-family:var(--sans); font-size:13px;}
-.volta a{color:var(--azul); font-weight:700; text-decoration:none;}
+.volta{font-family:var(--sans); font-size:14px; display:flex; gap:20px; flex-wrap:wrap;}
+.volta a{color:var(--azul); font-weight:700; text-decoration:none; padding:12px 0; display:inline-block;}
 .volta a:hover{text-decoration:underline;}
-@media (max-width:640px){ .lem-svg{margin:0 -10px;} }
+
+@media (max-width:760px){
+  .fita{display:none;}
+  main{margin-left:0;}
+  .assinatura-topo{display:block; background:var(--azul); color:var(--branco); font-family:var(--sans);
+    font-weight:900; font-size:10px; letter-spacing:.2em; text-transform:uppercase; padding:7px 18px;}
+  .pagina{padding:30px 20px;}
+  .lem-svg{display:none;}
+  .stepper{display:block;}
+  h2.secao{font-size:15px; margin:34px 0 12px;}
+  .painel{padding:20px 18px;}
+  .painel a.principal{display:block; text-align:center; padding:17px 20px;}
+  .circuito{opacity:.35; width:260px;}
+}
 </style>
 </head>
 <body>
 <div class="fita"><span>SEU CÓDIGO &nbsp;·&nbsp; A PLATAFORMA DE PRÁTICA DO LIVRO</span></div>
+<div class="assinatura-topo">Seu Código · a plataforma de prática do livro</div>
 <main>
 
 <section class="hero">
-  <svg class="circuito" width="420" height="300" viewBox="0 0 420 300" fill="none">
+  <svg class="circuito" width="420" height="300" viewBox="0 0 420 300" fill="none" aria-hidden="true">
     <g stroke="#e3e3e3" stroke-width="2"><path d="M30 290 V210 H110 V150 H190 V90"/><path d="M90 290 V240 H170 V180 H260 V110 H330"/><path d="M150 290 V250 H240 V200 H320 V140 H400"/><path d="M210 290 V260 H300 V220 H390"/></g>
     <g fill="#2b7dbf"><circle cx="190" cy="90" r="5"/><circle cx="330" cy="110" r="5"/><circle cx="400" cy="140" r="5"/></g>
     <g fill="#231f20"><circle cx="110" cy="150" r="4"/><circle cx="260" cy="110" r="4"/><circle cx="390" cy="220" r="4"/></g>
   </svg>
-  <div class="pagina" style="padding-bottom:40px;">
+  <div class="pagina" style="padding-bottom:28px;">
     <span class="chip">A plataforma de prática do livro</span>
     <p class="kicker">O Novo Código da Mudança · Kiko Campos</p>
     <h1>Seu <span class="az">Código</span></h1>
-    <p class="promessa">O livro traz 15 códigos. <b>Aqui você escreve o seu</b> — com o seu caso, o seu time e a sua evidência.</p>
+    <p class="promessa">O livro traz 15 códigos. <b>Aqui você escreve o seu</b> — transformando conceitos em decisões, conversas e evidências reais, no seu caso e com o seu time.</p>
 
-    <!-- lemniscata viva -->
-    <svg class="lem-svg" viewBox="0 0 640 300" width="100%" style="display:block; max-width:680px; margin-top:10px;" role="img" aria-label="Seu progresso nas três forças">
-      <path d="M 90,140 C 90,78 240,78 320,140 C 400,202 550,202 550,140 C 550,78 400,78 320,140 C 240,202 90,202 90,140 Z"
-            fill="none" stroke="#c9c9c9" stroke-width="2.5"/>
-      <circle id="no1" cx="90" cy="140" r="30" fill="#2b7dbf"/>
-      <text id="no1t" x="90" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#ffffff">1</text>
-      <text x="90" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CONSCIÊNCIA</text>
-      <text id="st1" x="90" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">…</text>
-      <text id="aqui1" x="90" y="80" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf">VOCÊ ESTÁ AQUI</text>
-      <circle id="no2" cx="320" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
-      <text id="no2t" x="320" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">2</text>
-      <text x="320" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CORAGEM</text>
-      <text id="st2" x="320" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">em preparação</text>
-      <circle id="no3" cx="550" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
-      <text id="no3t" x="550" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">3</text>
-      <text x="550" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CONSISTÊNCIA</text>
-      <text id="st3" x="550" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">em preparação</text>
-      <text x="320" y="282" text-anchor="middle" font-family="Lato,Arial" font-size="12" font-style="italic" fill="#6d6e71">O ciclo não termina: consistência devolve consciência — em um nível acima.</text>
-    </svg>
+    <!-- PAINEL PESSOAL: onde estou e o que faço agora -->
+    <div class="painel">
+      <span class="onde" id="painelOnde">Primeiro acesso</span>
+      <p class="passo" id="painelPasso"><b>Comece pela Consciência</b>Enxergar o sistema real é o que dá sentido a tudo o que vem depois.</p>
+      <a class="principal" id="painelCta" href="/workbook-ato1.html">Começar meu código →</a>
+      <p class="privacidade">Seu progresso fica salvo apenas neste navegador. <span id="dicaBackup"></span></p>
+    </div>
   </div>
 </section>
 
 <section>
-  <div class="pagina" style="padding-top:34px;">
+  <div class="pagina" style="padding-top:26px;">
+    <h2 class="secao">Sua jornada</h2>
+
+    <!-- desktop: lemniscata -->
+    <svg class="lem-svg" viewBox="0 0 640 300" width="100%" role="img" aria-label="Seu progresso nas três forças">
+      <path d="M 90,140 C 90,78 240,78 320,140 C 400,202 550,202 550,140 C 550,78 400,78 320,140 C 240,202 90,202 90,140 Z" fill="none" stroke="#c9c9c9" stroke-width="2.5"/>
+      <circle id="no1" cx="90" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
+      <text id="no1t" x="90" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">1</text>
+      <text x="90" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CONSCIÊNCIA</text>
+      <text id="st1" x="90" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">…</text>
+      <text id="aqui1" x="90" y="80" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf"></text>
+      <circle id="no2" cx="320" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
+      <text id="no2t" x="320" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">2</text>
+      <text x="320" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CORAGEM</text>
+      <text id="st2" x="320" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">—</text>
+      <text id="aqui2" x="320" y="80" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf"></text>
+      <circle id="no3" cx="550" cy="140" r="30" fill="#ffffff" stroke="#c9c9c9" stroke-width="2.5"/>
+      <text id="no3t" x="550" y="150" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="26" fill="#c9c9c9">3</text>
+      <text x="550" y="210" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="16" letter-spacing="1" fill="#231f20">CONSISTÊNCIA</text>
+      <text id="st3" x="550" y="230" text-anchor="middle" font-family="Lato,Arial" font-size="12" fill="#6d6e71">—</text>
+      <text id="aqui3" x="550" y="80" text-anchor="middle" font-family="Lato,Arial" font-weight="900" font-size="11" letter-spacing="2" fill="#2b7dbf"></text>
+      <text x="320" y="282" text-anchor="middle" font-family="Lato,Arial" font-size="12" font-style="italic" fill="#6d6e71">O ciclo não termina: consistência devolve consciência — em um nível acima.</text>
+    </svg>
+
+    <!-- mobile: stepper vertical -->
+    <div class="stepper" id="stepper"></div>
+
+    <h2 class="secao">As três forças</h2>
     <div class="atos">
       <div class="ato-card" id="cardAto1">
-        <span class="aqui" id="badge1" style="display:none;">Você está aqui</span>
         <span class="num">I</span>
         <h3>Consciência</h3>
-        <p class="sub">Enxergar o sistema real. Diagnóstico sem ilusões, âncoras culturais, engrenagens do sistema e a sombra do líder. Códigos 1–4.</p>
+        <p class="sub">Enxergar o sistema real. Diagnóstico sem ilusões, âncoras culturais, engrenagens e a sombra do líder. Códigos 1–4.</p>
         <div class="barra"><div id="barra1"></div></div>
         <span class="status" id="status1">carregando…</span>
-        <a class="cta" id="cta1" href="/workbook-ato1.html">Começar →</a>
+        <a class="cta" id="cta1" href="/workbook-ato1.html">Abrir</a>
       </div>
       <div class="ato-card" id="cardAto2">
-        <span class="aqui" id="badge2" style="display:none;">Você está aqui</span>
         <span class="num">II</span>
         <h3>Coragem</h3>
-        <p class="sub">Transformar intenção em prática. Ensaie — no seguro — a conversa que você vem adiando, e saia com acordo, multiplicadores e história. Códigos 5–9.</p>
+        <p class="sub">Transformar intenção em prática. Ensaie a conversa que você vem adiando e saia com acordo, multiplicadores e história. Códigos 5–9.</p>
         <div class="barra"><div id="barra2"></div></div>
         <span class="status" id="status2">carregando…</span>
-        <a class="cta" id="cta2" href="/workbook-ato2.html">Começar →</a>
+        <a class="cta" id="cta2" href="/workbook-ato2.html">Abrir</a>
       </div>
       <div class="ato-card" id="cardAto3">
-        <span class="aqui" id="badge3" style="display:none;">Você está aqui</span>
         <span class="num">III</span>
         <h3>Consistência</h3>
-        <p class="sub">Sustentar até virar cultura. Medição que gera ação, ciclo de 90 dias, sistemas alinhados, governança — e o Código do Leitor com as suas 15 evidências. Códigos 10–15.</p>
+        <p class="sub">Sustentar até virar cultura. Medição, ciclo de 90 dias, sistemas alinhados, governança — e o seu Código do Leitor. Códigos 10–15.</p>
         <div class="barra"><div id="barra3"></div></div>
         <span class="status" id="status3">carregando…</span>
-        <a class="cta" id="cta3" href="/workbook-ato3.html">Começar →</a>
+        <a class="cta" id="cta3" href="/workbook-ato3.html">Abrir</a>
       </div>
     </div>
 
-    <h2 class="secao">O que você já escreveu</h2>
-    <p class="nota" style="margin-bottom:18px;">Suas evidências ficam neste navegador e atravessam a jornada: o que você escreve na Consciência vira matéria-prima da Coragem.</p>
-    <div class="evidencias">
-      <div class="evid"><span class="rotulo">Código 1 · Gap nomeado</span><p id="ev1" class="vazio">Ainda em branco — <a href="/workbook-ato1.html">nasce no exercício 1.4 do Ato I</a>.</p></div>
-      <div class="evid"><span class="rotulo">Código 2 · Não-negociáveis</span><p id="ev2" class="vazio">Ainda em branco — nasce na triagem 2.3.</p></div>
-      <div class="evid"><span class="rotulo">Código 3 · Alavancas do sistema</span><p id="ev3" class="vazio">Ainda em branco — nasce no exercício 3.4.</p></div>
-      <div class="evid"><span class="rotulo">Código 4 · Compromisso de sombra</span><p id="ev4" class="vazio">Ainda em branco — nasce no compromisso 4.4.</p></div>
-      <div class="evid"><span class="rotulo">Código 5 · Ritual de conexão</span><p id="ev5" class="vazio">Ainda em branco — nasce no exercício 5.3 do Ato II.</p></div>
-      <div class="evid"><span class="rotulo">Código 6 · Conversa destravada</span><p id="ev6" class="vazio">Ainda em branco — nasce no roteiro 6.2.</p></div>
-      <div class="evid"><span class="rotulo">Código 7 · Autoria entregue</span><p id="ev7" class="vazio">Ainda em branco — nasce no exercício 7.2.</p></div>
-      <div class="evid"><span class="rotulo">Código 8 · Microprática inclusiva</span><p id="ev8" class="vazio">Ainda em branco — nasce no exercício 8.2.</p></div>
-      <div class="evid"><span class="rotulo">Código 9 · Micro-história</span><p id="ev9" class="vazio">Ainda em branco — nasce na cena 9.2.</p></div>
-      <div class="evid"><span class="rotulo">Código 10 · Indicador vivo</span><p id="ev10" class="vazio">Ainda em branco — nasce no exercício 10.2 do Ato III.</p></div>
-      <div class="evid"><span class="rotulo">Código 11 · Ciclo de 90 dias</span><p id="ev11" class="vazio">Ainda em branco — nasce no canvas 11.1.</p></div>
-      <div class="evid"><span class="rotulo">Código 12 · Plano de aprendizado</span><p id="ev12" class="vazio">Ainda em branco — nasce no 70-20-10.</p></div>
-      <div class="evid"><span class="rotulo">Código 13 · Decisão com critério</span><p id="ev13" class="vazio">Ainda em branco — nasce no exercício 13.1.</p></div>
-      <div class="evid"><span class="rotulo">Código 14 · Contrato de delegação</span><p id="ev14" class="vazio">Ainda em branco — nasce no exercício 14.2.</p></div>
-      <div class="evid"><span class="rotulo">Código 15 · Legado</span><p id="ev15" class="vazio">Ainda em branco — nasce no exercício 15.1.</p></div>
-    </div>
+    <h2 class="secao">Seus 15 códigos</h2>
+    <p class="contador" id="contador"><span>0 de 15</span> evidências registradas</p>
+    <div id="listaCodigos"></div>
+    <div id="historicoCiclos"></div>
 
-    <h2 class="secao">Seu ciclo, com você</h2>
-    <p class="nota">Seus registros ficam neste navegador — nada é enviado a servidores. Exporte uma cópia para não perder seu progresso ao trocar de dispositivo, e importe onde quiser.</p>
+    <h2 class="secao">Backup e portabilidade</h2>
+    <p class="nota">Seus registros ficam neste navegador — nada é enviado a servidores. Baixe uma cópia para não perder o progresso ao trocar de dispositivo ou limpar o navegador.</p>
     <div class="botoes">
-      <button class="acao" onclick="exportarCiclo()">Exportar meu ciclo</button>
-      <button class="acao" onclick="document.getElementById('importFile').click()">Importar ciclo</button>
+      <button class="acao" onclick="exportarCiclo()">Baixar cópia do meu progresso</button>
+      <button class="acao" onclick="document.getElementById('importFile').click()">Restaurar uma cópia</button>
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importarCiclo(event)">
     </div>
 
-    <p class="volta" style="margin-top:36px;">← <a href="/livro.html">Conhecer o livro</a> &nbsp;·&nbsp; <a href="/index.html">kikocampos.com</a></p>
+    <h2 class="secao">Mais do ecossistema</h2>
+    <p class="volta"><a href="/livro.html">Conhecer o livro →</a> <a href="/index.html">kikocampos.com →</a></p>
   </div>
 </section>
 
@@ -215,14 +267,13 @@ button.acao:hover{background:var(--cinza-claro);}
 <div class="pe">SEU CÓDIGO · O NOVO CÓDIGO DA MUDANÇA — TODA MUDANÇA É <b>HUMANA</b></div>
 
 <script>
-var SC_CONFIG = { accessMode: 'open', platformVersion: '1.0.0' };
+var SC_CONFIG = { accessMode: 'open', platformVersion: '1.1.0' };
 var CHAVES = ['ncc-workbook-ato1', 'ncc-workbook-ato2', 'ncc-workbook-ato3'];
 function carrega(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
 function v(o,k){ return (o[k] || '').toString().trim(); }
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
 
-/* plataforma: id anônimo, esquema, primeira origem */
 if (!scGet('seucodigo_anon_id')) scSet('seucodigo_anon_id', 'sc-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10));
 scSet('seucodigo_schema_version', 1);
 (function(){
@@ -233,9 +284,8 @@ scSet('seucodigo_schema_version', 1);
   scSet('seucodigo_first_touch', ft);
 })();
 
-var a1 = carrega(CHAVES[0]);
+var a1 = carrega(CHAVES[0]), a2 = carrega(CHAVES[1]), a3 = carrega(CHAVES[2]);
 
-/* instrumentação — nunca envia texto do leitor */
 var SC_SESSION = (function(){
   var loc = scGet('seucodigo_last_location');
   var dias = (loc && loc.ts) ? Math.floor((Date.now() - loc.ts) / 86400000) : null;
@@ -245,13 +295,10 @@ function evento(nome, params) {
   try {
     if (typeof gtag !== 'function') return;
     var ft = scGet('seucodigo_first_touch') || {};
-    var base = {
-      route: a1.rota || null, cycle_number: 1,
+    var base = { route: a1.rota || null, cycle_number: (scGet('seucodigo_ciclos') || []).length + 1,
       session_type: SC_SESSION.tipo, days_since_last_visit: SC_SESSION.dias,
-      progress_percentage: parseInt(a1._progresso || 0),
-      platform_version: SC_CONFIG.platformVersion,
-      traffic_source: ft.utm_source || (ft.ref ? 'referral' : 'direto')
-    };
+      progress_percentage: parseInt(a1._progresso || 0), platform_version: SC_CONFIG.platformVersion,
+      traffic_source: ft.utm_source || (ft.ref ? 'referral' : 'direto') };
     var p = params || {};
     for (var k in p) base[k] = p[k];
     gtag('event', nome, base);
@@ -259,174 +306,169 @@ function evento(nome, params) {
 }
 evento('sc_hub_view');
 
-/* ---- progresso do Ato I ---- */
-var prog = parseInt(a1._progresso || 0);
-var tela = parseInt(a1._tela || 0);
-var iniciou = tela > 0 || prog > 0 || Object.keys(a1).length > 2;
-var completo = prog >= 100;
+/* ================= estado de cada ato ================= */
+var EVS = [['_ev1','_ev2','_ev3','_ev4'], ['_ev5','_ev6','_ev7','_ev8','_ev9'], ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15']];
+function estadoAto(dados, i) {
+  var evs = EVS[i];
+  var n = evs.filter(function(k){ return dados[k]; }).length;
+  var iniciou = (dados._tela || 0) > 0 || Object.keys(dados).length > 2;
+  return { n: n, total: evs.length, iniciou: iniciou, completo: !!dados._atoOk || n === evs.length, dados: dados };
+}
+var A = [estadoAto(a1,0), estadoAto(a2,1), estadoAto(a3,2)];
+var NOMES = ['Consciência','Coragem','Consistência'];
+var ARQ = ['/workbook-ato1.html','/workbook-ato2.html','/workbook-ato3.html'];
+var totalEv = A[0].n + A[1].n + A[2].n;
 
-var barra1 = document.getElementById('barra1');
-var status1 = document.getElementById('status1');
-var cta1 = document.getElementById('cta1');
-barra1.style.width = Math.max(prog, iniciou ? 4 : 0) + '%';
-var nomesRota = { '7': 'Rota 7 · Sprint', '30': 'Rota 30 · Travessia', '90': 'Rota 90 · Ciclo' };
-var detalhes = [];
-if (a1.rota) detalhes.push(nomesRota[a1.rota] || 'Rota ' + a1.rota);
-detalhes.push('Ciclo 1');
-if (a1._ts) {
-  var dd = Math.floor((Date.now() - a1._ts) / 86400000);
-  detalhes.push(dd === 0 ? 'última atividade hoje' : 'última atividade há ' + dd + ' dia' + (dd > 1 ? 's' : ''));
-}
-if (!iniciou) {
-  status1.textContent = 'Não iniciado · ≈ 25 min por código';
-  cta1.textContent = 'Começar pela Consciência →';
-  cta1.addEventListener('click', function(){ evento('sc_next_act_intent', { act_number: 1 }); });
-} else if (completo) {
-  status1.textContent = 'Ato completo — evidências entregues · ' + detalhes.join(' · ');
-  cta1.textContent = 'Ver meu Mapa de Consciência';
-  cta1.href = '/workbook-ato1.html#continuar';
-  cta1.addEventListener('click', function(){ evento('sc_resume_clicked', { via: 'hub' }); });
-  /* mensagem do próximo ato indisponível */
-  document.querySelector('#cardAto2 .status').textContent = 'Você concluiu a Consciência. A Coragem está sendo preparada.';
-} else {
-  status1.textContent = 'Em andamento · ' + prog + '% · ' + detalhes.join(' · ');
-  cta1.textContent = 'Continuar de onde parei →';
-  cta1.href = '/workbook-ato1.html#continuar';
-  cta1.addEventListener('click', function(){ evento('sc_resume_clicked', { via: 'hub' }); });
-  document.getElementById('badge1').style.display = 'inline-block';
-}
+/* qual é o ato atual: o primeiro não-completo que já começou; senão o primeiro não-completo */
+var idxAtual = 0;
+for (var i = 0; i < 3; i++) { if (A[i].iniciou && !A[i].completo) { idxAtual = i; break; } if (A[i].completo) idxAtual = Math.min(i + 1, 2); }
+var nunca = !A[0].iniciou && !A[1].iniciou && !A[2].iniciou;
+var tudoCompleto = A[0].completo && A[1].completo && A[2].completo;
 
-/* ---- progresso do Ato II ---- */
-var a2 = carrega(CHAVES[1]);
-var prog2 = parseInt(a2._progresso || 0);
-var iniciou2 = (a2._tela || 0) > 0 || prog2 > 0 || Object.keys(a2).length > 2;
-var completo2 = !!a2._atoOk;
-var barra2 = document.getElementById('barra2');
-var status2 = document.getElementById('status2');
-var cta2 = document.getElementById('cta2');
-if (barra2) {
-  var nEv2 = ['_ev5','_ev6','_ev7','_ev8','_ev9'].filter(function(k){ return a2[k]; }).length;
-  barra2.style.width = (nEv2 / 5 * 100) + '%';
-  if (!iniciou2) {
-    status2.textContent = completo ? 'Pronto para você — a Consciência abriu o caminho' : 'Rende mais depois do Ato I · ≈ 20 min por código';
-    cta2.textContent = 'Começar a Coragem →';
-    cta2.addEventListener('click', function(){ evento('sc_next_act_intent', { act_number: 2 }); });
-  } else if (completo2) {
-    status2.textContent = 'Ato completo — ' + nEv2 + '/5 evidências entregues';
-    cta2.textContent = 'Ver meu Mapa de Coragem';
-    cta2.href = '/workbook-ato2.html#continuar';
-  } else {
-    status2.textContent = 'Em andamento · ' + nEv2 + '/5 evidências';
-    cta2.textContent = 'Continuar de onde parei →';
-    cta2.href = '/workbook-ato2.html#continuar';
-    var b2 = document.getElementById('badge2'); if (b2) b2.style.display = 'inline-block';
-    var b1 = document.getElementById('badge1'); if (b1) b1.style.display = 'none';
-  }
-}
-
-/* ---- progresso do Ato III ---- */
-var a3 = carrega(CHAVES[2]);
-var iniciou3 = (a3._tela || 0) > 0 || Object.keys(a3).length > 2;
-var completo3 = !!a3._atoOk;
-var nEv3 = ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15'].filter(function(k){ return a3[k]; }).length;
-var barra3 = document.getElementById('barra3');
-if (barra3) {
-  barra3.style.width = (nEv3 / 6 * 100) + '%';
-  var status3 = document.getElementById('status3'), cta3 = document.getElementById('cta3');
-  if (!iniciou3) {
-    status3.textContent = completo2 ? 'Pronto para você — a Coragem abriu o caminho' : 'Sustenta o que os atos anteriores começaram';
-    cta3.textContent = 'Começar a Consistência →';
-    cta3.addEventListener('click', function(){ evento('sc_next_act_intent', { act_number: 3 }); });
-  } else if (completo3) {
-    status3.textContent = 'Ato completo — Código do Leitor disponível';
-    cta3.textContent = 'Ver meu Código do Leitor';
-    cta3.href = '/workbook-ato3.html#continuar';
-  } else {
-    status3.textContent = 'Em andamento · ' + nEv3 + '/6 evidências';
-    cta3.textContent = 'Continuar de onde parei →';
-    cta3.href = '/workbook-ato3.html#continuar';
-    var b3 = document.getElementById('badge3'); if (b3) b3.style.display = 'inline-block';
-    var b2x = document.getElementById('badge2'); if (b2x) b2x.style.display = 'none';
-    var b1x = document.getElementById('badge1'); if (b1x) b1x.style.display = 'none';
-  }
-}
-
-/* ---- lemniscata ---- */
-var st1 = document.getElementById('st1');
-st1.textContent = !iniciou ? 'comece por aqui' : (completo ? '✓ completo' : prog + '% percorrido');
-if (completo) {
-  document.getElementById('no1').setAttribute('fill', '#231f20');
-  document.getElementById('aqui1').textContent = '✓ CONSCIÊNCIA ENTREGUE';
-  document.getElementById('aqui1').setAttribute('fill', '#231f20');
-}
-var st3 = document.getElementById('st3');
-if (iniciou3) {
-  document.getElementById('no3').setAttribute('fill', completo3 ? '#231f20' : '#2b7dbf');
-  document.getElementById('no3').setAttribute('stroke', completo3 ? '#231f20' : '#2b7dbf');
-  document.getElementById('no3t').setAttribute('fill', '#ffffff');
-  st3.textContent = completo3 ? '✓ completo' : nEv3 + '/6 evidências';
-} else {
-  st3.textContent = completo2 ? 'seu próximo passo' : 'depois da Coragem';
-}
-var st2 = document.getElementById('st2');
-if (iniciou2) {
-  document.getElementById('no2').setAttribute('fill', completo2 ? '#231f20' : '#2b7dbf');
-  document.getElementById('no2').setAttribute('stroke', completo2 ? '#231f20' : '#2b7dbf');
-  document.getElementById('no2t').setAttribute('fill', '#ffffff');
-  st2.textContent = completo2 ? '✓ completo' : (['_ev5','_ev6','_ev7','_ev8','_ev9'].filter(function(k){ return a2[k]; }).length) + '/5 evidências';
-  if (!completo2) {
-    document.getElementById('aqui1').textContent = completo ? '✓ ENTREGUE' : '';
-  }
-} else {
-  st2.textContent = completo ? 'seu próximo passo' : 'depois da Consciência';
-}
-
-/* ---- evidências (handoff visível) ---- */
-function mostra(id, html){ var el = document.getElementById(id); el.className = ''; el.innerHTML = html; }
-if (v(a1,'c1_gap_declara') && v(a1,'c1_gap_pratica')) {
-  mostra('ev1', 'Declaramos <b>' + v(a1,'c1_gap_declara') + '</b>, mas na prática <b>' + v(a1,'c1_gap_pratica') + '</b>.' + (v(a1,'c1_gap_evidencia') ? ' Evidência: ' + v(a1,'c1_gap_evidencia') + '.' : ''));
-}
-var ess = [];
-for (var i = 1; i <= 5; i++) { if (v(a1,'c2_s' + i) === 'Essência' && v(a1,'c2_p' + i)) ess.push(v(a1,'c2_p' + i)); }
-if (ess.length) mostra('ev2', '<b>' + ess.join(' · ') + '</b>');
-if (v(a1,'c3_alavanca1') || v(a1,'c3_alavanca2')) {
-  mostra('ev3', [v(a1,'c3_alavanca1'), v(a1,'c3_alavanca2')].filter(Boolean).map(function(x){ return '• ' + x; }).join('<br>'));
-}
-if (v(a1,'c4_comportamento')) {
-  mostra('ev4', '<b>' + v(a1,'c4_comportamento') + '</b>' + (v(a1,'c4_evidencia') ? '<br><span style="font-weight:400; font-size:15px;">O time percebe quando: ' + v(a1,'c4_evidencia') + '</span>' : ''));
-}
-
-/* ---- evidências do Ato II ---- */
-if (v(a2,'c5_ritual')) mostra('ev5', '<b>' + v(a2,'c5_ritual') + '</b>' + (v(a2,'c5_evidencia') ? '<br><span style="font-weight:400; font-size:15px;">Evidência: ' + v(a2,'c5_evidencia') + '</span>' : ''));
-if (v(a2,'c6_clareza')) mostra('ev6', 'Vou dizer: <b>' + v(a2,'c6_clareza') + '</b>' + (v(a2,'c6_acordo') ? '<br><span style="font-weight:400; font-size:15px;">Acordo: ' + v(a2,'c6_acordo') + '</span>' : ''));
-if (v(a2,'c7_entrega')) mostra('ev7', '<b>' + v(a2,'c7_entrega') + '</b>');
-if (v(a2,'c8_micropratica')) mostra('ev8', '<b>' + v(a2,'c8_micropratica') + '</b>');
-if (v(a2,'c9_contexto') || v(a2,'missao9')) mostra('ev9', '<b>' + (v(a2,'missao9') || 'Micro-história') + '</b>' + (v(a2,'c9_onde') ? '<br><span style="font-weight:400; font-size:15px;">Contada em: ' + v(a2,'c9_onde') + '</span>' : ''));
-
-/* ---- evidências do Ato III ---- */
-if (v(a3,'c10_indicador')) mostra('ev10', '<b>' + v(a3,'c10_indicador') + '</b>');
-if (v(a3,'c11_p1')) mostra('ev11', '<b>' + v(a3,'c11_p1') + '</b>' + (v(a3,'c11_microvitoria') ? '<br><span style="font-weight:400; font-size:15px;">Em 90 dias: ' + v(a3,'c11_microvitoria') + '</span>' : ''));
-if (v(a3,'c12_competencia')) mostra('ev12', '<b>' + v(a3,'c12_competencia') + '</b>');
-if (v(a3,'c13_decisao')) mostra('ev13', '<b>' + v(a3,'c13_decisao') + '</b>');
-if (v(a3,'c14_decisao')) mostra('ev14', '<b>' + v(a3,'c14_decisao') + '</b>');
-if (v(a3,'c15_continua')) mostra('ev15', '<b>' + v(a3,'c15_continua') + '</b>');
-
-/* ---- histórico de ciclos ---- */
+/* ================= PAINEL PESSOAL ================= */
 (function(){
-  var hist = [];
-  try { hist = JSON.parse(localStorage.getItem('seucodigo_ciclos') || '[]'); } catch(e) {}
-  if (!hist.length) return;
-  var alvo = document.querySelector('.evidencias');
-  if (!alvo) return;
-  var d = document.createElement('div');
-  d.style.cssText = 'font-family:var(--sans); font-size:13px; color:var(--cinza); border-left:4px solid var(--preto); padding:12px 16px; background:var(--cinza-claro); margin-top:6px;';
-  var h2 = '<b style="color:var(--preto);">Ciclos anteriores</b><br>';
-  hist.forEach(function(c){ h2 += '· Ciclo ' + c.ciclo + (c.tensao ? ' — ' + c.tensao : '') + ' · ' + c.evidencias.length + ' evidências<br>'; });
-  d.innerHTML = h2;
-  alvo.parentNode.insertBefore(d, alvo.nextSibling);
+  var onde = document.getElementById('painelOnde');
+  var passo = document.getElementById('painelPasso');
+  var cta = document.getElementById('painelCta');
+  var dica = document.getElementById('dicaBackup');
+  if (nunca) {
+    onde.textContent = 'Primeiro acesso';
+    passo.innerHTML = '<b>Comece pela Consciência</b>Enxergar o sistema real é o que dá sentido a tudo o que vem depois. Cerca de 20 minutos no essencial.';
+    cta.textContent = 'Começar meu código →';
+    cta.href = ARQ[0];
+  } else if (tudoCompleto) {
+    onde.textContent = 'Ciclo completo';
+    passo.innerHTML = '<b>Seu Código do Leitor está pronto</b>15 de 15 evidências. O próximo passo é fechar o ciclo e escolher a próxima tensão cultural.';
+    cta.textContent = 'Ver meu Código do Leitor →';
+    cta.href = ARQ[2] + '#continuar';
+  } else {
+    var at = A[idxAtual];
+    onde.textContent = 'Você está na ' + NOMES[idxAtual];
+    var restam = at.total - at.n;
+    passo.innerHTML = '<b>' + (at.iniciou ? 'Continue de onde parou' : 'Comece a ' + NOMES[idxAtual]) + '</b>'
+      + at.n + ' de ' + at.total + ' evidências deste ato' + (restam ? ' · faltam ' + restam : '') + '.';
+    cta.textContent = at.iniciou ? 'Continuar meu próximo passo →' : 'Começar a ' + NOMES[idxAtual] + ' →';
+    cta.href = ARQ[idxAtual] + (at.iniciou ? '#continuar' : '');
+  }
+  cta.addEventListener('click', function(){ evento(nunca ? 'sc_next_act_intent' : 'sc_resume_clicked', { act_number: idxAtual + 1, via: 'painel' }); });
+  if (totalEv > 0) dica.textContent = 'Baixe uma cópia ao final para não perdê-lo.';
 })();
 
-/* ---- exportar / importar ciclo completo ---- */
+/* ================= JORNADA: lemniscata + stepper ================= */
+(function(){
+  var st = [document.getElementById('st1'), document.getElementById('st2'), document.getElementById('st3')];
+  var no = [document.getElementById('no1'), document.getElementById('no2'), document.getElementById('no3')];
+  var not = [document.getElementById('no1t'), document.getElementById('no2t'), document.getElementById('no3t')];
+  var aqui = [document.getElementById('aqui1'), document.getElementById('aqui2'), document.getElementById('aqui3')];
+  var stepper = document.getElementById('stepper');
+  var h = '';
+  for (var i = 0; i < 3; i++) {
+    var a = A[i], atual = (i === idxAtual && !tudoCompleto);
+    var legenda = a.completo ? '✓ completo' : (a.iniciou ? a.n + ' de ' + a.total + ' evidências' : (atual ? 'seu próximo passo' : (i === 0 ? 'comece por aqui' : 'depois da ' + NOMES[i-1])));
+    st[i].textContent = legenda;
+    if (a.completo) { no[i].setAttribute('fill', '#231f20'); no[i].setAttribute('stroke', '#231f20'); not[i].setAttribute('fill', '#ffffff'); }
+    else if (atual) { no[i].setAttribute('fill', '#2b7dbf'); no[i].setAttribute('stroke', '#2b7dbf'); not[i].setAttribute('fill', '#ffffff'); }
+    aqui[i].textContent = atual ? 'VOCÊ ESTÁ AQUI' : (a.completo ? '✓ ENTREGUE' : '');
+    aqui[i].setAttribute('fill', atual ? '#2b7dbf' : '#231f20');
+    h += '<div class="step ' + (a.completo ? 'feito' : (atual ? 'atual' : '')) + '">'
+      + '<span class="n">' + (a.completo ? '✓' : (i + 1)) + '</span>'
+      + '<span><b>' + NOMES[i] + '</b><span>' + legenda + (atual ? ' · você está aqui' : '') + '</span></span></div>';
+  }
+  stepper.innerHTML = h;
+})();
+
+/* ================= CARDS DOS ATOS ================= */
+(function(){
+  var nomesRota = { '7': 'Rota 7', '30': 'Rota 30', '90': 'Rota 90' };
+  for (var i = 0; i < 3; i++) {
+    var a = A[i], atual = (i === idxAtual && !tudoCompleto);
+    var card = document.getElementById('cardAto' + (i + 1));
+    var barra = document.getElementById('barra' + (i + 1));
+    var status = document.getElementById('status' + (i + 1));
+    var cta = document.getElementById('cta' + (i + 1));
+    barra.style.width = (a.n / a.total * 100) + '%';
+    if (atual) {
+      card.classList.add('ativo');
+      var badge = document.createElement('span');
+      badge.className = 'aqui'; badge.textContent = 'Você está aqui';
+      card.appendChild(badge);
+    }
+    /* status enxuto */
+    var partes = [];
+    if (a.completo) partes.push('Completo · ' + a.n + '/' + a.total + ' evidências');
+    else if (a.iniciou) partes.push(a.n + '/' + a.total + ' evidências');
+    else partes.push(atual ? 'Pronto para começar' : 'Não iniciado');
+    if (i === 0 && a.dados.rota && nomesRota[a.dados.rota]) partes.push(nomesRota[a.dados.rota]);
+    if (a.iniciou && a.dados._ts) {
+      var dd = Math.floor((Date.now() - a.dados._ts) / 86400000);
+      partes.push(dd === 0 ? 'atualizado hoje' : dd === 1 ? 'ontem' : 'há ' + dd + ' dias');
+    }
+    status.textContent = partes.join(' · ');
+    /* CTA por posição na jornada */
+    if (a.completo) { cta.textContent = 'Rever a ' + NOMES[i]; cta.href = ARQ[i] + '#continuar'; }
+    else if (atual) { cta.textContent = a.iniciou ? 'Continuar na ' + NOMES[i] : 'Começar a ' + NOMES[i]; cta.href = ARQ[i] + (a.iniciou ? '#continuar' : ''); }
+    else if (i > idxAtual) { cta.textContent = 'Ver o que vem depois'; cta.href = ARQ[i]; }
+    else { cta.textContent = 'Voltar à ' + NOMES[i]; cta.href = ARQ[i] + '#continuar'; }
+    (function(idx){ cta.addEventListener('click', function(){ evento('sc_act_open', { act_number: idx + 1, via: 'card' }); }); })(i);
+  }
+})();
+
+/* ================= OS 15 CÓDIGOS ================= */
+(function(){
+  function w(o,k){ return v(o,k); }
+  var ess = [];
+  for (var i = 1; i <= 5; i++) { if (v(a1,'c2_s' + i) === 'Essência' && v(a1,'c2_p' + i)) ess.push(v(a1,'c2_p' + i)); }
+  var CODIGOS = [
+    [0, 1, 'Gap nomeado', (w(a1,'c1_gap_declara') && w(a1,'c1_gap_pratica')) ? 'Declaramos que <b>' + w(a1,'c1_gap_declara') + '</b>, mas na prática <b>' + w(a1,'c1_gap_pratica') + '</b>.' : '', 'exercício 1.4'],
+    [0, 2, 'Não-negociáveis', ess.length ? '<b>' + ess.join(' · ') + '</b>' : '', 'triagem 2.3'],
+    [0, 3, 'Alavancas do sistema', (w(a1,'c3_alavanca1') || w(a1,'c3_alavanca2')) ? [w(a1,'c3_alavanca1'), w(a1,'c3_alavanca2')].filter(Boolean).map(function(x){ return '• ' + x; }).join('<br>') : '', 'exercício 3.4'],
+    [0, 4, 'Compromisso de sombra', w(a1,'c4_comportamento') ? '<b>' + w(a1,'c4_comportamento') + '</b>' : '', 'compromisso 4.4'],
+    [1, 5, 'Ritual de conexão', w(a2,'c5_ritual') ? '<b>' + w(a2,'c5_ritual') + '</b>' : '', 'exercício 5.3'],
+    [1, 6, 'Conversa destravada', w(a2,'c6_clareza') ? 'Vou dizer: <b>' + w(a2,'c6_clareza') + '</b>' + (w(a2,'c6_acordo') ? ' · Acordo: ' + w(a2,'c6_acordo') : '') : '', 'roteiro 6.2'],
+    [1, 7, 'Autoria entregue', w(a2,'c7_entrega') ? '<b>' + w(a2,'c7_entrega') + '</b>' : '', 'exercício 7.2'],
+    [1, 8, 'Microprática inclusiva', w(a2,'c8_micropratica') ? '<b>' + w(a2,'c8_micropratica') + '</b>' : '', 'exercício 8.2'],
+    [1, 9, 'Micro-história', (w(a2,'missao9') || w(a2,'c9_contexto')) ? '<b>' + (w(a2,'missao9') || w(a2,'c9_contexto')) + '</b>' : '', 'cena 9.2'],
+    [2, 10, 'Indicador vivo', w(a3,'c10_indicador') ? '<b>' + w(a3,'c10_indicador') + '</b>' : '', 'exercício 10.2'],
+    [2, 11, 'Ciclo de 90 dias', w(a3,'c11_p1') ? '<b>' + w(a3,'c11_p1') + '</b>' + (w(a3,'c11_microvitoria') ? ' · Em 90 dias: ' + w(a3,'c11_microvitoria') : '') : '', 'canvas 11.1'],
+    [2, 12, 'Plano de aprendizado', w(a3,'c12_competencia') ? '<b>' + w(a3,'c12_competencia') + '</b>' : '', '70-20-10'],
+    [2, 13, 'Decisão com critério', w(a3,'c13_decisao') ? '<b>' + w(a3,'c13_decisao') + '</b>' : '', 'exercício 13.1'],
+    [2, 14, 'Contrato de delegação', w(a3,'c14_decisao') ? '<b>' + w(a3,'c14_decisao') + '</b>' : '', 'exercício 14.2'],
+    [2, 15, 'Legado', w(a3,'c15_continua') ? '<b>' + w(a3,'c15_continua') + '</b>' : '', 'exercício 15.1']
+  ];
+  var preenchidos = CODIGOS.filter(function(c){ return c[3]; }).length;
+  document.getElementById('contador').innerHTML = '<span>' + preenchidos + ' de 15</span> evidências registradas'
+    + (preenchidos ? '' : ' — as suas aparecem aqui conforme você avança');
+  var lista = document.getElementById('listaCodigos');
+  var html = '';
+  for (var f = 0; f < 3; f++) {
+    var doAto = CODIGOS.filter(function(c){ return c[0] === f; });
+    var nOk = doAto.filter(function(c){ return c[3]; }).length;
+    var aberto = (f === idxAtual || nOk > 0) ? ' open' : '';
+    html += '<details class="forca"' + aberto + '><summary>' + NOMES[f]
+      + ' <span class="cnt">' + nOk + ' de ' + doAto.length + '</span></summary>';
+    doAto.forEach(function(c) {
+      html += '<div class="codigo ' + (c[3] ? 'ok' : '') + '"><span class="n">' + c[1] + '</span>'
+        + '<span><span class="tit">' + c[2] + '</span>'
+        + (c[3] ? '<span class="txt">' + c[3] + '</span>'
+                : '<span class="vazio">Você construirá este código no <a href="' + ARQ[c[0]] + '">' + c[4] + '</a>.</span>')
+        + '</span></div>';
+    });
+    html += '</details>';
+  }
+  lista.innerHTML = html;
+})();
+
+/* ================= histórico de ciclos ================= */
+(function(){
+  var hist = scGet('seucodigo_ciclos') || [];
+  if (!hist.length) return;
+  var el = document.getElementById('historicoCiclos');
+  var h = '<div class="historico"><b>Ciclos anteriores</b><br>';
+  hist.forEach(function(c){ h += '· Ciclo ' + c.ciclo + (c.tensao ? ' — ' + c.tensao : '') + ' · ' + c.evidencias.length + ' evidências · encerrado em ' + new Date(c.encerradoEm).toLocaleDateString('pt-BR') + '<br>'; });
+  el.innerHTML = h + '</div>';
+})();
+
+/* ================= exportar / importar ================= */
 function exportarCiclo() {
   var pacote = { formato: 'seucodigo-ciclo', versao: 1, exportadoEm: new Date().toISOString() };
   ['seucodigo_first_touch', 'seucodigo_last_location', 'seucodigo_ciclos'].forEach(function(k){ var d = scGet(k); if (d) pacote[k] = d; });
@@ -434,7 +476,7 @@ function exportarCiclo() {
   var blob = new Blob([JSON.stringify(pacote, null, 2)], { type: 'application/json' });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'seu-codigo-ciclo.json';
+  a.download = 'seu-codigo-' + new Date().toISOString().slice(0,10) + '.json';
   a.click();
   evento('sc_export_completed');
 }
@@ -446,7 +488,6 @@ function importarCiclo(ev) {
     try {
       var pacote = JSON.parse(r.result);
       if (!pacote || typeof pacote !== 'object' || Array.isArray(pacote)) throw new Error('estrutura');
-      /* cópia de segurança antes de sobrescrever — nunca importar parcialmente em silêncio */
       CHAVES.forEach(function(k){
         try { var atual = localStorage.getItem(k); if (atual) localStorage.setItem(k + '__backup', atual); } catch(e) {}
       });
@@ -454,9 +495,9 @@ function importarCiclo(ev) {
         var achou = false;
         CHAVES.forEach(function(k){ if (pacote[k] && typeof pacote[k] === 'object') { localStorage.setItem(k, JSON.stringify(pacote[k])); achou = true; } });
         if (pacote.seucodigo_last_location) scSet('seucodigo_last_location', pacote.seucodigo_last_location);
+        if (pacote.seucodigo_ciclos) scSet('seucodigo_ciclos', pacote.seucodigo_ciclos);
         if (!achou) throw new Error('vazio');
       } else if (pacote._v || pacote._tela !== undefined || pacote.c1_valor !== undefined) {
-        /* export antigo do módulo Ato I */
         localStorage.setItem(CHAVES[0], JSON.stringify(pacote));
       } else { throw new Error('formato'); }
       evento('sc_import_completed');
