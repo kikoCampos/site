@@ -336,7 +336,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
     <nav class="atos-nav" aria-label="Atos">
       <span class="ato-tab ativo" aria-current="page">I · Consciência</span>
       <a class="ato-tab" href="/workbook-ato2.html" id="tabAto2" title="Ato II · Coragem">II · Coragem</a>
-      <span class="ato-tab off" title="Em preparação">III</span>
+      <a class="ato-tab" href="/workbook-ato3.html" id="tabAto3" title="Ato III · Consistência">III · Consistência</a>
     </nav>
     <div class="trilho"><div class="fill" id="progressoFill"></div></div>
     <div class="pct" id="progressoPct">0%</div>
@@ -2080,6 +2080,16 @@ function importar(ev) {
   if (n) t.textContent = 'II · Coragem ' + n + '/5';
   if ((a2._tela || 0) > 0) t.href = '/workbook-ato2.html#continuar';
   t.addEventListener('click', function(){ evento('sc_next_act_intent', { act_number: 2, via: 'tab' }); });
+})();
+
+(function(){
+  var t = document.getElementById('tabAto3');
+  if (!t) return;
+  var a3 = {};
+  try { a3 = JSON.parse(localStorage.getItem('ncc-workbook-ato3') || '{}'); } catch(e) {}
+  var n = ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15'].filter(function(k){ return a3[k]; }).length;
+  if (n) t.textContent = 'III · Consistência ' + n + '/6';
+  if ((a3._tela || 0) > 0) t.href = '/workbook-ato3.html#continuar';
 })();
 
 /* ================= init ================= */
