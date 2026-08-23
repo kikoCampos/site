@@ -241,6 +241,14 @@ select{font-family:var(--sans); font-weight:700; font-size:13px; padding:8px 10p
 .chave .fb.show{display:block;}
 .chave.aberta{border-style:solid; border-color:var(--preto);}
 .chave.aberta .fb{color:var(--preto);}
+.chave .pular{display:none; margin-top:10px; background:none; border:0; padding:4px 0; cursor:pointer;
+  font-family:var(--sans); font-size:13px; font-weight:700; color:var(--cinza); text-decoration:underline;}
+.chave .pular.show{display:inline-block;}
+.chave .pular:hover{color:var(--preto);}
+.chave.pulada{border-style:dashed; border-color:var(--linha);}
+.aviso-teto{font-family:var(--sans); font-size:13.5px; margin-top:10px; line-height:1.5;}
+.aviso-teto.ok{color:var(--cinza);}
+.aviso-teto.demais{color:var(--vermelho); font-weight:700;}
 
 /* missão no livro */
 .missao{background:var(--cinza-claro); border-left:5px solid var(--azul); padding:20px 24px; margin:26px 0;}
@@ -1032,7 +1040,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
     </div>
     <div class="botoes">
       <a href="/workbook-ato3.html" onclick="evento('sc_next_act_intent', { act_number: 3 })" class="acao" style="text-decoration:none; display:inline-block; background:var(--azul); border-color:var(--azul); color:var(--branco); font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border:2px solid var(--azul);">Agir já não basta → Começar a Consistência</a>
-      <a href="/seucodigo/" class="acao vazado" style="text-decoration:none; display:inline-block; font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border:2px solid var(--preto);">Ver minha jornada</a>
+      <a href="/seucodigo/" class="acao vazado" style="text-decoration:none; color:var(--preto); display:inline-block; font-family:var(--sans); font-weight:900; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:14px 26px; border:2px solid var(--preto);">Ver minha jornada</a>
     </div>
 
     <h2 class="secao">Uma pergunta, só uma</h2>
@@ -1469,20 +1477,64 @@ function normaliza(s) {
 document.querySelectorAll('.chave').forEach(function(box) {
   var inp = box.querySelector('.chave-input');
   var fb = box.querySelector('.fb');
-  function checa(silencioso) {
+  var chaveId = inp.getAttribute('data-save');
+  /* saída para quem não está com o livro na mão: a chave nunca deve virar beco sem saída */
+  var cap = ((box.textContent || '') + ' ' + (fb.getAttribute('data-errado') || '')).match(/Cap[íi]tulo\s*(\d+)/);
+  var pular = document.createElement('button');
+  pular.type = 'button';
+  pular.className = 'pular';
+  pular.textContent = 'Não estou com o livro agora';
+  box.appendChild(pular);
+  function neutro() {
+    box.classList.add('pulada');
+    box.classList.remove('aberta');
+    fb.classList.add('show');
+    fb.innerHTML = '<b>Sem problema.</b> Esta chave não bloqueia nada — ela só existe para te levar de volta ao '
+      + (cap ? 'Capítulo ' + cap[1] : 'capítulo correspondente') + '. Siga o exercício e volte aqui quando estiver com o livro.';
+    fb.style.color = 'var(--cinza)';
+    pular.classList.remove('show');
+  }
+  pular.addEventListener('click', function(){ estado['_pulou_' + chaveId] = true; salvar(); neutro(); evento('sc_key_skipped', { key: chaveId }); });
+  function checa() {
     var resp = normaliza(inp.value);
-    if (!resp) { fb.classList.remove('show'); box.classList.remove('aberta'); return; }
+    if (!resp) {
+      if (estado['_pulou_' + chaveId]) { neutro(); return; }
+      fb.classList.remove('show'); box.classList.remove('aberta'); pular.classList.add('show'); return;
+    }
     var alvo = inp.getAttribute('data-resposta').split('|').map(normaliza);
     var certo = alvo.some(function(a){ return resp.indexOf(a) !== -1; });
     fb.classList.add('show');
+    box.classList.remove('pulada');
     box.classList.toggle('aberta', certo);
     fb.innerHTML = certo ? fb.getAttribute('data-certo') : fb.getAttribute('data-errado');
     fb.style.color = certo ? 'var(--preto)' : 'var(--vermelho)';
+    pular.classList.toggle('show', !certo);
+    if (certo && estado['_pulou_' + chaveId]) { estado['_pulou_' + chaveId] = false; salvar(); }
   }
   inp.addEventListener('change', function(){ checa(); });
   inp.addEventListener('blur', function(){ checa(); });
-  if (inp.value) checa(true);
+  if (inp.value) checa(); else if (estado['_pulou_' + chaveId]) neutro(); else pular.classList.add('show');
 });
+
+/* ================= teto dos não-negociáveis (Código 2) ================= */
+(function(){
+  var sels = [];
+  for (var i = 1; i <= 5; i++) { var s = document.querySelector('[data-save="c2_s' + i + '"]'); if (s) sels.push(s); }
+  if (sels.length !== 5) return;
+  var linha = sels[4].closest('.classif');
+  if (!linha) return;
+  var aviso = document.createElement('p');
+  aviso.className = 'aviso-teto';
+  linha.insertAdjacentElement('afterend', aviso);
+  function render(){
+    var n = sels.filter(function(s){ return s.value === 'Essência'; }).length;
+    if (!n) { aviso.textContent = ''; aviso.className = 'aviso-teto'; return; }
+    if (n <= 3) { aviso.className = 'aviso-teto ok'; aviso.textContent = n + (n === 1 ? ' não-negociável marcado' : ' não-negociáveis marcados') + ' — o teto são 3.'; }
+    else { aviso.className = 'aviso-teto demais'; aviso.textContent = 'Você marcou ' + n + ' como essência. Um não-negociável que inclui tudo deixa de ser não-negociável — fique com no máximo três e reclassifique o resto como costume ou vício.'; }
+  }
+  sels.forEach(function(s){ s.addEventListener('change', render); });
+  render();
+})();
 
 /* ================= rotas 7/30/90 ================= */
 var rotaTextos = {
