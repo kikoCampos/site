@@ -198,14 +198,18 @@ button.acao:hover{background:var(--branco);}
   .hero-grid{grid-template-columns:1fr; gap:26px; padding-top:34px; padding-bottom:36px;}
   .hero .circuito{opacity:.3; width:250px;}
   .promessa{max-width:100%;}
+  /* no celular o conector vira um risco cortando o texto — a pilha já comunica a ordem */
   .jornada{grid-template-columns:1fr; gap:0;}
-  .forca{padding:18px 0 20px;}
-  .forca:not(:last-child)::after{top:66px; left:21px; width:2px; height:calc(100% - 78px);}
-  .forca .linha{min-height:0;}
-  .forca.atual{margin:0 -20px; padding:18px 20px 22px;}
-  .forca.atual::after{left:41px; top:66px; height:calc(100% - 80px);}
-  .forca.feita{margin:0 -20px; padding:18px 20px 22px;}
-  .forca.feita::after{left:41px; top:66px; height:calc(100% - 80px);}
+  .forca{padding:20px 0 22px; border-top:1px solid var(--linha);}
+  .forca:not(:last-child)::after{display:none;}
+  .jornada .forca:first-child{border-top:0;}
+  .forca .cabeca{display:flex; align-items:center; gap:14px;}
+  .forca .no{width:38px; height:38px; font-size:14px; flex-shrink:0;}
+  .forca h3{margin:0;}
+  .forca .aqui{margin-top:0;}
+  .forca .carimbo{margin:0 0 5px;}
+  .forca .linha{min-height:0; margin-top:12px;}
+  .forca.atual, .forca.feita{margin:0 -20px; padding:20px 20px 24px; border-top:0;}
   .ciclo-arco{display:none;}
   .ciclo-legenda{text-align:left; margin-top:16px; font-size:14.5px;}
   h2.secao{font-size:20px;}
@@ -511,10 +515,10 @@ function alternarRespostas(){
   for (var i = 0; i < 3; i++) {
     var a = A[i], atual = (i === alvo), cls = a.completo ? 'feita' : (atual ? 'atual' : (i > idxAtual ? 'futura' : ''));
     html += '<article class="forca ' + cls + '">';
-    html += '<div class="no" aria-hidden="true">' + (a.completo ? '✓' : ROMANOS[i]) + '</div>';
+    html += '<div class="cabeca"><div class="no" aria-hidden="true">' + (a.completo ? '✓' : ROMANOS[i]) + '</div><div class="cab-txt">';
     if (atual) html += '<span class="aqui">Você está aqui</span>';
     if (a.completo) html += '<div><span class="carimbo">Ato ' + ROMANOS[i] + " · entregue</span></div>";
-    html += '<h3>' + NOMES[i] + '</h3><p class="linha">' + LINHAS[i] + '</p>';
+    html += '<h3>' + NOMES[i] + '</h3></div></div><p class="linha">' + LINHAS[i] + '</p>';
 
     html += '<div class="pontos" role="group" aria-label="Códigos da ' + NOMES[i] + '">';
     CODS[i].forEach(function(c){
