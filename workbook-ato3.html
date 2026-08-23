@@ -503,9 +503,8 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="botoes">
         <button class="acao" style="background:var(--azul); border-color:var(--azul);" onclick="estado.modo='completo'; irPara(1)">Começar a sustentar →</button>
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
-        <button class="acao vazado" onclick="estado.modo='essencial'; evento('sc_shortcut_activation'); irPara(4)">Sem tempo? Monte seu ciclo de 90 dias →</button>
       </div>
-      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Faça o <b>essencial em ≈ 5 minutos por código</b> — ou aprofunde no seu ritmo. Suas respostas ficam neste navegador.</p>
+      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Faça o <b>essencial em 6 a 12 minutos por código</b> — ou aprofunde no seu ritmo. Suas respostas ficam neste navegador.</p>
       <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
     </div>
   </div>
@@ -1195,7 +1194,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.0.0' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.5.0' };
 var SC_ATO = 3;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1348,13 +1347,15 @@ function montarRotasDaCapa(){
   if (!box) return;
   var cont = document.getElementById('btnContinuar');
   var nEv = Object.keys(telasEvidencia).length;
-  var min = nEv * 5;
+  /* mesma tabela de minutos do hub: o tempo anunciado é a soma real dos códigos deste ato */
+  var MIN_CODIGO = {1:8,2:7,3:8,4:6,5:7,6:12,7:6,8:6,9:8,10:7,11:10,12:7,13:6,14:7,15:8};
+  var min = Math.round(Object.keys(telasEvidencia).reduce(function(a, t){ return a + (MIN_CODIGO[telasEvidencia[t]] || 8); }, 0) / 5) * 5;
   box.innerHTML = '';
   var b1 = document.createElement('button');
   b1.className = 'acao';
   b1.style.cssText = 'background:var(--azul); border-color:var(--azul);';
   b1.textContent = 'Fazer o essencial · ' + nEv + ' práticas, ≈ ' + min + ' min →';
-  b1.addEventListener('click', function(){ estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); irPara(1); });
+  b1.addEventListener('click', function(){ estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); evento('sc_shortcut_activation'); irPara(1); });
   var b2 = document.createElement('button');
   b2.className = 'acao vazado';
   b2.textContent = 'Percurso completo · com vídeos e exercícios';
@@ -2137,6 +2138,7 @@ function bindReencontro() {
     if (estado.c16_resultado === val) b.classList.add('certo');
     b.addEventListener('click', function() {
       estado.c16_resultado = val; salvar();
+      evento('sc_reencontro_respondido', { resultado: val, act_number: 3 });
       ops.querySelectorAll('button').forEach(function(x){ x.classList.remove('certo'); });
       b.classList.add('certo');
       fb.classList.add('show'); fb.innerHTML = reencontroMsgs[val];
