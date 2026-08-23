@@ -513,9 +513,8 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="botoes">
         <button class="acao" style="background:var(--azul); border-color:var(--azul);" onclick="estado.modo='completo'; irPara(1)">Começar meu diagnóstico →</button>
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
-        <button class="acao vazado" id="btnAtalho" onclick="modoEssencial()">Sem tempo? Nomeie seu gap em 10 min →</button>
       </div>
-      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece com um desafio real. Faça o <b>essencial em ≈ 5 minutos por código</b> — ou aprofunde no seu ritmo com vídeos e exercícios adicionais. Suas respostas ficam neste navegador.</p>
+      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece com um desafio real. Faça o <b>essencial em 6 a 12 minutos por código</b> — ou aprofunde no seu ritmo com vídeos e exercícios adicionais. Suas respostas ficam neste navegador.</p>
       <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
     </div>
   </div>
@@ -702,10 +701,10 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
           <p style="font-weight:900; font-size:14px; margin-bottom:4px;">Seu Código começou a operar.</p>
           <p style="font-size:13px; color:var(--cinza); margin-bottom:0;">Agora existe uma evidência, não apenas uma intenção. Seus registros ficam neste navegador — exporte uma cópia no fim para não perdê-los ao trocar de dispositivo.</p>
           <div id="capturaForm" style="display:none; margin-top:12px;">
-            <p style="font-size:13px; color:var(--cinza); margin-bottom:10px;">Quer receber o Ato II (Coragem) assim que sair? Deixe seu e-mail — enviamos só o aviso de lançamento, nada mais.</p>
+            <p style="font-size:13px; color:var(--cinza); margin-bottom:10px;">Quer que eu te lembre do seu reencontro — e de guardar uma cópia antes de trocar de navegador? Deixe seu e-mail. <b>Vai só o e-mail: nada do que você escreveu sai deste navegador.</b></p>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <input type="email" id="leadEmail" placeholder="voce@empresa.com" style="flex:1; min-width:200px; border:1px solid #c9c9c9; border-left:4px solid var(--azul); padding:10px 12px; font-family:var(--serif); font-size:15px;">
-              <button class="acao" style="padding:10px 18px;" onclick="enviarLead()">Quero o Ato II</button>
+              <input type="email" id="leadEmail" placeholder="voce@empresa.com" style="flex:1; min-width:200px; min-height:44px; border:1px solid var(--linha); border-radius:var(--r-sm); padding:12px 16px; font-family:var(--serif); font-size:16px;">
+              <button class="acao" style="padding:12px 20px;" onclick="enviarLead()">Quero o lembrete</button>
             </div>
             <p id="leadFeedback" style="font-size:12px; font-weight:700; margin-top:8px; display:none;"></p>
           </div>
@@ -1235,7 +1234,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.0.0' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.5.0' };
 var SC_ATO = 1;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1388,13 +1387,15 @@ function montarRotasDaCapa(){
   if (!box) return;
   var cont = document.getElementById('btnContinuar');
   var nEv = Object.keys(telasEvidencia).length;
-  var min = nEv * 5;
+  /* mesma tabela de minutos do hub: o tempo anunciado é a soma real dos códigos deste ato */
+  var MIN_CODIGO = {1:8,2:7,3:8,4:6,5:7,6:12,7:6,8:6,9:8,10:7,11:10,12:7,13:6,14:7,15:8};
+  var min = Math.round(Object.keys(telasEvidencia).reduce(function(a, t){ return a + (MIN_CODIGO[telasEvidencia[t]] || 8); }, 0) / 5) * 5;
   box.innerHTML = '';
   var b1 = document.createElement('button');
   b1.className = 'acao';
   b1.style.cssText = 'background:var(--azul); border-color:var(--azul);';
   b1.textContent = 'Fazer o essencial · ' + nEv + ' práticas, ≈ ' + min + ' min →';
-  b1.addEventListener('click', function(){ estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); irPara(1); });
+  b1.addEventListener('click', function(){ estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); evento('sc_shortcut_activation'); irPara(1); });
   var b2 = document.createElement('button');
   b2.className = 'acao vazado';
   b2.textContent = 'Percurso completo · com vídeos e exercícios';
@@ -1893,18 +1894,7 @@ function atualizarSinteses() {
   var g = document.getElementById('gapSintese');
   if (v('c1_gap_declara') && v('c1_gap_pratica') && v('c1_gap_evidencia')) {
     g.className = ''; g.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>. Evidência: ' + v('c1_gap_evidencia') + '.';
-    /* ATIVAÇÃO: primeira evidência útil produzida */
-    if (!estado._ativado) {
-      estado._ativado = true;
-      var min = estado._inicioTs ? Math.round((Date.now() - estado._inicioTs) / 60000) : null;
-      evento('sc_first_evidence_created', { time_to_activation_min: min });
-      var cap = document.getElementById('capturaAto2');
-      if (cap) {
-        cap.style.display = 'block';
-        var form = document.getElementById('capturaForm');
-        if (form) form.style.display = SC_CONFIG.leadCapture ? 'block' : 'none';
-      }
-    }
+    /* a ativação agora mora no laço de evidências — qualquer código serve, não só o 1 */
   }
   /* evidências entregues → código concluído; as quatro → ato concluído */
   [['_ev1', v('c1_gap_declara') && v('c1_gap_pratica') && v('c1_gap_evidencia')],
@@ -1914,6 +1904,15 @@ function atualizarSinteses() {
   ].forEach(function(par, idx) {
     if (par[1] && !estado[par[0]]) {
       estado[par[0]] = true;
+      if (!estado._ativado) {
+        estado._ativado = true;
+        var minAtiv = estado._inicioTs ? Math.round((Date.now() - estado._inicioTs) / 60000) : null;
+        evento('sc_first_evidence_created', { time_to_activation_min: minAtiv, code_number: (idx + 1) });
+        var capA = document.getElementById('capturaAto2');
+        if (capA) { capA.style.display = 'block';
+          var formA = document.getElementById('capturaForm');
+          if (formA) formA.style.display = SC_CONFIG.leadCapture ? 'block' : 'none'; }
+      }
       evento('sc_evidence_created', { code_number: idx + 1 });
       if (typeof toast === 'function') toast(idx + 1);
       evento('sc_code_completed', { code_number: idx + 1 });
@@ -2105,6 +2104,7 @@ function bindReencontro() {
     if (estado.c5_resultado === val) b.classList.add('certo');
     b.addEventListener('click', function() {
       estado.c5_resultado = val; salvar();
+      evento('sc_reencontro_respondido', { resultado: val, act_number: 1 });
       ops.querySelectorAll('button').forEach(function(x){ x.classList.remove('certo'); });
       b.classList.add('certo');
       fb.classList.add('show'); fb.innerHTML = reencontroMsgs[val];
@@ -2252,7 +2252,7 @@ function enviarLead() {
   if (!em || em.indexOf('@') < 1) { fb.style.display = 'block'; fb.style.color = 'var(--vermelho)'; fb.textContent = 'Confira o e-mail e tente de novo.'; return; }
   var fd = new FormData();
   fd.append('access_key', '3436ebf8-58a6-42b9-b24d-ab6d248f7d7e');
-  fd.append('subject', 'Seu Código — lead para o Ato II');
+  fd.append('subject', 'Seu Código — lembrete de reencontro');
   fd.append('from_name', 'Seu Código (workbook Ato I)');
   fd.append('email', em);
   fd.append('Origem', 'workbook-ato1 · progresso ' + (estado._progresso || 0) + '%');
@@ -2260,7 +2260,7 @@ function enviarLead() {
     .then(function(r){ return r.json(); })
     .then(function(d) {
       fb.style.display = 'block';
-      if (d && d.success) { fb.style.color = 'var(--preto)'; fb.textContent = '✓ Você será o primeiro a saber. Agora, de volta ao trabalho.'; estado._lead = true; salvar(); evento('sc_lead_captured'); }
+      if (d && d.success) { fb.style.color = 'var(--preto)'; fb.textContent = '✓ Combinado. Eu te escrevo no seu reencontro. Agora, de volta ao trabalho.'; estado._lead = true; salvar(); evento('sc_lead_captured'); }
       else { fb.style.color = 'var(--vermelho)'; fb.textContent = 'Não consegui enviar agora — escreva para kiko@kikocampos.com'; }
     })
     .catch(function() { fb.style.display = 'block'; fb.style.color = 'var(--vermelho)'; fb.textContent = 'Não consegui enviar agora — escreva para kiko@kikocampos.com'; });
