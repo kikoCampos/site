@@ -255,6 +255,9 @@ select{font-family:var(--sans); font-weight:700; font-size:13px; padding:8px 10p
 .barra-modo button{background:none; border:0; font-family:var(--sans); font-size:13px; font-weight:700;
   color:#1f6aa6; text-decoration:underline; cursor:pointer; padding:4px 0;}
 .barra-modo button:hover{color:var(--preto);}
+.tag-opcional{display:inline-block; margin-left:8px; font-family:var(--sans); font-weight:700; font-size:9.5px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--cinza); border:1px solid var(--linha);
+  padding:2px 6px; vertical-align:middle; white-space:nowrap;}
 
 /* missão no livro */
 .missao{background:var(--cinza-claro); border-left:5px solid var(--azul); padding:20px 24px; margin:26px 0;}
@@ -470,7 +473,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
         <button class="acao vazado" id="btnAtalho" onclick="modoEssencial()">Sem tempo? Nomeie seu gap em 10 min →</button>
       </div>
-      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece com um desafio real. Faça o <b>essencial em ≈ 8 minutos por código</b> — ou aprofunde no seu ritmo com vídeos e exercícios adicionais. Suas respostas ficam neste navegador.</p>
+      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece com um desafio real. Faça o <b>essencial em ≈ 5 minutos por código</b> — ou aprofunde no seu ritmo com vídeos e exercícios adicionais. Suas respostas ficam neste navegador.</p>
       <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
     </div>
   </div>
@@ -1343,7 +1346,7 @@ function montarRotasDaCapa(){
   if (!box) return;
   var cont = document.getElementById('btnContinuar');
   var nEv = Object.keys(telasEvidencia).length;
-  var min = Math.round(nEv * 8 / 5) * 5;
+  var min = nEv * 5;
   box.innerHTML = '';
   var b1 = document.createElement('button');
   b1.className = 'acao';
@@ -1360,6 +1363,30 @@ function montarRotasDaCapa(){
   if (typeof atualizaBotaoContinuar === 'function') atualizaBotaoContinuar();
 }
 montarRotasDaCapa();
+
+/* ============ o que fecha a evidência e o que é sugestão ============
+   Só 31 campos, em toda a plataforma, fecham as 15 evidências. Os demais continuam
+   exatamente onde estão — apenas marcados como opcionais, para quem tem 5 minutos
+   saber onde pode parar sem perder o essencial. */
+var CHAVES_EVIDENCIA = ['c1_gap_declara','c1_gap_pratica','c1_gap_evidencia','c2_p1','c2_p2','c2_p3','c2_p4','c2_p5','c2_evidencia',
+  'c3_alavanca1','c3_alavanca2','c3_evidencia','c4_comportamento','c4_evidencia','c5_ritual','c5_evidencia','c6_clareza','c6_acordo',
+  'c7_entrega','c7_evidencia','c8_micropratica','c8_evidencia','c9_contexto','c9_escolha','missao9','c10_indicador','c10_microacao',
+  'c11_p1','c11_microvitoria','c12_competencia','c12_evidencia','c13_decisao','c13_evidencia','c14_decisao','c14_sinais',
+  'c15_continua','c15_preservar','c15_evoluir'];
+(function marcarOpcionais(){
+  Array.prototype.forEach.call(document.querySelectorAll('.exercicio [data-save]'), function(el){
+    var k = el.getAttribute('data-save');
+    if (!k || CHAVES_EVIDENCIA.indexOf(k) !== -1) return;
+    var tipo = (el.getAttribute('type') || 'text').toLowerCase();
+    if (el.tagName !== 'TEXTAREA' && !(el.tagName === 'INPUT' && tipo === 'text')) return;
+    var lab = el.previousElementSibling;
+    if (!lab || lab.tagName !== 'LABEL' || lab.querySelector('.tag-opcional')) return;
+    var t = document.createElement('span');
+    t.className = 'tag-opcional';
+    t.textContent = 'opcional';
+    lab.appendChild(t);
+  });
+})();
 /* requisito mínimo do ponto de partida: desafio + rota */
 function checaPartida() {
   if (!v('c0_tensao')) {
