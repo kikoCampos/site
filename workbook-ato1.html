@@ -249,6 +249,12 @@ select{font-family:var(--sans); font-weight:700; font-size:13px; padding:8px 10p
 .aviso-teto{font-family:var(--sans); font-size:13.5px; margin-top:10px; line-height:1.5;}
 .aviso-teto.ok{color:var(--cinza);}
 .aviso-teto.demais{color:var(--vermelho); font-weight:700;}
+.barra-modo{background:#eef4fa; border-bottom:1px solid #cfe0ef; font-family:var(--sans); font-size:13px;
+  display:flex; gap:16px; align-items:center; justify-content:center; flex-wrap:wrap; padding:10px 18px; color:var(--preto);}
+.barra-modo b{font-weight:900; letter-spacing:.08em; text-transform:uppercase; font-size:11px; color:#1f6aa6;}
+.barra-modo button{background:none; border:0; font-family:var(--sans); font-size:13px; font-weight:700;
+  color:#1f6aa6; text-decoration:underline; cursor:pointer; padding:4px 0;}
+.barra-modo button:hover{color:var(--preto);}
 
 /* missão no livro */
 .missao{background:var(--cinza-claro); border-left:5px solid var(--azul); padding:20px 24px; margin:26px 0;}
@@ -464,7 +470,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
         <button class="acao vazado" id="btnAtalho" onclick="modoEssencial()">Sem tempo? Nomeie seu gap em 10 min →</button>
       </div>
-      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece com um desafio real. Faça o <b>essencial em ≈ 20 minutos por código</b> — ou aprofunde no seu ritmo com vídeos e exercícios adicionais. Suas respostas ficam neste navegador.</p>
+      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece com um desafio real. Faça o <b>essencial em ≈ 8 minutos por código</b> — ou aprofunde no seu ritmo com vídeos e exercícios adicionais. Suas respostas ficam neste navegador.</p>
       <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
     </div>
   </div>
@@ -1275,6 +1281,7 @@ function irPara(i, semSalvar) {
   atualizaBotaoContinuar();
   evento('sc_screen_view', { screen_id: i + 1 });
   renderNav();
+  if (typeof renderBarraModo === 'function') renderBarraModo();
 }
 /* trava suave: sair de um código sem a evidência pede decisão consciente */
 var telasEvidencia = { 4: 1, 7: 2, 10: 3, 13: 4 };
@@ -1284,8 +1291,75 @@ function mover(d) {
     abrirTrava(telasEvidencia[atual]);
     return;
   }
-  irPara(atual + d);
+  var alvo = proximaTela(d);
+  if (alvo !== -1) irPara(alvo);
 }
+
+/* ============ rota essencial: só as práticas que fecham evidência ============
+   O percurso completo continua inteiro e a um clique — mas quem entra sem tempo
+   não precisa atravessar vídeos e aquecimentos para produzir a primeira evidência. */
+var ROTA_ESSENCIAL = (function(){
+  var t = [0, 1];
+  Object.keys(telasEvidencia).map(Number).sort(function(a, b){ return a - b; }).forEach(function(i){ if (t.indexOf(i) === -1) t.push(i); });
+  [telas.length - 2, telas.length - 1].forEach(function(i){ if (i > 1 && t.indexOf(i) === -1) t.push(i); });
+  return t.sort(function(a, b){ return a - b; });
+})();
+function rotaAtiva(){ return (estado.modo === 'essencial') ? ROTA_ESSENCIAL : null; }
+function proximaTela(d){
+  var r = rotaAtiva(), n;
+  if (!r || r.indexOf(atual) === -1) { n = atual + d; return (n >= 0 && n < telas.length) ? n : -1; }
+  var alvo = r[r.indexOf(atual) + d];
+  return (alvo === undefined) ? -1 : alvo;
+}
+function alternarModo(){
+  estado.modo = (estado.modo === 'essencial') ? 'completo' : 'essencial';
+  salvar();
+  evento('sc_mode_toggled', { mode: estado.modo });
+  renderBarraModo();
+  renderNav();
+}
+function renderBarraModo(){
+  var bar = document.getElementById('barraModo');
+  if (!bar) {
+    var m = document.querySelector('main');
+    if (!m) return;
+    bar = document.createElement('div');
+    bar.id = 'barraModo';
+    bar.className = 'barra-modo';
+    m.insertBefore(bar, m.firstChild);
+  }
+  if (estado.modo !== 'essencial' || (estado._tela || 0) === 0) { bar.style.display = 'none'; return; }
+  bar.style.display = 'flex';
+  bar.innerHTML = '<span><b>Modo essencial</b> · só as ' + Object.keys(telasEvidencia).length + ' práticas que fecham evidência</span>';
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = 'Ver percurso completo';
+  b.addEventListener('click', alternarModo);
+  bar.appendChild(b);
+}
+/* a capa oferece as duas rotas — a essencial primeiro, com o tempo real */
+function montarRotasDaCapa(){
+  var box = telas[0] && telas[0].querySelector('.botoes');
+  if (!box) return;
+  var cont = document.getElementById('btnContinuar');
+  var nEv = Object.keys(telasEvidencia).length;
+  var min = Math.round(nEv * 8 / 5) * 5;
+  box.innerHTML = '';
+  var b1 = document.createElement('button');
+  b1.className = 'acao';
+  b1.style.cssText = 'background:var(--azul); border-color:var(--azul);';
+  b1.textContent = 'Fazer o essencial · ' + nEv + ' práticas, ≈ ' + min + ' min →';
+  b1.addEventListener('click', function(){ estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); irPara(1); });
+  var b2 = document.createElement('button');
+  b2.className = 'acao vazado';
+  b2.textContent = 'Percurso completo · com vídeos e exercícios';
+  b2.addEventListener('click', function(){ estado.modo = 'completo'; salvar(); evento('sc_mode_chosen', { mode: 'completo' }); irPara(1); });
+  box.appendChild(b1);
+  box.appendChild(b2);
+  if (cont) box.appendChild(cont);
+  if (typeof atualizaBotaoContinuar === 'function') atualizaBotaoContinuar();
+}
+montarRotasDaCapa();
 /* requisito mínimo do ponto de partida: desafio + rota */
 function checaPartida() {
   if (!v('c0_tensao')) {
@@ -1353,13 +1427,14 @@ function continuar() { evento('sc_resume_clicked', { via: 'capa' }); irPara(esta
 function renderNav() {
   var t = telas[atual];
   document.getElementById('ondeGrupo').textContent = t.getAttribute('data-grupo');
-  document.getElementById('ondeTitulo').textContent = t.getAttribute('data-titulo') + ' · tela ' + (atual + 1) + ' de ' + telas.length;
-  document.getElementById('btnVoltar').disabled = (atual === 0);
+  document.getElementById('ondeTitulo').textContent = t.getAttribute('data-titulo') + ' · ' + (function(){ var r = rotaAtiva(); var i = r ? r.indexOf(atual) : -1; return (i !== -1) ? ('etapa ' + (i + 1) + ' de ' + r.length) : ('tela ' + (atual + 1) + ' de ' + telas.length); })();
+  document.getElementById('btnVoltar').disabled = (proximaTela(-1) === -1);
   var av = document.getElementById('btnAvancar');
-  if (atual === telas.length - 1) { av.disabled = true; av.textContent = 'Ciclo fechado ✓'; }
+  var proxIdx = proximaTela(1);
+  if (proxIdx === -1) { av.disabled = true; av.textContent = 'Ciclo fechado ✓'; }
   else {
     av.disabled = false;
-    var prox = telas[atual + 1];
+    var prox = telas[proxIdx];
     var proxGrupo = prox.getAttribute('data-grupo');
     if (atual === 1) {
       av.textContent = 'Continuar para o Código 1 →';
