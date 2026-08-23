@@ -507,9 +507,8 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="botoes">
         <button class="acao" style="background:var(--azul); border-color:var(--azul);" onclick="estado.modo='completo'; irPara(1)">Começar minha travessia →</button>
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
-        <button class="acao vazado" onclick="estado.modo='essencial'; evento('sc_shortcut_activation'); irPara(6)">Sem tempo? Ensaie sua conversa em 10 min →</button>
       </div>
-      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Faça o <b>essencial em ≈ 5 minutos por código</b> — ou aprofunde no seu ritmo. Suas respostas ficam neste navegador.</p>
+      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Faça o <b>essencial em 6 a 12 minutos por código</b> — ou aprofunde no seu ritmo. Suas respostas ficam neste navegador.</p>
       <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
     </div>
   </div>
@@ -1179,7 +1178,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.0.0' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.5.0' };
 var SC_ATO = 2;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1332,13 +1331,15 @@ function montarRotasDaCapa(){
   if (!box) return;
   var cont = document.getElementById('btnContinuar');
   var nEv = Object.keys(telasEvidencia).length;
-  var min = nEv * 5;
+  /* mesma tabela de minutos do hub: o tempo anunciado é a soma real dos códigos deste ato */
+  var MIN_CODIGO = {1:8,2:7,3:8,4:6,5:7,6:12,7:6,8:6,9:8,10:7,11:10,12:7,13:6,14:7,15:8};
+  var min = Math.round(Object.keys(telasEvidencia).reduce(function(a, t){ return a + (MIN_CODIGO[telasEvidencia[t]] || 8); }, 0) / 5) * 5;
   box.innerHTML = '';
   var b1 = document.createElement('button');
   b1.className = 'acao';
   b1.style.cssText = 'background:var(--azul); border-color:var(--azul);';
   b1.textContent = 'Fazer o essencial · ' + nEv + ' práticas, ≈ ' + min + ' min →';
-  b1.addEventListener('click', function(){ estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); irPara(1); });
+  b1.addEventListener('click', function(){ estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); evento('sc_shortcut_activation'); irPara(1); });
   var b2 = document.createElement('button');
   b2.className = 'acao vazado';
   b2.textContent = 'Percurso completo · com vídeos e exercícios';
@@ -1855,12 +1856,7 @@ function atualizarSinteses() {
   set('mapaC8', v('c8_micropratica'), '<b>' + v('c8_micropratica') + '</b>');
   set('mapaC9', v('c9_contexto') || v('missao9'), '<b>' + (v('missao9') || 'Micro-história') + '</b>' + (v('c9_onde') ? '<br><span style="font-weight:400; font-size:15px;">Contada em: ' + v('c9_onde') + '</span>' : ''));
 
-  /* ATIVAÇÃO do Ato II: roteiro da conversa pronto (clareza + acordo) */
-  if (v('c6_clareza') && v('c6_acordo') && !estado._ativado) {
-    estado._ativado = true;
-    var min = estado._inicioTs ? Math.round((Date.now() - estado._inicioTs) / 60000) : null;
-    evento('sc_first_evidence_created', { time_to_activation_min: min });
-  }
+  /* a ativação mora no laço de evidências — qualquer código serve, não só o 6 */
   /* evidências entregues */
   [['_ev5', v('c5_ritual') && v('c5_evidencia'), 5],
    ['_ev6', v('c6_clareza') && v('c6_acordo'), 6],
@@ -1870,6 +1866,11 @@ function atualizarSinteses() {
   ].forEach(function(par) {
     if (par[1] && !estado[par[0]]) {
       estado[par[0]] = true;
+      if (!estado._ativado) {
+        estado._ativado = true;
+        var minAtiv = estado._inicioTs ? Math.round((Date.now() - estado._inicioTs) / 60000) : null;
+        evento('sc_first_evidence_created', { time_to_activation_min: minAtiv, code_number: par[2] });
+      }
       evento('sc_evidence_created', { code_number: par[2] });
       if (typeof toast === 'function') toast(par[2]);
       evento('sc_code_completed', { code_number: par[2] });
@@ -2027,6 +2028,7 @@ function bindReencontro() {
     if (estado.c10_resultado === val) b.classList.add('certo');
     b.addEventListener('click', function() {
       estado.c10_resultado = val; salvar();
+      evento('sc_reencontro_respondido', { resultado: val, act_number: 2 });
       ops.querySelectorAll('button').forEach(function(x){ x.classList.remove('certo'); });
       b.classList.add('certo');
       fb.classList.add('show'); fb.innerHTML = reencontroMsgs[val];
