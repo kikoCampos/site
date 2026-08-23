@@ -255,6 +255,16 @@ select{font-family:var(--sans); font-weight:700; font-size:13px; padding:8px 10p
 .barra-modo button{background:none; border:0; font-family:var(--sans); font-size:13px; font-weight:700;
   color:#1f6aa6; text-decoration:underline; cursor:pointer; padding:4px 0;}
 .barra-modo button:hover{color:var(--preto);}
+details.biblioteca{border:1px solid var(--linha); margin:22px 0; background:var(--branco);}
+details.biblioteca > summary{cursor:pointer; padding:15px 18px; font-family:var(--sans); font-weight:900; font-size:14px;
+  display:flex; justify-content:space-between; gap:12px; align-items:center; list-style:none;}
+details.biblioteca > summary::-webkit-details-marker{display:none;}
+details.biblioteca > summary::after{content:"+"; font-size:20px; font-weight:400; color:var(--cinza); flex-shrink:0;}
+details.biblioteca[open] > summary::after{content:"–";}
+details.biblioteca > summary:hover{background:var(--cinza-claro);}
+details.biblioteca > summary .cnt{font-weight:700; font-size:12.5px; color:var(--cinza); letter-spacing:0; text-align:right;}
+details.biblioteca[open] > summary{border-bottom:1px solid var(--linha);}
+details.biblioteca .videos{margin:0; padding:18px;}
 .tag-opcional{display:inline-block; margin-left:8px; font-family:var(--sans); font-weight:700; font-size:9.5px;
   letter-spacing:.14em; text-transform:uppercase; color:var(--cinza); border:1px solid var(--linha);
   padding:2px 6px; vertical-align:middle; white-space:nowrap;}
@@ -1347,6 +1357,34 @@ var CHAVES_EVIDENCIA = ['c1_gap_declara','c1_gap_pratica','c1_gap_evidencia','c2
     lab.appendChild(t);
   });
 })();
+
+/* ============ vídeos: biblioteca, não percurso ============
+   Os vídeos valem horas. Continuam todos aqui, um conjunto por código, mas
+   recolhidos: quem quer aprofundar abre; quem quer praticar não tropeça neles. */
+(function bibliotecaDeVideos(){
+  Array.prototype.forEach.call(document.querySelectorAll('.videos'), function(bloco){
+    if (bloco.closest('details')) return;
+    var vids = bloco.querySelectorAll('.video');
+    if (!vids.length) return;
+    var min = 0, comDur = 0;
+    Array.prototype.forEach.call(bloco.querySelectorAll('.dur'), function(d){
+      var m = (d.textContent || '').match(/(\d+)\s*MIN/i);
+      if (m) { min += parseInt(m[1], 10); comDur++; }
+    });
+    var titulo = 'Prepare o olhar';
+    var h = bloco.previousElementSibling;
+    if (h && h.tagName === 'H2' && h.className.indexOf('secao') !== -1) { titulo = h.textContent.trim(); h.parentNode.removeChild(h); }
+    var det = document.createElement('details');
+    det.className = 'biblioteca';
+    var sum = document.createElement('summary');
+    var tempo = min ? ' · ' + (comDur < vids.length ? 'a partir de ' : '') + min + ' min' : '';
+    sum.innerHTML = '<span>' + titulo + '</span><span class="cnt">' + vids.length + (vids.length === 1 ? ' vídeo' : ' vídeos') + tempo + ' · opcional</span>';
+    bloco.parentNode.insertBefore(det, bloco);
+    det.appendChild(sum);
+    det.appendChild(bloco);
+    det.addEventListener('toggle', function(){ if (det.open) evento('sc_video_library_opened'); });
+  });
+})();
 /* requisito mínimo do ponto de partida: desafio + rota */
 function checaPartida() {
   if (!v('c0_sustentar')) {
@@ -1914,7 +1952,7 @@ function renderHistorico() {
 /* ================= progresso ================= */
 var camposProg = Array.prototype.slice.call(document.querySelectorAll('[data-prog]')).map(function(el){ return el.getAttribute('data-save'); });
 var quizIds = Array.prototype.slice.call(document.querySelectorAll('.quiz-item')).map(function(el){ return 'quiz_' + el.getAttribute('data-q'); });
-var vidIds = Array.prototype.slice.call(document.querySelectorAll('.vid-check:not([data-opt])')).map(function(el){ return 'vid_' + el.getAttribute('data-vid'); });
+var vidIds = []; /* vídeos viraram biblioteca opcional — não contam no percentual de percurso */
 function atualizarProgresso() {
   var total = camposProg.length + quizIds.length + vidIds.length + 8;
   var ok = 0;
