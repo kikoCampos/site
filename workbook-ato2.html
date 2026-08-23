@@ -1112,9 +1112,9 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <button class="acao vazado" onclick="exportar()">Exportar respostas (.json)</button>
       <button class="acao vazado" onclick="document.getElementById('importFile').click()">Importar respostas</button>
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importar(event)">
-      <button class="acao perigo" onclick="pedirReset()">Apagar todos os meus registros</button>
       <span class="salvo-aviso" id="salvoAviso" aria-live="polite">✓ salvo neste navegador</span>
     </div>
+    <p style="font-family:var(--sans); font-size:12px; color:var(--cinza); margin-top:12px;">Precisa recomeçar do zero? A opção de apagar tudo está no <b>Mapa</b>, no topo da tela — longe de onde você trabalha.</p>
   </div>
   <div class="pe">SEU CÓDIGO · WORKBOOK ATO II — TODA MUDANÇA É <b>HUMANA</b></div>
 </section>
@@ -1325,14 +1325,14 @@ function renderBarraModo(){
   b.addEventListener('click', alternarModo);
   bar.appendChild(b);
 }
+/* tabela de minutos por código — fonte única do tempo anunciado, igual à do hub */
+var MIN_CODIGO = {1:8,2:7,3:8,4:6,5:7,6:12,7:6,8:6,9:8,10:7,11:10,12:7,13:6,14:7,15:8};
 /* a capa oferece as duas rotas — a essencial primeiro, com o tempo real */
 function montarRotasDaCapa(){
   var box = telas[0] && telas[0].querySelector('.botoes');
   if (!box) return;
   var cont = document.getElementById('btnContinuar');
   var nEv = Object.keys(telasEvidencia).length;
-  /* mesma tabela de minutos do hub: o tempo anunciado é a soma real dos códigos deste ato */
-  var MIN_CODIGO = {1:8,2:7,3:8,4:6,5:7,6:12,7:6,8:6,9:8,10:7,11:10,12:7,13:6,14:7,15:8};
   var min = Math.round(Object.keys(telasEvidencia).reduce(function(a, t){ return a + (MIN_CODIGO[telasEvidencia[t]] || 8); }, 0) / 5) * 5;
   box.innerHTML = '';
   var b1 = document.createElement('button');
@@ -1350,6 +1350,26 @@ function montarRotasDaCapa(){
   if (typeof atualizaBotaoContinuar === 'function') atualizaBotaoContinuar();
 }
 montarRotasDaCapa();
+
+/* ============ alavanca repetida: aviso, não erro ============
+   Duas vezes a mesma alavanca fecha a evidência com uma alavanca só. */
+(function(){
+  var a1 = document.querySelector('[data-save="c3_alavanca1"]');
+  var a2 = document.querySelector('[data-save="c3_alavanca2"]');
+  if (!a1 || !a2) return;
+  var av = document.createElement('p');
+  av.className = 'aviso-teto';
+  a2.parentNode.insertBefore(av, a2.nextSibling);
+  function checa(){
+    var x = normaliza(a1.value), y = normaliza(a2.value);
+    var igual = x && y && x === y;
+    av.className = 'aviso-teto' + (igual ? ' demais' : '');
+    av.textContent = igual ? 'As duas alavancas estão iguais. Duas vezes o mesmo ponto é uma alavanca só — escolha um segundo ponto do sistema, ou deixe a segunda em branco.' : '';
+  }
+  a1.addEventListener('input', checa);
+  a2.addEventListener('input', checa);
+  checa();
+})();
 
 /* ============ o que fecha a evidência e o que é sugestão ============
    Só 31 campos, em toda a plataforma, fecham as 15 evidências. Os demais continuam
@@ -1480,7 +1500,14 @@ function continuar() { evento('sc_resume_clicked', { via: 'capa' }); irPara(esta
 function renderNav() {
   var t = telas[atual];
   document.getElementById('ondeGrupo').textContent = t.getAttribute('data-grupo');
-  document.getElementById('ondeTitulo').textContent = t.getAttribute('data-titulo') + ' · ' + (function(){ var r = rotaAtiva(); var i = r ? r.indexOf(atual) : -1; return (i !== -1) ? ('etapa ' + (i + 1) + ' de ' + r.length) : ('tela ' + (atual + 1) + ' de ' + telas.length); })();
+  document.getElementById('ondeTitulo').textContent = t.getAttribute('data-titulo') + ' · ' + (function(){
+    /* o único número de progresso da interface é a evidência, no topo.
+       Aqui o rodapé responde outra pergunta: quanto falta, em tempo. */
+    var falta = 0;
+    for (var tl in telasEvidencia) { var c = telasEvidencia[tl];
+      if (!estado['_ev' + c]) falta += ((typeof MIN_CODIGO === 'object' && MIN_CODIGO[c]) || 8); }
+    return falta ? 'faltam ≈ ' + (Math.round(falta / 5) * 5) + ' min' : 'ato completo ✓';
+  })();
   document.getElementById('btnVoltar').disabled = (proximaTela(-1) === -1);
   var av = document.getElementById('btnAvancar');
   var proxIdx = proximaTela(1);
