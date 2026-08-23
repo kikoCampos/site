@@ -87,6 +87,18 @@ main{margin-left:12px; padding:64px 0 96px;}
 .etapa{display:none; animation:surge .25s ease;}
 .etapa.ativa{display:block;}
 @keyframes surge{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+
+/* ===== microinterações (Lote C) ===== */
+.toast{position:fixed; left:50%; bottom:96px; transform:translate(-50%, 12px); z-index:80;
+  background:var(--preto); color:var(--branco); font-family:var(--sans); font-weight:700; font-size:14px;
+  padding:12px 20px; border-radius:var(--r-full); box-shadow:var(--sombra-3);
+  opacity:0; pointer-events:none; transition:opacity var(--mov-normal), transform var(--mov-normal);}
+.toast.show{opacity:1; transform:translate(-50%, 0);}
+.toast b{color:#5cb3f0;}
+@media (prefers-reduced-motion: reduce){
+  .etapa{animation:none;}
+  *{transition-duration:.01ms !important; animation-duration:.01ms !important; scroll-behavior:auto !important;}
+}
 .pagina{max-width:780px; margin:0 auto; padding:40px 32px;}
 
 /* ===== barra de navegação inferior ===== */
@@ -363,18 +375,16 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   .onde-estou{display:none;}
 }
 @media print{
-  .fita,.topo,.rodape-nav,.videos,.botoes,.mapa,.atos-nav{display:flex; gap:4px; font-family:var(--sans); flex-shrink:0;}
-.ato-tab{font-weight:900; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; padding:8px 12px;
-  border:1px solid #3a3739; color:#b9b6b7; text-decoration:none; white-space:nowrap;}
-.ato-tab.ativo{background:var(--branco); color:var(--preto); border-color:var(--branco);}
-.ato-tab:hover:not(.ativo):not(.off){border-color:#5cb3f0; color:#5cb3f0;}
-.ato-tab.off{opacity:.4; cursor:default;}
-@media (max-width:860px){ .ato-tab{padding:4px 8px; font-size:10.5px;} .ato-tab.off{display:none;} }
-.btn-mapa{display:none !important;}
-  .etapa{display:block !important;}
+  .fita,.topo,.rodape-nav,.mapa,.barra-modo,.videos,.botoes,details.biblioteca,.chave .pular{display:none !important;}
+  .btn-mapa{display:none !important;}
+  .etapa{display:block !important; animation:none; page-break-after:always;}
+  .etapa:last-child{page-break-after:auto;}
   main{margin:0; padding:0;}
+  body{background:#fff;}
+  .exercicio{border:1px solid #999; border-radius:0; box-shadow:none; page-break-inside:avoid;}
+  .sintese, .chave{page-break-inside:avoid;}
+  textarea, input[type=text]{border:1px solid #999; min-height:0; box-shadow:none; background:#fff;}
   .capa-bloco{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
-  textarea{border:1px solid #999; min-height:60px;}
 }
 </style>
 </head>
@@ -1407,6 +1417,21 @@ var CHAVES_EVIDENCIA = ['c1_gap_declara','c1_gap_pratica','c1_gap_evidencia','c2
     det.addEventListener('toggle', function(){ if (det.open) evento('sc_video_library_opened'); });
   });
 })();
+
+/* ============ reconhecimento discreto ao fechar uma evidência ============ */
+var _evVistas = {};
+(function(){ for (var t in telasEvidencia) { if (estado['_ev' + telasEvidencia[t]]) _evVistas[telasEvidencia[t]] = true; } })();
+function toast(n){
+  if (_evVistas[n]) return;
+  _evVistas[n] = true;
+  var el = document.getElementById('toast');
+  if (!el) { el = document.createElement('div'); el.id = 'toast'; el.className = 'toast';
+    el.setAttribute('role', 'status'); el.setAttribute('aria-live', 'polite'); document.body.appendChild(el); }
+  el.innerHTML = '<b>\u2713</b> Evidência do Código ' + n + ' registrada';
+  el.classList.add('show');
+  clearTimeout(window.__toastT);
+  window.__toastT = setTimeout(function(){ el.classList.remove('show'); }, 3600);
+}
 /* requisito mínimo do ponto de partida: desafio + rota */
 function checaPartida() {
   if (!v('c0_sustentar')) {
@@ -1881,6 +1906,7 @@ function atualizarSinteses() {
         evento('sc_first_evidence_created', { time_to_activation_min: min, code_number: par[2] });
       }
       evento('sc_evidence_created', { code_number: par[2] });
+      if (typeof toast === 'function') toast(par[2]);
       evento('sc_code_completed', { code_number: par[2] });
     }
   });
