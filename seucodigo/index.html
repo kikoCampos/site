@@ -207,6 +207,27 @@ button.acao:active{transform:translateY(1px);}
   padding:24px 32px 40px; max-width:960px; margin:0 auto;}
 .pe b{color:var(--preto); font-weight:900;}
 
+/* ===== impressão: o hub vira o retrato dos seus 15 códigos (Lote C) ===== */
+@media print{
+  .fita,.assinatura-topo,.topo,.hero .circuito,.barra-port,.botoes,.caixa,.pontos,.ciclo-arco,.volta,.forca a.ir{display:none !important;}
+  .hero{background:#fff !important; color:var(--preto) !important;}
+  .chip{border-color:#999 !important; color:var(--preto) !important;}
+  h1 .az, .kicker, .promessa, .promessa b{color:var(--preto) !important;}
+  .hero-grid{grid-template-columns:1fr; gap:16px; padding:0 0 16px;}
+  .painel{box-shadow:none; border:1px solid #999;}
+  main{margin:0;}
+  .pagina{padding:0 0 16px; max-width:none;}
+  .jornada{gap:16px;}
+  .forca.atual, .forca.feita{box-shadow:none; background:#fff !important; color:var(--preto) !important; margin:0; padding:16px 0;}
+  .forca.feita h3, .forca.feita .linha, .forca.feita .meta, .forca.feita .carimbo{color:var(--preto) !important; border-color:var(--preto) !important;}
+  .forca:not(:last-child)::after{display:none;}
+  details.forca-lista{border-bottom:1px solid #ccc;}
+  details.forca-lista > summary::after{content:"" !important;}
+  .codigo{page-break-inside:avoid;}
+  .codigo.ok{background:#fff;}
+  .bloco{margin-top:24px;}
+}
+
 @media (max-width:860px){
   .fita{display:none;}
   main{margin-left:0;}
@@ -402,6 +423,15 @@ function evento(nome, params) {
   } catch(e) {}
 }
 evento('sc_hub_view');
+
+/* ao imprimir, abrir os três grupos de códigos — o papel não tem acordeão */
+(function(){
+  var abertos = [];
+  function antes(){ abertos = []; Array.prototype.forEach.call(document.querySelectorAll('details.forca-lista'), function(d){ abertos.push(d.open); d.open = true; }); }
+  function depois(){ Array.prototype.forEach.call(document.querySelectorAll('details.forca-lista'), function(d, i){ d.open = abertos[i]; }); }
+  window.addEventListener('beforeprint', antes);
+  window.addEventListener('afterprint', depois);
+})();
 
 /* ================= estado de cada ato ================= */
 var EVS = [['_ev1','_ev2','_ev3','_ev4'], ['_ev5','_ev6','_ev7','_ev8','_ev9'], ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15']];
