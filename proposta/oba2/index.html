@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saúde mental é competência de liderança · Proposta para o Oba Hortifruti (v2)</title>
+<meta name="description" content="Versão revista: um módulo único de 3h por turma, dentro do programa de liderança em curso, com a mesma mensagem para toda a rede.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kikocampos.com/proposta/oba2/">
+<meta property="og:title" content="Saúde mental é competência de liderança · Esabela Cruz e Kiko Campos para o Oba Hortifruti">
+<meta property="og:description" content="Versão 2 · Um módulo de 3h por turma, dentro do programa que já está rodando. Mesma mensagem para os 230 gestores.">
+<meta property="og:image" content="https://kikocampos.com/proposta/oba/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Saúde mental é competência de liderança — proposta para o Oba Hortifruti">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kikocampos.com/proposta/oba2/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15201b; --ink-soft:#41504a; --ink-faint:#75837c;
+    --green:#0f3d2e; --green-mid:#1d6b4f; --green-pale:#e7efe9;
+    --amber:#b45309; --amber-pale:#fdf3e3;
+    --cream:#faf8f4; --paper:#ffffff; --rule:#e2ddd3; --rule-soft:#efebe3;
+    --serif:'Fraunces', Georgia, 'Times New Roman', serif;
+    --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --maxw:900px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  section{padding:50px 0;border-top:1px solid var(--rule)}
+  section:first-of-type{border-top:none}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0 0 .5em;letter-spacing:-.01em}
+  h1{font-size:clamp(2.3rem,5.6vw,3.6rem);line-height:1.05;letter-spacing:-.03em}
+  h2{font-size:clamp(1.55rem,3.2vw,2.15rem);letter-spacing:-.02em;margin-bottom:.55em}
+  h3{font-size:1.2rem;margin-top:1.7em}
+  h4{font-size:1.02rem;font-family:var(--sans);font-weight:700;letter-spacing:-.01em}
+  p{margin:0 0 1em}
+  a{color:var(--green-mid);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+  strong{font-weight:600;color:var(--ink)}
+
+  .eyebrow{font-size:.71rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--green-mid);margin:0 0 1em;font-family:var(--sans)}
+  .lede{font-size:1.15rem;line-height:1.5;color:var(--ink-soft)}
+  .note{font-size:.86rem;color:var(--ink-faint);line-height:1.5}
+
+  .masthead{background:var(--green);color:#f3f7f3;padding:22px 0}
+  .masthead .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--serif);font-size:1rem;font-weight:600}
+  .brand span{display:block;font-family:var(--sans);font-size:.68rem;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:#9dbfae;margin-top:3px}
+  .tag{font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.3);border-radius:2px;padding:5px 10px;color:#c7ddd0}
+
+  .hero{padding:62px 0 44px}
+  h1 em{color:var(--green-mid);font-style:italic;display:block}
+  .hero .lede{max-width:620px;margin-bottom:28px}
+  .version-flag{display:block;background:var(--amber-pale);border-left:3px solid var(--amber);
+    padding:14px 18px;margin-bottom:28px;font-size:.92rem;line-height:1.5;color:#6b3d09;max-width:660px}
+  .version-flag b{color:#7c2d12}
+
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule)}
+  .facts div{background:var(--paper);padding:15px 17px}
+  .facts dt{font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+  .facts dd{margin:0;font-weight:600;font-size:.94rem;line-height:1.35}
+
+  .band{background:var(--paper);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:34px 0}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px}
+  .stat .num{font-family:var(--serif);font-size:2rem;font-weight:700;line-height:1;color:var(--green);letter-spacing:-.03em}
+  .stat p{margin:6px 0 0;font-size:.85rem;line-height:1.4;color:var(--ink-soft)}
+
+  .cards{display:grid;gap:18px;margin:26px 0}
+  .cols-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{background:var(--paper);border:1px solid var(--rule);padding:22px}
+  .card .kicker{font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:9px}
+  .card h4{margin-bottom:.45em}
+  .card p{font-size:.92rem;color:var(--ink-soft);margin-bottom:0}
+
+  .panel{background:var(--green-pale);border-left:3px solid var(--green-mid);padding:20px 22px;margin:26px 0}
+  .panel p:last-child{margin-bottom:0}
+  .panel h4{color:var(--green)}
+
+  ul.clean,ul.check,ul.cut{list-style:none;padding:0;margin:20px 0;display:grid;gap:10px}
+  ul.clean li,ul.check li,ul.cut li{position:relative;padding-left:26px;font-size:.94rem;color:var(--ink-soft)}
+  ul.clean li::before{content:"";position:absolute;left:2px;top:.6em;width:6px;height:6px;background:var(--green-mid);border-radius:50%}
+  ul.check li::before{content:"✓";position:absolute;left:0;top:0;color:var(--green-mid);font-weight:700}
+  ul.cut li::before{content:"—";position:absolute;left:0;top:0;color:var(--amber);font-weight:700}
+  ul li b{color:var(--ink)}
+  ul.clean li cite{font-style:normal;color:var(--ink-faint);font-size:.85em}
+
+  .tablewrap{overflow-x:auto;margin:24px 0;border:1px solid var(--rule);background:var(--paper)}
+  table{border-collapse:collapse;width:100%;min-width:540px;font-size:.9rem}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+  thead th{background:var(--green);color:#eaf2ec;font-size:.66rem;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;border-bottom:none}
+  tbody tr:last-child td{border-bottom:none}
+  td .t{font-family:var(--serif);font-weight:600;white-space:nowrap;color:var(--green)}
+
+  .people{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin:24px 0}
+  .person{background:var(--paper);border:1px solid var(--rule);padding:20px;display:flex;gap:15px;align-items:flex-start}
+  .person img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 56px;background:var(--green-pale)}
+  .person h4{margin-bottom:.2em;font-size:1rem}
+  .person .role{font-size:.78rem;color:var(--ink-faint);margin:0 0 .6em;line-height:1.35}
+  .person p{font-size:.89rem;color:var(--ink-soft);margin-bottom:.5em}
+  .person a{font-size:.84rem}
+
+  .pricebox{background:var(--green);color:#eef4f0;padding:28px;margin:8px 0 26px}
+  .pricebox .label{font-size:.9rem;color:#a9c7b7;max-width:520px;line-height:1.5;margin-bottom:12px}
+  .pricebox .amount{font-family:var(--serif);font-size:clamp(2.1rem,5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1}
+  .pricebox .amount small{display:block;font-family:var(--sans);font-size:.74rem;font-weight:500;
+    letter-spacing:.1em;text-transform:uppercase;color:#a9c7b7;margin-top:9px}
+
+  .close{background:var(--green);color:#e9f1ec}
+  .close h2{color:#fff}
+  .close p{color:#c3d8cc}
+  .close strong{color:#fff}
+  .close .eyebrow{color:#8fb9a2}
+  .close .panel{background:rgba(255,255,255,.07);border-left-color:#6ea98b}
+  .close .panel h4{color:#fff}
+  .close .panel p{color:#cfe0d5}
+
+  footer{background:#0a2a20;color:#8fa89b;padding:28px 0;font-size:.82rem;line-height:1.6}
+  footer a{color:#b9d4c5}
+  footer .sig{font-family:var(--serif);font-size:1.02rem;color:#e9f1ec;margin-bottom:4px}
+
+  @media (max-width:640px){
+    body{font-size:16px}
+    section{padding:40px 0}
+    .wrap{padding:0 20px}
+    .person{flex-direction:column}
+  }
+  @media print{body{background:#fff} section{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap row">
+    <div class="brand">Esabela Cruz &amp; Kiko Campos<span>Liderança · Cultura · Mudança</span></div>
+    <div class="tag">Proposta · Versão 2 · Confidencial</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Módulo de liderança · 230 gestores · Oba Hortifruti</p>
+    <h1>Saúde mental é <em>competência de liderança.</em></h1>
+    <p class="lede">
+      Um módulo presencial de três horas, replicado em quatro turmas, para preparar os 230 gestores
+      do Oba a reconhecer, acolher e prevenir o adoecimento nas suas equipes.
+    </p>
+
+    <div class="version-flag">
+      <b>Versão 2, revista após o alinhamento com Nathalia em 24 de agosto.</b>
+      O tema já vive dentro de um programa em curso — então <b>nada aqui compete com a agenda
+      dele</b>. E a mensagem deve ser a mesma para toda a rede — então <b>o conteúdo é único, e as
+      turmas existem por logística</b>.
+    </div>
+
+    <dl class="facts">
+      <div><dt>Para</dt><dd>Nathalia Trindade<br>Oba Hortifruti</dd></div>
+      <div><dt>Formato</dt><dd>Módulo único de 3h<br>4 turmas presenciais</dd></div>
+      <div><dt>Praças</dt><dd>São Paulo · Campinas<br>Brasília</dd></div>
+    </dl>
+  </section>
+</div>
+
+<div class="band">
+  <div class="wrap stats">
+    <div class="stat"><div class="num">230</div><p>Gestores a preparar em quatro turmas</p></div>
+    <div class="stat"><div class="num">546 mil</div><p>Afastamentos por transtorno mental no Brasil em 2025</p></div>
+    <div class="stat"><div class="num">+79%</div><p>Alta desses afastamentos em dois anos</p></div>
+    <div class="stat"><div class="num">NR-1</div><p>Risco psicossocial no PGR desde maio de 2026</p></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- O AJUSTE -->
+  <section style="border-top:none">
+    <p class="eyebrow">O ajuste desta versão</p>
+    <h2>Um módulo dentro do programa — não um programa ao lado dele</h2>
+    <p class="lede">
+      O programa de liderança do Oba vai de agosto a novembro, com acompanhamento próprio. Saúde
+      mental é um tema <em>dentro</em> dele. Qualquer entrega que crie agenda paralela concorre com o
+      que já está no ar — e perde as duas disputas.
+    </p>
+    <p>Por isso tudo se concentra em <strong>uma única entrada em sala por turma</strong>. Saíram do escopo:</p>
+    <ul class="cut">
+      <li>A trilha de 30 dias com microdesafios semanais.</li>
+      <li>Os encontros de reforço e o acompanhamento pós-sala com os participantes.</li>
+      <li>O pulse com os líderes e as entrevistas de diagnóstico com gerentes de loja.</li>
+    </ul>
+
+    <div class="panel">
+      <h4>O que compensa o que saiu</h4>
+      <p><strong>Mais prática dentro da sala.</strong> O encontro passa de 2h30 para 3h, e o tempo
+        adicional vai inteiro para o laboratório de conversas. Se não há reforço depois, o ensaio
+        precisa acontecer aqui.</p>
+      <p><strong>Sustentação por ativo, não por agenda.</strong> Cartão de bolso, roteiro de 1:1,
+        mapa de sinais e rota de encaminhamento — material que o líder usa na rotina que já tem.</p>
+      <p><strong>Preparação sem custo de agenda.</strong> Leitura documental com o RH: desligamentos,
+        absenteísmo, afastamentos e insumos do programa em curso. Nada pedido aos 230.</p>
+    </div>
+  </section>
+
+  <!-- O ENCONTRO -->
+  <section>
+    <p class="eyebrow">O encontro</p>
+    <h2>Três conversas treinadas, não seis temas expostos</h2>
+    <p>
+      O bloco formativo cobre o essencial — o que é saúde mental e o que não é, os quadros mais
+      comuns e suas causas no trabalho, onde termina o estresse e começa o adoecimento, o que fazer
+      nas primeiras 48 horas e o que a prevenção pede do gestor. O laboratório converte isso em três
+      conversas com roteiro, que o gestor conduz na loja na manhã seguinte.
+    </p>
+
+    <div class="cards cols-3">
+      <div class="card">
+        <div class="kicker">Conversa 1</div>
+        <h4>Conversa de atenção</h4>
+        <p>Percebi um sinal. E agora? Abrir a conversa sem invadir, sem diagnosticar e sem
+          constranger na frente da equipe. É a que a maioria dos gestores evita.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">Conversa 2</div>
+        <h4>Conversa de carga e escala</h4>
+        <p>Negociar jornada, antecipar mudanças e explicar o que não está sob seu controle sem perder
+          a confiança do time. Prevenção na prática.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">Conversa 3</div>
+        <h4>Conversa difícil</h4>
+        <p>Feedback que corrige sem adoecer a relação nem humilhar a pessoa. Sem “sanduíche” e sem a
+          bronca de corredor.</p>
+      </div>
+    </div>
+
+    <h3>O roteiro de 3h</h3>
+    <p class="note" style="margin-top:-.6em">
+      Construído para sessenta a setenta gestores que passaram o dia em pé. Mais de um terço do tempo
+      é prática.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Tempo</th><th>Bloco</th><th>O que acontece</th></tr></thead>
+        <tbody>
+          <tr><td class="t">0–20</td><td><b>O espelho</b></td>
+            <td>Dados reais de afastamento e desligamento do Oba, ao lado dos números do país. A sala para de achar que é mais um treinamento.</td></tr>
+          <tr><td class="t">20–50</td><td><b>Sem tabu e sem rótulo</b></td>
+            <td>O que é, os quadros mais comuns e de onde vêm. Onde termina o estresse e começa o adoecimento.</td></tr>
+          <tr><td class="t">50–75</td><td><b>Prestar atenção</b></td>
+            <td>Que sinais observar — e a diferença entre prestar atenção e vigiar. Casos de loja discutidos em mesa.</td></tr>
+          <tr><td class="t">75–140</td><td><b>Laboratório de conversas</b></td>
+            <td>Tríades com casos reais: cada um conduz uma conversa, recebe outra e observa a terceira, com devolutiva. É o coração do encontro.</td></tr>
+          <tr><td class="t">140–165</td><td><b>Prevenção e limite de papel</b></td>
+            <td>O que o gestor previne pelo desenho do trabalho e onde a responsabilidade dele termina. Rota de encaminhamento e leitura prática da NR-1.</td></tr>
+          <tr><td class="t">165–180</td><td><b>O compromisso</b></td>
+            <td>Cada gestor sai com uma conversa agendada — nome, assunto e data no cartão — dentro da rotina que já tem.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h4>Por que este desenho, e não um treino de resiliência</h4>
+      <ul class="clean" style="margin:14px 0 0">
+        <li>O maior estudo sobre bem-estar corporativo — 46.336 trabalhadores, 233 organizações — não
+          achou benefício mensurável em mindfulness, apps ou treinos de resiliência. O que move o
+          ponteiro é a prática de gestão. <cite>Fleming (2024), Univ. de Oxford.</cite></li>
+        <li>As primeiras diretrizes globais de saúde mental no trabalho recomendam, explicitamente, a
+          formação de gestores. <cite>OMS e OIT (2022).</cite></li>
+        <li>O gestor direto responde por pelo menos 70% da variação de engajamento entre equipes.
+          <cite>Gallup (2015).</cite></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TURMAS -->
+  <section>
+    <p class="eyebrow">As quatro turmas</p>
+    <h2>Uma só mensagem. As turmas existem por logística.</h2>
+    <p class="lede">
+      O conteúdo é idêntico nas quatro salas. O ritmo da operação, a conversa de corredor e a gestão
+      de pico valem para todo o varejo do Oba — a rede se divide por deslocamento e escala, não por
+      necessidade diferente.
+    </p>
+    <p>
+      Para que um colaborador encontre o mesmo padrão de cuidado em Pinheiros, Campinas ou Brasília,
+      os gestores precisam sair com <strong>o mesmo limite de papel, o mesmo vocabulário e a mesma
+      rota de encaminhamento</strong>. Conteúdo padronizado é o que torna a promessa auditável —
+      inclusive para a NR-1.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Nº</th><th>Praça</th><th>Público</th><th>Conteúdo</th></tr></thead>
+        <tbody>
+          <tr><td class="t">01</td><td><b>São Paulo · Pinheiros</b></td><td>70 líderes de SP e Baixada Santista</td><td>Módulo padrão · 3h</td></tr>
+          <tr><td class="t">02</td><td><b>Sumaré / Campinas</b></td><td>60 gerentes de loja</td><td>Módulo padrão · 3h</td></tr>
+          <tr><td class="t">03</td><td><b>Sumaré · Corporativo</b></td><td>60 gestores</td><td>Módulo padrão · 3h</td></tr>
+          <tr><td class="t">04</td><td><b>Brasília</b></td><td>40 a 60 líderes do Centro-Oeste</td><td>Módulo padrão · 3h</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      <strong>A diferença entre as salas fica no repertório do facilitador, não no desenho:</strong>
+      os casos do laboratório vêm de um banco comum e são escolhidos conforme quem está na frente.
+      Mesmo objetivo, mesma mensagem, mesma entrega.<br><br>
+      <strong>Otimização:</strong> as turmas 02 e 03, ambas em Sumaré, podem ocorrer no mesmo dia —
+      manhã e tarde. <strong>Sala:</strong> mesas redondas de seis pessoas, com circulação;
+      metodologia ativa não sobrevive a auditório.
+    </p>
+  </section>
+
+  <!-- QUEM CONDUZ -->
+  <section>
+    <p class="eyebrow">Quem conduz</p>
+    <h2>A dupla que vocês já viram no Mente no Trabalho</h2>
+    <p>
+      As quatro turmas são facilitadas a quatro mãos. Uma leitura vem da psicologia do trabalho e da
+      gestão de riscos psicossociais; a outra, da direção de RH em operações de grande porte e de
+      integração pós-aquisição no varejo alimentar.
+    </p>
+
+    <div class="people">
+      <div class="person">
+        <img src="https://kikocampos.com/proposta/oba/esabela.jpg" alt="Esabela Cruz">
+        <div>
+          <h4>Esabela Cruz, MSc</h4>
+          <p class="role">Psicóloga do trabalho · riscos psicossociais · formação de lideranças</p>
+          <p>Atua em saúde mental, bem-estar e gestão de riscos psicossociais do trabalho (NR-1),
+            cultura organizacional e DE&amp;I. É dela o conceito de <strong>plano de ação vivo</strong>.</p>
+          <a href="https://www.linkedin.com/in/esabela-cruz-msc-93539b2a/">LinkedIn</a>
+        </div>
+      </div>
+      <div class="person">
+        <img src="https://kikocampos.com/proposta/oba/kiko.jpg" alt="Kiko Campos">
+        <div>
+          <h4>Kiko Campos</h4>
+          <p class="role">Diretor de RH · cultura, liderança e transformação pós-M&amp;A</p>
+          <p>Foi Diretor Global de RH, Transformação e Cultura da <strong>Vale</strong> — 170 mil
+            pessoas, 12 países. Antes, <strong>McKinsey</strong>. No <strong>Carrefour Brasil</strong>,
+            liderou a integração do Grupo BIG e a maior escola de liderança do país.</p>
+          <a href="https://www.linkedin.com/in/kikocampos">linkedin.com/in/kikocampos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTIMENTO -->
+  <section>
+    <p class="eyebrow">Investimento</p>
+
+    <div class="pricebox">
+      <div class="label">
+        Pacote fechado · quatro turmas presenciais de 3h, preparação, materiais para 230
+        participantes, kit do multiplicador e leitura de indicadores
+      </div>
+      <div class="amount">R$ 140.000<small>Duas parcelas · 50% na assinatura, 50% após a última turma</small></div>
+    </div>
+
+    <ul class="check">
+      <li><strong>Quatro turmas presenciais de 3h</strong>, conduzidas em dupla, em São Paulo, Campinas e Brasília — conteúdo idêntico nas quatro.</li>
+      <li><strong>Leitura documental prévia</strong> com o RH e produção do bloco de abertura com os dados do próprio Oba.</li>
+      <li><strong>Cartão de bolso e Guia do Líder</strong> para os 230 participantes, com arte e texto prontos.</li>
+      <li><strong>Kit de sustentação</strong> — roteiro de 1:1, mapa de sinais e rota de encaminhamento, para a rotina existente do gestor.</li>
+      <li><strong>Kit do multiplicador</strong> — deck de facilitação, banco de casos, guia de condução e sessão de repasse com o RH, para o Oba replicar o módulo com novos líderes.</li>
+      <li><strong>Relatório executivo</strong> e <strong>evidência documental para a NR-1</strong> no formato que o PGR exige.</li>
+      <li><strong>Leitura de indicadores em 90 dias</strong> junto ao RH — absenteísmo, afastamentos e rotatividade de novatos.</li>
+    </ul>
+
+    <p class="note">
+      Deslocamento, hospedagem e alimentação da dupla fora de São Paulo e a produção física dos
+      materiais por conta da contratante, a partir das artes que entregamos.
+      <strong>Validade:</strong> trinta dias a partir de 24 de agosto de 2026; as datas ficam
+      reservadas mediante aceite.
+    </p>
+  </section>
+
+</div>
+
+<!-- FECHAMENTO -->
+<section class="close">
+  <div class="wrap">
+    <p class="eyebrow">O próximo passo</p>
+    <h2>Cabe no calendário. E cabe na operação.</h2>
+    <p class="lede" style="color:#cfe0d5">
+      Uma rede que acabou de incorporar dez lojas e passou a responder pela NR-1 tem, agora, a janela
+      mais curta e mais decisiva para provar que quer estar entre as melhores empresas para se
+      trabalhar — <strong>e são os 230 gestores destas quatro salas que decidem se a frase vira
+      operação ou fica na parede.</strong>
+    </p>
+
+    <div class="panel">
+      <p>
+        No aceite, encaixamos as quatro datas no calendário do programa que já está rodando e
+        entramos na leitura documental dos dados. <strong>São duas semanas de preparação</strong> —
+        nada é pedido aos participantes antes da sala.
+      </p>
+      <p>
+        <strong>Nathalia</strong>, esta versão foi escrita a partir do seu retorno: um módulo só,
+        dentro do programa, com a mesma mensagem para toda a rede. Se ainda houver ajuste, fazemos
+        antes do aceite.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">Esabela Cruz · Kiko Campos</div>
+    <p style="margin:0 0 10px">
+      <a href="https://www.linkedin.com/in/esabela-cruz-msc-93539b2a/">linkedin.com/in/esabela-cruz</a> ·
+      <a href="https://www.linkedin.com/in/kikocampos">linkedin.com/in/kikocampos</a> ·
+      <a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a> ·
+      <a href="https://mente.kikocampos.com">Série Mente no Trabalho</a>
+    </p>
+    <p style="margin:0">
+      Proposta comercial · versão 2 · Esabela Cruz e Kiko Campos para o Oba Hortifruti ·
+      São Paulo/SP, 24 de agosto de 2026 · Documento confidencial
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
