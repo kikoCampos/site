@@ -330,12 +330,16 @@ button.acao:active{transform:translateY(1px);}
     <div class="bloco">
       <h2 class="secao">Backup e portabilidade</h2>
       <div class="caixa">
-        <p class="nota">Seus registros ficam neste navegador — nada é enviado a servidores. Baixe uma cópia para não perder o progresso ao trocar de dispositivo ou limpar o navegador.</p>
+        <p class="nota">Seus registros ficam neste navegador — <b>nada é enviado a servidores</b>. Para não perder o progresso ao trocar de computador, guarde a cópia numa pasta que já sincroniza sozinha: Google Drive, iCloud ou OneDrive. O arquivo vai direto do seu navegador para a sua nuvem — quem sincroniza é o seu serviço, não nós.</p>
         <div class="botoes">
+          <button class="acao" id="btnDrive" style="display:none" onclick="guardarNaNuvem()">Guardar na minha nuvem</button>
+          <button class="acao" id="btnAtualizar" style="display:none" onclick="atualizarCopia()">Atualizar minha cópia</button>
+          <button class="acao" id="btnAbrir" style="display:none" onclick="abrirDaNuvem()">Abrir cópia da nuvem</button>
           <button class="acao" onclick="exportarCiclo()">Baixar cópia do meu progresso</button>
           <button class="acao" onclick="document.getElementById('importFile').click()">Restaurar uma cópia</button>
           <input type="file" id="importFile" accept=".json" style="display:none" onchange="importarCiclo(event)">
         </div>
+        <p class="nota" id="statusCopia" style="margin-top:12px;"></p>
       </div>
     </div>
 
@@ -730,10 +734,14 @@ function irCodigo(n){
 })();
 
 /* ================= exportar / importar ================= */
-function exportarCiclo() {
+function pacoteDeBackup() {
   var pacote = { formato: 'seucodigo-ciclo', versao: 1, exportadoEm: new Date().toISOString() };
   ['seucodigo_first_touch', 'seucodigo_last_location', 'seucodigo_ciclos'].forEach(function(k){ var d = scGet(k); if (d) pacote[k] = d; });
   CHAVES.forEach(function(k){ var d = carrega(k); if (Object.keys(d).length) pacote[k] = d; });
+  return pacote;
+}
+function exportarCiclo() {
+  var pacote = pacoteDeBackup();
   var blob = new Blob([JSON.stringify(pacote, null, 2)], { type: 'application/json' });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -745,9 +753,13 @@ function importarCiclo(ev) {
   var f = ev.target.files[0];
   if (!f) return;
   var r = new FileReader();
-  r.onload = function() {
+  r.onload = function() { aplicarPacoteTexto(r.result); };
+  r.readAsText(f);
+}
+function aplicarPacoteTexto(txt) {
+  (function() {
     try {
-      var pacote = JSON.parse(r.result);
+      var pacote = JSON.parse(txt);
       if (!pacote || typeof pacote !== 'object' || Array.isArray(pacote)) throw new Error('estrutura');
       CHAVES.forEach(function(k){
         try { var atual = localStorage.getItem(k); if (atual) localStorage.setItem(k + '__backup', atual); } catch(e) {}
@@ -775,9 +787,103 @@ function importarCiclo(ev) {
       evento('sc_import_failed');
       alert('Não conseguimos ler este arquivo. Seus dados atuais continuam protegidos.');
     }
-  };
-  r.readAsText(f);
+  })();
 }
+
+/* ============ nível 1: a cópia mora na nuvem do próprio leitor ============
+   Usa a File System Access API: o leitor escolhe uma pasta que já sincroniza
+   (Drive, iCloud, OneDrive) e o arquivo é escrito direto ali pelo navegador.
+   Nenhum byte passa por um servidor nosso — quem sincroniza é o serviço dele.
+   Onde a API não existe (Safari, Firefox, celular), o caminho de baixar e
+   restaurar continua igual. */
+var TEM_FS = (typeof window.showSaveFilePicker === 'function');
+
+function bd() {
+  return new Promise(function(ok, err) {
+    var r = indexedDB.open('seucodigo', 1);
+    r.onupgradeneeded = function(){ r.result.createObjectStore('h'); };
+    r.onsuccess = function(){ ok(r.result); };
+    r.onerror = function(){ err(r.error); };
+  });
+}
+function guardarRef(h) {
+  return bd().then(function(db){ return new Promise(function(ok){
+    var t = db.transaction('h', 'readwrite'); t.objectStore('h').put(h, 'arquivo');
+    t.oncomplete = function(){ ok(); }; t.onerror = function(){ ok(); };
+  }); });
+}
+function lerRef() {
+  return bd().then(function(db){ return new Promise(function(ok){
+    var t = db.transaction('h', 'readonly'), q = t.objectStore('h').get('arquivo');
+    q.onsuccess = function(){ ok(q.result || null); }; q.onerror = function(){ ok(null); };
+  }); }).catch(function(){ return null; });
+}
+function statusCopia(txt) { var el = document.getElementById('statusCopia'); if (el) el.innerHTML = txt; }
+function escreverNoArquivo(h) {
+  return h.createWritable().then(function(w){
+    return w.write(JSON.stringify(pacoteDeBackup(), null, 2)).then(function(){ return w.close(); });
+  }).then(function(){ scSet('seucodigo_copia_em', Date.now()); });
+}
+function guardarNaNuvem() {
+  window.showSaveFilePicker({
+    suggestedName: 'seu-codigo.json',
+    types: [{ description: 'Seu Código', accept: { 'application/json': ['.json'] } }]
+  }).then(function(h){
+    return escreverNoArquivo(h).then(function(){ return guardarRef(h); }).then(function(){
+      evento('sc_cloud_linked');
+      document.getElementById('btnDrive').style.display = 'none';
+      document.getElementById('btnAtualizar').style.display = '';
+      statusCopia('✓ Cópia guardada em <b>' + h.name + '</b>. Volte aqui e clique em “Atualizar minha cópia” sempre que avançar.');
+    });
+  }).catch(function(e){
+    if (e && e.name === 'AbortError') return;
+    statusCopia('Não consegui guardar agora — use “Baixar cópia do meu progresso”.');
+  });
+}
+function atualizarCopia() {
+  lerRef().then(function(h){
+    if (!h) return guardarNaNuvem();
+    return Promise.resolve(h.queryPermission ? h.queryPermission({ mode: 'readwrite' }) : 'granted').then(function(p){
+      if (p === 'granted') return 'granted';
+      return h.requestPermission ? h.requestPermission({ mode: 'readwrite' }) : 'denied';
+    }).then(function(p){
+      if (p !== 'granted') { statusCopia('Preciso da sua permissão para escrever no arquivo.'); return; }
+      return escreverNoArquivo(h).then(function(){
+        evento('sc_cloud_saved');
+        statusCopia('✓ Sua cópia em <b>' + h.name + '</b> foi atualizada agora.');
+      });
+    });
+  }).catch(function(){ statusCopia('Não consegui atualizar agora — use “Baixar cópia do meu progresso”.'); });
+}
+function abrirDaNuvem() {
+  window.showOpenFilePicker({ types: [{ description: 'Seu Código', accept: { 'application/json': ['.json'] } }], multiple: false })
+    .then(function(hs){ var h = hs[0]; return h.getFile().then(function(fl){ return fl.text(); }).then(function(txt){
+      return guardarRef(h).then(function(){ evento('sc_cloud_restored'); aplicarPacoteTexto(txt); }); }); })
+    .catch(function(e){ if (e && e.name !== 'AbortError') statusCopia('Não consegui abrir o arquivo.'); });
+}
+(function iniciarNuvem(){
+  var bD = document.getElementById('btnDrive'), bA = document.getElementById('btnAtualizar'), bO = document.getElementById('btnAbrir');
+  if (!bD) return;
+  if (!TEM_FS) {
+    statusCopia('Neste navegador a cópia é feita por download. No Chrome ou no Edge do computador dá para guardar direto na sua pasta do Drive ou do iCloud.');
+    return;
+  }
+  bO.style.display = '';
+  lerRef().then(function(h){
+    if (!h) { bD.style.display = ''; return; }
+    bA.style.display = '';
+    Promise.resolve(h.queryPermission ? h.queryPermission({ mode: 'readwrite' }) : 'granted').then(function(p){
+      if (p === 'granted' && totalEv > 0) {
+        escreverNoArquivo(h).then(function(){
+          evento('sc_cloud_saved', { automatico: true });
+          statusCopia('✓ Sua cópia em <b>' + h.name + '</b> foi atualizada agora.');
+        }).catch(function(){ statusCopia('Sua cópia está em <b>' + h.name + '</b>.'); });
+      } else {
+        statusCopia('Sua cópia está em <b>' + h.name + '</b> — clique em “Atualizar minha cópia” para salvar o que mudou.');
+      }
+    });
+  });
+})();
 </script>
 </body>
 </html>
