@@ -2002,26 +2002,98 @@ function coletaBrief() {
 }
 function gerarBrief() {
   var linhas = coletaBrief();
-  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" para gerar o brief.'); return; }
-  evento('sc_brief_generated');
+  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" para gerar a sua página.'); return; }
+  evento('sc_brief_generated', { act_number: SC_ATO });
+  var ATOS = {
+    1: { rom: 'I',   nome: 'Consciência',  arq: 'consciencia',  faixa: 'Códigos 1 a 4',   total: 4 },
+    2: { rom: 'II',  nome: 'Coragem',      arq: 'coragem',      faixa: 'Códigos 5 a 9',   total: 5 },
+    3: { rom: 'III', nome: 'Consistência', arq: 'consistencia', faixa: 'Códigos 10 a 15', total: 6 }
+  };
+  var A = ATOS[SC_ATO] || ATOS[1];
   var hoje = new Date().toLocaleDateString('pt-BR');
-  var htm = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Brief — Meu Código de Consciência</title><style>'
-    + 'body{font-family:Georgia,serif;color:#231f20;max-width:700px;margin:40px auto;padding:0 24px;line-height:1.6;}'
-    + 'h1{font-family:Arial,Helvetica,sans-serif;text-transform:uppercase;font-size:24px;border-bottom:3px solid #231f20;padding-bottom:10px;}'
-    + '.meta{font-family:Arial,sans-serif;font-size:12px;color:#6d6e71;text-transform:uppercase;letter-spacing:.1em;margin-bottom:30px;}'
-    + 'h2{font-family:Arial,sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.06em;background:#231f20;color:#fff;display:inline-block;padding:4px 10px;margin:24px 0 8px;}'
-    + 'p{margin:6px 0 0;font-size:16px;} .rodape{margin-top:40px;font-family:Arial,sans-serif;font-size:11px;color:#6d6e71;text-transform:uppercase;letter-spacing:.1em;border-top:1px solid #ddd;padding-top:12px;}'
-    + '@media print{.no-print{display:none;}}</style></head><body>'
-    + '<h1>Meu Código de Consciência — Ato I</h1><div class="meta">O Novo Código da Mudança · Workbook · ' + hoje + '</div>';
-  linhas.forEach(function(l){ htm += '<h2>' + l[0] + '</h2><p>' + l[1] + '</p>'; });
-  htm += '<h2>O 16º código é seu</h2><p>O livro tem 15 códigos. Esta página é o décimo sexto — o que só você podia escrever. <b>Dobre-a e guarde-a dentro do livro, como marcador:</b> toda vez que voltar a ele, sua promessa volta junto.</p>'
-    + '<div class="rodape">Toda mudança é humana — gerado pelo workbook do Ato I</div>'
-    + '<p class="no-print" style="margin-top:24px;"><button onclick="window.print()" style="font-family:Arial;font-weight:bold;padding:12px 24px;background:#231f20;color:#fff;border:0;cursor:pointer;">Imprimir / salvar PDF</button></p></body></html>';
+  var semTags = function(t){ return String(t).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim(); };
+  /* o contador da capa é evidência fechada, não linha do brief — são coisas diferentes */
+  var codigosAto = Object.keys(telasEvidencia).map(function(t){ return telasEvidencia[t]; });
+  var nEv = codigosAto.filter(function(c){ return estado['_ev' + c]; }).length;
+
+  /* versão em texto — é ela que cabe numa mensagem */
+  var texto = 'MEU CÓDIGO DE ' + A.nome.toUpperCase() + ' — ATO ' + A.rom + '\n'
+    + 'O Novo Código da Mudança · Kiko Campos · ' + hoje + '\n\n'
+    + linhas.map(function(l){ return semTags(l[0]).toUpperCase() + '\n' + semTags(l[1]); }).join('\n\n')
+    + '\n\nO 16º código é seu: o livro tem 15, este é o que só eu podia escrever.\nkikocampos.com/seucodigo';
+
+  var itens = linhas.map(function(l, i){
+    return '<article class="item"><span class="n">' + (i + 1) + '</span><div><h2>' + semTags(l[0]) + '</h2><p>' + l[1] + '</p></div></article>';
+  }).join('');
+
+  var css = [
+    '@page{size:A4; margin:14mm;}',
+    '*{box-sizing:border-box; margin:0; padding:0;}',
+    'body{font-family:Lato,Arial,Helvetica,sans-serif; color:#231f20; background:#f7f7f5; padding:24px; line-height:1.5;}',
+    '.folha{max-width:210mm; margin:0 auto; background:#fff; box-shadow:0 24px 60px -30px rgba(20,18,19,.4);}',
+    '.capa{background:#151314; color:#fff; padding:40px 40px 32px; position:relative; overflow:hidden;}',
+    '.capa .chip{display:inline-block; border:1px solid rgba(255,255,255,.34); border-radius:999px; font-size:10px; font-weight:900; letter-spacing:.16em; text-transform:uppercase; padding:5px 12px;}',
+    '.capa h1{font-size:44px; font-weight:900; line-height:.95; text-transform:uppercase; margin:16px 0 12px; letter-spacing:-.01em;}',
+    '.capa h1 i{color:#5cb3f0; font-style:normal; display:block;}',
+    '.capa .sub{font-size:13px; color:#b9b6b7; letter-spacing:.03em; position:relative; z-index:2;}',
+    '.capa .sub b{color:#fff; font-weight:900;}',
+    '.capa svg{position:absolute; right:-8px; bottom:-12px; opacity:.5;}',
+    '.corpo{padding:32px 40px 8px;}',
+    '.item{display:grid; grid-template-columns:32px 1fr; gap:16px; padding:16px 0; border-top:1px solid #eceae7; page-break-inside:avoid;}',
+    '.item:first-child{border-top:0; padding-top:0;}',
+    '.item .n{font-size:19px; font-weight:900; color:#1f6aa6;}',
+    '.item h2{font-size:11px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; color:#8b8789; margin-bottom:6px;}',
+    '.item p{font-family:"Source Serif 4",Georgia,serif; font-size:16px; line-height:1.5;}',
+    '.fecho{margin:8px 40px 0; padding:20px; background:#f4f3f0; border-left:3px solid #1f6aa6; page-break-inside:avoid;}',
+    '.fecho p{font-size:14px; line-height:1.55; color:#4a4748;}',
+    '.credito{padding:20px 40px 32px; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#8b8789; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;}',
+    '.credito b{color:#231f20; font-weight:900;}',
+    '.acoes{max-width:210mm; margin:20px auto 60px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;}',
+    '.acoes button{font-family:Lato,Arial,sans-serif; font-weight:900; font-size:14px; padding:12px 20px; border-radius:6px; border:1px solid #231f20; background:#231f20; color:#fff; cursor:pointer;}',
+    '.acoes button.sec{background:#fff; color:#231f20; border-color:#d8d6d1;}',
+    '.acoes .ok{font-size:13px; font-weight:700; color:#1f6aa6;}',
+    '@media print{body{background:#fff; padding:0;} .folha{box-shadow:none; max-width:none;} .no-print{display:none;} .capa{-webkit-print-color-adjust:exact; print-color-adjust:exact;}}'
+  ].join('');
+
+  var circuito = '<svg width="240" height="150" viewBox="0 0 240 150" fill="none" aria-hidden="true">'
+    + '<g stroke="#34302f" stroke-width="2"><path d="M10 145 V105 H60 V70 H110 V30"/><path d="M50 145 V120 H100 V85 H150 V45 H200"/><path d="M90 145 V128 H140 V100 H190 V66 H240"/></g>'
+    + '<g fill="#5cb3f0"><circle cx="110" cy="30" r="4"/><circle cx="200" cy="45" r="4"/></g>'
+    + '<g fill="#4a4546"><circle cx="60" cy="70" r="3"/><circle cx="150" cy="45" r="3"/><circle cx="190" cy="66" r="3"/></g></svg>';
+
+  var htm = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">'
+    + '<meta name="viewport" content="width=device-width, initial-scale=1">'
+    + '<title>Meu Código de ' + A.nome + ' — Ato ' + A.rom + '</title>'
+    + '<link rel="preconnect" href="https://fonts.googleapis.com">'
+    + '<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">'
+    + '<style>' + css + '</style></head><body>'
+    + '<div class="folha">'
+    + '<header class="capa">' + circuito
+    + '<span class="chip">O Novo Código da Mudança · Kiko Campos</span>'
+    + '<h1>Meu Código<br><i>de ' + A.nome + '</i></h1>'
+    + '<p class="sub">Ato ' + A.rom + ' · ' + A.faixa + ' · <b>' + nEv + ' de ' + codigosAto.length + '</b> com evidência · ' + hoje + '</p>'
+    + '</header>'
+    + '<section class="corpo">' + itens + '</section>'
+    + '<div class="fecho"><p><b>O 16º código é seu.</b> O livro tem 15 — esta página é a décima sexta, a que só você podia escrever. '
+    + 'Dobre e guarde dentro do livro: toda vez que voltar a ele, sua promessa volta junto.</p></div>'
+    + '<div class="credito"><span>kikocampos.com/seucodigo</span><span>Toda mudança é <b>humana</b></span></div>'
+    + '</div>'
+    + '<div class="acoes no-print">'
+    + '<button onclick="window.print()">Salvar em PDF</button>'
+    + '<button class="sec" onclick="copiarTexto()">Copiar como texto</button>'
+    + '<span class="ok" id="okCopia"></span></div>'
+    + '<script>var TXT = ' + JSON.stringify(texto) + ';'
+    + 'function copiarTexto(){ var f=function(){ document.getElementById("okCopia").textContent="✓ copiado — cole onde quiser"; };'
+    + ' if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(TXT).then(f).catch(g); } else { g(); }'
+    + ' function g(){ var t=document.createElement("textarea"); t.value=TXT; document.body.appendChild(t); t.select();'
+    + ' try{ document.execCommand("copy"); f(); }catch(e){ document.getElementById("okCopia").textContent="Selecione e copie — " + TXT.length + " caracteres"; } t.remove(); } }'
+    + '<\/script></body></html>';
+
   var w = window.open('', '_blank');
   if (w) { w.document.write(htm); w.document.close(); }
   else {
     var blob = new Blob([htm], { type: 'text/html' });
-    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'brief-codigo-consciencia.html'; a.click();
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'meu-codigo-' + A.arq + '.html'; a.click();
   }
 }
 function enviarEmail() {
