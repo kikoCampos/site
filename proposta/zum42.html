@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded",function(){
   document.getElementById("pwin").addEventListener("keydown",function(e){if(e.key==="Enter")go();});
 });
 </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Programa de Protagonismo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -231,6 +233,48 @@ document.addEventListener("DOMContentLoaded",function(){
     .road-band,.road-cols{grid-template-columns:1fr}
   }
 
+
+  /* ===== mobile polish ===== */
+  @media(max-width:640px){
+    .wrap{padding:0 20px}
+    .slide{padding:60px 0}
+    .cover{min-height:auto;padding:40px 0 56px}
+    .cover .meta-top{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:44px}
+    .cover h1{font-size:clamp(38px,11vw,60px)}
+    .cover .meta-bot{margin-top:44px;gap:18px 28px;font-size:12.5px}
+    h2{font-size:clamp(26px,7.5vw,36px)}
+    .mega{font-size:clamp(52px,17vw,90px)}
+    .mega-cap{font-size:17px}
+    .sub{font-size:15.5px}
+    .kick{font-size:10.5px;letter-spacing:.22em}
+    .sum30{grid-template-columns:1fr}
+    .dots{gap:12px}
+    .dot6{width:64px;height:64px;border-radius:16px;font-size:20px}
+    .day-head{flex-wrap:wrap;gap:12px;margin:48px 0 6px}
+    .ag{display:block;border-top:1px solid var(--line2)}
+    .ag-t{padding:16px 0 2px;border-bottom:none;font-size:12.5px}
+    .ag-c{padding:4px 0 16px;border-bottom:1px solid var(--line)}
+    .ag-c h4{font-size:16.5px}
+    .ag-c p{font-size:13.5px}
+    .prova{grid-template-columns:1fr 1fr;gap:10px}
+    .prova .pv{padding:14px}
+    .prova .n{font-size:21px}
+    .shelf{grid-template-columns:1fr}
+    .book{min-height:auto}
+    .logostrip{font-size:13px;line-height:1.9}
+    .eco span{padding:7px 14px;font-size:11.5px}
+    .bio{gap:32px}
+    .bio-photo{max-width:300px;margin:0 auto}
+    .stepsK{gap:28px}
+    .road-seg{padding:14px 16px}
+    .mst .d{min-width:52px;font-size:10.5px}
+    .mst .t{font-size:13px}
+    .fig-row{gap:28px}
+    .punch li{gap:14px;font-size:15px}
+    .punch .ico{width:38px;height:38px;border-radius:11px}
+    footer{padding:48px 0}
+    footer p{font-size:12.5px;word-break:break-word}
+  }
 </style>
 
 <!-- ============ CAPA ============ -->
