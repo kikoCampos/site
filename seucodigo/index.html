@@ -56,6 +56,9 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 :focus-visible{outline:3px solid var(--azul-acao); outline-offset:3px;}
+.pular-conteudo{position:absolute; left:-9999px; top:0; z-index:200; background:var(--tinta); color:#fff;
+  font-family:var(--sans); font-weight:900; font-size:13px; padding:12px 18px; text-decoration:none;}
+.pular-conteudo:focus{left:16px; top:16px;}
 body{font-family:var(--sans); color:var(--preto); background:var(--papel); line-height:1.55; font-size:16px;}
 
 /* assinatura */
@@ -257,9 +260,10 @@ button.acao:active{transform:translateY(1px);}
 </style>
 </head>
 <body>
+<a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 <div class="fita"><span>SEU CÓDIGO &nbsp;·&nbsp; A PLATAFORMA DE PRÁTICA DO LIVRO</span></div>
 <div class="assinatura-topo">Seu Código</div>
-<main>
+<main id="conteudo">
 
 <!-- ===================== HERÓI ===================== -->
 <section class="hero">
@@ -355,7 +359,7 @@ button.acao:active{transform:translateY(1px);}
 <div class="pe">SEU CÓDIGO · O NOVO CÓDIGO DA MUDANÇA — TODA MUDANÇA É <b>HUMANA</b></div>
 
 <script>
-var SC_CONFIG = { accessMode: 'open', platformVersion: '1.5.3' };
+var SC_CONFIG = { accessMode: 'open', platformVersion: '1.5.4' };
 var CHAVES = ['ncc-workbook-ato1', 'ncc-workbook-ato2', 'ncc-workbook-ato3'];
 function carrega(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
 function v(o,k){ return (o[k] || '').toString().trim(); }
@@ -761,6 +765,19 @@ function aplicarPacoteTexto(txt) {
     try {
       var pacote = JSON.parse(txt);
       if (!pacote || typeof pacote !== 'object' || Array.isArray(pacote)) throw new Error('estrutura');
+      /* restaurar substitui o que está gravado — confirmar antes, com o tamanho do estrago */
+      var gravadas = 0;
+      CHAVES.forEach(function(k){
+        var o = carrega(k);
+        gravadas += Object.keys(o).filter(function(x){
+          if (x.charAt(0) === '_') return false;
+          var v = o[x];
+          return v === true || (typeof v === 'number') || (typeof v === 'string' && v.trim() !== '');
+        }).length;
+      });
+      if (gravadas && !confirm('Restaurar esta cópia substitui as ' + gravadas + ' respostas gravadas neste navegador.\n\nUma cópia de segurança do que está aqui hoje fica guardada. Continuar?')) {
+        return;
+      }
       CHAVES.forEach(function(k){
         try { var atual = localStorage.getItem(k); if (atual) localStorage.setItem(k + '__backup', atual); } catch(e) {}
       });
