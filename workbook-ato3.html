@@ -650,6 +650,19 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <label class="campo">Quem conduz a devolutiva — e quando?<small>RH, liderança local ou ambos. Escuta sem devolutiva destrói confiança.</small></label>
         <input type="text" data-save="c10_devolutiva" data-prog="1" placeholder="ex.: eu e a gerente de operações, na primeira semana do mês">
         <div class="sintese"><div class="rotulo">Sua medição viva</div><p id="sintC10" class="vazio">Preencha indicador e microação para fechar o Código 10.</p></div>
+        <div id="capturaAto2" style="display:none; background:var(--cinza-claro); border-left:4px solid var(--azul); padding:18px 20px; margin:16px 0; font-family:var(--sans);">
+          <p style="font-weight:900; font-size:14px; margin-bottom:4px;">A Consistência começou a operar.</p>
+          <p style="font-size:13px; color:var(--cinza); margin-bottom:0;">Agora existe um indicador, não apenas uma intenção. Seus registros ficam neste navegador — exporte uma cópia no fim para não perdê-los ao trocar de dispositivo.</p>
+          <div id="capturaForm" style="display:none; margin-top:12px;">
+            <p style="font-size:13px; color:var(--cinza); margin-bottom:10px;">Quer que eu te lembre da retrospectiva em que você vai conferir se o ciclo se sustentou? Deixe seu e-mail. <b>Vai só o e-mail: nada do que você escreveu sai deste navegador.</b> Um e-mail, mais nada. <a href="/privacidade.html" style="color:var(--azul);">Como trato seus dados</a>.</p>
+            <label class="campo" for="leadEmail" style="font-family:var(--sans); font-weight:700; font-size:12px; letter-spacing:.06em; text-transform:uppercase; display:block; margin-bottom:6px;">Seu e-mail</label>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <input type="email" id="leadEmail" name="email" autocomplete="email" placeholder="voce@empresa.com" style="flex:1; min-width:200px; min-height:44px; border:1px solid var(--linha-campo); border-radius:var(--r-sm); padding:12px 16px; font-family:var(--serif); font-size:16px;">
+              <button class="acao" style="padding:12px 20px;" onclick="enviarLead()">Quero o lembrete</button>
+            </div>
+            <p id="leadFeedback" style="font-size:12px; font-weight:700; margin-top:8px; display:none;"></p>
+          </div>
+        </div>
         <div class="box-preto"><div class="rotulo">Ritual mínimo desta semana</div><p style="margin:0;">Devolva algo que você já ouviu — mesmo que pequeno: <i>"isso foi o que ouvimos, isso é o que vamos fazer agora, isso não vamos fazer por enquanto."</i> Transparência é combustível de confiança.</p></div>
       </div>
     </div>
@@ -791,15 +804,62 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   <div class="pe">CÓDIGO 12 — TODA MUDANÇA É <b>HUMANA</b></div>
 </section>
 
-<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 12 · Aprenda todos os dias">
+<section class="etapa" data-titulo="Pratique" data-grupo="Código 12 · Aprenda todos os dias">
   <div class="pagina">
-    <span class="chip vermelho">Código 12 · Campo real</span>
+    <span class="chip">Código 12 · Pratique</span>
     <div class="chave">
       <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
       <p class="pergunta">No Capítulo 12, qual é a proporção do aprendizado no mundo real? (três números)</p>
       <input type="text" class="chave-input" data-save="chave12" data-prog="1" data-resposta="70-20-10|70 20 10|702010" placeholder="ex.: 00-00-00">
       <p class="fb" data-certo="<b>✓ Chave certa.</b> 70% experiência, 20% feedback, 10% conteúdo — e a Escola de Líderes da Operação nasceu dessa lógica: casos reais, não sala de aula. Agora desenhe o seu." data-errado="<b>Ainda não.</b> Releia <i>70-20-10: aprender no mundo real, com método</i>, no Capítulo 12. Os três números estão no título."></p>
     </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Aquecimento</span><h3>12.1 · Entrega ou impacto?</h3><span class="tempo">~5 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Entrega é hora-aula, turma cheia, presença e certificado emitido. Impacto é mudança de prática no trabalho. Confundir os dois é o erro clássico do capítulo. Classifique:</p>
+        <div class="quiz-item" data-q="q121a">
+          <p class="afirmacao">"Treinamento de liderança concluído: 240 certificados emitidos, NPS 9,2."</p>
+          <div class="quiz-op"><button data-v="entrega">Entrega</button><button data-v="impacto">Impacto</button></div>
+          <p class="quiz-fb"><b>Entrega.</b> Certificado e NPS medem a satisfação com o evento, não a mudança no trabalho. Duas semanas depois, o mesmo problema volta — porque o que faltava não era informação.</p>
+        </div>
+        <div class="quiz-item" data-q="q121b">
+          <p class="afirmacao">"Três meses depois, os 1:1 semanais acontecem em 8 das 9 áreas."</p>
+          <div class="quiz-op"><button data-v="impacto">Impacto</button><button data-v="entrega">Entrega</button></div>
+          <p class="quiz-fb"><b>Impacto.</b> Comportamento repetido, verificável, no fluxo do trabalho. É a diferença entre hora-aula e prática instalada.</p>
+        </div>
+        <div class="quiz-item" data-q="q121c">
+          <p class="afirmacao">"95% de presença nas quatro turmas do programa."</p>
+          <div class="quiz-op"><button data-v="entrega">Entrega</button><button data-v="impacto">Impacto</button></div>
+          <p class="quiz-fb"><b>Entrega.</b> O sucesso medido por presença é um dos cinco sinais de que o aprendizado virou burocracia. Presença não é prática.</p>
+        </div>
+        <div class="quiz-item" data-q="q121d">
+          <p class="afirmacao">"O tempo médio para escalar uma decisão caiu de 12 para 4 dias."</p>
+          <div class="quiz-op"><button data-v="impacto">Impacto</button><button data-v="entrega">Entrega</button></div>
+          <p class="quiz-fb"><b>Impacto.</b> Indicador que avançou porque a prática mudou. Senge: organizações que aprendem não são as que mais treinam, são as que convertem experiência em melhoria contínua.</p>
+        </div>
+      </div>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Autodiagnóstico</span><h3>12.2 · O aprendizado virou burocracia?</h3><span class="tempo">~5 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Os cinco sinais do capítulo. Marque os que você reconhece na sua organização:</p>
+        <ul class="check-lista" id="burocracia">
+          <li><input type="checkbox" data-k="b1"><span>O participante termina o curso sem saber o que aplicar na semana seguinte.</span></li>
+          <li><input type="checkbox" data-k="b2"><span>A liderança não acompanha nem oferece contexto.</span></li>
+          <li><input type="checkbox" data-k="b3"><span>Não existe espaço seguro para testar o novo; o erro vira punição.</span></li>
+          <li><input type="checkbox" data-k="b4"><span>O conteúdo é genérico e distante da realidade.</span></li>
+          <li><input type="checkbox" data-k="b5"><span>O sucesso é medido por presença, não por prática.</span></li>
+        </ul>
+        <div class="resultado" id="burocraciaResultado"></div>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 12 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 12 · Aprenda todos os dias">
+  <div class="pagina">
+    <span class="chip vermelho">Código 12 · Campo real</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>Releia <i>Certificado não é sinônimo de competência</i>. Na margem, <b>escreva a última coisa que você aprendeu de verdade no trabalho</b> — e como aprendeu. Aposto que não foi num curso.</p>
@@ -807,7 +867,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao12" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>12.1 · Seu 70-20-10</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>12.3 · Seu 70-20-10</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <label class="campo">Competência crítica dos próximos 90 dias</label>
         <input type="text" data-save="c12_competencia" data-prog="1" placeholder="ex.: conduzir conversas difíceis sem adiar">
@@ -873,15 +933,57 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   <div class="pe">CÓDIGO 13 — TODA MUDANÇA É <b>HUMANA</b></div>
 </section>
 
-<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 13 · Alinhe os sistemas que reforçam">
+<section class="etapa" data-titulo="Pratique" data-grupo="Código 13 · Alinhe os sistemas que reforçam">
   <div class="pagina">
-    <span class="chip vermelho">Código 13 · Campo real</span>
+    <span class="chip">Código 13 · Pratique</span>
     <div class="chave">
       <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
       <p class="pergunta">A regra que impede resultado e comportamento de se compensarem chama-se regra da…?</p>
       <input type="text" class="chave-input" data-save="chave13" data-prog="1" data-resposta="dupla chave|dupla" placeholder="complete o nome">
       <p class="fb" data-certo="<b>✓ Chave certa.</b> Dupla chave: as duas precisam estar presentes para avançar. Não basta entregar resultados e destruir o sistema." data-errado="<b>Ainda não.</b> Releia <i>A regra da dupla chave</i>, no Capítulo 13 — é o mecanismo central deste código."></p>
     </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Aquecimento</span><h3>13.1 · O que a decisão ensinou?</h3><span class="tempo">~5 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Kerr chamou de a insensatez de recompensar A esperando B. Quando alguém é promovido apesar de um comportamento que a empresa diz não tolerar, as pessoas não veem uma decisão individual: elas atualizam as regras. O que cada decisão ensinou?</p>
+        <div class="quiz-item" data-q="q131a">
+          <p class="afirmacao">"O único promovido do semestre bateu a meta e é a pessoa que todos evitam nas interfaces."</p>
+          <div class="quiz-op"><button data-v="resultado">Resultado basta</button><button data-v="comportamento">Comportamento conta</button><button data-v="negociavel">A regra é negociável</button></div>
+          <p class="quiz-fb"><b>Resultado basta.</b> É a média que se compensa: nota baixa em comportamento, alta em resultado, e o bônus sai. O sistema não avaliou a cultura — calculou quanta incoerência está disposto a aceitar.</p>
+        </div>
+        <div class="quiz-item" data-q="q131b">
+          <p class="afirmacao">"A promoção de um diretor foi adiada seis meses até ele apresentar evidência do comportamento combinado."</p>
+          <div class="quiz-op"><button data-v="comportamento">Comportamento conta</button><button data-v="resultado">Resultado basta</button><button data-v="negociavel">A regra é negociável</button></div>
+          <p class="quiz-fb"><b>Comportamento conta.</b> Dupla chave na prática: as duas precisam estar presentes para avançar. A conversa deixou de ser sobre opinião e passou a ser sobre fatos.</p>
+        </div>
+        <div class="quiz-item" data-q="q131c">
+          <p class="afirmacao">"A política exige evidência para toda avaliação — mas o caso do executivo indispensável passou sem."</p>
+          <div class="quiz-op"><button data-v="negociavel">A regra é negociável</button><button data-v="comportamento">Comportamento conta</button><button data-v="resultado">Resultado basta</button></div>
+          <p class="quiz-fb"><b>A regra é negociável.</b> As exceções escrevem a política real. Elas podem existir — mas precisam ser nomeadas, justificadas e acompanhadas, com o risco cultural explícito e o prazo de correção definido.</p>
+        </div>
+      </div>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Tradução</span><h3>13.2 · De valor a critério</h3><span class="tempo">~10 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Palavras amplas permitem interpretações amplas: duas lideranças avaliam a mesma pessoa de formas opostas achando que aplicam o mesmo valor. A tradução mínima tem três linhas.</p>
+        <label class="campo">O valor que mais deveria pesar nas suas decisões de gente<small>Colaboração, coragem, respeito, inovação, foco no cliente…</small></label>
+        <input type="text" data-save="c13_valor" data-prog="1" placeholder="ex.: colaboração">
+        <label class="campo">1 · O que esperamos ver — em ações concretas e observáveis</label>
+        <textarea data-save="c13_esperado" data-prog="1" placeholder="ex.: envolver as áreas afetadas antes de decidir; compartilhar risco antes de virar problema"></textarea>
+        <label class="campo">2 · O que não aceitaremos — a conduta contrária, dita com todas as letras</label>
+        <textarea data-save="c13_inaceitavel" data-prog="1" placeholder="ex.: reter informação para preservar vantagem; otimizar a própria área às custas do sistema"></textarea>
+        <label class="campo">3 · Que evidência será considerada<small>Decisões, entregas, feedbacks, episódios e impactos verificáveis — sob pressão, não no discurso.</small></label>
+        <textarea data-save="c13_prova" data-prog="1"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 13 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 13 · Alinhe os sistemas que reforçam">
+  <div class="pagina">
+    <span class="chip vermelho">Código 13 · Campo real</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>No Capítulo 13, <b>sublinhe a frase sobre as exceções</b> ("as exceções escrevem a política real"). Na margem, escreva a última exceção que a sua organização abriu — e o que ela ensinou a quem observou.</p>
@@ -889,7 +991,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao13" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>13.1 · Uma decisão com critério explícito</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>13.3 · Uma decisão com critério explícito</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Escolha uma decisão real dos próximos 90 dias: contratação, avaliação, reconhecimento, promoção ou sucessão.</p>
         <label class="campo">A decisão</label>
@@ -956,9 +1058,9 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   <div class="pe">CÓDIGO 14 — TODA MUDANÇA É <b>HUMANA</b></div>
 </section>
 
-<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 14 · Construa a governança que dá autonomia">
+<section class="etapa" data-titulo="Pratique" data-grupo="Código 14 · Construa a governança que dá autonomia">
   <div class="pagina">
-    <span class="chip vermelho">Código 14 · Campo real</span>
+    <span class="chip">Código 14 · Pratique</span>
     <div class="chave">
       <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
       <p class="pergunta">Quando o entusiasmo acaba, o que começa?</p>
@@ -966,7 +1068,28 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <p class="fb" data-certo="<b>✓ Chave certa.</b> A governança é o que segura a cultura quando a energia inicial passa — e é por isso que ela vem aqui, e não no começo." data-errado="<b>Ainda não.</b> É o título da primeira seção do Capítulo 14 — e a tese inteira do código."></p>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>14.1 · Onde a cultura está vazando</h3><span class="tempo">~10 MIN</span></div>
+      <div class="cabeca"><span class="tag">Aquecimento</span><h3>14.1 · Governança que liberta ou que trava?</h3><span class="tempo">~5 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Governança leve não é ausência de controle: é controle com propósito. O excesso de comitês mata a agilidade; a ausência de acompanhamento mata a coerência. Classifique:</p>
+        <div class="quiz-item" data-q="q141a">
+          <p class="afirmacao">"Criamos um comitê mensal para acompanhar o comitê de transformação."</p>
+          <div class="quiz-op"><button data-v="trava">Trava</button><button data-v="liberta">Liberta</button></div>
+          <p class="quiz-fb"><b>Trava.</b> Governança cultural desenhada como governança corporativa: comitês grandes, pautas amplas, apresentações longas. A cultura morre na sala de reunião quando a governança vira teatro de alinhamento.</p>
+        </div>
+        <div class="quiz-item" data-q="q141b">
+          <p class="afirmacao">"O time decide a escala sozinho e informa no fórum quinzenal o que decidiu."</p>
+          <div class="quiz-op"><button data-v="liberta">Liberta</button><button data-v="trava">Trava</button></div>
+          <p class="quiz-fb"><b>Liberta.</b> O time decide e informa — já existe padrão, e a visibilidade se mantém sem pedir permissão. Autonomia é resultado de direção clara, capacidade instalada e confiança construída.</p>
+        </div>
+        <div class="quiz-item" data-q="q141c">
+          <p class="afirmacao">"Toda decisão de bandeira precisa da assinatura do diretor, mesmo as recorrentes."</p>
+          <div class="quiz-op"><button data-v="trava">Trava</button><button data-v="liberta">Liberta</button></div>
+          <p class="quiz-fb"><b>Trava.</b> Decisão que sobe sem necessidade é um dos quatro pontos de vazamento do capítulo. Se a capacidade está instalada, a assinatura só adiciona atrito — e ensina que ninguém decide nada aqui.</p>
+        </div>
+      </div>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>14.2 · Onde a cultura está vazando</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Liste os mecanismos que hoje sustentam a cultura (reuniões, fóruns, multiplicadores, comunicações, ritos, indicadores) e ache o furo.</p>
         <label class="campo">Qual é o principal ponto de vazamento?</label>
@@ -981,8 +1104,15 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <textarea data-save="c14_vazamento" data-prog="1"></textarea>
       </div>
     </div>
+  </div>
+  <div class="pe">CÓDIGO 14 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 14 · Construa a governança que dá autonomia">
+  <div class="pagina">
+    <span class="chip vermelho">Código 14 · Campo real</span>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>14.2 · Contrato de delegação em cinco linhas</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>14.3 · Contrato de delegação em cinco linhas</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Autonomia não se anuncia: se contrata. Escreva o seu para uma decisão recorrente.</p>
         <label class="campo">1 · Que decisão passa a ser de quem?</label>
@@ -1049,15 +1179,55 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   <div class="pe">CÓDIGO 15 — TODA MUDANÇA É <b>HUMANA</b></div>
 </section>
 
-<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 15 · Estruture seu legado">
+<section class="etapa" data-titulo="Pratique" data-grupo="Código 15 · Estruture seu legado">
   <div class="pagina">
-    <span class="chip vermelho">Código 15 · Campo real</span>
+    <span class="chip">Código 15 · Pratique</span>
     <div class="chave">
       <div class="rotulo">Chave do capítulo <span>· a resposta está no livro</span></div>
       <p class="pergunta">Segundo o Capítulo 15, o legado não é um monumento. É um…?</p>
       <input type="text" class="chave-input" data-save="chave15" data-prog="1" data-resposta="compromisso|contrato" placeholder="uma palavra">
       <p class="fb" data-certo="<b>✓ Chave certa.</b> Um compromisso — o contrato silencioso entre gerações de líderes: preservar o que importa e desafiar o que envelheceu. Agora escreva o seu." data-errado="<b>Ainda não.</b> Releia <i>O legado como contrato com o futuro</i>, no fim do Capítulo 15."></p>
     </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Aquecimento</span><h3>15.1 · Legado ou monumento?</h3><span class="tempo">~5 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Legado não é o monumento que se deixa: é o sistema que continua funcionando — e se renovando — quando o autor do movimento sai de cena. Classifique:</p>
+        <div class="quiz-item" data-q="q151a">
+          <p class="afirmacao">"Uma placa com os valores na recepção, inaugurada pelo CEO."</p>
+          <div class="quiz-op"><button data-v="monumento">Monumento</button><button data-v="legado">Legado</button></div>
+          <p class="quiz-fb"><b>Monumento.</b> Depende da memória afetiva de quem fez acontecer. Não sobrevive à primeira troca de liderança porque não mudou nenhuma decisão.</p>
+        </div>
+        <div class="quiz-item" data-q="q151b">
+          <p class="afirmacao">"Três líderes conduzem a retrospectiva do ciclo sem você na sala — e ajustam o que não funcionou."</p>
+          <div class="quiz-op"><button data-v="legado">Legado</button><button data-v="monumento">Monumento</button></div>
+          <p class="quiz-fb"><b>Legado.</b> Cultura que respira sem depender do pulmão de um líder específico. Foi assim que a virada da Microsoft se sustentou por mais de uma década: por cadência, não por evento.</p>
+        </div>
+        <div class="quiz-item" data-q="q151c">
+          <p class="afirmacao">"Um manual de cultura de 80 páginas, aprovado e arquivado no drive."</p>
+          <div class="quiz-op"><button data-v="monumento">Monumento</button><button data-v="legado">Legado</button></div>
+          <p class="quiz-fb"><b>Monumento.</b> E, com o tempo, dívida cultural: aumenta o custo de cada mudança e ninguém tem coragem de mexer. Melhor não mexer, vai dar problema — é a frase que denuncia a dívida.</p>
+        </div>
+      </div>
+    </div>
+    <div class="exercicio">
+      <div class="cabeca"><span class="tag">Teste da ausência</span><h3>15.2 · Duas semanas sem você</h3><span class="tempo">~10 MIN</span></div>
+      <div class="corpo">
+        <p class="instrucao">Não é férias: é o teste. Imagine que você fica duas semanas fora, sem telefone, a partir de segunda-feira.</p>
+        <label class="campo">Que decisão ficaria parada esperando você voltar?</label>
+        <textarea data-save="c15_parada" data-prog="1"></textarea>
+        <label class="campo">Que ritual aconteceria mesmo assim — e quem conduziria?<small>Se nenhum, o Código 14 ainda não fechou.</small></label>
+        <textarea data-save="c15_ritual_sozinho" data-prog="1"></textarea>
+        <label class="campo">O que só existe na sua cabeça e em nenhum outro lugar?<small>Critérios, contexto, histórico de decisão, combinados informais.</small></label>
+        <textarea data-save="c15_so_na_cabeca" data-prog="1"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="pe">CÓDIGO 15 — TODA MUDANÇA É <b>HUMANA</b></div>
+</section>
+
+<section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 15 · Estruture seu legado">
+  <div class="pagina">
+    <span class="chip vermelho">Código 15 · Campo real</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>Nas últimas páginas do livro, <b>escreva o seu nome e a data</b> ao lado da pergunta do legado. Daqui a um ano, releia. O livro vira o registro do compromisso que você assumiu hoje.</p>
@@ -1065,7 +1235,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao15" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>15.1 · Seu legado e o próximo ciclo</h3><span class="tempo">~20 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>15.3 · Seu legado e o próximo ciclo</h3><span class="tempo">~20 MIN</span></div>
       <div class="corpo">
         <label class="campo">O que continua funcionando se você sair amanhã?<small>Se a resposta for "nada", este é o trabalho dos próximos 90 dias.</small></label>
         <textarea data-save="c15_continua" data-prog="1"></textarea>
@@ -1136,6 +1306,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <button class="acao" onclick="enviarEmail()">Abrir rascunho no meu e-mail</button>
       <button class="acao" onclick="baixarICS()">Agendar meu ciclo de 90 dias</button>
     </div>
+    <p id="dataReencontroNota" style="font-family:var(--sans); font-size:12px; color:var(--cinza); margin:0 0 10px;"></p>
     <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">O calendário baixa um .ics com os rituais da sua cadência, a revisão de 30 dias e a retrospectiva do ciclo. Nada é enviado a servidores — seus dados ficam com você.</p>
     <div class="botoes">
       <button class="acao vazado" onclick="window.print()">Imprimir tudo / salvar PDF</button>
@@ -1165,7 +1336,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="cabeca"><span class="tag campo-real">Fechamento do ciclo</span><h3>R.1 · A retrospectiva</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <label class="campo">Data da retrospectiva</label>
-        <input type="text" data-save="c16_data" placeholder="dd/mm/aaaa">
+        <input type="date" data-save="c16_data">
         <label class="campo">A microvitória aconteceu?</label>
         <div class="quiz-op" id="reencontroOpcoes" style="margin-bottom:6px;">
           <button data-rv="sim">Sim — e as pessoas perceberam</button>
@@ -1208,7 +1379,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.5.4' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.5.5' };
 var SC_ATO = 3;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1236,7 +1407,7 @@ function evento(nome, params) {
     var base = {
       act_number: SC_ATO,
       route: estado.rota || null,
-      cycle_number: 1,
+      cycle_number: (function(){ try { return (JSON.parse(localStorage.getItem('seucodigo_ciclos') || '[]')).length + 1; } catch(e) { return 1; } })(),
       session_type: SC_SESSION.tipo,
       days_since_last_visit: SC_SESSION.dias,
       progress_percentage: estado._progresso || 0,
@@ -1290,7 +1461,7 @@ function irPara(i, semSalvar) {
     evento('sc_journey_started');
   }
   /* início de código (telas Prepare: 2/5/8/11) */
-  var mapaCod = { 2: 10, 5: 11, 7: 12, 9: 13, 11: 14, 13: 15 };
+  var mapaCod = { 2: 10, 5: 11, 7: 12, 10: 13, 13: 14, 16: 15 };
   if (mapaCod[i] && !estado['_cs' + mapaCod[i]]) {
     estado['_cs' + mapaCod[i]] = true;
     evento('sc_code_started', { code_number: mapaCod[i] });
@@ -1303,7 +1474,7 @@ function irPara(i, semSalvar) {
   if (typeof aplicarModoEssencial === 'function') aplicarModoEssencial();
 }
 /* trava suave: sair de um código sem a evidência pede decisão consciente */
-var telasEvidencia = { 4: 10, 6: 11, 8: 12, 10: 13, 12: 14, 14: 15 };
+var telasEvidencia = { 4: 10, 6: 11, 9: 12, 12: 13, 15: 14, 18: 15 };
 function mover(d) {
   if (d > 0 && atual === 1 && !checaPartida()) return;
   if (d > 0 && telasEvidencia[atual] && !estado['_ev' + telasEvidencia[atual]]) {
@@ -1942,6 +2113,11 @@ function ligaChecklist(listaId, resultadoId, mensagens) {
   });
   render();
 }
+ligaChecklist('burocracia', 'burocraciaResultado', function(n) {
+  if (n <= 1) return '<b>' + n + ' sinal.</b> O aprendizado ainda está colado ao trabalho. Proteja isso: o ciclo curto é o que mantém o aprendizado vivo.';
+  if (n <= 3) return '<b>' + n + ' sinais.</b> O treinamento começou a virar um fim em si mesmo. Recoloque-o no lugar certo: parte de um ecossistema, não a ferramenta principal.';
+  return '<b>' + n + ' sinais.</b> Aprendizado virou burocracia — entrega alta, impacto nenhum. Comece pelo 70-20-10 do exercício 12.3: desenhe a experiência antes de escolher o curso.';
+});
 ligaChecklist('escudos', 'escudosResultado', function(n) {
   if (n <= 1) return '<b>' + n + ' frase-escudo.</b> Sinal de sistema relativamente aberto — ou de que você ainda não está escutando os corredores.';
   if (n <= 3) return '<b>' + n + ' frases-escudo.</b> A imunidade à mudança está ativa. Cada frase dessas é menos um fato e mais um mecanismo de gestão de ansiedade (Kegan & Lahey).';
@@ -2243,6 +2419,36 @@ function enviarEmail() {
   location.href = 'mailto:?subject=' + encodeURIComponent('O Código do Leitor — meus 15 códigos') + '&body=' + encodeURIComponent(corpo);
 }
 
+/* ================= data do reencontro ================= */
+/* Era um campo de texto livre cujo valor o gerador de .ics reescrevia em silêncio
+   quando não casava com dd/mm/aaaa — e que só aparecia DEPOIS do botão de calendário.
+   Agora nasce preenchido com a data sugerida pela rota, e o que o leitor mudar manda. */
+function parseDataReencontro(txt) {
+  txt = (txt || '').trim();
+  var iso = txt.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (iso) return new Date(+iso[1], +iso[2] - 1, +iso[3], 9, 0, 0);
+  var br = txt.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (br) return new Date(+br[3], +br[2] - 1, +br[1], 9, 0, 0);
+  return null;
+}
+function sugereDataReencontro() {
+  var el = document.querySelector('[data-save="c16_data"]');
+  if (!el) return;
+  var atual = parseDataReencontro(estado.c16_data);
+  if (!atual) {
+    var off = { '7': 7, '30': 30, '90': 90 }['90'] || 30;
+    var d = new Date(); d.setDate(d.getDate() + off);
+    estado.c16_data = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+    salvar();
+  }
+  el.value = estado.c16_data;
+  var nota = document.getElementById('dataReencontroNota');
+  if (nota) {
+    var dd = parseDataReencontro(estado.c16_data);
+    nota.textContent = dd ? 'O convite do reencontro vai para ' + dd.toLocaleDateString('pt-BR') + '. A data está na última etapa, e é sua para mudar.' : '';
+  }
+}
+
 /* ================= calendário (.ics) ================= */
 function fmtICS(d) {
   function p(n){ return (n < 10 ? '0' : '') + n; }
@@ -2263,9 +2469,10 @@ function baixarICS() {
   var d7 = new Date(agora); d7.setDate(d7.getDate() + (rota === '7' ? 3 : 7)); d7.setHours(9, 0, 0, 0);
   var d30 = new Date(agora); d30.setDate(d30.getDate() + offsetReencontro); d30.setHours(9, 0, 0, 0);
   /* respeita a data escolhida na tela de reencontro, se houver */
-  var m = v('c16_data').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-  if (m) { var dd = new Date(+m[3], +m[2] - 1, +m[1], 9, 0, 0); if (dd > agora) d30 = dd; }
-  else { estado.c16_data = d30.toLocaleDateString('pt-BR'); salvar(); }
+  /* a data escolhida manda. Aceita o formato do <input type=date> e o dd/mm/aaaa
+     de quem preencheu antes — e nunca reescreve por baixo o que o leitor digitou. */
+  var dEsc = parseDataReencontro(v('c16_data'));
+  if (dEsc && dEsc > agora) d30 = dEsc;
   var comp = v('c11_comportamento') || v('c11_p1') || 'o comportamento crítico do seu ciclo';
   var evid = v('c11_microvitoria') || v('c10_indicador') || 'a microvitória definida no ciclo';
   var par = v('c10_devolutiva') || 'a devolutiva da escuta';
@@ -2489,6 +2696,34 @@ telas.forEach(function(t, i) {
   linha.appendChild(b);
   alvo.appendChild(linha);
 });
+
+/* ================= captura opcional ================= */
+(function(){
+  window.addEventListener('DOMContentLoaded', function(){
+    var em = document.getElementById('leadEmail');
+    if (!em) return;
+    em.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); enviarLead(); } });
+  });
+})();
+function enviarLead() {
+  var em = (document.getElementById('leadEmail').value || '').trim();
+  var fb = document.getElementById('leadFeedback');
+  if (!em || em.indexOf('@') < 1) { fb.style.display = 'block'; fb.style.color = 'var(--vermelho)'; fb.textContent = 'Confira o e-mail e tente de novo.'; return; }
+  var fd = new FormData();
+  fd.append('access_key', '3436ebf8-58a6-42b9-b24d-ab6d248f7d7e');
+  fd.append('subject', 'Seu Código — lembrete de reencontro');
+  fd.append('from_name', 'Seu Código (workbook Ato III)');
+  fd.append('email', em);
+  fd.append('Origem', 'workbook-ato3 · progresso ' + (estado._progresso || 0) + '%');
+  fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
+    .then(function(r){ return r.json(); })
+    .then(function(d) {
+      fb.style.display = 'block';
+      if (d && d.success) { fb.style.color = 'var(--preto)'; fb.textContent = '✓ Combinado. Eu te escrevo no seu reencontro. Agora, de volta ao trabalho.'; estado._lead = true; salvar(); evento('sc_lead_captured'); }
+      else { fb.style.color = 'var(--vermelho)'; fb.textContent = 'Não consegui enviar agora — escreva para kiko@kikocampos.com'; }
+    })
+    .catch(function() { fb.style.display = 'block'; fb.style.color = 'var(--vermelho)'; fb.textContent = 'Não consegui enviar agora — escreva para kiko@kikocampos.com'; });
+}
 
 /* ================= exportar / importar ================= */
 function exportar() {
@@ -2726,6 +2961,7 @@ bindVazamento();
 bindReencontro();
 renderHistorico();
 atualizarSinteses();
+sugereDataReencontro();
 atualizarProgresso();
 telas[0].classList.add('ativa');
 renderNav();

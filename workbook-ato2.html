@@ -661,6 +661,19 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <label class="campo">Qual evidência mostraria que a rede começou a funcionar melhor?<small>Algo observável: uma decisão que não subiu, um ruído que não virou retrabalho.</small></label>
         <input type="text" data-save="c5_evidencia" data-prog="1" placeholder="ex.: o próximo conflito de prioridade se resolve sem mim">
         <div class="sintese"><div class="rotulo">Sua rede em movimento</div><p id="sintC5" class="vazio">Preencha o ritual e a evidência para fechar o Código 5.</p></div>
+        <div id="capturaAto2" style="display:none; background:var(--cinza-claro); border-left:4px solid var(--azul); padding:18px 20px; margin:16px 0; font-family:var(--sans);">
+          <p style="font-weight:900; font-size:14px; margin-bottom:4px;">A Coragem começou a operar.</p>
+          <p style="font-size:13px; color:var(--cinza); margin-bottom:0;">Agora existe um acordo, não apenas uma intenção. Seus registros ficam neste navegador — exporte uma cópia no fim para não perdê-los ao trocar de dispositivo.</p>
+          <div id="capturaForm" style="display:none; margin-top:12px;">
+            <p style="font-size:13px; color:var(--cinza); margin-bottom:10px;">Quer que eu te lembre do reencontro em que você vai conferir se o acordo aconteceu? Deixe seu e-mail. <b>Vai só o e-mail: nada do que você escreveu sai deste navegador.</b> Um e-mail, mais nada. <a href="/privacidade.html" style="color:var(--azul);">Como trato seus dados</a>.</p>
+            <label class="campo" for="leadEmail" style="font-family:var(--sans); font-weight:700; font-size:12px; letter-spacing:.06em; text-transform:uppercase; display:block; margin-bottom:6px;">Seu e-mail</label>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <input type="email" id="leadEmail" name="email" autocomplete="email" placeholder="voce@empresa.com" style="flex:1; min-width:200px; min-height:44px; border:1px solid var(--linha-campo); border-radius:var(--r-sm); padding:12px 16px; font-family:var(--serif); font-size:16px;">
+              <button class="acao" style="padding:12px 20px;" onclick="enviarLead()">Quero o lembrete</button>
+            </div>
+            <p id="leadFeedback" style="font-size:12px; font-weight:700; margin-top:8px; display:none;"></p>
+          </div>
+        </div>
         <div class="box-preto"><div class="rotulo">Ritual mínimo desta semana</div><p style="margin:0;">Agende o ritual que você escreveu acima <b>ainda hoje</b> — com convite na agenda dos envolvidos. Conexão não se declara; se agenda.</p></div>
       </div>
     </div>
@@ -1120,6 +1133,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <button class="acao" onclick="enviarEmail()">Abrir rascunho no meu e-mail</button>
       <button class="acao" onclick="baixarICS()">Agendar ações no calendário</button>
     </div>
+    <p id="dataReencontroNota" style="font-family:var(--sans); font-size:12px; color:var(--cinza); margin:0 0 10px;"></p>
     <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">O calendário baixa um arquivo .ics com 3 compromissos: seu ritual de conexão (cadência da sua rota), a conversa que você marcou e o reencontro com este workbook. Nada é enviado a servidores — seus dados ficam com você.</p>
     <div class="botoes">
       <button class="acao vazado" onclick="window.print()">Imprimir tudo / salvar PDF</button>
@@ -1149,7 +1163,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="cabeca"><span class="tag campo-real">Fechamento do ciclo</span><h3>R.1 · O confronto com o real</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
         <label class="campo">Data do seu reencontro</label>
-        <input type="text" data-save="c10_data" placeholder="dd/mm/aaaa">
+        <input type="date" data-save="c10_data">
         <label class="campo">A conversa aconteceu?</label>
         <div class="quiz-op" id="reencontroOpcoes" style="margin-bottom:6px;">
           <button data-rv="sim">Sim — e houve acordo</button>
@@ -1192,7 +1206,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.5.4' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.5.5' };
 var SC_ATO = 2;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1220,7 +1234,7 @@ function evento(nome, params) {
     var base = {
       act_number: SC_ATO,
       route: estado.rota || null,
-      cycle_number: 1,
+      cycle_number: (function(){ try { return (JSON.parse(localStorage.getItem('seucodigo_ciclos') || '[]')).length + 1; } catch(e) { return 1; } })(),
       session_type: SC_SESSION.tipo,
       days_since_last_visit: SC_SESSION.dias,
       progress_percentage: estado._progresso || 0,
@@ -2132,6 +2146,36 @@ function enviarEmail() {
   location.href = 'mailto:?subject=' + encodeURIComponent('Meu Código de Coragem — Ato II') + '&body=' + encodeURIComponent(corpo);
 }
 
+/* ================= data do reencontro ================= */
+/* Era um campo de texto livre cujo valor o gerador de .ics reescrevia em silêncio
+   quando não casava com dd/mm/aaaa — e que só aparecia DEPOIS do botão de calendário.
+   Agora nasce preenchido com a data sugerida pela rota, e o que o leitor mudar manda. */
+function parseDataReencontro(txt) {
+  txt = (txt || '').trim();
+  var iso = txt.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (iso) return new Date(+iso[1], +iso[2] - 1, +iso[3], 9, 0, 0);
+  var br = txt.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (br) return new Date(+br[3], +br[2] - 1, +br[1], 9, 0, 0);
+  return null;
+}
+function sugereDataReencontro() {
+  var el = document.querySelector('[data-save="c10_data"]');
+  if (!el) return;
+  var atual = parseDataReencontro(estado.c10_data);
+  if (!atual) {
+    var off = { '7': 7, '30': 30, '90': 90 }[(estado.rota || '30')] || 30;
+    var d = new Date(); d.setDate(d.getDate() + off);
+    estado.c10_data = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+    salvar();
+  }
+  el.value = estado.c10_data;
+  var nota = document.getElementById('dataReencontroNota');
+  if (nota) {
+    var dd = parseDataReencontro(estado.c10_data);
+    nota.textContent = dd ? 'O convite do reencontro vai para ' + dd.toLocaleDateString('pt-BR') + '. A data está na última etapa, e é sua para mudar.' : '';
+  }
+}
+
 /* ================= calendário (.ics) ================= */
 function fmtICS(d) {
   function p(n){ return (n < 10 ? '0' : '') + n; }
@@ -2152,9 +2196,10 @@ function baixarICS() {
   var d7 = new Date(agora); d7.setDate(d7.getDate() + (rota === '7' ? 3 : 7)); d7.setHours(9, 0, 0, 0);
   var d30 = new Date(agora); d30.setDate(d30.getDate() + offsetReencontro); d30.setHours(9, 0, 0, 0);
   /* respeita a data escolhida na tela de reencontro, se houver */
-  var m = v('c10_data').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-  if (m) { var dd = new Date(+m[3], +m[2] - 1, +m[1], 9, 0, 0); if (dd > agora) d30 = dd; }
-  else { estado.c10_data = d30.toLocaleDateString('pt-BR'); salvar(); }
+  /* a data escolhida manda. Aceita o formato do <input type=date> e o dd/mm/aaaa
+     de quem preencheu antes — e nunca reescreve por baixo o que o leitor digitou. */
+  var dEsc = parseDataReencontro(v('c10_data'));
+  if (dEsc && dEsc > agora) d30 = dEsc;
   var comp = v('c5_ritual') || 'praticar o ritual de conexão escolhido no workbook';
   var evid = v('c5_evidencia') || 'a evidência definida no exercício 5.3';
   var par = v('c0_conversa') || 'a conversa que você vem adiando';
@@ -2383,6 +2428,34 @@ telas.forEach(function(t, i) {
   linha.appendChild(b);
   alvo.appendChild(linha);
 });
+
+/* ================= captura opcional ================= */
+(function(){
+  window.addEventListener('DOMContentLoaded', function(){
+    var em = document.getElementById('leadEmail');
+    if (!em) return;
+    em.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); enviarLead(); } });
+  });
+})();
+function enviarLead() {
+  var em = (document.getElementById('leadEmail').value || '').trim();
+  var fb = document.getElementById('leadFeedback');
+  if (!em || em.indexOf('@') < 1) { fb.style.display = 'block'; fb.style.color = 'var(--vermelho)'; fb.textContent = 'Confira o e-mail e tente de novo.'; return; }
+  var fd = new FormData();
+  fd.append('access_key', '3436ebf8-58a6-42b9-b24d-ab6d248f7d7e');
+  fd.append('subject', 'Seu Código — lembrete de reencontro');
+  fd.append('from_name', 'Seu Código (workbook Ato II)');
+  fd.append('email', em);
+  fd.append('Origem', 'workbook-ato2 · progresso ' + (estado._progresso || 0) + '%');
+  fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
+    .then(function(r){ return r.json(); })
+    .then(function(d) {
+      fb.style.display = 'block';
+      if (d && d.success) { fb.style.color = 'var(--preto)'; fb.textContent = '✓ Combinado. Eu te escrevo no seu reencontro. Agora, de volta ao trabalho.'; estado._lead = true; salvar(); evento('sc_lead_captured'); }
+      else { fb.style.color = 'var(--vermelho)'; fb.textContent = 'Não consegui enviar agora — escreva para kiko@kikocampos.com'; }
+    })
+    .catch(function() { fb.style.display = 'block'; fb.style.color = 'var(--vermelho)'; fb.textContent = 'Não consegui enviar agora — escreva para kiko@kikocampos.com'; });
+}
 
 /* ================= exportar / importar ================= */
 function exportar() {
@@ -2762,6 +2835,7 @@ bindRotas();
 bindReencontro();
 simIniciar(false);
 atualizarSinteses();
+sugereDataReencontro();
 atualizarProgresso();
 telas[0].classList.add('ativa');
 renderNav();
