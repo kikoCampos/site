@@ -54,6 +54,18 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 :focus-visible{outline:3px solid var(--azul); outline-offset:2px;}
+.pular-conteudo{position:absolute; left:-9999px; top:0; z-index:200; background:var(--preto); color:#fff;
+  font-family:var(--sans); font-weight:900; font-size:13px; padding:12px 18px; text-decoration:none;}
+.pular-conteudo:focus{left:16px; top:16px;}
+.selo-essencial{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  background:var(--azul); color:#fff; padding:5px 12px; margin-bottom:6px; display:block;}
+.barra-desfazer{position:fixed; left:16px; right:16px; bottom:16px; max-width:640px; margin:0 auto; z-index:90;
+  background:var(--preto); color:#fff; font-family:var(--sans); font-size:13px; padding:12px 16px;
+  display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  box-shadow:0 12px 34px rgba(0,0,0,.3);}
+.barra-desfazer button{font-family:var(--sans); font-weight:700; font-size:12px; padding:9px 14px; cursor:pointer;
+  background:transparent; color:#fff; border:1px solid rgba(255,255,255,.5);}
+.barra-desfazer button:first-of-type{background:var(--azul); border-color:var(--azul);}
 body{font-family:var(--serif); color:var(--preto); background:var(--branco); line-height:1.65; font-size:16px;}
 
 /* ===== moldura editorial ===== */
@@ -390,6 +402,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 </head>
 
 <body>
+<a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
 <div class="fita"><span>WORKBOOK &nbsp;·&nbsp; ATO III &nbsp;·&nbsp; CONSISTÊNCIA</span></div>
 
@@ -505,7 +518,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
         <button class="acao vazado" id="btnAtalho" onclick="modoEssencial()">Sem tempo? Monte seu ciclo de 90 dias em 10 min →</button>
       </div>
-      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Faça o <b>essencial em 6 a 12 minutos por código</b> — ou aprofunde no seu ritmo. Suas respostas ficam neste navegador.</p>
+      <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Faça o <b>essencial em <span id="faixaTempo">6 a 12 minutos por código</span></b> — ou aprofunde no seu ritmo. Suas respostas ficam neste navegador.</p>
       <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
     </div>
   </div>
@@ -1195,7 +1208,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.5.3' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: false, platformVersion: '1.5.4' };
 var SC_ATO = 3;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1287,6 +1300,7 @@ function irPara(i, semSalvar) {
   evento('sc_screen_view', { screen_id: i + 1 });
   renderNav();
   if (typeof renderBarraModo === 'function') renderBarraModo();
+  if (typeof aplicarModoEssencial === 'function') aplicarModoEssencial();
 }
 /* trava suave: sair de um código sem a evidência pede decisão consciente */
 var telasEvidencia = { 4: 10, 6: 11, 8: 12, 10: 13, 12: 14, 14: 15 };
@@ -1342,6 +1356,7 @@ function renderBarraModo(){
   b.addEventListener('click', alternarModo);
   bar.appendChild(b);
 }
+var CODIGO_ATALHO = 11, VERBO_ATALHO = 'Monte seu ciclo';
 /* tabela de minutos por código — fonte única do tempo anunciado, igual à do hub */
 var MIN_CODIGO = {1:8,2:7,3:8,4:6,5:7,6:12,7:6,8:6,9:8,10:7,11:10,12:7,13:6,14:7,15:8};
 /* a capa oferece as duas rotas — a essencial primeiro, com o tempo real */
@@ -1353,10 +1368,17 @@ function montarRotasDaCapa(){
   var nEv = Object.keys(telasEvidencia).length;
   var min = Math.round(Object.keys(telasEvidencia).reduce(function(a, t){ return a + (MIN_CODIGO[telasEvidencia[t]] || 8); }, 0) / 5) * 5;
   box.innerHTML = '';
+  /* a oferta mais barata primeiro: quem tem dez minutos não deve ler trinta como
+     primeira proposta. Todos os números saem de MIN_CODIGO — fonte única. */
+  if (atalho) {
+    atalho.className = 'acao';
+    atalho.style.cssText = 'background:var(--azul); border-color:var(--azul);';
+    atalho.textContent = VERBO_ATALHO + ' em ' + (MIN_CODIGO[CODIGO_ATALHO] || 10) + ' minutos →';
+    box.appendChild(atalho);
+  }
   var b1 = document.createElement('button');
-  b1.className = 'acao';
-  b1.style.cssText = 'background:var(--azul); border-color:var(--azul);';
-  b1.textContent = 'Fazer o essencial · ' + nEv + ' práticas, ≈ ' + min + ' min →';
+  b1.className = 'acao vazado';
+  b1.textContent = 'As ' + nEv + ' práticas do Ato · ≈ ' + min + ' min';
   b1.addEventListener('click', function(){ estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); irPara(1); });
   var b2 = document.createElement('button');
   b2.className = 'acao vazado';
@@ -1365,7 +1387,13 @@ function montarRotasDaCapa(){
   box.appendChild(b1);
   box.appendChild(b2);
   if (cont) box.appendChild(cont);
-  if (atalho) box.appendChild(atalho);
+  /* a faixa de tempo por código também sai da tabela, e por ato */
+  var faixa = document.getElementById('faixaTempo');
+  if (faixa) {
+    var mins = Object.keys(telasEvidencia).map(function(t){ return MIN_CODIGO[telasEvidencia[t]] || 8; });
+    var lo = Math.min.apply(null, mins), hi = Math.max.apply(null, mins);
+    faixa.textContent = (lo === hi) ? ('cerca de ' + lo + ' minutos por código') : (lo + ' a ' + hi + ' minutos por código');
+  }
   if (typeof atualizaBotaoContinuar === 'function') atualizaBotaoContinuar();
 }
 montarRotasDaCapa();
@@ -1482,7 +1510,7 @@ function abrirTermoEscolha() {
   document.getElementById('avisoTexto').textContent = 'São 8 afirmações rápidas — é o que permite comparar o seu antes e depois no fim do Ato. Você pode responder agora ou deixar para depois.';
   document.getElementById('avisoBotoes').innerHTML =
     '<button class="acao" onclick="fecharAviso(true); document.getElementById(\'termoWrap\').scrollIntoView({behavior:\'smooth\',block:\'center\'});">Responder o termômetro</button>' +
-    '<button class="acao vazado" onclick="estado._termoDepois=true; salvar(); fecharAviso(false); irPara(2);">Fazer depois e continuar</button>';
+    '<button class="acao vazado" onclick="estado._termoDepois=true; salvar(); fecharAviso(false); var _p=proximaTela(1); irPara(_p===-1?atual+1:_p);">Fazer depois e continuar</button>';
   abrirModal('veuAviso');
 }
 function fecharAviso(focar) {
@@ -1500,7 +1528,16 @@ function fecharAviso(focar) {
 var travaCodigo = null;
 function abrirTrava(n) {
   travaCodigo = n;
-  document.getElementById('travaTexto').innerHTML = 'Sua evidência do <b>Código ' + n + '</b> ainda não está pronta. É ela que você leva deste código — o resto é preparação.';
+  /* o título dizia só "falta a sua evidência". Nomear o que falta e quanto custa
+     transforma um aviso em convite. */
+  var info = (typeof infoEvidencia === 'function') ? infoEvidencia(n) : { nome: '', tempo: '', numero: '' };
+  var tit = document.getElementById('travaTitulo');
+  if (tit) tit.textContent = info.nome
+    ? 'Falta uma coisa só: ' + info.nome.charAt(0).toLowerCase() + info.nome.slice(1)
+    : 'Falta a sua evidência';
+  var quanto = info.tempo ? ' Cerca de ' + info.tempo.toLowerCase().replace(/\bmin\b/, 'minutos') + '.' : '';
+  document.getElementById('travaTexto').innerHTML =
+    'É o que você leva do <b>Código ' + n + '</b> — o resto foi preparação.' + quanto;
   abrirModal('veuTrava');
   evento('sc_soft_gate', { code_number: n });
 }
@@ -1512,7 +1549,10 @@ function travaConcluir() {
 function travaSeguir() {
   fecharModal('veuTrava');
   evento('sc_soft_gate_choice', { code_number: travaCodigo, choice: 'seguir' });
-  irPara(atual + 1);
+  /* seguia com atual + 1, ignorando a rota escolhida: quem estava no modo essencial
+     caía numa tela que a própria rota pula, e saía do percurso sem perceber. */
+  var alvo = (typeof proximaTela === 'function') ? proximaTela(1) : atual + 1;
+  if (alvo !== -1) irPara(alvo);
 }
 function continuar() { evento('sc_resume_clicked', { via: 'capa' }); irPara(estado._tela || 0); }
 
@@ -1522,10 +1562,19 @@ function renderNav() {
   document.getElementById('ondeTitulo').textContent = t.getAttribute('data-titulo') + ' · ' + (function(){
     /* o único número de progresso da interface é a evidência, no topo.
        Aqui o rodapé responde outra pergunta: quanto falta, em tempo. */
-    var falta = 0;
-    for (var tl in telasEvidencia) { var c = telasEvidencia[tl];
-      if (!estado['_ev' + c]) falta += ((typeof MIN_CODIGO === 'object' && MIN_CODIGO[c]) || 8); }
-    return falta ? 'faltam ≈ ' + (Math.round(falta / 5) * 5) + ' min' : 'ato completo ✓';
+    /* o rodapé dizia quanto falta sofrer. Passa a dizer o que vem —
+       o único número de progresso da interface é a evidência, no topo. */
+    var ordem = Object.keys(telasEvidencia).map(Number).sort(function(a, b){ return a - b; });
+    var prox = null;
+    for (var oi = 0; oi < ordem.length; oi++) {
+      var cc = telasEvidencia[ordem[oi]];
+      if (!estado['_ev' + cc]) { prox = cc; break; }
+    }
+    if (!prox) return 'ato completo ✓';
+    var ip = (typeof infoEvidencia === 'function') ? infoEvidencia(prox) : { nome: '' };
+    return ip.nome
+      ? 'próximo: ' + ip.nome.charAt(0).toLowerCase() + ip.nome.slice(1)
+      : 'próximo: Código ' + prox;
   })();
   document.getElementById('btnVoltar').disabled = (proximaTela(-1) === -1);
   var av = document.getElementById('btnAvancar');
@@ -1655,7 +1704,7 @@ function calcTermos() {
   if (ini.n === afirmacoes.length) {
     var p = Math.round(ini.soma / 40 * 100);
     bi.style.width = p + '%';
-    li.innerHTML = '<b>' + ini.soma + '/40.</b> ' + (p < 50 ? 'Você está entrando no Ato certo: consciência é exatamente o que este percurso constrói.' : p < 75 ? 'Boa base — os exercícios vão transformar percepção em evidência.' : 'Nível alto — use o workbook para testar se é consciência ou narrativa confortável.');
+    li.innerHTML = '<b>' + ini.soma + '/40.</b> ' + (p < 50 ? 'Você está entrando no Ato certo: consistência é exatamente o que este percurso constrói.' : p < 75 ? 'Boa base — os exercícios vão transformar iniciativa em cadência.' : 'Nível alto — e consistência se prova no segundo mês. Use o workbook para testar se o ciclo sobreviveu ao entusiasmo do primeiro.');
   }
   var bf = document.getElementById('termoFimBar'), lf = document.getElementById('termoFimLeg');
   if (fim.n === afirmacoes.length) {
@@ -1667,8 +1716,8 @@ function calcTermos() {
       var comp = document.getElementById('comparativo');
       comp.classList.add('show');
       comp.innerHTML = d > 0
-        ? '<b>+' + d + ' pontos</b> em relação ao ponto de partida. Consciência não é entender melhor: é mudar o lugar de onde se observa. Seus registros acima são a evidência.'
-        : (d === 0 ? '<b>Mesmo escore.</b> Releia suas respostas: o ganho pode estar na qualidade da evidência, não no número.' : '<b>' + d + ' pontos.</b> Escore menor após o percurso costuma ser bom sinal: você trocou confiança narrativa por lucidez. É o efeito "diagnosticar sem ilusões".');
+        ? '<b>+' + d + ' pontos</b> em relação ao ponto de partida. Consistência não é fazer mais: é fazer de novo, quando ninguém está olhando. Seus registros acima são a evidência.'
+        : (d === 0 ? '<b>Mesmo escore.</b> Releia suas respostas: o ganho pode estar na qualidade do ciclo, não no número.' : '<b>' + d + ' pontos.</b> Escore menor depois de medir de verdade costuma ser bom sinal: você trocou a impressão de que estava rodando pelo dado de como está rodando.');
     }
   }
 }
@@ -1682,15 +1731,40 @@ document.querySelectorAll('[data-save]').forEach(function(el) {
 });
 
 /* ================= quizzes ================= */
+/* A alternativa correta era sempre a primeira do HTML — quem percebia o padrão acertava
+   tudo sem ler o enunciado, e o aquecimento perdia o sentido: ele existe para o leitor
+   errar e descobrir que confunde narrativa com evidência. Agora a correta é marcada por
+   atributo e a ordem é embaralhada com semente estável: varia entre perguntas, não varia
+   entre visitas — quem volta reencontra a tela como deixou. */
+function sementeQuiz(str) {
+  var h = 2166136261;
+  for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return function() {
+    h += 0x6D2B79F5;
+    var t = Math.imul(h ^ h >>> 15, 1 | h);
+    t ^= t + Math.imul(t ^ t >>> 7, 61 | t);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
 document.querySelectorAll('.quiz-item').forEach(function(item) {
   var q = item.getAttribute('data-q');
-  var botoes = item.querySelectorAll('.quiz-op button');
+  var caixa = item.querySelector('.quiz-op');
+  if (!q || !caixa) return;
+  var botoes = Array.prototype.slice.call(caixa.querySelectorAll('button'));
+  if (!botoes.length) return;
   var certoV = botoes[0].getAttribute('data-v');
+  botoes[0].setAttribute('data-correta', '1');
+  var sorteia = sementeQuiz('sc-' + q);
+  for (var i = botoes.length - 1; i > 0; i--) {
+    var j = Math.floor(sorteia() * (i + 1));
+    var tmp = botoes[i]; botoes[i] = botoes[j]; botoes[j] = tmp;
+  }
+  botoes.forEach(function(b) { caixa.appendChild(b); b.setAttribute('aria-pressed', 'false'); });
   function marcar(valor) {
     botoes.forEach(function(b) {
       b.setAttribute('aria-pressed', b.getAttribute('data-v') === valor ? 'true' : 'false');
       b.disabled = true;
-      if (b.getAttribute('data-v') === certoV) b.classList.add('certo');
+      if (b.getAttribute('data-correta')) b.classList.add('certo');
       else if (b.getAttribute('data-v') === valor && valor !== certoV) b.classList.add('errado');
     });
     item.querySelector('.quiz-fb').classList.add('show');
@@ -1798,7 +1872,7 @@ function bindCadencia() {
   RITUAIS.forEach(function(r) {
     h += '<div class="engrenagem" style="grid-template-columns:150px 1fr;">'
       + '<div class="nome">' + r.nome + '</div>'
-      + '<div><input type="text" data-save="cad_' + r.k + '" placeholder="' + r.dica + '" style="width:100%;">'
+      + '<div><input type="text" data-save="cad_' + r.k + '" aria-label="' + r.nome + '" placeholder="' + r.dica + '" style="width:100%;">'
       + '<label class="assisti" style="border-top:0; padding-top:6px; margin-top:4px;"><input type="checkbox" class="cad-check" data-cad="' + r.k + '"> Já está na agenda</label></div></div>';
   });
   cont.innerHTML = h;
@@ -1886,6 +1960,10 @@ var listaEng = ['Liderança', 'Incentivos', 'Governança', 'Rituais', 'Comunica�
     var div = document.createElement('div'); div.className = 'engrenagem';
     var n = document.createElement('div'); n.className = 'nome'; n.textContent = nome; div.appendChild(n);
     var ops = document.createElement('div'); ops.className = 'ops';
+    /* sem isto o leitor de tela ouve "reforça / neutra / contradiz" sete vezes,
+       sem saber de qual engrenagem se trata */
+    ops.setAttribute('role', 'radiogroup');
+    ops.setAttribute('aria-label', nome);
     [['reforca', 'Reforça o desejado'], ['neutra', 'Neutra'], ['contradiz', 'Contradiz']].forEach(function(op) {
       var l = document.createElement('label');
       var r = document.createElement('input'); r.type = 'radio'; r.name = 'eng' + i; r.value = op[0];
@@ -2254,12 +2332,47 @@ function modoEssencial() {
   estado.modo = 'essencial'; salvar(); evento('sc_mode_chosen', { mode: 'essencial' }); evento('sc_shortcut_activation');
   irPara(6); focarEvidencia(11, true);
 }
+/* O selo do modo essencial existia uma única vez, no primeiro código do Ato I.
+   As duas portas do modo — o atalho e o botão da capa — também se comportavam
+   de formas diferentes. Agora o selo é montado em toda tela de evidência, e o
+   modo é reaplicado a cada troca de tela, venha o leitor por onde vier. */
+function infoEvidencia(n) {
+  var vazio = { nome: '', tempo: '', numero: '' };
+  var k = (typeof camposEvidencia === 'object') ? camposEvidencia[n] : null;
+  if (!k) return vazio;
+  var el = document.querySelector('[data-save="' + k + '"]');
+  var ex = el && el.closest && el.closest('.exercicio');
+  if (!ex) return vazio;
+  var h = ex.querySelector('.cabeca h3');
+  var t = ex.querySelector('.cabeca .tempo');
+  if (!h) return vazio;
+  var bruto = h.textContent.trim();
+  var num = (bruto.match(/^([\d.]+)/) || [])[1] || '';
+  return { nome: bruto.replace(/^[\d.]+\s*·\s*/, '').trim(), numero: num,
+           tempo: t ? t.textContent.replace(/[~≈]/g, '').trim() : '', caixa: ex };
+}
 function aplicarModoEssencial() {
-  if (estado.modo !== 'essencial') return;
-  var selo = document.getElementById('seloEssencial');
-  if (selo) selo.style.display = 'inline-block';
+  var ess = (estado.modo === 'essencial');
   var apro = document.getElementById('aprofundamento13');
-  if (apro && !apro.open) apro.open = false;
+  if (apro && ess && apro.open) apro.open = false;
+  var estatico = document.getElementById('seloEssencial');
+  if (estatico) estatico.style.display = 'none';
+  for (var t in telasEvidencia) {
+    var n = telasEvidencia[t], tela = telas[t];
+    if (!tela) continue;
+    var selo = tela.querySelector('.selo-essencial');
+    if (!ess) { if (selo) selo.style.display = 'none'; continue; }
+    var info = infoEvidencia(n);
+    if (!info.nome || !info.caixa || !info.caixa.parentNode) continue;
+    if (!selo) {
+      selo = document.createElement('p');
+      selo.className = 'selo-essencial';
+      info.caixa.parentNode.insertBefore(selo, info.caixa);
+    }
+    selo.style.display = 'block';
+    selo.textContent = 'Modo essencial' + (info.tempo ? ' · ' + info.tempo.toLowerCase() : '') +
+      ' — o exercício ' + info.numero + ' é o que fecha este código';
+  }
 }
 
 /* ================= foco na evidência do código ================= */
@@ -2386,6 +2499,23 @@ function exportar() {
   a.download = 'ncc-workbook-ato3-respostas.json';
   a.click();
 }
+/* Importar substituía tudo sem perguntar e aceitava o arquivo de qualquer ato.
+   O fluxo de apagar — que é deliberado — tinha modal e "não tem desfazer"; o de
+   importar, onde o acidente acontece, não tinha nada. Agora tem as duas coisas:
+   confirmação com o tamanho do estrago, e desfazer de verdade. */
+var _importPend = null, _importNome = '';
+function chavesDesteAto() {
+  var o = {};
+  document.querySelectorAll('[data-save]').forEach(function(el){ o[el.getAttribute('data-save')] = 1; });
+  return o;
+}
+function respostasDe(o) {
+  return Object.keys(o || {}).filter(function(k){
+    if (k.charAt(0) === '_') return false;
+    var v = o[k];
+    return v === true || (typeof v === 'number') || (typeof v === 'string' && v.trim() !== '');
+  });
+}
 function importar(ev) {
   var f = ev.target.files[0];
   if (!f) return;
@@ -2396,23 +2526,97 @@ function importar(ev) {
       /* aceita o pacote do ciclo (hub) ou o export do módulo */
       if (novo && novo.formato === 'seucodigo-ciclo') novo = novo[STORE_KEY] || null;
       if (!novo || typeof novo !== 'object' || Array.isArray(novo)) throw new Error('estrutura');
-      /* cópia de segurança antes de sobrescrever — nunca importar parcialmente em silêncio */
-      try { localStorage.setItem(STORE_KEY + '__backup', localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {}
-      novo._v = novo._v || 1;
-      estado = novo;
-      evento('sc_import_completed');
-      salvar();
-      alert('Seu progresso foi recuperado. Você pode continuar de onde parou.');
-      location.reload();
+      var minhas = chavesDesteAto();
+      var respNovas = respostasDe(novo);
+      var daqui = respNovas.filter(function(k){ return minhas[k]; });
+      if (respNovas.length && !daqui.length) {
+        evento('sc_import_failed');
+        abrirAviso('Este arquivo é de outro Ato',
+          'As respostas de "' + f.name + '" não pertencem a este Ato. Abra o Ato correspondente e importe por lá — nada foi alterado aqui.');
+        ev.target.value = '';
+        return;
+      }
+      var respAtual = respostasDe(estado).length;
+      _importPend = novo; _importNome = f.name;
+      avisoAlvo = null; avisoScroll = null;
+      document.getElementById('avisoTitulo').textContent = 'Substituir suas respostas?';
+      document.getElementById('avisoTexto').textContent =
+        '"' + f.name + '" traz ' + respNovas.length + (respNovas.length === 1 ? ' resposta' : ' respostas') + '. ' +
+        (respAtual
+          ? 'Isso substitui ' + respAtual + (respAtual === 1 ? ' resposta que está' : ' respostas que estão') + ' neste navegador. Dá para desfazer logo depois.'
+          : 'Não há nada gravado neste navegador para substituir.');
+      document.getElementById('avisoBotoes').innerHTML =
+        '<button class="acao" onclick="confirmarImport()">Substituir</button>' +
+        '<button class="acao vazado" onclick="cancelarImport()">Cancelar</button>';
+      abrirModal('veuAviso');
     } catch(e) {
       evento('sc_import_failed');
-      alert('Não conseguimos ler este arquivo. Seus dados atuais continuam protegidos.');
+      abrirAviso('Não consegui ler este arquivo', 'O arquivo não parece ser um export do Seu Código. Suas respostas atuais continuam intactas.');
+      ev.target.value = '';
     }
   };
   r.readAsText(f);
 }
+function cancelarImport() {
+  _importPend = null;
+  fecharModal('veuAviso');
+  var inp = document.getElementById('importFile');
+  if (inp) inp.value = '';
+}
+function confirmarImport() {
+  var novo = _importPend; _importPend = null;
+  fecharModal('veuAviso');
+  if (!novo) return;
+  try { localStorage.setItem(STORE_KEY + '__backup', localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {}
+  novo._v = novo._v || 1;
+  estado = novo;
+  estado._importadoEm = Date.now();
+  evento('sc_import_completed');
+  salvar();
+  location.reload();
+}
+/* a barra de desfazer aparece na volta, uma vez, e some quando o leitor decide */
+(function() {
+  if (!estado._importadoEm) return;
+  var backup = null;
+  try { backup = localStorage.getItem(STORE_KEY + '__backup'); } catch(e) {}
+  if (!backup) { delete estado._importadoEm; return; }
+  window.addEventListener('DOMContentLoaded', function() {
+    var b = document.createElement('div');
+    b.className = 'barra-desfazer';
+    b.setAttribute('role', 'status');
+    var txt = document.createElement('span');
+    txt.textContent = 'Respostas importadas. As anteriores ainda estão guardadas.';
+    var desfazer = document.createElement('button');
+    desfazer.type = 'button';
+    desfazer.textContent = 'Desfazer importação';
+    desfazer.addEventListener('click', function() {
+      try { localStorage.setItem(STORE_KEY, backup); localStorage.removeItem(STORE_KEY + '__backup'); } catch(e) {}
+      evento('sc_import_undone');
+      location.reload();
+    });
+    var ficar = document.createElement('button');
+    ficar.type = 'button';
+    ficar.textContent = 'Ficar com as importadas';
+    ficar.addEventListener('click', function() { delete estado._importadoEm; salvar(); b.remove(); });
+    var grupo = document.createElement('span');
+    grupo.style.cssText = 'display:inline-flex; gap:8px; flex-wrap:wrap;';
+    grupo.appendChild(desfazer); grupo.appendChild(ficar);
+    b.appendChild(txt); b.appendChild(grupo);
+    document.body.appendChild(b);
+  });
+})();
 
 /* ================= acessibilidade programática ================= */
+/* as caixas das listas guardam o texto num <span> irmão — sem nome, o leitor de tela
+   anuncia "caixa de seleção, não marcada" e mais nada */
+(function(){
+  document.querySelectorAll('.check-lista input[type=checkbox]').forEach(function(c){
+    if (c.getAttribute('aria-label')) return;
+    var t = c.parentNode && c.parentNode.querySelector('span');
+    if (t && t.textContent.trim()) c.setAttribute('aria-label', t.textContent.trim());
+  });
+})();
 (function(){
   var uid = 0;
   document.querySelectorAll('[data-save]').forEach(function(el) {
