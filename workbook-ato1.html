@@ -47,8 +47,8 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
   --mov-rapido:140ms cubic-bezier(.2,0,.2,1);
   --mov-normal:240ms cubic-bezier(.2,0,.2,1);
 
-  --preto:#231f20; --azul:#2b7dbf; --vermelho:#d2232a; --cinza:#6d6e71; --cinza-claro:#f2f2f2;
-  --linha:#dedede; --branco:#ffffff;
+  --preto:#231f20; --azul:#1f6aa6; --vermelho:#d2232a; --cinza:#6d6e71; --cinza-claro:#f2f2f2;
+  --linha:#dedede; --linha-campo:#94928e; --branco:#ffffff;
   --serif:'Source Serif 4', Georgia, serif;
   --sans:'Lato', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -203,7 +203,7 @@ a.cartao-link .porque{color:var(--cinza); display:block; margin-top:4px;}
 a.cartao-link .url{color:var(--azul); font-weight:700; display:block; margin-top:8px; font-size:12px;}
 
 /* formulários */
-textarea, input[type=text]{width:100%; border:1px solid var(--linha); border-radius:var(--r-sm);
+textarea, input[type=text]{width:100%; border:1px solid var(--linha-campo); border-radius:var(--r-sm);
   background:var(--branco); font-family:var(--serif); font-size:16px; line-height:1.5; padding:12px 16px; color:var(--preto);
   box-shadow:inset 0 1px 2px rgba(20,18,19,.04); transition:border-color var(--mov-rapido), box-shadow var(--mov-rapido);}
 input[type=text]{min-height:44px;}
@@ -251,7 +251,7 @@ table.likert input{accent-color:var(--preto); width:17px; height:17px; cursor:po
 .check-lista{list-style:none;}
 .check-lista li{display:flex; gap:12px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--linha); font-family:var(--sans); font-size:14px;}
 .check-lista input{accent-color:var(--preto); width:18px; height:18px; margin-top:4px; flex-shrink:0; cursor:pointer;}
-select{font-family:var(--sans); font-weight:700; font-size:14px; padding:12px; min-height:44px; border:1px solid var(--linha);
+select{font-family:var(--sans); font-weight:700; font-size:14px; padding:12px; min-height:44px; border:1px solid var(--linha-campo);
   border-radius:var(--r-sm); background:var(--branco); cursor:pointer; transition:border-color var(--mov-rapido), box-shadow var(--mov-rapido);}
 select:focus{outline:0; border-color:var(--azul); box-shadow:0 0 0 3px rgba(43,125,191,.18);}
 .classif{display:grid; grid-template-columns:1fr 170px; gap:8px; margin:8px 0; align-items:center;}
@@ -1235,7 +1235,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.5.2' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.5.3' };
 var SC_ATO = 1;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -2219,6 +2219,7 @@ function bindReencontro() {
 function modoEssencial() {
   estado.modo = 'essencial';
   salvar();
+  evento('sc_mode_chosen', { mode: 'essencial' });
   evento('sc_shortcut_activation');
   irPara(4);
   aplicarModoEssencial();
