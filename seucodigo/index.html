@@ -7,7 +7,7 @@
 <meta name="description" content="O livro traz 15 códigos. Aqui você escreve o seu. A plataforma de prática de O Novo Código da Mudança: diagnóstico, coragem e consistência — com o seu caso, no seu ritmo.">
 <meta property="og:title" content="Seu Código — a plataforma de prática do livro">
 <meta property="og:description" content="O livro traz 15 códigos. Aqui você escreve o seu.">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://kikocampos.com/seucodigo/">
 <!-- Google tag + consentimento (LGPD, mesmo padrão do site) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RD1P3CKLSE"></script>
 <script>
@@ -359,7 +359,7 @@ button.acao:active{transform:translateY(1px);}
 <div class="pe">SEU CÓDIGO · O NOVO CÓDIGO DA MUDANÇA — TODA MUDANÇA É <b>HUMANA</b></div>
 
 <script>
-var SC_CONFIG = { accessMode: 'open', platformVersion: '1.5.4' };
+var SC_CONFIG = { accessMode: 'open', platformVersion: '1.5.5' };
 var CHAVES = ['ncc-workbook-ato1', 'ncc-workbook-ato2', 'ncc-workbook-ato3'];
 function carrega(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
 function v(o,k){ return (o[k] || '').toString().trim(); }
@@ -423,7 +423,7 @@ function evento(nome, params) {
     var ft = scGet('seucodigo_first_touch') || {};
     var base = { route: a1.rota || null, cycle_number: (scGet('seucodigo_ciclos') || []).length + 1,
       session_type: SC_SESSION.tipo, days_since_last_visit: SC_SESSION.dias,
-      progress_percentage: parseInt(a1._progresso || 0), platform_version: SC_CONFIG.platformVersion,
+      progress_percentage: (function(){ var m = 0; [a1, a2, a3].forEach(function(o){ var x = parseInt(o._progresso || 0); if (x > m) m = x; }); return m; })(), platform_version: SC_CONFIG.platformVersion,
       traffic_source: ft.utm_source || (ft.ref ? 'referral' : 'direto') };
     var p = params || {};
     for (var k in p) base[k] = p[k];
