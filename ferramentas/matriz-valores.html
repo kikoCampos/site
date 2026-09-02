@@ -206,6 +206,8 @@ section[hidden]{display:none}
 .av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;
   font-family:var(--fd);font-size:9.5px;font-weight:600;letter-spacing:.01em;color:#fff}
 .av.lg{width:34px;height:34px;font-size:12px}
+.av.sm{width:22px;height:22px;font-size:8px}
+.av.xs{width:19px;height:19px;font-size:7px}
 
 /* ---------- evidências ---------- */
 .feed{display:flex;flex-direction:column}
@@ -234,6 +236,12 @@ table.mtx thead th.cor{left:0;z-index:5;text-align:left;padding:0 18px 10px 4px;
 table.mtx thead th.cor i{font-style:normal;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);display:block;line-height:1.6}
 .ch{display:block;font-size:11px;color:var(--ink-2);line-height:1.25;text-align:center;font-weight:500;transition:color .12s}
 th.hot .ch{color:var(--pp-ink)}
+/* cabecalho de coluna com o mesmo par avatar+nome usado na linha */
+.colh{display:flex;flex-direction:column;align-items:center;gap:6px}
+.colh .av{transition:box-shadow .12s}
+th.hot .colh .av{box-shadow:0 0 0 2px var(--panel),0 0 0 3.5px var(--pp-ink)}
+table.mtx tbody tr:hover th .av{box-shadow:0 0 0 2px var(--panel),0 0 0 3.5px var(--pp-ink)}
+table.mtx tbody th .av{transition:box-shadow .12s}
 table.mtx tbody th{position:sticky;left:0;z-index:2;background:var(--panel);text-align:left;font-weight:500;
   padding:0 18px 0 4px;font-size:13px;color:var(--ink);white-space:nowrap}
 table.mtx tbody th .rowh{display:flex;align-items:center;gap:9px}
@@ -1547,8 +1555,13 @@ function renderMtx(){
 
   var h='<table class="mtx"><thead><tr>'
     +'<th class="cor" style="min-width:'+nameW+'px"><i>avaliado &#8595;</i><i>avaliador &#8594;</i></th>';
+  var avCls = W>=72?"" : W>=54?"sm" : "xs";
+  var showColName = W>=54;              /* abaixo disso o avatar ja carrega as iniciais */
   list.forEach(function(p,i){
-    h+='<th data-col="'+i+'" style="width:'+W+'px"><span class="ch">'+esc(showNum?shortName(p.name):initials(p.name))+'</span></th>';
+    h+='<th data-col="'+i+'" style="width:'+W+'px" title="'+esc(p.name)+'">'
+      +'<span class="colh">'+avatar(p.name,avCls)
+      +(showColName?'<span class="ch">'+esc(shortName(p.name))+'</span>':'')
+      +'</span></th>';
   });
   h+='<th class="totlab" style="width:'+Math.max(W,64)+'px"><span class="ch">M\u00c9DIA<br>RECEBIDA</span></th></tr></thead><tbody>';
 
