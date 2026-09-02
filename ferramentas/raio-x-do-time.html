@@ -1223,7 +1223,7 @@ function view_home(){
       <div class="entrybox">
         <div class="seg">${seg}</div>
         <div class="entryrow">
-          <input class="tx" id="codein" placeholder="ex.: COMITE-VALE" autocomplete="off"
+          <input class="tx" id="codein" placeholder="ex.: TIME-PICPAY" autocomplete="off"
                  style="flex:1;min-width:190px;text-transform:uppercase" value="${esc(S.code)}">
           <button class="btn pri" data-act="enter">${S.mode==="responder"?"Começar":"Abrir"} →</button>
         </div>
@@ -2191,7 +2191,7 @@ document.addEventListener("click", async e=>{
     S.demo=false; S.code=""; S.team=null; S.respostas=[]; S.answers={}; S.view="home"; render(); return;
   }
   if(act==="create"){
-    const code = prompt("Código do novo time (sem espaços, ex.: COMITE-VALE):", ($("#codein")||{}).value||"");
+    const code = prompt("Código do novo time (sem espaços, ex.: TIME-PICPAY):", ($("#codein")||{}).value||"");
     if(!code) return;
     const nome = prompt("Nome do time (aparece no relatório):", code) || code;
     const ok = await enterTeam(code, true, nome);
