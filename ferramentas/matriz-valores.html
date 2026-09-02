@@ -371,6 +371,149 @@ tr.totrow td,tr.totrow th{padding-top:10px}
   color:var(--ink-3);font-size:12px;font-weight:600;display:grid;place-items:center;padding:0;flex-shrink:0}
 .helpb:hover{border-color:var(--ink-3);color:var(--ink)}
 @media (max-width:560px){.sheet{border-radius:16px}.sheet .body{padding:18px 18px 6px}.sheet > header{padding:18px 20px 14px}.sheet > footer{padding:14px 20px 18px}}
+
+/* ============ hero ============ */
+.hero{position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(118deg,#0A2018 0%,#05130E 52%,#0A2A1D 100%)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);background-size:3px 3px}
+.hero::after{content:"";position:absolute;right:-8%;top:-70%;width:56%;height:240%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(15,205,123,.26),transparent 72%)}
+.hero-in{max-width:1280px;margin:0 auto;padding:40px 26px 36px;display:flex;gap:40px;
+  align-items:flex-end;justify-content:space-between;flex-wrap:wrap;position:relative;z-index:1}
+.hero .eyebrow{font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--pp);display:flex;gap:10px;align-items:center;margin-bottom:14px}
+.hero .eyebrow s{text-decoration:none;color:rgba(255,255,255,.3)}
+.hero h1{font-size:clamp(30px,4.3vw,50px);line-height:1;font-weight:700;letter-spacing:-.042em;max-width:15ch}
+.hero p{margin:14px 0 0;color:rgba(255,255,255,.6);font-size:14.5px;line-height:1.55;max-width:52ch}
+.hero .right{display:flex;align-items:flex-end;gap:34px;flex-wrap:wrap}
+.hfigs{display:flex;gap:28px}
+.hfig{display:flex;flex-direction:column;gap:5px;min-width:74px}
+.hfig .n{font-family:var(--fm);font-size:36px;font-weight:600;line-height:.88;
+  font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+.hfig .n small{font-size:15px;color:rgba(255,255,255,.4);margin-left:1px}
+.hfig .l{font-family:var(--fm);font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.hbar{height:3px;background:rgba(255,255,255,.13);border-radius:2px;overflow:hidden;margin-top:9px}
+.hbar i{display:block;height:100%;background:var(--pp);border-radius:2px;transition:width .8s cubic-bezier(.2,.7,.3,1)}
+@media (max-width:820px){.hero-in{padding:28px 16px 26px;gap:24px}.hero .right{gap:22px}.hfigs{gap:20px}.ringwrap{display:none}}
+
+/* a roda dos valores, nas cores oficiais */
+.ringwrap{position:relative;display:grid;place-items:center}
+.ring{display:block;animation:ringIn 1s cubic-bezier(.2,.7,.3,1) both}
+.ring circle{transition:stroke-width .2s}
+.ringwrap b{position:absolute;font-family:var(--fm);font-size:9px;letter-spacing:.13em;
+  text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:400;text-align:center;line-height:1.3}
+@keyframes ringIn{from{opacity:0;transform:rotate(-50deg) scale(.8)}to{opacity:1;transform:none}}
+
+/* primeira banda de cada aba perde o titulo — ele virou hero */
+.band-hd.tools-only{justify-content:flex-start;margin-bottom:22px}
+.band-hd.tools-only .t{display:none}
+
+/* ============ vida no formulario ============ */
+.chip .av{width:18px;height:18px;font-size:7.5px;margin-left:-4px}
+.chip.val{background:color-mix(in srgb,var(--vc) 9%,#fff);border-color:color-mix(in srgb,var(--vc) 26%,#fff)}
+.chip.val:hover{background:color-mix(in srgb,var(--vc) 16%,#fff);border-color:var(--vc)}
+.chip:active{transform:scale(.96)}
+.chip{transition:.13s cubic-bezier(.2,.7,.3,1)}
+.sc:active{transform:scale(.96)}
+.sc{transition:.13s cubic-bezier(.2,.7,.3,1)}
+
+/* estado vazio que ensina em vez de ocupar espaco */
+.ghost{border:1px dashed var(--line-2);border-radius:12px;padding:15px 16px;position:relative;opacity:.75}
+.ghost .tagx{position:absolute;top:-8px;left:14px;background:var(--panel-2);padding:0 7px;
+  font-family:var(--fm);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.ghost .h{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.ghost .h span{font-weight:600;font-size:13.5px;color:var(--ink-2)}
+.ghost .h i{font-style:normal;color:var(--ink-3);font-size:12px}
+.ghost .mkq{font-size:12px;color:var(--ink-3);font-style:italic;margin-bottom:4px}
+.ghost .tx{font-size:13.5px;color:var(--ink-3);line-height:1.55}
+
+/* entradas com movimento */
+.feed .ev{animation:evIn .34s cubic-bezier(.2,.7,.3,1) both}
+@keyframes evIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
+@keyframes tileIn{from{opacity:0;transform:scale(.84)}to{opacity:1;transform:none}}
+.prow{animation:evIn .3s cubic-bezier(.2,.7,.3,1) both}
+.vcard{transition:transform .16s cubic-bezier(.2,.7,.3,1),box-shadow .16s}
+.vcard:hover{transform:translateY(-2px);box-shadow:0 10px 26px -18px rgba(14,21,18,.4)}
+@media (prefers-reduced-motion:reduce){
+  .feed .ev,td.c button,.prow,.ring{animation:none}
+  .vcard:hover{transform:none}
+}
+
+/* ============ fluxo: uma pergunta por vez ============ */
+.flow{max-width:600px;margin:0 auto;padding:6px 0 20px}
+.flow-top{display:flex;align-items:center;gap:14px;margin-bottom:26px;min-height:30px}
+.dots{display:flex;gap:6px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--line-2);display:block;transition:.25s}
+.dots i.on{background:var(--pp);transform:scale(1.25)}
+.dots i.past{background:var(--pp-ink);opacity:.45}
+.flow-top .st{font-family:var(--fm);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.flow-top .bk{margin-left:auto;background:none;border:0;cursor:pointer;color:var(--ink-3);
+  font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 2px}
+.flow-top .bk:hover{color:var(--ink)}
+.crumbs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;min-height:24px}
+.crumb{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 11px 4px 5px;
+  font-size:11.5px;background:var(--panel-2);border:1px solid var(--line);color:var(--ink-2)}
+.crumb .av{width:17px;height:17px;font-size:7px}
+.crumb b{width:8px;height:8px;border-radius:50%;background:var(--vc);display:inline-block}
+.crumb u{text-decoration:none;font-family:var(--fm);font-weight:600;color:var(--ink)}
+.q{font-size:clamp(21px,3vw,27px);font-weight:600;letter-spacing:-.03em;line-height:1.18;margin-bottom:6px}
+.qs{color:var(--ink-2);font-size:13.5px;line-height:1.5;margin:0 0 20px;max-width:48ch}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opts.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;
+  background:var(--panel);border:1px solid var(--line-2);border-radius:13px;padding:13px 15px;
+  transition:.14s cubic-bezier(.2,.7,.3,1)}
+.opt:hover{border-color:var(--ink-3);transform:translateX(2px)}
+.opt:active{transform:scale(.99)}
+.opt .ol{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.opt .ol b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.opt .ol s{text-decoration:none;font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.opt .oc{color:var(--line-2);font-size:15px;transition:.14s}
+.opt:hover .oc{color:var(--pp-ink);transform:translateX(2px)}
+.opt.done{border-color:color-mix(in srgb,var(--pp) 40%,#fff);background:color-mix(in srgb,var(--pp) 5%,#fff)}
+/* opcao de valor: barra na cor oficial */
+.opt.v{border-left:5px solid var(--vc)}
+.opt.v:hover{border-color:var(--vc);border-left-color:var(--vc)}
+.opt.v .ol s{color:var(--vci)}
+/* marcadores */
+.mkhead{font-family:var(--fm);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:18px 0 9px;display:flex;align-items:center;gap:8px}
+.mkhead:first-child{margin-top:0}
+.mkhead i{width:6px;height:6px;border-radius:50%;background:var(--pp);display:block}
+.mkhead.neg i{background:var(--s2)}
+.opt.mk{padding:11px 14px;border-radius:11px;font-size:14px;line-height:1.4}
+.opt.mk.neg:hover{border-color:var(--s2)}
+/* escala */
+.opts.scale5{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.opt.sq{flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:15px 5px 13px;text-align:center;border-radius:13px}
+.opt.sq b{font-family:var(--fm);font-size:21px;font-weight:600;line-height:1}
+.opt.sq s{text-decoration:none;font-family:var(--fm);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);line-height:1.25}
+.opt.sq:hover{transform:translateY(-2px)}
+@media (max-width:520px){.opts.scale5{grid-template-columns:repeat(5,1fr);gap:4px}.opt.sq{padding:11px 2px 9px}.opt.sq b{font-size:17px}.opt.sq s{font-size:7px}}
+/* passo do texto */
+.flow textarea{border-radius:13px;padding:14px 15px;font-size:15.5px;min-height:130px}
+.flow .foot{display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+.flow .foot .btn{padding:13px 26px;font-size:15px}
+/* confirmacao */
+.saved{text-align:center;padding:28px 0 8px;animation:evIn .35s cubic-bezier(.2,.7,.3,1) both}
+.saved .tick{width:56px;height:56px;border-radius:50%;background:var(--pp);color:#04120B;display:grid;place-items:center;
+  margin:0 auto 18px;font-size:26px;animation:pop .4s cubic-bezier(.2,.9,.3,1) both}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
+.saved h3{font-size:23px;font-weight:600;letter-spacing:-.03em}
+.saved p{color:var(--ink-2);font-size:14px;margin:8px 0 22px}
+.mine-link{background:none;border:0;cursor:pointer;color:var(--ink-3);font:inherit;font-size:12.5px;
+  text-decoration:underline;text-underline-offset:3px;padding:0}
+.mine-link:hover{color:var(--ink)}
+/* o hero encolhe no fluxo, para nao competir */
+.hero.slim .hero-in{padding:22px 26px 20px}
+.hero.slim h1{font-size:clamp(21px,2.6vw,28px)}
+.hero.slim p{display:none}
+.hero.slim .ringwrap{display:none}
+.hero.slim .hfig .n{font-size:26px}
+/* engrenagem no lugar da palavra Ajustes */
+.nv.icon{padding:0 12px;font-size:14px;letter-spacing:0}
 </style>
 
 <div class="rail">
@@ -382,7 +525,7 @@ tr.totrow td,tr.totrow th{padding-top:10px}
       <button class="nv" role="tab" data-t="ppl" aria-selected="false">Pessoas</button>
       <button class="nv" role="tab" data-t="evd" aria-selected="false">Evidências<em id="nEvd">0</em></button>
       <button class="nv" role="tab" data-t="ref" aria-selected="false">Valores</button>
-      <button class="nv" role="tab" data-t="cfg" aria-selected="false">Ajustes</button>
+      <button class="nv icon" role="tab" data-t="cfg" aria-selected="false" title="Ajustes" aria-label="Ajustes">&#9881;</button>
     </div>
     <div class="rail-r">
       <select id="meSel" class="mini" aria-label="Quem é você"><option value="">quem é você?</option></select>
@@ -397,71 +540,39 @@ tr.totrow td,tr.totrow th{padding-top:10px}
   <button id="demoQuit">sair e começar de verdade</button>
 </div>
 
+
+<div class="hero" id="hero">
+  <div class="hero-in">
+    <div class="t">
+      <div class="eyebrow"><span id="heroEyebrow">Matriz de Valores</span><s>/</s><span id="heroSala"></span></div>
+      <h1 id="heroTitle">Registre o que você viu.</h1>
+      <p id="heroSub"></p>
+    </div>
+    <div class="right">
+      <div class="hfigs" id="heroFigs"></div>
+      <div class="ringwrap" id="heroRing"></div>
+    </div>
+  </div>
+</div>
+
 <div class="shell">
 
 <!-- ===== REGISTRAR ===== -->
 <section id="tab-reg">
   <div class="band">
-    <div class="band-hd">
-      <div class="t">
-        <h2>Registre o que você viu.</h2>
-        <p>Um fato observado aqui, no encontro. Escolha a pessoa, marque o comportamento e conte a situação. Seu nome fica visível para todo mundo.</p>
-      </div>
-      <div class="figure">
-        <div class="fig"><span class="lab">Você já cobriu</span><span class="n" id="mineN">0<small>/0</small></span><span class="covbar"><i id="mineBar" style="width:0%"></i></span></div>
-        <div class="fig"><span class="lab">Cobertura da sala</span><span class="n" id="covN">0<small>%</small></span></div>
-        <div class="fig"><span class="lab">Registros</span><span class="n" id="recN">0</span></div>
-      </div>
+    <div class="gate" id="gate" hidden>
+      <h3>Quem é você?</h3>
+      <p id="gateMsg">Escolha seu nome para começar. Ele aparece junto de cada avaliação que você registrar — é assim que a matriz fica transparente.</p>
+      <select id="gateSel"><option value="">— selecione seu nome —</option></select>
     </div>
-
-    <div class="compose">
-      <div>
-        <div class="gate" id="gate" hidden>
-          <h3>Quem é você?</h3>
-          <p id="gateMsg">Escolha seu nome para começar. Ele aparece junto de cada avaliação que você registrar — é assim que a matriz fica transparente.</p>
-          <select id="gateSel"><option value="">— selecione seu nome —</option></select>
-        </div>
-
-        <div id="regForm">
-          <div class="step" id="stPerson">
-            <span class="lab"><i>1</i> Sobre quem</span>
-            <div class="chips" id="toChips"></div>
-          </div>
-
-          <div class="step" id="stVal">
-            <span class="lab"><i>2</i> Qual valor</span>
-            <div class="chips" id="valChips"></div>
-            <div class="vdesc" id="valDesc">Escolha o valor que a situação melhor ilustra.</div>
-            <div id="mkWrap"></div>
-          </div>
-
-          <div class="step" id="stScore">
-            <span class="lab"><i>3</i> Quanto</span>
-            <div class="scale" id="scale"></div>
-          </div>
-
-          <div class="step" id="stText">
-            <span class="lab"><i>4</i> A situação</span>
-            <textarea id="evTxt" rows="4" placeholder="Conte o que aconteceu."></textarea>
-            <div class="prompts"><span>Quando?</span><span>O que fez ou disse?</span><span>Qual foi o efeito?</span></div>
-            <div class="count" id="evCount">0 / 50 caracteres mínimos</div>
-          </div>
-
-          <button class="btn" id="saveBtn" disabled>Registrar evidência</button>
-        </div>
-      </div>
-      <div>
-        <div class="side-t"><h3>Seus registros</h3><span class="lab" id="mineCount"></span></div>
-        <div class="feed" id="mineList"></div>
-      </div>
-    </div>
+    <div class="flow" id="flow" hidden></div>
   </div>
 </section>
 
 <!-- ===== MATRIZ ===== -->
 <section id="tab-mtx" hidden>
   <div class="band">
-    <div class="band-hd">
+    <div class="band-hd tools-only">
       <div class="t"><h2>Quem avaliou quem</h2><p>Linha = pessoa avaliada. Coluna = quem avaliou. Clique numa célula para ler as evidências daquele par.</p></div>
       <div class="tools">
         <select id="mtxVal" class="mini"><option value="">todos os valores</option></select>
@@ -477,7 +588,7 @@ tr.totrow td,tr.totrow th{padding-top:10px}
 <!-- ===== PESSOAS ===== -->
 <section id="tab-ppl" hidden>
   <div class="band">
-    <div class="band-hd">
+    <div class="band-hd tools-only">
       <div class="t"><h2>Retrato por pessoa</h2><p>Um bloco por valor, na cor oficial. Altura = média recebida. Clique na linha para ler tudo.</p></div>
       <div class="tools">
         <select id="pplGrp" class="mini"><option value="">todos os grupos</option></select>
@@ -496,7 +607,7 @@ tr.totrow td,tr.totrow th{padding-top:10px}
 <!-- ===== EVIDÊNCIAS ===== -->
 <section id="tab-evd" hidden>
   <div class="band">
-    <div class="band-hd">
+    <div class="band-hd tools-only">
       <div class="t"><h2>Tudo que foi escrito</h2><p>Mais recente primeiro. Este é o material da conversa — a nota é só o índice.</p></div>
       <div class="tools">
         <select id="fPerson" class="mini"><option value="">todas as pessoas</option></select>
@@ -512,7 +623,7 @@ tr.totrow td,tr.totrow th{padding-top:10px}
 <!-- ===== VALORES ===== -->
 <section id="tab-ref" hidden>
   <div class="band">
-    <div class="band-hd"><div class="t"><h2 id="refTitle">Os valores</h2><p>Os valores desta sala. Os marcadores abaixo de cada um são os mesmos que aparecem na hora de registrar.</p></div></div>
+    <div class="band-hd tools-only"><div class="t"><h2 id="refTitle">Os valores</h2><p>Os valores desta sala. Os marcadores abaixo de cada um são os mesmos que aparecem na hora de registrar.</p></div></div>
     <div class="vals" id="valRef"></div>
   </div>
   <div class="band" id="notBand" hidden>
@@ -524,7 +635,7 @@ tr.totrow td,tr.totrow th{padding-top:10px}
 <!-- ===== AJUSTES ===== -->
 <section id="tab-cfg" hidden>
   <div class="band">
-    <div class="band-hd"><div class="t"><h2>Participantes</h2><p>Um nome por linha. Se quiser separar em subgrupos ou rodadas, escreva <span class="mono" style="color:var(--ink)">Nome ; Grupo</span></p></div></div>
+    <div class="band-hd tools-only"><div class="t"><h2>Participantes</h2><p>Um nome por linha. Se quiser separar em subgrupos ou rodadas, escreva <span class="mono" style="color:var(--ink)">Nome ; Grupo</span></p></div></div>
     <div style="max-width:620px">
       <textarea id="peopleTxt" rows="9" placeholder="Ana Souza&#10;Bruno Lima&#10;Carla Dias"></textarea>
       <div class="row" style="margin-top:13px">
@@ -789,7 +900,7 @@ var MINCH=50;
 
 /* ============ estado ============ */
 var db=null,people=[],records=[],me=null,tab="reg";
-var draft={to:"",val:"",score:0,mk:"",dir:""};
+var draft={to:"",val:"",score:0,mk:"",dir:"",text:"",step:1,saved:false};
 
 /* backend: artifact (claude) → supabase → local */
 var CFG=(typeof window!=="undefined"&&window.PV_CONFIG)||{};
@@ -798,6 +909,17 @@ var SESSION=(function(){
   return CFG.session||"workshop";
 })();
 var SB=null,MODE="local";
+/* Participante ve so o essencial. O facilitador abre tudo com ?adm=1 na URL
+   (fica lembrado neste navegador; ?adm=0 volta a ser participante). */
+var ADM=(function(){
+  try{
+    var q=new URLSearchParams(location.search);
+    if(q.get("adm")==="1"){try{localStorage.setItem("pv_adm","1");}catch(e){} return true;}
+    if(q.get("adm")==="0"){try{localStorage.setItem("pv_adm","0");}catch(e){} return false;}
+    return localStorage.getItem("pv_adm")==="1";
+  }catch(e){return false;}
+})();
+var ADM_TABS=["ppl","evd","ref","cfg"];
 
 var $=function(s){return document.querySelector(s);};
 var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
@@ -1003,18 +1125,74 @@ function peopleOpts(ex){
   return people.filter(function(p){return p.id!==ex;}).map(function(p){return {v:p.id,l:p.name+(p.group?" · "+p.group:"")};});
 }
 
+/* ============ hero ============ */
+var HERO={
+  reg:["Registre o que você viu.","Um fato observado aqui, no encontro. Escolha a pessoa, marque o comportamento e conte a situação. Seu nome fica visível para todo mundo."],
+  mtx:["Quem avaliou quem","Linha é a pessoa avaliada, coluna é quem avaliou. Clique numa célula para ler as evidências daquele par."],
+  ppl:["Retrato por pessoa","Um bloco por valor, na cor oficial. A altura é a média recebida. Clique na linha para ler tudo."],
+  evd:["Tudo que foi escrito","Mais recente primeiro. Este é o material da conversa — a nota é só o índice."],
+  ref:["Os valores da casa","Texto oficial da cultura. Os marcadores são os mesmos que aparecem na hora de registrar."],
+  cfg:["Ajustes da sala","Participantes, valores, exportação e o que fazer entre um workshop e outro."]
+};
+/* a roda dos valores, montada a partir das cores da sala */
+function valueRing(size,stroke){
+  var n=VALUES.length; if(!n) return "";
+  var r=(size-stroke)/2, c=2*Math.PI*r, seg=c/n, gap=Math.min(seg*0.22,10);
+  var out='<svg viewBox="0 0 '+size+' '+size+'" width="'+size+'" height="'+size+'" class="ring" aria-hidden="true">';
+  VALUES.forEach(function(v,i){
+    out+='<circle cx="'+(size/2)+'" cy="'+(size/2)+'" r="'+r+'" fill="none" stroke="'+v.c+'" stroke-width="'+stroke+'"'
+      +' stroke-linecap="round" stroke-dasharray="'+(seg-gap)+' '+(c-seg+gap)+'"'
+      +' stroke-dashoffset="'+(-i*seg)+'" transform="rotate(-90 '+(size/2)+' '+(size/2)+')"></circle>';
+  });
+  return out+'</svg>';
+}
+/* contadores sobem em vez de aparecer secos */
+function countUp(el,to,suf){
+  var from=+(el.dataset.v||0); if(from===to){el.innerHTML=to+(suf||"");return;}
+  el.dataset.v=to;
+  var t0=performance.now(),d=520;
+  (function step(t){
+    var k=Math.min(1,(t-t0)/d), e=1-Math.pow(1-k,3);
+    el.innerHTML=Math.round(from+(to-from)*e)+(suf||"");
+    if(k<1) requestAnimationFrame(step);
+  })(t0);
+}
+function renderHero(){
+  var h=HERO[tab]||HERO.reg;
+  $("#heroTitle").textContent=h[0];
+  $("#heroSub").textContent=h[1];
+  $("#heroSala").textContent=(MODE==="local"?"modo local":SESSION);
+  var c=coverage();
+  var peers=me?people.filter(function(p){return p.id!==me;}):[];
+  var covered=0;
+  peers.forEach(function(p){if(records.some(function(r){return r.fromId===me&&r.toId===p.id;})) covered++;});
+  var figs=$("#heroFigs");
+  if(!figs.dataset.built){
+    figs.innerHTML=''
+      +'<div class="hfig"><span class="n" id="hf1">0</span><span class="l">você cobriu</span><span class="hbar"><i id="hb1"></i></span></div>'
+      +'<div class="hfig"><span class="n" id="hf2">0</span><span class="l">cobertura da sala</span><span class="hbar"><i id="hb2"></i></span></div>'
+      +'<div class="hfig"><span class="n" id="hf3">0</span><span class="l">evidências</span></div>';
+    figs.dataset.built="1";
+  }
+  countUp($("#hf1"),covered,'<small>/'+peers.length+'</small>');
+  countUp($("#hf2"),c.pct,'<small>%</small>');
+  countUp($("#hf3"),records.length,'');
+  $("#hb1").style.width=(peers.length?covered/peers.length*100:0)+"%";
+  $("#hb2").style.width=Math.min(100,c.pct)+"%";
+  var ring=$("#heroRing");
+  var sig=VALUES.map(function(v){return v.c;}).join(",");
+  if(ring.dataset.sig!==sig){
+    ring.dataset.sig=sig;
+    ring.innerHTML=valueRing(104,9)+'<b>'+VALUES.length+'<br>valores</b>';
+  }
+}
+
 /* ============ rail ============ */
 function renderRail(){
   fillSelect($("#meSel"),peopleOpts(null),me,"quem é você?");
   $("#nEvd").textContent=records.length;
   var c=coverage();
-  $("#covN").innerHTML=c.pct+'<small>%</small>';
-  $("#recN").textContent=records.length;
-  var peers=me?people.filter(function(p){return p.id!==me;}):[];
-  var covered=0;
-  peers.forEach(function(p){if(records.some(function(r){return r.fromId===me&&r.toId===p.id;})) covered++;});
-  $("#mineN").innerHTML=covered+'<small>/'+peers.length+'</small>';
-  $("#mineBar").style.width=(peers.length?covered/peers.length*100:0)+"%";
+  /* os contadores vivem no hero agora */
 }
 
 /* ============ cartão de evidência ============ */
@@ -1029,67 +1207,135 @@ function evHtml(r,own){
     +(own?'<button class="del" data-del="'+esc(r.id)+'">excluir</button>':'')+'</div></div>';
 }
 
-/* ============ registrar ============ */
+/* ============ registrar: uma pergunta por vez ============ */
+var STEPS=5;
+function stepOf(){
+  if(!draft.to) return 1;
+  if(!draft.val) return 2;
+  if(!draft.mk&&!draft.mkSkip) return 3;
+  if(!draft.score) return 4;
+  return 5;
+}
+function goBack(){
+  var st=draft.step||stepOf();
+  if(st>=5){draft.score=0;draft.step=4;}
+  else if(st===4){draft.mk="";draft.dir="";draft.mkSkip=false;draft.step=3;}
+  else if(st===3){draft.val="";draft.step=2;}
+  else if(st===2){draft.to="";draft.step=1;}
+  renderReg();
+}
+function crumbs(){
+  var out="";
+  var p=draft.to?personById(draft.to):null;
+  if(p) out+='<span class="crumb">'+avatar(p.name)+esc(shortName(p.name))+'</span>';
+  var v=VMAP[draft.val];
+  if(v) out+='<span class="crumb" style="--vc:'+v.c+'"><b></b>'+esc(v.n)+'</span>';
+  if(draft.mk) out+='<span class="crumb">'+(draft.dir==="-"?"&#9888; ":"&#10003; ")+esc(draft.mk)+'</span>';
+  if(draft.score) out+='<span class="crumb"><u>'+draft.score+'</u></span>';
+  return out;
+}
 function renderReg(){
   var blocked=!me;
   $("#gate").hidden=!blocked;
-  $("#regForm").hidden=blocked;
+  $("#flow").hidden=blocked;
+  $("#hero").classList.toggle("slim",tab==="reg"&&!blocked);
   if(blocked){
     fillSelect($("#gateSel"),peopleOpts(null),"","— selecione seu nome —");
     $("#gateSel").hidden=!people.length;
     $("#gateMsg").textContent=people.length
       ?"Escolha seu nome para começar. Ele aparece junto de cada avaliação que você registrar — é assim que a matriz fica transparente."
       :"A lista de participantes ainda está vazia. Abra Ajustes e cole os nomes de quem está no encontro.";
-    renderMine();
     return;
   }
 
-  /* 1. pessoas */
+  var mine=records.filter(function(r){return r.fromId===me;});
   var peers=people.filter(function(p){return p.id!==me;});
-  $("#toChips").innerHTML=peers.length?peers.map(function(p){
-    var n=records.filter(function(r){return r.fromId===me&&r.toId===p.id;}).length;
-    return '<button class="chip" type="button" data-to="'+esc(p.id)+'" aria-pressed="'+(draft.to===p.id)+'">'
-      +(n?'<span class="pip"></span>':'')+esc(p.name)+(n?'<span class="ct">'+n+'</span>':'')+'</button>';
-  }).join(""):'<span class="lab">ninguém mais na lista</span>';
 
-  /* 2. valores */
-  $("#valChips").innerHTML=VALUES.map(function(v){
-    return '<button class="chip val" type="button" style="--vc:'+v.c+';--vci:'+v.ci+';--von:'+v.on+'" data-v="'+v.k+'" aria-pressed="'+(draft.val===v.k)+'">'+esc(v.n)+'</button>';
-  }).join("");
-  var V=VMAP[draft.val];
-  $("#valDesc").textContent=V?V.d:"Escolha o valor que a situação melhor ilustra.";
-  $("#mkWrap").innerHTML=V?(
-     '<div class="mk-group" style="--vc:'+V.c+';--vci:'+V.ci+'"><span>Demonstrou</span><div class="mk">'
-     +V.pos.map(function(m){return '<button class="mkb" type="button" data-mk="'+esc(m)+'" data-dir="+" aria-pressed="'+(draft.mk===m)+'">'+esc(m)+'</button>';}).join("")
-     +'</div></div>'
-     +'<div class="mk-group" style="--vc:'+V.c+';--vci:'+V.ci+'"><span>Ficou devendo</span><div class="mk">'
-     +V.neg.map(function(m){return '<button class="mkb neg" type="button" data-mk="'+esc(m)+'" data-dir="-" aria-pressed="'+(draft.mk===m)+'">'+esc(m)+'</button>';}).join("")
-     +'</div></div>'
-  ):"";
+  /* tela de confirmação depois de salvar */
+  if(draft.saved){
+    var falta=peers.filter(function(p){return !records.some(function(r){return r.fromId===me&&r.toId===p.id;});}).length;
+    $("#flow").innerHTML='<div class="saved"><div class="tick">&#10003;</div>'
+      +'<h3>Registrado.</h3>'
+      +'<p>'+(falta?("Faltam "+falta+" colega"+(falta>1?"s":"")+" sem nenhum registro seu."):"Você já cobriu todo mundo. Pode aprofundar em quem quiser.")+'</p>'
+      +'<button class="btn" id="fNext">Registrar outro</button><br><br>'
+      +'<button class="mine-link" id="fMine">ver meus '+mine.length+' registros</button></div>';
+    return;
+  }
 
-  /* 3. escala */
-  $("#scale").innerHTML=SCALE.map(function(s){
-    return '<button class="sc" type="button" data-v="'+s.v+'" aria-pressed="'+(draft.score===s.v)+'"><span class="n">'+s.v+'</span><span class="t">'+esc(s.t)+'</span></button>';
-  }).join("");
+  var st=draft.step||stepOf();
+  draft.step=st;
+  var h='<div class="flow-top"><span class="dots">'
+    +[1,2,3,4,5].map(function(n){return '<i class="'+(n===st?"on":(n<st?"past":""))+'"></i>';}).join("")
+    +'</span><span class="st">passo '+st+' de '+STEPS+'</span>'
+    +(st>1?'<button class="bk" id="fBack">&#8592; voltar</button>':'')
+    +'</div><div class="crumbs">'+crumbs()+'</div>';
 
-  $("#stPerson").classList.toggle("done",!!draft.to);
-  $("#stVal").classList.toggle("done",!!draft.val);
-  $("#stScore").classList.toggle("done",!!draft.score);
-  syncCount();
-  renderMine();
-}
-function renderMine(){
-  var mine=records.filter(function(r){return r.fromId===me;}).sort(function(a,b){return b.ts-a.ts;});
-  $("#mineCount").textContent=mine.length?(mine.length+(mine.length>1?" registros":" registro")):"";
-  $("#mineList").innerHTML=mine.length?mine.map(function(r){return evHtml(r,true);}).join(""):'<div class="none">seus registros aparecem aqui</div>';
+  if(st===1){
+    h+='<div class="q">Sobre quem você quer falar?</div>'
+      +'<p class="qs">O ponto verde marca quem você já avaliou.</p><div class="opts">'
+      +(peers.length?peers.map(function(p){
+          var n=records.filter(function(r){return r.fromId===me&&r.toId===p.id;}).length;
+          return '<button class="opt'+(n?" done":"")+'" data-to="'+esc(p.id)+'">'+avatar(p.name)
+            +'<span class="ol"><b>'+esc(p.name)+'</b><s>'+(n?n+" registro"+(n>1?"s":"")+" seu"+(n>1?"s":""):"ainda não avaliado")+'</s></span>'
+            +'<span class="oc">&#8594;</span></button>';
+        }).join(""):'<div class="none">ninguém mais na lista</div>')
+      +'</div>';
+  }
+  else if(st===2){
+    h+='<div class="q">Qual valor essa situação toca?</div>'
+      +'<p class="qs">Escolha o que ela melhor ilustra. Um registro, um valor.</p><div class="opts">'
+      +VALUES.map(function(v){
+          return '<button class="opt v" style="--vc:'+v.c+';--vci:'+v.ci+'" data-v="'+v.k+'">'
+            +'<span class="ol"><b>'+esc(v.n)+'</b><s>'+esc(v.d.split(".")[0])+'</s></span>'
+            +'<span class="oc">&#8594;</span></button>';
+        }).join("")
+      +'</div>';
+  }
+  else if(st===3){
+    var V=VMAP[draft.val];
+    h+='<div class="q">O que você viu?</div>'
+      +'<p class="qs">Escolha a frase mais próxima. Ela já sugere a nota — você ajusta no passo seguinte.</p>'
+      +'<div class="mkhead"><i></i>demonstrou</div><div class="opts">'
+      +V.pos.map(function(m){return '<button class="opt mk" data-mk="'+esc(m)+'" data-dir="+">'+esc(m)+'</button>';}).join("")
+      +'</div><div class="mkhead neg"><i></i>ficou devendo</div><div class="opts">'
+      +V.neg.map(function(m){return '<button class="opt mk neg" data-mk="'+esc(m)+'" data-dir="-">'+esc(m)+'</button>';}).join("")
+      +'</div><div class="foot"><button class="mine-link" id="fSkip">nenhuma dessas — seguir mesmo assim</button></div>';
+  }
+  else if(st===4){
+    h+='<div class="q">Quanto?</div>'
+      +'<p class="qs">3 é o esperado. Só suba ou desça se viu motivo.</p><div class="opts scale5">'
+      +SCALE.map(function(x){
+          var f=scoreFill(x.v), sug=(draft.dir==="+"&&x.v===4)||(draft.dir==="-"&&x.v===2);
+          return '<button class="opt sq'+(sug?" done":"")+'" data-sc="'+x.v+'" style="border-color:'+(sug?f.bg:"")+'">'
+            +'<b style="color:'+(x.v===3?"var(--ink)":f.bg)+'">'+x.v+'</b><s>'+esc(x.t)+'</s></button>';
+        }).join("")
+      +'</div>';
+  }
+  else{
+    h+='<div class="q">Conte a situação.</div>'
+      +'<p class="qs">Quando foi, o que a pessoa fez ou disse, e o que mudou por causa disso.</p>'
+      +'<textarea id="evTxt" rows="5" placeholder="Foi na dinâmica da manhã, quando…"></textarea>'
+      +'<div class="count" id="evCount">0 / '+MINCH+' caracteres mínimos</div>'
+      +'<div class="foot"><button class="btn" id="saveBtn" disabled>Registrar</button>'
+      +'<span class="lab">seu nome fica visível</span></div>';
+  }
+  $("#flow").innerHTML=h;
+  if(st===5){
+    var ta=$("#evTxt");
+    if(draft.text) ta.value=draft.text;
+    ta.addEventListener("input",function(){draft.text=ta.value;syncCount();});
+    setTimeout(function(){try{ta.focus();}catch(e){}},60);
+    syncCount();
+  }
 }
 function syncCount(){
-  var len=$("#evTxt").value.trim().length,c=$("#evCount");
-  c.textContent=len<MINCH?(len+" / "+MINCH+" caracteres mínimos"):(len+" caracteres");
-  c.classList.toggle("ok",len>=MINCH);
-  $("#stText").classList.toggle("done",len>=MINCH);
-  $("#saveBtn").disabled=!(me&&draft.to&&draft.val&&draft.score&&len>=MINCH);
+  var ta=$("#evTxt"); if(!ta) return;
+  var len=ta.value.trim().length,c=$("#evCount");
+  if(c){c.textContent=len<MINCH?(len+" / "+MINCH+" caracteres mínimos"):(len+" caracteres");c.classList.toggle("ok",len>=MINCH);}
+  var b=$("#saveBtn"); if(b) b.disabled=!(len>=MINCH);
 }
+function ghostCard(){return "";}
+function renderMine(){}
 
 /* ============ matriz ============ */
 function renderMtx(){
@@ -1259,6 +1505,7 @@ function renderCfg(){
 
 function render(){
   renderRail();
+  renderHero();
   var g=groups().map(function(x){return {v:x,l:x};});
   [["#mtxGrp","todos os grupos"],["#pplGrp","todos os grupos"]].forEach(function(x){var e=$(x[0]);fillSelect(e,g,e.value,x[1]);});
   [["#mtxVal","todos os valores"],["#fVal","todos os valores"]].forEach(function(x){var e=$(x[0]);fillSelect(e,VALUES.map(function(v){return {v:v.k,l:v.n};}),e.value,x[1]);});
@@ -1355,13 +1602,21 @@ function buildCsv(){
 }
 
 /* ============ eventos ============ */
+function applyRole(){
+  $$(".nv").forEach(function(b){
+    if(ADM_TABS.indexOf(b.dataset.t)>-1) b.hidden=!ADM;
+  });
+  var f=$("#howFacil"); if(f) f.hidden=!ADM;
+}
 function selectTab(t,scroll){
+  if(!ADM&&ADM_TABS.indexOf(t)>-1) t="reg";
   tab=t;
   $$(".nv").forEach(function(x){x.setAttribute("aria-selected",String(x.dataset.t===t));});
   $$("section[id^='tab-']").forEach(function(s){s.hidden=s.id!=="tab-"+t;});
   if(scroll){window.scrollTo(0,0);setTimeout(function(){window.scrollTo(0,0);},80);}
   render();
 }
+applyRole();
 $$(".nv").forEach(function(b){b.addEventListener("click",function(){selectTab(b.dataset.t,true);});});
 wireCross();
 
@@ -1369,52 +1624,35 @@ function setMe(v){me=v||null;lsSet("pv_me",me);draft={to:"",val:"",score:0,mk:""
 $("#meSel").addEventListener("change",function(){setMe(this.value);});
 $("#gateSel").addEventListener("change",function(){setMe(this.value);});
 
-$("#toChips").addEventListener("click",function(e){
-  var b=e.target.closest("[data-to]");if(!b)return;
-  draft.to=draft.to===b.dataset.to?"":b.dataset.to;renderReg();
-});
-$("#valChips").addEventListener("click",function(e){
-  var b=e.target.closest("[data-v]");if(!b)return;
-  var nv=b.dataset.v;
-  if(draft.val!==nv){draft.val=nv;draft.mk="";draft.dir="";}
-  else {draft.val="";draft.mk="";draft.dir="";}
-  renderReg();
-});
-$("#mkWrap").addEventListener("click",function(e){
-  var b=e.target.closest("[data-mk]");if(!b)return;
-  var m=b.dataset.mk,d=b.dataset.dir;
-  if(draft.mk===m){draft.mk="";draft.dir="";}
-  else{
-    draft.mk=m;draft.dir=d;
-    if(!draft.score) draft.score = d==="+"?4:2;
-    var ta=$("#evTxt");
-    if(!ta.value.trim()) ta.placeholder = d==="+"?"Em que momento? O que exatamente ela fez ou disse — e o que mudou por causa disso?":"Em que momento? O que aconteceu — e qual foi o efeito no grupo?";
+/* cliques do fluxo — cada escolha avanca sozinha */
+$("#flow").addEventListener("click",function(e){
+  var b;
+  if((b=e.target.closest("[data-to]"))){draft.to=b.dataset.to;draft.step=2;renderReg();return;}
+  if((b=e.target.closest("[data-v]"))){
+    if(draft.val!==b.dataset.v){draft.mk="";draft.dir="";draft.mkSkip=false;}
+    draft.val=b.dataset.v;draft.step=3;renderReg();return;
   }
-  renderReg();
+  if((b=e.target.closest("[data-mk]"))){
+    draft.mk=b.dataset.mk;draft.dir=b.dataset.dir;draft.mkSkip=false;
+    if(!draft.score) draft.score=draft.dir==="+"?4:2;
+    draft.step=4;renderReg();return;
+  }
+  if(e.target.closest("#fSkip")){draft.mkSkip=true;draft.mk="";draft.dir="";draft.step=4;renderReg();return;}
+  if((b=e.target.closest("[data-sc]"))){draft.score=+b.dataset.sc;draft.step=5;renderReg();return;}
+  if(e.target.closest("#fBack")){goBack();return;}
+  if(e.target.closest("#fNext")){draft={to:"",val:"",score:0,mk:"",dir:"",text:"",step:1,saved:false};renderReg();return;}
+  if(e.target.closest("#fMine")){openPerson(me);return;}
+  if(e.target.closest("#saveBtn")) salvar();
 });
-$("#scale").addEventListener("click",function(e){
-  var b=e.target.closest(".sc");if(!b)return;
-  var v=+b.dataset.v;draft.score=draft.score===v?0:v;
-  $$("#scale .sc").forEach(function(c){c.setAttribute("aria-pressed",String(+c.dataset.v===draft.score));});
-  $("#stScore").classList.toggle("done",!!draft.score);
-  syncCount();
-});
-$("#evTxt").addEventListener("input",syncCount);
-
-$("#saveBtn").addEventListener("click",function(){
-  var text=$("#evTxt").value.trim();
+function salvar(){
+  var text=($("#evTxt")?$("#evTxt").value:"").trim();
   if(!(me&&draft.to&&draft.val&&draft.score&&text.length>=MINCH)) return;
   var f=personById(me),t=personById(draft.to);if(!f||!t)return;
   writeRecord({id:uid(),fromId:me,fromName:f.name,toId:t.id,toName:t.name,
     val:draft.val,score:draft.score,mk:draft.mk,dir:draft.dir,text:text,ts:Date.now()});
-  var peers=people.filter(function(p){return p.id!==me;});
-  var left=peers.filter(function(p){return !records.some(function(r){return r.fromId===me&&r.toId===p.id;});}).length;
-  $("#evTxt").value="";$("#evTxt").placeholder="Conte o que aconteceu.";
-  draft.val="";draft.score=0;draft.mk="";draft.dir="";
+  draft={to:"",val:"",score:0,mk:"",dir:"",text:"",step:1,saved:true};
   render();
-  toast(left?("Registrado. Faltam "+left+" colega"+(left>1?"s":"")+"."):"Registrado. Você já cobriu todo mundo.");
-});
-
+}
 document.addEventListener("click",function(e){
   var d=e.target.closest("[data-del]");
   if(d){arm(d,function(){deleteRecord(d.dataset.del);});return;}
