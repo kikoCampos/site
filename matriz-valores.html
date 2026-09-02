@@ -1530,14 +1530,25 @@ records=lsGet("pv_records",[]);
 setValues(lsGet("pv_values",null));
 NOTS=lsGet("pv_nots",[])||[];
 render();
+/* A simulação só entra se a sala estiver realmente vazia — e isso só
+   se sabe depois que o backend responde. Antes disso, não decide nada. */
+var demoDecided=false;
+function maybeDemo(){
+  if(demoDecided||demo) return;
+  demoDecided=true;
+  var h=(location.hash||"").replace(/^#/,"").split(/[,\/-]/).filter(Boolean);
+  var forced=h.indexOf("demo")>-1;
+  if(!forced&&(people.length||records.length)) return;
+  enterDemo();
+  var t=["reg","mtx","ppl","evd","ref","cfg"].filter(function(x){return h.indexOf(x)>-1;})[0];
+  if(!t) selectTab("mtx",true);
+}
 (function(){
   var h=(location.hash||"").replace(/^#/,"").split(/[,\/-]/).filter(Boolean);
-  var wantDemo=h.indexOf("demo")>-1||(!people.length&&!records.length);
-  if(wantDemo) enterDemo();
   var t=["reg","mtx","ppl","evd","ref","cfg"].filter(function(x){return h.indexOf(x)>-1;})[0];
   if(t) selectTab(t,true);
-  else if(wantDemo) selectTab("mtx",true);
   if(!lsGet("pv_howto_v1",0)) setTimeout(openHowto,450);
+  setTimeout(maybeDemo,3000); /* rede de segurança */
 })();
 
 function setLive(txt,on,title){
@@ -1578,8 +1589,9 @@ function cleanRecords(arr){
       db.collection("records").onSnapshot(function(snap){
         var inc=cleanRecords(snapDocs(snap));
         if(demo){realRecords=inc;return;}
-        records=inc;render();
+        records=inc;render();maybeDemo();
       });
+      setTimeout(maybeDemo,1500);
       return;
     }catch(e){db=null;MODE="local";}
   }
@@ -1608,6 +1620,7 @@ function cleanRecords(arr){
         }catch(e){}
       };
       await pull();
+      maybeDemo();
       SB.channel("pv-"+SESSION)
         .on("postgres_changes",{event:"*",schema:"public",table:"pv_records",filter:"session=eq."+SESSION},pull)
         .on("postgres_changes",{event:"*",schema:"public",table:"pv_config",filter:"session=eq."+SESSION},pull)
@@ -1620,6 +1633,7 @@ function cleanRecords(arr){
   /* 3 — local */
   MODE="local";
   setLive("modo local",false,"Sem estado compartilhado: os registros ficam só neste navegador.");
+  maybeDemo();
 })();
 
 })();
