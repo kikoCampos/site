@@ -514,6 +514,58 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
 .hero.slim .hfig .n{font-size:26px}
 /* engrenagem no lugar da palavra Ajustes */
 .nv.icon{padding:0 12px;font-size:14px;letter-spacing:0}
+
+/* ===== correções da revisão ===== */
+/* o fluxo é a tela: sem hero competindo */
+.hero.off{display:none}
+.flow{max-width:620px;padding:44px 0 40px}
+@media (max-width:640px){.flow{padding:26px 0 32px}}
+
+/* seta visível */
+.opt .oc{color:var(--ink-3)}
+.opt:hover .oc{color:var(--pp-ink)}
+/* ponto verde de verdade em quem já foi avaliado */
+.opt .pipdot{width:8px;height:8px;border-radius:50%;background:var(--pp);flex-shrink:0;
+  box-shadow:0 0 0 3px var(--pp-dim)}
+.opt.done{border-color:color-mix(in srgb,var(--pp) 34%,#fff)}
+
+/* descrição do valor: texto de leitura, não rótulo */
+.opt .od{font-size:12.8px;line-height:1.45;color:var(--ink-2);font-family:var(--fd);
+  letter-spacing:0;text-transform:none;margin-top:3px}
+
+/* passo da nota com presença */
+.opts.scale5{gap:9px;margin-top:4px}
+.opt.sq{padding:22px 6px 18px;gap:7px}
+.opt.sq b{font-size:26px}
+.opt.sq s{font-size:9.5px;letter-spacing:.05em;color:var(--ink-2)}
+.opt.sq.done{box-shadow:0 0 0 2px var(--pp) inset}
+.sughint{display:flex;align-items:center;gap:8px;margin-top:14px;
+  font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.sughint i{width:7px;height:7px;border-radius:50%;background:var(--pp);display:block;flex-shrink:0}
+
+/* acesso permanente aos próprios registros */
+.flow-top .mine{margin-left:auto;background:none;border:0;cursor:pointer;color:var(--ink-3);
+  font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 2px}
+.flow-top .mine:hover{color:var(--pp-ink)}
+.flow-top .bk{margin-left:0}
+.flow-top{gap:12px}
+
+/* alvo de toque decente */
+.helpb{width:32px;height:32px;font-size:13px}
+
+/* barra do topo no celular */
+@media (max-width:700px){
+  .rail-in{gap:10px;padding:0 14px}
+  .mark .sq{width:24px;height:24px}
+  .live{display:none}
+  #meSel{max-width:38vw;text-overflow:ellipsis;padding:7px 22px 7px 8px}
+  .nv{padding:0 10px;font-size:10px}
+  .helpb{width:34px;height:34px}
+}
+@media (max-width:420px){
+  #meSel{max-width:32vw;font-size:10px}
+  .nv{padding:0 8px;letter-spacing:.08em}
+}
 </style>
 
 <div class="rail">
@@ -1158,6 +1210,8 @@ function countUp(el,to,suf){
   })(t0);
 }
 function renderHero(){
+  $("#hero").classList.toggle("off",tab==="reg");
+  if(tab==="reg") return;
   var h=HERO[tab]||HERO.reg;
   $("#heroTitle").textContent=h[0];
   $("#heroSub").textContent=h[1];
@@ -1238,7 +1292,7 @@ function renderReg(){
   var blocked=!me;
   $("#gate").hidden=!blocked;
   $("#flow").hidden=blocked;
-  $("#hero").classList.toggle("slim",tab==="reg"&&!blocked);
+  $("#hero").classList.toggle("off",tab==="reg");
   if(blocked){
     fillSelect($("#gateSel"),peopleOpts(null),"","— selecione seu nome —");
     $("#gateSel").hidden=!people.length;
@@ -1268,15 +1322,17 @@ function renderReg(){
     +[1,2,3,4,5].map(function(n){return '<i class="'+(n===st?"on":(n<st?"past":""))+'"></i>';}).join("")
     +'</span><span class="st">passo '+st+' de '+STEPS+'</span>'
     +(st>1?'<button class="bk" id="fBack">&#8592; voltar</button>':'')
+    +(mine.length?'<button class="mine" id="fMine">meus '+mine.length+' registros</button>':'')
     +'</div><div class="crumbs">'+crumbs()+'</div>';
 
   if(st===1){
     h+='<div class="q">Sobre quem você quer falar?</div>'
-      +'<p class="qs">O ponto verde marca quem você já avaliou.</p><div class="opts">'
+      +'<p class="qs">O ponto verde marca quem você já avaliou. Pode voltar em quem quiser.</p><div class="opts">'
       +(peers.length?peers.map(function(p){
           var n=records.filter(function(r){return r.fromId===me&&r.toId===p.id;}).length;
           return '<button class="opt'+(n?" done":"")+'" data-to="'+esc(p.id)+'">'+avatar(p.name)
             +'<span class="ol"><b>'+esc(p.name)+'</b><s>'+(n?n+" registro"+(n>1?"s":"")+" seu"+(n>1?"s":""):"ainda não avaliado")+'</s></span>'
+            +(n?'<span class="pipdot"></span>':'')
             +'<span class="oc">&#8594;</span></button>';
         }).join(""):'<div class="none">ninguém mais na lista</div>')
       +'</div>';
@@ -1286,7 +1342,7 @@ function renderReg(){
       +'<p class="qs">Escolha o que ela melhor ilustra. Um registro, um valor.</p><div class="opts">'
       +VALUES.map(function(v){
           return '<button class="opt v" style="--vc:'+v.c+';--vci:'+v.ci+'" data-v="'+v.k+'">'
-            +'<span class="ol"><b>'+esc(v.n)+'</b><s>'+esc(v.d.split(".")[0])+'</s></span>'
+            +'<span class="ol"><b>'+esc(v.n)+'</b><span class="od">'+esc(v.d.split(".")[0])+'.</span></span>'
             +'<span class="oc">&#8594;</span></button>';
         }).join("")
       +'</div>';
@@ -1302,14 +1358,16 @@ function renderReg(){
       +'</div><div class="foot"><button class="mine-link" id="fSkip">nenhuma dessas — seguir mesmo assim</button></div>';
   }
   else if(st===4){
+    var sugN=draft.dir==="+"?4:(draft.dir==="-"?2:0);
     h+='<div class="q">Quanto?</div>'
-      +'<p class="qs">3 é o esperado. Só suba ou desça se viu motivo.</p><div class="opts scale5">'
+      +'<p class="qs">3 é o esperado. Só suba ou desça se viu motivo para isso.</p><div class="opts scale5">'
       +SCALE.map(function(x){
-          var f=scoreFill(x.v), sug=(draft.dir==="+"&&x.v===4)||(draft.dir==="-"&&x.v===2);
-          return '<button class="opt sq'+(sug?" done":"")+'" data-sc="'+x.v+'" style="border-color:'+(sug?f.bg:"")+'">'
+          var f=scoreFill(x.v), sug=x.v===sugN;
+          return '<button class="opt sq'+(sug?" done":"")+'" data-sc="'+x.v+'">'
             +'<b style="color:'+(x.v===3?"var(--ink)":f.bg)+'">'+x.v+'</b><s>'+esc(x.t)+'</s></button>';
         }).join("")
-      +'</div>';
+      +'</div>'
+      +(sugN?'<div class="sughint"><i></i>o '+sugN+' já vem sugerido pelo que você marcou — mude se discordar</div>':'');
   }
   else{
     h+='<div class="q">Conte a situação.</div>'
