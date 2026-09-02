@@ -1,0 +1,2405 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Avaliação de coesão de equipe em 30 itens, com relatório individual e coletivo.">
+<title>Raio-X do Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#FFFFFF;
+  --card:#FFFFFF;
+  --card-2:#F6F4F1;
+  --ink:#111111;
+  --ink-2:#3D3A37;
+  --muted:#78736C;
+  --line:#E3E0DB;
+  --line-2:#C4BFB8;
+  --chrome:#FFFFFF;
+  --chrome-ink:#111111;
+  --chrome-muted:#78736C;
+  --accent:#E03C10;
+  --accent-soft:#FDECE6;
+  --accent-on:#FFFFFF;
+  --forte:#0E7A4F;   --forte-soft:#E3F2EB;
+  --moderado:#57534E; --moderado-soft:#EFEDEA;
+  --fragil:#B0271A;  --fragil-soft:#FBE7E4;
+  --neutro:#A8A29A;  --neutro-soft:#F2F0ED;
+  --band-on:#FFFFFF;
+  --shadow:none;
+  --shadow-lift:0 1px 0 var(--line-2);
+  --r:4px;
+  /* a rampa é exposição, não cor: claro = raro, escuro = frequente */
+  --sc1:#FCEAE2; --sc2:#F7C9B4; --sc3:#F0A183; --sc4:#E4703F; --sc5:#C7350F;
+  --sct1:#111111; --sct2:#111111; --sct3:#111111; --sct4:#111111; --sct5:#FFFFFF;
+  --b-confianca:#23409E; --b-confianca-ink:#23409E;
+  --b-conflito:#B93317; --b-conflito-ink:#B93317;
+  --b-comprometimento:#4F6B15; --b-comprometimento-ink:#4F6B15;
+  --b-accountability:#5F2A7D; --b-accountability-ink:#5F2A7D;
+  --b-resultados:#8A5D08; --b-resultados-ink:#8A5D08;
+  --glass:rgba(255,255,255,.62);
+  --glass-2:rgba(255,255,255,.80);
+  --glass-brd:rgba(17,17,17,.10);
+  --glass-hi:rgba(255,255,255,.85);
+  --glass-ring:rgba(17,17,17,.07);
+  --blur:saturate(175%) blur(18px);
+  --shadow:0 1px 2px rgba(17,17,17,.04), 0 12px 34px -16px rgba(17,17,17,.20);
+  --shadow-lift:0 2px 8px rgba(17,17,17,.06), 0 26px 56px -24px rgba(17,17,17,.30);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D0C0B;
+    --card:#161514;
+    --card-2:#1E1C1A;
+    --ink:#F2EFEA;
+    --ink-2:#CFCAC3;
+    --muted:#8E8880;
+    --line:#2A2825;
+    --line-2:#3E3B37;
+    --chrome:#0D0C0B;
+    --chrome-ink:#F2EFEA;
+    --chrome-muted:#8E8880;
+    --accent:#FF6B42;
+    --accent-soft:#2B1710;
+    --accent-on:#0D0C0B;
+    --forte:#43C994;   --forte-soft:#0F2A20;
+    --moderado:#A8A29A; --moderado-soft:#242220;
+    --fragil:#F2705A;  --fragil-soft:#2E1815;
+    --neutro:#5A5550;  --neutro-soft:#1E1C1A;
+    --band-on:#0D0C0B;
+    --shadow:none;
+    --shadow-lift:0 1px 0 var(--line-2);
+    --sc1:#2C1A12; --sc2:#4B2718; --sc3:#7C3E1F; --sc4:#BC5F2C; --sc5:#FF8A5C;
+    --sct1:#F2EFEA; --sct2:#F2EFEA; --sct3:#FFFFFF; --sct4:#0D0C0B; --sct5:#0D0C0B;
+    --b-confianca:#8AA2F2; --b-confianca-ink:#8AA2F2;
+  --b-conflito:#F5866B; --b-conflito-ink:#F5866B;
+  --b-comprometimento:#AECB63; --b-comprometimento-ink:#AECB63;
+  --b-accountability:#C79BE8; --b-accountability-ink:#C79BE8;
+  --b-resultados:#E5B451; --b-resultados-ink:#E5B451;
+    --b-confianca:#8AA2F2; --b-confianca-ink:#8AA2F2;
+    --b-conflito:#F5866B; --b-conflito-ink:#F5866B;
+    --b-comprometimento:#AECB63; --b-comprometimento-ink:#AECB63;
+    --b-accountability:#C79BE8; --b-accountability-ink:#C79BE8;
+    --b-resultados:#E5B451; --b-resultados-ink:#E5B451;
+    --glass:rgba(32,30,28,.60);
+    --glass-2:rgba(38,36,33,.76);
+    --glass-brd:rgba(255,255,255,.12);
+    --glass-hi:rgba(255,255,255,.06);
+    --glass-ring:rgba(255,255,255,.07);
+    --blur:saturate(175%) blur(18px);
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 14px 36px -16px rgba(0,0,0,.8);
+    --shadow-lift:0 2px 8px rgba(0,0,0,.45), 0 28px 58px -24px rgba(0,0,0,.95);
+  }
+}
+:root[data-theme="dark"]{
+    --ground:#0D0C0B;
+  --card:#161514;
+  --card-2:#1E1C1A;
+  --ink:#F2EFEA;
+  --ink-2:#CFCAC3;
+  --muted:#8E8880;
+  --line:#2A2825;
+  --line-2:#3E3B37;
+  --chrome:#0D0C0B;
+  --chrome-ink:#F2EFEA;
+  --chrome-muted:#8E8880;
+  --accent:#FF6B42;
+  --accent-soft:#2B1710;
+  --accent-on:#0D0C0B;
+  --forte:#43C994;   --forte-soft:#0F2A20;
+  --moderado:#A8A29A; --moderado-soft:#242220;
+  --fragil:#F2705A;  --fragil-soft:#2E1815;
+  --neutro:#5A5550;  --neutro-soft:#1E1C1A;
+  --band-on:#0D0C0B;
+  --shadow:none;
+  --shadow-lift:0 1px 0 var(--line-2);
+  --sc1:#2C1A12; --sc2:#4B2718; --sc3:#7C3E1F; --sc4:#BC5F2C; --sc5:#FF8A5C;
+  --sct1:#F2EFEA; --sct2:#F2EFEA; --sct3:#FFFFFF; --sct4:#0D0C0B; --sct5:#0D0C0B;
+    --b-confianca:#8AA2F2; --b-confianca-ink:#8AA2F2;
+  --b-conflito:#F5866B; --b-conflito-ink:#F5866B;
+  --b-comprometimento:#AECB63; --b-comprometimento-ink:#AECB63;
+  --b-accountability:#C79BE8; --b-accountability-ink:#C79BE8;
+  --b-resultados:#E5B451; --b-resultados-ink:#E5B451;
+  --glass:rgba(32,30,28,.60);
+  --glass-2:rgba(38,36,33,.76);
+  --glass-brd:rgba(255,255,255,.12);
+  --glass-hi:rgba(255,255,255,.06);
+  --glass-ring:rgba(255,255,255,.07);
+  --blur:saturate(175%) blur(18px);
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 14px 36px -16px rgba(0,0,0,.8);
+  --shadow-lift:0 2px 8px rgba(0,0,0,.45), 0 28px 58px -24px rgba(0,0,0,.95);
+}
+
+*{box-sizing:border-box}
+/* rede de segurança: um SVG de ícone nunca deve crescer além do previsto,
+   mesmo que alguma regra se perca */
+svg:not(.pyr){max-width:100%}
+svg.glyph,svg.chapart,svg.behavbarart{flex:none}
+.rbox svg,h4 svg,h3 svg,.mxlbl svg{width:22px;height:22px}
+.glyph-lg{width:30px;height:30px}
+body{
+  margin:0;
+  background-color:var(--ground);
+  background-image:
+    radial-gradient(58vw 52vw at  6%  -6%, color-mix(in srgb, var(--b-confianca) 20%, transparent), transparent 70%),
+    radial-gradient(52vw 48vw at 98%   4%, color-mix(in srgb, var(--b-resultados) 20%, transparent), transparent 70%),
+    radial-gradient(56vw 52vw at 92%  64%, color-mix(in srgb, var(--b-accountability) 17%, transparent), transparent 70%),
+    radial-gradient(50vw 46vw at  2%  86%, color-mix(in srgb, var(--b-comprometimento) 16%, transparent), transparent 70%),
+    radial-gradient(44vw 40vw at 52%  40%, color-mix(in srgb, var(--b-conflito) 10%, transparent), transparent 72%);
+  background-attachment:fixed;
+  background-repeat:no-repeat;
+  color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-size:15.5px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.ui{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+h1,h2,.disp{font-family:"Archivo Black","Archivo","Helvetica Neue",Arial,sans-serif;font-weight:400;letter-spacing:-.035em;line-height:1.02}
+h3,h4{letter-spacing:-.015em}
+/* a serifa fica só na prosa do relatório e nas afirmações — dá peso de laudo */
+.lede,.qtext,ol.disc li,.mini li,.itemhead p,.serif{font-family:"Source Serif 4","Iowan Old Style",Georgia,serif}
+h1,h2,h3,h4{margin:0;text-wrap:balance;letter-spacing:-.015em;line-height:1.15}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+p{margin:0}
+a{color:var(--accent)}
+
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 90px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  background:var(--glass-2);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  color:var(--chrome-ink);
+  border-bottom:1px solid var(--glass-brd);
+  position:sticky;top:0;z-index:30;
+}
+.topbar-in{
+  max-width:1080px;margin:0 auto;padding:15px 20px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand .mk{width:26px;height:26px;flex:none}
+.brand b{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:16px;letter-spacing:-.02em}
+.brand span{display:block;font-size:11px;color:var(--chrome-muted);letter-spacing:.09em;text-transform:uppercase;font-family:"Archivo",sans-serif;font-weight:500}
+.navbtns{display:flex;gap:6px;flex-wrap:wrap}
+.topbar .btn.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+
+/* ---------- controls ---------- */
+button{font:inherit;cursor:pointer}
+.btn{
+  font-family:"Archivo",sans-serif;font-weight:600;font-size:13.5px;letter-spacing:.01em;
+  padding:11px 18px;border-radius:11px;border:1px solid var(--glass-brd);
+  background:var(--glass-2);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  color:var(--ink);box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi);
+  transition:.15s box-shadow,.15s transform,.15s background;
+}
+.btn:hover{box-shadow:var(--shadow-lift), inset 0 1px 0 var(--glass-hi);transform:translateY(-1px)}
+.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.btn.pri:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-on);filter:none}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+.btn.ghost:hover{color:var(--ink);background:var(--card-2)}
+.btn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:6px 11px;font-size:12.5px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+label.fl{display:block;font-family:"Archivo",sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+input.tx{
+  width:100%;padding:13px 16px;border-radius:11px;border:1px solid var(--glass-brd);
+  background:var(--glass-2);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  box-shadow:var(--shadow) inset;color:var(--ink);font:inherit;font-size:15px;
+}
+input.tx:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+
+/* ---------- cards ---------- */
+.card{background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-brd);border-radius:var(--r);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi)}
+.card.lift{box-shadow:var(--shadow-lift), inset 0 1px 0 var(--glass-hi)}
+.pad{padding:clamp(22px,3vw,34px)}
+.stack{display:flex;flex-direction:column;gap:22px}
+.eyebrow{font-family:"Archivo",sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--ink-2);max-width:62ch}
+.hr{height:1px;background:var(--line);border:0;margin:0}
+
+/* ---------- home ---------- */
+.herogrid{display:grid;gap:32px;grid-template-columns:1fr;align-items:center;
+  padding:clamp(30px,4.4vw,58px) 0 clamp(22px,3vw,36px)}
+@media(min-width:900px){.herogrid{grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(36px,5vw,68px)}}
+.homehead h1{font-size:clamp(30px,3.6vw,46px);margin-top:16px;max-width:21ch}
+.homehead .lede{font-family:"Archivo",sans-serif;font-size:16.5px;line-height:1.6;
+  margin-top:20px;max-width:48ch;color:var(--ink-2)}
+.heroart{position:relative}
+
+.entrybox{margin-top:30px;max-width:460px}
+.seg{display:inline-flex;padding:4px;gap:3px;border:1px solid var(--glass-brd);border-radius:99px;
+  background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);box-shadow:var(--shadow)}
+.segb{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;padding:8px 18px;border-radius:99px;
+  border:0;background:transparent;color:var(--muted);transition:.15s}
+.segb:hover{color:var(--ink)}
+.segb.on{background:var(--glass-2);color:var(--ink);box-shadow:var(--shadow)}
+.entryfoot{font-size:13.5px;color:var(--muted);margin-top:12px}
+.linkb{border:0;background:none;padding:0;font:inherit;color:var(--accent);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.linkb:hover{text-decoration-thickness:2px}
+.entryrow{display:flex;gap:9px;flex-wrap:nowrap;margin-top:14px;max-width:430px}
+.entryrow .btn{white-space:nowrap;flex:none}
+
+.homebelow{display:grid;gap:26px;grid-template-columns:1fr;padding:clamp(34px,4.6vw,58px) 0 0}
+@media(min-width:820px){.homebelow{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,4.6vw,58px);align-items:start}}
+.modelnote{font-size:15.5px;color:var(--ink-2);margin-top:14px;line-height:1.55;max-width:38ch}
+.modelgrid{display:grid;gap:8px;margin:0}
+.modelrow{display:flex;gap:15px;align-items:center;padding:15px 16px;color:var(--muted);
+  border:1px solid var(--line);border-left:5px solid var(--c);border-radius:4px;
+  background:var(--card);transition:background .15s,border-color .15s}
+.modelrow:hover{background:var(--card-2);border-color:var(--c)}
+.modelrow .glyph{color:var(--c);width:26px;height:26px}
+.modelrow b{font-family:"Archivo",sans-serif;font-size:17px;font-weight:600;color:var(--ink)}
+.modelrow span{font-size:14px;margin-left:auto}
+.tryrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:clamp(32px,4vw,48px);
+  padding-top:22px;border-top:1px solid var(--line)}
+.tryrow span{font-size:14.5px;color:var(--muted);margin-right:4px}
+
+/* matriz de dispersão — cada coluna é uma pessoa, sem nome */
+.mx{display:grid;gap:3px;min-width:420px}
+.mxr{display:grid;grid-template-columns:150px repeat(var(--n),minmax(30px,1fr));gap:3px;align-items:stretch}
+.mxlbl{display:flex;align-items:center;gap:8px;font-family:"Archivo",sans-serif;font-size:12.5px;font-weight:600;padding-right:8px}
+.mxlbl .glyph{width:17px;height:17px;color:var(--muted)}
+.mxc{display:flex;align-items:center;justify-content:center;border-radius:5px;padding:9px 2px;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums}
+.mxh{display:flex;align-items:center;justify-content:center;font-family:"Archivo",sans-serif;font-size:10.5px;
+  font-weight:700;color:var(--muted);letter-spacing:.06em;padding-bottom:4px}
+
+/* ---------- glifos ---------- */
+.glyph{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+.glyph .fillnode{fill:currentColor;stroke:none}
+.glyph-lg{width:30px;height:30px;stroke-width:1.5}
+
+/* ---------- questionário ---------- */
+.progress{height:5px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress>i{display:block;height:100%;background:var(--accent);transition:width .35s cubic-bezier(.3,.8,.3,1)}
+.stickybar{position:sticky;top:62px;z-index:20;padding:14px 0 12px;margin-bottom:-4px;
+  background:var(--glass-2);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-radius:12px}
+.qitem{padding:22px 0 22px 18px;border-bottom:1px solid var(--glass-ring);border-left:3px solid transparent;
+  transition:border-color .2s,background .2s}
+.qitem:last-of-type{border-bottom:0}
+.qitem.done{border-left-color:var(--accent)}
+.qitem.miss{border-left-color:var(--fragil);background:linear-gradient(90deg,var(--fragil-soft),transparent 60%)}
+.qitem.miss .qtext::after{content:"falta responder";display:inline-block;margin-left:10px;
+  font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--fragil);vertical-align:2px}
+.qtext{font-size:17.5px;line-height:1.45;margin-bottom:16px;max-width:58ch}
+.qnum{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);margin-right:10px}
+
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;max-width:540px}
+.scale label{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:0 4px 10px;border-radius:12px;overflow:hidden;cursor:pointer;text-align:center;min-height:66px;
+  background:var(--glass-2);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-brd);box-shadow:var(--shadow);
+  transition:transform .13s,box-shadow .13s,background .13s}
+.scale label .swatch{width:100%;height:7px;background:var(--sw);transition:height .14s}
+.scale label:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.scale input{position:absolute;opacity:0;width:0;height:0}
+.scale .n{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:17px;margin-top:6px;line-height:1}
+.scale .w{font-family:"Archivo",sans-serif;font-size:9.5px;letter-spacing:.045em;text-transform:uppercase;
+  color:var(--muted);line-height:1.15;padding:0 2px}
+.scale label:has(input:checked){background:var(--sw);border-color:var(--sw);box-shadow:var(--shadow-lift)}
+.scale label:has(input:checked) .swatch{height:0}
+.scale label:has(input:checked) .n{color:var(--swt);margin-top:13px}
+.scale label:has(input:checked) .w{color:var(--swt);opacity:.9}
+.scale label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.scalehint{display:flex;justify-content:space-between;max-width:540px;margin-top:8px;
+  font-family:"Archivo",sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- pirâmide ---------- */
+.pyr{width:100%;height:auto;display:block;max-width:520px;margin:0 auto}
+.pyr.comvalores{max-width:660px}
+.pyr .tier{cursor:pointer}
+.pyr .tier:hover .gauge{opacity:.85}
+.pyr .tier.static{cursor:default}
+.pyr .gauge{transition:width .8s cubic-bezier(.2,.75,.25,1)}
+.pyr text{font-family:"Archivo",sans-serif}
+.pyr .pchip{fill:var(--card);stroke:var(--c);stroke-width:1.5}
+.pyr .plbl{font-size:10.5px;font-weight:700;letter-spacing:.11em;fill:var(--ink)}
+.pyr .plead{stroke:var(--c);stroke-width:1;opacity:.35;stroke-dasharray:2 3}
+.pyr .pcap{font-family:"Archivo",sans-serif;font-size:10px;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;fill:var(--muted)}
+.pyr .pval{font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:600;fill:var(--c);letter-spacing:-.02em}
+.pyr .pval.dim{fill:var(--muted)}
+.pyr .pbig{font-family:"IBM Plex Mono",monospace;font-size:30px;font-weight:600;fill:var(--c);letter-spacing:-.03em}
+.pyr .pband{font-family:"Archivo",sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;fill:var(--muted)}
+.pyr .side{font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;fill:var(--muted)}
+@media (prefers-reduced-motion:reduce){.pyr .gauge{transition:none}}
+
+.pyrlegend{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:16px;flex-wrap:wrap;
+  font-family:"Archivo",sans-serif;font-size:11.5px;color:var(--muted)}
+.pyrlegend b{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ink-2)}
+.pyrlegend .sq{width:12px;height:12px;border-radius:3px;background:var(--neutro)}
+.pyrlegend .sq.hollow{background:transparent;border:2px solid var(--neutro)}
+
+.reportgrid{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:900px){.reportgrid{grid-template-columns:1.05fr .95fr;align-items:start}}
+
+.pill-ui{display:inline-flex;align-items:center;gap:7px;font-family:"Archivo",sans-serif;font-weight:600;
+  font-size:12.5px;padding:6px 13px 6px 10px;border-radius:99px;border:1px solid transparent;
+  background:var(--soft);color:var(--fg);white-space:nowrap;box-shadow:0 1px 2px rgba(15,23,32,.06)}
+.pill-ui svg{width:15px;height:15px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bandchip{display:inline-flex;align-items:center;gap:7px;font-family:"Archivo",sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:3px;background:var(--soft);color:var(--fg);border:0}
+.dot{width:7px;height:7px;border-radius:99px;background:currentColor;flex:none}
+
+/* avatares — a cor vem das pessoas */
+.av{width:30px;height:30px;border-radius:99px;display:inline-flex;align-items:center;justify-content:center;
+  font-family:"Archivo",sans-serif;font-weight:700;font-size:11.5px;color:#fff;letter-spacing:.02em;flex:none;
+  box-shadow:0 0 0 2px var(--card)}
+.av.sm{width:24px;height:24px;font-size:10px}
+.avrow{display:flex;flex-wrap:wrap;gap:10px}
+.avchip{display:inline-flex;align-items:center;gap:9px;padding:5px 15px 5px 5px;border-radius:99px;
+  background:var(--glass-2);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-brd);box-shadow:var(--shadow);font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.avstack{display:flex}
+.avstack .av{margin-left:-9px}
+.avstack .av:first-child{margin-left:0}
+
+/* dumbbell */
+.dumb{display:flex;flex-direction:column;gap:2px}
+.dumbrow{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.dumbrow:last-child{border-bottom:0}
+.dumbrow .nm{font-family:"Archivo",sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.02em}
+.track{position:relative;height:26px}
+.track .ax{position:absolute;left:0;right:0;top:12px;height:2px;background:var(--line)}
+.track .gridl{position:absolute;top:6px;bottom:6px;width:1px;background:var(--line)}
+.track .seg{position:absolute;top:12px;height:2px;background:var(--accent);opacity:.55}
+.track .pt{position:absolute;top:6px;width:14px;height:14px;border-radius:99px;transform:translateX(-7px)}
+.track .pt.team{background:var(--card);border:2.5px solid var(--muted)}
+.track .pt.you{background:var(--accent);border:2.5px solid var(--card)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-family:"Archivo",sans-serif}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:99px;margin-right:5px;vertical-align:-1px}
+
+/* item table */
+.itemrow{padding:16px 0;border-bottom:1px solid var(--line)}
+.itemrow:last-child{border-bottom:0}
+.itemhead{display:flex;gap:14px;align-items:flex-start;justify-content:space-between}
+.itemhead p{font-size:15.5px;line-height:1.45;max-width:56ch}
+.itemscore{font-family:"IBM Plex Mono",monospace;font-size:24px;font-weight:600;flex:none;min-width:74px;text-align:right;letter-spacing:-.02em}
+.hist{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:13px;max-width:460px;align-items:end}
+.hcol{display:flex;flex-direction:column;align-items:stretch;gap:5px}
+.hplot{height:44px;display:flex;align-items:flex-end;border-bottom:1px solid var(--line-2)}
+.hbar{width:100%;background:var(--sw);border-radius:3px 3px 0 0;min-height:2px;transition:height .3s ease}
+.hbar.zero{background:var(--line);min-height:2px}
+.hmeta{display:flex;flex-direction:column;align-items:center;gap:1px}
+.hn{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;line-height:1.1}
+.hl{font-family:"Archivo",sans-serif;font-size:9px;letter-spacing:.045em;text-transform:uppercase;color:var(--muted);line-height:1.15;text-align:center}
+.hcol.hit .hplot{border-bottom-color:var(--accent)}
+.hcol.hit .hn{color:var(--accent)}
+.hcol.hit .hl{color:var(--accent);font-weight:600}
+.you-mark{font-family:"Archivo",sans-serif;font-size:11.5px;color:var(--accent);font-weight:600;margin-top:9px;display:inline-block}
+.flag{font-family:"Archivo",sans-serif;font-size:11px;font-weight:600;color:var(--moderado);background:var(--moderado-soft);border:0;border-radius:99px;padding:3px 10px;margin-left:9px;white-space:nowrap;vertical-align:2px}
+
+.behavblock{scroll-margin-top:80px;border-radius:var(--r);box-shadow:var(--shadow)}
+.behavbar{background:linear-gradient(135deg, color-mix(in srgb, var(--c) 18%, var(--glass-2)),
+                                             color-mix(in srgb, var(--c) 6%, var(--glass-2)));
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-brd);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  color:var(--c);display:flex;align-items:center;gap:15px;padding:18px 24px}
+.behavbarart{width:30px;height:30px;flex:none;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.behavbarart .fillnode{fill:currentColor;stroke:none}
+.behavbar h3{font-size:clamp(19px,2.4vw,26px);color:var(--c)}
+.behavbarband{font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);background:var(--glass-2);border:1px solid var(--glass-brd);
+  padding:5px 11px;border-radius:99px}
+.behavbarnum{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:clamp(26px,3.4vw,36px);
+  font-weight:600;color:var(--c);letter-spacing:-.03em}
+.behavhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.behavhead h3{font-size:22px}
+.behavicon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;
+  border:1px solid var(--glass-brd);background:var(--glass-2);box-shadow:var(--shadow)}
+.behavicon .glyph{opacity:.95}
+
+.tworow{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:760px){.tworow{grid-template-columns:1fr 1fr;gap:34px}}
+.mini{padding:18px 20px;border-radius:14px;background:var(--glass);border:1px solid var(--glass-brd);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.mini h4{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:11px;font-weight:600}
+.mini ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px}
+.mini li{font-size:15px;line-height:1.45}
+ol.disc{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px}
+ol.disc li{font-size:15.5px;line-height:1.5}
+
+.pill{font-family:"Archivo",sans-serif;font-size:12.5px;padding:6px 13px;border-radius:99px;border:1px solid var(--line);background:var(--card-2);color:var(--ink-2)}
+
+.demobar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 16px;border-radius:99px;
+  background:var(--moderado-soft);color:var(--moderado);font-family:"Archivo",sans-serif;font-weight:600;font-size:13px}
+.demobar span{font-weight:500;color:var(--ink-2)}
+.demobar .linkb{margin-left:auto;color:var(--moderado)}
+.notice{border-left:3px solid var(--accent);background:var(--accent-soft);padding:14px 16px;border-radius:0 8px 8px 0;font-size:14.5px;color:var(--ink-2)}
+.notice.warn{border-color:var(--moderado);background:transparent;border:1px solid var(--line);border-left:3px solid var(--moderado)}
+
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px}
+.tbl th{text-align:left;font-family:"Archivo",sans-serif;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:0 10px 8px 0;border-bottom:1px solid var(--line)}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--line)}
+.tbl td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.scroll-x{overflow-x:auto}
+
+/* ===================== MODO APRESENTAÇÃO =====================
+   Mesmo padrão do app — fundo claro, vidro e as cores dos comportamentos.
+   O que muda é a escala: tipografia e números muito maiores, um fato por tela. */
+.pres{
+  position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;
+  color:var(--ink);padding:clamp(20px,3.4vw,46px);
+  background-color:var(--ground);
+  background-image:
+    radial-gradient(62vw 56vw at  4%  -8%, color-mix(in srgb, var(--b-confianca) 22%, transparent), transparent 70%),
+    radial-gradient(56vw 50vw at 99%   2%, color-mix(in srgb, var(--b-resultados) 22%, transparent), transparent 70%),
+    radial-gradient(58vw 54vw at 94%  70%, color-mix(in srgb, var(--b-accountability) 18%, transparent), transparent 70%),
+    radial-gradient(52vw 48vw at  0%  92%, color-mix(in srgb, var(--b-comprometimento) 17%, transparent), transparent 70%);
+  background-repeat:no-repeat;
+  animation:presin .35s ease both;
+}
+@keyframes presin{from{opacity:0}to{opacity:1}}
+.pres .pyr{width:auto;max-width:100%;height:min(58vh,500px);margin:0 auto}
+.presbody{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2vw,26px);
+  max-width:1100px;width:100%;margin:0 auto;overflow:auto;padding:8px 0}
+.preskicker{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted)}
+.prestitle{font-family:"Archivo",sans-serif;font-weight:700;letter-spacing:-.028em;line-height:1.05;
+  font-size:clamp(30px,5.2vw,62px);text-wrap:balance}
+.pressub{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(16px,1.9vw,23px);color:var(--ink-2);
+  max-width:44ch;line-height:1.45}
+.presfoot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--glass-brd)}
+.presdots{display:flex;gap:7px;margin-right:auto}
+.presdot{width:8px;height:8px;border-radius:99px;background:var(--line-2);transition:.2s;border:0;padding:0}
+.presdot.on{background:var(--accent);width:24px}
+.presnav{display:flex;gap:8px}
+.presbtn{font-family:"Archivo",sans-serif;font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:99px;
+  border:1px solid var(--glass-brd);background:var(--glass-2);color:var(--ink);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);box-shadow:var(--shadow)}
+.presbtn:hover{box-shadow:var(--shadow-lift);transform:translateY(-1px)}
+.presbtn[disabled]{opacity:.35}
+.presbtn.x{border-color:transparent;color:var(--muted)}
+
+.prow{display:flex;align-items:flex-start;gap:clamp(16px,2.2vw,28px);padding:clamp(13px,1.7vw,20px) 0;
+  border-bottom:1px solid var(--glass-brd)}
+.prow:last-child{border-bottom:0}
+.pscore{font-family:"IBM Plex Mono",monospace;font-weight:600;font-variant-numeric:tabular-nums;
+  font-size:clamp(30px,4vw,50px);line-height:1;color:var(--c);min-width:2.6em;text-align:right;flex:none}
+.prow b{display:block;font-family:"Archivo",sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--c);margin-bottom:6px}
+.prow p{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(16px,2vw,25px);line-height:1.35;color:var(--ink)}
+.preslegend{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.presgrid{display:grid;gap:clamp(16px,2.4vw,34px);grid-template-columns:1fr;align-items:center}
+@media(min-width:900px){.presgrid.two{grid-template-columns:.95fr 1.05fr}}
+.presacts{counter-reset:pa;display:flex;flex-direction:column;gap:clamp(12px,1.8vw,20px)}
+.presact{display:flex;gap:18px;align-items:flex-start}
+.presact::before{counter-increment:pa;content:counter(pa);font-family:"IBM Plex Mono",monospace;font-weight:600;
+  font-size:14px;color:var(--accent-on);background:var(--accent);border:0;border-radius:99px;
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex:none}
+.presact p{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(15px,1.8vw,22px);line-height:1.4}
+.pres .mxr{grid-template-columns:clamp(120px,16vw,190px) repeat(var(--n),minmax(28px,1fr))}
+.pres .mxc{padding:clamp(9px,1.5vw,16px) 2px;font-size:clamp(12px,1.4vw,16px);border-radius:6px}
+.pres .mxlbl{font-size:clamp(12px,1.4vw,16px)}
+.pres .tbl td,.pres .tbl th{font-size:clamp(14px,1.7vw,20px);padding:12px 12px 12px 0}
+
+footer.ft{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.hide{display:none !important}
+
+/* faixa preta que sangra até a borda — dá ritmo ao documento longo */
+
+/* divisor de seção do relatório */
+.secband{display:flex;align-items:baseline;gap:18px;padding:0 0 12px;border-bottom:3px solid var(--ink);margin:44px 0 26px}
+.secband .n{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.1em}
+.secband h2{font-size:clamp(20px,2.6vw,28px)}
+.secband span{margin-left:auto;font-size:12.5px;color:var(--muted);font-family:"Archivo",sans-serif}
+
+/* número fantasma do capítulo, à moda de revista */
+.ghostnum{font-family:"Archivo Black",sans-serif;font-size:clamp(58px,9vw,104px);line-height:.8;
+  color:transparent;-webkit-text-stroke:1.5px var(--line-2);letter-spacing:-.05em;flex:none;user-select:none}
+
+.eyebrow{position:relative}
+.eyebrow.rule{padding-left:26px}
+.eyebrow.rule::before{content:"";position:absolute;left:0;top:50%;width:18px;height:2px;background:var(--accent)}
+
+/* ---------- abertura ---------- */
+.intro{max-width:760px;margin:0 auto;padding-top:40px}
+.introsteps{display:flex;gap:7px;margin-bottom:30px}
+.introstep{height:3px;flex:1;border-radius:99px;background:var(--line);transition:.3s}
+.introstep.on{background:var(--accent)}
+.introstep.done{background:var(--line-2)}
+.intro h1{font-size:clamp(28px,4.6vw,46px);margin-bottom:18px}
+.intro .lede{font-size:17px;color:var(--ink-2);max-width:58ch}
+.benefits{display:grid;gap:14px;grid-template-columns:1fr;margin-top:32px}
+@media(min-width:760px){.benefits{grid-template-columns:repeat(3,1fr)}}
+.benefit{padding:24px 22px;border-radius:16px;border:1px solid var(--glass-brd);
+  background:color-mix(in srgb, var(--c,var(--accent)) 7%, var(--glass));
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);box-shadow:var(--shadow)}
+.benefit{border-top:4px solid var(--c,var(--accent))}
+.benefit .ic{width:46px;height:46px;border-radius:4px;background:transparent;color:var(--c,var(--accent));
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.benefit b{display:block;font-family:"Archivo",sans-serif;font-size:15.5px;margin-bottom:7px}
+.benefit p{font-family:"Source Serif 4",Georgia,serif;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.rules{counter-reset:ru;display:flex;flex-direction:column;gap:18px;margin-top:30px}
+.rule{display:flex;gap:16px;align-items:flex-start}
+.rule::before{counter-increment:ru;content:counter(ru);font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;
+  width:28px;height:28px;border-radius:99px;border:1px solid var(--line-2);color:var(--muted);
+  display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.rule p{font-family:"Source Serif 4",Georgia,serif;font-size:16px;line-height:1.45}
+.rule p b{font-family:"Archivo",sans-serif;font-weight:600}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.fact{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border-radius:99px;background:var(--glass-2);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--glass-brd);box-shadow:var(--shadow);font-family:"Archivo",sans-serif;font-size:13px;font-weight:500;color:var(--ink-2)}
+.fact b{font-weight:700;color:var(--ink)}
+.privacy{display:flex;flex-direction:column;gap:0;margin-top:26px;border-top:1px solid var(--line)}
+.privrow{display:grid;grid-template-columns:1fr;gap:4px;padding:16px 0;border-bottom:1px solid var(--line)}
+@media(min-width:660px){.privrow{grid-template-columns:190px 1fr;gap:20px;align-items:baseline}}
+.privrow b{font-family:"Archivo",sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.privrow p{font-family:"Source Serif 4",Georgia,serif;font-size:15.5px;line-height:1.45}
+.privrow.you b{color:var(--accent)}
+.intronav{display:flex;gap:12px;align-items:center;margin-top:34px;flex-wrap:wrap}
+.revebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 18px;border-radius:4px;
+  background:var(--accent-soft);margin-bottom:26px;font-family:"Archivo",sans-serif;font-size:13.5px;color:var(--ink-2)}
+.revebar b{font-weight:600;color:var(--ink)}
+.revebar .linkb{margin-left:auto;color:var(--accent)}
+
+/* ---------- relatório individual ---------- */
+.rcapa{padding:18px 0 4px;border-bottom:4px solid var(--ink);margin-bottom:34px}
+.rcapa h1{font-size:clamp(32px,4.6vw,50px);letter-spacing:-.028em;margin:10px 0 14px}
+.rmeta{display:flex;flex-wrap:wrap;gap:10px 26px;padding-bottom:20px;font-size:13.5px;color:var(--muted)}
+.rmeta b{color:var(--ink);font-weight:600}
+.rchap{scroll-margin-top:80px;border:0;padding:0;background:transparent;border-radius:var(--r);box-shadow:var(--shadow)}
+.chapcover{
+  background:linear-gradient(135deg, color-mix(in srgb, var(--c) 20%, var(--glass-2)) 0%,
+                                     color-mix(in srgb, var(--c) 7%, var(--glass-2)) 100%);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-brd);border-bottom:0;
+  border-radius:var(--r) var(--r) 0 0;
+  padding:clamp(24px,3.4vw,40px) clamp(22px,3.2vw,36px);
+  display:grid;gap:20px;grid-template-columns:1fr;align-items:start;position:relative}
+@media(min-width:640px){.chapcover{grid-template-columns:1fr auto}}
+.chapcover .kick{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
+.chapcover h2{font-size:clamp(28px,4.2vw,46px);color:var(--c);margin:0}
+.chapcover .sub{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(15px,1.7vw,17.5px);
+  color:var(--ink-2);margin-top:12px;max-width:48ch;line-height:1.5}
+.chapart{width:58px;height:58px;padding:12px;box-sizing:content-box;color:var(--c);justify-self:end;
+  stroke:currentColor;fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;
+  background:var(--glass-2);border:1px solid var(--glass-brd);border-radius:18px;box-shadow:var(--shadow)}
+.chapart .fillnode{fill:currentColor;stroke:none}
+.chapnums{display:flex;gap:0;border-top:1px solid var(--glass-ring);margin-top:22px;padding-top:16px;grid-column:1/-1}
+.chapnum{flex:1;border-right:1px solid var(--glass-ring);padding-right:18px;margin-right:18px}
+.chapnum:last-child{border-right:0;margin-right:0;padding-right:0}
+.chapnum .k{font-family:"Archivo",sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.chapnum .v{font-family:"IBM Plex Mono",monospace;font-size:clamp(28px,4vw,40px);font-weight:600;
+  color:var(--c);line-height:.95;letter-spacing:-.03em}
+.chapnum .b{font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);margin-left:8px}
+.chapbody{background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-brd);border-top:0;border-radius:0 0 var(--r) var(--r);
+  padding:clamp(22px,3vw,34px);box-shadow:var(--shadow)}
+.rlead{border-left-color:var(--c,var(--accent))}
+.rbox.ex{background:color-mix(in srgb, var(--c,var(--accent)) 8%, var(--glass-2));
+  border:1px solid var(--glass-brd);border-left:4px solid var(--c,var(--accent));border-radius:14px}
+.rbox.ex h4{color:var(--c,var(--accent))}
+.behavicon{border-color:currentColor}
+.rchaphead{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-bottom:18px;border-bottom:3px solid var(--ink);margin-bottom:22px}
+.rchapnum{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);letter-spacing:.1em}
+.rchaphead h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.02em}
+.rscores{margin-left:auto;display:flex;gap:22px;align-items:flex-end}
+.rscore{text-align:right}
+.rscore .k{font-family:"Archivo",sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.rscore .v{font-family:"IBM Plex Mono",monospace;font-size:clamp(34px,5vw,52px);font-weight:600;line-height:.95;letter-spacing:-.03em}
+.rlead{font-family:"Source Serif 4",Georgia,serif;font-size:17.5px;line-height:1.55;color:var(--ink);max-width:62ch;
+  border-left:4px solid var(--accent);padding-left:20px;margin:22px 0 4px}
+.rbox{border-radius:4px;padding:20px 22px;margin-top:20px}
+.rbox h4{font-family:"Archivo",sans-serif;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.rbox p,.rbox li{font-family:"Source Serif 4",Georgia,serif;font-size:15.5px;line-height:1.5}
+.rbox.ex{background:var(--accent-soft)}
+.rbox.ex h4{color:var(--accent)}
+.rbox.ex ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px}
+.rbox.livro{background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--glass-brd);border-radius:14px}
+.rbox.livro h4{color:var(--muted)}
+.rcodigo{display:flex;gap:14px;align-items:flex-start;margin-top:16px;padding-top:16px;border-top:1px dashed var(--line-2)}
+.rcodigo .tag{font-family:"Archivo",sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 12px;border-radius:99px;background:var(--ink);color:var(--ground);white-space:nowrap;flex:none}
+.rcodigo p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.proc{font-family:"Archivo",sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);background:var(--card-2);border:1px solid var(--line);
+  border-radius:99px;padding:3px 9px;margin-left:8px;white-space:nowrap}
+.proc.livro{color:var(--ink);border-color:var(--ink-2)}
+.ferrtit{font-family:"Archivo",sans-serif !important;font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin:18px 0 10px;padding-top:16px;border-top:1px solid var(--glass-ring)}
+.ferr{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px}
+.ferr li{font-family:"Source Serif 4",Georgia,serif;font-size:15px;line-height:1.45}
+.rnote{font-family:"Archivo",sans-serif;font-size:12px;font-weight:600;color:var(--moderado);
+  background:var(--moderado-soft);border-radius:6px;padding:5px 10px;display:inline-block;margin-top:9px}
+.trilha{display:flex;flex-direction:column;gap:0;margin-top:6px}
+.tses{display:grid;grid-template-columns:1fr;gap:6px;padding:20px 0;border-top:1px solid var(--glass-ring)}
+@media(min-width:700px){.tses{grid-template-columns:132px minmax(0,1fr);gap:24px;align-items:start}}
+.tses:first-child{border-top:0;padding-top:8px}
+.tsmeta{display:flex;flex-direction:column;gap:5px}
+.tsnum{font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--c)}
+.tsdur{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted)}
+.tsnome{font-family:"Archivo",sans-serif;font-size:19px;font-weight:600;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:7px}
+.tsdesc{font-family:"Source Serif 4",Georgia,serif;font-size:15.5px;line-height:1.5;color:var(--ink-2);max-width:60ch}
+.tsrit{display:flex;gap:14px;align-items:flex-start;margin-top:22px;padding:18px 20px;border-radius:14px;
+  background:color-mix(in srgb, var(--c) 8%, var(--glass-2));border:1px solid var(--glass-brd)}
+.tsrit b{font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--c);flex:none;padding-top:3px;width:74px}
+.tsrit p{font-family:"Source Serif 4",Georgia,serif;font-size:15.5px;line-height:1.5}
+.rplano{counter-reset:rp;display:flex;flex-direction:column;gap:16px}
+.rplanoi{display:flex;gap:16px;align-items:flex-start}
+.rplanoi::before{counter-increment:rp;content:counter(rp);font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13px;
+  width:30px;height:30px;border-radius:99px;background:var(--accent);color:var(--accent-on);
+  display:flex;align-items:center;justify-content:center;flex:none}
+.rplanoi p{font-family:"Source Serif 4",Georgia,serif;font-size:16px;line-height:1.45}
+
+@media print{
+  :root, :root[data-theme="dark"], :root:not([data-theme="light"]){
+    --ground:#fff; --card:#fff; --card-2:#F6F8FC; --ink:#111; --ink-2:#333; --muted:#666;
+    --line:#DDD; --line-2:#BBB; --accent:#1B4C9E; --accent-soft:#EEF3FC; --accent-on:#fff;
+    --forte:#15794F; --forte-soft:#E7F4EC; --moderado:#8A5A0E; --moderado-soft:#FAF0DA;
+    --fragil:#A83628; --fragil-soft:#FAE9E5; --neutro:#999; --neutro-soft:#F2F2F2;
+    --band-on:#fff; --shadow:none; --shadow-lift:none;
+  }
+  @page{margin:14mm}
+  .topbar,.navbtns,.presfoot,#pres,.demobar,.noprint,footer.ft button{display:none !important}
+  body::before{display:none !important}
+  .card,.chapcover,.chapbody,.behavbar,.rbox,.mini,.benefit,.modelrow,.avchip,.fact,.seg,.btn,input.tx{
+    -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+    box-shadow:none !important;background:#fff !important}
+  .chapcover{border:1px solid #E2E2E2 !important;border-bottom:0 !important}
+  body{background:#fff;font-size:12pt}
+  .wrap{max-width:none;padding:0}
+  .card{box-shadow:none;border:1px solid #E2E2E2;break-inside:avoid}
+  .rchap{break-before:page}
+  .rchap:first-of-type{break-before:auto}
+  .rbox,.itemrow,.hist,.dumbrow,.rplanoi{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+img{max-width:100%;height:auto}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <svg class="mk" viewBox="0 0 26 26" width="26" height="26" aria-hidden="true" fill="currentColor">
+        <rect x="10" y="2.6"  width="6"  height="3.4" rx="1.2" opacity=".34"/>
+        <rect x="8"  y="7.2"  width="10" height="3.4" rx="1.2" opacity=".5"/>
+        <rect x="6"  y="11.8" width="14" height="3.4" rx="1.2" opacity=".68"/>
+        <rect x="4"  y="16.4" width="18" height="3.4" rx="1.2" opacity=".85"/>
+        <rect x="2"  y="21"   width="22" height="3.4" rx="1.2"/>
+      </svg>
+      <div>
+        <b>Raio-X do Time</b>
+        <span id="brandsub">Exercício de aceleração</span>
+      </div>
+    </div>
+    <div class="navbtns" id="nav"></div>
+  </div>
+</div>
+
+<div class="wrap" id="app"></div>
+<div id="pres"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================== MODELO ============================== */
+
+const BEHAV = [
+  {
+    k:"confianca", n:"Confiança", sub:"vulnerabilidade",
+    def:"Confiança aqui não é previsibilidade. É a disposição de ficar exposto na frente do time — admitir erro, pedir ajuda, dizer “não sei” — na certeza de que ninguém vai usar isso contra você.",
+    quando:"Quando existe: as pessoas param de gastar energia administrando a própria imagem e passam a gastá-la no trabalho.",
+    acoes:[
+      "Abra as reuniões de time com 5 minutos de história pessoal — o líder vai primeiro, e vai fundo.",
+      "Institua o “erro da semana”: cada membro traz uma decisão própria que não funcionou e o que aprendeu.",
+      "Mapeie estilos de comportamento (DiSC ou equivalente) e faça cada um declarar em público onde tende a atrapalhar o time."
+    ],
+    forca:"Consciência",
+    forcaTxt:"Confiança é onde a Consciência começa. O time só se vê de verdade quando as pessoas param de gastar energia administrando a própria imagem — e essa energia sai do trabalho.",
+    livro:"É a primeira disfunção do livro, e Lencioni é categórico: nenhuma das outras quatro se resolve enquanto esta estiver de pé. A confiança que ele descreve não é previsibilidade de comportamento; é a disposição de ficar exposto na frente dos colegas. O exercício de histórias pessoais que ele propõe existe para quebrar esse gelo sem virar terapia.",
+    exerc:["Escolha um erro seu dos últimos 90 dias e conte na próxima reunião de time — sem justificativa e sem moral da história. Dois minutos, cronometrados.", "Liste três coisas que você não faz bem e que o time provavelmente já percebeu. Diga uma delas em voz alta esta semana.", "Peça ajuda formalmente a um colega numa área em que você costuma se virar sozinho. Peça, aceite e agradeça em público."],
+    leitura:{"alto": "Você enxerga um time onde dá para baixar a guarda. Isso costuma significar que você já é uma das pessoas que baixam — e que tem margem para puxar quem ainda não baixou.", "medio": "Você vê um time que se abre em alguns momentos e se fecha em outros. Vale mapear quais: em geral a abertura depende de quem está na sala, não do assunto.", "baixo": "Você vê um time ainda cuidadoso consigo mesmo. Onde a guarda está alta, há muita energia sendo gasta na própria imagem — energia que pode voltar para o trabalho assim que alguém der o primeiro passo."},
+    cor:"#23409E",
+    corInk:"#8AA2F2",
+    ferramentas:["Exercício de histórias pessoais — cada um responde a perguntas simples sobre si (irmãos, cidade natal, desafios da infância, primeiro e pior emprego). 30 minutos.", "Exercício de eficiência da equipe — um de cada vez, o time nomeia a contribuição mais importante daquela pessoa e a área que ela precisa melhorar. Começa pelo líder. 60 minutos.", "Perfis de preferência de personalidade e comportamento — MBTI ou DISC, conduzidos por profissional habilitado. 4 horas.", "Feedback 360 graus, totalmente separado da avaliação formal de desempenho.", "Papel do líder: ser o primeiro a demonstrar vulnerabilidade, de forma verdadeira e nunca ensaiada."],
+    trilha:{"semanas": "8 semanas", "ritual": "Abrir a reunião semanal com cinco minutos de “o que não foi bem” — o líder sempre primeiro.", "sessoes": [["Sessão 1", "30 min", "Histórias pessoais", "Cada um responde a cinco perguntas simples sobre si: irmãos, cidade natal, desafio da infância, primeiro emprego, pior emprego. Baixo risco, e é o degrau que abre todos os outros.", "livro"], ["Sessão 2", "60 min", "Eficiência da equipe", "Um de cada vez, o time nomeia a contribuição mais importante daquela pessoa e a área em que ela precisa melhorar. Começa pelo líder — sem exceção.", "livro"], ["Sessão 3", "4 horas", "Perfis de comportamento", "DISC ou MBTI com facilitador habilitado. Entrega ao time uma linguagem comum para falar de diferença sem julgamento.", "livro"]]}
+  },
+  {
+    k:"conflito", n:"Conflito", sub:"debate produtivo",
+    def:"Conflito produtivo é o debate aberto e sem filtro sobre ideias que importam. O oposto não é harmonia — é a reunião silenciosa seguida da conversa de corredor.",
+    quando:"Quando existe: as decisões chegam mais rápido, porque o contraponto foi dito na hora e não seis semanas depois.",
+    acoes:[
+      "Nomeie o desconforto em tempo real: quando o debate esquentar, alguém diz em voz alta que aquilo é exatamente o que o time precisa.",
+      "Designe um advogado do diabo rotativo para toda decisão de peso.",
+      "Feche cada pauta perguntando: “o que não foi dito nesta sala?” — e espere o silêncio de dez segundos."
+    ],
+    forca:"Coragem",
+    forcaTxt:"Conflito produtivo é a Coragem na forma mais crua: dizer dentro da sala o que você diria no corredor, com o assunto ainda em aberto.",
+    livro:"Lencioni chama a segunda disfunção de medo do conflito, e o sintoma que ele descreve é a harmonia artificial: reuniões educadas, decisões mornas e a conversa de verdade acontecendo depois, em duplas. A ideia mais útil do capítulo é contraintuitiva — equipes que discutem economizam tempo, porque não voltam ao mesmo assunto três vezes.",
+    exerc:["Na próxima reunião, diga a coisa que você normalmente diria só depois, e só para uma pessoa. Diga antes da decisão, não depois.", "Peça a opinião de quem ficou calado pelo nome, não para a sala. Espere a resposta sem preencher o silêncio.", "Escolha um tema em que você discorda do consenso, escreva o contraponto em cinco linhas e leve por escrito."],
+    leitura:{"alto": "Você vê um time que discute de verdade. Sua tarefa aqui é de manutenção: garantir que o debate continue sobre a ideia e não migre para a pessoa.", "medio": "Você vê um time que enfrenta alguns assuntos e contorna outros. A lista dos contornados é o material da próxima conversa.", "baixo": "Você vê um time que ainda protege a harmonia. Quando o debate encontra espaço na sala, ele deixa de acontecer no corredor — e as decisões passam a andar bem mais rápido."},
+    cor:"#B93317",
+    corInk:"#F5866B",
+    ferramentas:["Minerador de conflitos — alguém assume, na reunião, o papel de trazer à tona as discórdias enterradas e sustentá-las até serem resolvidas.", "Permissão em tempo real — quando o desconforto aparece, alguém interrompe para lembrar ao grupo que aquele debate é necessário.", "Papel do líder: conter-se para não proteger as pessoas do conflito, mesmo quando a tentação de intervir é grande."],
+    trilha:{"semanas": "6 semanas", "ritual": "Última pergunta de toda pauta: “o que não foi dito nesta sala?” — e dez segundos de silêncio antes de encerrar.", "sessoes": [["Sessão 1", "45 min", "Mapear o padrão", "O time lista os assuntos que discute abertamente e os que contorna. A segunda lista é a pauta real dos próximos encontros.", "próprio"], ["Sessão 2", "reunião real", "Minerador de conflitos", "Uma pessoa designada, rotativa, assume trazer à tona a discórdia enterrada e sustentá-la até ser resolvida.", "livro"], ["Sessão 3", "reunião real", "Permissão em tempo real", "Quando o desconforto aparecer, alguém interrompe e lembra ao grupo que aquele debate é necessário. Nomear o desconforto é o que o torna suportável.", "livro"]]}
+  },
+  {
+    k:"comprometimento", n:"Comprometimento", sub:"clareza e adesão",
+    def:"Comprometimento não exige consenso nem certeza. Exige que todos tenham sido ouvidos e que a decisão saia da sala com dono, prazo e a mesma redação na boca de todos.",
+    quando:"Quando existe: ninguém precisa adivinhar a prioridade, e a decisão não é reaberta a cada semana.",
+    acoes:[
+      "Termine toda reunião com 5 minutos de cascata: o que foi decidido, quem comunica, para quem, até quando.",
+      "Publique as três prioridades do time em um lugar visível e revise-as a cada trimestre — não mais que três.",
+      "Estabeleça prazos artificiais para decisões travadas: decidir com 70% de informação supera adiar com 100%."
+    ],
+    forca:"Coragem",
+    forcaTxt:"Comprometimento é a Coragem de decidir sem certeza e de sustentar a decisão lá fora — inclusive quando você perdeu o debate lá dentro.",
+    livro:"A terceira disfunção, para Lencioni, quase nunca vem de discordância: vem de ambiguidade. Ele separa duas coisas que as equipes confundem, consenso e adesão. Ninguém precisa concordar; todo mundo precisa ter sido ouvido e saber o que ficou decidido. O antídoto que ele propõe é banal e funciona: fechar toda reunião repetindo em voz alta a decisão e quem comunica o quê.",
+    exerc:["Escreva agora, sem consultar ninguém, as três prioridades do time. Compare com o que um colega escreveu sem combinar.", "Ao sair da próxima reunião, mande por escrito o que você entendeu que ficou decidido, com dono e prazo. Conte quantas correções voltam.", "Identifique uma decisão que você não sustentou fora da sala. Corrija com quem você falou."],
+    leitura:{"alto": "Você sai das reuniões sabendo o que foi decidido. Verifique se o resto do time sai com a mesma frase na cabeça — é essa parte que costuma falhar.", "medio": "Você vê clareza intermitente. Em geral isso significa decisões tomadas sem dono ou sem data, e reabertas semanas depois.", "baixo": "Você sai das reuniões sem clareza total do que ficou decidido. É o ponto de maior retorno da lista: pequenas mudanças de ritual aqui destravam tudo o que vem acima."},
+    cor:"#4F6B15",
+    corInk:"#AECB63",
+    ferramentas:["Mensagem em massa — nos últimos 10 minutos da reunião, o time revisa as decisões e define o que será comunicado, por quem e a quem.", "Prazos — datas claras para decisões intermediárias, não só para as finais, honradas com disciplina.", "Contingência e análise do pior cenário — explicitar antes qual seria o pior desfecho da decisão, o que costuma reduzir o medo de decidir.", "Terapia da exposição ao baixo risco — treinar decisão rápida em situações de pouca consequência.", "Papel do líder: não supervalorizar certeza e consenso."],
+    trilha:{"semanas": "6 semanas", "ritual": "Prazo explícito para toda decisão, inclusive as intermediárias — e dono com nome, não com área.", "sessoes": [["Sessão 1", "60 min", "As três prioridades", "Cada um escreve as três prioridades do time sem consultar ninguém. Comparar as folhas costuma ser o momento mais revelador da trilha.", "próprio"], ["Sessão 2", "10 min por reunião", "Mensagem em massa", "Nos últimos dez minutos, revisar o que foi decidido e definir o que será comunicado, por quem, a quem e até quando.", "livro"], ["Sessão 3", "45 min", "Pior cenário", "Pegar a decisão que está travada e explicitar o pior desfecho possível. O medo quase sempre encolhe quando ganha nome.", "livro"]]}
+  },
+  {
+    k:"accountability", n:"Accountability", sub:"cobrança entre pares",
+    def:"Accountability é a disposição de cobrar o colega diretamente sobre comportamento e desempenho, sem terceirizar a conversa para o chefe e sem esperar o ciclo de avaliação.",
+    quando:"Quando existe: o padrão sobe sozinho, porque a pressão vem do lado e não de cima.",
+    acoes:[
+      "Torne públicos os compromissos: metas, prazos e donos visíveis para todo o time.",
+      "Faça uma revisão de pares por trimestre, curta e nominal: o que sustentar, o que mudar.",
+      "O líder deixa de ser o único cobrador — e cobra em público quem espera que ele cobre em particular."
+    ],
+    forca:"Consistência",
+    forcaTxt:"Accountability é Consistência aplicada a gente: a cobrança que tem nome, data e volta na semana seguinte.",
+    livro:"Na quarta disfunção Lencioni contraria a intuição gerencial: o mecanismo mais eficaz de manutenção de padrão não é o chefe, é a pressão dos pares. Times que dependem só do líder para cobrar ficam lentos e ressentidos. Ele registra também o paradoxo que trava tudo — evitamos a conversa difícil justamente com quem mais prezamos, e é assim que a relação apodrece.",
+    exerc:["Pense no feedback que você guarda há mais de 60 dias. Marque a conversa esta semana: quinze minutos, um assunto só.", "Da próxima vez que quiser reclamar de um colega com o líder, reclame com o colega primeiro.", "Peça a um par que cobre você sobre um compromisso específico, com data. Dê a ele permissão explícita para insistir."],
+    leitura:{"alto": "Você vê um time que se cobra. Cuide para que a cobrança continue valendo igual para os mais antigos e os mais influentes — é sempre por aí que ela afrouxa.", "medio": "Você vê cobrança que acontece, mas tarde ou pelo canal errado. Feedback guardado para o ciclo de avaliação já perdeu o efeito.", "baixo": "Você vê um time que ainda apoia a cobrança no líder. Quando ela passa a circular entre pares, o padrão sobe sozinho — e costuma ser mais leve do que se imagina."},
+    cor:"#5F2A7D",
+    corInk:"#C79BE8",
+    ferramentas:["Publicação de objetivos e padrões — o que o time deve alcançar, quem faz o quê e como todos devem se comportar, explícito para todos.", "Revisões de progresso simples e regulares — feedback verbal ou escrito, entre pares, sobre desempenho frente aos padrões acordados.", "Recompensas à equipe — deslocar o reconhecimento do resultado individual para o coletivo.", "Papel do líder: encorajar a cobrança entre pares e ser o árbitro final, sem virar a única fonte de disciplina."],
+    trilha:{"semanas": "10 semanas", "ritual": "Revisão de progresso quinzenal, curta e entre pares — sem o líder no papel de único cobrador.", "sessoes": [["Sessão 1", "60 min", "Publicação de objetivos e padrões", "O que o time deve alcançar, quem faz o quê e como todos devem se comportar. Explícito e visível: ambiguidade é o inimigo da cobrança.", "livro"], ["Sessão 2", "30 min", "Acordo de cobrança", "Quem cobra quem, sobre o quê e com que frequência. Cada um pede a um par que o cobre, com data.", "próprio"], ["Sessão 3", "45 min por trimestre", "Revisão de progresso entre pares", "Feedback curto e nominal sobre desempenho frente aos padrões acordados, separado da avaliação formal.", "livro"]]}
+  },
+  {
+    k:"resultados", n:"Resultados", sub:"placar coletivo",
+    def:"O resultado coletivo é o único juiz. Onde ele não é explícito, as pessoas preenchem o vazio com status individual, orçamento da área e ego.",
+    quando:"Quando existe: um colega sobrecarregado recebe ajuda antes de pedir.",
+    acoes:[
+      "Defina um placar único do time, com no máximo cinco números, revisado no mesmo rito toda semana.",
+      "Vincule reconhecimento e bônus ao resultado coletivo antes do individual.",
+      "Comemore em público a contribuição de quem abriu mão de algo da própria área pelo time."
+    ],
+    forca:"Consistência",
+    forcaTxt:"Resultado é Consistência levada ao placar: poucos números, o mesmo rito, toda semana, na frente de todos.",
+    livro:"A disfunção do topo é a falta de atenção ao resultado coletivo, e o que ocupa o lugar dele é sempre uma de duas coisas: o status individual ou o número da própria área. A recomendação central de Lencioni é tornar o placar coletivo público — o que é medido e visível dificilmente é abandonado em favor do território pessoal.",
+    exerc:["Liste os números pelos quais você é cobrado e os números pelos quais o time é cobrado. Se as listas não se tocam, o problema é de desenho, não de esforço.", "Identifique um colega sobrecarregado e ofereça algo concreto da sua área esta semana: pessoa, tempo ou orçamento.", "Na próxima vitória, atribua o crédito em público a alguém que não é você."],
+    leitura:{"alto": "Você vê um time que joga pelo placar coletivo. Vale checar se isso se sustenta nos trimestres ruins — é quando o território reaparece.", "medio": "Você vê um time que oscila entre o coletivo e a própria área, provavelmente conforme a pressão do momento.", "baixo": "Você vê um time bastante focado nas próprias áreas. Raramente é falta de empenho: é a ausência de um placar comum. Assim que ele existe, a colaboração aparece quase sozinha."},
+    cor:"#8A5D08",
+    corInk:"#E5B451",
+    ferramentas:["Placar público de resultados — poucas categorias, visíveis a todos, revisadas com regularidade.", "Recompensas com base em resultados — vincular compensação ao alcance de resultados coletivos declarados.", "Papel do líder: ser altruísta e objetivo, reservando reconhecimento a quem contribui para o resultado do time."],
+    trilha:{"semanas": "8 semanas", "ritual": "Rito semanal de placar: trinta minutos, os mesmos números, na frente de todos.", "sessoes": [["Sessão 1", "90 min", "Definir o placar", "No máximo cinco números coletivos. Se a lista passar disso, o time ainda não escolheu.", "livro"], ["Sessão 2", "30 min semanais", "Instalar o rito", "O placar revisado no mesmo horário, no mesmo formato, toda semana. A consistência é o que faz o número virar comportamento.", "próprio"], ["Sessão 3", "60 min", "Reconhecimento coletivo", "Revisar como o time reconhece e recompensa. Enquanto o prêmio for individual, o placar coletivo é decoração.", "livro"]]}
+  }
+];
+const BK = BEHAV.map(b=>b.k);
+const BMAP = {}; BEHAV.forEach(b=>BMAP[b.k]=b);
+
+const ITEMS = [
+  /* CONFIANÇA */
+  {id:"c1", b:"confianca", t:"As pessoas admitem que não sabem alguma coisa, sem rodeios.", p:"O que acontece hoje, na prática, com quem diz “não sei” nesta sala?"},
+  {id:"c2", b:"confianca", t:"Erros são ditos em voz alta enquanto ainda são pequenos.", p:"Qual foi o último erro que o time descobriu tarde demais? O que o segurou?"},
+  {id:"c3", b:"confianca", t:"Pedir ajuda aqui não é lido como fraqueza.", p:"Quem neste time pediu ajuda nos últimos 30 dias? E quem precisava e não pediu?"},
+  {id:"c4", b:"confianca", t:"As pessoas falam das próprias limitações sem medo do julgamento dos colegas.", p:"Que limitação sua o time inteiro já percebeu, mas você nunca disse em voz alta?"},
+  {id:"c5", b:"confianca", t:"Quando alguém erra, reconhece e pede desculpas sem que seja preciso cobrar.", p:"Quanto tempo passa, em média, entre o erro e o reconhecimento neste time?"},
+  {id:"c6", b:"confianca", t:"O que se fala sobre um colega fora da sala é o mesmo que se fala na frente dele.", p:"Que conversa vem acontecendo em duplas e ainda não chegou à mesa?"},
+  /* CONFLITO */
+  {id:"k1", b:"conflito", t:"Discordâncias sobre temas importantes aparecem na reunião, não depois dela.", p:"Onde as decisões deste time são realmente tomadas: na reunião ou no corredor?"},
+  {id:"k2", b:"conflito", t:"As pessoas sustentam uma posição impopular quando acreditam nela.", p:"Qual foi a última vez que alguém aqui ficou sozinho numa posição — e o que aconteceu com essa pessoa?"},
+  {id:"k3", b:"conflito", t:"O time pede ativamente a opinião de quem ficou calado.", p:"Quem fala menos nesta mesa? O que o time perde com isso?"},
+  {id:"k4", b:"conflito", t:"O debate esquenta sobre a ideia, sem virar ataque pessoal.", p:"O time evita conflito por educação ou por medo? Como saber a diferença?"},
+  {id:"k5", b:"conflito", t:"Quando um assunto difícil aparece, o time enfrenta ali e não empurra para a próxima pauta.", p:"Qual assunto está sendo empurrado de reunião em reunião há mais de um mês?"},
+  {id:"k6", b:"conflito", t:"Decisões relevantes só avançam depois de o contraponto ser ouvido.", p:"Que decisão recente teria mudado se o contraponto tivesse sido dito na hora?"},
+  /* COMPROMETIMENTO */
+  {id:"m1", b:"comprometimento", t:"Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", p:"Escreva as três prioridades sem combinar com ninguém. Compare as folhas."},
+  {id:"m2", b:"comprometimento", t:"As reuniões terminam com decisão, dono e prazo explícitos.", p:"Pegue a ata da última reunião: quantas decisões têm nome e data?"},
+  {id:"m3", b:"comprometimento", t:"Quem discordou no debate sustenta a decisão depois, fora da sala.", p:"Que decisão foi combinada aqui e comunicada de forma diferente lá fora?"},
+  {id:"m4", b:"comprometimento", t:"O time decide mesmo sem consenso pleno e sem informação completa.", p:"Qual decisão está travada esperando uma certeza que não vai chegar?"},
+  {id:"m5", b:"comprometimento", t:"As decisões são comunicadas de forma consistente por todos às suas equipes.", p:"Se eu perguntar à equipe de cada um, ouvirei a mesma versão?"},
+  {id:"m6", b:"comprometimento", t:"É raro reabrir uma decisão já fechada sem que haja fato novo.", p:"Que decisão este time já reabriu mais de duas vezes? Por quê?"},
+  /* ACCOUNTABILITY */
+  {id:"a1", b:"accountability", t:"As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", p:"Quantas cobranças chegaram ao líder no último mês que deveriam ter sido feitas entre pares?"},
+  {id:"a2", b:"accountability", t:"Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", p:"Que feedback você está guardando há mais de 60 dias — e para quem?"},
+  {id:"a3", b:"accountability", t:"Atrasos e entregas abaixo do combinado são nomeados, com nome e data.", p:"O que acontece neste time quando um prazo é perdido?"},
+  {id:"a4", b:"accountability", t:"O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", p:"Quem aqui é cobrado de forma mais leve? O que isso comunica ao resto?"},
+  {id:"a5", b:"accountability", t:"Questionar o método de um colega dentro da área dele é bem-vindo aqui.", p:"Qual área deste time ninguém se sente autorizado a questionar?"},
+  {id:"a6", b:"accountability", t:"Quem recebe uma cobrança responde com fato, não com defesa.", p:"Como este time reage quando é confrontado com um número ruim?"},
+  /* RESULTADOS */
+  {id:"r1", b:"resultados", t:"O placar do time importa mais do que o placar de cada área.", p:"Se o time bater a meta coletiva e a sua área não, isso é sucesso ou fracasso aqui?"},
+  {id:"r2", b:"resultados", t:"As pessoas abrem mão de recursos ou de agenda da própria área quando o time precisa.", p:"Qual foi o último recurso que alguém cedeu de verdade — e o que ganhou com isso?"},
+  {id:"r3", b:"resultados", t:"Quando a meta coletiva falha, cada um olha primeiro para a própria parte.", p:"Na última meta perdida, quanto tempo o time gastou explicando antes de agir?"},
+  {id:"r4", b:"resultados", t:"O sucesso de um colega é tratado como resultado do time.", p:"Quem foi reconhecido publicamente aqui nos últimos 90 dias?"},
+  {id:"r5", b:"resultados", t:"O time acompanha um conjunto pequeno de indicadores comuns, com frequência.", p:"Quantos números este time olha junto toda semana? Todos sabem dizer quais são?"},
+  {id:"r6", b:"resultados", t:"Ninguém aqui protege território em detrimento do objetivo comum.", p:"Onde a fronteira entre duas áreas deste time custa mais caro à empresa?"}
+];
+const IMAP = {}; ITEMS.forEach(i=>IMAP[i.id]=i);
+const BY_B = {}; BK.forEach(k=>BY_B[k]=ITEMS.filter(i=>i.b===k));
+
+/* Glifos próprios — cada um abstrai o mecanismo do comportamento, não a metáfora
+   óbvia (aperto de mão, raio, troféu). Mesma malha 24×24, traço 1,6, sem preenchimento. */
+const GLYPH = {
+  // guarda baixa: o círculo tem uma abertura e algo entra por ela
+  confianca: '<path d="M16.6 6.2A8 8 0 1 0 16.6 17.8"/><circle class="fillnode" cx="19.6" cy="12" r="1.7"/>',
+  // duas posições avançando uma contra a outra, com o ponto de atrito no meio
+  conflito: '<path d="M4.5 5.5 10 12l-5.5 6.5"/><path d="M19.5 5.5 14 12l5.5 6.5"/><path d="M12 8.5v7"/>',
+  // caminhos distintos que passam a ser um só
+  comprometimento: '<path d="M4 5.5h4.5c3.2 0 3.2 6.5 6.4 6.5H20"/><path d="M4 18.5h4.5c3.2 0 3.2-6.5 6.4-6.5"/><circle class="fillnode" cx="20.2" cy="12" r="1.7"/>',
+  // prumo: a viga, o fio e o peso — o padrão que vale para todos
+  accountability: '<path d="M3.5 5.5h17"/><path d="M12 5.5v8.5"/><path d="M8.8 14h6.4L12 19.5Z"/>',
+  // ponteiro de instrumento: onde o resultado parou
+  resultados: '<path d="M3.8 17.2a8.2 8.2 0 0 1 16.4 0"/><path d="M12 17.2 16.9 12"/><circle class="fillnode" cx="12" cy="17.2" r="1.8"/>'
+};
+function glyph(k, cls){
+  const g = (cls||"").indexOf("glyph-lg")>=0 ? 30 : 22;
+  return '<svg class="glyph '+(cls||"")+'" viewBox="0 0 24 24" width="'+g+'" height="'+g+'"'+
+    ' fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"'+
+    ' aria-hidden="true">'+(GLYPH[k]||"")+'</svg>';
+}
+
+const SCALE = [
+  {v:1,w:"Nunca"},{v:2,w:"Raramente"},{v:3,w:"Às vezes"},{v:4,w:"Quase sempre"},{v:5,w:"Sempre"}
+];
+const MIN_N = 3;
+
+/* ============================== UTIL ============================== */
+
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => (n===null||n===undefined||isNaN(n)) ? "—" : n.toFixed(1).replace(".",",");
+const fmt2 = n => (n===null||n===undefined||isNaN(n)) ? "—" : n.toFixed(2).replace(".",",");
+const mean = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
+function sd(a){ if(a.length<2) return 0; const m=mean(a); return Math.sqrt(a.reduce((s,x)=>s+(x-m)*(x-m),0)/(a.length-1)); }
+function band(v){
+  if(v===null||v===undefined||isNaN(v)) return {k:"nd",n:"Sem dados",c:"var(--neutro)",s:"var(--neutro-soft)"};
+  if(v>=3.75) return {k:"forte",n:"Consolidado",c:"var(--forte)",s:"var(--forte-soft)"};
+  if(v>=3.00) return {k:"moderado",n:"Em desenvolvimento",c:"var(--moderado)",s:"var(--moderado-soft)"};
+  return {k:"fragil",n:"Em construção",c:"var(--fragil)",s:"var(--fragil-soft)"};
+}
+const BANDICON = {
+  forte:'<path d="M3 10.5 7.5 15 17 4.5"/>',
+  moderado:'<path d="M4 10h12"/>',
+  fragil:'<path d="M10 4v10"/><path d="M5.5 9.5 10 14.5l4.5-5"/>',
+  nd:'<circle cx="10" cy="10" r="5.5"/>'
+};
+function bandPill(bd){
+  return '<span class="bandchip" style="--fg:'+bd.c+';--soft:'+bd.s+'">'+
+    '<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+BANDICON[bd.k]+'</svg>'+bd.n+'</span>';
+}
+
+/* avatares: a cor identifica a pessoa e é estável entre sessões */
+const AV_COLORS = ["#6D3FB5","#C2402F","#157F58","#A9660F","#2158C9","#0E7C8C","#B33A80","#4A5D78"];
+function avColor(name){
+  const t=String(name||"?"); let h=0;
+  for(let i=0;i<t.length;i++) h=(h*31 + t.charCodeAt(i))>>>0;
+  return AV_COLORS[h % AV_COLORS.length];
+}
+function initials(name){
+  const p=String(name||"?").trim().split(/\s+/).filter(Boolean);
+  const a=(p[0]||"?")[0], b=p.length>1?p[p.length-1][0]:"";
+  return (a+b).toUpperCase();
+}
+function avatar(name,cls,i){
+  const c = (typeof i==="number") ? AV_COLORS[i % AV_COLORS.length] : avColor(name);
+  return '<span class="av '+(cls||"")+'" style="background:'+c+'">'+esc(initials(name))+'</span>';
+}
+function avChip(name,i){ return '<span class="avchip">'+avatar(name,"sm",i)+esc(name)+'</span>'; }
+function rampIdx(v){ return Math.min(5, Math.max(1, Math.round(v||1))); }
+function uid(){ return "r"+Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4); }
+function slug(s){ return String(s).toUpperCase().replace(/[^A-Z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,24); }
+
+const LS = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+
+/* ============================== CONFIG ============================== */
+/*  Preencha aqui e o app passa a sincronizar as respostas entre as pessoas.
+    BACKEND: "local"    -> sem servidor; respostas ficam só no navegador de cada um
+             "supabase" -> banco próprio (recomendado)
+             "sheets"   -> planilha Google via Apps Script
+    Instruções completas em INSTALACAO.md                                     */
+
+const CONFIG = {
+  // Senha do modo facilitador. Fica no código-fonte da página, então protege
+  // contra o participante curioso, não contra alguém determinado.
+  SENHA_FACILITADOR: "raiox",
+
+  BACKEND: "supabase",
+  SUPABASE_URL: "https://adwmzkksbzmnhjdhdtkw.supabase.co",
+
+  // Deixe vazio: a ferramenta lê a chave anon public que a Matriz de Valores
+  // já publica no mesmo domínio. Preencha aqui só se quiser fixar outra chave.
+  SUPABASE_ANON_KEY: "",
+  SHEETS_URL: ""           // ex.: https://script.google.com/macros/s/AKfy.../exec
+};
+
+/* ============================== STORE ============================== */
+
+let DBREADY=false, BACKEND="local";
+const LOCAL = { times:{}, respostas:{} };
+function localLoad(){ const s=LS.get("rxt_local",null); if(s){ LOCAL.times=s.times||{}; LOCAL.respostas=s.respostas||{}; } }
+function localSave(){ LS.set("rxt_local",{times:LOCAL.times,respostas:LOCAL.respostas}); }
+localLoad();
+
+async function sb(path, opts){
+  opts = opts||{};
+  const h = {
+    "apikey": CONFIG.SUPABASE_ANON_KEY,
+    "Authorization": "Bearer "+CONFIG.SUPABASE_ANON_KEY,
+    "Content-Type": "application/json"
+  };
+  Object.keys(opts.headers||{}).forEach(k=>{ h[k]=opts.headers[k]; });
+  const r = await fetch(CONFIG.SUPABASE_URL.replace(/\/+$/,"")+"/rest/v1/"+path,
+    { method: opts.method||"GET", headers:h, body: opts.body });
+  if(!r.ok) throw new Error("Supabase "+r.status+": "+(await r.text()).slice(0,200));
+  const t = await r.text();
+  return t ? JSON.parse(t) : null;
+}
+
+// Reaproveita a chave anon public que a Matriz de Valores já publica no mesmo
+// domínio. Assim não existe uma segunda cópia da chave para manter em dia.
+async function descobrirChaveAnon(){
+  if(CONFIG.SUPABASE_ANON_KEY) return CONFIG.SUPABASE_ANON_KEY;
+  try{
+    const r = await fetch("/ferramentas/matriz-valores.html", {cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const t = await r.text();
+    const m = t.match(/eyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}/)
+           || t.match(/sb_publishable_[A-Za-z0-9_\-]{20,}/);
+    if(m){ console.info("Chave anon herdada da Matriz de Valores."); return m[0]; }
+    console.warn("Não encontrei a chave anon em matriz-valores.html.");
+  }catch(e){
+    console.warn("Não consegui ler a chave da Matriz de Valores:", e.message);
+  }
+  return "";
+}
+
+async function rpc(fn, args){
+  return await sb("rpc/"+fn, {method:"POST", body: JSON.stringify(args||{})});
+}
+
+async function gs(payload){
+  const r = await fetch(CONFIG.SHEETS_URL, {
+    method:"POST",
+    headers:{"Content-Type":"text/plain;charset=utf-8"},   // evita preflight CORS
+    body: JSON.stringify(payload)
+  });
+  if(!r.ok) throw new Error("Sheets "+r.status);
+  const j = await r.json();
+  if(j && j.error) throw new Error("Sheets: "+j.error);
+  return j;
+}
+
+function fromRowTeam(r){ return {code:r.code, nome:r.nome, rodadaAtual:r.rodada_atual||1, criadoEm:r.criado_em}; }
+function fromRowResp(r){ return {code:r.code, rodada:Number(r.rodada), respId:r.resp_id, nome:r.nome, ts:r.ts,
+  a:(typeof r.a==="string"?JSON.parse(r.a):r.a)}; }
+
+async function getTeam(code){
+  try{
+    if(BACKEND==="supabase"){
+      const rows = await rpc("rxt_get_team", {p_code: code});
+      return (rows && rows[0]) ? fromRowTeam(rows[0]) : null;
+    }
+    if(BACKEND==="sheets"){
+      const r = await gs({action:"getTeam", code:code});
+      return (r&&r.team) ? r.team : null;
+    }
+  }catch(e){ console.warn(e); DBREADY=false; }
+  return LOCAL.times[code]||null;
+}
+
+async function setTeam(code,obj){
+  LOCAL.times[code]=obj; localSave();
+  try{
+    if(BACKEND==="supabase"){
+      await rpc("rxt_set_team", {p_code:obj.code, p_nome:obj.nome, p_rodada:obj.rodadaAtual});
+      return true;
+    }
+    if(BACKEND==="sheets"){ await gs({action:"setTeam", team:obj}); return true; }
+  }catch(e){ console.warn(e); DBREADY=false; }
+  return true;
+}
+
+async function getRespostas(code){
+  try{
+    if(BACKEND==="supabase"){
+      const rows = await rpc("rxt_get_respostas", {p_code: code});
+      return (rows||[]).map(fromRowResp);
+    }
+    if(BACKEND==="sheets"){
+      const r = await gs({action:"getRespostas", code:code});
+      return (r&&r.respostas)||[];
+    }
+  }catch(e){ console.warn(e); DBREADY=false; }
+  return Object.values(LOCAL.respostas).filter(r=>r.code===code);
+}
+
+async function saveResposta(doc){
+  const id = doc.code+"__"+doc.rodada+"__"+doc.respId;
+  LOCAL.respostas[id]=doc; localSave();
+  try{
+    if(BACKEND==="supabase"){
+      await rpc("rxt_save_resposta", {p_id:id, p_code:doc.code, p_rodada:doc.rodada,
+                                      p_resp_id:doc.respId, p_nome:doc.nome, p_a:doc.a});
+      return true;
+    }
+    if(BACKEND==="sheets"){ await gs({action:"saveResposta", id:id, doc:doc}); return true; }
+  }catch(e){
+    console.warn(e); DBREADY=false;
+    alert("Não consegui gravar no servidor. Sua resposta ficou salva neste navegador — avise o facilitador.");
+  }
+  return true;
+}
+
+/* ============================== ESTADO ============================== */
+
+const ME = LS.get("rxt_me", null) || { id: uid(), nome:"" };
+LS.set("rxt_me", ME);
+
+/* Ordem randômica por respondente. O construto não é revelado durante a resposta:
+   os 30 itens vêm embaralhados, sem o nome do comportamento, para evitar
+   ancoragem dentro de bloco e resposta socialmente desejável. A semente é o id
+   da pessoa, então a ordem não muda se ela recarregar a página no meio. */
+function seededShuffle(arr, seedStr){
+  let h = 2166136261>>>0;
+  const s = String(seedStr||"x");
+  for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h,16777619)>>>0; }
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    h ^= h<<13; h>>>=0; h ^= h>>>17; h ^= h<<5; h>>>=0;
+    const j = h % (i+1);
+    const t=a[i]; a[i]=a[j]; a[j]=t;
+  }
+  return a;
+}
+const ORDER = seededShuffle(ITEMS, ME.id);
+const PER_PAGE = 6;
+const PAGES = Math.ceil(ORDER.length/PER_PAGE);
+const pageItems = p => ORDER.slice(p*PER_PAGE, (p+1)*PER_PAGE);
+
+const S = {
+  view:"home", code:"", team:null, respostas:[], step:0,
+  answers:{}, nome:ME.nome||"", loading:false, msg:"", openBehav:null, mode:"responder", demo:false, pres:null, introStep:0, facilitador:false, sessao:""
+};
+
+/* ====================== DEMONSTRAÇÃO (dados simulados) ======================
+   Comitê fictício de 7 pessoas, duas rodadas. Perfil desenhado para exercitar
+   todas as telas: base frágil, comprometimento forte, ganho na segunda rodada,
+   dois itens com dissenso alto e um "você" que diverge do time em dois níveis. */
+const DEMO_CODE = "EXEMPLO";
+const DEMO_ALVO = {
+  c1:2.1,c2:2.6,c3:3.2,c4:2.2,c5:3.3,c6:2.4,
+  k1:2.8,k2:2.6,k3:2.9,k4:3.6,k5:2.7,k6:3.1,
+  m1:4.4,m2:3.5,m3:3.9,m4:3.4,m5:3.6,m6:3.8,
+  a1:2.0,a2:2.4,a3:3.1,a4:2.5,a5:2.8,a6:3.2,
+  r1:2.8,r2:2.0,r3:3.3,r4:3.4,r5:2.9,r6:2.6
+};
+const DEMO_DISPERSO = {c5:1,c6:1,k3:1,a3:1,r3:1,m2:1};
+const DEMO_NOMES = ["Ana Ribeiro","Bruno Tavares","Carla Menezes","Diego Fontes",
+                    "Eva Nakamura","Felipe Arruda","Gisele Prado"];
+const DEMO_BIAS  = [-0.5,-0.2,0,0.15,0.35,-0.35,0.25];
+
+function demoRng(seed){
+  let h = 2166136261>>>0;
+  const t = String(seed);
+  for(let i=0;i<t.length;i++){ h ^= t.charCodeAt(i); h = Math.imul(h,16777619)>>>0; }
+  return function(){ h ^= h<<13; h>>>=0; h ^= h>>>17; h ^= h<<5; h>>>=0; return h/4294967296; };
+}
+function demoAnswers(seed, bias, rodada, extra){
+  const rnd = demoRng(seed);
+  const a = {};
+  ITEMS.forEach(it=>{
+    const ganho = rodada===2 ? (it.b==="confianca"?0.8:it.b==="accountability"?0.6:it.b==="conflito"?0.4:0.1) : 0;
+    const disp  = DEMO_DISPERSO[it.id] ? 1.15 : 0.6;
+    const ruido = (rnd()+rnd()+rnd()-1.5)*disp*1.6;
+    const ex    = extra ? (extra[it.b]||0) : 0;
+    a[it.id] = Math.max(1, Math.min(5, Math.round(DEMO_ALVO[it.id] + bias + ganho + ex + ruido)));
+  });
+  return a;
+}
+function demoLoad(){
+  const time = { code:DEMO_CODE, nome:"Comitê Executivo (exemplo)", rodadaAtual:2, criadoEm:"2026-05-10T10:00:00.000Z" };
+  const rs = [];
+  [1,2].forEach(rodada=>{
+    DEMO_NOMES.forEach((nome,i)=>{
+      rs.push({ code:DEMO_CODE, rodada:rodada, respId:"demo"+i, nome:nome,
+                ts:"2026-0"+(rodada===1?5:8)+"-1"+i+"T10:00:00.000Z",
+                a: demoAnswers("d"+rodada+"-"+i, DEMO_BIAS[i], rodada, null) });
+    });
+  });
+  // "você": vê confiança bem melhor e accountability bem pior que o time
+  const meuViés = { confianca:1.0, accountability:-0.9, conflito:0.2, comprometimento:0, resultados:-0.2 };
+  const minhas = demoAnswers("dvoce", 0, 2, meuViés);
+  rs.push({ code:DEMO_CODE, rodada:2, respId:ME.id, nome:(S.nome||ME.nome||"Você"),
+            ts:"2026-08-20T10:00:00.000Z", a:minhas });
+  S.demo = true; S.code = DEMO_CODE; S.team = time; S.respostas = rs;
+  S.answers = Object.assign({}, minhas); S.nome = S.nome || ME.nome || "Você";
+}
+
+/* ============================== CÁLCULO ============================== */
+
+function analyze(respostas, rodada){
+  const rs = respostas.filter(r=>!rodada || r.rodada===rodada);
+  const n = rs.length;
+  const items = {};
+  ITEMS.forEach(it=>{
+    const vals = rs.map(r=>r.a && r.a[it.id]).filter(v=>typeof v==="number" && v>=1 && v<=5);
+    const dist = [0,0,0,0,0];
+    vals.forEach(v=>dist[v-1]++);
+    items[it.id] = { id:it.id, b:it.b, mean:mean(vals), sd:sd(vals), dist, n:vals.length };
+  });
+  const behav = {};
+  BK.forEach(k=>{
+    const ms = BY_B[k].map(i=>items[i.id].mean).filter(v=>v!==null);
+    behav[k] = { k, mean: mean(ms), band: band(mean(ms)) };
+  });
+  const scored = ITEMS.map(i=>items[i.id]).filter(x=>x.mean!==null);
+  const asc = scored.slice().sort((a,b)=>a.mean-b.mean || a.id.localeCompare(b.id));
+  return {
+    n, items, behav,
+    forcas: asc.slice(-3).reverse(),
+    desafios: asc.slice(0,3),
+    ordered: BK.map(k=>behav[k]).sort((a,b)=> (a.mean===null?9:a.mean) - (b.mean===null?9:b.mean))
+  };
+}
+
+/* ============================== PIRÂMIDE ============================== */
+
+/* A pirâmide é composta por cinco medidores. Cada nível carrega a cor do próprio
+   comportamento e é preenchido da esquerda para a direita na proporção da nota:
+   1 = vazio, 5 = cheio. Com opts.mine o nível se divide em duas barras —
+   a de cima é você, a de baixo é o time.                                        */
+let PYR_SEQ = 0;
+function pyramid(analysis, opts){
+  opts = opts||{};
+  const bare = !!opts.bare, mine = opts.mine||null, temDados = !!analysis;
+  // A pirâmide ocupa a esquerda; os números moram numa coluna à direita, onde
+  // sempre cabem. Assim nenhum nível aperta e nenhum dado se perde.
+  const TOP_HW=54, BOT_HW=222, Y0=26, Y1=452, CX=246, COL=500;
+  const H=(Y1-Y0)/5, uid = "p"+(++PYR_SEQ);
+  const hw = y => TOP_HW + (y-Y0)/(Y1-Y0)*(BOT_HW-TOP_HW);
+  const frac = v => (v===null||v===undefined||isNaN(v)) ? 0 : Math.max(0,Math.min(1,(v-1)/4));
+  let defs = "", parts = "";
+
+  BK.forEach((k,i)=>{
+    const b = BMAP[k], d = analysis ? analysis.behav[k] : null;
+    const vT = d ? d.mean : null, vY = mine ? mine[k] : null;
+    const yTop = Y0 + (4-i)*H + 3, yBot = Y0 + (5-i)*H - 3;
+    const tw = hw(yTop), bwd = hw(yBot), alt = yBot-yTop, midY = (yTop+yBot)/2;
+    const pts = (CX-tw)+","+yTop+" "+(CX+tw)+","+yTop+" "+(CX+bwd)+","+yBot+" "+(CX-bwd)+","+yBot;
+    const cid = uid+"-"+k;
+    const cor = bare ? "var(--neutro)" : "var(--b-"+k+")";
+    defs += '<clipPath id="'+cid+'"><polygon points="'+pts+'"></polygon></clipPath>';
+
+    const barra = (y,h,v) =>
+      '<rect x="'+(CX-BOT_HW)+'" y="'+y+'" width="'+(2*BOT_HW)+'" height="'+h+'" fill="'+cor+'" opacity=".13"></rect>'+
+      ((bare||!temDados) ? '' :
+      '<rect class="gauge" x="'+(CX-bwd)+'" y="'+y+'" width="'+(2*bwd*frac(v))+'" height="'+h+'" fill="'+cor+'"></rect>');
+
+    let corpo;
+    if(!temDados){ corpo = barra(yTop, alt, null); }
+    else if(mine && !bare){
+      const hA = alt/2 - 1.5;
+      corpo = barra(yTop, hA, vY) + barra(yTop+alt/2+1.5, hA, vT);
+    } else { corpo = barra(yTop, alt, vT); }
+
+    // plaqueta com o nome, sempre centrada e sempre menor que o topo do nível
+    const nome = b.n.toUpperCase();
+    const chipW = nome.length*7.0 + 26, chipH = 26;
+    const chipX = CX - chipW/2, chipY = midY - chipH/2;
+    let rotulos =
+      '<rect class="pchip" x="'+chipX+'" y="'+chipY+'" width="'+chipW+'" height="'+chipH+'" rx="6"></rect>'+
+      '<text class="plbl" x="'+CX+'" y="'+(chipY+17)+'" text-anchor="middle">'+esc(nome)+'</text>';
+
+    // coluna de números, fora da pirâmide
+    if(temDados && !bare){
+      rotulos += '<line class="plead" x1="'+(CX+hw(midY)+8)+'" y1="'+midY+'" x2="'+(COL-14)+'" y2="'+midY+'"></line>';
+      if(mine){
+        rotulos +=
+          '<text class="pcap" x="'+COL+'" y="'+(midY-6)+'">você</text>'+
+          '<text class="pval" x="'+(COL+44)+'" y="'+(midY-4)+'">'+fmt(vY)+'</text>'+
+          '<text class="pcap" x="'+COL+'" y="'+(midY+16)+'">time</text>'+
+          '<text class="pval dim" x="'+(COL+44)+'" y="'+(midY+18)+'">'+fmt(vT)+'</text>';
+      } else {
+        rotulos +=
+          '<text class="pbig" x="'+COL+'" y="'+(midY+4)+'">'+fmt(vT)+'</text>'+
+          '<text class="pband" x="'+COL+'" y="'+(midY+20)+'">'+esc(band(vT).n)+'</text>';
+      }
+    }
+
+    const aria = bare ? b.n : (mine ? b.n+": você "+fmt(vY)+", time "+fmt(vT) : b.n+", média "+fmt(vT));
+    parts += '<g class="tier'+(bare?" static":"")+'" data-b="'+k+'"'+(bare?"":' role="button" tabindex="0"')+
+      ' aria-label="'+esc(aria)+'" style="--c:'+cor+'">'+
+      '<g clip-path="url(#'+cid+')">'+corpo+'</g>'+
+      '<polygon points="'+pts+'" fill="none" stroke="'+cor+'" stroke-width="1.6"></polygon>'+
+      rotulos + '</g>';
+  });
+
+  const largura = (temDados && !bare) ? 700 : 500;
+  const rodape = mine ? "em cada nível, a barra de cima é você e a de baixo é o time"
+                      : (bare ? "cada nível se apoia no de baixo" : "quanto mais cheio, mais o comportamento acontece");
+  return '<svg class="pyr'+((temDados&&!bare)?" comvalores":"")+'" viewBox="0 0 '+largura+' 486" role="img" aria-label="Pirâmide dos cinco comportamentos">'+
+    '<defs>'+defs+'</defs>'+parts+
+    '<text class="side" x="'+(largura/2)+'" y="478" text-anchor="middle">'+rodape+'</text></svg>';
+}
+
+/* ============================== VIEWS ============================== */
+
+function navHTML(){
+  const b=[];
+  if(S.code){
+    if(S.answers && Object.keys(S.answers).length===ITEMS.length)
+      b.push('<button class="btn sm '+(S.view==="me"?"on":"")+'" data-go="me">Meu relatório</button>');
+    if(S.facilitador)
+      b.push('<button class="btn sm '+(S.view==="team"?"on":"")+'" data-go="team">Relatório do time</button>');
+    if(!S.sessao) b.push('<button class="btn sm ghost" data-go="home">Trocar time</button>');
+  }
+  b.push('<button class="btn sm ghost" data-act="facil" title="Modo facilitador" aria-label="Modo facilitador">'+
+         (S.facilitador?"⚙ facilitador":"⚙")+'</button>');
+  return b.join("");
+}
+
+function view_home(){
+  const modelRows = BEHAV.slice().reverse().map(b=>
+    `<div class="modelrow" style="--c:var(--b-${b.k})">${glyph(b.k)}<b>${esc(b.n)}</b><span>${esc(b.sub)}</span></div>`).join("");
+  const seg = [["responder","Responder"],["time","Ver o relatório"]].map(([v,l])=>
+    `<button class="segb ${S.mode===v?"on":""}" data-act="mode-${v}">${l}</button>`).join("");
+  return `
+  <div class="herogrid">
+    <div class="homehead">
+      <p class="eyebrow rule">Exercício de aceleração de equipes · 30 afirmações · 7 minutos</p>
+      <h1>Um time forte não acontece por acaso. Ele é construído — e sempre na mesma ordem.</h1>
+      <p class="lede">Cada pessoa responde sozinha. Em sete minutos vocês descobrem em que nível o time está —
+      e recebem a trilha para o próximo: três sessões, um ritual e uma data de reteste, com as ferramentas
+      que Lencioni propõe para aquele comportamento.</p>
+      <div class="entrybox">
+        <div class="seg">${seg}</div>
+        <div class="entryrow">
+          <input class="tx" id="codein" placeholder="ex.: COMITE-VALE" autocomplete="off"
+                 style="flex:1;min-width:190px;text-transform:uppercase" value="${esc(S.code)}">
+          <button class="btn pri" data-act="enter">${S.mode==="responder"?"Começar":"Abrir"} →</button>
+        </div>
+        <p class="entryfoot">Ainda não tem um código? <button class="linkb" data-act="create">Criar um time</button></p>
+      </div>
+      <div id="homemsg"></div>
+    </div>
+    <div class="heroart">${pyramid(null)}</div>
+  </div>
+
+  <div class="homebelow">
+    <div>
+      <p class="eyebrow rule">Os cinco comportamentos</p>
+      <p class="modelnote">Cada nível se apoia no de baixo. É por isso que tantos times investem em
+      accountability e pouca coisa muda: o que sustentava estava dois andares abaixo.</p>
+    </div>
+    <div class="modelgrid">${modelRows}</div>
+  </div>
+
+  <div class="tryrow">
+    <span>Quer ver antes de convidar o time?</span>
+    <button class="btn" data-act="demoresp">Experimentar como quem responde</button>
+    <button class="btn" data-act="demo">Ver um relatório pronto</button>
+  </div>
+
+  <footer class="ft">
+    <span>Modelo conceitual: <em>Os 5 Desafios das Equipes</em>, Patrick Lencioni. Itens de avaliação e relatório: elaboração própria.</span>
+    <span>${DBREADY?'Respostas sincronizadas entre os participantes':'Modo local — configure o BACKEND no topo do arquivo'} · <a href="/ferramentas/">Ferramentas</a> · <a href="https://kikocampos.com">kikocampos.com</a></span>
+  </footer>`;
+}
+
+function scaleHTML(it, cur){
+  return SCALE.map(s=>`
+      <label style="--sw:var(--sc${s.v});--swt:var(--sct${s.v})">
+        <span class="swatch" aria-hidden="true"></span>
+        <input type="radio" name="${it.id}" value="${s.v}" ${cur===s.v?"checked":""} data-q="${it.id}">
+        <span class="n">${s.v}</span><span class="w">${s.w}</span>
+      </label>`).join("");
+}
+
+function view_survey(){
+  const items = pageItems(S.step);
+  const answered = ITEMS.filter(i=>S.answers[i.id]).length;
+  const pct = Math.round(answered/ITEMS.length*100);
+  const rows = items.map((it,ix)=>{
+    const cur = S.answers[it.id];
+    return `<div class="qitem ${cur?"done":""}" data-item="${it.id}">
+      <p class="qtext"><span class="qnum mono">${String(S.step*PER_PAGE+ix+1).padStart(2,"0")}</span>${esc(it.t)}</p>
+      <div class="scale" role="radiogroup" aria-label="${esc(it.t)}">${scaleHTML(it,cur)}</div>
+      <div class="scalehint"><span>nunca acontece</span><span>acontece sempre</span></div>
+    </div>`;
+  }).join("");
+  const last = S.step===PAGES-1;
+  return `
+  <div class="stack" style="padding-top:24px">
+    ${S.demo?`<div class="demobar" style="margin-bottom:26px">Exemplo simulado<span>Você está respondendo contra um comitê fictício de 7 pessoas — nada é gravado.</span><button class="linkb" data-act="exitdemo">Sair</button></div>`:""}
+    <div class="stickybar">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:8px">
+        <p class="eyebrow">Parte ${S.step+1} de ${PAGES} · ${esc(S.code)}</p>
+        <p class="mono" style="font-size:12.5px;color:var(--muted)">${answered}/${ITEMS.length}</p>
+      </div>
+      <div class="progress"><i style="width:${pct}%"></i></div>
+    </div>
+    ${S.step===0?`<div class="card pad" style="padding-bottom:20px">
+      <p class="eyebrow">Como responder</p>
+      <h2 style="font-size:24px;margin:8px 0 10px">Trinta afirmações sobre o dia a dia do time.</h2>
+      <p class="lede" style="font-size:15.5px">Marque com que frequência cada uma acontece de verdade, olhando os últimos três meses — não o melhor dia nem o pior. As afirmações vêm fora de ordem e sem rótulo, de propósito: o retrato fica mais fiel quando você responde uma de cada vez.</p>
+    </div>`:""}
+    <div class="card pad">
+      ${rows}
+    </div>
+    <div style="display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;align-items:center">
+      <button class="btn" data-act="prev" ${S.step===0?"disabled":""}>← Voltar</button>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span id="surveymsg" style="font-size:13.5px;color:var(--fragil)"></span>
+        <button class="btn pri" data-act="${last?"submit":"next"}">${last?"Enviar respostas":"Avançar →"}</button>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted)">Atalho: com o cursor sobre uma afirmação, as teclas <span class="mono">1</span> a <span class="mono">5</span> respondem.</p>
+  </div>`;
+}
+
+function view_name(){
+  const p = S.introStep||0;
+  const nomeTime = (S.team && S.team.nome) ? S.team.nome : S.code;
+  const dots = [0,1,2].map(i=>`<span class="introstep ${i===p?"on":(i<p?"done":"")}"></span>`).join("");
+
+  const telas = [
+
+  /* ---------- 1. o que é e o que você ganha ---------- */
+  ()=>`
+    <span class="eyebrow rule">${esc(nomeTime)} · Raio-X do Time</span>
+    <h1 class="disp">Sete minutos seus.<br>Uma conversa que pode mudar o ano do time.</h1>
+    <p class="lede">Você vai ler trinta afirmações sobre o dia a dia deste time e dizer com que frequência
+    cada uma acontece. Elas descrevem os cinco comportamentos que sustentam qualquer equipe de verdade —
+    e que se constroem sempre na mesma ordem.</p>
+    <div class="benefits">
+      <div class="benefit" style="--c:var(--b-resultados)">
+        <span class="ic">${glyph("resultados","glyph-lg")}</span>
+        <b>Um retrato só seu</b>
+        <p>Sua leitura de cada nível ao lado da do time, e o que você pode fazer a partir dela.</p>
+      </div>
+      <div class="benefit" style="--c:var(--b-conflito)">
+        <span class="ic">${glyph("conflito","glyph-lg")}</span>
+        <b>A distância que ninguém mede</b>
+        <p>Onde sua visão se afasta da do grupo. É quase sempre daí que sai a conversa mais valiosa.</p>
+      </div>
+      <div class="benefit" style="--c:var(--b-accountability)">
+        <span class="ic">${glyph("accountability","glyph-lg")}</span>
+        <b>Uma trilha, não um diagnóstico</b>
+        <p>Ao fim, o time sai com três sessões marcadas, um ritual para instalar e a data do reteste.</p>
+      </div>
+    </div>`,
+
+  /* ---------- 2. como responder ---------- */
+  ()=>`
+    <span class="eyebrow">Como responder</span>
+    <h1>Frequência, não opinião.</h1>
+    <p class="lede">Cinco orientações curtas. O retrato fica tão bom quanto a sinceridade das respostas —
+    e essa parte só você pode dar.</p>
+    <div class="rules">
+      <div class="rule"><p>Responda pelo que <b>acontece</b>, não pelo que deveria acontecer. A escala vai de <em>nunca</em> a <em>sempre</em>.</p></div>
+      <div class="rule"><p>Pense nos <b>últimos três meses</b>. Não no melhor dia do time, nem no pior.</p></div>
+      <div class="rule"><p>Não existe resposta certa. Um retrato generoso demais serve menos ao time do que um retrato fiel.</p></div>
+      <div class="rule"><p>As afirmações vêm <b>fora de ordem e sem rótulo</b>, de propósito. Responder uma de cada vez produz leitura mais honesta do que tentar montar um retrato.</p></div>
+      <div class="rule"><p>Na dúvida, marque a primeira coisa que veio. O conjunto conta mais do que qualquer afirmação isolada.</p></div>
+    </div>
+    <div class="facts">
+      <span class="fact"><b>30</b> afirmações</span>
+      <span class="fact"><b>5</b> partes</span>
+      <span class="fact">cerca de <b>7</b> minutos</span>
+      <span class="fact">dá para <b>voltar</b> atrás</span>
+      <span class="fact">teclas <b>1</b> a <b>5</b> respondem</span>
+    </div>`,
+
+  /* ---------- 3. o que acontece com as respostas + nome ---------- */
+  ()=>`
+    <span class="eyebrow">Suas respostas</span>
+    <h1>Ninguém vê o que você respondeu em cada afirmação.</h1>
+    <p class="lede">Essa garantia é literal, e vale saber exatamente onde cada informação vai parar.</p>
+    <div class="privacy">
+      <div class="privrow"><b>O time vê</b><p>Médias e distribuição de respostas por afirmação. Sabe-se que três pessoas marcaram “raramente”; não se sabe quais.</p></div>
+      <div class="privrow"><b>O facilitador vê</b><p>A lista de quem já respondeu — só para saber quando fechar a rodada. Não vê as respostas de ninguém.</p></div>
+      <div class="privrow you"><b>Só você vê</b><p>Seu relatório individual: sua nota em cada nível, sua distância em relação ao time, seus exercícios e seu plano de 30 dias.</p></div>
+      <div class="privrow"><b>Proteção extra</b><p>O relatório coletivo só abre com ${MIN_N} respostas. Abaixo disso, a média entregaria quem respondeu o quê.</p></div>
+    </div>
+    <div class="card pad" style="margin-top:28px">
+      <label class="fl" for="namein">Como você quer ser identificado na lista de participantes</label>
+      <input class="tx" id="namein" placeholder="Nome e sobrenome" value="${esc(S.nome)}" autocomplete="name">
+      <p style="font-size:13px;color:var(--muted);margin-top:10px">Aparece apenas na lista de quem respondeu.</p>
+    </div>`
+  ];
+
+  const ultima = p===2;
+  const jaViu = LS.get("rxt_viu_intro", false);
+  const reve = (ultima && jaViu) ? `<div class="revebar">
+      <b>Você já conhece o Raio-X.</b> Pulamos direto para o início — confirme seu nome e comece.
+      <button class="linkb" data-act="intro-rever">Rever a apresentação</button>
+    </div>` : "";
+  return `
+  <div class="intro">
+    ${S.demo?`<div class="demobar" style="margin-bottom:26px">Exemplo simulado<span>Você está respondendo contra um comitê fictício de 7 pessoas — nada é gravado.</span><button class="linkb" data-act="exitdemo">Sair</button></div>`:""}
+    <div class="introsteps">${dots}</div>
+    ${reve}
+    ${telas[p]()}
+    <div class="intronav">
+      ${p>0?'<button class="btn" data-act="intro-prev">← Voltar</button>':''}
+      <button class="btn pri" data-act="${ultima?"startsurvey":"intro-next"}">${ultima?"Começar as 30 afirmações →":"Continuar →"}</button>
+      <span id="namemsg" style="font-size:13.5px;color:var(--fragil)"></span>
+      ${!ultima?'<button class="btn ghost" data-act="intro-skip" style="margin-left:auto">Já sei como funciona, pular →</button>':''}
+    </div>
+  </div>`;
+}
+
+function distHTML(itemStat, myVal){
+  const max = Math.max.apply(null, itemStat.dist.concat([1]));
+  const cells = SCALE.map(s=>{
+    const c = itemStat.dist[s.v-1];
+    const h = c ? Math.max(8, Math.round(c/max*100)) : 0;
+    const hit = myVal===s.v;
+    return `<div class="hcol ${hit?"hit":""}" style="--sw:var(--sc${s.v})">
+      <div class="hplot"><div class="hbar ${c?"":"zero"}" style="height:${c?h:2}%"></div></div>
+      <div class="hmeta"><span class="hn">${c}</span><span class="hl">${s.w}</span></div>
+    </div>`;
+  }).join("");
+  return `<div class="hist" role="img" aria-label="Distribuição das respostas: ${itemStat.dist.map((c,i)=>c+" em "+SCALE[i].w).join(", ")}">${cells}</div>`;
+}
+
+function itemsHTML(k, A, mine){
+  return BY_B[k].map(it=>{
+    const st = A.items[it.id];
+    const bd = band(st.mean);
+    const my = mine ? mine[it.id] : null;
+    const diverge = st.n>=MIN_N && st.sd>=1.0;
+    const gap = (my && st.mean!==null) ? Math.abs(my-st.mean) : 0;
+    return `<div class="itemrow">
+      <div class="itemhead">
+        <p>${esc(it.t)}${diverge?'<span class="flag">Visões distintas</span>':""}</p>
+        <span class="itemscore" style="color:${bd.c}">${fmt(st.mean)}</span>
+      </div>
+      ${distHTML(st, my)}
+      ${my?`<span class="you-mark">Sua resposta: ${my} · ${esc(SCALE[my-1].w)}${gap>=1?" · "+fmt(gap)+" de diferença para o time":""}</span>`:""}
+    </div>`;
+  }).join("");
+}
+
+function behavBlocks(A, mine){
+  return BK.slice().reverse().map(k=>{
+    const b = BMAP[k], d = A.behav[k], bd = d.band;
+    const showActions = d.mean!==null && d.mean<3.75;
+    return `<section class="behavblock" id="b-${k}" style="--c:var(--b-${k})">
+      <div class="behavbar">
+        <svg class="behavbarart" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${GLYPH[k]}</svg>
+        <h3 class="disp">${esc(b.n)}</h3>
+        <span class="behavbarband">${esc(bd.n)}</span>
+        <span class="behavbarnum">${fmt(d.mean)}</span>
+      </div>
+      <div class="chapbody">
+      <p class="lede" style="font-size:15px">${esc(b.def)}</p>
+      <hr class="hr" style="margin:20px 0 0">
+      ${itemsHTML(k, A, mine)}
+      <div class="tworow" style="margin-top:22px">
+        <div class="mini" style="border-top-color:var(--c)">
+          <h4>${showActions?"Três movimentos para este nível":"O que sustenta este nível"} <span class="proc">elaboração própria</span></h4>
+          <ul>${(showActions?b.acoes:[b.quando].concat(b.acoes.slice(0,1))).map(x=>"<li>"+esc(x)+"</li>").join("")}</ul>
+        </div>
+        <div class="mini">
+          <h4>Para a conversa</h4>
+          <ul>${BY_B[k].slice().sort((x,y)=>(A.items[x.id].mean??9)-(A.items[y.id].mean??9)).slice(0,2).map(i=>"<li>"+esc(i.p)+"</li>").join("")}</ul>
+        </div>
+      </div>
+      </div>
+    </section>`;
+  }).join("");
+}
+
+/* Matriz comportamento × respondente. Colunas anônimas e ordenadas da leitura
+   mais severa para a mais generosa: mostra a dispersão sem identificar ninguém. */
+function matrixHTML(respostas, rodada){
+  const rs = respostas.filter(r=>r.rodada===rodada);
+  if(rs.length < MIN_N) return "";
+  const cols = rs.map(r=>{
+    const m = {};
+    BK.forEach(k=>{ m[k] = mean(BY_B[k].map(i=>r.a && r.a[i.id]).filter(v=>typeof v==="number")); });
+    m._all = mean(BK.map(k=>m[k]).filter(v=>v!==null));
+    return m;
+  }).sort((a,b)=>(a._all||0)-(b._all||0));
+  const letters = cols.map((_,i)=>String.fromCharCode(65+i));
+  const head = `<div class="mxr" style="--n:${cols.length}"><span></span>${letters.map(l=>'<div class="mxh">'+l+'</div>').join("")}</div>`;
+  const rows = BK.slice().reverse().map(k=>{
+    const cells = cols.map(c=>{
+      const v = c[k], i = rampIdx(v);
+      return `<div class="mxc" style="background:var(--sc${i});color:var(--sct${i})" title="${esc(BMAP[k].n)}: ${fmt(v)}">${fmt(v)}</div>`;
+    }).join("");
+    return `<div class="mxr" style="--n:${cols.length}"><div class="mxlbl">${glyph(k)}${esc(BMAP[k].n)}</div>${cells}</div>`;
+  }).join("");
+  return `<section class="card pad">
+    <h3 style="font-size:20px;margin:0 0 6px">O quanto vocês enxergam o mesmo time</h3>
+    <p class="lede" style="font-size:15px;margin-bottom:18px">Cada coluna é uma pessoa, sem identificação, ordenadas da leitura mais severa para a mais generosa. Uma linha com tons muito diferentes mostra um nível que o time ainda vê de formas distintas — e alinhar isso costuma ser o primeiro ganho.</p>
+    <div class="scroll-x"><div class="mx">${head}${rows}</div></div>
+  </section>`;
+}
+
+/* A trilha é o produto final: onde o time está → o que fazer, em que ordem,
+   com que ferramenta e em quanto tempo. Sessões marcadas com a origem. */
+function trilhaHTML(k, rodada){
+  const b = BMAP[k], t = b.trilha;
+  const ses = t.sessoes.map(([num,dur,nome,desc,fonte],i)=>`
+    <div class="tses">
+      <div class="tsmeta"><span class="tsnum">${esc(num)}</span><span class="tsdur">${esc(dur)}</span></div>
+      <div>
+        <div class="tsnome">${esc(nome)}
+          <span class="proc ${fonte==="livro"?"livro":""}">${fonte==="livro"?"do livro":"elaboração própria"}</span>
+        </div>
+        <p class="tsdesc">${esc(desc)}</p>
+      </div>
+    </div>`).join("");
+  return `<section class="card pad" style="--c:var(--b-${k})">
+    <p class="eyebrow rule">A trilha · ${esc(t.semanas)}</p>
+    <h3 class="disp" style="font-size:clamp(24px,3.2vw,34px);margin:10px 0 8px;color:var(--c)">${esc(b.n)}, e só isso, até o reteste.</h3>
+    <p class="lede" style="font-size:15.5px;margin-bottom:6px">${esc(b.def)}</p>
+    <div class="trilha">${ses}</div>
+    <div class="tsrit"><b>Ritual</b><p>${esc(t.ritual)}</p></div>
+    <div class="tsrit" style="--c:var(--ink)"><b>Gate</b><p>Ao fim de ${esc(t.semanas)}, abra a rodada ${rodada+1} com as mesmas 30 afirmações. A comparação item a item mostra se o comportamento mudou — ou se mudou apenas a intenção.</p></div>
+  </section>`;
+}
+
+function view_team(){
+  const A = analyze(S.respostas, S.team?S.team.rodadaAtual:1);
+  const prev = (S.team && S.team.rodadaAtual>1) ? analyze(S.respostas, S.team.rodadaAtual-1) : null;
+  const participantes = S.respostas.filter(r=>r.rodada===(S.team?S.team.rodadaAtual:1));
+
+  if(A.n < MIN_N){
+    return `
+    <div class="stack" style="padding-top:34px">
+      <div>
+        <p class="eyebrow">${esc(S.code)}${S.team&&S.team.nome?" · "+esc(S.team.nome):""} · rodada ${S.team?S.team.rodadaAtual:1}</p>
+        <h1 style="font-size:34px;margin-top:8px">Aguardando respostas</h1>
+      </div>
+      <div class="card pad stack">
+        <p class="notice">O relatório coletivo abre com <strong>${MIN_N} respostas</strong>. Isso protege o anonimato: com menos gente, as médias praticamente identificam quem respondeu o quê.</p>
+        <p style="font-size:15px">Respostas recebidas: <span class="mono" style="font-size:22px;font-weight:600">${A.n}</span> de ${MIN_N} necessárias.</p>
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px">Já responderam</p>
+          <div class="avrow">${participantes.length?participantes.map((r,i)=>avChip(r.nome||"anônimo",i)).join(""):'<span class="pill">ninguém ainda</span>'}</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn pri" data-act="go-respond-here">Responder agora</button>
+          <button class="btn" data-act="refresh">Atualizar</button>
+          <button class="btn ghost" data-act="copycode">Copiar código do time</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  const ord = A.ordered.filter(x=>x.mean!==null);
+  const menor = ord[0], maior = ord[ord.length-1];
+  const foco = ord[0];
+
+  const forcas = A.forcas.map(s=>{
+    const it = IMAP[s.id];
+    return `<tr><td><span class="eyebrow">${esc(BMAP[it.b].n)}</span><br>${esc(it.t)}</td><td class="num" style="color:var(--forte);font-weight:600">${fmt(s.mean)}</td></tr>`;
+  }).join("");
+  const desafios = A.desafios.map(s=>{
+    const it = IMAP[s.id];
+    return `<tr><td><span class="eyebrow">${esc(BMAP[it.b].n)}</span><br>${esc(it.t)}</td><td class="num" style="color:var(--fragil);font-weight:600">${fmt(s.mean)}</td></tr>`;
+  }).join("");
+
+  const discussao = A.desafios.map(s=>"<li>"+esc(IMAP[s.id].p)+"</li>").join("")
+    + (A.forcas[0]?"<li>"+esc(IMAP[A.forcas[0].id].p)+"</li>":"");
+
+  const compara = prev && prev.n>=MIN_N ? `
+    <section class="card pad">
+      <p class="eyebrow">Evolução</p>
+      <h3 style="font-size:20px;margin:6px 0 14px">Rodada ${S.team.rodadaAtual-1} → ${S.team.rodadaAtual}</h3>
+      <div class="scroll-x"><table class="tbl">
+        <thead><tr><th>Comportamento</th><th>Antes</th><th>Agora</th><th>Δ</th></tr></thead>
+        <tbody>${BK.slice().reverse().map(k=>{
+          const a=prev.behav[k].mean, b=A.behav[k].mean;
+          const d=(a!==null&&b!==null)?Math.round((b-a)*10)/10:null;
+          const col = d===null?"var(--muted)":(d>=0.2?"var(--forte)":(d<=-0.2?"var(--fragil)":"var(--muted)"));
+          const txt = d===null?"—":(d===0?"—":(d>0?"+":"−")+fmt(Math.abs(d)));
+          return `<tr><td>${esc(BMAP[k].n)}</td><td class="num">${fmt(a)}</td><td class="num">${fmt(b)}</td><td class="num" style="color:${col};font-weight:600">${txt}</td></tr>`;
+        }).join("")}</tbody>
+      </table></div>
+    </section>` : "";
+
+  return `
+  <div class="stack" style="padding-top:34px">
+    ${S.demo?`<div class="demobar">Exemplo simulado<span>7 pessoas fictícias, duas rodadas — nenhum dado real.</span><button class="linkb" data-act="exitdemo">Sair do exemplo</button></div>`:""}
+    <div style="display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;justify-content:space-between">
+      <div>
+        <p class="eyebrow">${esc(S.code)}${S.team&&S.team.nome?" · "+esc(S.team.nome):""} · rodada ${S.team?S.team.rodadaAtual:1} · ${A.n} respondentes</p>
+        <h1 style="font-size:clamp(30px,4.4vw,42px);margin-top:8px">Relatório do time</h1>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sm pri" data-act="present">▶ Apresentar</button>
+        <button class="btn sm" data-act="refresh">Atualizar</button>
+        <button class="btn sm" data-act="export">Exportar CSV</button>
+        <button class="btn sm ghost" data-act="newround">Nova rodada</button>
+      </div>
+    </div>
+
+    <div class="secband"><span class="n">01</span><h2 class="disp">O retrato</h2><span>a pirâmide e a leitura</span></div>
+    <div class="reportgrid">
+      <div class="card pad">${pyramid(A)}</div>
+      <div class="stack">
+        <div class="card pad">
+          <h3 style="font-size:21px;margin:0 0 10px">O melhor ponto de partida é ${esc(BMAP[foco.k].n.toLowerCase())}.</h3>
+          <p class="lede" style="font-size:15.5px">
+            A base mais sólida deste time é <strong>${esc(BMAP[maior.k].n.toLowerCase())}</strong> (${fmt(maior.mean)}), e o nível
+            com mais espaço para crescer é <strong>${esc(BMAP[menor.k].n.toLowerCase())}</strong> (${fmt(menor.mean)}).
+            Como cada andar se apoia no de baixo, o ganho maior vem de trabalhar primeiro o ponto mais baixo —
+            é ali que o esforço rende mais e se sustenta.
+          </p>
+          <hr class="hr" style="margin:18px 0">
+          <div class="scroll-x"><table class="tbl">
+            <thead><tr><th>Comportamento</th><th>Média</th><th>Faixa</th></tr></thead>
+            <tbody>${BK.slice().reverse().map(k=>{
+              const d=A.behav[k];
+              return `<tr><td><a href="#b-${k}" style="text-decoration:none;color:inherit;border-bottom:1px solid var(--line-2)">${esc(BMAP[k].n)}</a></td><td class="num" style="font-weight:600">${fmt(d.mean)}</td><td>${bandPill(d.band)}</td></tr>`;
+            }).join("")}</tbody>
+          </table></div>
+          <p style="font-size:12.5px;color:var(--muted);margin-top:12px">Em construção abaixo de 3,0 · em desenvolvimento de 3,0 a 3,7 · consolidado a partir de 3,75. Escala de 1 a 5.</p>
+        </div>
+        <div class="card pad">
+          <p class="eyebrow">Participantes desta rodada</p>
+          <div class="avrow" style="margin-top:12px">${participantes.map((r,i)=>avChip(r.nome||"anônimo",i)).join("")}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="secband"><span class="n">02</span><h2 class="disp">As evidências</h2><span>item a item, com a distribuição</span></div>
+    <div class="tworow">
+      <section class="card pad">
+        <p class="eyebrow">Os três itens mais altos</p>
+        <h3 style="font-size:20px;margin:6px 0 14px">O que este time já sustenta</h3>
+        <div class="scroll-x"><table class="tbl"><tbody>${forcas}</tbody></table></div>
+      </section>
+      <section class="card pad">
+        <p class="eyebrow">Os três maiores espaços</p>
+        <h3 style="font-size:20px;margin:6px 0 14px">Onde há mais espaço para crescer</h3>
+        <div class="scroll-x"><table class="tbl"><tbody>${desafios}</tbody></table></div>
+      </section>
+    </div>
+
+    ${matrixHTML(S.respostas, S.team?S.team.rodadaAtual:1)}
+
+    ${compara}
+
+    <div class="secband"><span class="n">03</span><h2 class="disp">O que fazer</h2><span>conversa, plano e reteste</span></div>
+    <section class="card pad">
+      <h3 style="font-size:20px;margin:0 0 14px">Quatro perguntas para começar a conversa</h3>
+      <ol class="disc">${discussao}</ol>
+    </section>
+
+    <div>
+      <p class="eyebrow rule" style="margin-bottom:14px">Detalhe por comportamento — do topo para a base</p>
+      <div class="stack">${behavBlocks(A, null)}</div>
+    </div>
+
+    ${trilhaHTML(foco.k, S.team?S.team.rodadaAtual:1)}
+
+    <footer class="ft">
+      <span>Modelo conceitual: <em>Os 5 Desafios das Equipes</em>, Patrick Lencioni. Itens e relatório: elaboração própria.</span>
+      <span>${DBREADY?"Sincronizado":"Modo local"} · ${A.n} respostas</span>
+    </footer>
+  </div>`;
+}
+
+function view_me(){
+  const rodada = S.team?S.team.rodadaAtual:1;
+  const A = analyze(S.respostas, rodada);
+  const mine = S.answers;
+  const myBehav = {};
+  BK.forEach(k=>{ myBehav[k] = mean(BY_B[k].map(i=>mine[i.id]).filter(v=>typeof v==="number")); });
+  const teamReady = A.n>=MIN_N;
+  const hoje = new Date().toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"});
+
+  /* --- síntese pessoal --- */
+  const meusOrd = BK.map(k=>({k, v:myBehav[k]})).filter(x=>x.v!==null).sort((a,b)=>a.v-b.v);
+  const meuFraco = meusOrd[0], meuForte = meusOrd[meusOrd.length-1];
+  const gapsB = teamReady ? BK.map(k=>({k, d:(myBehav[k]??0)-(A.behav[k].mean??0)}))
+                              .sort((a,b)=>Math.abs(b.d)-Math.abs(a.d)) : [];
+  const maiorGap = gapsB[0];
+
+  /* --- régua você x time --- */
+  const dumb = BK.slice().reverse().map(k=>{
+    const you=myBehav[k], team=teamReady?A.behav[k].mean:null;
+    const pos=v=>v===null?null:((v-1)/4*100);
+    const py=pos(you), pt=pos(team);
+    const segL=(py!==null&&pt!==null)?Math.min(py,pt):null, segW=(py!==null&&pt!==null)?Math.abs(py-pt):null;
+    const gap=(you!==null&&team!==null)?(you-team):null;
+    return `<div class="dumbrow">
+      <div class="nm">${esc(BMAP[k].n)}</div>
+      <div>
+        <div class="track"><div class="ax"></div>
+          ${[0,25,50,75,100].map(p=>'<div class="gridl" style="left:'+p+'%"></div>').join("")}
+          ${segL!==null?'<div class="seg" style="left:'+segL+'%;width:'+segW+'%"></div>':""}
+          ${pt!==null?'<div class="pt team" style="left:'+pt+'%"></div>':""}
+          ${py!==null?'<div class="pt you" style="left:'+py+'%"></div>':""}
+        </div>
+        <div class="mono" style="font-size:12px;color:var(--muted);margin-top:2px">
+          você ${fmt(you)}${team!==null?" · time "+fmt(team)+(Math.abs(gap)>=0.5?" · "+(gap>0?"você vê melhor":"você vê pior"):""):""}
+        </div>
+      </div></div>`;
+  }).join("");
+
+  /* --- capítulos, da base para o topo, como no livro --- */
+  const caps = BK.map((k,ix)=>{
+    const b=BMAP[k], you=myBehav[k], team=teamReady?A.behav[k].mean:null;
+    const bdY=band(you), bdT=band(team);
+    const nivel = you===null?"medio":(you>=3.75?"alto":(you>=3?"medio":"baixo"));
+    const gap = (you!==null&&team!==null)?(you-team):null;
+    let gapTxt="";
+    if(gap!==null){
+      if(gap>=0.6) gapTxt = `Sua leitura está ${fmt(Math.abs(gap))} acima da média do time neste nível. Ou você enxerga uma abertura que os outros não sentem, ou está sendo poupado de algo que os demais vivem. Nos dois casos, vale perguntar em vez de supor.`;
+      else if(gap<=-0.6) gapTxt = `Sua leitura está ${fmt(Math.abs(gap))} abaixo da média do time. Você pode estar vendo cedo um problema que os outros ainda não nomearam — ou carregando um caso específico que o time desconhece.`;
+      else gapTxt = `Sua leitura e a do time praticamente coincidem aqui. Onde há acordo, a conversa pode ir direto ao que fazer.`;
+    }
+    const itens = BY_B[k].map(it=>{
+      const st=A.items[it.id], my=mine[it.id], d=(my&&st.mean!==null)?my-st.mean:null;
+      let nota="";
+      if(d!==null && d<=-1.2) nota = `<span class="rnote">Você enxerga isto com mais rigor que o time</span>`;
+      else if(d!==null && d>=1.2) nota = `<span class="rnote">Você enxerga isto com mais confiança que o time</span>`;
+      else if(my<=2) nota = `<span class="rnote">Um dos maiores espaços que você aponta aqui</span>`;
+      return `<div class="itemrow">
+        <div class="itemhead">
+          <p>${esc(it.t)}</p>
+          <span class="itemscore" style="color:${band(st.mean).c}">${my}<span style="font-size:12px;color:var(--muted)"> / ${fmt(st.mean)}</span></span>
+        </div>
+        ${teamReady?distHTML(st,my):""}
+        ${nota}
+      </div>`;
+    }).join("");
+    return `<section class="rchap" id="b-${k}" style="--c:var(--b-${k})">
+      <div class="chapcover">
+        <div>
+          <span class="kick">Capítulo ${ix+1} de 5 · ${esc(b.forca)}</span>
+          <h2 class="disp">${esc(b.n)}</h2>
+          <p class="sub">${esc(b.sub.charAt(0).toUpperCase()+b.sub.slice(1))}. ${esc(b.quando)}</p>
+        </div>
+        <svg class="chapart" viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${GLYPH[k]}</svg>
+        <div class="chapnums">
+          <div class="chapnum"><span class="k">sua leitura</span><span class="v">${fmt(you)}</span><span class="b">${band(you).n}</span></div>
+          <div class="chapnum"><span class="k">o time</span><span class="v">${fmt(team)}</span><span class="b">${band(team).n}</span></div>
+          <div class="chapnum"><span class="k">distância</span><span class="v">${(()=>{ if(you===null||team===null) return "—"; const dd=Math.round((you-team)*10)/10; return dd===0?"0,0":(dd>0?"+":"−")+fmt(Math.abs(dd)); })()}</span></div>
+        </div>
+      </div>
+      <div class="chapbody">
+      <p class="lede" style="font-size:15.5px">${esc(b.def)}</p>
+      <p class="rlead">${esc(b.leitura[nivel])}${gapTxt?" "+esc(gapTxt):""}</p>
+
+      <h4 style="font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:26px 0 4px">Suas seis respostas · você / média do time</h4>
+      ${itens}
+
+      <div class="rbox ex">
+        <h4>${glyph(k)}Três exercícios ao seu alcance <span class="proc">elaboração própria</span></h4>
+        <ol>${b.exerc.map(x=>"<li>"+esc(x)+"</li>").join("")}</ol>
+      </div>
+
+      <div class="rbox livro">
+        <h4>No livro · Os 5 Desafios das Equipes <span class="proc livro">fonte primária</span></h4>
+        <p>${esc(b.livro)}</p>
+        <p class="ferrtit">As ferramentas que Lencioni propõe para este nível</p>
+        <ul class="ferr">${b.ferramentas.map(x=>"<li>"+esc(x)+"</li>").join("")}</ul>
+        <div class="rcodigo">
+          <span class="tag" style="background:var(--c);color:#fff">${esc(b.forca)}</span>
+          <p>${esc(b.forcaTxt)}</p>
+        </div>
+      </div>
+      </div>
+    </section>`;
+  }).join("");
+
+  /* --- itens pessoais extremos --- */
+  const meusItens = ITEMS.map(it=>({it, v:mine[it.id]})).filter(x=>typeof x.v==="number").sort((a,b)=>a.v-b.v);
+  const linha = x => `<tr><td><span class="eyebrow">${esc(BMAP[x.it.b].n)}</span><br>${esc(x.it.t)}</td><td class="num" style="font-weight:700">${x.v}</td></tr>`;
+
+  return `
+  ${S.demo?`<div class="demobar">Exemplo simulado<span>7 pessoas fictícias, duas rodadas — nenhum dado real.</span><button class="linkb" data-act="exitdemo">Sair do exemplo</button></div>`:""}
+  <div class="stack" style="padding-top:26px">
+
+    <div class="rcapa">
+      <span class="eyebrow rule">Relatório individual · Raio-X do Time</span>
+      <h1 class="disp">${esc(S.nome||"Você")}</h1>
+      <div class="rmeta">
+        <span>Time <b>${esc(S.team&&S.team.nome?S.team.nome:S.code)}</b></span>
+        <span>Rodada <b>${rodada}</b></span>
+        <span>Respondentes <b>${A.n}</b></span>
+        <span>Emitido em <b>${hoje}</b></span>
+        <span class="noprint"><button class="btn sm" data-act="print">Salvar em PDF</button></span>
+      </div>
+    </div>
+
+    ${teamReady?"":'<div class="notice">O time ainda tem menos de '+MIN_N+' respostas. Sua parte está registrada; a comparação com a média aparece quando o grupo completar o mínimo.</div>'}
+
+    <div class="card pad">
+      <h3 style="font-size:20px;margin:0 0 10px">Como ler este relatório</h3>
+      <p class="lede" style="font-size:15.5px">Cada afirmação foi respondida numa escala de frequência de 1 a 5 — de <em>nunca acontece</em> a <em>acontece sempre</em>. Os cinco comportamentos formam uma pirâmide: cada nível se apoia no de baixo, e por isso a ordem de trabalho importa mais que o esforço. Ao longo do relatório você vê dois números lado a lado: <b>o seu</b> e <b>o do time</b>. A distância entre eles é o material mais rico deste relatório — ela não diz quem está certo, diz onde vale conversar.</p>
+      <div class="preslegend" style="justify-content:flex-start;margin-top:16px">${bandPill(band(4))}${bandPill(band(3.2))}${bandPill(band(2))}</div>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:12px">Em construção abaixo de 3,0 · em desenvolvimento de 3,0 a 3,7 · consolidado a partir de 3,75.</p>
+    </div>
+
+    <div class="reportgrid">
+      <div class="card pad">
+        ${teamReady?pyramid(A,{mine:myBehav}):pyramid(null,{bare:true})}
+        ${teamReady?`<div class="pyrlegend">
+          <b><span class="sq" style="background:var(--fragil)"></span><span class="sq" style="background:var(--moderado)"></span><span class="sq" style="background:var(--forte)"></span>em construção · em desenvolvimento · consolidado</b>
+          <span>barras de tamanhos diferentes mostram onde vale conversar</span>
+        </div>`:`<p style="font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px">A pirâmide abre com ${MIN_N} respostas</p>`}
+      </div>
+      <div class="stack">
+        <div class="card pad">
+          <h3 style="font-size:20px;margin:0 0 8px">Seu retrato em três frases</h3>
+          <p class="lede" style="font-size:15.5px">
+            Na sua leitura, o nível mais consolidado deste time é <b>${esc(BMAP[meuForte.k].n.toLowerCase())}</b> (${fmt(meuForte.v)}) e o com mais espaço é <b>${esc(BMAP[meuFraco.k].n.toLowerCase())}</b> (${fmt(meuFraco.v)}).
+            ${teamReady&&maiorGap?`Sua maior distância em relação ao grupo está em <b>${esc(BMAP[maiorGap.k].n.toLowerCase())}</b>, onde você avalia ${fmt(Math.abs(maiorGap.d))} ${maiorGap.d>0?"acima":"abaixo"} da média.`:""}
+            ${teamReady?`O melhor ponto de partida do time é <b>${esc(BMAP[A.ordered.filter(x=>x.mean!==null)[0].k].n.toLowerCase())}</b>, a base ainda em construção da pirâmide coletiva.`:""}
+          </p>
+        </div>
+        <div class="card pad">
+          <h3 style="font-size:20px;margin:0 0 16px">Você e o time, na mesma régua</h3>
+          <div class="dumb">${dumb}</div>
+          <div class="legend" style="margin-top:14px">
+            <span><i style="background:var(--accent)"></i>você</span>
+            <span><i style="background:var(--card);border:2px solid var(--muted)"></i>média do time</span>
+            <span style="margin-left:auto">escala 1 → 5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    ${caps}
+
+    <div class="tworow">
+      <section class="card pad">
+        <h3 style="font-size:20px;margin:0 0 14px">O que você já vê acontecendo</h3>
+        <div class="scroll-x"><table class="tbl"><tbody>${meusItens.slice(-3).reverse().map(linha).join("")}</tbody></table></div>
+      </section>
+      <section class="card pad">
+        <h3 style="font-size:20px;margin:0 0 14px">Onde você vê mais espaço</h3>
+        <div class="scroll-x"><table class="tbl"><tbody>${meusItens.slice(0,3).map(linha).join("")}</tbody></table></div>
+      </section>
+    </div>
+
+    <section class="card pad">
+      <span class="eyebrow">Seu compromisso</span>
+      <h3 style="font-size:22px;margin:8px 0 18px">Os próximos 30 dias</h3>
+      <div class="rplano">
+        <div class="rplanoi"><p><b>Leve uma frase para a devolutiva.</b> ${teamReady&&maiorGap?`A sua está pronta: “eu vejo ${esc(BMAP[maiorGap.k].n.toLowerCase())} de forma diferente do resto do time, e queria entender por quê.”`:`Escolha o nível em que sua leitura mais destoa e diga isso em voz alta.`}</p></div>
+        <div class="rplanoi"><p><b>Faça um exercício de ${esc(BMAP[meuFraco.k].n.toLowerCase())} nesta semana.</b> ${esc(BMAP[meuFraco.k].exerc[0])}</p></div>
+        <div class="rplanoi"><p><b>Escolha um par.</b> Conte a ele qual exercício você vai fazer e peça que cobre você na semana seguinte, com data.</p></div>
+        <div class="rplanoi"><p><b>Entre na trilha do time.</b> O relatório coletivo traz três sessões e um ritual para o nível mais baixo da pirâmide. Seu exercício individual acima é o que você leva para dentro delas.</p></div>
+        <div class="rplanoi"><p><b>Releia isto no dia do reteste.</b> A rodada ${rodada+1} usa as mesmas 30 afirmações — a comparação só tem valor se você lembrar do que se propôs a mudar.</p></div>
+      </div>
+    </section>
+
+    <footer class="ft">
+      <span>Modelo conceitual: <em>Os 5 Desafios das Equipes</em>, Patrick Lencioni · Três forças: <em>O Novo Código da Mudança</em>. Itens de avaliação, relatório e exercícios: elaboração própria.</span>
+      <span class="noprint"><button class="btn sm ghost" data-act="go-team">Ver relatório do time →</button></span>
+    </footer>
+  </div>`;
+}
+
+/* ====================== MODO APRESENTAÇÃO ======================
+   Sequência para projetar na devolutiva. Cada slide entrega um fato só. */
+
+function presSlides(){
+  const rodada = S.team ? S.team.rodadaAtual : 1;
+  const A = analyze(S.respostas, rodada);
+  const prev = (S.team && S.team.rodadaAtual>1) ? analyze(S.respostas, rodada-1) : null;
+  const ord = A.ordered.filter(x=>x.mean!==null);
+  const foco = ord[0], topo = ord[ord.length-1];
+  const nomeTime = (S.team && S.team.nome) ? S.team.nome : S.code;
+  const slides = [];
+
+  slides.push(()=>`
+    <p class="preskicker">Raio-X do Time · rodada ${rodada} · ${A.n} respondentes</p>
+    <h1 class="prestitle">${esc(nomeTime)}</h1>
+    <p class="pressub">Cinco comportamentos, trinta afirmações e um retrato do que este time
+    já construiu — e do que vem a seguir.</p>`);
+
+  slides.push(()=>`
+    <p class="preskicker">O retrato</p>
+    <div class="presgrid two">
+      <div>
+        <h2 class="prestitle" style="font-size:clamp(26px,3.6vw,44px)">${esc(BMAP[topo.k].n)} já sustenta.<br>${esc(BMAP[foco.k].n)} é o próximo passo.</h2>
+        <p class="pressub" style="margin-top:16px">Cada nível se apoia no de baixo. Por isso a ordem do trabalho importa tanto quanto o esforço:
+        começar embaixo faz o ganho durar.</p>
+        <div class="preslegend" style="justify-content:flex-start;margin-top:22px">
+          ${bandPill(band(4))}${bandPill(band(3.2))}${bandPill(band(2))}
+        </div>
+      </div>
+      <div>${pyramid(A)}</div>
+    </div>`);
+
+  slides.push(()=>`
+    <p class="preskicker">O que este time já sustenta</p>
+    <h2 class="prestitle" style="font-size:clamp(24px,3.2vw,40px)">Três forças para preservar</h2>
+    <div>${A.forcas.map(x=>{const it=IMAP[x.id];return `
+      <div class="prow" style="--c:var(--forte)">
+        <span class="pscore">${fmt(x.mean)}</span>
+        <div><b>${esc(BMAP[it.b].n)}</b><p>${esc(it.t)}</p></div>
+      </div>`;}).join("")}</div>`);
+
+  slides.push(()=>`
+    <p class="preskicker">Onde há mais espaço para crescer</p>
+    <h2 class="prestitle" style="font-size:clamp(24px,3.2vw,40px)">Três oportunidades claras</h2>
+    <div>${A.desafios.map(x=>{const it=IMAP[x.id];return `
+      <div class="prow" style="--c:var(--fragil)">
+        <span class="pscore">${fmt(x.mean)}</span>
+        <div><b>${esc(BMAP[it.b].n)}</b><p>${esc(it.t)}</p></div>
+      </div>`;}).join("")}</div>`);
+
+  const mx = matrixHTML(S.respostas, rodada);
+  if(mx) slides.push(()=>`
+    <p class="preskicker">Concordância interna</p>
+    <h2 class="prestitle" style="font-size:clamp(24px,3.2vw,40px)">Vocês veem o mesmo time?</h2>
+    <p class="pressub">Cada coluna é uma pessoa, sem nome. Linha com tons muito diferentes = um nível que o time
+    ainda vê de formas distintas. Alinhar isso costuma ser o primeiro ganho.</p>
+    ${mx.replace(/<section class="card pad">[\s\S]*?<div class="scroll-x">/,'<div class="scroll-x">').replace(/<\/section>$/,'')}`);
+
+  if(prev && prev.n>=MIN_N) slides.push(()=>`
+    <p class="preskicker">Evolução · rodada ${rodada-1} → ${rodada}</p>
+    <h2 class="prestitle" style="font-size:clamp(24px,3.2vw,40px)">O que se moveu</h2>
+    <div class="scroll-x"><table class="tbl">
+      <thead><tr><th>Comportamento</th><th>Antes</th><th>Agora</th><th>Δ</th></tr></thead>
+      <tbody>${BK.slice().reverse().map(k=>{
+        const a=prev.behav[k].mean, b=A.behav[k].mean;
+        const d=(a!==null&&b!==null)?Math.round((b-a)*10)/10:null;
+        const col = d===null||d===0?"var(--muted)":(d>0?"var(--forte)":"var(--fragil)");
+        const txt = (d===null||d===0)?"—":(d>0?"+":"−")+fmt(Math.abs(d));
+        return `<tr><td>${esc(BMAP[k].n)}</td><td class="num">${fmt(a)}</td><td class="num">${fmt(b)}</td>
+          <td class="num" style="color:${col};font-weight:700">${txt}</td></tr>`;
+      }).join("")}</tbody></table></div>`);
+
+  slides.push(()=>{
+    const t = BMAP[foco.k].trilha;
+    return `
+    <p class="preskicker">A trilha · ${esc(t.semanas)}</p>
+    <h2 class="prestitle" style="font-size:clamp(24px,3.2vw,40px)">Três sessões, um ritual, um gate.</h2>
+    <div>${t.sessoes.map(([num,dur,nome,,fonte])=>`
+      <div class="prow" style="--c:var(--b-${foco.k})">
+        <span class="pscore" style="font-size:clamp(15px,1.8vw,22px);min-width:5.6em">${esc(dur)}</span>
+        <div><b>${esc(num)}</b><p>${esc(nome)}</p></div>
+      </div>`).join("")}</div>
+    <p class="pressub" style="margin-top:16px"><strong>Ritual:</strong> ${esc(t.ritual)}</p>`;
+  });
+
+  slides.push(()=>`
+    <p class="preskicker">A pergunta que abre a próxima conversa</p>
+    <h2 class="prestitle">${esc(A.desafios[0]?IMAP[A.desafios[0].id].p:"O que este time evita conversar?")}</h2>
+    <p class="pressub" style="margin-top:18px">Vale responder juntos antes de sair da sala.</p>`);
+
+  return slides;
+}
+
+function renderPres(){
+  const box = document.getElementById("pres");
+  if(S.pres===null || S.pres===undefined){ box.innerHTML=""; box.className=""; document.body.style.overflow=""; return; }
+  const slides = presSlides();
+  const i = Math.max(0, Math.min(slides.length-1, S.pres));
+  S.pres = i;
+  box.className = "pres";
+  document.body.style.overflow = "hidden";
+  box.innerHTML =
+    '<div class="presbody" key="'+i+'">'+slides[i]()+'</div>'+
+    '<div class="presfoot">'+
+      '<div class="presdots">'+slides.map((_,n)=>'<button class="presdot '+(n===i?"on":"")+'" data-pres="'+n+'" aria-label="Slide '+(n+1)+'"></button>').join("")+'</div>'+
+      '<div class="presnav">'+
+        '<button class="presbtn" data-pres="prev" '+(i===0?"disabled":"")+'>‹ Voltar</button>'+
+        '<button class="presbtn" data-pres="next" '+(i===slides.length-1?"disabled":"")+'>Avançar ›</button>'+
+        '<button class="presbtn x" data-pres="close">Sair (Esc)</button>'+
+      '</div>'+
+    '</div>';
+}
+
+/* ============================== RENDER ============================== */
+
+function render(){
+  const app = $("#app");
+  let html = "";
+  if(S.view==="home") html = view_home();
+  else if(S.view==="name") html = view_name();
+  else if(S.view==="survey") html = view_survey();
+  else if(S.view==="team") html = view_team();
+  else if(S.view==="me") html = view_me();
+  app.innerHTML = html;
+  $("#nav").innerHTML = navHTML();
+  $("#brandsub").textContent = S.code ? S.code : "Exercício de aceleração";
+  if(S.msg){ const m=$("#homemsg")||$("#surveymsg"); if(m){ m.innerHTML='<p class="notice warn" style="margin-top:12px">'+esc(S.msg)+'</p>'; } S.msg=""; }
+  if(S.pres!==null && S.pres!==undefined) renderPres();
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+/* ============================== AÇÕES ============================== */
+
+/* quem já passou pela apresentação alguma vez entra direto na tela final */
+function introInicial(){ return (LS.get("rxt_viu_intro", false) && (S.nome||ME.nome)) ? 2 : 0; }
+
+async function enterTeam(code, createIfMissing, nomeTime){
+  code = slug(code);
+  if(!code){ S.msg="Informe um código de time."; render(); return false; }
+  S.code = code;
+  let t = await getTeam(code);
+  if(!t){
+    if(!createIfMissing){
+      S.msg='Time "'+code+'" não encontrado. Confira o código ou crie um time novo.';
+      render(); return false;
+    }
+    t = { code, nome: nomeTime||code, rodadaAtual:1, criadoEm:new Date().toISOString() };
+    await setTeam(code, t);
+  }
+  S.team = t;
+  LS.set("rxt_lastcode", code);
+  await loadRespostas();
+  const my = S.respostas.find(r=>r.respId===ME.id && r.rodada===t.rodadaAtual);
+  if(my){ S.answers = Object.assign({}, my.a); S.nome = my.nome||S.nome; S.jaRespondeu = true; }
+  else { S.answers = {}; S.jaRespondeu = false; }
+  // quem já passou pela apresentação alguma vez cai direto na tela final
+  S.introStep = introInicial();
+  return true;
+}
+
+async function loadRespostas(){
+  if(S.demo) return;
+  S.respostas = await getRespostas(S.code);
+}
+
+async function submitSurvey(){
+  const missing = ITEMS.filter(i=>!S.answers[i.id]);
+  if(missing.length){ S.msg="Faltam "+missing.length+" respostas."; render(); return; }
+  const doc = {
+    code:S.code, rodada:S.team?S.team.rodadaAtual:1, respId:ME.id,
+    nome:S.nome||"anônimo", ts:new Date().toISOString(), a:Object.assign({},S.answers)
+  };
+  if(S.demo){
+    S.respostas = S.respostas.filter(r=>r.respId!==ME.id).concat([doc]);
+  } else {
+    await saveResposta(doc);
+    await loadRespostas();
+  }
+  S.view="me"; render();
+}
+
+function csv(){
+  const A = analyze(S.respostas, S.team?S.team.rodadaAtual:1);
+  const lines = [["comportamento","item","media","desvio","n","nunca","raramente","as_vezes","quase_sempre","sempre"].join(";")];
+  ITEMS.forEach(it=>{
+    const s=A.items[it.id];
+    lines.push([BMAP[it.b].n, '"'+it.t.replace(/"/g,'""')+'"', fmt2(s.mean), fmt2(s.sd), s.n].concat(s.dist).join(";"));
+  });
+  lines.push("");
+  BK.slice().reverse().forEach(k=>lines.push([BMAP[k].n,"MÉDIA DO COMPORTAMENTO",fmt2(A.behav[k].mean),"","",""].join(";")));
+  return "﻿"+lines.join("\n");
+}
+
+async function doExport(){
+  const data = csv();
+  const name = "raio-x-"+S.code+"-rodada"+(S.team?S.team.rodadaAtual:1)+".csv";
+  try{
+    const blob = new Blob([data], {type:"text/csv;charset=utf-8;"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = name; a.style.display="none";
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 800);
+  }catch(e){
+    console.warn(e);
+    alert("Não foi possível gerar o arquivo neste navegador.");
+  }
+}
+
+/* ============================== EVENTOS ============================== */
+
+function softScroll(el){
+  if(!el || typeof el.scrollIntoView!=="function") return;
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try{ el.scrollIntoView({behavior: reduce?"auto":"smooth", block:"center"}); }catch(e){ try{ el.scrollIntoView(); }catch(_){} }
+}
+
+function markMissing(){
+  const falta = pageItems(S.step).filter(i=>!S.answers[i.id]);
+  document.querySelectorAll(".qitem").forEach(el=>el.classList.remove("miss"));
+  if(!falta.length) return false;
+  falta.forEach(i=>{
+    const el = document.querySelector('.qitem[data-item="'+i.id+'"]');
+    if(el) el.classList.add("miss");
+  });
+  const m = $("#surveymsg");
+  if(m) m.textContent = falta.length===1 ? "Falta 1 afirmação." : "Faltam "+falta.length+" afirmações.";
+  softScroll(document.querySelector(".qitem.miss"));
+  return true;
+}
+
+function nextUnansweredOnPage(afterId){
+  const list = pageItems(S.step);
+  const start = afterId ? list.findIndex(i=>i.id===afterId)+1 : 0;
+  for(let i=start;i<list.length;i++) if(!S.answers[list[i].id]) return list[i].id;
+  return null;
+}
+
+document.addEventListener("change", e=>{
+  const q = e.target.getAttribute && e.target.getAttribute("data-q");
+  if(q){ S.answers[q] = Number(e.target.value);
+    const row = document.querySelector('.qitem[data-item="'+q+'"]');
+    if(row){ row.classList.add("done"); row.classList.remove("miss"); }
+    const answered = ITEMS.filter(i=>S.answers[i.id]).length;
+    const bar = document.querySelector(".progress>i");
+    if(bar) bar.style.width = Math.round(answered/ITEMS.length*100)+"%";
+    document.querySelectorAll(".mono").forEach(el=>{
+      if(/^\d+\/\d+$/.test(el.textContent.trim())) el.textContent = answered+"/"+ITEMS.length;
+    });
+    const m = document.getElementById("surveymsg"); if(m) m.textContent="";
+    const nx = nextUnansweredOnPage(q);
+    if(nx){
+      const el = document.querySelector('.qitem[data-item="'+nx+'"]');
+      if(el && el.getBoundingClientRect().bottom > window.innerHeight - 40) softScroll(el);
+    }
+  }
+});
+
+/* teclas 1–5 respondem a afirmação sob o cursor ou com foco */
+document.addEventListener("keydown", e=>{
+  if(S.view!=="survey") return;
+  if(e.metaKey||e.ctrlKey||e.altKey) return;
+  if(!/^[1-5]$/.test(e.key)) return;
+  let row = document.activeElement && document.activeElement.closest && document.activeElement.closest(".qitem");
+  if(!row && HOVER_ITEM) row = document.querySelector('.qitem[data-item="'+HOVER_ITEM+'"]');
+  if(!row) return;
+  const inp = row.querySelector('input[value="'+e.key+'"]');
+  if(inp){ e.preventDefault(); inp.checked = true; inp.dispatchEvent(new Event("change",{bubbles:true})); }
+});
+
+let HOVER_ITEM = null;
+document.addEventListener("mouseover", e=>{
+  const row = e.target.closest && e.target.closest(".qitem");
+  HOVER_ITEM = row ? row.getAttribute("data-item") : HOVER_ITEM;
+});
+
+document.addEventListener("click", e=>{
+  const p = e.target.closest && e.target.closest("[data-pres]");
+  if(!p) return;
+  const v = p.getAttribute("data-pres");
+  if(v==="close"){ S.pres=null; }
+  else if(v==="next"){ S.pres++; }
+  else if(v==="prev"){ S.pres--; }
+  else S.pres = Number(v);
+  renderPres();
+  e.stopPropagation();
+}, true);
+
+document.addEventListener("keydown", e=>{
+  if(S.pres===null || S.pres===undefined) return;
+  if(e.key==="Escape"){ S.pres=null; renderPres(); e.preventDefault(); return; }
+  if(e.key==="ArrowRight" || e.key===" " || e.key==="PageDown"){ S.pres++; renderPres(); e.preventDefault(); return; }
+  if(e.key==="ArrowLeft" || e.key==="PageUp"){ S.pres--; renderPres(); e.preventDefault(); return; }
+}, true);
+
+document.addEventListener("click", async e=>{
+  const tier = e.target.closest && e.target.closest(".tier");
+  if(tier && (S.view==="team"||S.view==="me")){
+    const el = document.getElementById("b-"+tier.getAttribute("data-b"));
+    if(el){ el.scrollIntoView({behavior:"smooth",block:"start"}); return; }
+  }
+  const go = e.target.closest && e.target.closest("[data-go]");
+  if(go){
+    const v = go.getAttribute("data-go");
+    if(v==="home"){ S.view="home"; S.code=""; S.team=null; S.respostas=[]; S.demo=false; S.answers={}; }
+    else if(v==="team" && !S.facilitador){ return; }
+    else S.view=v;
+    render(); return;
+  }
+  const b = e.target.closest && e.target.closest("[data-act]");
+  if(!b) return;
+  const act = b.getAttribute("data-act");
+
+  if(act==="mode-responder" || act==="mode-time"){
+    S.mode = act==="mode-responder" ? "responder" : "time";
+    const cur = ($("#codein")||{}).value||"";
+    S.code = slug(cur);
+    render();
+    const inp=$("#codein"); if(inp){ inp.value=cur; inp.focus(); }
+    return;
+  }
+  if(act==="enter"){
+    const code = ($("#codein")||{}).value||"";
+    b.disabled=true; b.textContent="…";
+    const ok = await enterTeam(code, false);
+    if(ok){ S.view = (S.mode==="responder") ? (S.jaRespondeu ? "me" : "name") : "team"; render(); }
+    return;
+  }
+  if(act==="demo"){
+    demoLoad(); S.view="me"; render(); return;
+  }
+  if(act==="demoresp"){
+    // mesma equipe simulada, mas você entra pela porta da frente e responde de verdade
+    demoLoad();
+    S.respostas = S.respostas.filter(r=>r.respId!==ME.id);
+    S.answers = {}; S.step = 0; S.jaRespondeu = false; S.nome = S.nome||ME.nome||""; S.introStep = introInicial();
+    S.view = "name"; render(); return;
+  }
+  if(act==="exitdemo"){
+    S.demo=false; S.code=""; S.team=null; S.respostas=[]; S.answers={}; S.view="home"; render(); return;
+  }
+  if(act==="create"){
+    const code = prompt("Código do novo time (sem espaços, ex.: COMITE-VALE):", ($("#codein")||{}).value||"");
+    if(!code) return;
+    const nome = prompt("Nome do time (aparece no relatório):", code) || code;
+    const ok = await enterTeam(code, true, nome);
+    if(ok){ S.view="name"; render(); }
+    return;
+  }
+  if(act==="intro-next"){ S.introStep=Math.min(2,(S.introStep||0)+1); render(); return; }
+  if(act==="intro-prev"){ S.introStep=Math.max(0,(S.introStep||0)-1); render(); return; }
+  if(act==="intro-skip"){ S.introStep=2; render(); return; }
+  if(act==="intro-rever"){ S.introStep=0; render(); return; }
+  if(act==="startsurvey"){
+    const nm = (($("#namein")||{}).value||"").trim();
+    if(nm.length<2){ const m=$("#namemsg"); if(m) m.textContent="Escreva seu nome para continuar."; return; }
+    S.nome = nm; ME.nome = nm; LS.set("rxt_me", ME); LS.set("rxt_viu_intro", true);
+    S.step=0; S.view="survey"; render(); return;
+  }
+  if(act==="next"){
+    if(markMissing()) return;
+    S.step++; render(); return;
+  }
+  if(act==="prev"){ S.step=Math.max(0,S.step-1); render(); return; }
+  if(act==="submit"){
+    if(markMissing()) return;
+    const falta = ITEMS.filter(i=>!S.answers[i.id]).length;
+    if(falta){ const m=$("#surveymsg"); if(m) m.textContent="Faltam "+falta+" itens em partes anteriores."; return; }
+    b.disabled=true; b.textContent="Enviando…";
+    await submitSurvey(); return;
+  }
+  if(act==="refresh"){ if(S.demo){ render(); return; } b.disabled=true; await loadRespostas(); render(); return; }
+  if(act==="go-respond-here"){ S.view="name"; S.introStep=introInicial(); S.step=0; render(); return; }
+  if(act==="go-team"){ S.view="team"; render(); return; }
+  if(act==="copycode"){
+    try{ await navigator.clipboard.writeText(S.code); b.textContent="Copiado ✓"; setTimeout(()=>b.textContent="Copiar código do time",1600); }catch(e){}
+    return;
+  }
+  if(act==="present"){ S.pres=0; renderPres(); return; }
+  if(act==="facil"){
+    if(S.facilitador){
+      if(confirm("Sair do modo facilitador?")){ S.facilitador=false; if(S.view==="team") S.view="me"; render(); }
+      return;
+    }
+    const senha = prompt("Modo facilitador — senha:");
+    if(senha===null) return;
+    if(senha === CONFIG.SENHA_FACILITADOR){ S.facilitador = true; render(); }
+    else alert("Senha incorreta.");
+    return;
+  }
+  if(act==="print"){ window.print(); return; }
+  if(act==="export"){ await doExport(); return; }
+  if(act==="newround"){
+    if(S.demo){ alert("Isto é um exemplo simulado — abra um time de verdade para criar rodadas."); return; }
+    if(!confirm("Abrir a rodada "+((S.team?S.team.rodadaAtual:1)+1)+"? As respostas atuais ficam guardadas para comparação.")) return;
+    S.team = Object.assign({}, S.team, {rodadaAtual:(S.team.rodadaAtual||1)+1});
+    await setTeam(S.code, S.team);
+    S.answers={}; await loadRespostas(); render(); return;
+  }
+});
+
+document.addEventListener("keydown", e=>{
+  if(e.key!=="Enter") return;
+  if(e.target && e.target.id==="codein"){ const btn=document.querySelector('[data-act="enter"]'); if(btn) btn.click(); }
+  if(e.target && e.target.id==="namein"){ const btn=document.querySelector('[data-act="startsurvey"]'); if(btn) btn.click(); }
+  const t = e.target.closest && e.target.closest(".tier");
+  if(t){ e.preventDefault(); t.click(); }
+});
+
+/* ============================== BOOT ============================== */
+
+render();
+
+(async function boot(){
+  BACKEND = (CONFIG.BACKEND||"local").toLowerCase();
+  if(BACKEND==="supabase") CONFIG.SUPABASE_ANON_KEY = await descobrirChaveAnon();
+  if(BACKEND==="supabase" && !(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY)) BACKEND="local";
+  if(BACKEND==="sheets" && !CONFIG.SHEETS_URL) BACKEND="local";
+
+  if(BACKEND!=="local"){
+    try{
+      if(BACKEND==="supabase") await rpc("rxt_get_team", {p_code:"__ping__"});
+      else await gs({action:"ping"});
+      DBREADY = true;
+    }catch(e){
+      DBREADY = false;
+      console.warn("Backend indisponível — o app segue em modo local. Detalhe:", e.message);
+    }
+  }
+
+  // Sessão pela URL, como nas demais ferramentas do site:
+  //   ?s=picpay-comite            -> o participante entra direto
+  //   ?s=picpay-comite&modo=time  -> facilitador (ainda pede senha para o relatório)
+  const params = new URLSearchParams(location.search);
+  const qs    = slug(params.get("s") || params.get("time") || "");
+  const qmodo = (params.get("modo")||"").toLowerCase();
+  if(qs){
+    S.sessao = qs;
+    S.mode = (qmodo==="time") ? "time" : "responder";
+    const ok = await enterTeam(qs, true, params.get("nome") || qs);
+    if(ok){
+      S.view = S.jaRespondeu ? "me" : "name";
+      if(qmodo==="time" && S.facilitador) S.view = "team";
+    }
+    render();
+    return;
+  }
+
+  const last = LS.get("rxt_lastcode","");
+  if(last && S.view==="home"){
+    const t = await getTeam(last);
+    if(t){
+      S.code=last; S.team=t; await loadRespostas();
+      const my = S.respostas.find(r=>r.respId===ME.id && r.rodada===t.rodadaAtual);
+      if(my){ S.answers=Object.assign({},my.a); S.nome=my.nome||S.nome; }
+    }
+  }
+  render();
+})();
+
+setInterval(async ()=>{
+  if((S.view==="team"||S.view==="me") && S.code){
+    const before = S.respostas.length;
+    await loadRespostas();
+    if(S.respostas.length!==before) render();
+  }
+}, 20000);
+
+})();
+</script>
+
+</body>
+</html>
