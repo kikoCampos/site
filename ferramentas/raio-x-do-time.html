@@ -2361,8 +2361,8 @@ render();
   }
 
   // Sessão pela URL, como nas demais ferramentas do site:
-  //   ?s=picpay-comite            -> o participante entra direto
-  //   ?s=picpay-comite&modo=time  -> facilitador (ainda pede senha para o relatório)
+  //   ?s=comite-exec            -> o participante entra direto
+  //   ?s=comite-exec&modo=time  -> facilitador (ainda pede senha para o relatório)
   const params = new URLSearchParams(location.search);
   const qs    = slug(params.get("s") || params.get("time") || "");
   const qmodo = (params.get("modo")||"").toLowerCase();
