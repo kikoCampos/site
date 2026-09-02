@@ -827,7 +827,7 @@ function snapDocs(snap){
 }
 
 /* ============ simulação ============ */
-var demo=false,realPeople=null,realRecords=null,realValues=null,realNots=null;
+var demo=false,realPeople=null,realRecords=null,realValues=null,realNots=null,roomConfigured=false;
 var DEMO_A=["Ana Beatriz Rocha","Caio Menezes","Diego Nunes","Fernanda Prado","Gustavo Lins","Helena Braga","Marina Tavares","Rafael Okamoto"];
 var DEMO_TX={
   dono:{p:[["Assumiu a virada do case sem ninguém pedir e voltou com o plano pronto na sessão da tarde.","Assumiu o resultado como seu, sem esperar ordem"],
@@ -935,8 +935,15 @@ async function writeValues(list,nots){setValues(list);NOTS=nots||[];render();awa
 function applyConfig(c){
   if(!c) return;
   if(Array.isArray(c.people)) people=c.people;
-  if(Array.isArray(c.values)&&c.values.length) setValues(c.values);
+  if(Array.isArray(c.values)&&c.values.length){setValues(c.values);roomConfigured=true;}
   if(Array.isArray(c.nots)) NOTS=c.nots;
+}
+/* Sair da simulacao sem perder o que o facilitador acabou de digitar. */
+function ensureRealMode(){
+  if(!demo) return;
+  demo=false;
+  records=realRecords||[];
+  $("#demoBar").hidden=true;$("#demoOn").hidden=false;$("#demoOff").hidden=true;
 }
 function sbErr(p){return p.then(function(res){if(res&&res.error) throw res.error;return res;});}
 
@@ -1443,6 +1450,7 @@ $("#applyPeople").addEventListener("click",function(){
     var base=id,k=2;while(seen[id]){id=base+"-"+k;k++;}
     seen[id]=1;list.push({id:id,name:name,group:grp});
   });
+  ensureRealMode();
   writePeople(list);toast(list.length+" participantes salvos.");
 });
 $("#applyValues").addEventListener("click",function(){
@@ -1453,6 +1461,7 @@ $("#applyValues").addEventListener("click",function(){
     var orfaos=records.filter(function(x){return !keys[x.val];}).length;
     if(orfaos&&!confirm(orfaos+" registro(s) já feitos deixam de somar em algum valor com essa mudança. Continuar?")) return;
   }
+  ensureRealMode();
   writeValues(r.values,r.nots);
   toast(r.values.length+" valores salvos.");
 });
@@ -1538,7 +1547,7 @@ function maybeDemo(){
   demoDecided=true;
   var h=(location.hash||"").replace(/^#/,"").split(/[,\/-]/).filter(Boolean);
   var forced=h.indexOf("demo")>-1;
-  if(!forced&&(people.length||records.length)) return;
+  if(!forced&&(people.length||records.length||roomConfigured)) return;
   enterDemo();
   var t=["reg","mtx","ppl","evd","ref","cfg"].filter(function(x){return h.indexOf(x)>-1;})[0];
   if(!t) selectTab("mtx",true);
