@@ -28,7 +28,12 @@
 window.PV_CONFIG = {
   url: "https://adwmzkksbzmnhjdhdtkw.supabase.co",
   key: "sb_publishable_xmIazktrsioHmJryAUhdgg_Bjm_KZKZ",
-  session: "picpay-01"
+  session: "picpay-01",
+
+  // Senha do modo facilitador. NAO e seguranca: este arquivo e publico e
+  // qualquer pessoa consegue ler daqui. Serve so para o participante nao
+  // entrar sem querer. Troque quando quiser.
+  adminPass: "kiko2026"
 };
 </script>
 <style>
@@ -566,6 +571,84 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
   #meSel{max-width:32vw;font-size:10px}
   .nv{padding:0 8px;letter-spacing:.08em}
 }
+
+/* ============ comportamentos ============ */
+.bhead{font-family:var(--fm);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;align-items:center;gap:9px;margin:30px 0 14px}
+.bhead:first-child{margin-top:0}
+.bhead i{width:7px;height:7px;border-radius:50%;background:var(--pp);display:block;flex-shrink:0}
+.bhead.neg i{background:var(--s2)}
+.bhead.zero i{background:var(--line-2)}
+.bhead b{font-weight:400;color:var(--ink-2);text-transform:none;letter-spacing:0;font-family:var(--fd);font-size:12.5px}
+.blist{display:flex;flex-direction:column;gap:3px}
+.brow{display:grid;grid-template-columns:1fr 128px 46px;gap:16px;align-items:center;
+  padding:11px 12px;border-radius:10px;transition:background .13s}
+.brow:hover{background:var(--panel)}
+.brow .bt{font-size:14px;line-height:1.4;display:flex;align-items:center;gap:10px;min-width:0}
+.brow .bt em{font-style:normal;width:4px;height:17px;border-radius:3px;background:var(--vc);flex-shrink:0}
+.brow .bv{font-family:var(--fm);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--vci);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brow .bbar{height:7px;background:var(--s0);border-radius:4px;overflow:hidden}
+.brow .bbar i{display:block;height:100%;background:var(--vc);border-radius:4px;transition:width .5s cubic-bezier(.2,.7,.3,1)}
+.brow .bn{font-family:var(--fm);font-size:15px;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:760px){
+  .brow{grid-template-columns:1fr 52px;gap:10px}
+  .brow .bbar{display:none}
+}
+.zeros{display:flex;flex-wrap:wrap;gap:7px}
+.zerochip{border:1px dashed var(--line-2);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--ink-3);
+  display:inline-flex;align-items:center;gap:8px}
+.zerochip em{font-style:normal;width:6px;height:6px;border-radius:50%;background:var(--vc);opacity:.5;flex-shrink:0}
+
+/* nota dentro do passo final */
+.scorerow{margin:2px 0 18px}
+.scorerow > .lab{display:block;margin-bottom:9px}
+.scoremini{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:420px}
+.smb{border:1px solid var(--line-2);background:var(--panel);border-radius:10px;padding:9px 4px 8px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;transition:.13s cubic-bezier(.2,.7,.3,1)}
+.smb:hover{border-color:var(--ink-3)}
+.smb b{font-family:var(--fm);font-size:16px;font-weight:600;line-height:1}
+.smb s{text-decoration:none;font-family:var(--fm);font-size:7.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-3);line-height:1.2;text-align:center}
+.smb[aria-pressed="true"]{border-width:2px;padding:8px 3px 7px}
+.scorenote{font-size:12px;color:var(--ink-3);margin-top:9px;line-height:1.45}
+
+/* ============ zona de risco ============ */
+details.danger{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;max-width:900px}
+details.danger > summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;gap:11px;
+  font-size:14px;color:var(--ink-2);transition:background .13s}
+details.danger > summary::-webkit-details-marker{display:none}
+details.danger > summary:hover{background:var(--panel-2)}
+details.danger > summary i{font-style:normal;width:20px;height:20px;border-radius:50%;border:1px solid var(--line-2);
+  display:grid;place-items:center;font-size:11px;color:var(--ink-3);flex-shrink:0;transition:.16s}
+details.danger[open] > summary{border-bottom:1px solid var(--line);background:var(--panel-2)}
+details.danger[open] > summary i{transform:rotate(45deg);border-color:var(--s1);color:var(--s1)}
+details.danger > summary b{font-weight:600;color:var(--ink)}
+details.danger .inner{padding:20px}
+.warnbox{border-left:3px solid var(--s2);background:rgba(222,123,78,.07);border-radius:0 10px 10px 0;
+  padding:13px 16px;font-size:13px;color:var(--ink-2);line-height:1.55;margin-bottom:18px;max-width:64ch}
+.warnbox b{color:var(--ink);font-weight:600}
+
+/* ============ modo facilitador ============ */
+.lockb{background:none;border:1px solid var(--line-2);border-radius:50%;width:32px;height:32px;cursor:pointer;
+  color:var(--ink-3);font-size:13px;display:grid;place-items:center;padding:0;flex-shrink:0;transition:.13s}
+.lockb:hover{border-color:var(--ink-3);color:var(--ink)}
+@media (max-width:700px){.lockb{width:34px;height:34px}}
+.mini-sheet{position:fixed;z-index:71;left:50%;top:50%;transform:translate(-50%,-50%) scale(.97);
+  width:min(400px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:18px;
+  padding:26px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s cubic-bezier(.2,.7,.3,1);
+  box-shadow:0 30px 70px -24px rgba(14,21,18,.4)}
+.mini-sheet.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.mini-sheet .lab{display:block;margin-bottom:9px}
+.mini-sheet h3{font-size:20px;font-weight:700;letter-spacing:-.025em;margin-bottom:7px}
+.mini-sheet p{margin:0 0 18px;font-size:13px;color:var(--ink-2);line-height:1.5}
+.mini-sheet input{width:100%;font-size:16px;padding:12px 13px;border-radius:10px}
+.mini-sheet .row{margin-top:16px}
+.mini-sheet .err{color:var(--s1);font-size:12.5px;margin-top:10px;display:none}
+.mini-sheet.bad{animation:shake .32s}
+.mini-sheet.bad .err{display:block}
+@keyframes shake{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% - 7px),-50%)}75%{transform:translate(calc(-50% + 7px),-50%)}}
+@media (prefers-reduced-motion:reduce){.mini-sheet.bad{animation:none}}
 </style>
 
 <div class="rail">
@@ -574,6 +657,7 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
     <div class="navs" role="tablist">
       <button class="nv" role="tab" data-t="reg" aria-selected="true">Registrar</button>
       <button class="nv" role="tab" data-t="mtx" aria-selected="false">Matriz</button>
+      <button class="nv" role="tab" data-t="bhv" aria-selected="false">Comportamentos</button>
       <button class="nv" role="tab" data-t="ppl" aria-selected="false">Pessoas</button>
       <button class="nv" role="tab" data-t="evd" aria-selected="false">Evidências<em id="nEvd">0</em></button>
       <button class="nv" role="tab" data-t="ref" aria-selected="false">Valores</button>
@@ -583,6 +667,7 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
       <select id="meSel" class="mini" aria-label="Quem é você"><option value="">quem é você?</option></select>
       <span class="live"><i class="dot off" id="dot"></i><span id="connTxt">conectando</span></span>
       <button class="helpb" id="helpBtn" aria-label="Como funciona" title="Como funciona">?</button>
+      <button class="lockb" id="lockBtn" aria-label="Modo facilitador" title="Modo facilitador" hidden>&#9679;</button>
     </div>
   </div>
 </div>
@@ -634,6 +719,16 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
     <div class="mtx-box" id="mtxWrap"></div>
     <div class="key" id="mtxKey"></div>
     <div class="key" style="margin-top:8px"><span class="sp" id="mtxInfo"></span></div>
+  </div>
+</section>
+
+<section id="tab-bhv" hidden>
+  <div class="band">
+    <div class="band-hd tools-only">
+      <div class="t"></div>
+      <div class="tools"><select id="bhvVal" class="mini"><option value="">todos os valores</option></select></div>
+    </div>
+    <div id="bhvList"></div>
   </div>
 </section>
 
@@ -694,7 +789,7 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
         <button class="btn" id="applyPeople">Salvar lista</button>
         <span class="lab" id="peopleInfo"></span>
       </div>
-      <p style="color:var(--ink-3);font-size:13px;max-width:58ch;margin-top:18px">Trocar a lista não apaga registros. Se um nome sair, as evidências dele ficam guardadas e reaparecem se o nome voltar.</p>
+      <div class="warnbox" style="margin-top:20px"><b>Cuidado ao corrigir um nome já em uso.</b> Tirar alguém da lista é seguro: as evidências ficam guardadas e voltam se o nome voltar. Mas <b>renomear</b> depois que a sala começou cria uma pessoa nova e deixa os registros antigos órfãos.</div>
     </div>
   </div>
 
@@ -725,28 +820,7 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
     <div class="row">
       <button class="btn g" id="expCsv">Baixar CSV</button>
       <button class="btn g" id="copyCsv">Copiar para planilha</button>
-    </div>
-  </div>
-
-  <div class="band">
-    <div class="band-hd"><div class="t"><h2>Zerar a sala</h2><p>Exporte o CSV antes. Nada aqui pode ser desfeito.</p></div>
-      <div class="tools"><span class="lab">Sala atual: <span class="mono" id="sessNow" style="color:var(--ink)"></span></span></div></div>
-    <div class="zbox">
-      <div class="zcard" id="zNewCard">
-        <h4>Começar uma sala nova</h4>
-        <p>Cria um código novo e abre a matriz vazia. Não apaga nada — a sala anterior continua guardada e acessível pelo código dela. É o caminho recomendado entre um workshop e outro.</p>
-        <button class="btn" id="zNew">Nova sala</button>
-      </div>
-      <div class="zcard">
-        <h4>Apagar só os registros</h4>
-        <p>Zera a matriz mas mantém os participantes e os valores desta sala. Use quando quiser refazer a dinâmica com o mesmo grupo.</p>
-        <button class="btn d" data-arm="zRecs">Apagar registros</button>
-      </div>
-      <div class="zcard">
-        <h4>Apagar tudo desta sala</h4>
-        <p>Registros, participantes e valores. A sala volta ao estado inicial, com o conjunto genérico de valores.</p>
-        <button class="btn d" data-arm="zAll">Apagar tudo</button>
-      </div>
+      <button class="btn g" id="admOut" hidden>Sair do modo facilitador</button>
     </div>
   </div>
 
@@ -768,6 +842,34 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
       <p><b>Gap se descreve como situação, nunca como característica.</b> Os marcadores já ajudam nisso. “Concordou na sala e discordou no corredor” funciona; “é falso” não.</p>
     </div>
   </div>
+  <div class="band">
+    <div class="band-hd"><div class="t"><h2>Zona de risco</h2><p>Ações que apagam dados. Ficam fechadas de propósito.</p></div>
+      <div class="tools"><span class="lab">Sala atual: <span class="mono" id="sessNow" style="color:var(--ink)"></span></span></div></div>
+    <details class="danger">
+      <summary><i>+</i><span><b>Zerar a sala</b> &mdash; apagar registros, participantes ou valores</span></summary>
+      <div class="inner">
+        <div class="warnbox"><b>Exporte o CSV antes.</b> Nada aqui pode ser desfeito e os dados não têm backup. Se a sua intenção é apenas começar outro workshop, use <b>Nova sala</b> — ela preserva tudo que já existe.</div>
+        <div class="zbox">
+          <div class="zcard" id="zNewCard">
+            <h4>Começar uma sala nova</h4>
+            <p>Cria um código novo e abre a matriz vazia. Não apaga nada — a sala anterior continua guardada e acessível pelo código dela. É o caminho recomendado entre um workshop e outro.</p>
+            <button class="btn" id="zNew">Nova sala</button>
+          </div>
+          <div class="zcard">
+            <h4>Apagar só os registros</h4>
+            <p>Zera a matriz mas mantém os participantes e os valores desta sala. Use quando quiser refazer a dinâmica com o mesmo grupo.</p>
+            <button class="btn d" data-arm="zRecs">Apagar registros</button>
+          </div>
+          <div class="zcard">
+            <h4>Apagar tudo desta sala</h4>
+            <p>Registros, participantes e valores. A sala volta ao estado inicial, com o conjunto genérico de valores.</p>
+            <button class="btn d" data-arm="zAll">Apagar tudo</button>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
 </section>
 
 </div>
@@ -843,6 +945,18 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
   </footer>
 </aside>
 
+<aside class="mini-sheet" id="admSheet" aria-hidden="true" role="dialog" aria-label="Modo facilitador">
+  <span class="lab">Acesso restrito</span>
+  <h3>Modo facilitador</h3>
+  <p id="admMsg">Abre as abas de condução: Pessoas, Evidências, Valores e Ajustes. Os participantes não precisam disso.</p>
+  <input type="email" id="admMail" placeholder="e-mail" autocomplete="username" hidden>
+  <input type="password" id="admPass" placeholder="senha" autocomplete="current-password" enterkeyhint="go" style="margin-top:8px">
+  <div class="err" id="admErr">Senha incorreta.</div>
+  <div class="row" style="display:flex;gap:10px">
+    <button class="btn" id="admGo">Entrar</button>
+    <button class="btn g" id="admCancel">Cancelar</button>
+  </div>
+</aside>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -960,7 +1074,7 @@ var SESSION=(function(){
   try{var q=new URLSearchParams(location.search).get("s");if(q) return q;}catch(e){}
   return CFG.session||"workshop";
 })();
-var SB=null,MODE="local";
+var SB=null,MODE="local",SESSAO_ADM=null;
 /* Participante ve so o essencial. O facilitador abre tudo com ?adm=1 na URL
    (fica lembrado neste navegador; ?adm=0 volta a ser participante). */
 var ADM=(function(){
@@ -971,6 +1085,12 @@ var ADM=(function(){
     return localStorage.getItem("pv_adm")==="1";
   }catch(e){return false;}
 })();
+function setAdm(v){
+  ADM=!!v;
+  try{localStorage.setItem("pv_adm",ADM?"1":"0");}catch(e){}
+  applyRole();
+  if(!ADM&&ADM_TABS.indexOf(tab)>-1) selectTab("reg",true); else render();
+}
 var ADM_TABS=["ppl","evd","ref","cfg"];
 
 var $=function(s){return document.querySelector(s);};
@@ -1082,7 +1202,7 @@ async function writeRecord(r){
   if(demo) return;
   try{
     if(MODE==="artifact") await db.doc("records/"+r.id).set(r);
-    else if(MODE==="supabase") await sbErr(SB.from("pv_records").upsert({id:r.id,session:SESSION,data:r,ts:r.ts}));
+    else if(MODE==="supabase") await sbErr(SB.from("pv_records").insert({id:r.id,session:SESSION,data:r,ts:r.ts}));
     else saveLocal();
   }catch(e){toast("Não consegui salvar. Tente de novo.");}
 }
@@ -1182,6 +1302,7 @@ var HERO={
   reg:["Registre o que você viu.","Um fato observado aqui, no encontro. Escolha a pessoa, marque o comportamento e conte a situação. Seu nome fica visível para todo mundo."],
   mtx:["Quem avaliou quem","Linha é a pessoa avaliada, coluna é quem avaliou. Clique numa célula para ler as evidências daquele par."],
   ppl:["Retrato por pessoa","Um bloco por valor, na cor oficial. A altura é a média recebida. Clique na linha para ler tudo."],
+  bhv:["Comportamentos","O que a sala de fato viu — e o que ninguém viu. É a leitura da cultura, não das pessoas."],
   evd:["Tudo que foi escrito","Mais recente primeiro. Este é o material da conversa — a nota é só o índice."],
   ref:["Os valores da casa","Texto oficial da cultura. Os marcadores são os mesmos que aparecem na hora de registrar."],
   cfg:["Ajustes da sala","Participantes, valores, exportação e o que fazer entre um workshop e outro."]
@@ -1258,22 +1379,20 @@ function evHtml(r,own){
     +(r.mk?'<div class="mkq">'+(r.dir==="-"?"⚠ ":"✓ ")+esc(r.mk)+'</div>':'')
     +'<div class="tx">'+esc(r.text)+'</div>'
     +'<div class="ft"><span>'+new Date(r.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+'</span>'
-    +(own?'<button class="del" data-del="'+esc(r.id)+'">excluir</button>':'')+'</div></div>';
+    +((own&&(ADM||MODE!=="supabase"))?'<button class="del" data-del="'+esc(r.id)+'">excluir</button>':'')+'</div></div>';
 }
 
 /* ============ registrar: uma pergunta por vez ============ */
-var STEPS=5;
+var STEPS=4;
 function stepOf(){
   if(!draft.to) return 1;
   if(!draft.val) return 2;
   if(!draft.mk&&!draft.mkSkip) return 3;
-  if(!draft.score) return 4;
-  return 5;
+  return 4;
 }
 function goBack(){
   var st=draft.step||stepOf();
-  if(st>=5){draft.score=0;draft.step=4;}
-  else if(st===4){draft.mk="";draft.dir="";draft.mkSkip=false;draft.step=3;}
+  if(st===4){draft.mk="";draft.dir="";draft.mkSkip=false;draft.score=0;draft.step=3;}
   else if(st===3){draft.val="";draft.step=2;}
   else if(st===2){draft.to="";draft.step=1;}
   renderReg();
@@ -1319,7 +1438,7 @@ function renderReg(){
   var st=draft.step||stepOf();
   draft.step=st;
   var h='<div class="flow-top"><span class="dots">'
-    +[1,2,3,4,5].map(function(n){return '<i class="'+(n===st?"on":(n<st?"past":""))+'"></i>';}).join("")
+    +[1,2,3,4].map(function(n){return '<i class="'+(n===st?"on":(n<st?"past":""))+'"></i>';}).join("")
     +'</span><span class="st">passo '+st+' de '+STEPS+'</span>'
     +(st>1?'<button class="bk" id="fBack">&#8592; voltar</button>':'')
     +(mine.length?'<button class="mine" id="fMine">meus '+mine.length+' registros</button>':'')
@@ -1357,28 +1476,29 @@ function renderReg(){
       +V.neg.map(function(m){return '<button class="opt mk neg" data-mk="'+esc(m)+'" data-dir="-">'+esc(m)+'</button>';}).join("")
       +'</div><div class="foot"><button class="mine-link" id="fSkip">nenhuma dessas — seguir mesmo assim</button></div>';
   }
-  else if(st===4){
+  else{
     var sugN=draft.dir==="+"?4:(draft.dir==="-"?2:0);
-    h+='<div class="q">Quanto?</div>'
-      +'<p class="qs">3 é o esperado. Só suba ou desça se viu motivo para isso.</p><div class="opts scale5">'
+    if(!draft.score&&sugN) draft.score=sugN;
+    h+='<div class="q">Conte a situação.</div>'
+      +'<p class="qs">Quando foi, o que a pessoa fez ou disse, e o que mudou por causa disso.</p>'
+      +'<div class="scorerow"><span class="lab">Nota</span><div class="scoremini" id="scoreMini">'
       +SCALE.map(function(x){
-          var f=scoreFill(x.v), sug=x.v===sugN;
-          return '<button class="opt sq'+(sug?" done":"")+'" data-sc="'+x.v+'">'
+          var f=scoreFill(x.v), on=draft.score===x.v;
+          return '<button class="smb" type="button" data-sc="'+x.v+'" aria-pressed="'+on+'"'
+            +(on?' style="border-color:'+f.bg+'"':'')+'>'
             +'<b style="color:'+(x.v===3?"var(--ink)":f.bg)+'">'+x.v+'</b><s>'+esc(x.t)+'</s></button>';
         }).join("")
       +'</div>'
-      +(sugN?'<div class="sughint"><i></i>o '+sugN+' já vem sugerido pelo que você marcou — mude se discordar</div>':'');
-  }
-  else{
-    h+='<div class="q">Conte a situação.</div>'
-      +'<p class="qs">Quando foi, o que a pessoa fez ou disse, e o que mudou por causa disso.</p>'
+      +'<div class="scorenote">'+(sugN&&draft.score===sugN
+          ? 'O '+sugN+' veio do comportamento que você marcou. Toque em outro número se discordar.'
+          : '3 é o esperado. Só suba ou desça se viu motivo para isso.')+'</div></div>'
       +'<textarea id="evTxt" rows="5" placeholder="Foi na dinâmica da manhã, quando…"></textarea>'
       +'<div class="count" id="evCount">0 / '+MINCH+' caracteres mínimos</div>'
       +'<div class="foot"><button class="btn" id="saveBtn" disabled>Registrar</button>'
       +'<span class="lab">seu nome fica visível</span></div>';
   }
   $("#flow").innerHTML=h;
-  if(st===5){
+  if(st===4){
     var ta=$("#evTxt");
     if(draft.text) ta.value=draft.text;
     ta.addEventListener("input",function(){draft.text=ta.value;syncCount();});
@@ -1390,7 +1510,7 @@ function syncCount(){
   var ta=$("#evTxt"); if(!ta) return;
   var len=ta.value.trim().length,c=$("#evCount");
   if(c){c.textContent=len<MINCH?(len+" / "+MINCH+" caracteres mínimos"):(len+" caracteres");c.classList.toggle("ok",len>=MINCH);}
-  var b=$("#saveBtn"); if(b) b.disabled=!(len>=MINCH);
+  var b=$("#saveBtn"); if(b) b.disabled=!(len>=MINCH&&draft.score>0);
 }
 function ghostCard(){return "";}
 function renderMine(){}
@@ -1484,6 +1604,53 @@ function wireCross(){
   });
 }
 
+/* ============ comportamentos: o que a sala de fato viu ============ */
+function renderBhv(){
+  var fv=$("#bhvVal").value;
+  var vals=fv?VALUES.filter(function(v){return v.k===fv;}):VALUES;
+  var cont={};
+  records.forEach(function(r){
+    if(!r.mk) return;
+    if(fv&&r.val!==fv) return;
+    var k=r.val+"||"+r.mk;
+    if(!cont[k]) cont[k]={val:r.val,mk:r.mk,dir:r.dir,n:0};
+    cont[k].n++;
+  });
+  var todos=[];
+  vals.forEach(function(v){
+    v.pos.forEach(function(m){todos.push({val:v.k,mk:m,dir:"+",n:(cont[v.k+"||"+m]||{}).n||0});});
+    v.neg.forEach(function(m){todos.push({val:v.k,mk:m,dir:"-",n:(cont[v.k+"||"+m]||{}).n||0});});
+  });
+  var vistos=todos.filter(function(x){return x.n>0;}).sort(function(a,b){return b.n-a.n;});
+  var pos=vistos.filter(function(x){return x.dir==="+";});
+  var neg=vistos.filter(function(x){return x.dir==="-";});
+  var zero=todos.filter(function(x){return x.n===0;});
+  var max=vistos.length?vistos[0].n:1;
+
+  function linha(x){
+    var v=VMAP[x.val]||{c:"var(--ink-3)",ci:"var(--ink-3)",n:x.val};
+    return '<div class="brow" style="--vc:'+v.c+';--vci:'+v.ci+'">'
+      +'<span class="bt"><em></em><span>'+esc(x.mk)+'</span></span>'
+      +'<span class="bbar"><i style="width:'+(x.n/max*100)+'%"></i></span>'
+      +'<span class="bn">'+x.n+'</span></div>';
+  }
+  var h='';
+  if(!records.length){
+    h='<div class="none">nenhum registro ainda — os comportamentos aparecem conforme a sala escreve</div>';
+  }else{
+    h+='<div class="bhead"><i></i>o que a sala mais viu <b>&middot; '+pos.length+' comportamentos observados</b></div>'
+      +'<div class="blist">'+(pos.length?pos.map(linha).join(""):'<div class="none">nada aqui ainda</div>')+'</div>';
+    h+='<div class="bhead neg"><i></i>onde mais ficou devendo <b>&middot; '+neg.length+' comportamentos citados</b></div>'
+      +'<div class="blist">'+(neg.length?neg.map(linha).join(""):'<div class="none">nenhum gap registrado</div>')+'</div>';
+    h+='<div class="bhead zero"><i></i>ninguém viu <b>&middot; '+zero.length+' de '+todos.length+' comportamentos sem um único registro</b></div>'
+      +'<div class="zeros">'+(zero.length?zero.map(function(x){
+          var v=VMAP[x.val]||{c:"var(--ink-3)"};
+          return '<span class="zerochip" style="--vc:'+v.c+'"><em></em>'+esc(x.mk)+'</span>';
+        }).join(""):'<div class="none">todos os comportamentos apareceram pelo menos uma vez</div>')+'</div>';
+  }
+  $("#bhvList").innerHTML=h;
+}
+
 /* ============ pessoas ============ */
 function renderPpl(){
   var fg=$("#pplGrp").value,sort=$("#pplSort").value;
@@ -1566,10 +1733,11 @@ function render(){
   renderHero();
   var g=groups().map(function(x){return {v:x,l:x};});
   [["#mtxGrp","todos os grupos"],["#pplGrp","todos os grupos"]].forEach(function(x){var e=$(x[0]);fillSelect(e,g,e.value,x[1]);});
-  [["#mtxVal","todos os valores"],["#fVal","todos os valores"]].forEach(function(x){var e=$(x[0]);fillSelect(e,VALUES.map(function(v){return {v:v.k,l:v.n};}),e.value,x[1]);});
+  [["#mtxVal","todos os valores"],["#fVal","todos os valores"],["#bhvVal","todos os valores"]].forEach(function(x){var e=$(x[0]);fillSelect(e,VALUES.map(function(v){return {v:v.k,l:v.n};}),e.value,x[1]);});
   var fp=$("#fPerson");fillSelect(fp,peopleOpts(null),fp.value,"todas as pessoas");
   if(tab==="reg") renderReg();
   if(tab==="mtx") renderMtx();
+  if(tab==="bhv") renderBhv();
   if(tab==="ppl") renderPpl();
   if(tab==="evd") renderEvd();
   if(tab==="ref") renderRef();
@@ -1665,6 +1833,12 @@ function applyRole(){
     if(ADM_TABS.indexOf(b.dataset.t)>-1) b.hidden=!ADM;
   });
   var f=$("#howFacil"); if(f) f.hidden=!ADM;
+  var l=$("#lockBtn");
+  if(l){
+    l.hidden=ADM;
+    l.title="Modo facilitador";
+  }
+  var sair=$("#admOut"); if(sair) sair.hidden=!ADM;
 }
 function selectTab(t,scroll){
   if(!ADM&&ADM_TABS.indexOf(t)>-1) t="reg";
@@ -1692,11 +1866,11 @@ $("#flow").addEventListener("click",function(e){
   }
   if((b=e.target.closest("[data-mk]"))){
     draft.mk=b.dataset.mk;draft.dir=b.dataset.dir;draft.mkSkip=false;
-    if(!draft.score) draft.score=draft.dir==="+"?4:2;
+    draft.score=draft.dir==="+"?4:2;
     draft.step=4;renderReg();return;
   }
-  if(e.target.closest("#fSkip")){draft.mkSkip=true;draft.mk="";draft.dir="";draft.step=4;renderReg();return;}
-  if((b=e.target.closest("[data-sc]"))){draft.score=+b.dataset.sc;draft.step=5;renderReg();return;}
+  if(e.target.closest("#fSkip")){draft.mkSkip=true;draft.mk="";draft.dir="";draft.score=0;draft.step=4;renderReg();return;}
+  if((b=e.target.closest("[data-sc]"))){draft.score=+b.dataset.sc;draft.text=($("#evTxt")||{}).value||draft.text;renderReg();return;}
   if(e.target.closest("#fBack")){goBack();return;}
   if(e.target.closest("#fNext")){draft={to:"",val:"",score:0,mk:"",dir:"",text:"",step:1,saved:false};renderReg();return;}
   if(e.target.closest("#fMine")){openPerson(me);return;}
@@ -1722,17 +1896,73 @@ document.addEventListener("click",function(e){
 $("#dClose").addEventListener("click",closeDrawer);
 $("#scrim").addEventListener("click",closeDrawer);
 $("#helpBtn").addEventListener("click",openHowto);
+
+/* ---- modo facilitador ----
+   Trava de conveniência, não de segurança: a senha está no arquivo,
+   que é público. Serve para o participante não entrar sem querer. */
+function openAdm(){
+  var comAuth=(MODE==="supabase"&&!!SB);
+  $("#admMail").hidden=!comAuth;
+  $("#admMsg").textContent=comAuth
+    ? "Entre com a conta de facilitador. É a mesma sessão que autoriza mudar a configuração e apagar dados."
+    : "Abre as abas de condução: Pessoas, Evidências, Valores e Ajustes. Os participantes não precisam disso.";
+  $("#admErr").textContent="Senha incorreta.";
+  $("#admSheet").classList.remove("bad");
+  $("#admSheet").classList.add("on");$("#admSheet").setAttribute("aria-hidden","false");
+  $("#howScrim").classList.add("on");
+  $("#admPass").value="";
+  setTimeout(function(){try{(comAuth?$("#admMail"):$("#admPass")).focus();}catch(e){}},80);
+}
+function closeAdm(){
+  $("#admSheet").classList.remove("on","bad");$("#admSheet").setAttribute("aria-hidden","true");
+  if(!$("#howto").classList.contains("on")) $("#howScrim").classList.remove("on");
+}
+function admFalhou(msg){
+  var sh=$("#admSheet"); sh.classList.remove("bad"); void sh.offsetWidth; sh.classList.add("bad");
+  $("#admErr").textContent=msg||"Senha incorreta.";
+  try{$("#admPass").select();}catch(e){}
+}
+async function tentarAdm(){
+  var btn=$("#admGo");
+  if(MODE==="supabase"&&SB){
+    var email=($("#admMail").value||"").trim(), pass=$("#admPass").value;
+    if(!email||!pass){admFalhou("Preencha e-mail e senha.");return;}
+    btn.disabled=true; btn.textContent="Entrando…";
+    try{
+      var r=await SB.auth.signInWithPassword({email:email,password:pass});
+      if(r.error) throw r.error;
+      SESSAO_ADM=r.data.session||null;
+      closeAdm(); setAdm(true);
+      toast("Modo facilitador. Sessão autenticada.");
+    }catch(e){
+      admFalhou("Não entrou: "+((e&&e.message)||"verifique e-mail e senha."));
+    }
+    btn.disabled=false; btn.textContent="Entrar";
+    return;
+  }
+  /* sem Supabase (artifact ou modo local): trava simples de conveniência */
+  if($("#admPass").value===(CFG.adminPass||"facilitador")){
+    closeAdm(); setAdm(true); toast("Modo facilitador.");
+  }else admFalhou();
+}
+$("#lockBtn").addEventListener("click",openAdm);
+$("#admGo").addEventListener("click",tentarAdm);
+$("#admCancel").addEventListener("click",closeAdm);
+$("#admPass").addEventListener("keydown",function(e){if(e.key==="Enter") tentarAdm();});
 $("#howClose").addEventListener("click",closeHowto);
-$("#howScrim").addEventListener("click",closeHowto);
+$("#howScrim").addEventListener("click",function(){ if($("#admSheet").classList.contains("on")) closeAdm(); else closeHowto(); });
 $("#howGo").addEventListener("click",function(){closeHowto();selectTab("reg",true);});
 $("#howFacil").addEventListener("click",function(){closeHowto();selectTab("cfg",true);});
 document.addEventListener("keydown",function(e){
   if(e.key!=="Escape") return;
-  if($("#howto").classList.contains("on")) closeHowto(); else closeDrawer();
+  if($("#admSheet").classList.contains("on")) closeAdm();
+  else if($("#howto").classList.contains("on")) closeHowto();
+  else closeDrawer();
 });
 ["#mtxVal","#mtxGrp"].forEach(function(s){$(s).addEventListener("change",renderMtx);});
 ["#pplGrp","#pplSort"].forEach(function(s){$(s).addEventListener("change",renderPpl);});
 ["#fPerson","#fVal","#fDir"].forEach(function(s){$(s).addEventListener("change",renderEvd);});
+$("#bhvVal").addEventListener("change",renderBhv);
 $("#fQ").addEventListener("input",renderEvd);
 
 $("#applyPeople").addEventListener("click",function(){
@@ -1778,6 +2008,10 @@ $("#expCsv").addEventListener("click",async function(){
 $("#copyCsv").addEventListener("click",async function(){
   try{await navigator.clipboard.writeText(buildCsv());toast("CSV copiado. Cole numa planilha.");}
   catch(e){toast("Não consegui copiar.");}
+});
+$("#admOut").addEventListener("click",async function(){
+  if(MODE==="supabase"&&SB){try{await SB.auth.signOut();}catch(e){}}
+  SESSAO_ADM=null; setAdm(false); toast("Você voltou à visão de participante.");
 });
 $("#demoOn").addEventListener("click",enterDemo);
 $("#demoOff").addEventListener("click",exitDemo);
@@ -1845,7 +2079,7 @@ function maybeDemo(){
   var forced=h.indexOf("demo")>-1;
   if(!forced&&(people.length||records.length||roomConfigured)) return;
   enterDemo();
-  var t=["reg","mtx","ppl","evd","ref","cfg"].filter(function(x){return h.indexOf(x)>-1;})[0];
+  var t=["reg","mtx","bhv","ppl","evd","ref","cfg"].filter(function(x){return h.indexOf(x)>-1;})[0];
   if(!t) selectTab("mtx",true);
 }
 (function(){
@@ -1906,6 +2140,13 @@ function cleanRecords(arr){
     try{
       SB=window.supabase.createClient(CFG.url,CFG.key);
       MODE="supabase";
+      try{
+        var ses=await SB.auth.getSession();
+        SESSAO_ADM=(ses.data&&ses.data.session)||null;
+        if(SESSAO_ADM){ADM=true;}
+        else if(localStorage.getItem("pv_adm")==="1"){ /* trava antiga: nao vale mais com Supabase */ ADM=false; }
+        applyRole();
+      }catch(e){}
       setLive("ao vivo · "+SESSION,true,"Sala "+SESSION);
       var pull=async function(){
         try{
