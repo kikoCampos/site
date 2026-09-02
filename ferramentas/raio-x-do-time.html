@@ -77,7 +77,7 @@ body{
   background-repeat:no-repeat;
   color:var(--ink);
   font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
-  font-size:15.5px;
+  font-size:17.5px;
   line-height:1.55;
   -webkit-font-smoothing:antialiased;
 }
@@ -218,7 +218,7 @@ input.tx:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(
 .qitem.miss .qtext::after{content:"falta responder";display:inline-block;margin-left:10px;
   font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;color:var(--fragil);vertical-align:2px}
-.qtext{font-size:17.5px;line-height:1.45;margin-bottom:16px;max-width:58ch}
+.qtext{font-size:22px;line-height:1.4;margin-bottom:16px;max-width:58ch}
 .qnum{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);margin-right:10px}
 
 .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;max-width:540px}
@@ -230,14 +230,33 @@ input.tx:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(
 .scale label .swatch{width:100%;height:7px;background:var(--sw);transition:height .14s}
 .scale label:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
 .scale input{position:absolute;opacity:0;width:0;height:0}
-.scale .n{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:17px;margin-top:6px;line-height:1}
-.scale .w{font-family:"Archivo",sans-serif;font-size:9.5px;letter-spacing:.045em;text-transform:uppercase;
-  color:var(--muted);line-height:1.15;padding:0 2px}
+.scale .n{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:19px;margin-top:6px;line-height:1}
+.scale .w{font-family:"Archivo",sans-serif;font-size:clamp(9px,2.3vw,10.5px);letter-spacing:.045em;
+  text-transform:uppercase;color:var(--muted);line-height:1.15;padding:0 2px;
+  /* sem width:100% o rótulo assume a largura do texto e o botão o corta */
+  width:100%;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+/* No celular o botão tem ~50px: sobra usada para o rótulo caber sem corte. */
+@media(max-width:560px){
+  .wrap{padding-left:16px;padding-right:16px}
+  .qitem{padding-left:12px}
+  .scale{gap:5px}
+  .scale label{padding-left:2px;padding-right:2px}
+  .scale .w{padding:0;letter-spacing:.02em}
+}
 .scale label:has(input:checked){background:var(--sw);border-color:var(--sw);box-shadow:var(--shadow-lift)}
 .scale label:has(input:checked) .swatch{height:0}
 .scale label:has(input:checked) .n{color:var(--swt);margin-top:13px}
 .scale label:has(input:checked) .w{color:var(--swt);opacity:.9}
 .scale label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+/* Desktop: a afirmação à esquerda e a escala à direita, na mesma linha.
+   O olho vai da frase direto para a resposta e as 30 cabem em menos rolagem. */
+@media(min-width:900px){
+  .qitem{display:grid;grid-template-columns:minmax(0,1fr) 540px;
+         column-gap:40px;row-gap:8px;align-items:center;padding-top:26px;padding-bottom:26px}
+  .qitem>.qtext{grid-column:1;grid-row:1/3;margin-bottom:0;max-width:none;align-self:center}
+  .qitem>.scale{grid-column:2;grid-row:1;max-width:none}
+  .qitem>.scalehint{grid-column:2;grid-row:2;max-width:none}
+}
 .scalehint{display:flex;justify-content:space-between;max-width:540px;margin-top:8px;
   font-family:"Archivo",sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 
@@ -308,6 +327,16 @@ input.tx:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(
 
 /* item table */
 .itemrow{padding:16px 0;border-bottom:1px solid var(--line)}
+/* Desktop: a afirmação e a nota à esquerda, a distribuição à direita.
+   Mesma leitura horizontal do questionário, e sem meia tela vazia. */
+@media(min-width:1000px){
+  .itemrow{display:grid;grid-template-columns:minmax(0,1fr) 460px;
+           column-gap:44px;row-gap:10px;align-items:center}
+  .itemrow>.itemhead{grid-column:1;grid-row:1}
+  .itemrow>.hist{grid-column:2;grid-row:1;max-width:none}
+  .itemrow>.rnote{grid-column:1;grid-row:2;align-self:start}
+}
+@media print{ .itemrow{display:block} }
 .itemrow:last-child{border-bottom:0}
 .itemhead{display:flex;gap:14px;align-items:flex-start;justify-content:space-between}
 .itemhead p{font-size:15.5px;line-height:1.45;max-width:56ch}
@@ -535,6 +564,16 @@ footer.ft{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);colo
   color:var(--c);line-height:.95;letter-spacing:-.03em}
 .chapnum .b{font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;color:var(--muted);margin-left:8px}
+/* Desktop: a definição do comportamento e a sua leitura dividem a largura,
+   em vez de duas colunas de texto empilhadas com meia tela vazia à direita. */
+@media(min-width:1000px){
+  .chapbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:44px}
+  .chapbody>*{grid-column:1/-1;min-width:0}
+  .chapbody>.lede{grid-column:1;grid-row:1;max-width:none;align-self:start}
+  .chapbody>.rlead{grid-column:2;grid-row:1;max-width:none;align-self:start;margin-top:0}
+  .chapbody:not(:has(>.rlead))>.lede{grid-column:1/-1;max-width:62ch}
+}
+@media print{ .chapbody{display:block} }
 .chapbody{background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
   border:1px solid var(--glass-brd);border-top:0;border-radius:0 0 var(--r) var(--r);
   padding:clamp(22px,3vw,34px);box-shadow:var(--shadow)}
@@ -550,7 +589,7 @@ footer.ft{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);colo
 .rscore{text-align:right}
 .rscore .k{font-family:"Archivo",sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .rscore .v{font-family:"IBM Plex Mono",monospace;font-size:clamp(34px,5vw,52px);font-weight:600;line-height:.95;letter-spacing:-.03em}
-.rlead{font-family:"Source Serif 4",Georgia,serif;font-size:17.5px;line-height:1.55;color:var(--ink);max-width:62ch;
+.rlead{font-family:"Source Serif 4",Georgia,serif;font-size:20px;line-height:1.55;color:var(--ink);max-width:62ch;
   border-left:4px solid var(--accent);padding-left:20px;margin:22px 0 4px}
 .rbox{border-radius:4px;padding:20px 22px;margin-top:20px}
 .rbox h4{font-family:"Archivo",sans-serif;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
@@ -1302,7 +1341,7 @@ function view_survey(){
     ${S.step===0?`<div class="card pad" style="padding-bottom:20px">
       <p class="eyebrow">Como responder</p>
       <h2 style="font-size:24px;margin:8px 0 10px">Trinta afirmações sobre o dia a dia do time.</h2>
-      <p class="lede" style="font-size:15.5px">Marque com que frequência cada uma acontece de verdade, olhando os últimos três meses — não o melhor dia nem o pior. As afirmações vêm fora de ordem e sem rótulo, de propósito: o retrato fica mais fiel quando você responde uma de cada vez.</p>
+      <p class="lede" style="font-size:17px">Marque com que frequência cada uma acontece de verdade, olhando os últimos três meses — não o melhor dia nem o pior. As afirmações vêm fora de ordem e sem rótulo, de propósito: o retrato fica mais fiel quando você responde uma de cada vez.</p>
     </div>`:""}
     <div class="card pad">
       ${rows}
@@ -1454,7 +1493,7 @@ function behavBlocks(A, mine){
         <span class="behavbarnum">${fmt(d.mean)}</span>
       </div>
       <div class="chapbody">
-      <p class="lede" style="font-size:15px">${esc(b.def)}</p>
+      <p class="lede" style="font-size:17px">${esc(b.def)}</p>
       <hr class="hr" style="margin:20px 0 0">
       ${itemsHTML(k, A, mine)}
       <div class="tworow" style="margin-top:22px">
@@ -1494,7 +1533,7 @@ function matrixHTML(respostas, rodada){
   }).join("");
   return `<section class="card pad">
     <h3 style="font-size:20px;margin:0 0 6px">O quanto vocês enxergam o mesmo time</h3>
-    <p class="lede" style="font-size:15px;margin-bottom:18px">Cada coluna é uma pessoa, sem identificação, ordenadas da leitura mais severa para a mais generosa. Uma linha com tons muito diferentes mostra um nível que o time ainda vê de formas distintas — e alinhar isso costuma ser o primeiro ganho.</p>
+    <p class="lede" style="font-size:17px;margin-bottom:18px">Cada coluna é uma pessoa, sem identificação, ordenadas da leitura mais severa para a mais generosa. Uma linha com tons muito diferentes mostra um nível que o time ainda vê de formas distintas — e alinhar isso costuma ser o primeiro ganho.</p>
     <div class="scroll-x"><div class="mx">${head}${rows}</div></div>
   </section>`;
 }
@@ -1746,7 +1785,7 @@ function view_me(){
         </div>
       </div>
       <div class="chapbody">
-      <p class="lede" style="font-size:15.5px">${esc(b.def)}</p>
+      <p class="lede" style="font-size:17px">${esc(b.def)}</p>
       <p class="rlead">${esc(b.leitura[nivel])}${gapTxt?" "+esc(gapTxt):""}</p>
 
       <h4 style="font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:26px 0 4px">Suas seis respostas · você / média do time</h4>
