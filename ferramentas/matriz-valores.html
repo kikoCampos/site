@@ -228,7 +228,8 @@ section[hidden]{display:none}
 
 /* ---------- matriz ---------- */
 .mtx-box{border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:auto;max-height:78vh;
-  width:fit-content;max-width:100%;padding:14px 16px 16px}
+  width:100%;padding:14px 16px 16px}
+table.mtx{width:100%}
 table.mtx{border-collapse:separate;border-spacing:0;font-family:var(--fd)}
 table.mtx th,table.mtx td{padding:0}
 table.mtx thead th{position:sticky;top:0;z-index:3;background:var(--panel);vertical-align:bottom;padding:0 3px 10px}
@@ -250,6 +251,10 @@ td.c{padding:2px}
 td.c button{width:100%;height:100%;border:0;cursor:pointer;font:inherit;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:1px;padding:0;border-radius:9px;transition:box-shadow .1s}
 td.c button b{font-family:var(--fm);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
+table.mtx.big td.c button b{font-size:19px}
+table.mtx.big td.c button s{font-size:9.5px}
+table.mtx.big td.c button{gap:3px}
+table.mtx.big tbody th{font-size:14px}
 td.c button s{font-family:var(--fm);font-size:8.5px;text-decoration:none;opacity:.62;line-height:1;letter-spacing:.03em}
 td.c button:hover{box-shadow:inset 0 0 0 2px var(--ink)}
 td.c.e button{cursor:default;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line)}
@@ -1547,13 +1552,22 @@ function renderMtx(){
   var cm={};rs.forEach(function(r){var k=r.toId+"|"+r.fromId;(cm[k]=cm[k]||[]).push(r);});
 
   var n=list.length;
-  var W = n<=10?72 : n<=16?54 : n<=24?38 : 28;
-  var H = n<=10?48 : n<=16?40 : n<=24?32 : 26;
+  var nameW = n<=16?210:160;
+  var totW  = 70;
+  /* a celula cresce ate preencher a caixa: sem sobra a direita, sem aperto */
+  var boxEl=$("#mtxWrap");
+  var avail=(boxEl&&boxEl.clientWidth?boxEl.clientWidth:1180)-36;
+  var W=Math.floor((avail-nameW-totW)/n);
+  W=Math.max(28,Math.min(120,W));
+  /* teto vertical: a sala inteira deve caber na caixa sem rolar */
+  /* reserva: cabecalho das colunas (~72) + linha "media dada" (~63) + respiro da caixa */
+  var vh=Math.round((window.innerHeight||760)*0.78)-178;
+  var H=Math.max(26,Math.min(74,Math.round(W*0.62+8),Math.floor(vh/n)));
   var showCount = W>=54;
   var showNum   = W>=38;
-  var nameW = n<=16?210:160;
+  var big       = W>=88;
 
-  var h='<table class="mtx"><thead><tr>'
+  var h='<table class="mtx'+(big?" big":"")+'"><thead><tr>'
     +'<th class="cor" style="min-width:'+nameW+'px"><i>avaliado &#8595;</i><i>avaliador &#8594;</i></th>';
   var avCls = W>=72?"" : W>=54?"sm" : "xs";
   var showColName = W>=54;              /* abaixo disso o avatar ja carrega as iniciais */
@@ -1563,7 +1577,7 @@ function renderMtx(){
       +(showColName?'<span class="ch">'+esc(shortName(p.name))+'</span>':'')
       +'</span></th>';
   });
-  h+='<th class="totlab" style="width:'+Math.max(W,64)+'px"><span class="ch">M\u00c9DIA<br>RECEBIDA</span></th></tr></thead><tbody>';
+  h+='<th class="totlab" style="width:'+totW+'px"><span class="ch">M\u00c9DIA<br>RECEBIDA</span></th></tr></thead><tbody>';
 
   var colScores={};
   list.forEach(function(rp){
@@ -1611,6 +1625,14 @@ function renderKey(){
   }).join("")+'<span style="margin-left:8px">1 contradiz \u2192 5 refer\u00eancia</span>'
    +'<span class="sp" id="mtxInfo2"></span>';
 }
+/* a matriz e dimensionada pela largura real: refaz ao redimensionar a janela */
+var mtxRT=null;
+window.addEventListener("resize",function(){
+  if(tab!=="mtx") return;
+  clearTimeout(mtxRT);
+  mtxRT=setTimeout(function(){ if(tab==="mtx") renderMtx(); },140);
+});
+
 /* destaque cruzado: ao passar numa c\u00e9lula, acende a coluna */
 function wireCross(){
   var box=$("#mtxWrap");
