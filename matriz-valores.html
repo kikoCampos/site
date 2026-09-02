@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0A0A0B">
+<title>Matriz de Valores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+/* ==========================================================
+   CONFIGURACAO — preencha os dois valores abaixo.
+   Supabase → Project Settings → API
+     url : Project URL
+     key : anon / public key
+   A chave anon e publica por natureza. Quem tiver o link desta
+   pagina pode ler e escrever nas tabelas pv_records / pv_config.
+   Use apenas para workshops; apague os dados depois.
+
+   session : identificador da sala. Cada workshop usa um valor
+   diferente para nao misturar dados. Pode ser trocado na URL:
+     matriz-valores.html?s=cliente-2026-03
+   ========================================================== */
+window.PV_CONFIG = {
+  url: "",
+  key: "",
+  session: "sala-01"
+};
+</script>
+<style>
+  html,body{margin:0;padding:0;background:#0A0A0B;color-scheme:dark}
+  img{max-width:100%}
+</style>
+</head>
+<body>
+<style>
+:root{
+  --ground:#0A0A0B;
+  --panel:#131316;
+  --panel-2:#1A1A1E;
+  --line:#232327;
+  --line-2:#35363D;
+  --ink:#FFFFFF;
+  --ink-2:#9EA0A8;
+  --ink-3:#686A73;
+  --pp:#0FCD7B;
+  --pp-dim:#0A3826;
+  /* escala de nota: alerta / neutro / verde */
+  --s1:#E8323C;
+  --s2:#F1592A;
+  --s3:#7A7C85;
+  --s4:#6ED8A2;
+  --s5:#0FCD7B;
+  --s0:#212126;
+  --rail:56px;
+  --fd:"Poppins","Helvetica Neue",Arial,sans-serif;
+  --fm:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--ground)}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--fd);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.02em;text-wrap:balance}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--pp);outline-offset:2px}
+::selection{background:var(--pp);color:#04120B}
+
+.lab{font-family:var(--fm);font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
+.mono{font-family:var(--fm);font-variant-numeric:tabular-nums}
+.shell{max-width:1280px;margin:0 auto;padding:0 26px}
+@media (max-width:640px){.shell{padding:0 16px}}
+
+/* ---------- rail ---------- */
+.rail{position:sticky;top:0;z-index:50;background:rgba(10,10,11,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.rail-in{max-width:1280px;margin:0 auto;padding:0 26px;height:var(--rail);display:flex;align-items:center;gap:24px}
+.mark{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.mark .sq{width:20px;height:20px;border-radius:6px;background:var(--pp);display:grid;place-items:center;color:#04120B;font-weight:700;font-size:12px;line-height:1}
+.mark b{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.navs{display:flex;margin-right:auto;overflow-x:auto;scrollbar-width:none;height:100%}
+.navs::-webkit-scrollbar{display:none}
+.nv{background:none;border:0;padding:0 14px;height:100%;cursor:pointer;position:relative;
+  font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transition:color .14s}
+.nv:hover{color:var(--ink-2)}
+.nv[aria-selected="true"]{color:var(--ink)}
+.nv[aria-selected="true"]::after{content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:2px;background:var(--pp)}
+.nv em{font-style:normal;color:var(--ink-3);margin-left:5px}
+.rail-r{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--pp);box-shadow:0 0 0 3px var(--pp-dim);display:inline-block}
+.dot.off{background:var(--s2);box-shadow:0 0 0 3px rgba(241,89,42,.15)}
+.live{display:flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+@media (max-width:900px){.rail-in{gap:12px}.live span{display:none}.mark b{display:none}}
+
+select,input[type=text],textarea{background:var(--panel);border:1px solid var(--line-2);border-radius:8px;padding:9px 11px;color:var(--ink);max-width:100%;transition:border-color .14s}
+select:hover,input[type=text]:hover,textarea:hover{border-color:var(--ink-3)}
+select{padding-right:26px;cursor:pointer}
+textarea{width:100%;resize:vertical;line-height:1.55;font-size:15px}
+.mini{padding:6px 9px;font-family:var(--fm);font-size:11px;letter-spacing:.03em;border-radius:6px}
+
+/* ---------- demo bar ---------- */
+.demobar{position:sticky;top:var(--rail);z-index:45;background:var(--v-disp);color:#1A0F00;
+  display:flex;align-items:center;justify-content:center;gap:14px;padding:7px 16px;
+  font-family:var(--fm);font-size:10px;letter-spacing:.13em;text-transform:uppercase;font-weight:600}
+.demobar button{background:none;border:1px solid rgba(26,15,0,.45);border-radius:5px;padding:2px 9px;font:inherit;cursor:pointer;color:inherit}
+.demobar button:hover{background:rgba(26,15,0,.12)}
+
+/* ---------- bands ---------- */
+section[hidden]{display:none}
+.band{border-bottom:1px solid var(--line);padding:42px 0}
+.band:last-child{border-bottom:0;padding-bottom:110px}
+.band-hd{display:flex;align-items:flex-end;justify-content:space-between;gap:26px;flex-wrap:wrap;margin-bottom:28px}
+.band-hd .t{max-width:54ch}
+.band-hd h2{font-size:clamp(26px,3.6vw,40px);line-height:1.04;font-weight:700;letter-spacing:-.035em}
+.band-hd p{margin:11px 0 0;color:var(--ink-2);font-size:14.5px;max-width:58ch}
+.band-hd .tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.figure{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap}
+.fig{display:flex;flex-direction:column;gap:3px}
+.fig .n{font-family:var(--fm);font-size:36px;font-weight:600;line-height:.9;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.fig .n small{font-size:16px;color:var(--ink-3);margin-left:1px}
+.covbar{width:160px;height:3px;background:var(--s0);overflow:hidden;margin-top:9px;border-radius:2px}
+.covbar i{display:block;height:100%;background:var(--pp);transition:width .5s cubic-bezier(.2,.7,.3,1)}
+
+/* ---------- compositor ---------- */
+.compose{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+.compose > div{padding:26px}
+.compose > div + div{border-left:1px solid var(--line);background:var(--ground)}
+@media (max-width:940px){.compose{grid-template-columns:1fr}.compose > div + div{border-left:0;border-top:1px solid var(--line)}}
+
+.step{margin-bottom:24px}
+.step > .lab{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.step > .lab i{font-style:normal;width:17px;height:17px;border-radius:50%;background:var(--line-2);color:var(--ink-2);
+  display:grid;place-items:center;font-size:9.5px;font-weight:600;flex-shrink:0}
+.step.done > .lab i{background:var(--pp);color:#04120B}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line-2);background:transparent;border-radius:999px;padding:7px 13px;cursor:pointer;
+  font-size:13.5px;color:var(--ink);transition:.13s;display:inline-flex;align-items:center;gap:7px}
+.chip:hover{border-color:var(--ink-3)}
+.chip .ct{font-family:var(--fm);font-size:10px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.chip .pip{width:5px;height:5px;border-radius:50%;background:var(--pp)}
+.chip[aria-pressed="true"]{background:var(--pp);border-color:var(--pp);color:#04120B;font-weight:600}
+.chip[aria-pressed="true"] .ct{color:rgba(4,18,11,.6)}
+.chip[aria-pressed="true"] .pip{background:rgba(4,18,11,.5)}
+.chip.val[aria-pressed="true"]{background:var(--vc);border-color:var(--vc);color:#080C0A}
+.chip.val{border-left:3px solid var(--vc)}
+
+/* marcadores */
+.mk-group{margin-top:12px}
+.mk-group > span{font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:7px}
+.mk{display:flex;flex-wrap:wrap;gap:5px}
+.mkb{border:1px solid var(--line);background:var(--panel-2);border-radius:7px;padding:7px 11px;cursor:pointer;
+  font-size:13px;color:var(--ink-2);text-align:left;transition:.13s;line-height:1.35}
+.mkb:hover{border-color:var(--ink-3);color:var(--ink)}
+.mkb[aria-pressed="true"]{border-color:var(--vc);color:var(--ink);background:color-mix(in srgb,var(--vc) 16%,transparent)}
+.mkb.neg[aria-pressed="true"]{border-color:var(--s2);background:rgba(241,89,42,.14)}
+.vdesc{font-size:13px;color:var(--ink-3);line-height:1.5;margin-top:10px;max-width:60ch}
+
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.sc{border:1px solid var(--line-2);background:transparent;border-radius:9px;padding:11px 4px 9px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:4px;transition:.13s}
+.sc:hover{border-color:var(--ink-3)}
+.sc .n{font-family:var(--fm);font-size:17px;font-weight:600;line-height:1;color:var(--ink)}
+.sc .t{font-family:var(--fm);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);line-height:1.2;text-align:center}
+.sc[aria-pressed="true"]{color:#080C0A;border-color:transparent}
+.sc[aria-pressed="true"] .n{color:#080C0A}
+.sc[aria-pressed="true"] .t{color:rgba(8,12,10,.7)}
+.sc[data-v="1"][aria-pressed="true"]{background:var(--s1)}
+.sc[data-v="2"][aria-pressed="true"]{background:var(--s2)}
+.sc[data-v="3"][aria-pressed="true"]{background:var(--s3)}
+.sc[data-v="4"][aria-pressed="true"]{background:var(--s4)}
+.sc[data-v="5"][aria-pressed="true"]{background:var(--s5)}
+
+.prompts{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.prompts span{font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.count{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:right;margin-top:7px}
+.count.ok{color:var(--pp)}
+.btn{background:var(--pp);color:#04120B;border:1px solid var(--pp);border-radius:9px;padding:12px 22px;cursor:pointer;font-weight:600;font-size:14.5px;transition:.13s}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{background:transparent;color:var(--ink-3);border-color:var(--line-2);cursor:not-allowed;filter:none}
+.btn.g{background:transparent;color:var(--ink-2);border-color:var(--line-2);font-weight:500}
+.btn.g:hover{border-color:var(--ink-3);color:var(--ink);filter:none}
+.btn.d{background:transparent;color:var(--s1);border-color:rgba(232,50,60,.45);font-weight:500}
+.row{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
+.side-t{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px}
+.side-t h3{font-size:16px;font-weight:600}
+.gate{display:flex;flex-direction:column;gap:16px;padding:12px 0 6px}
+.gate h3{font-size:clamp(23px,3vw,31px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.gate p{margin:0;color:var(--ink-2);font-size:14.5px;max-width:46ch}
+.gate select{font-size:16px;padding:14px 13px}
+
+/* ---------- evidências ---------- */
+.feed{display:flex;flex-direction:column}
+.ev{border-top:1px solid var(--line);padding:16px 0 16px 14px;position:relative}
+.ev:first-child{border-top:0;padding-top:2px}
+.ev::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:2px;background:var(--vc,var(--s0));border-radius:2px}
+.ev:first-child::before{top:2px}
+.ev .h{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-bottom:6px}
+.ev .nm{font-weight:600;font-size:14px}
+.ev .ar{color:var(--ink-3);font-size:12px}
+.ev .tg{font-family:var(--fm);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--vc);border:1px solid var(--vc);padding:2px 7px;border-radius:999px;opacity:.85}
+.ev .nb{font-family:var(--fm);font-size:12px;font-weight:600;color:var(--sc);margin-left:auto}
+.ev .mkq{font-size:12.5px;color:var(--ink-3);margin-bottom:4px;font-style:italic}
+.ev .tx{font-size:14.5px;color:var(--ink-2);line-height:1.6;max-width:66ch}
+.ev .ft{font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:8px;display:flex;gap:13px}
+.ev .del{background:none;border:0;color:var(--ink-3);cursor:pointer;text-decoration:underline;font:inherit;padding:0}
+.ev .del:hover{color:var(--s1)}
+
+/* ---------- matriz ---------- */
+.mtx-box{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:auto;max-height:74vh}
+table.mtx{border-collapse:separate;border-spacing:0;font-family:var(--fm)}
+table.mtx th,table.mtx td{padding:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+table.mtx thead th{position:sticky;top:0;z-index:3;background:var(--panel);vertical-align:bottom;padding-bottom:8px}
+table.mtx thead th.cor{left:0;z-index:5;text-align:left;padding:0 12px 10px;background:var(--panel)}
+table.mtx thead th.cor i{font-style:normal;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);display:block;line-height:1.45}
+.vh{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;font-size:10.5px;color:var(--ink-2);margin:0 auto;overflow:hidden;text-overflow:ellipsis;display:block}
+table.mtx tbody th{position:sticky;left:0;z-index:2;background:var(--panel);text-align:left;font-weight:400;padding:0 12px;
+  font-size:11.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+table.mtx tbody tr:hover th{color:var(--pp)}
+td.c{text-align:center}
+td.c button{width:100%;height:100%;border:0;background:transparent;cursor:pointer;color:#080C0A;font:inherit;font-weight:600;font-variant-numeric:tabular-nums;display:block;padding:0}
+td.c.e button{cursor:default;color:var(--s0)}
+td.c button:hover{box-shadow:inset 0 0 0 2px var(--ink)}
+td.c.e button:hover{box-shadow:none}
+td.x{background-image:linear-gradient(135deg,transparent 46%,var(--line-2) 46%,var(--line-2) 54%,transparent 54%)}
+td.tot,th.tot{background:var(--panel-2)}
+tr.tot th,tr.tot td{border-top:1px solid var(--line-2)}
+.b1{background:var(--s1)}.b2{background:var(--s2)}.b3{background:var(--s3)}.b4{background:var(--s4)}.b5{background:var(--s5)}
+td.c.b1{background:var(--s1)}td.c.b2{background:var(--s2)}td.c.b3{background:var(--s3)}td.c.b4{background:var(--s4)}td.c.b5{background:var(--s5)}
+.key{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:14px;font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.key i{width:11px;height:11px;display:inline-block;margin-right:6px;vertical-align:-1px;border-radius:2px}
+
+/* ---------- pessoas ---------- */
+.plist{border-top:1px solid var(--line)}
+.prow{display:grid;grid-template-columns:1fr auto auto;gap:22px;align-items:center;width:100%;text-align:left;
+  background:none;border:0;border-bottom:1px solid var(--line);padding:16px 6px;cursor:pointer;color:inherit;font:inherit;transition:background .13s}
+.prow:hover{background:var(--panel)}
+.prow .who{display:flex;flex-direction:column;gap:5px;min-width:0}
+.prow .nm{display:block;font-size:18px;font-weight:600;letter-spacing:-.015em;line-height:1.15}
+.prow .sub{display:block;font-family:var(--fm);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);line-height:1.3}
+.segs{display:flex;gap:4px}
+.seg{display:flex;flex-direction:column;gap:4px;width:30px}
+.seg .bar{height:30px;background:var(--s0);position:relative;overflow:hidden;display:block;border-radius:3px}
+.seg .bar i{position:absolute;left:0;right:0;bottom:0;display:block}
+.seg u{display:block;text-align:center;font-family:var(--fm);font-size:8px;letter-spacing:.04em;text-transform:uppercase;color:var(--vc);text-decoration:none;line-height:1;opacity:.9}
+.prow .big{font-family:var(--fm);font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.03em;min-width:62px;text-align:right}
+@media (max-width:720px){.prow{grid-template-columns:1fr auto;gap:14px}.segs{order:3;grid-column:1/-1}}
+
+/* ---------- referência de valores ---------- */
+.vals{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.vcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--vc);border-radius:0 12px 12px 0;padding:18px 20px}
+.vcard .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:7px}
+.vcard h4{font-size:15.5px;font-weight:600;color:var(--vc)}
+.vcard .avg{font-family:var(--fm);font-size:19px;font-weight:600;font-variant-numeric:tabular-nums}
+.vcard p{margin:0 0 12px;font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.vcard ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px}
+.vcard li{font-size:12.5px;color:var(--ink-3);display:flex;gap:8px;line-height:1.4}
+.vcard li b{color:var(--vc);font-weight:600;flex-shrink:0}
+.vcard li.n b{color:var(--s2)}
+.vcard .c{font-family:var(--fm);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin-top:12px}
+.nots{display:flex;flex-wrap:wrap;gap:7px}
+.not{border:1px solid var(--line-2);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--ink-2)}
+
+/* ---------- drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(4,4,5,.62);z-index:60;opacity:0;pointer-events:none;transition:.18s}
+.scrim.on{opacity:1;pointer-events:auto}
+.dw{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--ground);border-left:1px solid var(--line-2);
+  z-index:61;transform:translateX(100%);transition:transform .24s cubic-bezier(.2,.7,.3,1);display:flex;flex-direction:column}
+.dw.on{transform:none}
+.dw .hd{padding:22px 26px 18px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:14px}
+.dw .hd h3{font-size:20px;font-weight:700;flex:1;letter-spacing:-.025em}
+.dw .hd button{background:none;border:0;font-size:24px;line-height:1;cursor:pointer;color:var(--ink-3);padding:0 2px}
+.dw .hd button:hover{color:var(--ink)}
+.dw .bd{padding:4px 26px 40px;overflow-y:auto}
+@media (prefers-reduced-motion:reduce){.dw,.scrim,.covbar i,.prow{transition:none}}
+
+.none{color:var(--ink-3);padding:32px 0;text-align:center;font-family:var(--fm);letter-spacing:.06em;text-transform:uppercase;font-size:10px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(70px);background:var(--pp);color:#04120B;
+  padding:12px 22px;border-radius:999px;font-size:13.5px;font-weight:600;z-index:80;opacity:0;transition:.2s;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.figs{display:flex;gap:34px;flex-wrap:wrap}
+.figs .n{font-family:var(--fm);font-size:29px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.prose{max-width:64ch;display:flex;flex-direction:column;gap:15px;color:var(--ink-2);font-size:14.5px;line-height:1.62}
+.prose b{color:var(--ink);font-weight:600}
+.prose em{color:var(--ink);font-style:italic}
+</style>
+
+<div class="rail">
+  <div class="rail-in">
+    <div class="mark"><span class="sq">P</span><b>Matriz de Valores</b></div>
+    <div class="navs" role="tablist">
+      <button class="nv" role="tab" data-t="reg" aria-selected="true">Registrar</button>
+      <button class="nv" role="tab" data-t="mtx" aria-selected="false">Matriz</button>
+      <button class="nv" role="tab" data-t="ppl" aria-selected="false">Pessoas</button>
+      <button class="nv" role="tab" data-t="evd" aria-selected="false">Evidências<em id="nEvd">0</em></button>
+      <button class="nv" role="tab" data-t="ref" aria-selected="false">Valores</button>
+      <button class="nv" role="tab" data-t="cfg" aria-selected="false">Ajustes</button>
+    </div>
+    <div class="rail-r">
+      <select id="meSel" class="mini" aria-label="Quem é você"><option value="">quem é você?</option></select>
+      <span class="live"><i class="dot off" id="dot"></i><span id="connTxt">conectando</span></span>
+    </div>
+  </div>
+</div>
+
+<div class="demobar" id="demoBar" hidden>
+  <span>Simulação — dados fictícios, visíveis só nesta tela</span>
+  <button id="demoQuit">sair e começar de verdade</button>
+</div>
+
+<div class="shell">
+
+<!-- ===== REGISTRAR ===== -->
+<section id="tab-reg">
+  <div class="band">
+    <div class="band-hd">
+      <div class="t">
+        <h2>Registre o que você viu.</h2>
+        <p>Um fato observado aqui, no encontro. Escolha a pessoa, marque o comportamento e conte a situação. Seu nome fica visível para todo mundo.</p>
+      </div>
+      <div class="figure">
+        <div class="fig"><span class="lab">Você já cobriu</span><span class="n" id="mineN">0<small>/0</small></span><span class="covbar"><i id="mineBar" style="width:0%"></i></span></div>
+        <div class="fig"><span class="lab">Cobertura da sala</span><span class="n" id="covN">0<small>%</small></span></div>
+        <div class="fig"><span class="lab">Registros</span><span class="n" id="recN">0</span></div>
+      </div>
+    </div>
+
+    <div class="compose">
+      <div>
+        <div class="gate" id="gate" hidden>
+          <h3>Quem é você?</h3>
+          <p id="gateMsg">Escolha seu nome para começar. Ele aparece junto de cada avaliação que você registrar — é assim que a matriz fica transparente.</p>
+          <select id="gateSel"><option value="">— selecione seu nome —</option></select>
+        </div>
+
+        <div id="regForm">
+          <div class="step" id="stPerson">
+            <span class="lab"><i>1</i> Sobre quem</span>
+            <div class="chips" id="toChips"></div>
+          </div>
+
+          <div class="step" id="stVal">
+            <span class="lab"><i>2</i> Qual valor</span>
+            <div class="chips" id="valChips"></div>
+            <div class="vdesc" id="valDesc">Escolha o valor que a situação melhor ilustra.</div>
+            <div id="mkWrap"></div>
+          </div>
+
+          <div class="step" id="stScore">
+            <span class="lab"><i>3</i> Quanto</span>
+            <div class="scale" id="scale"></div>
+          </div>
+
+          <div class="step" id="stText">
+            <span class="lab"><i>4</i> A situação</span>
+            <textarea id="evTxt" rows="4" placeholder="Conte o que aconteceu."></textarea>
+            <div class="prompts"><span>Quando?</span><span>O que fez ou disse?</span><span>Qual foi o efeito?</span></div>
+            <div class="count" id="evCount">0 / 50 caracteres mínimos</div>
+          </div>
+
+          <button class="btn" id="saveBtn" disabled>Registrar evidência</button>
+        </div>
+      </div>
+      <div>
+        <div class="side-t"><h3>Seus registros</h3><span class="lab" id="mineCount"></span></div>
+        <div class="feed" id="mineList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MATRIZ ===== -->
+<section id="tab-mtx" hidden>
+  <div class="band">
+    <div class="band-hd">
+      <div class="t"><h2>Quem avaliou quem</h2><p>Linha = pessoa avaliada. Coluna = quem avaliou. Clique numa célula para ler as evidências daquele par.</p></div>
+      <div class="tools">
+        <select id="mtxVal" class="mini"><option value="">todos os valores</option></select>
+        <select id="mtxGrp" class="mini"><option value="">todos os grupos</option></select>
+      </div>
+    </div>
+    <div class="mtx-box" id="mtxWrap"></div>
+    <div class="key">
+      <span><i class="b1"></i>1 contradiz</span>
+      <span><i class="b2"></i>2 ficou devendo</span>
+      <span><i class="b3"></i>3 esperado</span>
+      <span><i class="b4"></i>4 foi além</span>
+      <span><i class="b5"></i>5 referência</span>
+      <span style="margin-left:auto" id="mtxInfo"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PESSOAS ===== -->
+<section id="tab-ppl" hidden>
+  <div class="band">
+    <div class="band-hd">
+      <div class="t"><h2>Retrato por pessoa</h2><p>Um bloco por valor, na cor oficial. Altura = média recebida. Clique na linha para ler tudo.</p></div>
+      <div class="tools">
+        <select id="pplGrp" class="mini"><option value="">todos os grupos</option></select>
+        <select id="pplSort" class="mini">
+          <option value="name">ordem alfabética</option>
+          <option value="avg">maior média</option>
+          <option value="low">menor média</option>
+          <option value="cov">menos avaliada</option>
+        </select>
+      </div>
+    </div>
+    <div class="plist" id="pplList"></div>
+  </div>
+</section>
+
+<!-- ===== EVIDÊNCIAS ===== -->
+<section id="tab-evd" hidden>
+  <div class="band">
+    <div class="band-hd">
+      <div class="t"><h2>Tudo que foi escrito</h2><p>Mais recente primeiro. Este é o material da conversa — a nota é só o índice.</p></div>
+      <div class="tools">
+        <select id="fPerson" class="mini"><option value="">todas as pessoas</option></select>
+        <select id="fDir" class="mini"><option value="to">como avaliada</option><option value="from">como avaliadora</option></select>
+        <select id="fVal" class="mini"><option value="">todos os valores</option></select>
+        <input type="text" id="fQ" class="mini" placeholder="buscar no texto" style="min-width:150px">
+      </div>
+    </div>
+    <div class="feed" id="evdList"></div>
+  </div>
+</section>
+
+<!-- ===== VALORES ===== -->
+<section id="tab-ref" hidden>
+  <div class="band">
+    <div class="band-hd"><div class="t"><h2 id="refTitle">Os valores</h2><p>Os valores desta sala. Os marcadores abaixo de cada um são os mesmos que aparecem na hora de registrar.</p></div></div>
+    <div class="vals" id="valRef"></div>
+  </div>
+  <div class="band" id="notBand" hidden>
+    <div class="band-hd"><div class="t"><h2>No que não acreditamos</h2><p>A contraparte da cultura. Se você viu algo desta lista, é evidência tanto quanto o resto.</p></div></div>
+    <div class="nots" id="notList"></div>
+  </div>
+</section>
+
+<!-- ===== AJUSTES ===== -->
+<section id="tab-cfg" hidden>
+  <div class="band">
+    <div class="band-hd"><div class="t"><h2>Participantes</h2><p>Um nome por linha. Se quiser separar em subgrupos ou rodadas, escreva <span class="mono" style="color:var(--ink)">Nome ; Grupo</span></p></div></div>
+    <div style="max-width:620px">
+      <textarea id="peopleTxt" rows="9" placeholder="Ana Souza&#10;Bruno Lima&#10;Carla Dias"></textarea>
+      <div class="row" style="margin-top:13px">
+        <button class="btn" id="applyPeople">Salvar lista</button>
+        <span class="lab" id="peopleInfo"></span>
+      </div>
+      <p style="color:var(--ink-3);font-size:13px;max-width:58ch;margin-top:18px">Trocar a lista não apaga registros. Se um nome sair, as evidências dele ficam guardadas e reaparecem se o nome voltar.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-hd"><div class="t"><h2>Valores da sala</h2><p>Os valores e os marcadores desta sessão. Ficam guardados na sala, não no código — cada cliente tem os seus.</p></div></div>
+    <div style="max-width:760px">
+      <textarea id="valuesTxt" rows="16" spellcheck="false" style="font-family:var(--fm);font-size:12.5px;line-height:1.6"></textarea>
+      <div class="row" style="margin-top:13px">
+        <button class="btn" id="applyValues">Salvar valores</button>
+        <button class="btn g" id="resetValues">Restaurar padrão</button>
+        <span class="lab" id="valuesInfo"></span>
+      </div>
+      <div class="prose" style="margin-top:20px;font-size:13.5px">
+        <p><b>Formato.</b> <span class="mono" style="color:var(--ink)"># Nome do valor #RRGGBB</span> abre um valor — a cor é opcional. A linha seguinte é a descrição. Linhas com <span class="mono" style="color:var(--ink)">+</span> são marcadores de quem demonstrou; com <span class="mono" style="color:var(--ink)">−</span>, de quem ficou devendo. Linhas com <span class="mono" style="color:var(--ink)">!</span> entram na lista “no que não acreditamos”.</p>
+        <p><b>Cuidado ao trocar no meio da sessão.</b> Registros já feitos guardam o valor pelo nome antigo. Se você renomear um valor depois que a sala começou, os registros anteriores param de somar nele.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-hd"><div class="t"><h2>Dados</h2><p>Exporte antes de apagar qualquer coisa.</p></div></div>
+    <div class="figs" style="margin-bottom:24px">
+      <div class="fig"><span class="lab">Registros</span><span class="n" id="stRec">0</span></div>
+      <div class="fig"><span class="lab">Pares cobertos</span><span class="n" id="stPairs">0</span></div>
+      <div class="fig"><span class="lab">Participantes</span><span class="n" id="stPpl">0</span></div>
+      <div class="fig"><span class="lab">Média geral</span><span class="n" id="stAvg">—</span></div>
+    </div>
+    <div class="row">
+      <button class="btn g" id="expCsv">Baixar CSV</button>
+      <button class="btn g" id="copyCsv">Copiar para planilha</button>
+      <button class="btn d" id="wipe">Apagar todos os registros</button>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-hd"><div class="t"><h2>Simulação</h2><p>Carrega 8 participantes fictícios com a matriz cheia, só na sua tela. Nada é salvo nem aparece para os outros.</p></div></div>
+    <div class="row">
+      <button class="btn g" id="demoOn">Ver com dados de exemplo</button>
+      <button class="btn g" id="demoOff" hidden>Sair da simulação</button>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-hd"><div class="t"><h2>Como conduzir</h2></div></div>
+    <div class="prose">
+      <p><b>A conta fecha.</b> Com 8 pessoas são 56 pares. Se cada um registrar 2 valores por colega, são 14 registros por pessoa — algo entre 20 e 25 minutos. A matriz enche de verdade, o que quase nunca acontece nesse tipo de dinâmica.</p>
+      <p><b>Transparência tem preço.</b> Com o nome do avaliador à mostra, as notas sobem e os gaps somem. Contrate isso na abertura: a matriz aberta é o próprio teste de <em>Franqueza</em> — “não se omite, expressa suas opiniões mesmo quando contrária dos demais”. Quem só distribui 5 não está sendo generoso; está saindo do valor.</p>
+      <p><b>Nota sem fato não vale.</b> Na leitura da matriz, cobre a evidência, nunca o número. Pergunta padrão: “o que você viu que te levou a essa nota?”</p>
+      <p><b>Olhe a linha “média dada”.</b> Ela mostra o viés de quem avalia, não de quem é avaliado. Um avaliador que só dá 5 diz mais sobre si do que sobre a turma — e essa costuma ser a conversa mais produtiva do dia.</p>
+      <p><b>Gap se descreve como situação, nunca como característica.</b> Os marcadores já ajudam nisso. “Concordou na sala e discordou no corredor” funciona; “é falso” não.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="dw" id="drawer" aria-hidden="true">
+  <div class="hd"><h3 id="dTitle">—</h3><button id="dClose" aria-label="Fechar">×</button></div>
+  <div class="bd" id="dBody"></div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ valores ============
+   Conjunto genérico de partida. Os valores reais de cada cliente
+   entram em Ajustes → Valores e ficam guardados na sala, nunca no código. */
+var PALETTE=["#4C8DF6","#E2624B","#2BB3C0","#E8A33D","#37B87C","#9B6BD6","#D96BA8"];
+var DEFAULT_VALUES=[
+  {k:"dono",n:"Dono do resultado",s:"DONO",c:"#4C8DF6",
+   d:"Assume o resultado como seu e não espera alguém resolver.",
+   pos:["Assumiu o resultado como seu, sem esperar ordem","Foi mão na massa em vez de repassar o problema","Cuidou do detalhe que ninguém tinha olhado"],
+   neg:["Esperou alguém resolver no lugar dele","Apontou o problema sem propor saída"]},
+  {k:"coragem",n:"Coragem de dizer",s:"DIZER",c:"#E2624B",
+   d:"Fala o que precisa ser dito, com respeito, mesmo contra a maioria.",
+   pos:["Falou o que precisava ser dito, com respeito","Sustentou posição contrária à da maioria","Soube dizer não"],
+   neg:["Concordou na sala e discordou depois","Se calou para evitar desconforto"]},
+  {k:"escuta",n:"Escuta real",s:"ESCUT",c:"#2BB3C0",
+   d:"Ouve até o fim e considera o argumento do outro antes de responder.",
+   pos:["Ouviu até o fim antes de responder","Mudou de ideia diante de um argumento melhor","Perguntou em vez de presumir"],
+   neg:["Interrompeu quem estava falando","Respondeu sem ter escutado"]},
+  {k:"compromisso",n:"Compromisso cumprido",s:"PRAZO",c:"#E8A33D",
+   d:"Promete o que consegue entregar e entrega no prazo combinado.",
+   pos:["Entregou no prazo combinado","Avisou cedo quando o prazo ia mudar","Prometeu só o que dava para cumprir"],
+   neg:["Atrasou sem avisar","Assumiu mais do que conseguia entregar"]},
+  {k:"simples",n:"Simplicidade",s:"SIMPL",c:"#37B87C",
+   d:"Descomplica, vai direto ao ponto e evita processo desnecessário.",
+   pos:["Foi direto ao ponto","Explicou de um jeito que todos entenderam","Cortou etapa que não servia"],
+   neg:["Complicou o que era simples","Criou processo onde bastava uma conversa"]},
+  {k:"time",n:"Time acima do ego",s:"TIME",c:"#9B6BD6",
+   d:"Prioriza o resultado do time e reconhece o mérito de quem fez.",
+   pos:["Reconheceu o mérito de outra pessoa","Ajudou sem que pedissem","Priorizou o resultado do time"],
+   neg:["Puxou para si o crédito do grupo","Cuidou da própria parte e travou a dos outros"]}
+];
+var VALUES=[],VMAP={},NOTS=[];
+function setValues(list){
+  VALUES=(list&&list.length)?list:DEFAULT_VALUES.map(function(v){return v;});
+  VMAP={};VALUES.forEach(function(v){VMAP[v.k]=v;});
+}
+setValues(null);
+
+/* texto → valores. Formato:
+   # Nome do valor #RRGGBB
+   Descrição numa linha
+   + marcador de quem demonstrou
+   - marcador de quem ficou devendo
+   ! item da lista "no que não acreditamos"        */
+function parseValues(txt){
+  var out=[],nots=[],cur=null,i=0;
+  txt.split("\n").forEach(function(raw){
+    var l=raw.trim();
+    if(!l) return;
+    if(l.charAt(0)==="!"){nots.push(l.slice(1).trim());return;}
+    if(l.charAt(0)==="#"){
+      var body=l.slice(1).trim();
+      var col=null,m=body.match(/\s(#[0-9a-fA-F]{6})$/);
+      if(m){col=m[1];body=body.slice(0,m.index).trim();}
+      if(!body) return;
+      var key=slug(body)||("v"+i);
+      var base=key,n=2;while(out.some(function(v){return v.k===key;})){key=base+"-"+n;n++;}
+      cur={k:key,n:body,s:body.replace(/[^A-Za-zÀ-ÿ]/g,"").slice(0,5).toUpperCase(),
+           c:col||PALETTE[i%PALETTE.length],d:"",pos:[],neg:[]};
+      out.push(cur);i++;return;
+    }
+    if(!cur) return;
+    if(l.charAt(0)==="+"){cur.pos.push(l.slice(1).trim());return;}
+    if(l.charAt(0)==="-"){cur.neg.push(l.slice(1).trim());return;}
+    cur.d=cur.d?(cur.d+" "+l):l;
+  });
+  return {values:out.filter(function(v){return v.n;}),nots:nots};
+}
+function serializeValues(list,nots){
+  var s=(list||[]).map(function(v){
+    return "# "+v.n+" "+(v.c&&v.c.charAt(0)==="#"?v.c:"")+"\n"+(v.d||"")
+      +(v.pos.length?"\n"+v.pos.map(function(m){return "+ "+m;}).join("\n"):"")
+      +(v.neg.length?"\n"+v.neg.map(function(m){return "- "+m;}).join("\n"):"");
+  }).join("\n\n");
+  if(nots&&nots.length) s+="\n\n"+nots.map(function(x){return "! "+x;}).join("\n");
+  return s;
+}
+
+var SCALE=[
+  {v:1,t:"contradiz"},{v:2,t:"ficou devendo"},{v:3,t:"esperado"},{v:4,t:"foi além"},{v:5,t:"referência"}
+];
+var MINCH=50;
+
+/* ============ estado ============ */
+var db=null,people=[],records=[],me=null,tab="reg";
+var draft={to:"",val:"",score:0,mk:"",dir:""};
+
+/* backend: artifact (claude) → supabase → local */
+var CFG=(typeof window!=="undefined"&&window.PV_CONFIG)||{};
+var SESSION=(function(){
+  try{var q=new URLSearchParams(location.search).get("s");if(q) return q;}catch(e){}
+  return CFG.session||"workshop";
+})();
+var SB=null,MODE="local";
+
+var $=function(s){return document.querySelector(s);};
+var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function slug(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40);}
+function uid(){return Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,8);}
+function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove("on");},2600);}
+function lsGet(k,f){try{var v=localStorage.getItem(k);return v==null?f:JSON.parse(v);}catch(e){return f;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+
+function docData(d){
+  if(!d) return null;
+  var o=null;
+  if(typeof d.data==="function"){try{o=d.data();}catch(e){o=null;}}
+  else if(d.data&&typeof d.data==="object"){o=d.data;}
+  if(!o) o=d;
+  var out={};
+  for(var k in o){if(Object.prototype.hasOwnProperty.call(o,k)) out[k]=o[k];}
+  if(out._id==null) out._id=d.id!=null?d.id:(d._id!=null?d._id:(o.id!=null?o.id:null));
+  return out;
+}
+function snapDocs(snap){
+  if(!snap) return [];
+  var arr=snap.docs||snap;
+  if(!arr||typeof arr.length!=="number") return [];
+  return Array.prototype.slice.call(arr).map(docData).filter(Boolean);
+}
+
+/* ============ simulação ============ */
+var demo=false,realPeople=null,realRecords=null,realValues=null,realNots=null;
+var DEMO_A=["Ana Beatriz Rocha","Caio Menezes","Diego Nunes","Fernanda Prado","Gustavo Lins","Helena Braga","Marina Tavares","Rafael Okamoto"];
+var DEMO_TX={
+  dono:{p:[["Assumiu a virada do case sem ninguém pedir e voltou com o plano pronto na sessão da tarde.","Assumiu o resultado como seu, sem esperar ordem"],
+           ["Pegou para si a parte chata do exercício, aquela que ninguém queria, e entregou.","Foi mão na massa em vez de repassar o problema"]],
+        n:[["Quando o grupo travou na decisão, ficou esperando o facilitador resolver.","Esperou alguém resolver no lugar dele"],
+           ["Apontou três problemas no plano e não propôs nenhuma saída.","Apontou o problema sem propor saída"]]},
+  coragem:{p:[["Disse na frente de todos que a meta do trimestre não fecha do jeito que está — com dado, sem drama.","Falou o que precisava ser dito, com respeito"],
+           ["Foi o único a discordar da solução que já parecia fechada, e sustentou o ponto até o fim.","Sustentou posição contrária à da maioria"]],
+        n:[["Concordou na sala e levantou a discordância só na conversa de corredor.","Concordou na sala e discordou depois"],
+           ["Deixou passar um erro óbvio na apresentação para não constranger ninguém.","Se calou para evitar desconforto"]]},
+  escuta:{p:[["Ouviu até o fim uma crítica dura ao próprio projeto e agradeceu antes de responder.","Ouviu até o fim antes de responder"],
+           ["Reconheceu na frente do grupo que a leitura do Caio derrubava a dele, e mudou de posição.","Mudou de ideia diante de um argumento melhor"]],
+        n:[["Interrompeu duas vezes a mesma pessoa na rodada de feedback.","Interrompeu quem estava falando"],
+           ["Respondeu à proposta da Helena antes de ela terminar de explicar o raciocínio.","Respondeu sem ter escutado"]]},
+  compromisso:{p:[["Prometeu trazer os números da squad até o intervalo e trouxe, no horário, sem ninguém cobrar.","Entregou no prazo combinado"],
+           ["Percebeu no meio da manhã que não daria e avisou na hora, com um plano B junto.","Avisou cedo quando o prazo ia mudar"]],
+        n:[["Chegou vinte minutos depois do combinado e o grupo teve que refazer o contexto.","Atrasou sem avisar"],
+           ["Assumiu duas entregas para o mesmo bloco sabendo que não daria conta das duas.","Assumiu mais do que conseguia entregar"]]},
+  simples:{p:[["Cortou o slide de dezoito linhas para três frases e a discussão finalmente andou.","Foi direto ao ponto"],
+           ["Explicou o modelo de risco para quem não é da área usando um exemplo do dia a dia.","Explicou de um jeito que todos entenderam"]],
+        n:[["Levou o grupo por três camadas de detalhe técnico quando a decisão precisava de uma frase.","Complicou o que era simples"],
+           ["Propôs criar um comitê para aprovar algo que uma conversa de dez minutos resolvia.","Criou processo onde bastava uma conversa"]]},
+  time:{p:[["Deixou claro para todos que a ideia da virada tinha saído da Marina, não dele.","Reconheceu o mérito de outra pessoa"],
+           ["Ficou depois do horário ajudando a dupla que estava atrasada no exercício.","Ajudou sem que pedissem"]],
+        n:[["Apresentou como sua uma ideia que tinha saído da dupla.","Puxou para si o crédito do grupo"],
+           ["Entregou a própria parte no prazo e não avisou que a etapa seguinte ia travar.","Cuidou da própria parte e travou a dos outros"]]}
+};
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+function buildDemo(){
+  var ppl=DEMO_A.map(function(n){return {id:slug(n),name:n,group:""};});
+  var r=rng(20260902),recs=[],t0=Date.now()-1000*60*140,n=0;
+  var bias={};ppl.forEach(function(p,i){bias[p.id]=[0.7,0,-0.6,0.25,0,-0.25,0.45,-0.7][i]||0;});
+  var qual={};ppl.forEach(function(p,i){qual[p.id]=[0.55,0.2,0.7,0.1,0.45,0.8,0.6,-0.1][i]||0;});
+  function push(from,to,vk){
+    var tx=DEMO_TX[vk];
+    var good = r() < (0.62+qual[to.id]*0.22);
+    var pool = good?tx.p:tx.n;
+    var pick = pool[Math.floor(r()*pool.length)];
+    var text = pick[0], mk = pick[1];
+    var sc = (good?4.3:2.1) + bias[from.id] + qual[to.id]*0.5;
+    if(r()<0.15) sc += (r()<0.5?-1:1);
+    sc=Math.max(1,Math.min(5,Math.round(sc)));
+    recs.push({id:"demo-"+(n++),fromId:from.id,fromName:from.name,toId:to.id,toName:to.name,
+      val:vk,score:sc,mk:mk,dir:good?"+":"-",text:text,ts:t0+n*1000*55});
+  }
+  ppl.forEach(function(f){ppl.forEach(function(t){
+    if(f.id===t.id) return;
+    var pool=VALUES.slice();
+    for(var i=pool.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var tmp=pool[i];pool[i]=pool[j];pool[j]=tmp;}
+    var k=2+(r()<0.45?1:0);
+    for(var q=0;q<k;q++) push(f,t,pool[q].k);
+  });});
+  return {people:ppl,records:recs};
+}
+function enterDemo(){
+  if(!demo){realPeople=people;realRecords=records;realValues=VALUES;realNots=NOTS;}
+  demo=true;
+  setValues(null);NOTS=[];
+  var d=buildDemo();
+  people=d.people;records=d.records;me=d.people[0].id;
+  $("#demoBar").hidden=false;$("#demoOn").hidden=true;$("#demoOff").hidden=false;
+  render();
+}
+function exitDemo(){
+  demo=false;
+  people=realPeople||lsGet("pv_people",[]);
+  records=realRecords||lsGet("pv_records",[]);
+  setValues(realValues);NOTS=realNots||[];
+  me=lsGet("pv_me",null);
+  $("#demoBar").hidden=true;$("#demoOn").hidden=false;$("#demoOff").hidden=true;
+  render();
+}
+
+/* ============ persistência ============ */
+function saveLocal(){lsSet("pv_people",people);lsSet("pv_records",records);lsSet("pv_values",VALUES);lsSet("pv_nots",NOTS);}
+async function writeRecord(r){
+  records=records.filter(function(x){return x.id!==r.id;}).concat([r]);render();
+  if(demo) return;
+  try{
+    if(MODE==="artifact") await db.doc("records/"+r.id).set(r);
+    else if(MODE==="supabase") await sbErr(SB.from("pv_records").upsert({id:r.id,session:SESSION,data:r,ts:r.ts}));
+    else saveLocal();
+  }catch(e){toast("Não consegui salvar. Tente de novo.");}
+}
+async function deleteRecord(id){
+  records=records.filter(function(x){return x.id!==id;});render();
+  if(demo) return;
+  try{
+    if(MODE==="artifact") await db.doc("records/"+id).delete();
+    else if(MODE==="supabase") await sbErr(SB.from("pv_records").delete().eq("id",id).eq("session",SESSION));
+    else saveLocal();
+  }catch(e){}
+}
+async function writeConfig(){
+  if(demo) return;
+  var cfg={people:people,values:VALUES,nots:NOTS,updated:Date.now()};
+  try{
+    if(MODE==="artifact") await db.doc("config/session").set(cfg);
+    else if(MODE==="supabase") await sbErr(SB.from("pv_config").upsert({session:SESSION,people:cfg.people,vals:cfg.values,nots:cfg.nots,updated:cfg.updated}));
+    else saveLocal();
+  }catch(e){toast("Não consegui salvar a configuração.");}
+}
+async function writePeople(list){people=list;render();await writeConfig();}
+async function writeValues(list,nots){setValues(list);NOTS=nots||[];render();await writeConfig();}
+function applyConfig(c){
+  if(!c) return;
+  if(Array.isArray(c.people)) people=c.people;
+  if(Array.isArray(c.values)&&c.values.length) setValues(c.values);
+  if(Array.isArray(c.nots)) NOTS=c.nots;
+}
+function sbErr(p){return p.then(function(res){if(res&&res.error) throw res.error;return res;});}
+
+/* ============ helpers ============ */
+function personById(id){for(var i=0;i<people.length;i++) if(people[i].id===id) return people[i];return null;}
+function groups(){var g=[],s={};people.forEach(function(p){if(p.group&&!s[p.group]){s[p.group]=1;g.push(p.group);}});return g;}
+function avg(a){if(!a.length) return null;var s=0;a.forEach(function(x){s+=x;});return s/a.length;}
+function sv(v){return "var(--s"+Math.max(1,Math.min(5,Math.round(v)))+")";}
+function bcls(v){return "b"+Math.max(1,Math.min(5,Math.round(v)));}
+function vcol(k){return VMAP[k]?VMAP[k].c:"var(--ink-3)";}
+function coverage(){
+  var byG={};people.forEach(function(p){var g=p.group||"_";(byG[g]=byG[g]||[]).push(p);});
+  var exp=0;for(var g in byG){var n=byG[g].length;exp+=n*(n-1);}
+  var seen={},done=0;
+  records.forEach(function(r){
+    var a=personById(r.fromId),b=personById(r.toId);
+    if(!a||!b) return;if((a.group||"_")!==(b.group||"_")) return;
+    var k=r.fromId+">"+r.toId;if(!seen[k]){seen[k]=1;done++;}
+  });
+  return {done:done,exp:exp,pct:exp?Math.round(done/exp*100):0};
+}
+function fillSelect(sel,opts,cur,ph){
+  var h=ph!=null?'<option value="">'+esc(ph)+'</option>':'';
+  opts.forEach(function(o){h+='<option value="'+esc(o.v)+'">'+esc(o.l)+'</option>';});
+  sel.innerHTML=h;sel.value=cur||"";
+}
+function peopleOpts(ex){
+  return people.filter(function(p){return p.id!==ex;}).map(function(p){return {v:p.id,l:p.name+(p.group?" · "+p.group:"")};});
+}
+
+/* ============ rail ============ */
+function renderRail(){
+  fillSelect($("#meSel"),peopleOpts(null),me,"quem é você?");
+  $("#nEvd").textContent=records.length;
+  var c=coverage();
+  $("#covN").innerHTML=c.pct+'<small>%</small>';
+  $("#recN").textContent=records.length;
+  var peers=me?people.filter(function(p){return p.id!==me;}):[];
+  var covered=0;
+  peers.forEach(function(p){if(records.some(function(r){return r.fromId===me&&r.toId===p.id;})) covered++;});
+  $("#mineN").innerHTML=covered+'<small>/'+peers.length+'</small>';
+  $("#mineBar").style.width=(peers.length?covered/peers.length*100:0)+"%";
+}
+
+/* ============ cartão de evidência ============ */
+function evHtml(r,own){
+  var v=VMAP[r.val];
+  return '<div class="ev" style="--vc:'+(v?v.c:"var(--s0)")+';--sc:'+sv(r.score)+'">'
+    +'<div class="h"><span class="nm">'+esc(r.fromName)+'</span><span class="ar">→</span><span class="nm">'+esc(r.toName)+'</span>'
+    +'<span class="tg">'+esc(v?v.n:r.val)+'</span><span class="nb">'+r.score+'</span></div>'
+    +(r.mk?'<div class="mkq">'+(r.dir==="-"?"⚠ ":"✓ ")+esc(r.mk)+'</div>':'')
+    +'<div class="tx">'+esc(r.text)+'</div>'
+    +'<div class="ft"><span>'+new Date(r.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+'</span>'
+    +(own?'<button class="del" data-del="'+esc(r.id)+'">excluir</button>':'')+'</div></div>';
+}
+
+/* ============ registrar ============ */
+function renderReg(){
+  var blocked=!me;
+  $("#gate").hidden=!blocked;
+  $("#regForm").hidden=blocked;
+  if(blocked){
+    fillSelect($("#gateSel"),peopleOpts(null),"","— selecione seu nome —");
+    $("#gateSel").hidden=!people.length;
+    $("#gateMsg").textContent=people.length
+      ?"Escolha seu nome para começar. Ele aparece junto de cada avaliação que você registrar — é assim que a matriz fica transparente."
+      :"A lista de participantes ainda está vazia. Abra Ajustes e cole os nomes de quem está no encontro.";
+    renderMine();
+    return;
+  }
+
+  /* 1. pessoas */
+  var peers=people.filter(function(p){return p.id!==me;});
+  $("#toChips").innerHTML=peers.length?peers.map(function(p){
+    var n=records.filter(function(r){return r.fromId===me&&r.toId===p.id;}).length;
+    return '<button class="chip" type="button" data-to="'+esc(p.id)+'" aria-pressed="'+(draft.to===p.id)+'">'
+      +(n?'<span class="pip"></span>':'')+esc(p.name)+(n?'<span class="ct">'+n+'</span>':'')+'</button>';
+  }).join(""):'<span class="lab">ninguém mais na lista</span>';
+
+  /* 2. valores */
+  $("#valChips").innerHTML=VALUES.map(function(v){
+    return '<button class="chip val" type="button" style="--vc:'+v.c+'" data-v="'+v.k+'" aria-pressed="'+(draft.val===v.k)+'">'+esc(v.n)+'</button>';
+  }).join("");
+  var V=VMAP[draft.val];
+  $("#valDesc").textContent=V?V.d:"Escolha o valor que a situação melhor ilustra.";
+  $("#mkWrap").innerHTML=V?(
+     '<div class="mk-group" style="--vc:'+V.c+'"><span>Demonstrou</span><div class="mk">'
+     +V.pos.map(function(m){return '<button class="mkb" type="button" data-mk="'+esc(m)+'" data-dir="+" aria-pressed="'+(draft.mk===m)+'">'+esc(m)+'</button>';}).join("")
+     +'</div></div>'
+     +'<div class="mk-group" style="--vc:'+V.c+'"><span>Ficou devendo</span><div class="mk">'
+     +V.neg.map(function(m){return '<button class="mkb neg" type="button" data-mk="'+esc(m)+'" data-dir="-" aria-pressed="'+(draft.mk===m)+'">'+esc(m)+'</button>';}).join("")
+     +'</div></div>'
+  ):"";
+
+  /* 3. escala */
+  $("#scale").innerHTML=SCALE.map(function(s){
+    return '<button class="sc" type="button" data-v="'+s.v+'" aria-pressed="'+(draft.score===s.v)+'"><span class="n">'+s.v+'</span><span class="t">'+esc(s.t)+'</span></button>';
+  }).join("");
+
+  $("#stPerson").classList.toggle("done",!!draft.to);
+  $("#stVal").classList.toggle("done",!!draft.val);
+  $("#stScore").classList.toggle("done",!!draft.score);
+  syncCount();
+  renderMine();
+}
+function renderMine(){
+  var mine=records.filter(function(r){return r.fromId===me;}).sort(function(a,b){return b.ts-a.ts;});
+  $("#mineCount").textContent=mine.length?(mine.length+(mine.length>1?" registros":" registro")):"";
+  $("#mineList").innerHTML=mine.length?mine.map(function(r){return evHtml(r,true);}).join(""):'<div class="none">seus registros aparecem aqui</div>';
+}
+function syncCount(){
+  var len=$("#evTxt").value.trim().length,c=$("#evCount");
+  c.textContent=len<MINCH?(len+" / "+MINCH+" caracteres mínimos"):(len+" caracteres");
+  c.classList.toggle("ok",len>=MINCH);
+  $("#stText").classList.toggle("done",len>=MINCH);
+  $("#saveBtn").disabled=!(me&&draft.to&&draft.val&&draft.score&&len>=MINCH);
+}
+
+/* ============ matriz ============ */
+function renderMtx(){
+  var fv=$("#mtxVal").value,fg=$("#mtxGrp").value;
+  var list=(fg?people.filter(function(p){return p.group===fg;}):people.slice());
+  var gO=groups();
+  list.sort(function(a,b){
+    var ga=gO.indexOf(a.group||""),gb=gO.indexOf(b.group||"");
+    if(ga!==gb) return (ga<0?99:ga)-(gb<0?99:gb);
+    return a.name.localeCompare(b.name,"pt-BR");
+  });
+  function isEdge(i){return list[i+1]&&(list[i+1].group||"")!==(list[i].group||"");}
+  if(!list.length){$("#mtxWrap").innerHTML='<div class="none">adicione participantes em ajustes</div>';$("#mtxInfo").textContent="";return;}
+
+  var rs=records.filter(function(r){return !fv||r.val===fv;});
+  var cm={};rs.forEach(function(r){var k=r.toId+"|"+r.fromId;(cm[k]=cm[k]||[]).push(r);});
+
+  var n=list.length;
+  var cs=n<=10?62:n<=16?38:n<=24?28:n<=32?23:19;
+  var showNum=cs>=36;
+  var nameW=n<=10?215:n<=16?190:150;
+  var headH=Math.min(160,nameW*0.86);
+  var fs=cs>=56?"14px":cs>=36?"12.5px":"10px";
+
+  var h='<table class="mtx" style="font-size:'+fs+'"><thead><tr>'
+    +'<th class="cor" style="min-width:'+nameW+'px;height:'+headH+'px"><i>avaliado ↓</i><i>avaliador →</i></th>';
+  list.forEach(function(p,i){
+    h+='<th class="'+(isEdge(i)?"grpend":"")+'" style="width:'+cs+'px"><span class="vh" style="max-height:'+(headH-14)+'px;font-size:'+(cs>=28?"10.5px":"9.5px")+'">'+esc(p.name)+'</span></th>';
+  });
+  h+='<th class="tot" style="width:'+Math.max(cs,46)+'px"><span class="vh" style="max-height:'+(headH-14)+'px;font-size:9.5px;letter-spacing:.1em;color:var(--ink-3)">MÉDIA RECEBIDA</span></th></tr></thead><tbody>';
+
+  var colScores={};
+  list.forEach(function(rp,ri){
+    h+='<tr><th style="height:'+cs+'px;min-width:'+nameW+'px;max-width:'+nameW+'px" title="'+esc(rp.name)+'">'+esc(rp.name)+'</th>';
+    var rowS=[];
+    list.forEach(function(cp){
+      if(rp.id===cp.id){h+='<td class="c x" style="height:'+cs+'px"></td>';return;}
+      var arr=cm[rp.id+"|"+cp.id];
+      if(!arr){h+='<td class="c e" style="height:'+cs+'px"><button tabindex="-1">·</button></td>';return;}
+      var a=avg(arr.map(function(r){return r.score;}));
+      arr.forEach(function(r){rowS.push(r.score);(colScores[cp.id]=colScores[cp.id]||[]).push(r.score);});
+      h+='<td class="c '+bcls(a)+'" style="height:'+cs+'px"><button data-cell="'+esc(rp.id)+'|'+esc(cp.id)+'" title="'+esc(cp.name)+' → '+esc(rp.name)+' · '+a.toFixed(1)+' · '+arr.length+' registro(s)">'+(showNum?a.toFixed(1):"")+'</button></td>';
+    });
+    var ra=avg(rowS);
+    h+='<td class="c tot '+(ra?bcls(ra):"e")+'" style="height:'+cs+'px"><button data-person="'+esc(rp.id)+'" style="font-size:'+(cs>=28?"11.5px":"9.5px")+'">'+(ra?ra.toFixed(1):"")+'</button></td></tr>';
+  });
+
+  h+='<tr class="tot"><th class="tot" style="height:'+Math.max(cs,26)+'px;font-size:9.5px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase">média dada</th>';
+  list.forEach(function(cp){
+    var a=avg(colScores[cp.id]||[]);
+    h+='<td class="c tot '+(a?bcls(a):"e")+'" style="height:'+Math.max(cs,26)+'px"><button data-person="'+esc(cp.id)+'" title="média que '+esc(cp.name)+' deu" style="font-size:'+(cs>=28?"11px":"9px")+'">'+(a?(cs>=23?a.toFixed(1):""):"")+'</button></td>';
+  });
+  h+='<td class="c tot x"></td></tr></tbody></table>';
+  $("#mtxWrap").innerHTML=h;
+
+  var filled=Object.keys(cm).filter(function(k){
+    var i=k.split("|");
+    return list.some(function(p){return p.id===i[0];})&&list.some(function(p){return p.id===i[1];});
+  }).length;
+  $("#mtxInfo").textContent=filled+" de "+(n*(n-1))+" pares"+(fv?" · "+VMAP[fv].n:"");
+}
+
+/* ============ pessoas ============ */
+function renderPpl(){
+  var fg=$("#pplGrp").value,sort=$("#pplSort").value;
+  var list=(fg?people.filter(function(p){return p.group===fg;}):people.slice());
+  var data=list.map(function(p){
+    var recv=records.filter(function(r){return r.toId===p.id;});
+    var giv=records.filter(function(r){return r.fromId===p.id;});
+    var byV={};VALUES.forEach(function(v){byV[v.k]=avg(recv.filter(function(r){return r.val===v.k;}).map(function(r){return r.score;}));});
+    var rt={};recv.forEach(function(r){rt[r.fromId]=1;});
+    return {p:p,recv:recv,giv:giv,avg:avg(recv.map(function(r){return r.score;})),byV:byV,raters:Object.keys(rt).length};
+  });
+  data.sort(function(x,y){
+    if(sort==="avg") return (y.avg==null?-1:y.avg)-(x.avg==null?-1:x.avg);
+    if(sort==="low") return (x.avg==null?99:x.avg)-(y.avg==null?99:y.avg);
+    if(sort==="cov") return x.raters-y.raters;
+    return x.p.name.localeCompare(y.p.name,"pt-BR");
+  });
+  $("#pplList").innerHTML=data.length?data.map(function(d){
+    var segs=VALUES.map(function(v){
+      var s=d.byV[v.k];
+      return '<span class="seg" style="--vc:'+v.c+'" title="'+esc(v.n)+(s?": "+s.toFixed(1):": sem registro")+'">'
+        +'<span class="bar">'+(s?'<i style="height:'+(s/5*100)+'%;background:'+sv(s)+'"></i>':'')+'</span>'
+        +'<u>'+v.s+'</u></span>';
+    }).join("");
+    return '<button class="prow" data-person="'+esc(d.p.id)+'">'
+      +'<span class="who"><span class="nm">'+esc(d.p.name)+'</span><span class="sub">'+(d.p.group?esc(d.p.group)+" · ":"")+d.raters+' avaliadores · '+d.recv.length+' recebidas · '+d.giv.length+' dadas</span></span>'
+      +'<span class="segs">'+segs+'</span>'
+      +'<span class="big" style="color:'+(d.avg?sv(d.avg):"var(--ink-3)")+'">'+(d.avg?d.avg.toFixed(1):"—")+'</span></button>';
+  }).join(""):'<div class="none">adicione participantes em ajustes</div>';
+}
+
+/* ============ feed ============ */
+function renderEvd(){
+  var fp=$("#fPerson").value,fv=$("#fVal").value,fd=$("#fDir").value,q=$("#fQ").value.trim().toLowerCase();
+  var l=records.slice().sort(function(a,b){return b.ts-a.ts;});
+  if(fp) l=l.filter(function(r){return fd==="from"?r.fromId===fp:r.toId===fp;});
+  if(fv) l=l.filter(function(r){return r.val===fv;});
+  if(q) l=l.filter(function(r){return (r.text+" "+(r.mk||"")+" "+r.fromName+" "+r.toName).toLowerCase().indexOf(q)>-1;});
+  $("#evdList").innerHTML=l.length?l.map(function(r){return evHtml(r,r.fromId===me);}).join(""):'<div class="none">nenhuma evidência com esses filtros</div>';
+}
+
+/* ============ referência ============ */
+function renderRef(){
+  $("#valRef").innerHTML=VALUES.map(function(v){
+    var rs=records.filter(function(r){return r.val===v.k;});
+    var a=avg(rs.map(function(r){return r.score;}));
+    return '<div class="vcard" style="--vc:'+v.c+'">'
+      +'<div class="top"><h4>'+esc(v.n)+'</h4><span class="avg" style="color:'+(a?sv(a):"var(--ink-3)")+'">'+(a?a.toFixed(1):"—")+'</span></div>'
+      +'<p>'+esc(v.d)+'</p>'
+      +'<ul>'+v.pos.map(function(m){return '<li><b>✓</b>'+esc(m)+'</li>';}).join("")
+      +v.neg.map(function(m){return '<li class="n"><b>⚠</b>'+esc(m)+'</li>';}).join("")+'</ul>'
+      +'<div class="c">'+rs.length+' registro'+(rs.length===1?"":"s")+'</div></div>';
+  }).join("");
+  var NUM=["Nenhum","Um","Dois","Três","Quatro","Cinco","Seis","Sete","Oito","Nove","Dez"];
+  $("#refTitle").textContent=VALUES.length&&VALUES.length<=10?("Os "+NUM[VALUES.length].toLowerCase()+" valores"):"Os valores";
+  $("#notBand").hidden=!NOTS.length;
+  $("#notList").innerHTML=NOTS.map(function(x){return '<span class="not">'+esc(x)+'</span>';}).join("");
+}
+
+/* ============ ajustes ============ */
+function renderCfg(){
+  if(document.activeElement!==$("#peopleTxt"))
+    $("#peopleTxt").value=people.map(function(p){return p.group?p.name+" ; "+p.group:p.name;}).join("\n");
+  $("#peopleInfo").textContent=people.length+" na lista";
+  if(document.activeElement!==$("#valuesTxt"))
+    $("#valuesTxt").value=serializeValues(VALUES,NOTS);
+  $("#valuesInfo").textContent=VALUES.length+" valores"+(NOTS.length?" · "+NOTS.length+" antipadrões":"");
+  var c=coverage();
+  $("#stRec").textContent=records.length;
+  $("#stPairs").textContent=c.done+(c.exp?" / "+c.exp:"");
+  $("#stPpl").textContent=people.length;
+  var a=avg(records.map(function(r){return r.score;}));
+  $("#stAvg").textContent=a?a.toFixed(2):"—";
+}
+
+function render(){
+  renderRail();
+  var g=groups().map(function(x){return {v:x,l:x};});
+  [["#mtxGrp","todos os grupos"],["#pplGrp","todos os grupos"]].forEach(function(x){var e=$(x[0]);fillSelect(e,g,e.value,x[1]);});
+  [["#mtxVal","todos os valores"],["#fVal","todos os valores"]].forEach(function(x){var e=$(x[0]);fillSelect(e,VALUES.map(function(v){return {v:v.k,l:v.n};}),e.value,x[1]);});
+  var fp=$("#fPerson");fillSelect(fp,peopleOpts(null),fp.value,"todas as pessoas");
+  if(tab==="reg") renderReg();
+  if(tab==="mtx") renderMtx();
+  if(tab==="ppl") renderPpl();
+  if(tab==="evd") renderEvd();
+  if(tab==="ref") renderRef();
+  if(tab==="cfg") renderCfg();
+}
+
+/* ============ drawer ============ */
+function openDrawer(t,h){
+  $("#dTitle").textContent=t;$("#dBody").innerHTML=h;
+  $("#drawer").classList.add("on");$("#drawer").setAttribute("aria-hidden","false");
+  $("#scrim").classList.add("on");
+}
+function closeDrawer(){
+  $("#drawer").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true");
+  $("#scrim").classList.remove("on");
+}
+function openPair(toId,fromId){
+  var a=records.filter(function(r){return r.toId===toId&&r.fromId===fromId;}).sort(function(x,y){return y.ts-x.ts;});
+  var to=personById(toId),fr=personById(fromId);
+  openDrawer((fr?fr.name:"?")+" → "+(to?to.name:"?"),'<div class="feed">'+(a.length?a.map(function(r){return evHtml(r,r.fromId===me);}).join(""):'<div class="none">sem registros</div>')+'</div>');
+}
+function openPerson(id){
+  var p=personById(id);if(!p) return;
+  var recv=records.filter(function(r){return r.toId===id;}).sort(function(x,y){return y.ts-x.ts;});
+  var giv=records.filter(function(r){return r.fromId===id;}).sort(function(x,y){return y.ts-x.ts;});
+  var ar=avg(recv.map(function(r){return r.score;})),ag=avg(giv.map(function(r){return r.score;}));
+  var head='<div class="figs" style="margin:20px 0 6px">'
+    +'<div class="fig"><span class="lab">Média recebida</span><span class="n" style="color:'+(ar?sv(ar):"var(--ink-3)")+'">'+(ar?ar.toFixed(1):"—")+'</span></div>'
+    +'<div class="fig"><span class="lab">Média dada</span><span class="n" style="color:'+(ag?sv(ag):"var(--ink-3)")+'">'+(ag?ag.toFixed(1):"—")+'</span></div>'
+    +'<div class="fig"><span class="lab">Recebidas</span><span class="n">'+recv.length+'</span></div>'
+    +'<div class="fig"><span class="lab">Dadas</span><span class="n">'+giv.length+'</span></div></div>';
+  function sec(t,arr,em){
+    return '<div class="lab" style="margin:28px 0 10px;border-top:1px solid var(--line);padding-top:14px">'+t+'</div>'
+      +'<div class="feed">'+(arr.length?arr.map(function(r){return evHtml(r,r.fromId===me);}).join(""):'<div class="none">'+em+'</div>')+'</div>';
+  }
+  openDrawer(p.name,head+sec("Sobre "+p.name,recv,"ninguém registrou nada ainda")+sec("Registrado por "+p.name,giv,"ainda não registrou nada"));
+}
+
+/* ============ CSV ============ */
+function buildCsv(){
+  var rows=[["data_hora","avaliador","avaliado","grupo_avaliado","valor","marcador","direcao","nota","evidencia"]];
+  records.slice().sort(function(a,b){return a.ts-b.ts;}).forEach(function(r){
+    var to=personById(r.toId);
+    rows.push([new Date(r.ts).toLocaleString("pt-BR"),r.fromName,r.toName,to&&to.group?to.group:"",
+      VMAP[r.val]?VMAP[r.val].n:r.val,r.mk||"",r.dir==="-"?"ficou devendo":(r.dir==="+"?"demonstrou":""),r.score,r.text]);
+  });
+  return "﻿"+rows.map(function(row){return row.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(";");}).join("\n");
+}
+
+/* ============ eventos ============ */
+function selectTab(t,scroll){
+  tab=t;
+  $$(".nv").forEach(function(x){x.setAttribute("aria-selected",String(x.dataset.t===t));});
+  $$("section[id^='tab-']").forEach(function(s){s.hidden=s.id!=="tab-"+t;});
+  if(scroll){window.scrollTo(0,0);setTimeout(function(){window.scrollTo(0,0);},80);}
+  render();
+}
+$$(".nv").forEach(function(b){b.addEventListener("click",function(){selectTab(b.dataset.t,true);});});
+
+function setMe(v){me=v||null;lsSet("pv_me",me);draft={to:"",val:"",score:0,mk:"",dir:""};render();}
+$("#meSel").addEventListener("change",function(){setMe(this.value);});
+$("#gateSel").addEventListener("change",function(){setMe(this.value);});
+
+$("#toChips").addEventListener("click",function(e){
+  var b=e.target.closest("[data-to]");if(!b)return;
+  draft.to=draft.to===b.dataset.to?"":b.dataset.to;renderReg();
+});
+$("#valChips").addEventListener("click",function(e){
+  var b=e.target.closest("[data-v]");if(!b)return;
+  var nv=b.dataset.v;
+  if(draft.val!==nv){draft.val=nv;draft.mk="";draft.dir="";}
+  else {draft.val="";draft.mk="";draft.dir="";}
+  renderReg();
+});
+$("#mkWrap").addEventListener("click",function(e){
+  var b=e.target.closest("[data-mk]");if(!b)return;
+  var m=b.dataset.mk,d=b.dataset.dir;
+  if(draft.mk===m){draft.mk="";draft.dir="";}
+  else{
+    draft.mk=m;draft.dir=d;
+    if(!draft.score) draft.score = d==="+"?4:2;
+    var ta=$("#evTxt");
+    if(!ta.value.trim()) ta.placeholder = d==="+"?"Em que momento? O que exatamente ela fez ou disse — e o que mudou por causa disso?":"Em que momento? O que aconteceu — e qual foi o efeito no grupo?";
+  }
+  renderReg();
+});
+$("#scale").addEventListener("click",function(e){
+  var b=e.target.closest(".sc");if(!b)return;
+  var v=+b.dataset.v;draft.score=draft.score===v?0:v;
+  $$("#scale .sc").forEach(function(c){c.setAttribute("aria-pressed",String(+c.dataset.v===draft.score));});
+  $("#stScore").classList.toggle("done",!!draft.score);
+  syncCount();
+});
+$("#evTxt").addEventListener("input",syncCount);
+
+$("#saveBtn").addEventListener("click",function(){
+  var text=$("#evTxt").value.trim();
+  if(!(me&&draft.to&&draft.val&&draft.score&&text.length>=MINCH)) return;
+  var f=personById(me),t=personById(draft.to);if(!f||!t)return;
+  writeRecord({id:uid(),fromId:me,fromName:f.name,toId:t.id,toName:t.name,
+    val:draft.val,score:draft.score,mk:draft.mk,dir:draft.dir,text:text,ts:Date.now()});
+  var peers=people.filter(function(p){return p.id!==me;});
+  var left=peers.filter(function(p){return !records.some(function(r){return r.fromId===me&&r.toId===p.id;});}).length;
+  $("#evTxt").value="";$("#evTxt").placeholder="Conte o que aconteceu.";
+  draft.val="";draft.score=0;draft.mk="";draft.dir="";
+  render();
+  toast(left?("Registrado. Faltam "+left+" colega"+(left>1?"s":"")+"."):"Registrado. Você já cobriu todo mundo.");
+});
+
+document.addEventListener("click",function(e){
+  var d=e.target.closest("[data-del]");
+  if(d){if(confirm("Excluir este registro?")) deleteRecord(d.dataset.del);return;}
+  var c=e.target.closest("[data-cell]");
+  if(c){var i=c.dataset.cell.split("|");openPair(i[0],i[1]);return;}
+  var p=e.target.closest("[data-person]");
+  if(p){openPerson(p.dataset.person);return;}
+});
+$("#dClose").addEventListener("click",closeDrawer);
+$("#scrim").addEventListener("click",closeDrawer);
+document.addEventListener("keydown",function(e){if(e.key==="Escape") closeDrawer();});
+["#mtxVal","#mtxGrp"].forEach(function(s){$(s).addEventListener("change",renderMtx);});
+["#pplGrp","#pplSort"].forEach(function(s){$(s).addEventListener("change",renderPpl);});
+["#fPerson","#fVal","#fDir"].forEach(function(s){$(s).addEventListener("change",renderEvd);});
+$("#fQ").addEventListener("input",renderEvd);
+
+$("#applyPeople").addEventListener("click",function(){
+  var lines=$("#peopleTxt").value.split("\n").map(function(l){return l.trim();}).filter(Boolean);
+  var seen={},list=[];
+  lines.forEach(function(l){
+    var parts=l.split(/\s*[;|]\s*/);
+    var name=parts[0].trim();if(!name)return;
+    var grp=(parts[1]||"").trim();
+    var id=slug(name)||("p"+list.length);
+    var base=id,k=2;while(seen[id]){id=base+"-"+k;k++;}
+    seen[id]=1;list.push({id:id,name:name,group:grp});
+  });
+  writePeople(list);toast(list.length+" participantes salvos.");
+});
+$("#applyValues").addEventListener("click",function(){
+  var r=parseValues($("#valuesTxt").value);
+  if(!r.values.length){toast("Nenhum valor reconhecido. Cada valor começa com #.");return;}
+  if(records.length){
+    var keys={};r.values.forEach(function(v){keys[v.k]=1;});
+    var orfaos=records.filter(function(x){return !keys[x.val];}).length;
+    if(orfaos&&!confirm(orfaos+" registro(s) já feitos deixam de somar em algum valor com essa mudança. Continuar?")) return;
+  }
+  writeValues(r.values,r.nots);
+  toast(r.values.length+" valores salvos.");
+});
+$("#resetValues").addEventListener("click",function(){
+  if(!confirm("Voltar ao conjunto genérico de valores?")) return;
+  writeValues(null,[]);
+  $("#valuesTxt").value=serializeValues(VALUES,NOTS);
+  toast("Valores restaurados.");
+});
+$("#expCsv").addEventListener("click",async function(){
+  var csv=buildCsv(),d=null;
+  try{d=await claude.use("downloads");}catch(e){}
+  var fn="matriz-valores-"+SESSION+"-"+new Date().toISOString().slice(0,10)+".csv";
+  if(d&&d.save){try{await d.save({filename:fn,data:csv});toast("Arquivo gerado.");return;}catch(e){}}
+  try{await navigator.clipboard.writeText(csv);toast("Download indisponível — CSV copiado.");}
+  catch(e){toast("Não consegui exportar aqui.");}
+});
+$("#copyCsv").addEventListener("click",async function(){
+  try{await navigator.clipboard.writeText(buildCsv());toast("CSV copiado. Cole numa planilha.");}
+  catch(e){toast("Não consegui copiar.");}
+});
+$("#demoOn").addEventListener("click",enterDemo);
+$("#demoOff").addEventListener("click",exitDemo);
+$("#demoQuit").addEventListener("click",exitDemo);
+$("#wipe").addEventListener("click",async function(){
+  if(demo){toast("Você está na simulação — nada a apagar.");return;}
+  if(!confirm("Apagar TODOS os registros de todos os participantes? Não dá para desfazer.")) return;
+  if(!confirm("Confirma mesmo? Exporte o CSV antes se quiser guardar.")) return;
+  var all=records.slice();records=[];render();
+  if(MODE==="artifact"){for(var i=0;i<all.length;i++){try{await db.doc("records/"+all[i].id).delete();}catch(e){}}}
+  else if(MODE==="supabase"){try{await sbErr(SB.from("pv_records").delete().eq("session",SESSION));}catch(e){}}
+  else saveLocal();
+  toast("Registros apagados.");
+});
+
+/* ============ boot ============ */
+me=lsGet("pv_me",null);
+people=lsGet("pv_people",[]);
+records=lsGet("pv_records",[]);
+setValues(lsGet("pv_values",null));
+NOTS=lsGet("pv_nots",[])||[];
+render();
+(function(){
+  var h=(location.hash||"").replace(/^#/,"").split(/[,\/-]/).filter(Boolean);
+  var wantDemo=h.indexOf("demo")>-1||(!people.length&&!records.length);
+  if(wantDemo) enterDemo();
+  var t=["reg","mtx","ppl","evd","ref","cfg"].filter(function(x){return h.indexOf(x)>-1;})[0];
+  if(t) selectTab(t,true);
+  else if(wantDemo) selectTab("mtx",true);
+})();
+
+function setLive(txt,on,title){
+  $("#connTxt").textContent=txt;
+  $("#dot").className=on?"dot":"dot off";
+  $("#connTxt").parentNode.title=title||"";
+}
+function cleanRecords(arr){
+  return arr.map(function(r){
+    if(!r.id&&r._id) r.id=r._id;
+    if(typeof r.score==="string") r.score=+r.score;
+    if(typeof r.ts==="string") r.ts=+r.ts;
+    return r;
+  }).filter(function(r){
+    return r&&r.id&&r.toId&&r.fromId&&r.val&&r.score>0&&typeof r.text==="string";
+  });
+}
+
+(async function(){
+  /* 1 — runtime do artifact */
+  var d=null;
+  try{ if(typeof claude!=="undefined"&&claude.use) d=await claude.use("db"); }catch(e){d=null;}
+  if(d){
+    db=d;MODE="artifact";setLive("ao vivo",true);
+    try{
+      db.collection("config").onSnapshot(function(snap){
+        var docs=snapDocs(snap),s=null;
+        for(var i=0;i<docs.length;i++){if(docs[i]._id==="session"||docs[i].people) s=docs[i];}
+        if(!s) return;
+        if(demo){
+          if(Array.isArray(s.people)) realPeople=s.people;
+          if(Array.isArray(s.values)&&s.values.length) realValues=s.values;
+          if(Array.isArray(s.nots)) realNots=s.nots;
+          return;
+        }
+        applyConfig(s);render();
+      });
+      db.collection("records").onSnapshot(function(snap){
+        var inc=cleanRecords(snapDocs(snap));
+        if(demo){realRecords=inc;return;}
+        records=inc;render();
+      });
+      return;
+    }catch(e){db=null;MODE="local";}
+  }
+
+  /* 2 — supabase (site próprio) */
+  if(CFG.url&&CFG.key&&typeof window!=="undefined"&&window.supabase){
+    try{
+      SB=window.supabase.createClient(CFG.url,CFG.key);
+      MODE="supabase";
+      setLive("ao vivo · "+SESSION,true,"Sala "+SESSION);
+      var pull=async function(){
+        try{
+          var a=await SB.from("pv_records").select("data").eq("session",SESSION);
+          if(a.error) throw a.error;
+          var inc=cleanRecords((a.data||[]).map(function(x){return x.data;}));
+          if(demo) realRecords=inc; else {records=inc;render();}
+          var b=await SB.from("pv_config").select("people,vals,nots").eq("session",SESSION).maybeSingle();
+          if(!b.error&&b.data){
+            var cfg={people:b.data.people,values:b.data.vals,nots:b.data.nots};
+            if(demo){
+              if(Array.isArray(cfg.people)) realPeople=cfg.people;
+              if(Array.isArray(cfg.values)&&cfg.values.length) realValues=cfg.values;
+              if(Array.isArray(cfg.nots)) realNots=cfg.nots;
+            }else{applyConfig(cfg);render();}
+          }
+        }catch(e){}
+      };
+      await pull();
+      SB.channel("pv-"+SESSION)
+        .on("postgres_changes",{event:"*",schema:"public",table:"pv_records",filter:"session=eq."+SESSION},pull)
+        .on("postgres_changes",{event:"*",schema:"public",table:"pv_config",filter:"session=eq."+SESSION},pull)
+        .subscribe();
+      setInterval(pull,20000);
+      return;
+    }catch(e){SB=null;MODE="local";}
+  }
+
+  /* 3 — local */
+  MODE="local";
+  setLive("modo local",false,"Sem estado compartilhado: os registros ficam só neste navegador.");
+})();
+
+})();
+</script>
+</body>
+</html>
