@@ -643,7 +643,8 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
 .blist{display:flex;flex-direction:column;gap:3px}
 /* tela larga: duas colunas, para o texto nao ficar longe da barra */
 @media (min-width:1080px){
-  .blist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:38px;row-gap:2px}
+  .blist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:38px;row-gap:2px;
+    grid-auto-flow:column;grid-template-rows:repeat(var(--rows,99),auto)}
   .brow{grid-template-columns:1fr 132px 40px;padding:13px 14px}
   .brow .bt{font-size:15px}
   .brow .bbar{height:9px;border-radius:5px}
@@ -1761,9 +1762,9 @@ function renderBhv(){
     h='<div class="none">nenhum registro ainda — os comportamentos aparecem conforme a sala escreve</div>';
   }else{
     h+='<div class="bhead"><i></i>o que a sala mais viu <b>&middot; '+pos.length+' comportamentos observados</b></div>'
-      +'<div class="blist">'+(pos.length?pos.map(linha).join(""):'<div class="none">nada aqui ainda</div>')+'</div>';
+      +'<div class="blist" style="--rows:'+Math.max(1,Math.ceil(pos.length/2))+'">'+(pos.length?pos.map(linha).join(""):'<div class="none">nada aqui ainda</div>')+'</div>';
     h+='<div class="bhead neg"><i></i>onde mais ficou devendo <b>&middot; '+neg.length+' comportamentos citados</b></div>'
-      +'<div class="blist">'+(neg.length?neg.map(linha).join(""):'<div class="none">nenhum gap registrado</div>')+'</div>';
+      +'<div class="blist" style="--rows:'+Math.max(1,Math.ceil(neg.length/2))+'">'+(neg.length?neg.map(linha).join(""):'<div class="none">nenhum gap registrado</div>')+'</div>';
     h+='<div class="bhead zero"><i></i>ninguém viu <b>&middot; '+zero.length+' de '+todos.length+' comportamentos sem um único registro</b></div>'
       +'<div class="zeros">'+(zero.length?zero.map(function(x){
           var v=VMAP[x.val]||{c:"var(--ink-3)"};
