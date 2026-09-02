@@ -503,8 +503,11 @@ footer.ft{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);colo
   border:1px solid var(--glass-brd);border-bottom:0;
   border-radius:var(--r) var(--r) 0 0;
   padding:clamp(24px,3.4vw,40px) clamp(22px,3.2vw,36px);
-  display:grid;gap:20px;grid-template-columns:1fr;align-items:start;position:relative}
-@media(min-width:640px){.chapcover{grid-template-columns:1fr auto}}
+  display:grid;gap:20px;grid-template-columns:minmax(0,1fr);align-items:start;position:relative}
+/* minmax(0,1fr) e o min-width:0 abaixo impedem que um filho largo (a faixa de
+   números) estique a coluna além da tela no celular. */
+.chapcover > *{min-width:0}
+@media(min-width:640px){.chapcover{grid-template-columns:minmax(0,1fr) auto}}
 .chapcover .kick{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
 .chapcover h2{font-size:clamp(28px,4.2vw,46px);color:var(--c);margin:0}
@@ -515,8 +518,17 @@ footer.ft{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);colo
   background:var(--glass-2);border:1px solid var(--glass-brd);border-radius:18px;box-shadow:var(--shadow)}
 .chapart .fillnode{fill:currentColor;stroke:none}
 .chapnums{display:flex;gap:0;border-top:1px solid var(--glass-ring);margin-top:22px;padding-top:16px;grid-column:1/-1}
-.chapnum{flex:1;border-right:1px solid var(--glass-ring);padding-right:18px;margin-right:18px}
+.chapnum{flex:1;min-width:0;border-right:1px solid var(--glass-ring);padding-right:18px;margin-right:18px}
 .chapnum:last-child{border-right:0;margin-right:0;padding-right:0}
+/* No celular as três colunas não cabem lado a lado: "sua leitura" e "o time"
+   ficam na primeira linha e "distância" ocupa a segunda inteira. */
+@media(max-width:560px){
+  .chapnums{flex-wrap:wrap;row-gap:14px}
+  .chapnum{padding-right:14px;margin-right:14px}
+  .chapnum:nth-child(2){border-right:0;padding-right:0;margin-right:0}
+  .chapnum:nth-child(3){flex:1 0 100%;border-top:1px solid var(--glass-ring);padding-top:14px}
+  .chapnum .b{display:block;margin-left:0;margin-top:7px}
+}
 .chapnum .k{font-family:"Archivo",sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
 .chapnum .v{font-family:"IBM Plex Mono",monospace;font-size:clamp(28px,4vw,40px);font-weight:600;
