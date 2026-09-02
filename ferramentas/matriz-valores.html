@@ -248,6 +248,21 @@ table.mtx tbody th{position:sticky;left:0;z-index:2;background:var(--panel);text
 table.mtx tbody th .rowh{display:flex;align-items:center;gap:9px}
 table.mtx tbody tr:hover th{color:var(--pp-ink)}
 td.c{padding:2px}
+.mhint{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px}
+@media (max-width:639px){
+  .mtx-box{padding:12px 10px 14px}
+  table.mtx thead th{padding:0 1px 9px}
+  table.mtx thead th.cor{padding:0 4px 9px 0}
+  table.mtx thead th.cor i{display:none}
+  table.mtx tbody th{padding:0 4px 0 0}
+  table.mtx tbody th .rowh{gap:0;justify-content:flex-start}
+  table.mtx td.c{padding:1.5px}
+  table.mtx td.c button{border-radius:7px}
+  table.mtx td.c button b{font-size:11px;letter-spacing:-.03em}
+  table.mtx td.tot button b{font-size:11px}
+  th.totlab{font-size:7.5px!important;letter-spacing:.06em}
+  .av{width:24px;height:24px;font-size:8.5px}
+}
 td.c button{width:100%;height:100%;border:0;cursor:pointer;font:inherit;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:1px;padding:0;border-radius:9px;transition:box-shadow .1s}
 td.c button b{font-family:var(--fm);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
@@ -732,6 +747,7 @@ details.danger .inner{padding:20px}
         <select id="mtxGrp" class="mini"><option value="">todos os grupos</option></select>
       </div>
     </div>
+    <div class="mhint" id="mtxHint" hidden></div>
     <div class="mtx-box" id="mtxWrap"></div>
     <div class="key" id="mtxKey"></div>
     <div class="key" style="margin-top:8px"><span class="sp" id="mtxInfo"></span></div>
@@ -1552,19 +1568,22 @@ function renderMtx(){
   var cm={};rs.forEach(function(r){var k=r.toId+"|"+r.fromId;(cm[k]=cm[k]||[]).push(r);});
 
   var n=list.length;
-  var nameW = n<=16?210:160;
-  var totW  = 70;
+  /* celular na vertical: o nome sai da lateral e sobra largura para a nota aparecer */
+  var narrow=(window.innerWidth||1200)<640;
+  var nameW = narrow?40:(n<=16?210:160);
+  var totW  = narrow?40:70;
   /* a celula cresce ate preencher a caixa: sem sobra a direita, sem aperto */
   var boxEl=$("#mtxWrap");
-  var avail=(boxEl&&boxEl.clientWidth?boxEl.clientWidth:1180)-36;
+  var avail=(boxEl&&boxEl.clientWidth?boxEl.clientWidth:1180)-(narrow?24:36);
   var W=Math.floor((avail-nameW-totW)/n);
-  W=Math.max(28,Math.min(120,W));
+  W=Math.max(narrow?26:28,Math.min(120,W));
   /* teto vertical: a sala inteira deve caber na caixa sem rolar */
   /* reserva: cabecalho das colunas (~72) + linha "media dada" (~63) + respiro da caixa */
   var vh=Math.round((window.innerHeight||760)*0.78)-178;
-  var H=Math.max(26,Math.min(74,Math.round(W*0.62+8),Math.floor(vh/n)));
+  var H=narrow?Math.max(30,Math.min(46,W+6))
+              :Math.max(26,Math.min(74,Math.round(W*0.62+8),Math.floor(vh/n)));
   var showCount = W>=54;
-  var showNum   = W>=38;
+  var showNum   = narrow?W>=26:W>=38;
   var big       = W>=88;
 
   var h='<table class="mtx'+(big?" big":"")+'"><thead><tr>'
@@ -1582,7 +1601,7 @@ function renderMtx(){
   var colScores={};
   list.forEach(function(rp){
     h+='<tr><th style="height:'+H+'px;min-width:'+nameW+'px" title="'+esc(rp.name)+'">'
-      +'<span class="rowh">'+avatar(rp.name)+'<span>'+esc(rp.name)+'</span></span></th>';
+      +'<span class="rowh">'+avatar(rp.name)+(narrow?'':'<span>'+esc(rp.name)+'</span>')+'</span></th>';
     var rowS=[];
     list.forEach(function(cp,ci){
       if(rp.id===cp.id){h+='<td class="c x" data-col="'+ci+'" style="height:'+H+'px"><div></div></td>';return;}
@@ -1609,6 +1628,16 @@ function renderMtx(){
   });
   h+='<td class="c tot"></td></tr></tbody></table>';
   $("#mtxWrap").innerHTML=h;
+
+  /* em tela estreita o nome sai da lateral: a orientacao vai para cima da caixa */
+  var hint=$("#mtxHint");
+  if(hint){
+    var precisaArrastar=boxEl.scrollWidth>boxEl.clientWidth+2;
+    hint.hidden=!(narrow||precisaArrastar);
+    hint.textContent = narrow
+      ? ("linha = avaliado \u00b7 coluna = quem avaliou"+(precisaArrastar?" \u00b7 arraste \u2192":""))
+      : "arraste a matriz para o lado \u2192";
+  }
 
   var filled=Object.keys(cm).filter(function(k){
     var i=k.split("|");
