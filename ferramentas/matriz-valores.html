@@ -479,6 +479,14 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
 
 /* ============ fluxo: uma pergunta por vez ============ */
 .flow{max-width:600px;margin:0 auto;padding:6px 0 20px}
+/* no computador cada passo usa a largura que o conteudo pede */
+@media (min-width:1000px){
+  .flow.st1,.flow.st2{max-width:1060px}
+  .flow.st3{max-width:900px}
+  .flow.st4{max-width:700px}
+  .flow .q{font-size:32px}
+  .flow .qs{font-size:15px;margin-bottom:26px}
+}
 .flow-top{display:flex;align-items:center;gap:14px;margin-bottom:26px;min-height:30px}
 .dots{display:flex;gap:6px}
 .dots i{width:7px;height:7px;border-radius:50%;background:var(--line-2);display:block;transition:.25s}
@@ -498,6 +506,27 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
 .qs{color:var(--ink-2);font-size:13.5px;line-height:1.5;margin:0 0 20px;max-width:48ch}
 .opts{display:flex;flex-direction:column;gap:8px}
 .opts.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+/* passo 1 no computador: cartao por pessoa, todos visiveis de uma vez */
+@media (min-width:760px){
+  .opts.ppl{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:13px}
+  .opts.ppl .opt{flex-direction:column;align-items:flex-start;gap:15px;padding:21px 19px 19px;position:relative}
+  .opts.ppl .opt:hover{transform:translateY(-3px);box-shadow:0 14px 30px -20px rgba(14,21,18,.5)}
+  .opts.ppl .opt .av{width:46px;height:46px;font-size:16px}
+  .opts.ppl .opt .ol{gap:4px}
+  .opts.ppl .opt .ol b{font-size:17.5px;line-height:1.2}
+  .opts.ppl .opt .oc{display:none}
+  .opts.ppl .opt .pipdot{position:absolute;top:19px;right:19px;width:9px;height:9px}
+  /* passo 2: os sete valores em tres colunas */
+  .opts.vals{display:grid;grid-template-columns:repeat(auto-fill,minmax(318px,1fr));gap:13px}
+  .opts.vals .opt{align-items:flex-start;padding:19px 18px 19px 19px}
+  .opts.vals .opt .ol{gap:5px}
+  .opts.vals .opt .ol b{font-size:16.5px}
+  .opts.vals .opt .oc{align-self:center}
+  .opts.vals .opt:hover{transform:translateY(-3px);box-shadow:0 14px 30px -20px rgba(14,21,18,.5)}
+  /* passo 3: frases em duas colunas */
+  .opts.mks{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:10px}
+  .opts.mks .opt.mk{padding:15px 17px;font-size:15px}
+}
 .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;
   background:var(--panel);border:1px solid var(--line-2);border-radius:13px;padding:13px 15px;
   transition:.14s cubic-bezier(.2,.7,.3,1)}
@@ -612,6 +641,17 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
 .bhead.zero i{background:var(--line-2)}
 .bhead b{font-weight:400;color:var(--ink-2);text-transform:none;letter-spacing:0;font-family:var(--fd);font-size:12.5px}
 .blist{display:flex;flex-direction:column;gap:3px}
+/* tela larga: duas colunas, para o texto nao ficar longe da barra */
+@media (min-width:1080px){
+  .blist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:38px;row-gap:2px}
+  .brow{grid-template-columns:1fr 132px 40px;padding:13px 14px}
+  .brow .bt{font-size:15px}
+  .brow .bbar{height:9px;border-radius:5px}
+  .brow .bbar i{border-radius:5px}
+  .brow .bn{font-size:16px}
+  .bhead{margin:38px 0 16px}
+  .zerochip{font-size:13px;padding:8px 15px}
+}
 .brow{display:grid;grid-template-columns:1fr 128px 46px;gap:16px;align-items:center;
   padding:11px 12px;border-radius:10px;transition:background .13s}
 .brow:hover{background:var(--panel)}
@@ -635,6 +675,15 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
 .scorerow{margin:2px 0 18px}
 .scorerow > .lab{display:block;margin-bottom:9px}
 .scoremini{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:420px}
+@media (min-width:1000px){
+  .scoremini{max-width:100%;gap:9px}
+  .smb{padding:14px 6px 12px}
+  .smb b{font-size:20px}
+  .smb s{font-size:8.5px}
+  .smb[aria-pressed="true"]{padding:13px 5px 11px}
+  .scorenote{font-size:13px}
+  .flow textarea{min-height:170px;font-size:16px}
+}
 .smb{border:1px solid var(--line-2);background:var(--panel);border-radius:10px;padding:9px 4px 8px;cursor:pointer;
   display:flex;flex-direction:column;align-items:center;gap:3px;transition:.13s cubic-bezier(.2,.7,.3,1)}
 .smb:hover{border-color:var(--ink-3)}
@@ -1479,7 +1528,7 @@ function renderReg(){
 
   if(st===1){
     h+='<div class="q">Sobre quem você quer falar?</div>'
-      +'<p class="qs">O ponto verde marca quem você já avaliou. Pode voltar em quem quiser.</p><div class="opts">'
+      +'<p class="qs">O ponto verde marca quem você já avaliou. Pode voltar em quem quiser.</p><div class="opts ppl">'
       +(peers.length?peers.map(function(p){
           var n=records.filter(function(r){return r.fromId===me&&r.toId===p.id;}).length;
           return '<button class="opt'+(n?" done":"")+'" data-to="'+esc(p.id)+'">'+avatar(p.name)
@@ -1491,7 +1540,7 @@ function renderReg(){
   }
   else if(st===2){
     h+='<div class="q">Qual valor essa situação toca?</div>'
-      +'<p class="qs">Escolha o que ela melhor ilustra. Um registro, um valor.</p><div class="opts">'
+      +'<p class="qs">Escolha o que ela melhor ilustra. Um registro, um valor.</p><div class="opts vals">'
       +VALUES.map(function(v){
           return '<button class="opt v" style="--vc:'+v.c+';--vci:'+v.ci+'" data-v="'+v.k+'">'
             +'<span class="ol"><b>'+esc(v.n)+'</b><span class="od">'+esc(v.d.split(".")[0])+'.</span></span>'
@@ -1503,9 +1552,9 @@ function renderReg(){
     var V=VMAP[draft.val];
     h+='<div class="q">O que você viu?</div>'
       +'<p class="qs">Escolha a frase mais próxima. Ela já sugere a nota — você ajusta no passo seguinte.</p>'
-      +'<div class="mkhead"><i></i>demonstrou</div><div class="opts">'
+      +'<div class="mkhead"><i></i>demonstrou</div><div class="opts mks">'
       +V.pos.map(function(m){return '<button class="opt mk" data-mk="'+esc(m)+'" data-dir="+">'+esc(m)+'</button>';}).join("")
-      +'</div><div class="mkhead neg"><i></i>ficou devendo</div><div class="opts">'
+      +'</div><div class="mkhead neg"><i></i>ficou devendo</div><div class="opts mks">'
       +V.neg.map(function(m){return '<button class="opt mk neg" data-mk="'+esc(m)+'" data-dir="-">'+esc(m)+'</button>';}).join("")
       +'</div><div class="foot"><button class="mine-link" id="fSkip">nenhuma dessas — seguir mesmo assim</button></div>';
   }
@@ -1530,6 +1579,7 @@ function renderReg(){
       +'<div class="foot"><button class="btn" id="saveBtn" disabled>Registrar</button>'
       +'<span class="lab">seu nome fica visível</span></div>';
   }
+  $("#flow").className="flow st"+st;
   $("#flow").innerHTML=h;
   if(st===4){
     var ta=$("#evTxt");
