@@ -97,6 +97,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 .nv[aria-selected="true"]::after{content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:2px;background:var(--pp)}
 .nv em{font-style:normal;color:var(--ink-3);margin-left:5px}
 .rail-r{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.metag{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;
+  color:var(--ink);white-space:nowrap;max-width:44vw;overflow:hidden}
+.metag span{overflow:hidden;text-overflow:ellipsis}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--pp);box-shadow:0 0 0 3px var(--pp-dim);display:inline-block}
 .dot.off{background:var(--s2);box-shadow:0 0 0 3px rgba(222,123,78,.16)}
 .live{display:flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
@@ -832,6 +835,7 @@ details.danger .inner{padding:20px}
     </div>
     <div class="rail-r">
       <select id="meSel" class="mini" aria-label="Quem é você"><option value="">quem é você?</option></select>
+      <span class="metag" id="meTag" hidden></span>
       <span class="live"><i class="dot off" id="dot"></i><span id="connTxt">conectando</span></span>
       <button class="helpb" id="helpBtn" aria-label="Como funciona" title="Como funciona">?</button>
       <button class="roundb" id="roundBtn" hidden></button>
@@ -1570,6 +1574,14 @@ function renderHero(){
 /* ============ rail ============ */
 function renderRail(){
   fillSelect($("#meSel"),peopleOpts(null),me,"quem é você?");
+  /* participante nao troca de identidade pela barra: isso e porta para se passar por outro */
+  var sel=$("#meSel"), tag=$("#meTag");
+  sel.hidden=!ADM;
+  if(tag){
+    var eu=me?PMAP()[me]:null;
+    tag.hidden=ADM||!eu;
+    if(eu) tag.innerHTML=avatar(eu.name,"sm")+'<span>'+esc(shortName(eu.name))+'</span>';
+  }
   $("#nEvd").textContent=records.length;
   var c=coverage();
   /* os contadores vivem no hero agora */
