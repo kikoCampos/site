@@ -880,6 +880,7 @@ details.danger .inner{padding:20px}
     <div class="band-hd tools-only">
       <div class="t"><h2>Quem avaliou quem</h2><p>Linha = pessoa avaliada. Coluna = quem avaliou. Clique numa célula para ler as evidências daquele par.</p></div>
       <div class="tools">
+        <select id="mtxRd" class="mini"><option value="">todas as rodadas</option></select>
         <select id="mtxVal" class="mini"><option value="">todos os valores</option></select>
         <select id="mtxGrp" class="mini"><option value="">todos os grupos</option></select>
       </div>
@@ -895,7 +896,7 @@ details.danger .inner{padding:20px}
   <div class="band">
     <div class="band-hd tools-only">
       <div class="t"></div>
-      <div class="tools"><select id="bhvVal" class="mini"><option value="">todos os valores</option></select></div>
+      <div class="tools"><select id="bhvRd" class="mini"><option value="">todas as rodadas</option></select><select id="bhvVal" class="mini"><option value="">todos os valores</option></select></div>
     </div>
     <div id="bhvList"></div>
   </div>
@@ -950,6 +951,18 @@ details.danger .inner{padding:20px}
 
 <!-- ===== AJUSTES ===== -->
 <section id="tab-cfg" hidden>
+  <div class="band">
+    <div class="band-hd tools-only"><div class="t"><h2>Rodada</h2></div></div>
+    <div style="max-width:620px">
+      <span class="lab">rodada atual</span>
+      <div class="row" style="margin-top:9px">
+        <input type="text" id="rdName" placeholder="Rodada 1" style="flex:1;min-width:220px">
+        <button class="btn ghost" id="rdSave">Renomear</button>
+      </div>
+      <div class="key" style="margin-top:10px"><span class="sp" id="rdInfo"></span></div>
+      <div class="warnbox" style="margin-top:16px">O nome sai sozinho como <b>Rodada 1</b>, <b>Rodada 2</b> e assim por diante — você não precisa digitar nada durante o encontro. Renomeie aqui depois, se quiser algo como <span class="mono" style="color:var(--ink)">Depois do estudo de caso</span>. Os registros já feitos guardam o nome que a rodada tinha na hora.</div>
+    </div>
+  </div>
   <div class="band">
     <div class="band-hd tools-only"><div class="t"><h2>Participantes</h2><p>Um nome por linha. Se quiser separar em subgrupos ou rodadas, escreva <span class="mono" style="color:var(--ink)">Nome ; Grupo</span></p></div></div>
     <div style="max-width:620px">
@@ -1785,6 +1798,7 @@ function renderMine(){}
 /* ============ matriz ============ */
 function renderMtx(){
   var fv=$("#mtxVal").value,fg=$("#mtxGrp").value;
+  fillSelect($("#mtxRd"),rodadasUsadas().map(function(x){return {v:x,l:x};}),$("#mtxRd").value,"todas as rodadas");
   var list=(fg?people.filter(function(p){return p.group===fg;}):people.slice());
   var gO=groups();
   list.sort(function(a,b){
@@ -1794,7 +1808,8 @@ function renderMtx(){
   });
   if(!list.length){$("#mtxWrap").innerHTML='<div class="none">adicione participantes em ajustes</div>';$("#mtxInfo").textContent="";renderKey();return;}
 
-  var rs=records.filter(function(r){return !fv||r.val===fv;});
+  var fr=$("#mtxRd").value;
+  var rs=records.filter(function(r){return (!fv||r.val===fv)&&(!fr||(r.rd||"")===fr);});
   var cm={};rs.forEach(function(r){var k=r.toId+"|"+r.fromId;(cm[k]=cm[k]||[]).push(r);});
 
   var n=list.length;
@@ -1908,12 +1923,14 @@ function wireCross(){
 
 /* ============ comportamentos: o que a sala de fato viu ============ */
 function renderBhv(){
-  var fv=$("#bhvVal").value;
+  var fv=$("#bhvVal").value, fr=$("#bhvRd").value;
+  fillSelect($("#bhvRd"),rodadasUsadas().map(function(x){return {v:x,l:x};}),fr,"todas as rodadas");
   var vals=fv?VALUES.filter(function(v){return v.k===fv;}):VALUES;
   var cont={};
   records.forEach(function(r){
     if(!r.mk) return;
     if(fv&&r.val!==fv) return;
+    if(fr&&(r.rd||"")!==fr) return;
     var k=r.val+"||"+r.mk;
     if(!cont[k]) cont[k]={val:r.val,mk:r.mk,dir:r.dir,n:0};
     cont[k].n++;
@@ -2021,6 +2038,10 @@ function renderCfg(){
     $("#valuesTxt").value=serializeValues(VALUES,NOTS);
   $("#valuesInfo").textContent=VALUES.length+" valores"+(NOTS.length?" · "+NOTS.length+" antipadrões":"");
   $("#sessNow").textContent=SESSION;
+  if(document.activeElement!==$("#rdName")) $("#rdName").value=RODADA||"";
+  var us=rodadasUsadas();
+  $("#rdInfo").textContent=(STAGE==="lobby"?"sala em espera":"registrando em “"+(RODADA||"—")+"”")
+    +" · "+us.length+(us.length===1?" rodada até agora":" rodadas até agora");
   $("#zNewCard").hidden=(MODE==="artifact");
   var c=coverage();
   $("#stRec").textContent=records.length;
@@ -2158,20 +2179,33 @@ function renderRoundBtn(){
     : "Volta a sala para o lobby. Ninguém registra até você abrir de novo.";
 }
 
+/* quantas rodadas ja existiram nesta sala */
+function rodadasUsadas(){
+  var vistas={};
+  records.forEach(function(r){ if(r.rd) vistas[r.rd]=1; });
+  if(RODADA) vistas[RODADA]=1;
+  return Object.keys(vistas);
+}
+function proximoNomeDeRodada(){
+  return "Rodada "+(rodadasUsadas().length+1);
+}
 async function alternarRodada(){
   if(!ADM) return;
   var indo = (STAGE==="lobby") ? "aberta" : "lobby";
   if(indo==="lobby" && !confirm("Fechar a rodada? Todos voltam para o lobby e param de registrar.")) return;
-  var nome = RODADA;
-  if(indo==="aberta"){
-    nome = prompt("Nome desta rodada (aparece para a sala):", RODADA || "") ;
-    if(nome===null) return;
-    nome = normNome(nome);
-  }
-  STAGE=indo; RODADA=nome;
+  /* nome automatico: nada para digitar na frente da sala. Renomeia em Ajustes se quiser. */
+  if(indo==="aberta") RODADA = proximoNomeDeRodada();
+  STAGE=indo;
   render();
-  try{ await writeConfig(); toast(indo==="aberta"?"Rodada aberta.":"Rodada fechada."); }
-  catch(e){ toast("Não consegui mudar o estado da sala."); }
+  try{
+    await writeConfig();
+    toast(indo==="aberta" ? (RODADA+" aberta.") : "Rodada fechada.");
+  }catch(e){ toast("Não consegui mudar o estado da sala."); }
+}
+async function renomearRodada(nome){
+  nome=normNome(nome); if(!nome||!ADM) return;
+  RODADA=nome; render();
+  try{ await writeConfig(); toast("Rodada renomeada."); }catch(e){}
 }
 $("#roundBtn").addEventListener("click",alternarRodada);
 function selectTab(t,scroll){
@@ -2231,7 +2265,8 @@ function salvar(){
   if(!(me&&draft.to&&draft.val&&draft.score&&contaPalavras(text)>0)) return;
   var f=personById(me),t=personById(draft.to);if(!f||!t)return;
   writeRecord({id:uid(),fromId:me,fromName:f.name,toId:t.id,toName:t.name,
-    val:draft.val,score:draft.score,mk:draft.mk,dir:draft.dir,text:text,ts:Date.now()});
+    val:draft.val,score:draft.score,mk:draft.mk,dir:draft.dir,text:text,
+    rd:RODADA||"",ts:Date.now()});
   draft={to:"",val:"",score:0,mk:"",dir:"",text:"",step:1,saved:true};
   render();
 }
@@ -2310,6 +2345,9 @@ document.addEventListener("keydown",function(e){
   else closeDrawer();
 });
 ["#mtxVal","#mtxGrp"].forEach(function(s){$(s).addEventListener("change",renderMtx);});
+$("#mtxRd").addEventListener("change",renderMtx);
+$("#bhvRd").addEventListener("change",renderBhv);
+$("#rdSave").addEventListener("click",function(){renomearRodada($("#rdName").value);});
 ["#pplGrp","#pplSort"].forEach(function(s){$(s).addEventListener("change",renderPpl);});
 ["#fPerson","#fVal","#fDir"].forEach(function(s){$(s).addEventListener("change",renderEvd);});
 $("#bhvVal").addEventListener("change",renderBhv);
