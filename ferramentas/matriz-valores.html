@@ -129,7 +129,7 @@ textarea{width:100%;resize:vertical;line-height:1.55;font-size:15px}
   .rail-r select{padding:8px 26px 8px 10px;max-width:44vw}
 }
 
-/* ---------- barra de simulação ---------- */
+/* ---------- barra do exemplo ---------- */
 .demobar{position:sticky;top:var(--rail);z-index:45;background:#FFF3D6;color:#6B4A05;border-bottom:1px solid #F0DFB0;
   display:flex;align-items:center;justify-content:center;gap:14px;padding:8px 16px;
   font-family:var(--fm);font-size:10px;letter-spacing:.13em;text-transform:uppercase;font-weight:600}
@@ -829,7 +829,7 @@ details.danger .inner{padding:20px}
       <button class="nv" role="tab" data-t="mtx" aria-selected="false">Matriz</button>
       <button class="nv" role="tab" data-t="bhv" aria-selected="false">Comportamentos</button>
       <button class="nv" role="tab" data-t="ppl" aria-selected="false">Pessoas</button>
-      <button class="nv" role="tab" data-t="evd" aria-selected="false">Evidências<em id="nEvd">0</em></button>
+      <button class="nv" role="tab" data-t="evd" aria-selected="false">Registros<em id="nEvd">0</em></button>
       <button class="nv" role="tab" data-t="ref" aria-selected="false">Valores</button>
       <button class="nv icon" role="tab" data-t="cfg" aria-selected="false" title="Ajustes" aria-label="Ajustes">&#9881;</button>
     </div>
@@ -845,8 +845,8 @@ details.danger .inner{padding:20px}
 </div>
 
 <div class="demobar" id="demoBar" hidden>
-  <span>Simulação — dados fictícios, visíveis só nesta tela</span>
-  <button id="demoQuit">sair e começar de verdade</button>
+  <span>Exemplo — ninguém aqui é real, nada é salvo e ninguém mais vê esta tela</span>
+  <button id="demoQuit">sair do exemplo</button>
 </div>
 
 
@@ -878,7 +878,7 @@ details.danger .inner{padding:20px}
 <section id="tab-mtx" hidden>
   <div class="band">
     <div class="band-hd tools-only">
-      <div class="t"><h2>Quem avaliou quem</h2><p>Linha = pessoa avaliada. Coluna = quem avaliou. Clique numa célula para ler as evidências daquele par.</p></div>
+      <div class="t"><h2>Quem avaliou quem</h2><p>Linha = pessoa avaliada. Coluna = quem avaliou. Clique numa célula para ler os registros daquele par. A média é índice de onde olhar, não nota da pessoa.</p></div>
       <div class="tools">
         <select id="mtxRd" class="mini"><option value="">todas as rodadas</option></select>
         <select id="mtxVal" class="mini"><option value="">todos os valores</option></select>
@@ -906,7 +906,7 @@ details.danger .inner{padding:20px}
 <section id="tab-ppl" hidden>
   <div class="band">
     <div class="band-hd tools-only">
-      <div class="t"><h2>Retrato por pessoa</h2><p>Um bloco por valor, na cor oficial. Altura = média recebida. Clique na linha para ler tudo.</p></div>
+      <div class="t"><h2>Retrato por pessoa</h2><p>Um bloco por valor, na cor oficial. Altura = média recebida — índice de onde olhar, não nota da pessoa. Clique na linha para ler tudo.</p></div>
       <div class="tools">
         <select id="pplGrp" class="mini"><option value="">todos os grupos</option></select>
         <select id="pplSort" class="mini">
@@ -940,7 +940,7 @@ details.danger .inner{padding:20px}
 <!-- ===== VALORES ===== -->
 <section id="tab-ref" hidden>
   <div class="band">
-    <div class="band-hd tools-only"><div class="t"><h2 id="refTitle">Os valores</h2><p>Os valores desta sala. Os marcadores abaixo de cada um são os mesmos que aparecem na hora de registrar.</p></div></div>
+    <div class="band-hd tools-only"><div class="t"><h2 id="refTitle">Os valores</h2><p>Os valores desta sala. Os comportamentos abaixo de cada um são os mesmos que aparecem na hora de registrar.</p></div></div>
     <div class="vals" id="valRef"></div>
   </div>
   <div class="band" id="notBand" hidden>
@@ -971,12 +971,12 @@ details.danger .inner{padding:20px}
         <button class="btn" id="applyPeople">Salvar lista</button>
         <span class="lab" id="peopleInfo"></span>
       </div>
-      <div class="warnbox" style="margin-top:20px"><b>Cuidado ao corrigir um nome já em uso.</b> Tirar alguém da lista é seguro: as evidências ficam guardadas e voltam se o nome voltar. Mas <b>renomear</b> depois que a sala começou cria uma pessoa nova e deixa os registros antigos órfãos.</div>
+      <div class="warnbox" style="margin-top:20px"><b>Cuidado ao corrigir um nome já em uso.</b> Tirar alguém da lista é seguro: os registros ficam guardados e voltam se o nome voltar. Mas <b>renomear</b> depois que a sala começou cria uma pessoa nova e deixa os registros antigos órfãos.</div>
     </div>
   </div>
 
   <div class="band">
-    <div class="band-hd"><div class="t"><h2>Valores da sala</h2><p>Os valores e os marcadores desta sessão. Ficam guardados na sala, não no código — cada cliente tem os seus.</p></div></div>
+    <div class="band-hd"><div class="t"><h2>Valores da sala</h2><p>Os valores e os comportamentos desta sala. Ficam guardados na sala, não no código — cada cliente tem os seus.</p></div></div>
     <div style="max-width:760px">
       <textarea id="valuesTxt" rows="16" spellcheck="false" style="font-family:var(--fm);font-size:16px;line-height:1.55"></textarea>
       <div class="row" style="margin-top:13px">
@@ -985,7 +985,7 @@ details.danger .inner{padding:20px}
         <span class="lab" id="valuesInfo"></span>
       </div>
       <div class="prose" style="margin-top:20px;font-size:13.5px">
-        <p><b>Formato.</b> <span class="mono" style="color:var(--ink)"># Nome do valor #RRGGBB</span> abre um valor — a cor é opcional. A linha seguinte é a descrição. Linhas com <span class="mono" style="color:var(--ink)">+</span> são marcadores de quem demonstrou; com <span class="mono" style="color:var(--ink)">−</span>, de quem ficou devendo. Linhas com <span class="mono" style="color:var(--ink)">!</span> entram na lista “no que não acreditamos”.</p>
+        <p><b>Formato.</b> <span class="mono" style="color:var(--ink)"># Nome do valor #RRGGBB</span> abre um valor — a cor é opcional. A linha seguinte é a descrição. Linhas com <span class="mono" style="color:var(--ink)">+</span> são comportamentos de quem demonstrou; com <span class="mono" style="color:var(--ink)">−</span>, do que faltou. Linhas com <span class="mono" style="color:var(--ink)">!</span> entram na lista “no que não acreditamos”.</p>
         <p><b>Cuidado ao trocar no meio da sessão.</b> Registros já feitos guardam o valor pelo nome antigo. Se você renomear um valor depois que a sala começou, os registros anteriores param de somar nele.</p>
       </div>
     </div>
@@ -1007,10 +1007,31 @@ details.danger .inner{padding:20px}
   </div>
 
   <div class="band">
-    <div class="band-hd"><div class="t"><h2>Simulação</h2><p>Carrega 8 participantes fictícios com a matriz cheia, só na sua tela. Nada é salvo nem aparece para os outros.</p></div></div>
+    <div class="band-hd"><div class="t"><h2>Exemplo</h2><p>Carrega 8 participantes fictícios com a matriz cheia, só na sua tela. Nada é salvo nem aparece para os outros.</p></div></div>
     <div class="row">
       <button class="btn g" id="demoOn">Ver com dados de exemplo</button>
-      <button class="btn g" id="demoOff" hidden>Sair da simulação</button>
+      <button class="btn g" id="demoOff" hidden>Sair do exemplo</button>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="band-hd"><div class="t"><h2>Links</h2><p>O de cima é o que você manda para a sala. O de baixo mostra a ferramenta cheia para quem ainda não é cliente — e nunca escreve nada.</p></div></div>
+    <div style="max-width:620px;display:flex;flex-direction:column;gap:16px">
+      <div>
+        <span class="lab">link do workshop — mande para os participantes</span>
+        <div class="row" style="margin-top:9px">
+          <input type="text" id="linkLive" readonly style="flex:1;min-width:240px">
+          <button class="btn ghost" data-copy="linkLive">Copiar</button>
+        </div>
+      </div>
+      <div>
+        <span class="lab">link do exemplo — para demonstrar</span>
+        <div class="row" style="margin-top:9px">
+          <input type="text" id="linkDemo" readonly style="flex:1;min-width:240px">
+          <button class="btn ghost" data-copy="linkDemo">Copiar</button>
+        </div>
+      </div>
+      <div class="warnbox">O link do workshop abre a sala de verdade: quem chega antes de você entrar com os nomes vê a tela de espera e já pode se cadastrar. O link do exemplo abre sempre com dados fictícios e não grava nada, em nenhuma sala.</div>
     </div>
   </div>
 
@@ -1018,10 +1039,10 @@ details.danger .inner{padding:20px}
     <div class="band-hd"><div class="t"><h2>Como conduzir</h2></div></div>
     <div class="prose">
       <p><b>A conta fecha.</b> Com 8 pessoas são 56 pares. Se cada um registrar 2 valores por colega, são 14 registros por pessoa — algo entre 20 e 25 minutos. A matriz enche de verdade, o que quase nunca acontece nesse tipo de dinâmica.</p>
-      <p><b>Transparência tem preço.</b> Com o nome do avaliador à mostra, as notas sobem e os gaps somem. Contrate isso na abertura: a matriz aberta é o próprio teste de <em>Franqueza</em> — “não se omite, expressa suas opiniões mesmo quando contrária dos demais”. Quem só distribui 5 não está sendo generoso; está saindo do valor.</p>
+      <p><b>Transparência tem preço.</b> Com o nome do avaliador à mostra, as notas sobem e o que faltou some. Contrate isso na abertura: a matriz aberta é o próprio teste de <em>Franqueza</em> — “não se omite, expressa suas opiniões mesmo quando contrária dos demais”. Quem só distribui 5 não está sendo generoso; está saindo do valor.</p>
       <p><b>Nota sem fato não vale.</b> Na leitura da matriz, cobre a evidência, nunca o número. Pergunta padrão: “o que você viu que te levou a essa nota?”</p>
       <p><b>Olhe a linha “média dada”.</b> Ela mostra o viés de quem avalia, não de quem é avaliado. Um avaliador que só dá 5 diz mais sobre si do que sobre a turma — e essa costuma ser a conversa mais produtiva do dia.</p>
-      <p><b>Gap se descreve como situação, nunca como característica.</b> Os marcadores já ajudam nisso. “Concordou na sala e discordou no corredor” funciona; “é falso” não.</p>
+      <p><b>O que faltou se descreve como situação, nunca como característica.</b> Os comportamentos já ajudam nisso. “Concordou na sala e discordou no corredor” funciona; “é falso” não.</p>
     </div>
   </div>
   <div class="band">
@@ -1073,30 +1094,35 @@ details.danger .inner{padding:20px}
   </header>
 
   <div class="body">
-    <p style="margin:0 0 20px;color:var(--ink-2);font-size:14.5px;max-width:62ch">
+    <p style="margin:0 0 14px;color:var(--ink-2);font-size:14.5px;max-width:62ch">
       Ao longo do encontro, cada pessoa registra o que viu os colegas fazerem — ligado aos valores.
-      No fim, a sala inteira lê a mesma matriz. Leva quatro passos.
+      No fim, a sala inteira lê a mesma matriz.
+    </p>
+    <p style="margin:0 0 20px;color:var(--ink-2);font-size:14.5px;max-width:62ch">
+      <b style="color:var(--ink)">Antes de tudo, você escreve seu nome e entra.</b> Ele aparece em tudo que você
+      registrar — a matriz é aberta, todo mundo vê quem avaliou quem. Esse é o combinado.
+      Depois, cada registro leva quatro passos.
     </p>
 
     <div class="steps4">
       <div class="stepcard">
         <span class="n">1</span>
-        <h4>Diga quem é você</h4>
-        <p>Escolha seu nome no topo da tela. Tudo que você registrar aparece com ele — a matriz é aberta, todo mundo vê quem avaliou quem. Esse é o combinado.</p>
+        <h4>Escolha o colega</h4>
+        <p>Os colegas aparecem como botões, com um ponto verde em quem você já registrou — dá para ver quem falta num relance. Pode voltar em quem quiser.</p>
         <div class="demo"><span class="mini-pill" id="hp1"></span></div>
       </div>
 
       <div class="stepcard">
         <span class="n">2</span>
-        <h4>Escolha o colega e o valor</h4>
-        <p>Os colegas aparecem como botões, com um ponto verde em quem você já avaliou — dá para ver quem falta num relance. Depois escolha um dos valores.</p>
+        <h4>Escolha o valor</h4>
+        <p>Um registro, um valor: o que aquela situação melhor ilustra. Se ela toca dois, vale fazer dois registros.</p>
         <div class="demo" id="hp2"></div>
       </div>
 
       <div class="stepcard">
         <span class="n">3</span>
         <h4>Marque o comportamento</h4>
-        <p>Aparecem frases do que você pode ter observado, em duas listas: <b>demonstrou</b> e <b>ficou devendo</b>. Clicar numa delas já sugere a nota — você ajusta se quiser.</p>
+        <p>Aparecem frases do que você pode ter observado, em duas listas: <b>demonstrou</b> e <b>o que faltou</b>. Clicar numa delas já sugere a nota — você ajusta se quiser.</p>
         <div class="demo" style="flex-direction:column;align-items:stretch;gap:7px" id="hp3"></div>
       </div>
 
@@ -1112,7 +1138,7 @@ details.danger .inner{padding:20px}
       <span class="lab">Três combinados antes de começar</span>
       <ul>
         <li><i>01</i><span><b>Nota sem fato não vale.</b> Na leitura da matriz a pergunta vai ser sempre a mesma: o que você viu que te levou a essa nota?</span></li>
-        <li><i>02</i><span><b>Gap se descreve como situação, nunca como pessoa.</b> “Interrompeu três vezes na dinâmica” funciona. “É arrogante” não.</span></li>
+        <li><i>02</i><span><b>O que faltou se descreve como situação, nunca como pessoa.</b> “Interrompeu três vezes na dinâmica” funciona. “É arrogante” não.</span></li>
         <li><i>03</i><span><b>Quem só distribui 5 não está sendo generoso.</b> Está saindo de <em>Franqueza</em> — que é um dos valores sendo avaliados aqui.</span></li>
       </ul>
     </div>
@@ -1130,7 +1156,7 @@ details.danger .inner{padding:20px}
 <aside class="mini-sheet" id="admSheet" aria-hidden="true" role="dialog" aria-label="Modo facilitador">
   <span class="lab">Acesso restrito</span>
   <h3>Modo facilitador</h3>
-  <p id="admMsg">Abre as abas de condução: Pessoas, Evidências, Valores e Ajustes. Os participantes não precisam disso.</p>
+  <p id="admMsg">Abre as abas de condução: Pessoas, Registros, Valores e Ajustes. Os participantes não precisam disso.</p>
   <input type="email" id="admMail" placeholder="e-mail" autocomplete="username" hidden>
   <input type="password" id="admPass" placeholder="senha" autocomplete="current-password" enterkeyhint="go" style="margin-top:8px">
   <div class="err" id="admErr">Senha incorreta.</div>
@@ -1305,7 +1331,7 @@ function snapDocs(snap){
   return Array.prototype.slice.call(arr).map(docData).filter(Boolean);
 }
 
-/* ============ simulação ============ */
+/* ============ exemplo ============ */
 var demo=false,realPeople=null,realRecords=null,realValues=null,realNots=null,roomConfigured=false;
 var DEMO_A=["Ana Beatriz Rocha","Caio Menezes","Diego Nunes","Fernanda Prado","Gustavo Lins","Helena Braga","Marina Tavares","Rafael Okamoto"];
 var DEMO_TX={
@@ -1372,6 +1398,15 @@ function enterDemo(){
 }
 function exitDemo(){
   demo=false;
+  /* se o exemplo veio do link, tira o parâmetro: recarregar não volta para os dados fictícios */
+  try{
+    if(DEMO_URL){
+      var u=new URL(location.href);u.searchParams.delete("demo");
+      if((u.hash||"").indexOf("demo")>-1) u.hash="";
+      history.replaceState(null,"",u.pathname+u.search+u.hash);
+      DEMO_URL=false;
+    }
+  }catch(e){}
   people=realPeople||lsGet("pv_people",[]);
   records=realRecords||lsGet("pv_records",[]);
   setValues(realValues);NOTS=realNots||[];
@@ -1382,14 +1417,21 @@ function exitDemo(){
 
 /* ============ persistência ============ */
 function saveLocal(){lsSet("pv_people",people);lsSet("pv_records",records);lsSet("pv_values",VALUES);lsSet("pv_nots",NOTS);}
+/* devolve true só quando o registro chegou ao banco.
+   Se falhar, desfaz o registro otimista e deixa o rascunho na tela. */
 async function writeRecord(r){
   records=records.filter(function(x){return x.id!==r.id;}).concat([r]);render();
-  if(demo) return;
+  if(demo) return true;
   try{
     if(MODE==="artifact") await db.doc("records/"+r.id).set(r);
     else if(MODE==="supabase") await sbErr(SB.from("pv_records").insert({id:r.id,session:SESSION,data:r,ts:r.ts}));
     else saveLocal();
-  }catch(e){toast("Não consegui salvar. Tente de novo.");}
+    return true;
+  }catch(e){
+    records=records.filter(function(x){return x.id!==r.id;});
+    toast("Não salvou — seu texto continua na tela. Toque em Registrar de novo.");
+    return false;
+  }
 }
 async function deleteRecord(id){
   records=records.filter(function(x){return x.id!==id;});render();
@@ -1407,7 +1449,7 @@ async function writeConfig(){
     if(MODE==="artifact") await db.doc("config/session").set(cfg);
     else if(MODE==="supabase") await sbErr(SB.from("pv_config").upsert({session:SESSION,people:cfg.people,vals:cfg.values,nots:cfg.nots,updated:cfg.updated,stage:STAGE,rodada:RODADA,maxppl:MAXPPL}));
     else saveLocal();
-  }catch(e){toast("Não consegui salvar a configuração.");}
+  }catch(e){toast("Não consegui salvar. O que você digitou continua na tela — toque em salvar de novo.");}
 }
 async function writePeople(list){
   var idsFicam={}; list.forEach(function(p){idsFicam[p.id]=1;});
@@ -1522,11 +1564,11 @@ function peopleOpts(ex){
 /* ============ hero ============ */
 var HERO={
   reg:["Registre o que você viu.","Um fato observado aqui, no encontro. Escolha a pessoa, marque o comportamento e conte a situação. Seu nome fica visível para todo mundo."],
-  mtx:["Quem avaliou quem","Linha é a pessoa avaliada, coluna é quem avaliou. Clique numa célula para ler as evidências daquele par."],
-  ppl:["Retrato por pessoa","Um bloco por valor, na cor oficial. A altura é a média recebida. Clique na linha para ler tudo."],
+  mtx:["Quem avaliou quem","Linha é a pessoa avaliada, coluna é quem avaliou. Clique numa célula para ler os registros daquele par. A média é índice de onde olhar, não nota da pessoa."],
+  ppl:["Retrato por pessoa","Um bloco por valor, na cor oficial. A altura é a média recebida — índice de onde olhar, não nota da pessoa. Clique na linha para ler tudo."],
   bhv:["Comportamentos","O que a sala de fato viu — e o que ninguém viu. É a leitura da cultura, não das pessoas."],
   evd:["Tudo que foi escrito","Mais recente primeiro. Este é o material da conversa — a nota é só o índice."],
-  ref:["Os valores da casa","Texto oficial da cultura. Os marcadores são os mesmos que aparecem na hora de registrar."],
+  ref:["Os valores da casa","Texto oficial da cultura. Os comportamentos são os mesmos que aparecem na hora de registrar."],
   cfg:["Ajustes da sala","Participantes, valores, exportação e o que fazer entre um workshop e outro."]
 };
 /* a roda dos valores, montada a partir das cores da sala */
@@ -1568,7 +1610,7 @@ function renderHero(){
     figs.innerHTML=''
       +'<div class="hfig"><span class="n" id="hf1">0</span><span class="l">você cobriu</span><span class="hbar"><i id="hb1"></i></span></div>'
       +'<div class="hfig"><span class="n" id="hf2">0</span><span class="l">cobertura da sala</span><span class="hbar"><i id="hb2"></i></span></div>'
-      +'<div class="hfig"><span class="n" id="hf3">0</span><span class="l">evidências</span></div>';
+      +'<div class="hfig"><span class="n" id="hf3">0</span><span class="l">registros</span></div>';
     figs.dataset.built="1";
   }
   countUp($("#hf1"),covered,'<small>/'+peers.length+'</small>');
@@ -1677,7 +1719,7 @@ function renderReg(){
             +'<span class="ol"><b>'+esc(p.name)+'</b><s>'+(n?n+" registro"+(n>1?"s":"")+" seu"+(n>1?"s":""):"ainda não avaliado")+'</s></span>'
             +(n?'<span class="pipdot"></span>':'')
             +'<span class="oc">&#8594;</span></button>';
-        }).join(""):'<div class="none">ninguém mais na lista</div>')
+        }).join(""):'<div class="none">Você já registrou sobre todo mundo. Pode voltar em quem quiser e acrescentar outro valor.</div>')
       +'</div>';
   }
   else if(st===2){
@@ -1696,7 +1738,7 @@ function renderReg(){
       +'<p class="qs">Escolha a frase mais próxima. Ela já sugere a nota — você ajusta no passo seguinte.</p>'
       +'<div class="mkhead"><i></i>demonstrou</div><div class="opts mks">'
       +V.pos.map(function(m){return '<button class="opt mk" data-mk="'+esc(m)+'" data-dir="+">'+esc(m)+'</button>';}).join("")
-      +'</div><div class="mkhead neg"><i></i>ficou devendo</div><div class="opts mks">'
+      +'</div><div class="mkhead neg"><i></i>o que faltou</div><div class="opts mks">'
       +V.neg.map(function(m){return '<button class="opt mk neg" data-mk="'+esc(m)+'" data-dir="-">'+esc(m)+'</button>';}).join("")
       +'</div><div class="foot"><button class="mine-link" id="fSkip">nenhuma dessas — seguir mesmo assim</button></div>';
   }
@@ -1718,8 +1760,8 @@ function renderReg(){
           : '3 é o esperado. Só suba ou desça se viu motivo para isso.')+'</div></div>'
       +'<textarea id="evTxt" rows="5" placeholder="Foi na dinâmica da manhã, quando…"></textarea>'
       +'<div class="count" id="evCount"><span class="ch">Ficou curto. Dá para dizer quando foi?</span><span class="n" id="evNum"></span></div>'
-      +'<div class="foot"><button class="btn" id="saveBtn" disabled>Registrar</button>'
-      +'<span class="lab">seu nome fica visível</span></div>';
+      +'<div class="foot"><button class="btn" id="saveBtn">Registrar</button>'
+      +'<span class="lab">seu nome fica visível &middot; só quem conduz pode apagar</span></div>';
   }
   $("#flow").className="flow st"+st;
   $("#flow").innerHTML=h;
@@ -1736,12 +1778,24 @@ function syncCount(){
   var n=contaPalavras(ta.value), c=$("#evCount"), num=$("#evNum"), ok=n>=MINPAL;
   if(num) num.textContent = n ? (n+(n===1?" palavra":" palavras")) : "";
   if(c){
+    var ch=c.querySelector(".ch");
+    /* a linha de baixo já abre dizendo o que se espera, em vez de só reclamar depois */
+    if(ch) ch.textContent = n
+      ? "Ficou curto. Dá para dizer quando foi?"
+      : "Uma situação, não um adjetivo. Comece por quando foi.";
     c.classList.toggle("ok",ok);
-    c.classList.toggle("short",n>0&&!ok); /* aviso, nao trava */
+    c.classList.toggle("short",!ok); /* aviso, nao trava */
   }
-  var b=$("#saveBtn"); if(b) b.disabled=!(n>0&&draft.score>0);
+  /* nada de botão morto: o que falta é dito, não silenciado */
+  var b=$("#saveBtn"); if(b) b.disabled=false;
 }
 function ghostCard(){return "";}
+/* o vazio tem que falar com quem está lendo: o participante não tem aba Ajustes */
+function semGente(){
+  return ADM
+    ? '<div class="none">Nenhum participante ainda. Cole a lista de nomes em Ajustes.</div>'
+    : '<div class="none">A sala ainda está montando. Quem está conduzindo entra com os nomes.</div>';
+}
 /* ====== entrada e lobby ======
    Sem nome ainda -> campo para digitar.
    Com nome e sala em lobby -> os nomes aparecendo ao vivo, esperando voce abrir. */
@@ -1750,7 +1804,8 @@ function renderGate(){
   if(!me){
     var cheia=people.length>=MAXPPL;
     h+='<h3>Como você se chama?</h3>'
-      +'<p>Seu nome aparece junto de cada registro que você fizer — é assim que a matriz fica transparente.</p>'
+      +'<p>Seu nome aparece junto de cada registro que você fizer — é assim que a matriz fica transparente.'
+      +(STAGE==="lobby"?' Pode entrar agora: a rodada abre quando quem está conduzindo abrir.':'')+'</p>'
       +'<div class="joinrow">'
       +'<input type="text" id="joinName" autocomplete="name" autocapitalize="words" spellcheck="false"'
       +' placeholder="seu nome e sobrenome"'+(cheia?' disabled':'')+'>'
@@ -1806,7 +1861,7 @@ function renderMtx(){
     if(ga!==gb) return (ga<0?99:ga)-(gb<0?99:gb);
     return a.name.localeCompare(b.name,"pt-BR");
   });
-  if(!list.length){$("#mtxWrap").innerHTML='<div class="none">adicione participantes em ajustes</div>';$("#mtxInfo").textContent="";renderKey();return;}
+  if(!list.length){$("#mtxWrap").innerHTML=semGente();$("#mtxInfo").textContent="";renderKey();return;}
 
   var fr=$("#mtxRd").value;
   var rs=records.filter(function(r){return (!fv||r.val===fv)&&(!fr||(r.rd||"")===fr);});
@@ -1955,17 +2010,17 @@ function renderBhv(){
   }
   var h='';
   if(!records.length){
-    h='<div class="none">nenhum registro ainda — os comportamentos aparecem conforme a sala escreve</div>';
+    h='<div class="none">Nada escrito ainda. Os comportamentos mais citados aparecem aqui conforme a sala registra.</div>';
   }else{
     h+='<div class="bhead"><i></i>o que a sala mais viu <b>&middot; '+pos.length+' comportamentos observados</b></div>'
-      +'<div class="blist" style="--rows:'+Math.max(1,Math.ceil(pos.length/2))+'">'+(pos.length?pos.map(linha).join(""):'<div class="none">nada aqui ainda</div>')+'</div>';
-    h+='<div class="bhead neg"><i></i>onde mais ficou devendo <b>&middot; '+neg.length+' comportamentos citados</b></div>'
-      +'<div class="blist" style="--rows:'+Math.max(1,Math.ceil(neg.length/2))+'">'+(neg.length?neg.map(linha).join(""):'<div class="none">nenhum gap registrado</div>')+'</div>';
+      +'<div class="blist" style="--rows:'+Math.max(1,Math.ceil(pos.length/2))+'">'+(pos.length?pos.map(linha).join(""):'<div class="none">Ninguém marcou um comportamento demonstrado até agora.</div>')+'</div>';
+    h+='<div class="bhead neg"><i></i>onde mais faltou <b>&middot; '+neg.length+' comportamentos citados</b></div>'
+      +'<div class="blist" style="--rows:'+Math.max(1,Math.ceil(neg.length/2))+'">'+(neg.length?neg.map(linha).join(""):'<div class="none">Ninguém marcou uma falta até agora.</div>')+'</div>';
     h+='<div class="bhead zero"><i></i>ninguém viu <b>&middot; '+zero.length+' de '+todos.length+' comportamentos sem um único registro</b></div>'
       +'<div class="zeros">'+(zero.length?zero.map(function(x){
           var v=VMAP[x.val]||{c:"var(--ink-3)"};
           return '<span class="zerochip" style="--vc:'+v.c+'"><em></em>'+esc(x.mk)+'</span>';
-        }).join(""):'<div class="none">todos os comportamentos apareceram pelo menos uma vez</div>')+'</div>';
+        }).join(""):'<div class="none">Todos os comportamentos apareceram pelo menos uma vez.</div>')+'</div>';
   }
   $("#bhvList").innerHTML=h;
 }
@@ -1998,7 +2053,7 @@ function renderPpl(){
       +'<span class="who">'+avatar(d.p.name,"lg")+'<span><span class="nm">'+esc(d.p.name)+'</span><span class="sub">'+(d.p.group?esc(d.p.group)+" · ":"")+d.raters+' avaliadores · '+d.recv.length+' recebidas · '+d.giv.length+' dadas</span></span></span>'
       +'<span class="segs">'+segs+'</span>'
       +'<span class="big" style="color:'+(d.avg?sv(d.avg):"var(--ink-3)")+'">'+(d.avg?d.avg.toFixed(1):"—")+'</span></button>';
-  }).join(""):'<div class="none">adicione participantes em ajustes</div>';
+  }).join(""):semGente();
 }
 
 /* ============ feed ============ */
@@ -2008,7 +2063,7 @@ function renderEvd(){
   if(fp) l=l.filter(function(r){return fd==="from"?r.fromId===fp:r.toId===fp;});
   if(fv) l=l.filter(function(r){return r.val===fv;});
   if(q) l=l.filter(function(r){return (r.text+" "+(r.mk||"")+" "+r.fromName+" "+r.toName).toLowerCase().indexOf(q)>-1;});
-  $("#evdList").innerHTML=l.length?l.map(function(r){return evHtml(r,r.fromId===me);}).join(""):'<div class="none">nenhuma evidência com esses filtros</div>';
+  $("#evdList").innerHTML=l.length?l.map(function(r){return evHtml(r,r.fromId===me);}).join(""):'<div class="none">Nada com esses filtros. <button class="mine-link" id="clrF">limpar filtros</button></div>';
 }
 
 /* ============ referência ============ */
@@ -2038,6 +2093,9 @@ function renderCfg(){
     $("#valuesTxt").value=serializeValues(VALUES,NOTS);
   $("#valuesInfo").textContent=VALUES.length+" valores"+(NOTS.length?" · "+NOTS.length+" antipadrões":"");
   $("#sessNow").textContent=SESSION;
+  var base=location.origin+location.pathname;
+  $("#linkLive").value=base+"?s="+encodeURIComponent(SESSION);
+  $("#linkDemo").value=base+"?demo=1";
   if(document.activeElement!==$("#rdName")) $("#rdName").value=RODADA||"";
   var us=rodadasUsadas();
   $("#rdInfo").textContent=(STAGE==="lobby"?"sala em espera":"registrando em “"+(RODADA||"—")+"”")
@@ -2121,7 +2179,7 @@ function closeDrawer(){
 function openPair(toId,fromId){
   var a=records.filter(function(r){return r.toId===toId&&r.fromId===fromId;}).sort(function(x,y){return y.ts-x.ts;});
   var to=personById(toId),fr=personById(fromId);
-  openDrawer((fr?fr.name:"?")+" → "+(to?to.name:"?"),'<div class="feed">'+(a.length?a.map(function(r){return evHtml(r,r.fromId===me);}).join(""):'<div class="none">sem registros</div>')+'</div>');
+  openDrawer((fr?fr.name:"?")+" → "+(to?to.name:"?"),'<div class="feed">'+(a.length?a.map(function(r){return evHtml(r,r.fromId===me);}).join(""):'<div class="none">Este par ainda não tem registro nenhum.</div>')+'</div>');
 }
 function openPerson(id){
   var p=personById(id);if(!p) return;
@@ -2137,7 +2195,7 @@ function openPerson(id){
     return '<div class="lab" style="margin:28px 0 10px;border-top:1px solid var(--line);padding-top:14px">'+t+'</div>'
       +'<div class="feed">'+(arr.length?arr.map(function(r){return evHtml(r,r.fromId===me);}).join(""):'<div class="none">'+em+'</div>')+'</div>';
   }
-  openDrawer(p.name,head+sec("Sobre "+p.name,recv,"ninguém registrou nada ainda")+sec("Registrado por "+p.name,giv,"ainda não registrou nada"));
+  openDrawer(p.name,head+sec("Sobre "+p.name,recv,"Ninguém escreveu nada sobre "+shortName(p.name)+" ainda.")+sec("Registrado por "+p.name,giv,shortName(p.name)+" ainda não registrou sobre ninguém."));
 }
 
 /* ============ CSV ============ */
@@ -2146,7 +2204,7 @@ function buildCsv(){
   records.slice().sort(function(a,b){return a.ts-b.ts;}).forEach(function(r){
     var to=personById(r.toId);
     rows.push([new Date(r.ts).toLocaleString("pt-BR"),r.fromName,r.toName,to&&to.group?to.group:"",
-      VMAP[r.val]?VMAP[r.val].n:r.val,r.mk||"",r.dir==="-"?"ficou devendo":(r.dir==="+"?"demonstrou":""),r.score,r.text]);
+      VMAP[r.val]?VMAP[r.val].n:r.val,r.mk||"",r.dir==="-"?"faltou":(r.dir==="+"?"demonstrou":""),r.score,r.text]);
   });
   return "﻿"+rows.map(function(row){return row.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(";");}).join("\n");
 }
@@ -2200,7 +2258,7 @@ async function alternarRodada(){
   try{
     await writeConfig();
     toast(indo==="aberta" ? (RODADA+" aberta.") : "Rodada fechada.");
-  }catch(e){ toast("Não consegui mudar o estado da sala."); }
+  }catch(e){ toast(indo==="lobby"?"Não consegui fechar a rodada. Ninguém foi desconectado — tente de novo.":"Não consegui abrir a rodada. Tente de novo."); }
 }
 async function renomearRodada(nome){
   nome=normNome(nome); if(!nome||!ADM) return;
@@ -2225,7 +2283,7 @@ function setMe(v){me=v||null;lsSet("pv_me_"+SESSION,me);lsSet("pv_me",me);draft=
 /* a pessoa digita o nome e entra. este e o unico cadastro que existe. */
 async function entrarComNome(nome){
   nome=normNome(nome);
-  if(nome.length<2){toast("Escreva seu nome.");return;}
+  if(nome.length<2){toast("Escreva seu nome completo — é ele que vai aparecer em cada registro.");return;}
   var jaTem=nomeJaExiste(nome);
   if(jaTem){ setMe(jaTem.id); return; }
   if(people.length>=MAXPPL){toast("A sala já está com "+MAXPPL+" pessoas.");return;}
@@ -2236,7 +2294,7 @@ async function entrarComNome(nome){
   try{
     if(MODE==="supabase") await sbErr(SB.from("pv_people").insert({id:novo.id,session:SESSION,name:novo.name,ts:Date.now()}));
     else saveLocal();
-  }catch(e){toast("Não consegui te cadastrar. Tente de novo.");}
+  }catch(e){toast("Não consegui te cadastrar. Confira a conexão e toque em Entrar de novo.");}
 }
 $("#meSel").addEventListener("change",function(){setMe(this.value);});
 
@@ -2260,19 +2318,27 @@ $("#flow").addEventListener("click",function(e){
   if(e.target.closest("#fMine")){openPerson(me);return;}
   if(e.target.closest("#saveBtn")) salvar();
 });
-function salvar(){
+async function salvar(){
   var text=($("#evTxt")?$("#evTxt").value:"").trim();
-  if(!(me&&draft.to&&draft.val&&draft.score&&contaPalavras(text)>0)) return;
+  if(!(me&&draft.to&&draft.val)) return;
+  if(!draft.score){ toast("Escolha uma nota de 1 a 5 antes de registrar."); return; }
+  if(!contaPalavras(text)){
+    var ta=$("#evTxt"); if(ta){try{ta.focus();}catch(e){}}
+    toast("Escreva o que você viu antes de registrar. Nota sem fato não vale.");
+    return;
+  }
   var f=personById(me),t=personById(draft.to);if(!f||!t)return;
-  writeRecord({id:uid(),fromId:me,fromName:f.name,toId:t.id,toName:t.name,
+  draft.text=text;
+  var ok=await writeRecord({id:uid(),fromId:me,fromName:f.name,toId:t.id,toName:t.name,
     val:draft.val,score:draft.score,mk:draft.mk,dir:draft.dir,text:text,
     rd:RODADA||"",ts:Date.now()});
+  if(!ok){ render(); return; }   /* o rascunho volta inteiro, com o texto */
   draft={to:"",val:"",score:0,mk:"",dir:"",text:"",step:1,saved:true};
   render();
 }
 document.addEventListener("click",function(e){
   var d=e.target.closest("[data-del]");
-  if(d){arm(d,function(){deleteRecord(d.dataset.del);});return;}
+  if(d){arm(d,function(){deleteRecord(d.dataset.del);},"Apagar este registro?");return;}
   var c=e.target.closest("[data-cell]");
   if(c){var i=c.dataset.cell.split("|");openPair(i[0],i[1]);return;}
   var p=e.target.closest("[data-person]");
@@ -2289,8 +2355,8 @@ function openAdm(){
   var comAuth=(MODE==="supabase"&&!!SB);
   $("#admMail").hidden=!comAuth;
   $("#admMsg").textContent=comAuth
-    ? "Entre com a conta de facilitador. É a mesma sessão que autoriza mudar a configuração e apagar dados."
-    : "Abre as abas de condução: Pessoas, Evidências, Valores e Ajustes. Os participantes não precisam disso.";
+    ? "Entre com a conta de facilitador. É ela que autoriza mudar a configuração e apagar dados."
+    : "Abre as abas de condução: Pessoas, Registros, Valores e Ajustes. Os participantes não precisam disso.";
   $("#admErr").textContent="Senha incorreta.";
   $("#admSheet").classList.remove("bad");
   $("#admSheet").classList.add("on");$("#admSheet").setAttribute("aria-hidden","false");
@@ -2318,7 +2384,7 @@ async function tentarAdm(){
       if(r.error) throw r.error;
       SESSAO_ADM=r.data.session||null;
       closeAdm(); setAdm(true);
-      toast("Modo facilitador. Sessão autenticada.");
+      toast("Pronto. As abas de condução estão abertas.");
     }catch(e){
       admFalhou("Não entrou: "+((e&&e.message)||"verifique e-mail e senha."));
     }
@@ -2327,7 +2393,7 @@ async function tentarAdm(){
   }
   /* sem Supabase (artifact ou modo local): trava simples de conveniência */
   if($("#admPass").value===(CFG.adminPass||"facilitador")){
-    closeAdm(); setAdm(true); toast("Modo facilitador.");
+    closeAdm(); setAdm(true); toast("Pronto. As abas de condução estão abertas.");
   }else admFalhou();
 }
 $("#lockBtn").addEventListener("click",openAdm);
@@ -2350,6 +2416,11 @@ $("#bhvRd").addEventListener("change",renderBhv);
 $("#rdSave").addEventListener("click",function(){renomearRodada($("#rdName").value);});
 ["#pplGrp","#pplSort"].forEach(function(s){$(s).addEventListener("change",renderPpl);});
 ["#fPerson","#fVal","#fDir"].forEach(function(s){$(s).addEventListener("change",renderEvd);});
+$("#evdList").addEventListener("click",function(e){
+  if(!e.target.closest("#clrF")) return;
+  $("#fPerson").value="";$("#fVal").value="";$("#fDir").value="to";$("#fQ").value="";
+  renderEvd();
+});
 $("#bhvVal").addEventListener("change",renderBhv);
 $("#fQ").addEventListener("input",renderEvd);
 
@@ -2371,7 +2442,7 @@ $("#applyPeople").addEventListener("click",function(){
 });
 $("#applyValues").addEventListener("click",function(){
   var r=parseValues($("#valuesTxt").value);
-  if(!r.values.length){toast("Nenhum valor reconhecido. Cada valor começa com #.");return;}
+  if(!r.values.length){toast("Nenhum valor reconhecido. Cada valor começa com # numa linha só dele.");return;}
   if(records.length){
     var keys={};r.values.forEach(function(v){keys[v.k]=1;});
     var orfaos=records.filter(function(x){return !keys[x.val];}).length;
@@ -2411,16 +2482,22 @@ $("#expCsv").addEventListener("click",async function(){
   var csv=buildCsv();
   if(saveCsvFile(csv,csvFileName())){toast("CSV baixado.");return;}
   try{await navigator.clipboard.writeText(csv);toast("Download indisponível aqui — CSV copiado.");}
-  catch(e){toast("Não consegui exportar aqui.");}
+  catch(e){toast("Não consegui exportar. Use Copiar para planilha e cole no Excel.");}
 });
 $("#copyCsv").addEventListener("click",async function(){
   if(!records.length){toast("Nenhum registro para copiar ainda.");return;}
   try{await navigator.clipboard.writeText(buildCsv());toast("CSV copiado. Cole numa planilha.");}
-  catch(e){toast("Não consegui copiar.");}
+  catch(e){toast("Não consegui copiar. Baixe o CSV em vez disso.");}
 });
 $("#admOut").addEventListener("click",async function(){
   if(MODE==="supabase"&&SB){try{await SB.auth.signOut();}catch(e){}}
   SESSAO_ADM=null; setAdm(false); toast("Você voltou à visão de participante.");
+});
+document.addEventListener("click",async function(e){
+  var b=e.target.closest("[data-copy]");if(!b)return;
+  var f=$("#"+b.dataset.copy);if(!f)return;
+  try{ await navigator.clipboard.writeText(f.value); toast("Link copiado."); }
+  catch(err){ f.select(); toast("Não consegui copiar — o link está selecionado, use Ctrl+C."); }
 });
 $("#demoOn").addEventListener("click",enterDemo);
 $("#demoOff").addEventListener("click",exitDemo);
@@ -2432,13 +2509,15 @@ function disarm(){
   armed.el.textContent=armed.label;armed.el.classList.remove("arm");
   armed=null;clearTimeout(armTimer);
 }
-function arm(el,run){
+function arm(el,run,pergunta){
   if(armed&&armed.el===el){var f=armed.run;disarm();f();return;}
   disarm();
   armed={el:el,label:el.textContent,run:run};
-  el.textContent="Confirmar?";el.classList.add("arm");
+  /* o rótulo diz o que vai sumir, com número — "Confirmar?" não avisa nada */
+  el.textContent=pergunta||"Confirmar?";el.classList.add("arm");
   armTimer=setTimeout(disarm,6000);
 }
+function plural(n,s,p){return n+" "+(n===1?s:p);}
 document.addEventListener("click",function(e){
   if(armed&&!e.target.closest("[data-arm]")&&!e.target.closest("[data-del]")) disarm();
 },true);
@@ -2451,17 +2530,22 @@ async function wipeRecords(){
 }
 document.addEventListener("click",function(e){
   var b=e.target.closest("[data-arm]");if(!b)return;
-  if(demo){toast("Você está na simulação — nada a apagar.");return;}
+  if(demo){toast("Você está no exemplo — não há nada real para apagar.");return;}
   var kind=b.dataset.arm;
+  var nR=records.length, nP=people.length;
+  var pergunta = kind==="zRecs"
+    ? (nR?"Apagar "+plural(nR,"registro","registros")+"?":"Não há registros para apagar")
+    : "Apagar "+plural(nR,"registro","registros")+" e "+plural(nP,"pessoa","pessoas")+"?";
+  if(kind==="zRecs"&&!nR){toast("Não há registros nesta sala.");return;}
   arm(b,async function(){
-    if(kind==="zRecs"){await wipeRecords();toast("Registros apagados. Participantes e valores mantidos.");}
+    if(kind==="zRecs"){await wipeRecords();toast(plural(nR,"registro apagado","registros apagados")+". Participantes e valores mantidos.");}
     else if(kind==="zAll"){
       await wipeRecords();
       people=[];setValues(null);NOTS=[];me=null;lsSet("pv_me",null);
       render();await writeConfig();
-      toast("Sala zerada.");
+      toast("Sala zerada — "+plural(nR,"registro apagado","registros apagados")+". O CSV que você baixou é a única cópia.");
     }
-  });
+  },pergunta);
 });
 $("#zNew").addEventListener("click",function(){
   var base=SESSION.replace(/-(\d+)$/,""),num=(SESSION.match(/-(\d+)$/)||[0,0])[1];
@@ -2478,16 +2562,20 @@ records=lsGet("pv_records",[]);
 setValues(lsGet("pv_values",null));
 NOTS=lsGet("pv_nots",[])||[];
 render();
-/* A simulação só entra se a sala estiver realmente vazia — e isso só
-   se sabe depois que o backend responde. Antes disso, não decide nada. */
 var demoDecided=false;
+/* O exemplo só entra quando o link pede: ?demo=1 (ou #demo).
+   Sala de workshop vazia nunca vira exemplo sozinha — quem chega cedo
+   tem que ver a tela de espera, não oito colegas fictícios. */
+var DEMO_URL=(function(){
+  try{ if(new URLSearchParams(location.search).get("demo")==="1") return true; }catch(e){}
+  return (location.hash||"").replace(/^#/,"").split(/[,\/-]/).indexOf("demo")>-1;
+})();
 function maybeDemo(){
   if(demoDecided||demo) return;
   demoDecided=true;
-  var h=(location.hash||"").replace(/^#/,"").split(/[,\/-]/).filter(Boolean);
-  var forced=h.indexOf("demo")>-1;
-  if(!forced&&(people.length||records.length||roomConfigured)) return;
+  if(!DEMO_URL) return;
   enterDemo();
+  var h=(location.hash||"").replace(/^#/,"").split(/[,\/-]/).filter(Boolean);
   var t=["reg","mtx","bhv","ppl","evd","ref","cfg"].filter(function(x){return h.indexOf(x)>-1;})[0];
   if(!t) selectTab("mtx",true);
 }
