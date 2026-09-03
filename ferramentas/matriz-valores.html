@@ -1270,9 +1270,17 @@ function serializeValues(list,nots){
 }
 
 var SCALE=[
-  {v:1,t:"contradiz"},{v:2,t:"ficou devendo"},{v:3,t:"esperado"},{v:4,t:"foi além"},{v:5,t:"referência"}
+  {v:1,t:"foi contra"},{v:2,t:"ficou devendo"},{v:3,t:"esperado"},{v:4,t:"foi além"},{v:5,t:"referência"}
 ];
 var MINPAL=5;
+/* Janela de arrependimento: em avaliação entre pares, poder voltar atrás sobre
+   o que se escreveu no calor da sala é o que sustenta a franqueza. */
+var JANELA_MIN=10;
+function podeApagar(r,own){
+  if(!own) return false;                       /* nunca se apaga o registro de outra pessoa */
+  if(ADM||MODE!=="supabase") return true;
+  return (Date.now()-(r.ts||0)) < JANELA_MIN*60*1000;
+}
 function contaPalavras(t){return String(t||"").trim().split(/\s+/).filter(Boolean).length;}
 
 /* ============ estado ============ */
@@ -1448,13 +1456,19 @@ async function writeRecord(r){
   }
 }
 async function deleteRecord(id){
+  var antes=records.slice();
   records=records.filter(function(x){return x.id!==id;});render();
   if(demo) return;
   try{
     if(MODE==="artifact") await db.doc("records/"+id).delete();
     else if(MODE==="supabase") await sbErr(SB.from("pv_records").delete().eq("id",id).eq("session",SESSION));
     else saveLocal();
-  }catch(e){}
+    toast("Registro apagado.");
+  }catch(e){
+    /* nada de apagar só na tela: se o banco recusou, o registro volta */
+    records=antes;render();
+    toast("Não consegui apagar. Peça para quem está conduzindo.");
+  }
 }
 async function writeConfig(){
   if(demo) return;
@@ -1665,7 +1679,7 @@ function evHtml(r,own){
     +(r.mk?'<div class="mkq">'+(r.dir==="-"?"⚠ ":"✓ ")+esc(r.mk)+'</div>':'')
     +'<div class="tx">'+esc(r.text)+'</div>'
     +'<div class="ft"><span>'+new Date(r.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+'</span>'
-    +((own&&(ADM||MODE!=="supabase"))?'<button class="del" data-del="'+esc(r.id)+'">excluir</button>':'')+'</div></div>';
+    +(podeApagar(r,own)?'<button class="del" data-del="'+esc(r.id)+'">apagar</button>':'')+'</div></div>';
 }
 
 /* ============ registrar: uma pergunta por vez ============ */
@@ -1775,7 +1789,7 @@ function renderReg(){
       +'<textarea id="evTxt" rows="5" placeholder="Foi na dinâmica da manhã, quando…"></textarea>'
       +'<div class="count" id="evCount"><span class="ch">Ficou curto. Dá para dizer quando foi?</span><span class="n" id="evNum"></span></div>'
       +'<div class="foot"><button class="btn" id="saveBtn">Registrar</button>'
-      +'<span class="lab">seu nome fica visível &middot; só quem conduz pode apagar</span></div>';
+      +'<span class="lab">seu nome fica visível &middot; dá para apagar nos primeiros '+JANELA_MIN+' minutos</span></div>';
   }
   $("#flow").className="flow st"+st;
   $("#flow").innerHTML=h;
@@ -1962,10 +1976,10 @@ function renderMtx(){
 }
 function renderKey(){
   var k=$("#mtxKey");if(!k)return;
-  var rot=[[1,"contradiz"],[2,"ficou devendo"],[3,"esperado"],[4,"foi al\u00e9m"],[5,"refer\u00eancia"]];
+  var rot=[[1,"foi contra o valor"],[2,"ficou devendo"],[3,"esperado"],[4,"foi al\u00e9m"],[5,"refer\u00eancia"]];
   k.innerHTML='<b>escala</b>'+rot.map(function(x){
     return '<i style="background:'+scoreFill(x[0]).bg+'" title="'+x[0]+' \u2014 '+x[1]+'"></i>';
-  }).join("")+'<span style="margin-left:8px">1 contradiz \u2192 5 refer\u00eancia</span>'
+  }).join("")+'<span style="margin-left:8px">1 foi contra o valor \u2192 5 refer\u00eancia</span>'
    +'<span class="sp" id="mtxInfo2"></span>';
 }
 /* a matriz e dimensionada pela largura real: refaz ao redimensionar a janela */
