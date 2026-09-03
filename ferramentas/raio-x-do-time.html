@@ -306,6 +306,11 @@ input.tx:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(
 .avchip{display:inline-flex;align-items:center;gap:9px;padding:5px 15px 5px 5px;border-radius:99px;
   background:var(--glass-2);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
   border:1px solid var(--glass-brd);box-shadow:var(--shadow);font-size:13.5px;font-weight:500;color:var(--ink-2)}
+/* mesma pastilha, mas clicável: abre o relatório daquela pessoa */
+.avchip.aslink{cursor:pointer;font-family:inherit;text-align:left;
+  transition:transform .12s,box-shadow .12s,border-color .12s}
+.avchip.aslink:hover{transform:translateY(-1px);box-shadow:var(--shadow-lift);border-color:var(--accent)}
+.avchip.aslink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .avstack{display:flex}
 .avstack .av{margin-left:-9px}
 .avstack .av:first-child{margin-left:0}
@@ -1121,7 +1126,10 @@ const pageItems = p => ORDER.slice(p*PER_PAGE, (p+1)*PER_PAGE);
 
 const S = {
   view:"home", code:"", team:null, respostas:[], step:0,
-  answers:{}, nome:ME.nome||"", loading:false, msg:"", openBehav:null, mode:"responder", demo:false, pres:null, introStep:0, facilitador:false, sessao:""
+  answers:{}, nome:ME.nome||"", loading:false, msg:"", openBehav:null, mode:"responder", demo:false, pres:null, introStep:0, facilitador:false, sessao:"",
+  /* painel e arquivo — só existem no modo facilitador.
+     senhaAdm fica na memória da aba e some ao fechar; nunca é gravada. */
+  verComo:"", sessoes:null, senhaAdm:"", painelMsg:""
 };
 
 /* ====================== DEMONSTRAÇÃO (dados simulados) ======================
@@ -1294,6 +1302,8 @@ function navHTML(){
       b.push('<button class="btn sm '+(S.view==="me"?"on":"")+'" data-go="me">Meu relatório</button>');
     if(S.facilitador)
       b.push('<button class="btn sm '+(S.view==="team"?"on":"")+'" data-go="team">Relatório do time</button>');
+    if(S.facilitador)
+      b.push('<button class="btn sm '+(S.view==="painel"?"on":"")+'" data-act="painel" title="Todos os times, backup e exclusão">Sessões</button>');
     if(!S.sessao) b.push('<button class="btn sm ghost" data-go="home">Trocar time</button>');
   }
   b.push('<button class="btn sm ghost" data-act="facil" title="Modo facilitador" aria-label="Modo facilitador">'+
@@ -1456,12 +1466,12 @@ function view_name(){
   /* ---------- 3. o que acontece com as respostas + nome ---------- */
   ()=>`
     <span class="eyebrow">Suas respostas</span>
-    <h1>Ninguém vê o que você respondeu em cada afirmação.</h1>
+    <h1>O time nunca vê o que você respondeu, item a item.</h1>
     <p class="lede">Essa garantia é literal, e vale saber exatamente onde cada informação vai parar.</p>
     <div class="privacy">
       <div class="privrow"><b>O time vê</b><p>Médias e distribuição de respostas por afirmação. Sabe-se que três pessoas marcaram “raramente”; não se sabe quais.</p></div>
-      <div class="privrow"><b>O facilitador vê</b><p>A lista de quem já respondeu — só para saber quando fechar a rodada. Não vê as respostas de ninguém.</p></div>
-      <div class="privrow you"><b>Só você vê</b><p>Seu relatório individual: sua nota em cada nível, sua distância em relação ao time, seus exercícios e seu plano de 30 dias.</p></div>
+      <div class="privrow"><b>O facilitador vê</b><p>Seu nome e suas respostas. É ele quem conduz a sessão, guarda os relatórios e responde pelo cuidado com esses dados.</p></div>
+      <div class="privrow you"><b>Você recebe</b><p>Seu relatório individual: sua nota em cada nível, sua distância em relação ao time, seus exercícios e seu plano de 30 dias.</p></div>
       <div class="privrow"><b>Proteção extra</b><p>O relatório coletivo só abre com ${MIN_N} respostas. Abaixo disso, a média entregaria quem respondeu o quê.</p></div>
     </div>
     <div class="card pad" style="margin-top:28px">
@@ -1706,7 +1716,12 @@ function view_team(){
         </div>
         <div class="card pad">
           <p class="eyebrow">Participantes desta rodada</p>
-          <div class="avrow" style="margin-top:12px">${participantes.map((r,i)=>avChip(r.nome||"anônimo",i)).join("")}</div>
+          <div class="avrow" style="margin-top:12px">${
+            S.facilitador
+              ? participantes.map((r,i)=>'<button class="avchip aslink" data-act="verpessoa" data-resp="'+esc(r.respId)+'" title="Abrir o relatório desta pessoa para salvar em PDF">'+avatar(r.nome||"anônimo","sm",i)+esc(r.nome||"anônimo")+'</button>').join("")
+              : participantes.map((r,i)=>avChip(r.nome||"anônimo",i)).join("")
+          }</div>
+          ${S.facilitador?'<p class="mono" style="font-size:11.5px;color:var(--muted);margin-top:10px">Clique em alguém para abrir o relatório individual e salvar em PDF.</p>':""}
         </div>
       </div>
     </div>
@@ -1749,10 +1764,136 @@ function view_team(){
   </div>`;
 }
 
+/* ====================== PAINEL DE SESSÕES ===========================
+   Só existe no modo facilitador e só responde com a senha de administração,
+   que é conferida DENTRO do banco (função rxt_admin_ok). A senha não está
+   escrita em lugar nenhum deste arquivo: fica na memória da aba enquanto o
+   painel estiver aberto e some ao fechar. Sem ela, a chave anon continua
+   sem conseguir listar sessão nenhuma. */
+
+async function painelListar(senha){
+  if(typeof rpc!=="function") throw new Error("O painel precisa do backend ligado.");
+  const linhas = await rpc("rxt_listar_times", {p_senha: senha});
+  return linhas || [];
+}
+
+async function painelEntrar(senha){
+  S.painelMsg = "";
+  const linhas = await painelListar(senha);
+  if(!linhas.length){
+    // sem senha certa a função devolve zero linhas — mas zero também pode
+    // significar "banco vazio". Distinguimos perguntando ao banco.
+    const ok = await rpc("rxt_admin_ok", {p_senha: senha});
+    if(!ok){ S.painelMsg = "Senha incorreta."; S.sessoes = null; return false; }
+  }
+  S.senhaAdm = senha;
+  S.sessoes = linhas;
+  return true;
+}
+
+function csvBackup(linhas){
+  const cab = ["sessao","nome_time","rodada","respondente","registrado_em"].concat(ITEMS.map(i=>i.id));
+  const out = [cab.join(";")];
+  linhas.forEach(r=>{
+    const a = (typeof r.a==="string") ? JSON.parse(r.a) : (r.a||{});
+    out.push([
+      r.code,
+      '"'+String(r.nome_time||"").replace(/"/g,'""')+'"',
+      r.rodada,
+      '"'+String(r.nome||"").replace(/"/g,'""')+'"',
+      r.ts
+    ].concat(ITEMS.map(i=>{
+      const v = a[i.id];
+      return (typeof v==="number") ? v : "";
+    })).join(";"));
+  });
+  return "﻿"+out.join("\n");
+}
+
+async function painelBackup(){
+  const linhas = await rpc("rxt_exportar_tudo", {p_senha: S.senhaAdm});
+  const data = csvBackup(linhas||[]);
+  const hoje = new Date().toISOString().slice(0,10);
+  await baixar("raio-x-backup-"+hoje+".csv", data);
+  return (linhas||[]).length;
+}
+
+function view_painel(){
+  if(!S.sessoes){
+    return `
+    <div class="stack" style="padding-top:34px;max-width:560px;margin:0 auto">
+      <div class="rcapa">
+        <span class="eyebrow rule">Administração</span>
+        <h1 class="disp">Sessões</h1>
+      </div>
+      <div class="card pad">
+        <p class="lede" style="font-size:16px">Todos os times que já responderam, com quantas pessoas e quando.
+        Daqui você abre uma sessão, baixa o backup de tudo ou apaga os dados de um cliente.</p>
+        <label class="fl" for="senhaadm" style="margin-top:18px">Senha de administração</label>
+        <input class="tx" id="senhaadm" type="password" autocomplete="off"
+               placeholder="a senha que você definiu no banco">
+        <p class="mono" style="font-size:11.5px;color:var(--muted);margin-top:10px">
+          Ela é conferida dentro do banco e não fica guardada neste arquivo nem no navegador.</p>
+        ${S.painelMsg?`<p class="notice warn" style="margin-top:14px">${esc(S.painelMsg)}</p>`:""}
+        <div style="margin-top:18px;display:flex;gap:10px">
+          <button class="btn" data-act="painel-entrar">Abrir o painel</button>
+          <button class="btn ghost" data-go="team">Voltar</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  const fmtData = s => s ? new Date(s).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"numeric"}) : "—";
+  const linhas = S.sessoes.map(t=>`
+    <tr>
+      <td><b>${esc(t.code)}</b><br><span class="eyebrow">${esc(t.nome||"")}</span></td>
+      <td class="num">${t.rodada_atual||1}</td>
+      <td class="num">${t.respondentes||0}</td>
+      <td>${fmtData(t.ultima_resposta||t.criado_em)}</td>
+      <td style="text-align:right;white-space:nowrap">
+        <button class="btn sm" data-act="painel-abrir" data-code="${esc(t.code)}">Abrir</button>
+        <button class="btn sm ghost" data-act="painel-apagar" data-code="${esc(t.code)}">Apagar</button>
+      </td>
+    </tr>`).join("");
+
+  return `
+  <div class="stack" style="padding-top:26px">
+    <div class="rcapa">
+      <span class="eyebrow rule">Administração</span>
+      <h1 class="disp">Sessões</h1>
+      <div class="rmeta">
+        <span>Times <b>${S.sessoes.length}</b></span>
+        <span class="noprint"><button class="btn sm" data-act="painel-backup">Baixar backup de tudo</button></span>
+        <span class="noprint"><button class="btn sm ghost" data-act="painel-sair">Fechar o painel</button></span>
+      </div>
+    </div>
+    ${S.painelMsg?`<p class="notice">${esc(S.painelMsg)}</p>`:""}
+    <div class="card pad">
+      ${S.sessoes.length ? `<table class="tbl">
+        <thead><tr><th>Time</th><th>Rodada</th><th>Respostas</th><th>Último registro</th><th></th></tr></thead>
+        <tbody>${linhas}</tbody>
+      </table>` : `<p class="lede">Nenhum time no banco ainda.</p>`}
+    </div>
+    <div class="card pad">
+      <h3 style="font-size:18px;margin:0 0 8px">Sobre o backup</h3>
+      <p class="lede" style="font-size:15px">Um arquivo com todas as sessões, uma linha por resposta e uma coluna
+      <span class="mono">sessao</span>. É <b>nominal</b> — serve de cópia de segurança e é o formato que a análise de
+      consistência interna consome direto, acumulando vários times. Para entregar dados a terceiros, use o
+      <b>CSV bruto</b> de cada sessão, que sai sem nomes.</p>
+    </div>
+  </div>`;
+}
+
 function view_me(){
   const rodada = S.team?S.team.rodadaAtual:1;
   const A = analyze(S.respostas, rodada);
-  const mine = S.answers;
+  /* Com S.verComo o facilitador abre o relatório de outra pessoa para
+     arquivar em PDF. Sem ele, o relatório é o de quem está na tela. */
+  const alvo = S.verComo
+    ? S.respostas.find(r=>r.respId===S.verComo && r.rodada===rodada)
+    : null;
+  const mine = alvo ? (alvo.a||{}) : S.answers;
+  const nomeRel = alvo ? (alvo.nome||"Sem nome") : S.nome;
   const myBehav = {};
   BK.forEach(k=>{ myBehav[k] = mean(BY_B[k].map(i=>mine[i.id]).filter(v=>typeof v==="number")); });
   const teamReady = A.n>=MIN_N;
@@ -1860,11 +2001,12 @@ function view_me(){
 
   return `
   ${S.demo?`<div class="demobar">Exemplo simulado<span>7 pessoas fictícias, duas rodadas — nenhum dado real.</span><button class="linkb" data-act="exitdemo">Sair do exemplo</button></div>`:""}
+  ${alvo?`<div class="demobar noprint">Relatório de outra pessoa<span>Você está vendo o relatório de <b>${esc(nomeRel)}</b> como facilitador. Salve em PDF e devolva a quem é.</span><button class="linkb" data-act="fecharpessoa">Voltar</button></div>`:""}
   <div class="stack" style="padding-top:26px">
 
     <div class="rcapa">
       <span class="eyebrow rule">Relatório individual · Raio-X do Time</span>
-      <h1 class="disp">${esc(S.nome||"Você")}</h1>
+      <h1 class="disp">${esc(nomeRel||"Você")}</h1>
       <div class="rmeta">
         <span>Time <b>${esc(S.team&&S.team.nome?S.team.nome:S.code)}</b></span>
         <span>Rodada <b>${rodada}</b></span>
@@ -2067,6 +2209,7 @@ function render(){
   else if(S.view==="survey") html = view_survey();
   else if(S.view==="team") html = view_team();
   else if(S.view==="me") html = view_me();
+  else if(S.view==="painel") html = view_painel();
   app.innerHTML = html;
   $("#nav").innerHTML = navHTML();
   $("#brandsub").textContent = S.code ? S.code : "Exercício de aceleração";
@@ -2169,6 +2312,11 @@ function csvBruto(){
 async function doExport(bruto){
   const data = bruto ? csvBruto() : csv();
   const name = "raio-x-"+S.code+"-rodada"+(S.team?S.team.rodadaAtual:1)+(bruto?"-bruto":"")+".csv";
+  await baixar(name, data);
+}
+
+/* Entrega de arquivo — versão do site, sem o runtime do claude.ai. */
+async function baixar(name, data){
   try{
     const blob = new Blob([data], {type:"text/csv;charset=utf-8;"});
     const url = URL.createObjectURL(blob);
@@ -2277,6 +2425,7 @@ document.addEventListener("click", async e=>{
   const go = e.target.closest && e.target.closest("[data-go]");
   if(go){
     const v = go.getAttribute("data-go");
+    S.verComo="";
     if(v==="home"){ S.view="home"; S.code=""; S.team=null; S.respostas=[]; S.demo=false; S.answers={}; }
     else if(v==="team" && !S.facilitador){ return; }
     else S.view=v;
@@ -2366,6 +2515,57 @@ document.addEventListener("click", async e=>{
   if(act==="print"){ window.print(); return; }
   if(act==="export"){ await doExport(false); return; }
   if(act==="exportraw"){ await doExport(true); return; }
+
+  /* ---------- arquivo: relatório individual de outra pessoa ---------- */
+  if(act==="verpessoa"){
+    if(!S.facilitador) return;
+    S.verComo = b.getAttribute("data-resp") || "";
+    S.view = "me"; render(); window.scrollTo(0,0); return;
+  }
+  if(act==="fecharpessoa"){ S.verComo=""; S.view="team"; render(); window.scrollTo(0,0); return; }
+
+  /* ---------- painel de sessões ---------- */
+  if(act==="painel"){
+    if(!S.facilitador) return;
+    S.view="painel"; S.painelMsg=""; render(); window.scrollTo(0,0); return;
+  }
+  if(act==="painel-entrar"){
+    const inp=$("#senhaadm"); const senha=inp?inp.value:"";
+    if(!senha){ S.painelMsg="Digite a senha."; render(); return; }
+    b.disabled=true; b.textContent="Abrindo…";
+    try{ await painelEntrar(senha); }
+    catch(e){ S.painelMsg = "Não consegui falar com o banco: "+e.message; S.sessoes=null; }
+    render(); return;
+  }
+  if(act==="painel-sair"){
+    S.sessoes=null; S.senhaAdm=""; S.painelMsg=""; S.view="team"; render(); return;
+  }
+  if(act==="painel-backup"){
+    b.disabled=true; b.textContent="Gerando…";
+    try{
+      const n = await painelBackup();
+      S.painelMsg = "Backup gerado: "+n+" respostas de todas as sessões.";
+    }catch(e){ S.painelMsg = "Não consegui gerar o backup: "+e.message; }
+    render(); return;
+  }
+  if(act==="painel-abrir"){
+    const code=b.getAttribute("data-code")||"";
+    S.sessoes=null; S.painelMsg="";
+    const ok = await enterTeam(code, false);
+    S.view = ok ? "team" : "painel"; render(); window.scrollTo(0,0); return;
+  }
+  if(act==="painel-apagar"){
+    const code=b.getAttribute("data-code")||"";
+    if(!confirm("Apagar TODOS os dados do time "+code+"?\n\nIsso remove as respostas e a sessão. Não tem volta.")) return;
+    if(prompt("Para confirmar, digite o código do time:")!==code){ S.painelMsg="Código não confere — nada foi apagado."; render(); return; }
+    b.disabled=true;
+    try{
+      const n = await rpc("rxt_apagar_time", {p_senha:S.senhaAdm, p_code:code});
+      S.sessoes = await painelListar(S.senhaAdm);
+      S.painelMsg = "Time "+code+" apagado ("+n+" respostas).";
+    }catch(e){ S.painelMsg = "Não consegui apagar: "+e.message; }
+    render(); return;
+  }
   if(act==="newround"){
     if(S.demo){ alert("Isto é um exemplo simulado — abra um time de verdade para criar rodadas."); return; }
     if(!confirm("Abrir a rodada "+((S.team?S.team.rodadaAtual:1)+1)+"? As respostas atuais ficam guardadas para comparação.")) return;
