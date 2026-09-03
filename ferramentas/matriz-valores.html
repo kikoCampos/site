@@ -676,12 +676,12 @@ td.c button{animation:tileIn .3s cubic-bezier(.2,.7,.3,1) both}
   .rail-in{gap:10px;padding:0 14px}
   .mark .sq{width:24px;height:24px}
   .live{display:none}
-  #meSel{max-width:38vw;text-overflow:ellipsis;padding:7px 22px 7px 8px}
+  #meSel{max-width:46vw;text-overflow:ellipsis;padding:8px 24px 8px 10px}
   .nv{padding:0 10px;font-size:10px}
   .helpb{width:34px;height:34px}
 }
 @media (max-width:420px){
-  #meSel{max-width:32vw;font-size:10px}
+  #meSel{max-width:42vw}   /* sem font-size: abaixo de 16px o iOS amplia a tela */
   .nv{padding:0 8px;letter-spacing:.08em}
 }
 
@@ -935,7 +935,7 @@ details.danger .inner{padding:20px}
   <div class="band">
     <div class="band-hd"><div class="t"><h2>Valores da sala</h2><p>Os valores e os marcadores desta sessão. Ficam guardados na sala, não no código — cada cliente tem os seus.</p></div></div>
     <div style="max-width:760px">
-      <textarea id="valuesTxt" rows="16" spellcheck="false" style="font-family:var(--fm);font-size:12.5px;line-height:1.6"></textarea>
+      <textarea id="valuesTxt" rows="16" spellcheck="false" style="font-family:var(--fm);font-size:16px;line-height:1.55"></textarea>
       <div class="row" style="margin-top:13px">
         <button class="btn" id="applyValues">Salvar valores</button>
         <button class="btn g" id="resetValues">Restaurar padrão</button>
