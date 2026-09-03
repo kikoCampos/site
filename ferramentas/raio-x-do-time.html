@@ -644,20 +644,59 @@ footer.ft{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);colo
     --fragil:#A83628; --fragil-soft:#FAE9E5; --neutro:#999; --neutro-soft:#F2F2F2;
     --band-on:#fff; --shadow:none; --shadow-lift:none;
   }
-  @page{margin:14mm}
+  @page{margin:16mm 14mm 18mm}
+
+  /* As barras do histograma e as faixas de cor são informação, não decoração:
+     sem isto o PDF sai com os gráficos em branco. */
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+
   .topbar,.navbtns,.presfoot,#pres,.demobar,.noprint,footer.ft button{display:none !important}
   body::before{display:none !important}
   .card,.chapcover,.chapbody,.behavbar,.rbox,.mini,.benefit,.modelrow,.avchip,.fact,.seg,.btn,input.tx{
     -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
     box-shadow:none !important;background:#fff !important}
   .chapcover{border:1px solid #E2E2E2 !important;border-bottom:0 !important}
-  body{background:#fff;font-size:12pt}
+  body{background:#fff;font-size:11.5pt;line-height:1.5}
   .wrap{max-width:none;padding:0}
-  .card{box-shadow:none;border:1px solid #E2E2E2;break-inside:avoid}
-  .rchap{break-before:page}
-  .rchap:first-of-type{break-before:auto}
-  .rbox,.itemrow,.hist,.dumbrow,.rplanoi{break-inside:avoid}
+  .card{box-shadow:none;border:1px solid #E2E2E2}
   a{color:inherit;text-decoration:none}
+
+  /* Uma coluna. As grades de duas colunas são de tela; na página impressa
+     grid e flex fragmentam mal, então viram blocos com margem no lugar do gap. */
+  .chapbody,.itemrow,.qitem{display:block}
+  .stack,.reportgrid,.tworow{display:block}
+  .stack>*,.reportgrid>*,.tworow>*{margin-bottom:22px}
+
+  /* ---------- Padrão de quebra de página ----------------------------
+     Blocos altos (capítulo, cartão) podem atravessar páginas. O que nunca
+     se parte é uma unidade de leitura: parágrafo, item, caixa, tabela.   */
+  .card,.rchap,.behavblock,.chapbody,.stack,.reportgrid{break-inside:auto}
+
+  p,li,blockquote,figure,table,.rlead,.lede,.qtext,.itemhead,.notice,
+  .rbox,.mini,.itemrow,.hist,.dumbrow,.rplanoi,.tses,.chapnums,.privrow,
+  .benefit,.fact,.modelrow,.pyrlegend,.you-mark,.rnote{break-inside:avoid}
+
+  .rbox h4,.ferrtit{break-after:avoid}
+
+  /* Um título nunca fica sozinho no pé da página. */
+  h1,h2,h3,h4,.eyebrow,.kick{break-after:avoid;break-inside:avoid}
+  .chapcover,.behavbar{break-inside:avoid;break-after:avoid}
+
+  /* Nem uma nem duas linhas soltas de um parágrafo numa página. */
+  p,li,.rlead,.lede{orphans:3;widows:3}
+
+  /* Gráficos e tabelas inteiros. */
+  svg,img,.pyr{break-inside:avoid}
+  /* A legenda explica a pirâmide: o cartão inteiro é uma unidade só.
+     Prender apenas a legenda ao gráfico partia o cartão ao meio e deixava
+     a borda aberta no pé da página. */
+  .card:has(.pyr){break-inside:avoid}
+  tr,thead,.mxr{break-inside:avoid}
+  thead{display:table-header-group}
+
+  /* Cada comportamento começa em página nova. */
+  .rchap,.behavblock{break-before:page}
+  .rchap:first-of-type,.behavblock:first-of-type{break-before:auto}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
 img{max-width:100%;height:auto}
