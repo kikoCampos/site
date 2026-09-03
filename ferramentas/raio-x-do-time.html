@@ -2649,7 +2649,9 @@ document.addEventListener("click", async e=>{
     S.view="painel"; S.painelMsg=""; render(); window.scrollTo(0,0); return;
   }
   if(act==="painel-entrar"){
-    const inp=$("#senhaadm"); const senha=inp?inp.value:"";
+    /* trim(): senha colada de um gerenciador costuma trazer espaço ou quebra
+       de linha no fim, e isso vira "senha incorreta" sem nenhuma pista. */
+    const inp=$("#senhaadm"); const senha=(inp?inp.value:"").trim();
     if(!senha){ S.painelMsg="Digite a senha."; render(); return; }
     b.disabled=true; b.textContent="Abrindo…";
     try{ await painelEntrar(senha); }
@@ -2695,9 +2697,11 @@ document.addEventListener("click", async e=>{
         "de preferência na sessão de devolutiva.")) return;
     /* A senha de administração é a mesma do painel de sessões. Se o
        facilitador já entrou no painel nesta aba, não pedimos de novo. */
-    let senha = S.senhaAdm;
+    /* trim(): senha colada de um gerenciador vem com espaço no fim mais vezes
+       do que se imagina, e um espaço invisível vira "senha incorreta". */
+    let senha = (S.senhaAdm || "").trim();
     if(!senha){
-      senha = prompt("Senha de administração (a mesma do painel de Sessões):") || "";
+      senha = (prompt("Senha de administração (a mesma do painel de Sessões):") || "").trim();
       if(!senha) return;
     }
     b.disabled = true;
@@ -2709,9 +2713,14 @@ document.addEventListener("click", async e=>{
     }catch(e){
       b.disabled = false;
       S.senhaAdm = "";
-      alert(/senha/i.test(e.message||"")
+      /* Mostra o que o servidor realmente disse. A versão anterior traduzia
+         qualquer erro que contivesse a palavra "senha" para "senha incorreta"
+         — e escondia a causa real quando era outra coisa. */
+      const msg = (e && e.message) ? String(e.message) : String(e);
+      alert(/incorreta/i.test(msg)
         ? "Senha de administração incorreta. Os relatórios continuam como estavam."
-        : "Não consegui falar com o servidor: "+(e.message||e)+"\n\nOs relatórios continuam como estavam.");
+        : "Não deu para liberar. O servidor respondeu:\n\n" + msg +
+          "\n\nOs relatórios continuam como estavam.");
     }
     return;
   }
