@@ -2387,15 +2387,34 @@ $("#resetValues").addEventListener("click",function(){
   $("#valuesTxt").value=serializeValues(VALUES,NOTS);
   toast("Valores restaurados.");
 });
+function csvFileName(){
+  return "matriz-valores-"+SESSION+"-"+new Date().toISOString().slice(0,10)+".csv";
+}
+/* baixa de verdade no navegador: Blob + link temporario.
+   BOM e separador ";" ja vem do buildCsv, entao o Excel em pt-BR abre em colunas. */
+function saveCsvFile(csv,fn){
+  try{
+    if(typeof Blob!=="function"||!window.URL||!URL.createObjectURL) return false;
+    var blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+    if(navigator.msSaveBlob){navigator.msSaveBlob(blob,fn);return true;}
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");
+    a.href=url;a.download=fn;a.rel="noopener";a.style.display="none";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){try{document.body.removeChild(a);}catch(e){}URL.revokeObjectURL(url);},1500);
+    return true;
+  }catch(e){return false;}
+}
 $("#expCsv").addEventListener("click",async function(){
-  var csv=buildCsv(),d=null;
-  try{d=await claude.use("downloads");}catch(e){}
-  var fn="matriz-valores-"+SESSION+"-"+new Date().toISOString().slice(0,10)+".csv";
-  if(d&&d.save){try{await d.save({filename:fn,data:csv});toast("Arquivo gerado.");return;}catch(e){}}
-  try{await navigator.clipboard.writeText(csv);toast("Download indisponível — CSV copiado.");}
+  if(!records.length){toast("Nenhum registro para exportar ainda.");return;}
+  var csv=buildCsv();
+  if(saveCsvFile(csv,csvFileName())){toast("CSV baixado.");return;}
+  try{await navigator.clipboard.writeText(csv);toast("Download indisponível aqui — CSV copiado.");}
   catch(e){toast("Não consegui exportar aqui.");}
 });
 $("#copyCsv").addEventListener("click",async function(){
+  if(!records.length){toast("Nenhum registro para copiar ainda.");return;}
   try{await navigator.clipboard.writeText(buildCsv());toast("CSV copiado. Cole numa planilha.");}
   catch(e){toast("Não consegui copiar.");}
 });
