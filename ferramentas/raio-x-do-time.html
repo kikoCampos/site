@@ -1677,6 +1677,7 @@ function view_team(){
         <button class="btn sm pri" data-act="present">▶ Apresentar</button>
         <button class="btn sm" data-act="refresh">Atualizar</button>
         <button class="btn sm" data-act="export">Exportar CSV</button>
+        <button class="btn sm" data-act="exportraw" title="Uma linha por pessoa, sem nomes — é o formato que a análise de consistência interna exige">CSV bruto</button>
         <button class="btn sm ghost" data-act="newround">Nova rodada</button>
       </div>
     </div>
@@ -2136,9 +2137,38 @@ function csv(){
   return "﻿"+lines.join("\n");
 }
 
-async function doExport(){
-  const data = csv();
-  const name = "raio-x-"+S.code+"-rodada"+(S.team?S.team.rodadaAtual:1)+".csv";
+/* CSV bruto e anônimo — uma linha por pessoa, uma coluna por item.
+   O CSV de médias acima não serve para análise psicométrica: alfa e
+   correlação item-total dependem da covariância entre os itens, e isso
+   não se recupera de médias. Aqui vai a matriz que o cálculo exige.
+   Sem nomes: as pessoas viram A, B, C… ordenadas da leitura mais severa
+   para a mais generosa, a mesma ordem da matriz de dispersão do relatório. */
+function letraCol(n){
+  let s=""; n++;
+  while(n>0){ n--; s=String.fromCharCode(65+(n%26))+s; n=Math.floor(n/26); }
+  return s;
+}
+function csvBruto(){
+  const rodada = S.team ? S.team.rodadaAtual : 1;
+  const rs = S.respostas.filter(r=>r.rodada===rodada);
+  const mediaDe = r => {
+    const v = ITEMS.map(i=>r.a && r.a[i.id]).filter(x=>typeof x==="number");
+    return v.length ? v.reduce((a,b)=>a+b,0)/v.length : 0;
+  };
+  const ord = rs.slice().sort((a,b)=>mediaDe(a)-mediaDe(b));
+  const linhas = [["respondente","rodada"].concat(ITEMS.map(i=>i.id)).join(";")];
+  ord.forEach((r,ix)=>{
+    linhas.push([letraCol(ix), rodada].concat(ITEMS.map(i=>{
+      const v = r.a && r.a[i.id];
+      return (typeof v==="number") ? v : "";
+    })).join(";"));
+  });
+  return "﻿"+linhas.join("\n");
+}
+
+async function doExport(bruto){
+  const data = bruto ? csvBruto() : csv();
+  const name = "raio-x-"+S.code+"-rodada"+(S.team?S.team.rodadaAtual:1)+(bruto?"-bruto":"")+".csv";
   try{
     const blob = new Blob([data], {type:"text/csv;charset=utf-8;"});
     const url = URL.createObjectURL(blob);
@@ -2334,7 +2364,8 @@ document.addEventListener("click", async e=>{
     return;
   }
   if(act==="print"){ window.print(); return; }
-  if(act==="export"){ await doExport(); return; }
+  if(act==="export"){ await doExport(false); return; }
+  if(act==="exportraw"){ await doExport(true); return; }
   if(act==="newround"){
     if(S.demo){ alert("Isto é um exemplo simulado — abra um time de verdade para criar rodadas."); return; }
     if(!confirm("Abrir a rodada "+((S.team?S.team.rodadaAtual:1)+1)+"? As respostas atuais ficam guardadas para comparação.")) return;
