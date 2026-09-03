@@ -691,6 +691,10 @@ footer.ft{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);colo
      Prender apenas a legenda ao gráfico partia o cartão ao meio e deixava
      a borda aberta no pé da página. */
   .card:has(.pyr){break-inside:avoid}
+  /* Na tela a pirâmide tem 520px. Na página, esses 520px fazem o cartão
+     não caber junto com a abertura e o "Como ler" — e a página 1 fica
+     metade vazia. A 410px o conjunto cabe com 30px de folga. */
+  .pyr,.pyr.comvalores{max-width:410px}
   tr,thead,.mxr{break-inside:avoid}
   thead{display:table-header-group}
 
