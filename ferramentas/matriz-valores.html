@@ -220,6 +220,28 @@ section[hidden]{display:none}
 .gate h3{font-size:clamp(23px,3vw,31px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
 .gate p{margin:0;color:var(--ink-2);font-size:14.5px;max-width:46ch}
 .gate select{font-size:16px;padding:14px 13px}
+/* ---------- entrada e lobby ---------- */
+.joinrow{display:flex;gap:10px;flex-wrap:wrap;max-width:520px}
+.joinrow input{flex:1 1 240px;font-size:17px;padding:15px 15px;border-radius:12px}
+.joinrow .btn{padding:15px 28px;font-size:16px;flex:0 0 auto}
+.gwarn{color:var(--s2)!important;font-size:13.5px!important}
+.gback{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.gback .lab{display:block;margin-bottom:10px}
+.glist{display:flex;flex-wrap:wrap;gap:8px}
+.gchip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-2);background:var(--panel);
+  border-radius:999px;padding:6px 15px 6px 6px;font:inherit;font-size:13.5px;color:var(--ink);
+  cursor:pointer;transition:.13s cubic-bezier(.2,.7,.3,1)}
+button.gchip:hover{border-color:var(--pp-ink);transform:translateY(-1px)}
+.gchip.me{border-color:var(--pp);background:color-mix(in srgb,var(--pp) 9%,#fff);font-weight:600}
+.glist.big .gchip{font-size:15px;padding:8px 18px 8px 8px;animation:evIn .34s cubic-bezier(.2,.7,.3,1) both}
+.lobby{display:flex;flex-direction:column;gap:14px}
+.lobby h3{margin:0}
+.lobcount{display:flex;align-items:baseline;gap:10px;margin:2px 0 2px}
+.lobcount b{font-family:var(--fm);font-size:46px;font-weight:600;line-height:1;letter-spacing:-.04em}
+.lobcount s{text-decoration:none;font-family:var(--fm);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3)}
+.lobby .mine-link{align-self:flex-start;margin-top:6px}
+@media (min-width:1000px){.lobcount b{font-size:60px}}
 
 /* ---------- avatares ---------- */
 .av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;
@@ -768,6 +790,13 @@ details.danger .inner{padding:20px}
 .warnbox b{color:var(--ink);font-weight:600}
 
 /* ============ modo facilitador ============ */
+/* abrir e fechar a rodada: o botao Comecar do facilitador */
+.roundb{border:0;border-radius:9px;cursor:pointer;font-family:var(--fm);font-size:10px;letter-spacing:.11em;
+  text-transform:uppercase;font-weight:600;padding:9px 14px;white-space:nowrap;
+  background:var(--pp);color:#04120B;transition:.13s cubic-bezier(.2,.7,.3,1)}
+.roundb:hover{transform:translateY(-1px)}
+.roundb.close{background:var(--panel-2);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line-2)}
+@media (max-width:700px){.roundb{font-size:9px;padding:9px 11px}}
 .lockb{background:none;border:1px solid var(--line-2);border-radius:50%;width:32px;height:32px;cursor:pointer;
   color:var(--ink-3);font-size:13px;display:grid;place-items:center;padding:0;flex-shrink:0;transition:.13s}
 .lockb:hover{border-color:var(--ink-3);color:var(--ink)}
@@ -805,6 +834,7 @@ details.danger .inner{padding:20px}
       <select id="meSel" class="mini" aria-label="Quem é você"><option value="">quem é você?</option></select>
       <span class="live"><i class="dot off" id="dot"></i><span id="connTxt">conectando</span></span>
       <button class="helpb" id="helpBtn" aria-label="Como funciona" title="Como funciona">?</button>
+      <button class="roundb" id="roundBtn" hidden></button>
       <button class="lockb" id="lockBtn" aria-label="Modo facilitador" title="Modo facilitador" hidden>&#9679;</button>
     </div>
   </div>
@@ -835,11 +865,7 @@ details.danger .inner{padding:20px}
 <!-- ===== REGISTRAR ===== -->
 <section id="tab-reg">
   <div class="band">
-    <div class="gate" id="gate" hidden>
-      <h3>Quem é você?</h3>
-      <p id="gateMsg">Escolha seu nome para começar. Ele aparece junto de cada avaliação que você registrar — é assim que a matriz fica transparente.</p>
-      <select id="gateSel"><option value="">— selecione seu nome —</option></select>
-    </div>
+    <div class="gate" id="gate" hidden></div>
     <div class="flow" id="flow" hidden></div>
   </div>
 </section>
@@ -1206,6 +1232,8 @@ function contaPalavras(t){return String(t||"").trim().split(/\s+/).filter(Boolea
 
 /* ============ estado ============ */
 var db=null,people=[],records=[],me=null,tab="reg";
+/* entrada estilo Kahoot: cada um se cadastra, o facilitador abre a rodada */
+var STAGE="aberta",RODADA="",MAXPPL=8,peopleAuto=[],cfgPeople=[];
 var draft={to:"",val:"",score:0,mk:"",dir:"",text:"",step:1,saved:false};
 
 /* backend: artifact (claude) → supabase → local */
@@ -1330,7 +1358,7 @@ function exitDemo(){
   people=realPeople||lsGet("pv_people",[]);
   records=realRecords||lsGet("pv_records",[]);
   setValues(realValues);NOTS=realNots||[];
-  me=lsGet("pv_me",null);
+  me=lsGet("pv_me_"+SESSION,null)||null;
   $("#demoBar").hidden=true;$("#demoOn").hidden=false;$("#demoOff").hidden=true;
   render();
 }
@@ -1357,20 +1385,57 @@ async function deleteRecord(id){
 }
 async function writeConfig(){
   if(demo) return;
-  var cfg={people:people,values:VALUES,nots:NOTS,updated:Date.now()};
+  var cfg={people:cfgPeople,values:VALUES,nots:NOTS,updated:Date.now()};
   try{
     if(MODE==="artifact") await db.doc("config/session").set(cfg);
-    else if(MODE==="supabase") await sbErr(SB.from("pv_config").upsert({session:SESSION,people:cfg.people,vals:cfg.values,nots:cfg.nots,updated:cfg.updated}));
+    else if(MODE==="supabase") await sbErr(SB.from("pv_config").upsert({session:SESSION,people:cfg.people,vals:cfg.values,nots:cfg.nots,updated:cfg.updated,stage:STAGE,rodada:RODADA,maxppl:MAXPPL}));
     else saveLocal();
   }catch(e){toast("Não consegui salvar a configuração.");}
 }
-async function writePeople(list){people=list;render();await writeConfig();}
+async function writePeople(list){
+  var idsFicam={}; list.forEach(function(p){idsFicam[p.id]=1;});
+  var autoIds={};  peopleAuto.forEach(function(p){autoIds[p.id]=1;});
+  var removidos=people.filter(function(p){return !idsFicam[p.id];});
+  /* a lista digitada vira a config, menos quem entrou sozinho pelo link */
+  cfgPeople=list.filter(function(p){return !autoIds[p.id];});
+  peopleAuto=peopleAuto.filter(function(p){return idsFicam[p.id];});
+  mergePeople(); render();
+  if(!demo && MODE==="supabase"){
+    for(var i=0;i<removidos.length;i++){
+      if(!autoIds[removidos[i].id]) continue;
+      try{ await sbErr(SB.from("pv_people").delete().eq("id",removidos[i].id).eq("session",SESSION)); }catch(e){}
+    }
+  }
+  await writeConfig();
+}
 async function writeValues(list,nots){setValues(list);NOTS=nots||[];render();await writeConfig();}
 function applyConfig(c){
   if(!c) return;
-  if(Array.isArray(c.people)) people=c.people;
+  if(Array.isArray(c.people)){cfgPeople=c.people;mergePeople();}
   if(Array.isArray(c.values)&&c.values.length){setValues(c.values);roomConfigured=true;}
   if(Array.isArray(c.nots)) NOTS=c.nots;
+  if(c.stage!==undefined)  STAGE=c.stage||"aberta";
+  if(c.rodada!==undefined) RODADA=c.rodada||"";
+  if(c.maxppl!==undefined) MAXPPL=c.maxppl||8;
+}
+/* a lista da sala tem duas origens: o que o facilitador colou e quem entrou pelo link */
+function mergePeople(){
+  var out=(cfgPeople||[]).slice(), vistos={};
+  out.forEach(function(p){vistos[p.id]=1;});
+  (peopleAuto||[]).forEach(function(p){if(!vistos[p.id]){vistos[p.id]=1;out.push(p);}});
+  people=out;
+}
+/* "Ana Beatriz" e "ana  beatriz" sao a mesma pessoa numa matriz 8x8 */
+function normNome(n){
+  return String(n||"").replace(/\s+/g," ").trim();
+}
+function chaveNome(n){
+  return normNome(n).toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function nomeJaExiste(n){
+  var k=chaveNome(n);
+  return people.filter(function(p){return chaveNome(p.name)===k;})[0]||null;
 }
 /* Sair da simulacao sem perder o que o facilitador acabou de digitar. */
 function ensureRealMode(){
@@ -1548,18 +1613,12 @@ function crumbs(){
   return out;
 }
 function renderReg(){
-  var blocked=!me;
+  var noLobby = (STAGE==="lobby") && !ADM;
+  var blocked = !me || noLobby;
   $("#gate").hidden=!blocked;
   $("#flow").hidden=blocked;
   $("#hero").classList.toggle("off",tab==="reg");
-  if(blocked){
-    fillSelect($("#gateSel"),peopleOpts(null),"","— selecione seu nome —");
-    $("#gateSel").hidden=!people.length;
-    $("#gateMsg").textContent=people.length
-      ?"Escolha seu nome para começar. Ele aparece junto de cada avaliação que você registrar — é assim que a matriz fica transparente."
-      :"A lista de participantes ainda está vazia. Abra Ajustes e cole os nomes de quem está no encontro.";
-    return;
-  }
+  if(blocked){ renderGate(); return; }
 
   var mine=records.filter(function(r){return r.fromId===me;});
   var peers=people.filter(function(p){return p.id!==me;});
@@ -1658,6 +1717,57 @@ function syncCount(){
   var b=$("#saveBtn"); if(b) b.disabled=!(n>0&&draft.score>0);
 }
 function ghostCard(){return "";}
+/* ====== entrada e lobby ======
+   Sem nome ainda -> campo para digitar.
+   Com nome e sala em lobby -> os nomes aparecendo ao vivo, esperando voce abrir. */
+function renderGate(){
+  var g=$("#gate"), h="";
+  if(!me){
+    var cheia=people.length>=MAXPPL;
+    h+='<h3>Como você se chama?</h3>'
+      +'<p>Seu nome aparece junto de cada registro que você fizer — é assim que a matriz fica transparente.</p>'
+      +'<div class="joinrow">'
+      +'<input type="text" id="joinName" autocomplete="name" autocapitalize="words" spellcheck="false"'
+      +' placeholder="seu nome e sobrenome"'+(cheia?' disabled':'')+'>'
+      +'<button class="btn" id="joinBtn"'+(cheia?' disabled':'')+'>Entrar</button>'
+      +'</div>';
+    if(cheia) h+='<p class="gwarn">A sala já está com '+MAXPPL+' pessoas. Fale com quem está conduzindo.</p>';
+    if(people.length){
+      h+='<div class="gback"><span class="lab">já entrou antes? toque no seu nome</span><div class="glist">'
+        +people.map(function(p){
+            return '<button class="gchip" data-back="'+esc(p.id)+'">'+avatar(p.name,"sm")+esc(shortName(p.name))+'</button>';
+          }).join("")
+        +'</div></div>';
+    }
+  }else{
+    var eu=PMAP()[me], n=people.length;
+    h+='<div class="lobby">'
+      +'<span class="lab">'+(RODADA?esc(RODADA):"sala "+esc(SESSION))+'</span>'
+      +'<h3>Você está dentro'+(eu?", "+esc(shortName(eu.name)):"")+'.</h3>'
+      +'<p>Assim que todo mundo entrar, quem está conduzindo abre a rodada. Deixe esta tela aberta.</p>'
+      +'<div class="lobcount"><b>'+n+'</b><s>'+(n===1?"pessoa na sala":"pessoas na sala")+'</s></div>'
+      +'<div class="glist big">'
+      +people.map(function(p){
+          return '<span class="gchip'+(p.id===me?" me":"")+'">'+avatar(p.name,"sm")+esc(shortName(p.name))+'</span>';
+        }).join("")
+      +'</div>'
+      +'<button class="mine-link" id="joinAgain">não sou eu — trocar de nome</button>'
+      +'</div>';
+  }
+  g.innerHTML=h;
+}
+function PMAP(){var m={};people.forEach(function(p){m[p.id]=p;});return m;}
+
+$("#gate").addEventListener("click",function(e){
+  var b;
+  if((b=e.target.closest("#joinBtn"))){ entrarComNome($("#joinName").value); return; }
+  if((b=e.target.closest("[data-back]"))){ setMe(b.dataset.back); return; }
+  if((b=e.target.closest("#joinAgain"))){ setMe(null); return; }
+});
+$("#gate").addEventListener("keydown",function(e){
+  if(e.key==="Enter"&&e.target.id==="joinName"){e.preventDefault();entrarComNome(e.target.value);}
+});
+
 function renderMine(){}
 
 /* ============ matriz ============ */
@@ -1909,6 +2019,7 @@ function renderCfg(){
 }
 
 function render(){
+  renderRoundBtn();
   renderRail();
   renderHero();
   var g=groups().map(function(x){return {v:x,l:x};});
@@ -2019,7 +2130,38 @@ function applyRole(){
     l.title="Modo facilitador";
   }
   var sair=$("#admOut"); if(sair) sair.hidden=!ADM;
+  renderRoundBtn();
 }
+
+/* ====== o botao Comecar: so quem esta logado ve ====== */
+function renderRoundBtn(){
+  var b=$("#roundBtn"); if(!b) return;
+  b.hidden = !ADM || MODE!=="supabase";
+  if(b.hidden) return;
+  var emLobby = STAGE==="lobby";
+  b.textContent = emLobby ? ("abrir rodada"+(people.length?" · "+people.length:"")) : "fechar rodada";
+  b.classList.toggle("close",!emLobby);
+  b.title = emLobby
+    ? "Libera a sala para registrar. Todos saem do lobby juntos."
+    : "Volta a sala para o lobby. Ninguém registra até você abrir de novo.";
+}
+
+async function alternarRodada(){
+  if(!ADM) return;
+  var indo = (STAGE==="lobby") ? "aberta" : "lobby";
+  if(indo==="lobby" && !confirm("Fechar a rodada? Todos voltam para o lobby e param de registrar.")) return;
+  var nome = RODADA;
+  if(indo==="aberta"){
+    nome = prompt("Nome desta rodada (aparece para a sala):", RODADA || "") ;
+    if(nome===null) return;
+    nome = normNome(nome);
+  }
+  STAGE=indo; RODADA=nome;
+  render();
+  try{ await writeConfig(); toast(indo==="aberta"?"Rodada aberta.":"Rodada fechada."); }
+  catch(e){ toast("Não consegui mudar o estado da sala."); }
+}
+$("#roundBtn").addEventListener("click",alternarRodada);
 function selectTab(t,scroll){
   if(!ADM&&ADM_TABS.indexOf(t)>-1) t="reg";
   tab=t;
@@ -2032,7 +2174,24 @@ applyRole();
 $$(".nv").forEach(function(b){b.addEventListener("click",function(){selectTab(b.dataset.t,true);});});
 wireCross();
 
-function setMe(v){me=v||null;lsSet("pv_me",me);draft={to:"",val:"",score:0,mk:"",dir:""};render();}
+function setMe(v){me=v||null;lsSet("pv_me_"+SESSION,me);lsSet("pv_me",me);draft={to:"",val:"",score:0,mk:"",dir:""};render();}
+
+/* a pessoa digita o nome e entra. este e o unico cadastro que existe. */
+async function entrarComNome(nome){
+  nome=normNome(nome);
+  if(nome.length<2){toast("Escreva seu nome.");return;}
+  var jaTem=nomeJaExiste(nome);
+  if(jaTem){ setMe(jaTem.id); return; }
+  if(people.length>=MAXPPL){toast("A sala já está com "+MAXPPL+" pessoas.");return;}
+  var novo={id:"p"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:nome,group:""};
+  peopleAuto=peopleAuto.concat([novo]); mergePeople();
+  setMe(novo.id);
+  if(demo) return;
+  try{
+    if(MODE==="supabase") await sbErr(SB.from("pv_people").insert({id:novo.id,session:SESSION,name:novo.name,ts:Date.now()}));
+    else saveLocal();
+  }catch(e){toast("Não consegui te cadastrar. Tente de novo.");}
+}
 $("#meSel").addEventListener("change",function(){setMe(this.value);});
 $("#gateSel").addEventListener("change",function(){setMe(this.value);});
 
@@ -2147,12 +2306,14 @@ $("#fQ").addEventListener("input",renderEvd);
 
 $("#applyPeople").addEventListener("click",function(){
   var lines=$("#peopleTxt").value.split("\n").map(function(l){return l.trim();}).filter(Boolean);
-  var seen={},list=[];
+  var seen={},list=[],jaTemId={};
+  people.forEach(function(p){jaTemId[chaveNome(p.name)]=p.id;});
   lines.forEach(function(l){
     var parts=l.split(/\s*[;|]\s*/);
     var name=parts[0].trim();if(!name)return;
     var grp=(parts[1]||"").trim();
-    var id=slug(name)||("p"+list.length);
+    /* preserva o id de quem ja existe: trocar id apaga a pessoa da matriz */
+    var id=jaTemId[chaveNome(name)]||slug(name)||("p"+list.length);
     var base=id,k=2;while(seen[id]){id=base+"-"+k;k++;}
     seen[id]=1;list.push({id:id,name:name,group:grp});
   });
@@ -2243,8 +2404,8 @@ $("#zNew").addEventListener("click",function(){
 });
 
 /* ============ boot ============ */
-me=lsGet("pv_me",null);
-people=lsGet("pv_people",[]);
+me=lsGet("pv_me_"+SESSION,null)||null;   /* a identidade e por sala */
+people=lsGet("pv_people",[]);cfgPeople=people.slice();
 records=lsGet("pv_records",[]);
 setValues(lsGet("pv_values",null));
 NOTS=lsGet("pv_nots",[])||[];
@@ -2334,9 +2495,15 @@ function cleanRecords(arr){
           if(a.error) throw a.error;
           var inc=cleanRecords((a.data||[]).map(function(x){return x.data;}));
           if(demo) realRecords=inc; else {records=inc;render();}
-          var b=await SB.from("pv_config").select("people,vals,nots").eq("session",SESSION).maybeSingle();
+          var pp=await SB.from("pv_people").select("id,name,ts").eq("session",SESSION).order("ts",{ascending:true});
+          if(!pp.error){
+            peopleAuto=(pp.data||[]).map(function(x){return {id:x.id,name:x.name,group:""};});
+            if(!demo){mergePeople();render();}
+          }
+          var b=await SB.from("pv_config").select("people,vals,nots,stage,rodada,maxppl").eq("session",SESSION).maybeSingle();
           if(!b.error&&b.data){
-            var cfg={people:b.data.people,values:b.data.vals,nots:b.data.nots};
+            var cfg={people:b.data.people,values:b.data.vals,nots:b.data.nots,
+                     stage:b.data.stage,rodada:b.data.rodada,maxppl:b.data.maxppl};
             if(demo){
               if(Array.isArray(cfg.people)) realPeople=cfg.people;
               if(Array.isArray(cfg.values)&&cfg.values.length) realValues=cfg.values;
@@ -2350,6 +2517,7 @@ function cleanRecords(arr){
       SB.channel("pv-"+SESSION)
         .on("postgres_changes",{event:"*",schema:"public",table:"pv_records",filter:"session=eq."+SESSION},pull)
         .on("postgres_changes",{event:"*",schema:"public",table:"pv_config",filter:"session=eq."+SESSION},pull)
+        .on("postgres_changes",{event:"*",schema:"public",table:"pv_people",filter:"session=eq."+SESSION},pull)
         .subscribe();
       setInterval(pull,20000);
       return;
