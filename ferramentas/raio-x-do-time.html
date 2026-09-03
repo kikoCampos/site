@@ -1108,6 +1108,14 @@ function relLiberado(){
   return !!(S.demo || S.facilitador || (S.team && S.team.liberado));
 }
 
+/* Identificação da sessão no topo das telas. Sem &nome= na URL, o nome do
+   time é o próprio slug — repetir os dois lia "TIME-X · TIME-X". */
+function tituloSessao(){
+  const nome = S.team && S.team.nome;
+  return esc(S.code) + (nome && nome.toUpperCase() !== String(S.code).toUpperCase()
+    ? " · " + esc(nome) : "");
+}
+
 async function getRespostas(code){
   try{
     if(BACKEND==="supabase"){
@@ -1664,7 +1672,7 @@ function view_team(){
     return `
     <div class="stack" style="padding-top:34px">
       <div>
-        <p class="eyebrow">${esc(S.code)}${S.team&&S.team.nome?" · "+esc(S.team.nome):""} · rodada ${S.team?S.team.rodadaAtual:1}</p>
+        <p class="eyebrow">${tituloSessao()} · rodada ${S.team?S.team.rodadaAtual:1}</p>
         <h1 style="font-size:34px;margin-top:8px">Aguardando respostas</h1>
       </div>
       <div class="card pad stack">
@@ -1720,7 +1728,7 @@ function view_team(){
     ${S.demo?`<div class="demobar">Exemplo simulado<span>7 pessoas fictícias, duas rodadas — nenhum dado real.</span><button class="linkb" data-act="exitdemo">Sair do exemplo</button></div>`:""}
     <div style="display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;justify-content:space-between">
       <div>
-        <p class="eyebrow">${esc(S.code)}${S.team&&S.team.nome?" · "+esc(S.team.nome):""} · rodada ${S.team?S.team.rodadaAtual:1} · ${A.n} respondentes</p>
+        <p class="eyebrow">${tituloSessao()} · rodada ${S.team?S.team.rodadaAtual:1} · ${A.n} respondentes</p>
         <h1 style="font-size:clamp(30px,4.4vw,42px);margin-top:8px">Relatório do time</h1>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -1947,7 +1955,7 @@ function view_recebido(){
   return `
   <div class="stack" style="padding-top:34px;max-width:640px;margin:0 auto">
     <div>
-      <p class="eyebrow">${esc(S.code)}${S.team&&S.team.nome?" · "+esc(S.team.nome):""}</p>
+      <p class="eyebrow">${tituloSessao()}</p>
       <h1 style="font-size:clamp(30px,4.4vw,42px);margin-top:8px">Resposta registrada${nome?", "+esc(nome):""}.</h1>
     </div>
     <div class="card pad stack">
