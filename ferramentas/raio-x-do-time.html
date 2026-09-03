@@ -317,16 +317,31 @@ input.tx:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(
 
 /* dumbbell */
 .dumb{display:flex;flex-direction:column;gap:2px}
-.dumbrow{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.dumbrow{display:grid;grid-template-columns:158px minmax(0,1fr) 186px;gap:22px;align-items:center;
+  padding:15px 0;border-bottom:1px solid var(--line)}
 .dumbrow:last-child{border-bottom:0}
-.dumbrow .nm{font-family:"Archivo",sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.02em}
+.dumbrow .lbl{display:flex;flex-direction:column;gap:2px;min-width:0}
+.dumbrow .nm{font-family:"Archivo",sans-serif;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--c)}
+.dumbrow .faixa{font-family:"Archivo",sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted)}
+.dumbrow .nums{text-align:right;font-family:"IBM Plex Mono",monospace;line-height:1.2;
+  font-variant-numeric:tabular-nums}
+.dumbrow .nums b{font-size:22px;font-weight:600;color:var(--c);letter-spacing:-.02em}
+.dumbrow .nums .vs{font-size:12.5px;color:var(--muted);margin-left:3px}
+.dumbrow .nums .dif{display:block;font-family:"Archivo",sans-serif;font-size:10.5px;font-weight:600;
+  letter-spacing:.03em;color:var(--muted);margin-top:3px}
+@media(max-width:760px){
+  .dumbrow{grid-template-columns:1fr;gap:8px;align-items:start}
+  .dumbrow .nums{text-align:left}
+}
 .track{position:relative;height:26px}
 .track .ax{position:absolute;left:0;right:0;top:12px;height:2px;background:var(--line)}
 .track .gridl{position:absolute;top:6px;bottom:6px;width:1px;background:var(--line)}
-.track .seg{position:absolute;top:12px;height:2px;background:var(--accent);opacity:.55}
+.track .seg{position:absolute;top:11px;height:4px;border-radius:2px;background:var(--line-2)}
 .track .pt{position:absolute;top:6px;width:14px;height:14px;border-radius:99px;transform:translateX(-7px)}
 .track .pt.team{background:var(--card);border:2.5px solid var(--muted)}
-.track .pt.you{background:var(--accent);border:2.5px solid var(--card)}
+.track .pt.you{background:var(--c,var(--accent));border:2.5px solid var(--card);
+  box-shadow:0 0 0 1px var(--line)}
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-family:"Archivo",sans-serif}
 .legend i{display:inline-block;width:11px;height:11px;border-radius:99px;margin-right:5px;vertical-align:-1px}
 
@@ -1241,16 +1256,17 @@ function pyramid(analysis, opts){
     const cor = bare ? "var(--neutro)" : "var(--b-"+k+")";
     defs += '<clipPath id="'+cid+'"><polygon points="'+pts+'"></polygon></clipPath>';
 
-    const barra = (y,h,v) =>
+    const barra = (y,h,v,op) =>
       '<rect x="'+(CX-BOT_HW)+'" y="'+y+'" width="'+(2*BOT_HW)+'" height="'+h+'" fill="'+cor+'" opacity=".13"></rect>'+
       ((bare||!temDados) ? '' :
-      '<rect class="gauge" x="'+(CX-bwd)+'" y="'+y+'" width="'+(2*bwd*frac(v))+'" height="'+h+'" fill="'+cor+'"></rect>');
+      '<rect class="gauge" x="'+(CX-bwd)+'" y="'+y+'" width="'+(2*bwd*frac(v))+'" height="'+h+'" fill="'+cor+'"'+
+        (op?' opacity="'+op+'"':'')+'></rect>');
 
     let corpo;
     if(!temDados){ corpo = barra(yTop, alt, null); }
     else if(mine && !bare){
       const hA = alt/2 - 1.5;
-      corpo = barra(yTop, hA, vY) + barra(yTop+alt/2+1.5, hA, vT);
+      corpo = barra(yTop, hA, vY) + barra(yTop+alt/2+1.5, hA, vT, .40);
     } else { corpo = barra(yTop, alt, vT); }
 
     // plaqueta com o nome, sempre centrada e sempre menor que o topo do nível
@@ -1262,19 +1278,13 @@ function pyramid(analysis, opts){
       '<text class="plbl" x="'+CX+'" y="'+(chipY+17)+'" text-anchor="middle">'+esc(nome)+'</text>';
 
     // coluna de números, fora da pirâmide
-    if(temDados && !bare){
+    // No relatório individual os números moram na régua, logo abaixo. Repetir
+    // aqui era a terceira vez que os mesmos dez números apareciam na mesma dobra.
+    if(temDados && !bare && !mine){
       rotulos += '<line class="plead" x1="'+(CX+hw(midY)+8)+'" y1="'+midY+'" x2="'+(COL-14)+'" y2="'+midY+'"></line>';
-      if(mine){
-        rotulos +=
-          '<text class="pcap" x="'+COL+'" y="'+(midY-6)+'">você</text>'+
-          '<text class="pval" x="'+(COL+44)+'" y="'+(midY-4)+'">'+fmt(vY)+'</text>'+
-          '<text class="pcap" x="'+COL+'" y="'+(midY+16)+'">time</text>'+
-          '<text class="pval dim" x="'+(COL+44)+'" y="'+(midY+18)+'">'+fmt(vT)+'</text>';
-      } else {
-        rotulos +=
-          '<text class="pbig" x="'+COL+'" y="'+(midY+4)+'">'+fmt(vT)+'</text>'+
-          '<text class="pband" x="'+COL+'" y="'+(midY+20)+'">'+esc(band(vT).n)+'</text>';
-      }
+      rotulos +=
+        '<text class="pbig" x="'+COL+'" y="'+(midY+4)+'">'+fmt(vT)+'</text>'+
+        '<text class="pband" x="'+COL+'" y="'+(midY+20)+'">'+esc(band(vT).n)+'</text>';
     }
 
     const aria = bare ? b.n : (mine ? b.n+": você "+fmt(vY)+", time "+fmt(vT) : b.n+", média "+fmt(vT));
@@ -1285,10 +1295,10 @@ function pyramid(analysis, opts){
       rotulos + '</g>';
   });
 
-  const largura = (temDados && !bare) ? 700 : 500;
-  const rodape = mine ? "em cada nível, a barra de cima é você e a de baixo é o time"
+  const largura = (temDados && !bare && !mine) ? 700 : 500;
+  const rodape = mine ? "barra cheia é você · barra clara é o time"
                       : (bare ? "cada nível se apoia no de baixo" : "quanto mais cheio, mais o comportamento acontece");
-  return '<svg class="pyr'+((temDados&&!bare)?" comvalores":"")+'" viewBox="0 0 '+largura+' 486" role="img" aria-label="Pirâmide dos cinco comportamentos">'+
+  return '<svg class="pyr'+((temDados&&!bare&&!mine)?" comvalores":"")+'" viewBox="0 0 '+largura+' 486" role="img" aria-label="Pirâmide dos cinco comportamentos">'+
     '<defs>'+defs+'</defs>'+parts+
     '<text class="side" x="'+(largura/2)+'" y="478" text-anchor="middle">'+rodape+'</text></svg>';
 }
@@ -1913,18 +1923,24 @@ function view_me(){
     const py=pos(you), pt=pos(team);
     const segL=(py!==null&&pt!==null)?Math.min(py,pt):null, segW=(py!==null&&pt!==null)?Math.abs(py-pt):null;
     const gap=(you!==null&&team!==null)?(you-team):null;
-    return `<div class="dumbrow">
-      <div class="nm">${esc(BMAP[k].n)}</div>
-      <div>
-        <div class="track"><div class="ax"></div>
-          ${[0,25,50,75,100].map(p=>'<div class="gridl" style="left:'+p+'%"></div>').join("")}
-          ${segL!==null?'<div class="seg" style="left:'+segL+'%;width:'+segW+'%"></div>':""}
-          ${pt!==null?'<div class="pt team" style="left:'+pt+'%"></div>':""}
-          ${py!==null?'<div class="pt you" style="left:'+py+'%"></div>':""}
-        </div>
-        <div class="mono" style="font-size:12px;color:var(--muted);margin-top:2px">
-          você ${fmt(you)}${team!==null?" · time "+fmt(team)+(Math.abs(gap)>=0.5?" · "+(gap>0?"você vê melhor":"você vê pior"):""):""}
-        </div>
+    // Direção, não veredito: "1,4 abaixo do time" em vez de "você vê pior".
+    const direcao = (gap===null) ? ""
+      : (Math.abs(gap) < 0.15 ? "no mesmo ponto do time"
+         : fmt(Math.abs(gap)) + (gap>0 ? " acima" : " abaixo") + " do time");
+    return `<div class="dumbrow" style="--c:var(--b-${k})">
+      <div class="lbl">
+        <span class="nm">${esc(BMAP[k].n)}</span>
+        <span class="faixa">${you!==null?esc(band(you).n):""}</span>
+      </div>
+      <div class="track"><div class="ax"></div>
+        ${[0,25,50,75,100].map(p=>'<div class="gridl" style="left:'+p+'%"></div>').join("")}
+        ${segL!==null?'<div class="seg" style="left:'+segL+'%;width:'+segW+'%"></div>':""}
+        ${pt!==null?'<div class="pt team" style="left:'+pt+'%"></div>':""}
+        ${py!==null?'<div class="pt you" style="left:'+py+'%"></div>':""}
+      </div>
+      <div class="nums">
+        <b>${fmt(you)}</b><span class="vs">/ ${fmt(team)}</span>
+        <span class="dif">${esc(direcao)}</span>
       </div></div>`;
   }).join("");
 
@@ -2028,13 +2044,10 @@ function view_me(){
     <div class="reportgrid">
       <div class="card pad">
         ${teamReady?pyramid(A,{mine:myBehav}):pyramid(null,{bare:true})}
-        ${teamReady?`<div class="pyrlegend">
-          <b><span class="sq" style="background:var(--fragil)"></span><span class="sq" style="background:var(--moderado)"></span><span class="sq" style="background:var(--forte)"></span>em construção · em desenvolvimento · consolidado</b>
-          <span>barras de tamanhos diferentes mostram onde vale conversar</span>
-        </div>`:`<p style="font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px">A pirâmide abre com ${MIN_N} respostas</p>`}
+        ${teamReady?``:`<p style="font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px">A pirâmide abre com ${MIN_N} respostas</p>`}
       </div>
-      <div class="stack">
-        <div class="card pad">
+      <div class="card pad" style="display:flex;flex-direction:column;justify-content:center">
+        <div>
           <h3 style="font-size:20px;margin:0 0 8px">Seu retrato em três frases</h3>
           <p class="lede" style="font-size:15.5px">
             Na sua leitura, o nível mais consolidado deste time é <b>${esc(BMAP[meuForte.k].n.toLowerCase())}</b> (${fmt(meuForte.v)}) e o com mais espaço é <b>${esc(BMAP[meuFraco.k].n.toLowerCase())}</b> (${fmt(meuFraco.v)}).
@@ -2042,15 +2055,20 @@ function view_me(){
             ${teamReady?`O melhor ponto de partida do time é <b>${esc(BMAP[A.ordered.filter(x=>x.mean!==null)[0].k].n.toLowerCase())}</b>, a base ainda em construção da pirâmide coletiva.`:""}
           </p>
         </div>
-        <div class="card pad">
-          <h3 style="font-size:20px;margin:0 0 16px">Você e o time, na mesma régua</h3>
-          <div class="dumb">${dumb}</div>
-          <div class="legend" style="margin-top:14px">
-            <span><i style="background:var(--accent)"></i>você</span>
-            <span><i style="background:var(--card);border:2px solid var(--muted)"></i>média do time</span>
-            <span style="margin-left:auto">escala 1 → 5</span>
-          </div>
-        </div>
+      </div>
+    </div>
+
+    <div class="card pad">
+      <h3 style="font-size:20px;margin:0 0 16px">Você e o time, nível por nível</h3>
+      <div class="dumb">${dumb}</div>
+      <div class="legend" style="margin-top:16px">
+        <span><i style="background:var(--muted)"></i>você</span>
+        <span><i style="background:var(--card);border:2px solid var(--muted)"></i>média do time</span>
+        <span><i style="background:var(--line-2);border-radius:2px;width:16px;height:5px"></i>a distância entre as duas</span>
+        <span style="margin-left:auto">escala 1 → 5</span>
+      </div>
+    </div>
+    <div style="display:none">
       </div>
     </div>
 
