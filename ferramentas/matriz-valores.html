@@ -1461,7 +1461,13 @@ async function deleteRecord(id){
   if(demo) return;
   try{
     if(MODE==="artifact") await db.doc("records/"+id).delete();
-    else if(MODE==="supabase") await sbErr(SB.from("pv_records").delete().eq("id",id).eq("session",SESSION));
+    else if(MODE==="supabase"){
+      /* o banco pode recusar a exclusão sem devolver erro: a política simplesmente
+         não encontra linha nenhuma para apagar. Por isso pedimos as linhas de volta —
+         lista vazia significa que o registro continua lá, e a tela não pode mentir. */
+      var res=await sbErr(SB.from("pv_records").delete().eq("id",id).eq("session",SESSION).select());
+      if(!(res&&res.data&&res.data.length)) throw new Error("exclusao recusada");
+    }
     else saveLocal();
     toast("Registro apagado.");
   }catch(e){
@@ -1747,7 +1753,7 @@ function renderReg(){
             +'<span class="ol"><b>'+esc(p.name)+'</b><s>'+(n?n+" registro"+(n>1?"s":"")+" seu"+(n>1?"s":""):"ainda não avaliado")+'</s></span>'
             +(n?'<span class="pipdot"></span>':'')
             +'<span class="oc">&#8594;</span></button>';
-        }).join(""):'<div class="none">Você já registrou sobre todo mundo. Pode voltar em quem quiser e acrescentar outro valor.</div>')
+        }).join(""):'<div class="none">Você é a única pessoa na sala por enquanto. Assim que os colegas entrarem, eles aparecem aqui.</div>')
       +'</div>';
   }
   else if(st===2){
@@ -1829,6 +1835,9 @@ function semGente(){
    Com nome e sala em lobby -> os nomes aparecendo ao vivo, esperando voce abrir. */
 function renderGate(){
   var g=$("#gate"), h="";
+  /* a sala se atualiza sozinha a cada pessoa que entra, e o gate é redesenhado junto.
+     Sem isto, quem está digitando o nome perde o que escreveu quando um colega entra. */
+  var inp=$("#joinName"), digitado=inp?inp.value:"", focado=(inp&&document.activeElement===inp);
   if(!me){
     var cheia=people.length>=MAXPPL;
     h+='<h3>Como você se chama?</h3>'
@@ -1863,6 +1872,11 @@ function renderGate(){
       +'</div>';
   }
   g.innerHTML=h;
+  var novo=$("#joinName");
+  if(novo&&digitado){
+    novo.value=digitado;
+    if(focado){try{novo.focus();novo.setSelectionRange(digitado.length,digitado.length);}catch(e){}}
+  }
 }
 function PMAP(){var m={};people.forEach(function(p){m[p.id]=p;});return m;}
 
