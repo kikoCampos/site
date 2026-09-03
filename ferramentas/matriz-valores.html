@@ -28,7 +28,9 @@
 window.PV_CONFIG = {
   url: "https://adwmzkksbzmnhjdhdtkw.supabase.co",
   key: "sb_publishable_xmIazktrsioHmJryAUhdgg_Bjm_KZKZ",
-  session: "picpay-01",
+  // Sala padrao vazia de proposito: sem ?s= na URL, a ferramenta abre o EXEMPLO.
+  // Assim o endereco solto nunca cai dentro da sala de um cliente.
+  session: "",
 
   // Senha do modo facilitador. NAO e seguranca: este arquivo e publico e
   // qualquer pessoa consegue ler daqui. Serve so para o participante nao
@@ -1281,7 +1283,22 @@ var draft={to:"",val:"",score:0,mk:"",dir:"",text:"",step:1,saved:false};
 
 /* backend: artifact (claude) → supabase → local */
 var CFG=(typeof window!=="undefined"&&window.PV_CONFIG)||{};
+/* O exemplo só entra quando o link pede: ?demo=1 (ou #demo).
+   Sala de workshop vazia nunca vira exemplo sozinha — quem chega cedo
+   tem que ver a tela de espera, não oito colegas fictícios. */
+var DEMO_URL=(function(){
+  try{
+    var q=new URLSearchParams(location.search);
+    if(q.get("demo")==="1") return true;
+    /* endereço solto, sem sala nenhuma: abre o exemplo em vez da sala de alguém */
+    if(!q.get("s")&&!CFG.session) return true;
+  }catch(e){}
+  return (location.hash||"").replace(/^#/,"").split(/[,\/-]/).indexOf("demo")>-1;
+})();
+var SALA_EXEMPLO="exemplo";
 var SESSION=(function(){
+  /* o link de demonstração nunca mostra nem toca a sala de um cliente */
+  if(DEMO_URL) return SALA_EXEMPLO;
   try{var q=new URLSearchParams(location.search).get("s");if(q) return q;}catch(e){}
   return CFG.session||"workshop";
 })();
@@ -1397,16 +1414,13 @@ function enterDemo(){
   render();
 }
 function exitDemo(){
+  /* veio do link de demonstração: sai para uma sala neutra e vazia,
+     nunca para a sala padrão de um cliente */
+  if(DEMO_URL){
+    location.href=location.pathname+"?s="+encodeURIComponent(SALA_EXEMPLO);
+    return;
+  }
   demo=false;
-  /* se o exemplo veio do link, tira o parâmetro: recarregar não volta para os dados fictícios */
-  try{
-    if(DEMO_URL){
-      var u=new URL(location.href);u.searchParams.delete("demo");
-      if((u.hash||"").indexOf("demo")>-1) u.hash="";
-      history.replaceState(null,"",u.pathname+u.search+u.hash);
-      DEMO_URL=false;
-    }
-  }catch(e){}
   people=realPeople||lsGet("pv_people",[]);
   records=realRecords||lsGet("pv_records",[]);
   setValues(realValues);NOTS=realNots||[];
@@ -2563,13 +2577,6 @@ setValues(lsGet("pv_values",null));
 NOTS=lsGet("pv_nots",[])||[];
 render();
 var demoDecided=false;
-/* O exemplo só entra quando o link pede: ?demo=1 (ou #demo).
-   Sala de workshop vazia nunca vira exemplo sozinha — quem chega cedo
-   tem que ver a tela de espera, não oito colegas fictícios. */
-var DEMO_URL=(function(){
-  try{ if(new URLSearchParams(location.search).get("demo")==="1") return true; }catch(e){}
-  return (location.hash||"").replace(/^#/,"").split(/[,\/-]/).indexOf("demo")>-1;
-})();
 function maybeDemo(){
   if(demoDecided||demo) return;
   demoDecided=true;
