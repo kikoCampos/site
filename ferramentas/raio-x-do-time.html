@@ -1052,7 +1052,10 @@ async function gs(payload){
   return j;
 }
 
-function fromRowTeam(r){ return {code:r.code, nome:r.nome, rodadaAtual:r.rodada_atual||1, criadoEm:r.criado_em}; }
+function fromRowTeam(r){ return {code:r.code, nome:r.nome, rodadaAtual:r.rodada_atual||1, criadoEm:r.criado_em,
+  /* Trava da devolutiva: enquanto for false, ninguém que respondeu vê média
+     nenhuma do time. Ausente (banco antigo, modo local) conta como travado. */
+  liberado: r.liberado===true}; }
 function fromRowResp(r){ return {code:r.code, rodada:Number(r.rodada), respId:r.resp_id, nome:r.nome, ts:r.ts,
   a:(typeof r.a==="string"?JSON.parse(r.a):r.a)}; }
 
@@ -1080,6 +1083,29 @@ async function setTeam(code,obj){
     if(BACKEND==="sheets"){ await gs({action:"setTeam", team:obj}); return true; }
   }catch(e){ console.warn(e); DBREADY=false; }
   return true;
+}
+
+/* Liberar ou trancar os relatórios da sessão.
+   Exige a senha de ADMINISTRAÇÃO — a mesma do painel de sessões, guardada
+   como hash no banco. A senha do modo facilitador não serve aqui de
+   propósito: ela mora no código-fonte da página, e quem tem o link de
+   resposta poderia lê-la e destravar o próprio relatório. */
+async function setLiberado(code, val, senha){
+  if(LOCAL.times[code]){ LOCAL.times[code].liberado = !!val; localSave(); }
+  if(BACKEND==="supabase"){
+    const r = await rpc("rxt_set_liberado", {p_senha:senha, p_code:code, p_val:!!val});
+    return r===true || r===false ? r : !!val;
+  }
+  /* Sem Supabase a trava vale só neste navegador. É suficiente para
+     demonstração; para uso com cliente, o backend precisa estar ligado. */
+  return !!val;
+}
+
+/* A comparação com o time só existe depois que o facilitador encerra a
+   coleta. Antes disso o relatório individual sai sobre uma amostra parcial
+   — e um número errado circula pior do que número nenhum. */
+function relLiberado(){
+  return !!(S.demo || S.facilitador || (S.team && S.team.liberado));
 }
 
 async function getRespostas(code){
@@ -1309,7 +1335,8 @@ function navHTML(){
   const b=[];
   if(S.code){
     if(S.answers && Object.keys(S.answers).length===ITEMS.length)
-      b.push('<button class="btn sm '+(S.view==="me"?"on":"")+'" data-go="me">Meu relatório</button>');
+      b.push('<button class="btn sm '+(S.view==="me"?"on":"")+'" data-go="me">'+
+             (relLiberado()?"Meu relatório":"Minha resposta")+'</button>');
     if(S.facilitador)
       b.push('<button class="btn sm '+(S.view==="team"?"on":"")+'" data-go="team">Relatório do time</button>');
     if(S.facilitador)
@@ -1481,7 +1508,7 @@ function view_name(){
     <div class="privacy">
       <div class="privrow"><b>O time vê</b><p>Médias e distribuição de respostas por afirmação. Sabe-se que três pessoas marcaram “raramente”; não se sabe quais.</p></div>
       <div class="privrow"><b>O facilitador vê</b><p>Seu nome e suas respostas. É ele quem conduz a sessão, guarda os relatórios e responde pelo cuidado com esses dados.</p></div>
-      <div class="privrow you"><b>Você recebe</b><p>Seu relatório individual: sua nota em cada nível, sua distância em relação ao time, seus exercícios e seu plano de 30 dias.</p></div>
+      <div class="privrow you"><b>Você recebe</b><p>Seu relatório individual: sua nota em cada nível, sua distância em relação ao time, seus exercícios e seu plano de 30 dias. Ele abre quando o facilitador encerra a coleta — até lá você vê só a confirmação de que respondeu.</p></div>
       <div class="privrow"><b>Proteção extra</b><p>O relatório coletivo só abre com ${MIN_N} respostas. Abaixo disso, a média entregaria quem respondeu o quê.</p></div>
     </div>
     <div class="card pad" style="margin-top:28px">
@@ -1626,6 +1653,9 @@ function trilhaHTML(k, rodada){
 }
 
 function view_team(){
+  /* Mesma trava do relatório individual. Sem isto, o botão "Ver relatório do
+     time" no rodapé do relatório pessoal daria a volta na porta da frente. */
+  if(!relLiberado()) return view_recebido();
   const A = analyze(S.respostas, S.team?S.team.rodadaAtual:1);
   const prev = (S.team && S.team.rodadaAtual>1) ? analyze(S.respostas, S.team.rodadaAtual-1) : null;
   const participantes = S.respostas.filter(r=>r.rodada===(S.team?S.team.rodadaAtual:1));
@@ -1701,6 +1731,19 @@ function view_team(){
         <button class="btn sm ghost" data-act="newround">Nova rodada</button>
       </div>
     </div>
+
+    ${S.demo ? "" : (S.team && S.team.liberado ? `
+    <div class="notice">
+      <strong>Relatórios liberados.</strong> Quem já respondeu vê o próprio relatório com a
+      comparação com o time. Quem responder de agora em diante vê na hora.
+      <button class="linkb" data-act="trancar">Trancar de novo</button>
+    </div>` : `
+    <div class="notice warn">
+      <strong>Relatórios travados.</strong> Os ${A.n} respondentes veem apenas a confirmação de
+      que a resposta entrou — nenhuma média do time chega a eles. Libere na devolutiva,
+      depois de encerrar a coleta.
+      <button class="btn sm pri" data-act="liberar" style="margin-left:10px">Liberar relatórios</button>
+    </div>`)}
 
     <div class="secband"><span class="n">01</span><h2 class="disp">O retrato</h2><span>a pirâmide e a leitura</span></div>
     <div class="reportgrid">
@@ -1894,7 +1937,47 @@ function view_painel(){
   </div>`;
 }
 
+/* Tela de quem já respondeu e ainda espera a liberação.
+   Único ponto do fluxo em que o participante pousa antes da devolutiva.
+   Deliberadamente sem número nenhum: nem a própria média, nem quantas
+   pessoas já responderam. O que ele leva daqui é a certeza de que a
+   resposta entrou. */
+function view_recebido(){
+  const nome = (S.nome||"").trim().split(/\s+/)[0];
+  return `
+  <div class="stack" style="padding-top:34px;max-width:640px;margin:0 auto">
+    <div>
+      <p class="eyebrow">${esc(S.code)}${S.team&&S.team.nome?" · "+esc(S.team.nome):""}</p>
+      <h1 style="font-size:clamp(30px,4.4vw,42px);margin-top:8px">Resposta registrada${nome?", "+esc(nome):""}.</h1>
+    </div>
+    <div class="card pad stack">
+      <p class="lede" style="font-size:16px">
+        Seu relatório fica pronto quando o facilitador encerrar a coleta. Até lá ele
+        continua guardado, e ninguém do time vê o que você respondeu.
+      </p>
+      <hr class="hr">
+      <p style="font-size:14.5px;color:var(--muted)">
+        A espera é de propósito. Com o time respondendo aos poucos, a média muda a cada
+        resposta nova — quem abrisse o relatório agora leria um retrato de meia dúzia de
+        pessoas como se fosse o do time inteiro. Fechada a coleta, o número para de se
+        mexer e todo mundo lê o mesmo retrato, na mesma hora.
+      </p>
+      <p style="font-size:14.5px;color:var(--muted)">
+        Se mudar de ideia sobre alguma afirmação, dá para responder de novo pelo mesmo
+        link — vale a última resposta.
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+        <button class="btn" data-act="refresh">Verificar se já liberou</button>
+        <button class="btn ghost" data-act="responder-de-novo">Revisar minhas respostas</button>
+      </div>
+    </div>
+  </div>`;
+}
+
 function view_me(){
+  /* Choke point da trava: qualquer caminho que leve ao relatório individual
+     passa por aqui. Prendemos na porta, não em cada rota. */
+  if(!relLiberado()) return view_recebido();
   const rodada = S.team?S.team.rodadaAtual:1;
   const A = analyze(S.respostas, rodada);
   /* Com S.verComo o facilitador abre o relatório de outra pessoa para
@@ -2251,7 +2334,9 @@ async function enterTeam(code, createIfMissing, nomeTime){
       S.msg='Time "'+code+'" não encontrado. Confira o código ou crie um time novo.';
       render(); return false;
     }
-    t = { code, nome: nomeTime||code, rodadaAtual:1, criadoEm:new Date().toISOString() };
+    /* Sessão nova nasce travada — o padrão seguro é o participante não ver
+       média nenhuma até o facilitador encerrar a coleta. */
+    t = { code, nome: nomeTime||code, rodadaAtual:1, criadoEm:new Date().toISOString(), liberado:false };
     await setTeam(code, t);
   }
   S.team = t;
@@ -2511,7 +2596,15 @@ document.addEventListener("click", async e=>{
     b.disabled=true; b.textContent="Enviando…";
     await submitSurvey(); return;
   }
-  if(act==="refresh"){ if(S.demo){ render(); return; } b.disabled=true; await loadRespostas(); render(); return; }
+  if(act==="refresh"){
+    if(S.demo){ render(); return; }
+    b.disabled=true;
+    /* Relê também o time: é assim que quem está na tela de espera descobre
+       que o facilitador liberou, sem precisar recarregar a página. */
+    const t = await getTeam(S.code); if(t) S.team = t;
+    await loadRespostas(); render(); return;
+  }
+  if(act==="responder-de-novo"){ S.view="name"; S.introStep=2; S.step=0; render(); return; }
   if(act==="go-respond-here"){ S.view="name"; S.introStep=introInicial(); S.step=0; render(); return; }
   if(act==="go-team"){ S.view="team"; render(); return; }
   if(act==="copycode"){
@@ -2584,10 +2677,43 @@ document.addEventListener("click", async e=>{
     }catch(e){ S.painelMsg = "Não consegui apagar: "+e.message; }
     render(); return;
   }
+  if(act==="liberar" || act==="trancar"){
+    const abrir = (act==="liberar");
+    if(S.demo){ alert("Isto é um exemplo simulado — abra um time de verdade para liberar."); return; }
+    if(abrir && !confirm(
+        "Liberar os relatórios de "+S.code+"?\n\n"+
+        "A partir de agora cada participante passa a ver o próprio relatório com a "+
+        "comparação com a média do time. Faça isso quando a coleta estiver encerrada — "+
+        "de preferência na sessão de devolutiva.")) return;
+    /* A senha de administração é a mesma do painel de sessões. Se o
+       facilitador já entrou no painel nesta aba, não pedimos de novo. */
+    let senha = S.senhaAdm;
+    if(!senha){
+      senha = prompt("Senha de administração (a mesma do painel de Sessões):") || "";
+      if(!senha) return;
+    }
+    b.disabled = true;
+    try{
+      const estado = await setLiberado(S.code, abrir, senha);
+      S.senhaAdm = senha;
+      S.team = Object.assign({}, S.team, {liberado: estado});
+      render();
+    }catch(e){
+      b.disabled = false;
+      S.senhaAdm = "";
+      alert(/senha/i.test(e.message||"")
+        ? "Senha de administração incorreta. Os relatórios continuam como estavam."
+        : "Não consegui falar com o servidor: "+(e.message||e)+"\n\nOs relatórios continuam como estavam.");
+    }
+    return;
+  }
+
   if(act==="newround"){
     if(S.demo){ alert("Isto é um exemplo simulado — abra um time de verdade para criar rodadas."); return; }
     if(!confirm("Abrir a rodada "+((S.team?S.team.rodadaAtual:1)+1)+"? As respostas atuais ficam guardadas para comparação.")) return;
-    S.team = Object.assign({}, S.team, {rodadaAtual:(S.team.rodadaAtual||1)+1});
+    /* Rodada nova entra travada. O banco faz o mesmo em rxt_set_team; aqui
+       espelhamos para a tela não ficar um passo à frente do servidor. */
+    S.team = Object.assign({}, S.team, {rodadaAtual:(S.team.rodadaAtual||1)+1, liberado:false});
     await setTeam(S.code, S.team);
     S.answers={}; await loadRespostas(); render(); return;
   }
