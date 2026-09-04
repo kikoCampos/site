@@ -1840,21 +1840,36 @@ function renderGate(){
   var inp=$("#joinName"), digitado=inp?inp.value:"", focado=(inp&&document.activeElement===inp);
   if(!me){
     var cheia=people.length>=MAXPPL;
-    h+='<h3>Como você se chama?</h3>'
-      +'<p>Seu nome aparece junto de cada registro que você fizer — é assim que a matriz fica transparente.'
-      +(STAGE==="lobby"?' Pode entrar agora: a rodada abre quando quem está conduzindo abrir.':'')+'</p>'
-      +'<div class="joinrow">'
-      +'<input type="text" id="joinName" autocomplete="name" autocapitalize="words" spellcheck="false"'
-      +' placeholder="seu nome e sobrenome"'+(cheia?' disabled':'')+'>'
-      +'<button class="btn" id="joinBtn"'+(cheia?' disabled':'')+'>Entrar</button>'
-      +'</div>';
-    if(cheia) h+='<p class="gwarn">A sala já está com '+MAXPPL+' pessoas. Fale com quem está conduzindo.</p>';
-    if(people.length){
-      h+='<div class="gback"><span class="lab">já entrou antes? toque no seu nome</span><div class="glist">'
+    /* Quando o facilitador já montou a lista inteira, ninguém está sobrando:
+       o caminho é tocar no próprio nome, e é ele que tem que vir primeiro. */
+    var listaPronta=cheia&&people.length>0;
+    var espera=(STAGE==="lobby");
+    if(listaPronta){
+      h+='<h3>Qual desses é você?</h3>'
+        +'<p>Toque no seu nome. Ele aparece junto de cada registro que você fizer — é assim que a matriz fica transparente.'
+        +(espera?' A rodada abre quando quem está conduzindo abrir.':'')+'</p>'
+        +'<div class="glist big">'
         +people.map(function(p){
             return '<button class="gchip" data-back="'+esc(p.id)+'">'+avatar(p.name,"sm")+esc(shortName(p.name))+'</button>';
           }).join("")
-        +'</div></div>';
+        +'</div>'
+        +'<p class="gwarn" style="margin-top:18px">Não está na lista? Fale com quem está conduzindo.</p>';
+    }else{
+      h+='<h3>Como você se chama?</h3>'
+        +'<p>Seu nome aparece junto de cada registro que você fizer — é assim que a matriz fica transparente.'
+        +(espera?' Pode entrar agora: a rodada abre quando quem está conduzindo abrir.':'')+'</p>'
+        +'<div class="joinrow">'
+        +'<input type="text" id="joinName" autocomplete="name" autocapitalize="words" spellcheck="false"'
+        +' placeholder="seu nome e sobrenome">'
+        +'<button class="btn" id="joinBtn">Entrar</button>'
+        +'</div>';
+      if(people.length){
+        h+='<div class="gback"><span class="lab">já entrou antes? toque no seu nome</span><div class="glist">'
+          +people.map(function(p){
+              return '<button class="gchip" data-back="'+esc(p.id)+'">'+avatar(p.name,"sm")+esc(shortName(p.name))+'</button>';
+            }).join("")
+          +'</div></div>';
+      }
     }
   }else{
     var eu=PMAP()[me], n=people.length;
