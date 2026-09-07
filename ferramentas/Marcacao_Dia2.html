@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#00B050">
+<title>Marcação das apresentações · Time de Donos</title>
+<style>
+:root{--verde:#00B050;--verde-e:#00913F;--vc:#E8F8EE;--preto:#171717;--palco:#0D0F0E;
+ --tx:#16191B;--tx2:#5A6670;--tx3:#96A0A8;--cinza:#F4F6F5;--linha:#E3E8E6}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:#fff;color:var(--tx);line-height:1.5;font-size:16px;-webkit-font-smoothing:antialiased;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+button{font:inherit;cursor:pointer}
+[hidden]{display:none!important}
+.eyebrow{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.mudo{color:var(--tx3)}
+.b{border:1.5px solid var(--linha);background:#fff;color:var(--tx);border-radius:12px;
+ padding:13px 20px;font-weight:700;font-size:15.5px}
+.b:hover{border-color:var(--tx3)}
+.b.p{background:var(--verde);border-color:var(--verde);color:#fff}
+.b.g{background:transparent;border-color:transparent;color:var(--tx2);padding-left:0}
+
+#app{max-width:620px;margin:0 auto;padding:0 20px 60px;min-height:100vh}
+.cab{padding:26px 0 0}
+.cab h1{font-size:25px;line-height:1.15;letter-spacing:-.4px;margin:10px 0 6px;font-weight:800}
+.cab p{margin:0;color:var(--tx2);font-size:14.5px}
+
+.nomes{margin:20px 0 0;border-top:1px solid var(--linha)}
+.nomes button{display:flex;width:100%;align-items:center;gap:13px;text-align:left;background:none;
+ border:0;border-bottom:1px solid var(--linha);padding:15px 2px}
+.nomes .ini{width:36px;height:36px;flex:none;border-radius:50%;background:var(--cinza);
+ display:grid;place-items:center;font-size:12.5px;font-weight:800;color:var(--tx2)}
+.nomes .n{font-size:16.5px;font-weight:700}
+.nomes .a{font-size:12.5px;color:var(--tx3)}
+.nomes .st{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--tx3)}
+.nomes .st.ok{color:var(--verde-e)}
+.nomes button:hover .ini{background:var(--vc);color:var(--verde-e)}
+
+.pess{padding:22px 0 0}
+.pess h2{margin:0;font-size:23px;font-weight:800;letter-spacing:-.3px}
+.pess .a{margin:2px 0 0;font-size:13px;color:var(--tx3)}
+.perg{margin:26px 0 10px;font-size:15.5px;font-weight:800}
+.perg + .sub{margin:-6px 0 12px;font-size:13.5px;color:var(--tx2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--linha);background:#fff;border-radius:11px;padding:11px 15px;
+ font-size:14.5px;font-weight:600;text-align:left}
+.chip.on{background:var(--preto);border-color:var(--preto);color:#fff}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{border:1.5px solid var(--linha);background:#fff;border-radius:13px;padding:15px 17px;text-align:left;
+ display:flex;gap:12px;align-items:flex-start}
+.opt .num{font-size:11px;font-weight:800;color:var(--verde);letter-spacing:1.4px;padding-top:3px}
+.opt .txt{font-size:15.5px;line-height:1.4}
+.opt.on{border-color:var(--verde);background:var(--vc)}
+.opt.vazio{color:var(--tx3);cursor:default}
+.rodape{position:sticky;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+ border-top:1px solid var(--linha);margin-top:26px;padding:12px 0;display:flex;gap:12px;align-items:center}
+.est{font-size:13px;color:var(--tx3);flex:1}
+
+/* ---------- palco / facilitador ---------- */
+#palco{position:fixed;inset:0;background:var(--palco);color:#fff;overflow:auto;padding:38px 48px 96px}
+#palco .lim{max-width:1240px;margin:0 auto}
+#palco h2{font-size:44px;line-height:1.05;letter-spacing:-1.4px;margin:10px 0 0;font-weight:800}
+#palco .sub{margin:10px 0 0;font-size:17px;color:#8E9A94}
+.rank{margin-top:32px;display:flex;flex-direction:column;gap:10px}
+.rk{display:flex;gap:18px;align-items:center;background:#171B19;border-radius:14px;padding:16px 20px;
+ border-left:4px solid #2A322E}
+.rk.top{border-left-color:var(--verde)}
+.rk .pos{font-size:26px;font-weight:800;width:44px;color:#8E9A94;font-variant-numeric:tabular-nums}
+.rk.top .pos{color:var(--verde)}
+.rk .txt{flex:1}
+.rk .area{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.rk .p{margin:4px 0 0;font-size:20px;line-height:1.3}
+.rk .quem{font-size:12.5px;color:#8E9A94;margin-top:5px}
+.rk .n{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}
+.corte{border-top:1px dashed #3A423E;margin:6px 0;padding-top:6px;font-size:12px;letter-spacing:2px;
+ text-transform:uppercase;color:#8E9A94;font-weight:800}
+.gradeC{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.cc{background:#171B19;border-radius:14px;padding:16px 18px;border:1px solid #232926}
+.cc .n{font-size:17px;font-weight:700}
+.cc .l{font-size:13px;color:#8E9A94;margin-top:6px}
+.cc .l b{color:#FFCB3D;font-weight:700}
+.barraP{position:fixed;left:0;right:0;bottom:0;background:#101413;border-top:1px solid #232926;
+ padding:12px 48px;display:flex;gap:14px;align-items:center}
+.pb{border:1px solid #3A423E;background:transparent;color:#fff;border-radius:10px;padding:10px 17px;
+ font-weight:700;font-size:14.5px}
+.pb.p{background:var(--verde);border-color:var(--verde)}
+.pb:hover{border-color:#fff}
+.barraP .e{flex:1;color:#8E9A94;font-size:13.5px}
+
+/* cadastro das prioridades */
+#prios{padding:6px 0 0}
+.pcard{background:#171B19;border-radius:14px;padding:16px 18px;margin-bottom:10px;border:1px solid #232926}
+.pcard h3{margin:0 0 10px;font-size:17px;font-weight:700}
+.pcard input{width:100%;font:inherit;font-size:14.5px;background:#0D0F0E;border:1px solid #2A322E;
+ color:#fff;border-radius:9px;padding:10px 12px;margin-bottom:7px}
+.pcard input:focus{outline:none;border-color:var(--verde)}
+.pgrade{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+@media (max-width:900px){
+  #palco{padding:22px 18px 92px}
+  #palco h2{font-size:30px}
+  .gradeC,.pgrade{grid-template-columns:1fr}
+  .rk .p{font-size:16px}
+  .barraP{padding:10px 18px;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="cab">
+    <div class="eyebrow">Time de Donos · Dia 2 · 09h15 e 10h15</div>
+    <h1 id="cabT">Marcação das apresentações</h1>
+    <p id="cabP">Dois toques por apresentação, nos dois minutos de arguição. Dá para mudar de ideia até a nona.</p>
+  </div>
+  <div id="corpo"></div>
+</div>
+
+<div id="palco" hidden><div class="lim" id="palcoIn"></div></div>
+<div class="barraP" id="barraP" hidden>
+  <button class="pb" id="pPrios">Prioridades</button>
+  <button class="pb" id="pRank">Ranking</button>
+  <button class="pb" id="pCampos">Campos</button>
+  <span class="e" id="pEst"></span>
+  <button class="pb" id="pRevelar">Revelar</button>
+  <button class="pb" id="pFechar">Fechar marcação</button>
+  <button class="pb p" id="pAtu">Atualizar</button>
+</div>
+
+<script>
+const URL_SB = "https://adwmzkksbzmnhjdhdtkw.supabase.co";
+const ANON   = "sb_publishable_xmIazktrsioHmJryAUhdgg_Bjm_KZKZ";
+/* o quadro do facilitador abre com ?f=<código> na URL */
+
+const TIME=[["Pedro Romero","Wallet & Banking"],["Guilherme Porto","Banking"],
+["Eduardo Favero","Contas"],["Italla Ferreira","Clientes"],["Luiz Krempel","Payments"],
+["Felipe Cotecchia","Tecnologia"],["Marcel Marques","Design"],["Letícia Ribeiro","Operações"],
+["Tiago Scrivano","Planejamento"]];
+
+const CAMPOS=[["1","A visão em uma frase"],["2","Três prioridades com indicador"],
+["3","O ROI da IA"],["4","O pedido nominal"],["5","O que para de fazer"],["0","Nenhum — cumpriu os cinco"]];
+
+const $=s=>document.querySelector(s);
+const esc=t=>String(t==null?"":t).replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+const iniciais=n=>n.split(" ").map(p=>p[0]).slice(0,2).join("");
+const areaDe=n=>(TIME.find(t=>t[0]===n)||["",""])[1];
+const primeiro=n=>n.split(" ")[0];
+const F=new URLSearchParams(location.search).get("f");
+const DEMO=new URLSearchParams(location.search).get("demo")==="1";
+
+const demoP={}, demoM={};
+function demoInit(){
+  if(Object.keys(demoP).length) return;
+  TIME.forEach(([n],i)=>{ for(let k=1;k<=3;k++) demoP[n+"|"+k]="Exemplo de prioridade "+k+" da área de "+primeiro(n)+"."; });
+  TIME.forEach(([a])=>TIME.forEach(([s])=>{ if(a===s) return;
+    demoM[a+"|"+s]={campo:(a.length+s.length)%6, escolha:1+((a.length+s.length)%3)}; }));
+}
+async function rpc(fn,args){
+  if(DEMO){
+    demoInit();
+    if(fn==="wb2_prios") return Object.entries(demoP).map(([k,v])=>({sobre:k.split("|")[0],idx:+k.split("|")[1],texto:v}));
+    if(fn==="wb2_estado_sala") return [{revelado:true,fechado:false}];
+    if(fn==="wb2_minhas") return [];
+    if(fn==="wb2_painel") return Object.entries(demoM).map(([k,v])=>({autor:k.split("|")[0],sobre:k.split("|")[1],campo:v.campo,escolha:v.escolha}));
+    return null;
+  }
+  const r=await fetch(URL_SB+"/rest/v1/rpc/"+fn,{method:"POST",
+    headers:{"Content-Type":"application/json",apikey:ANON,Authorization:"Bearer "+ANON},
+    body:JSON.stringify(args||{})});
+  if(!r.ok) throw new Error(await r.text());
+  const t=await r.text(); return t?JSON.parse(t):null;
+}
+
+/* ================= participante ================= */
+let autor=null, prios={}, minhas={}, fechado=false;
+
+async function carregarBase(){
+  try{ (await rpc("wb2_prios")||[]).forEach(p=>prios[p.sobre+"|"+p.idx]=p.texto); }catch(e){}
+  try{ const e=await rpc("wb2_estado_sala"); fechado=!!(e&&e[0]&&e[0].fechado); }catch(e){}
+}
+
+function telaNome(){
+  $("#cabT").textContent="Marcação das apresentações";
+  $("#cabP").textContent="Dois toques por apresentação, nos dois minutos de arguição. Dá para mudar de ideia até a nona.";
+  $("#corpo").innerHTML='<div class="eyebrow" style="margin:24px 0 0">Quem está marcando</div>'+
+    '<div class="nomes">'+TIME.map(([n,a])=>'<button data-n="'+esc(n)+'"><span class="ini">'+esc(iniciais(n))+
+    '</span><span><span class="n">'+esc(n)+'</span><br><span class="a">'+esc(a)+'</span></span></button>').join("")+'</div>';
+  $("#corpo").querySelectorAll("button").forEach(b=>b.onclick=()=>escolher(b.dataset.n));
+}
+
+async function escolher(n){
+  autor=n; localStorage.setItem("wb2_autor",n); minhas={};
+  try{ (await rpc("wb2_minhas",{p_autor:n})||[]).forEach(m=>minhas[m.sobre]={campo:m.campo,escolha:m.escolha}); }catch(e){}
+  telaLista();
+}
+
+function telaLista(){
+  $("#cabT").textContent="As nove apresentações";
+  $("#cabP").textContent="Você é "+autor+". Toque no nome de quem acabou de apresentar.";
+  const outros=TIME.filter(([n])=>n!==autor);
+  const feitos=outros.filter(([n])=>minhas[n]&&minhas[n].escolha).length;
+  $("#corpo").innerHTML='<div class="nomes">'+outros.map(([n,a])=>{
+      const m=minhas[n]||{};
+      const st = m.escolha ? "marcado" : (prios[n+"|1"] ? "pendente" : "aguardando");
+      return '<button data-n="'+esc(n)+'"><span class="ini">'+esc(iniciais(n))+'</span>'+
+        '<span><span class="n">'+esc(n)+'</span><br><span class="a">'+esc(a)+'</span></span>'+
+        '<span class="st'+(m.escolha?" ok":"")+'">'+st+'</span></button>';}).join("")+'</div>'+
+    '<div class="rodape"><span class="est">'+feitos+' de '+outros.length+' marcadas</span>'+
+    '<button class="b g" id="btTrocar">Trocar de nome</button></div>';
+  $("#corpo").querySelectorAll(".nomes button").forEach(b=>b.onclick=()=>telaMarcar(b.dataset.n));
+  $("#btTrocar").onclick=()=>{autor=null;localStorage.removeItem("wb2_autor");telaNome();};
+  window.scrollTo(0,0);
+}
+
+function telaMarcar(n){
+  const m=minhas[n]||{campo:null,escolha:null};
+  const tem=[1,2,3].some(i=>(prios[n+"|"+i]||"").trim());
+  $("#cabT").textContent=n;
+  $("#cabP").textContent=areaDe(n);
+  $("#corpo").innerHTML='<div class="pess">'+
+    '<div class="perg">01 · Que campo ficou incompleto?</div>'+
+    '<div class="chips">'+CAMPOS.map(([v,t])=>'<button class="chip'+(String(m.campo)===v?" on":"")+
+      '" data-c="'+v+'">'+esc(t)+'</button>').join("")+'</div>'+
+    '<div class="perg">02 · Qual destas três você sustentaria com capacidade da sua área?</div>'+
+    '<div class="sub">Não é qual é mais importante. É qual você banca.</div>'+
+    (tem ? '<div class="opts">'+[1,2,3].map(i=>{
+        const t=(prios[n+"|"+i]||"").trim();
+        if(!t) return "";
+        return '<button class="opt'+(m.escolha===i?" on":"")+'" data-e="'+i+'">'+
+               '<span class="num">0'+i+'</span><span class="txt">'+esc(t)+'</span></button>';}).join("")+'</div>'
+        : '<div class="opt vazio">As três prioridades desta área ainda não foram lançadas. Volte em instantes.</div>')+
+    '</div>'+
+    '<div class="rodape"><span class="est" id="est"></span>'+
+    '<button class="b p" id="btVolta">Concluir</button></div>';
+
+  const salvar=async()=>{
+    $("#est").textContent="salvando…";
+    try{ await rpc("wb2_marcar",{p_autor:autor,p_sobre:n,p_campo:minhas[n].campo,p_escolha:minhas[n].escolha});
+         $("#est").textContent="salvo"; }
+    catch(e){ $("#est").textContent=String(e).indexOf("encerrada")>-1?"a marcação foi encerrada":"sem conexão"; }
+  };
+  minhas[n]=minhas[n]||{campo:null,escolha:null};
+  $("#corpo").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
+    minhas[n].campo=Number(b.dataset.c);
+    $("#corpo").querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b));
+    salvar();
+  });
+  $("#corpo").querySelectorAll(".opt[data-e]").forEach(b=>b.onclick=()=>{
+    minhas[n].escolha=Number(b.dataset.e);
+    $("#corpo").querySelectorAll(".opt").forEach(x=>x.classList.toggle("on",x===b));
+    salvar();
+  });
+  $("#btVolta").onclick=telaLista;
+  window.scrollTo(0,0);
+}
+
+/* ================= facilitador ================= */
+async function facilitador(){
+  $("#app").hidden=true; $("#palco").hidden=false; $("#barraP").hidden=false;
+  let marcas=[], revelado=false, aba="prios";
+
+  async function carregar(){
+    prios={};
+    try{ (await rpc("wb2_prios")||[]).forEach(p=>prios[p.sobre+"|"+p.idx]=p.texto);
+         marcas=await rpc("wb2_painel",{p_codigo:F})||[];
+         const e=await rpc("wb2_estado_sala"); revelado=!!(e&&e[0]&&e[0].revelado); fechado=!!(e&&e[0]&&e[0].fechado);
+         $("#pEst").textContent=marcas.length+" marcações · "+(revelado?"painel revelado":"painel oculto")+(fechado?" · marcação fechada":""); }
+    catch(e){ $("#pEst").textContent="código inválido ou banco não configurado"; }
+    $("#pRevelar").textContent = revelado ? "Ocultar" : "Revelar";
+    $("#pFechar").textContent  = fechado  ? "Reabrir marcação" : "Fechar marcação";
+  }
+
+  function telaPrios(){
+    aba="prios";
+    $("#palcoIn").innerHTML='<div class="eyebrow">Antes e durante as apresentações</div>'+
+      '<h2>As três prioridades de cada área</h2>'+
+      '<p class="sub">Lance as três de cada um — do pré-work, ou na hora, enquanto a pessoa apresenta. Sem elas o segundo toque não aparece no celular de ninguém.</p>'+
+      '<div id="prios" class="pgrade">'+TIME.map(([n,a])=>
+        '<div class="pcard"><h3>'+esc(n)+' <span style="color:#8E9A94;font-weight:400;font-size:13px">· '+esc(a)+'</span></h3>'+
+        [1,2,3].map(i=>'<input data-s="'+esc(n)+'" data-i="'+i+'" placeholder="prioridade '+i+'" value="'+
+          esc(prios[n+"|"+i]||"").replace(/"/g,"&quot;")+'">').join("")+'</div>').join("")+'</div>';
+    $("#palcoIn").querySelectorAll("input").forEach(inp=>{
+      inp.onchange=async()=>{
+        try{ await rpc("wb2_salvar_prio",{p_codigo:F,p_sobre:inp.dataset.s,p_idx:Number(inp.dataset.i),p_texto:inp.value});
+             prios[inp.dataset.s+"|"+inp.dataset.i]=inp.value; $("#pEst").textContent="prioridade salva"; }
+        catch(e){ $("#pEst").textContent="não foi possível salvar"; }
+      };
+    });
+    window.scrollTo(0,0);
+  }
+
+  function telaRank(){
+    aba="rank";
+    const cont={};
+    marcas.forEach(m=>{ if(!m.escolha) return;
+      const k=m.sobre+"|"+m.escolha; (cont[k]=cont[k]||[]).push(m.autor); });
+    const lista=Object.entries(cont).map(([k,quem])=>{
+      const [sobre,idx]=k.split("|");
+      return {sobre, idx:+idx, texto:prios[k]||"(prioridade não lançada)", quem, n:quem.length};
+    }).sort((a,b)=>b.n-a.n || a.sobre.localeCompare(b.sobre));
+
+    let h='<div class="eyebrow">O que esta mesa banca</div><h2>As vinte e sete, em ordem</h2>'+
+      '<p class="sub">Cada um escolheu, em cada área ouvida, a prioridade que sustentaria com capacidade da própria. '+marcas.filter(m=>m.escolha).length+' escolhas.</p>';
+    if(!revelado) h+='<p class="sub" style="color:#FFCB3D">Painel oculto para os participantes. Esta é a sua tela — revele só às 10h55.</p>';
+    h+='<div class="rank">';
+    lista.forEach((l,i)=>{
+      if(i===5) h+='<div class="corte">daqui para baixo, a cauda — a briga é da quarta à sétima</div>';
+      h+='<div class="rk'+(i<5?" top":"")+'"><div class="pos">'+(i+1)+'</div><div class="txt">'+
+        '<div class="area">'+esc(l.sobre)+' · '+esc(areaDe(l.sobre))+'</div>'+
+        '<p class="p">'+esc(l.texto)+'</p>'+
+        '<div class="quem">'+esc(l.quem.map(primeiro).join(" · "))+'</div></div>'+
+        '<div class="n">'+l.n+'</div></div>';
+    });
+    if(!lista.length) h+='<p class="sub">Ainda não há escolhas.</p>';
+    h+='</div>';
+    $("#palcoIn").innerHTML=h; window.scrollTo(0,0);
+  }
+
+  function telaCampos(){
+    aba="campos";
+    const por={};
+    marcas.forEach(m=>{ if(m.campo===null||m.campo===undefined) return;
+      (por[m.sobre]=por[m.sobre]||[]).push(m); });
+    let h='<div class="eyebrow">O que ficou faltando</div><h2>Campos incompletos, por área</h2>'+
+      '<p class="sub">Marcação nominal: todos veem quem marcou o quê.</p><div class="gradeC">';
+    TIME.forEach(([n,a])=>{
+      const ms=por[n]||[];
+      const cont={};
+      ms.forEach(m=>{ if(m.campo>0) (cont[m.campo]=cont[m.campo]||[]).push(primeiro(m.autor)); });
+      const linhas=Object.entries(cont).sort((x,y)=>y[1].length-x[1].length)
+        .map(([c,q])=>'<div class="l"><b>'+q.length+'</b> · campo '+c+' — '+esc(CAMPOS[c-1][1])+' <span style="opacity:.7">('+esc(q.join(", "))+')</span></div>').join("");
+      h+='<div class="cc"><div class="n">'+esc(n)+'</div>'+
+         (linhas||'<div class="l">nenhum campo apontado</div>')+
+         '<div class="l" style="opacity:.6">'+ms.length+' de 8 marcaram · '+esc(a)+'</div></div>';
+    });
+    h+='</div>';
+    $("#palcoIn").innerHTML=h; window.scrollTo(0,0);
+  }
+
+  const desenha=()=>aba==="prios"?telaPrios():aba==="rank"?telaRank():telaCampos();
+  $("#pPrios").onclick=()=>{aba="prios";desenha();};
+  $("#pRank").onclick=()=>{aba="rank";desenha();};
+  $("#pCampos").onclick=()=>{aba="campos";desenha();};
+  $("#pAtu").onclick=async()=>{ $("#pEst").textContent="atualizando…"; await carregar(); desenha(); };
+  $("#pRevelar").onclick=async()=>{
+    try{ await rpc("wb2_sala",{p_codigo:F,p_revelado:!revelado,p_fechado:fechado}); await carregar(); desenha(); }
+    catch(e){ $("#pEst").textContent="não foi possível mudar o painel"; }
+  };
+  $("#pFechar").onclick=async()=>{
+    try{ await rpc("wb2_sala",{p_codigo:F,p_revelado:revelado,p_fechado:!fechado}); await carregar(); desenha(); }
+    catch(e){ $("#pEst").textContent="não foi possível fechar"; }
+  };
+  await carregar(); desenha();
+}
+
+/* ================= entrada ================= */
+(async function(){
+  if(F){ await facilitador(); return; }
+  await carregarBase();
+  const g=localStorage.getItem("wb2_autor");
+  if(g && TIME.some(([n])=>n===g)) escolher(g); else telaNome();
+  setInterval(async()=>{ if(!autor) return;
+    const antes=JSON.stringify(prios);
+    try{ (await rpc("wb2_prios")||[]).forEach(p=>prios[p.sobre+"|"+p.idx]=p.texto); }catch(e){}
+    if(JSON.stringify(prios)!==antes && $("#corpo").querySelector(".nomes")) telaLista();
+  }, 20000);
+})();
+</script>
+</body>
+</html>
