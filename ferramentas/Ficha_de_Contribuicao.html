@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#00B050">
+<title>Ficha de contribuição · Time de Donos</title>
+<style>
+:root{
+  --verde:#00B050; --verde-e:#00913F; --vc:#E8F8EE;
+  --preto:#171717; --palco:#0D0F0E;
+  --tx:#16191B; --tx2:#5A6670; --tx3:#96A0A8;
+  --cinza:#F4F6F5; --linha:#E3E8E6;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:#fff;color:var(--tx);line-height:1.5;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+[hidden]{display:none!important}
+.eyebrow{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.mudo{color:var(--tx3)}
+
+.b{border:1.5px solid var(--linha);background:#fff;color:var(--tx);
+  border-radius:12px;padding:14px 22px;font-weight:700;font-size:16px}
+.b:hover{border-color:var(--tx3)}
+.b.p{background:var(--verde);border-color:var(--verde);color:#fff}
+.b.p:hover{background:var(--verde-e);border-color:var(--verde-e)}
+.b:disabled{opacity:.35;cursor:default}
+.b.g{background:transparent;border-color:transparent;color:var(--tx2);padding-left:0}
+
+/* ================= FICHA (celular) ================= */
+#form{max-width:600px;margin:0 auto;padding:0 20px 132px;min-height:100vh}
+.cab{padding:26px 0 0}
+.cab h1{font-size:26px;line-height:1.15;letter-spacing:-.4px;margin:10px 0 8px;font-weight:800}
+.cab p{margin:0;color:var(--tx2);font-size:15px}
+
+.nomes{margin:22px 0 0;border-top:1px solid var(--linha)}
+.nomes button{display:flex;width:100%;align-items:center;gap:14px;text-align:left;
+  background:none;border:0;border-bottom:1px solid var(--linha);padding:16px 2px}
+.nomes .ini{width:38px;height:38px;flex:none;border-radius:50%;background:var(--cinza);
+  display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--tx2)}
+.nomes .n{font-size:17px;font-weight:700}
+.nomes .a{font-size:13px;color:var(--tx3)}
+.nomes button:hover .ini{background:var(--vc);color:var(--verde-e)}
+
+.regra{background:var(--vc);border-radius:14px;padding:15px 17px;font-size:14.5px;margin:20px 0 0}
+.regra b{font-weight:800}
+
+.pessoa{padding:24px 0 0}
+.pessoa .topo{display:flex;align-items:center;gap:14px}
+.pessoa .ini{width:52px;height:52px;flex:none;border-radius:50%;background:var(--preto);color:#fff;
+  display:grid;place-items:center;font-size:17px;font-weight:800;letter-spacing:.5px}
+.pessoa h2{margin:0;font-size:24px;letter-spacing:-.3px;font-weight:800}
+.pessoa .a{margin:0;font-size:13.5px;color:var(--tx3)}
+
+.campo{margin-top:26px}
+.campo .rot{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.campo .num{font-size:11px;font-weight:800;color:var(--verde);letter-spacing:1.6px}
+.campo .tit{font-size:16px;font-weight:800}
+.campo .dica{margin:0 0 10px;font-size:13.5px;color:var(--tx2);max-width:46ch}
+textarea{width:100%;font:inherit;font-size:16.5px;line-height:1.45;color:var(--tx);background:#fff;
+  border:1.5px solid var(--linha);border-radius:12px;padding:14px 15px;min-height:118px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px var(--vc)}
+textarea.curto{border-color:#E9D9A8}
+.conta{margin-top:6px;font-size:12.5px;color:var(--tx3);min-height:18px}
+.conta.ok{color:var(--verde-e);font-weight:700}
+
+.rev{padding:24px 0 0}
+.rev .lista{margin-top:18px;border-top:1px solid var(--linha)}
+.rev .li{display:flex;align-items:center;gap:12px;padding:14px 2px;border:0;border-bottom:1px solid var(--linha);
+  width:100%;background:none;text-align:left}
+.rev .mk{width:22px;height:22px;flex:none;border-radius:50%;display:grid;place-items:center;
+  font-size:12px;font-weight:800;background:var(--vc);color:var(--verde-e)}
+.rev .mk.f{background:#FBEFD6;color:#8A6100}
+.rev .nm{font-weight:700;font-size:15.5px;flex:1}
+.rev .st{font-size:13px;color:var(--tx3)}
+.rev .env{margin-top:26px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+
+.fim{padding:34px 0 0;max-width:46ch}
+.fim h2{font-size:26px;margin:12px 0 8px;font-weight:800;letter-spacing:-.3px}
+.fim p{color:var(--tx2);margin:0 0 20px}
+.pontos{display:flex;gap:7px;margin:0 0 22px}
+.pontos i{width:22px;height:6px;border-radius:3px;background:var(--linha)}
+.pontos i.on{background:var(--verde)}
+
+.rodape{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(8px);border-top:1px solid var(--linha);padding:12px 20px;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+.rodape .in{max-width:600px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rodape .meio{flex:1;text-align:center;font-size:12.5px;color:var(--tx3);font-weight:600}
+.trilho{position:absolute;left:0;top:0;height:3px;background:var(--verde);transition:width .25s ease}
+
+.folha{padding:30px 0 0}
+.folha h2{font-size:27px;margin:10px 0 4px;font-weight:800;letter-spacing:-.4px}
+.folha .sec{margin:30px 0 12px;font-size:11px;letter-spacing:2.4px;text-transform:uppercase;
+  font-weight:800;color:var(--verde)}
+.folha .it{padding:16px 0;border-top:1px solid var(--linha)}
+.folha .it .de{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;font-weight:800;color:var(--tx3)}
+.folha .it p{margin:6px 0 0;font-size:17px;line-height:1.5}
+.folha .it .sel{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;padding:4px 11px;
+  border-radius:20px;background:var(--vc);color:var(--verde-e)}
+.folha .it .sel.n{background:var(--cinza);color:var(--tx2)}
+
+/* ================= PALCO (projeção + comandos) ================= */
+#palco{position:fixed;inset:0;background:var(--palco);color:#fff;overflow:auto;padding:44px 56px 104px}
+#palco .lim{max-width:1180px;margin:0 auto}
+#palco h2{font-size:64px;line-height:1;letter-spacing:-2px;margin:12px 0 0;font-weight:800}
+#palco .area{margin:10px 0 0;font-size:19px;color:#8E9A94}
+
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:38px}
+.qt{background:#171B19;border-radius:16px;padding:22px 26px;border-left:4px solid var(--verde)}
+.qt .de{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.qt p{margin:9px 0 0;font-size:23px;line-height:1.35}
+
+.pedido{margin-top:40px;max-width:26ch}
+.pedido .de{font-size:14px;letter-spacing:2.4px;text-transform:uppercase;font-weight:800;color:var(--verde)}
+.pedido p{margin:16px 0 0;font-size:46px;line-height:1.18;letter-spacing:-1px;font-weight:700}
+.resp{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
+.rb{border:2px solid #3A423E;background:transparent;color:#fff;border-radius:14px;
+  padding:18px 38px;font-size:22px;font-weight:800;text-align:left}
+.rb:hover{border-color:#fff}
+.rb.sim.on{background:var(--verde);border-color:var(--verde)}
+.rb.nao.on{background:#fff;border-color:#fff;color:var(--palco)}
+.rb .k{display:block;font-size:11px;letter-spacing:2px;font-weight:700;color:#8E9A94;margin-top:5px}
+.rb.on .k{color:inherit;opacity:.55}
+.vazio{margin-top:44px;font-size:23px;color:#8E9A94}
+
+.lobby{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:34px}
+.lb{background:#171B19;border-radius:14px;padding:17px 19px;border:1px solid #232926}
+.lb .n{font-size:18px;font-weight:700}
+.lb .s{font-size:13px;margin-top:5px;color:#8E9A94}
+.lb.ok{border-color:var(--verde)}
+.lb.ok .s{color:var(--verde)}
+.cmd{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap;align-items:center}
+.aviso{margin-top:22px;font-size:15px;color:#8E9A94;max-width:60ch}
+
+.palcoBar{position:fixed;left:0;right:0;bottom:0;background:#101413;border-top:1px solid #232926;
+  padding:13px 56px;display:flex;align-items:center;gap:18px}
+.pb{border:1px solid #3A423E;background:transparent;color:#fff;border-radius:10px;
+  padding:11px 18px;font-weight:700;font-size:15px}
+.pb:hover{border-color:#fff}
+.pb.p{background:var(--verde);border-color:var(--verde)}
+.palcoBar .est{flex:1;color:#8E9A94;font-size:14px}
+.relogio{font-variant-numeric:tabular-nums;font-weight:800;font-size:20px;color:#8E9A94}
+.relogio.estourou{color:#FFCB3D}
+.dots{display:flex;gap:6px}
+.dots i{width:9px;height:9px;border-radius:50%;background:#3A423E}
+.dots i.on{background:var(--verde)}
+.dots i.now{background:#fff;transform:scale(1.25)}
+
+@media (max-width:900px){
+  #palco{padding:24px 20px 96px}
+  #palco h2{font-size:36px}
+  .grade{grid-template-columns:1fr}
+  .qt p{font-size:18px}
+  .pedido p{font-size:28px}
+  .lobby{grid-template-columns:1fr 1fr}
+  .palcoBar{padding:12px 20px;flex-wrap:wrap;gap:12px}
+}
+@media print{
+  .rodape,.cab,.regra,#palco,.palcoBar,.b{display:none!important}
+  #form{padding:0;max-width:none}
+  .folha .it{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div id="form">
+  <div class="cab">
+    <div class="eyebrow">Time de Donos · Dia 1 · 16h45</div>
+    <h1 id="cabT">Ficha de contribuição</h1>
+    <p id="cabP">Duas frases sobre cada colega: a contribuição que ele traz, e um pedido que você nunca fez.</p>
+  </div>
+  <div id="corpo"></div>
+</div>
+
+<div class="rodape" id="rodape" hidden>
+  <i class="trilho" id="trilho" style="width:0"></i>
+  <div class="in">
+    <button class="b g" id="btVoltar">‹ Voltar</button>
+    <span class="meio" id="passoTxt"></span>
+    <button class="b p" id="btAvancar">Próximo</button>
+  </div>
+</div>
+
+<div id="palco" hidden><div class="lim" id="palcoIn"></div></div>
+<div class="palcoBar" id="palcoBar" hidden>
+  <button class="pb" id="pAnt">‹</button>
+  <div class="dots" id="pDots"></div>
+  <span class="est" id="pEst"></span>
+  <span class="relogio" id="pRel"></span>
+  <button class="pb" id="pSair">Voltar ao quadro</button>
+  <button class="pb p" id="pProx">Avançar ›</button>
+</div>
+
+<script>
+/* ============ configuração ============ */
+const URL_SB = "https://adwmzkksbzmnhjdhdtkw.supabase.co";
+const ANON   = "COLE_AQUI_A_ANON_KEY";
+/* o quadro do facilitador abre com ?f=<código> na URL — o código não fica no arquivo */
+const MIN    = 25;                    /* caracteres mínimos por campo */
+const SEG_POR_PESSOA = 4*60;          /* 4 min por sujeito — plano de aula, bloco 16h45 */
+
+const TIME=[["Pedro Romero","Wallet & Banking"],["Guilherme Porto","Banking"],
+["Eduardo Favero","Contas"],["Italla Ferreira","Clientes"],["Luiz Krempel","Payments"],
+["Felipe Cotecchia","Tecnologia"],["Marcel Marques","Design"],["Letícia Ribeiro","Operações"],
+["Tiago Scrivano","Planejamento"]];
+
+/* ============ utilidades ============ */
+const $=s=>document.querySelector(s);
+const esc=t=>String(t==null?"":t).replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+const primeiro=n=>n.split(" ")[0];
+const iniciais=n=>n.split(" ").map(p=>p[0]).slice(0,2).join("");
+const areaDe=n=>(TIME.find(t=>t[0]===n)||["",""])[1];
+
+const DEMO=new URLSearchParams(location.search).get("demo")==="1";
+const F=new URLSearchParams(location.search).get("f");
+
+const demoBase={};
+function demoLinhas(){
+  const L=[];
+  TIME.forEach(([a])=>TIME.forEach(([p])=>{ if(a===p) return;
+    const k=a+"|"+p;
+    if(!(k in demoBase)) demoBase[k]={
+      contrib:"Exemplo. Quando "+primeiro(a)+" levou o número da fila para a reunião de terça, a decisão saiu no mesmo dia em vez de voltar para análise.",
+      pedido:"Exemplo. Preciso que "+primeiro(p)+" me avise antes de mudar prioridade de squad, e não depois.",
+      resposta:null,enviado:true};
+    L.push(Object.assign({autor:a,para:p},demoBase[k]));
+  }));
+  return L;
+}
+async function rpc(fn,args){
+  if(DEMO){
+    if(fn==="wb_consolidar") return demoLinhas();
+    if(fn==="wb_folha")      return demoLinhas().filter(l=>l.para===args.p_autor);
+    if(fn==="wb_situacao")   return [{enviados:TIME.length,liberado:true}];
+    if(fn==="wb_minhas")     return [];
+    if(fn==="wb_responder"){ const d=demoBase[args.p_autor+"|"+args.p_para]; if(d) d.resposta=args.p_resposta; }
+    return null;
+  }
+  const r=await fetch(URL_SB+"/rest/v1/rpc/"+fn,{method:"POST",
+    headers:{"Content-Type":"application/json",apikey:ANON,Authorization:"Bearer "+ANON},
+    body:JSON.stringify(args||{})});
+  if(!r.ok) throw new Error(await r.text());
+  const t=await r.text(); return t?JSON.parse(t):null;
+}
+
+/* ============ ficha ============ */
+let autor=null, colegas=[], dados={}, passo=0, enviado=false, timerEnvio=null;
+const corpo=$("#corpo");
+const completo=n=>{const d=dados[n]||{};
+  return (d.contrib||"").trim().length>=MIN && (d.pedido||"").trim().length>=MIN;};
+
+function render(){
+  if(enviado) return;
+  if(passo===0) return telaNome();
+  if(passo>=1 && passo<=colegas.length) return telaColega(passo-1);
+  return telaRevisao();
+}
+
+function telaNome(){
+  $("#rodape").hidden=true;
+  $("#cabT").textContent="Ficha de contribuição";
+  $("#cabP").textContent="Duas frases sobre cada colega: a contribuição que ele traz, e um pedido que você nunca fez.";
+  corpo.innerHTML='<div class="regra"><b>Contribuição não é elogio.</b> Elogio é “você é ótimo”. '+
+    'Contribuição é “quando você fez tal coisa, naquela reunião, isso destravou o meu time”. '+
+    'O pedido é uma coisa que você precisa daquela pessoa e nunca pediu.</div>'+
+    '<div class="eyebrow" style="margin:26px 0 0">Quem está preenchendo</div>'+
+    '<div class="nomes">'+TIME.map(([n,a])=>
+      '<button data-n="'+esc(n)+'"><span class="ini">'+esc(iniciais(n))+'</span>'+
+      '<span><span class="n">'+esc(n)+'</span><br><span class="a">'+esc(a)+'</span></span></button>').join("")+'</div>';
+  corpo.querySelectorAll(".nomes button").forEach(b=>b.onclick=()=>escolher(b.dataset.n));
+}
+
+async function escolher(n){
+  autor=n; localStorage.setItem("wb_autor",n);
+  colegas=TIME.filter(([x])=>x!==n); dados={};
+  try{ (await rpc("wb_minhas",{p_autor:n})||[]).forEach(r=>dados[r.para]={contrib:r.contrib,pedido:r.pedido}); }catch(e){}
+  if(localStorage.getItem("wb_enviado_"+n)==="1"){ telaEnviado(); return; }
+  passo=1; render();
+}
+
+function telaColega(i){
+  const [n,a]=colegas[i], d=dados[n]||{contrib:"",pedido:""};
+  $("#cabT").textContent="Ficha de contribuição";
+  $("#cabP").textContent="Você é "+autor+".";
+  corpo.innerHTML=
+   '<div class="pessoa"><div class="topo"><span class="ini">'+esc(iniciais(n))+'</span>'+
+   '<span><h2>'+esc(n)+'</h2><p class="a">'+esc(a)+'</p></span></div>'+
+   '<div class="campo"><div class="rot"><span class="num">01</span><span class="tit">A contribuição</span></div>'+
+   '<p class="dica">O que '+esc(primeiro(n))+' fez, em que situação, e o que mudou por causa disso. Um fato, não um adjetivo.</p>'+
+   '<textarea id="t1" placeholder="Quando…"></textarea><div class="conta" id="c1"></div></div>'+
+   '<div class="campo"><div class="rot"><span class="num">02</span><span class="tit">O pedido</span></div>'+
+   '<p class="dica">Uma coisa que você precisa de '+esc(primeiro(n))+' e nunca pediu. Na sala, '+esc(primeiro(n))+' responde sim ou não.</p>'+
+   '<textarea id="t2" placeholder="Preciso que…"></textarea><div class="conta" id="c2"></div></div></div>';
+
+  const t1=$("#t1"), t2=$("#t2");
+  t1.value=d.contrib||""; t2.value=d.pedido||"";
+  const pinta=()=>{
+    [[t1,$("#c1"),"a contribuição"],[t2,$("#c2"),"o pedido"]].forEach(function(p){
+      const t=p[0], c=p[1], rot=p[2], v=t.value.trim().length;
+      t.classList.toggle("curto", v>0 && v<MIN);
+      c.className="conta"+(v>=MIN?" ok":"");
+      c.textContent = v===0 ? "" : (v<MIN ? "faltam "+(MIN-v)+" caracteres para "+rot : "pronto");
+    });
+    $("#btAvancar").textContent = i===colegas.length-1 ? "Revisar" : "Próximo";
+  };
+  const salvar=async()=>{
+    try{ await rpc("wb_salvar",{p_autor:autor,p_para:n,p_contrib:t1.value,p_pedido:t2.value}); }
+    catch(e){ $("#passoTxt").textContent="sem conexão — o texto continua nesta tela"; }
+  };
+  let deb=null;
+  const mudou=()=>{ dados[n]={contrib:t1.value,pedido:t2.value}; pinta(); trilho();
+    clearTimeout(deb); deb=setTimeout(salvar,600); };
+  t1.addEventListener("input",mudou); t2.addEventListener("input",mudou);
+  t1.addEventListener("blur",salvar); t2.addEventListener("blur",salvar);
+  pinta();
+
+  $("#rodape").hidden=false; $("#btVoltar").hidden=false; $("#btAvancar").disabled=false;
+  $("#passoTxt").textContent=(i+1)+" de "+colegas.length;
+  trilho(); window.scrollTo(0,0);
+}
+
+function telaRevisao(){
+  $("#cabT").textContent="Antes de enviar";
+  $("#cabP").textContent="Toque em um nome para voltar e ajustar.";
+  const faltam=colegas.filter(([n])=>!completo(n)).length;
+  corpo.innerHTML='<div class="rev"><div class="lista">'+
+    colegas.map(([n],i)=>{const ok=completo(n), d=dados[n]||{};
+      const st = ok ? "as duas frases"
+        : ((d.contrib||"").trim().length>=MIN ? "falta o pedido"
+        : ((d.pedido||"").trim().length>=MIN ? "falta a contribuição" : "em branco"));
+      return '<button class="li" data-i="'+(i+1)+'"><span class="mk'+(ok?"":" f")+'">'+(ok?"✓":"!")+'</span>'+
+             '<span class="nm">'+esc(n)+'</span><span class="st">'+st+'</span></button>';}).join("")+
+    '</div><div class="env">'+
+    (faltam?'<p class="mudo" style="margin:0">Faltam '+faltam+'. Na rodada, cada pessoa recebe de todos.</p>':'')+
+    '<button class="b p" id="btEnviar"'+(faltam?" disabled":"")+'>Enviar a minha ficha</button>'+
+    '<span class="mudo" id="stEnvio" style="font-size:13.5px"></span></div></div>';
+  corpo.querySelectorAll(".li").forEach(b=>b.onclick=()=>{passo=+b.dataset.i;render();});
+  const be=$("#btEnviar");
+  if(be) be.onclick=async()=>{
+    be.disabled=true; $("#stEnvio").textContent="enviando…";
+    try{ await rpc("wb_enviar",{p_autor:autor}); localStorage.setItem("wb_enviado_"+autor,"1"); telaEnviado(); }
+    catch(e){ be.disabled=false; $("#stEnvio").textContent="não foi possível enviar — tente de novo"; }
+  };
+  $("#rodape").hidden=false; $("#btVoltar").hidden=false;
+  $("#btAvancar").disabled=true; $("#btAvancar").textContent="Próximo";
+  $("#passoTxt").textContent="revisão";
+  trilho(); window.scrollTo(0,0);
+}
+
+function trilho(){
+  const feitos=colegas.filter(([n])=>completo(n)).length;
+  $("#trilho").style.width=(feitos/Math.max(1,colegas.length)*100)+"%";
+}
+
+async function situacao(){
+  try{ const r=await rpc("wb_situacao"); return (r&&r[0])||{enviados:0,liberado:false}; }
+  catch(e){ return {enviados:0,liberado:false}; }
+}
+
+async function telaEnviado(){
+  enviado=true; $("#rodape").hidden=true;
+  $("#cabT").textContent="Ficha enviada";
+  $("#cabP").textContent=autor+" · "+areaDe(autor);
+  const st=await situacao();
+  const liberado=st.liberado||st.enviados>=TIME.length;
+  corpo.innerHTML='<div class="fim">'+
+    '<div class="pontos">'+TIME.map((_,i)=>'<i class="'+(i<st.enviados?"on":"")+'"></i>').join("")+'</div>'+
+    '<h2>'+(liberado?"A sua folha está pronta.":st.enviados+" de "+TIME.length+" enviaram.")+'</h2>'+
+    '<p>'+(liberado?"O que os oito colegas escreveram sobre você, com o nome de quem escreveu."
+                  :"A sua folha abre no fim da rodada. Pode deixar esta tela aberta.")+'</p>'+
+    (liberado?'<button class="b p" id="btFolha">Ver a minha folha</button> ':'')+
+    '<button class="b" id="btRever">Rever o que escrevi</button>'+
+    '</div><div id="minhaFolha"></div>';
+  $("#btRever").onclick=()=>{ enviado=false; clearTimeout(timerEnvio); passo=1; render(); };
+  const bf=$("#btFolha"); if(bf) bf.onclick=abrirFolha;
+  clearTimeout(timerEnvio);
+  if(!liberado) timerEnvio=setTimeout(telaEnviado,15000);
+}
+
+async function abrirFolha(){
+  const b=$("#btFolha"); b.textContent="abrindo…";
+  let its=[];
+  try{ its=await rpc("wb_folha",{p_autor:autor})||[]; }
+  catch(e){ b.textContent="Ver a minha folha"; return; }
+  b.hidden=true;
+  const c=its.filter(l=>(l.contrib||"").trim()), p=its.filter(l=>(l.pedido||"").trim());
+  let h='<div class="folha"><div class="eyebrow">Time de Donos · 8 e 9 de setembro</div>'+
+        '<h2>A folha de '+esc(autor)+'</h2><p class="mudo" style="margin:2px 0 0">'+esc(areaDe(autor))+'</p>';
+  if(c.length){ h+='<div class="sec">O que dizem que você traz</div>';
+    c.forEach(l=>h+='<div class="it"><div class="de">'+esc(l.autor)+'</div><p>'+esc(l.contrib)+'</p></div>'); }
+  if(p.length){ h+='<div class="sec">Os pedidos que você recebeu</div>';
+    p.forEach(l=>h+='<div class="it"><div class="de">'+esc(l.autor)+'</div><p>'+esc(l.pedido)+'</p>'+
+      (l.resposta?'<span class="sel'+(l.resposta==="nao"?" n":"")+'">'+
+        (l.resposta==="sim"?"você assumiu":"você não assumiu")+'</span>':'')+'</div>'); }
+  if(!c.length&&!p.length) h+='<p class="mudo">Ninguém preencheu a sua ficha.</p>';
+  h+='<div style="margin:28px 0 0"><button class="b" id="btPdf">Salvar em PDF</button></div></div>';
+  $("#minhaFolha").innerHTML=h;
+  $("#btPdf").onclick=()=>window.print();
+  $("#minhaFolha").scrollIntoView({behavior:"smooth"});
+}
+
+$("#btAvancar").onclick=()=>{ passo=Math.min(passo+1,colegas.length+1); render(); };
+$("#btVoltar").onclick =()=>{ passo=Math.max(passo-1,0); if(passo===0) autor=null; render(); };
+
+if(!F){
+  const g=localStorage.getItem("wb_autor");
+  if(g && TIME.some(([n])=>n===g)) escolher(g); else render();
+}
+
+/* ============ palco: quadro do facilitador + rodada ============ */
+if(F){
+  $("#form").hidden=true; $("#rodape").hidden=true;
+  $("#palco").hidden=false; $("#palcoBar").hidden=false;
+
+  let linhas=[], iP=0, iPed=0, fase="quadro", liberado=false, t0=0, tick=null;
+  const daPessoa=n=>linhas.filter(l=>l.para===n);
+  const contribDe=n=>daPessoa(n).filter(l=>(l.contrib||"").trim());
+  const pedidosDe=n=>daPessoa(n).filter(l=>(l.pedido||"").trim());
+
+  async function carregar(){
+    try{ linhas=await rpc("wb_consolidar",{p_codigo:F})||[];
+         const s=await rpc("wb_situacao"); liberado=!!(s&&s[0]&&s[0].liberado); }
+    catch(e){ $("#pEst").textContent="código inválido ou banco ainda não configurado"; }
+  }
+
+  function quadro(){
+    fase="quadro"; clearInterval(tick); $("#pRel").textContent=""; $("#pAnt").hidden=true;
+    const env={}, esc_={};
+    linhas.forEach(l=>{ if(l.enviado) env[l.autor]=true; esc_[l.autor]=(esc_[l.autor]||0)+1; });
+    const prontos=Object.keys(env).length;
+    const respondidos=linhas.filter(l=>(l.pedido||"").trim()&&l.resposta).length;
+    const totalPed=linhas.filter(l=>(l.pedido||"").trim()).length;
+    $("#palcoIn").innerHTML=
+      '<div class="eyebrow">Dia 1 · 16h45 · eficácia de equipe</div>'+
+      '<h2>'+prontos+' de '+TIME.length+' enviaram</h2>'+
+      '<p class="area">A rodada abre por Pedro Romero e dá quatro minutos a cada um.</p>'+
+      '<div class="lobby">'+TIME.map(([n,a])=>{const ok=!!env[n];
+        return '<div class="lb'+(ok?" ok":"")+'"><div class="n">'+esc(n)+'</div>'+
+          '<div class="s">'+(ok?"enviou":(esc_[n]?esc_[n]+" de 8 escritas":a))+'</div></div>';}).join("")+'</div>'+
+      '<div class="cmd">'+
+        '<button class="pb p" id="qIniciar">Começar por Pedro ›</button>'+
+        '<button class="pb" id="qAtu">Atualizar o quadro</button>'+
+        '<button class="pb" id="qLib">'+(liberado?"Fechar as folhas":"Liberar as folhas")+'</button>'+
+      '</div>'+
+      '<p class="aviso">'+(liberado
+        ? "As folhas estão abertas: cada um já vê no celular o que recebeu."
+        : "As folhas ficam fechadas até você liberar. "+respondidos+" de "+totalPed+" pedidos já têm resposta.")+'</p>';
+    $("#qIniciar").onclick=()=>{iP=0;iPed=0;contribuicoes();};
+    $("#qAtu").onclick=async()=>{ $("#pEst").textContent="atualizando…"; await carregar(); $("#pEst").textContent=""; quadro(); };
+    $("#qLib").onclick=async()=>{
+      try{ await rpc("wb_liberar",{p_codigo:F,p_liberado:!liberado}); liberado=!liberado; quadro(); }
+      catch(e){ $("#pEst").textContent="não foi possível mudar as folhas"; }
+    };
+    $("#pDots").innerHTML=""; $("#pProx").textContent="Começar ›"; $("#pProx").onclick=()=>{iP=0;iPed=0;contribuicoes();};
+    $("#pEst").textContent="";
+    window.scrollTo(0,0);
+  }
+
+  function dots(){ $("#pDots").innerHTML=TIME.map((_,i)=>'<i class="'+(i<iP?"on":(i===iP?"now":""))+'"></i>').join(""); }
+
+  function relogio(){
+    clearInterval(tick); t0=Date.now();
+    const p=()=>{ const s=SEG_POR_PESSOA-Math.floor((Date.now()-t0)/1000), a=Math.abs(s);
+      $("#pRel").textContent=(s<0?"+":"")+Math.floor(a/60)+":"+String(a%60).padStart(2,"0");
+      $("#pRel").classList.toggle("estourou",s<0); };
+    p(); tick=setInterval(p,1000);
+  }
+
+  function contribuicoes(){
+    fase="contrib"; const t=TIME[iP], n=t[0], a=t[1], its=contribDe(n);
+    relogio(); dots(); $("#pAnt").hidden=false;
+    $("#palcoIn").innerHTML='<div class="eyebrow">'+(iP+1)+' de '+TIME.length+' · o que dizem que você traz</div>'+
+      '<h2>'+esc(n)+'</h2><p class="area">'+esc(a)+'</p>'+
+      (its.length?'<div class="grade">'+its.map(l=>'<div class="qt"><div class="de">'+esc(l.autor)+
+        '</div><p>'+esc(l.contrib)+'</p></div>').join("")+'</div>'
+       :'<div class="vazio">Ninguém escreveu a contribuição desta pessoa.</div>');
+    const q=pedidosDe(n).length;
+    $("#pProx").textContent=q?"Ir aos "+q+" pedidos ›":"Próxima pessoa ›";
+    $("#pProx").onclick=avancar;
+    $("#pEst").textContent="Quem está recebendo só agradece.";
+    window.scrollTo(0,0);
+  }
+
+  function pedido(){
+    fase="pedido"; const n=TIME[iP][0], ps=pedidosDe(n);
+    if(!ps.length){ proxima(); return; }
+    const l=ps[iPed]; dots();
+    $("#palcoIn").innerHTML='<div class="eyebrow">'+esc(n)+' · pedido '+(iPed+1)+' de '+ps.length+'</div>'+
+      '<div class="pedido"><div class="de">'+esc(l.autor)+' pede</div><p>'+esc(l.pedido)+'</p></div>'+
+      '<div class="resp"><button class="rb sim">Assumo<span class="k">tecla S</span></button>'+
+      '<button class="rb nao">Não assumo<span class="k">tecla N</span></button></div>';
+    const bs=$(".rb.sim"), bn=$(".rb.nao");
+    bs.classList.toggle("on",l.resposta==="sim"); bn.classList.toggle("on",l.resposta==="nao");
+    bs.onclick=()=>responder(l,"sim"); bn.onclick=()=>responder(l,"nao");
+    $("#pEst").textContent=ps.filter(x=>x.resposta).length+" de "+ps.length+" respondidos";
+    $("#pProx").textContent=(iPed===ps.length-1)?"Próxima pessoa ›":"Próximo pedido ›";
+    $("#pProx").onclick=avancar;
+    window.scrollTo(0,0);
+  }
+
+  async function responder(l,v){
+    const novo=(l.resposta===v)?null:v;
+    const bs=$(".rb.sim"), bn=$(".rb.nao");
+    bs.classList.toggle("on",novo==="sim"); bn.classList.toggle("on",novo==="nao");
+    try{ await rpc("wb_responder",{p_codigo:F,p_autor:l.autor,p_para:l.para,p_resposta:novo});
+      l.resposta=novo;
+      const ps=pedidosDe(TIME[iP][0]);
+      $("#pEst").textContent=ps.filter(x=>x.resposta).length+" de "+ps.length+" respondidos"; }
+    catch(e){ bs.classList.toggle("on",l.resposta==="sim"); bn.classList.toggle("on",l.resposta==="nao");
+      $("#pEst").textContent="não foi possível gravar"; }
+  }
+
+  function proxima(){ if(iP>=TIME.length-1){ clearInterval(tick); quadro(); return; } iP++; iPed=0; contribuicoes(); }
+  function avancar(){
+    if(fase==="quadro"){ iP=0; iPed=0; contribuicoes(); return; }
+    if(fase==="contrib"){ iPed=0; pedido(); return; }
+    const ps=pedidosDe(TIME[iP][0]);
+    if(iPed<ps.length-1){ iPed++; pedido(); } else proxima();
+  }
+  function voltar(){
+    if(fase==="pedido"){ if(iPed>0){iPed--;pedido();} else contribuicoes(); return; }
+    if(fase==="contrib"){ if(iP>0){iP--;iPed=0;contribuicoes();} else quadro(); }
+  }
+
+  $("#pAnt").onclick=voltar;
+  $("#pSair").onclick=()=>{ clearInterval(tick); quadro(); };
+  document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"||e.key===" "){ e.preventDefault(); avancar(); }
+    else if(e.key==="ArrowLeft") voltar();
+    else if(fase==="pedido"&&(e.key==="s"||e.key==="S")) $(".rb.sim").click();
+    else if(fase==="pedido"&&(e.key==="n"||e.key==="N")) $(".rb.nao").click();
+    else if(e.key==="Escape"){ clearInterval(tick); quadro(); }
+  });
+
+  carregar().then(quadro);
+}
+</script>
+</body>
+</html>
