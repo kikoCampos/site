@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#00B050">
-<title>Marcação das apresentações · Time de Donos</title>
+<title>Duas respostas por apresentação · Time de Donos</title>
 <style>
 :root{--verde:#00B050;--verde-e:#00913F;--vc:#E8F8EE;--preto:#171717;--palco:#0D0F0E;
  --tx:#16191B;--tx2:#5A6670;--tx3:#96A0A8;--cinza:#F4F6F5;--linha:#E3E8E6}
@@ -43,7 +43,8 @@ button{font:inherit;cursor:pointer}
 .pess h2{margin:0;font-size:23px;font-weight:800;letter-spacing:-.3px}
 .pess .a{margin:2px 0 0;font-size:13px;color:var(--tx3)}
 .perg{margin:26px 0 10px;font-size:15.5px;font-weight:800}
-.perg + .sub{margin:-6px 0 12px;font-size:13.5px;color:var(--tx2)}
+.perg + .sub{margin:-4px 0 12px;font-size:13.5px;color:var(--tx2);line-height:1.4}
+.chips + .perg{margin-top:30px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1.5px solid var(--linha);background:#fff;border-radius:11px;padding:11px 15px;
  font-size:14.5px;font-weight:600;text-align:left}
@@ -112,9 +113,9 @@ button{font:inherit;cursor:pointer}
 
 <div id="app">
   <div class="cab">
-    <div class="eyebrow">Time de Donos · Dia 2 · 09h15 e 10h15</div>
-    <h1 id="cabT">Marcação das apresentações</h1>
-    <p id="cabP">Dois toques por apresentação, nos dois minutos de arguição. Dá para mudar de ideia até a nona.</p>
+    <div class="eyebrow">Time de Donos · Dia 2 · manhã</div>
+    <h1 id="cabT">Duas respostas por apresentação</h1>
+    <p id="cabP">Cada colega apresenta em seis minutos. Nos dois minutos seguintes, você responde duas perguntas aqui. Leva vinte segundos.</p>
   </div>
   <div id="corpo"></div>
 </div>
@@ -126,7 +127,7 @@ button{font:inherit;cursor:pointer}
   <button class="pb" id="pCampos">Campos</button>
   <span class="e" id="pEst"></span>
   <button class="pb" id="pRevelar">Revelar</button>
-  <button class="pb" id="pFechar">Fechar marcação</button>
+  <button class="pb" id="pFechar">Fechar as respostas</button>
   <button class="pb p" id="pAtu">Atualizar</button>
 </div>
 
@@ -140,8 +141,9 @@ const TIME=[["Pedro Romero","Wallet & Banking"],["Guilherme Porto","Banking"],
 ["Felipe Cotecchia","Tecnologia"],["Marcel Marques","Design"],["Letícia Ribeiro","Operações"],
 ["Tiago Scrivano","Planejamento"]];
 
-const CAMPOS=[["1","A visão em uma frase"],["2","Três prioridades com indicador"],
-["3","O ROI da IA"],["4","O pedido nominal"],["5","O que para de fazer"],["0","Nenhum — cumpriu os cinco"]];
+const CAMPOS=[["1","A visão da área"],["2","As prioridades com indicador"],
+["3","O ROI da IA"],["4","O pedido a outra área"],["5","O que ele vai parar de fazer"],
+["0","Não faltou nada"]];
 
 const $=s=>document.querySelector(s);
 const esc=t=>String(t==null?"":t).replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
@@ -183,9 +185,9 @@ async function carregarBase(){
 }
 
 function telaNome(){
-  $("#cabT").textContent="Marcação das apresentações";
-  $("#cabP").textContent="Dois toques por apresentação, nos dois minutos de arguição. Dá para mudar de ideia até a nona.";
-  $("#corpo").innerHTML='<div class="eyebrow" style="margin:24px 0 0">Quem está marcando</div>'+
+  $("#cabT").textContent="Duas respostas por apresentação";
+  $("#cabP").textContent="Cada colega apresenta em seis minutos. Nos dois minutos seguintes, você responde duas perguntas aqui. Leva vinte segundos.";
+  $("#corpo").innerHTML='<div class="eyebrow" style="margin:24px 0 0">Quem é você?</div>'+
     '<div class="nomes">'+TIME.map(([n,a])=>'<button data-n="'+esc(n)+'"><span class="ini">'+esc(iniciais(n))+
     '</span><span><span class="n">'+esc(n)+'</span><br><span class="a">'+esc(a)+'</span></span></button>').join("")+'</div>';
   $("#corpo").querySelectorAll("button").forEach(b=>b.onclick=()=>escolher(b.dataset.n));
@@ -198,18 +200,19 @@ async function escolher(n){
 }
 
 function telaLista(){
-  $("#cabT").textContent="As nove apresentações";
-  $("#cabP").textContent="Você é "+autor+". Toque no nome de quem acabou de apresentar.";
+  $("#cabT").textContent="Quem já apresentou";
+  $("#cabP").textContent="Toque no nome de quem acabou de apresentar. Você é "+autor+".";
   const outros=TIME.filter(([n])=>n!==autor);
   const feitos=outros.filter(([n])=>minhas[n]&&minhas[n].escolha).length;
   $("#corpo").innerHTML='<div class="nomes">'+outros.map(([n,a])=>{
       const m=minhas[n]||{};
-      const st = m.escolha ? "marcado" : (prios[n+"|1"] ? "pendente" : "aguardando");
+      const st = m.escolha ? "respondido" : (prios[n+"|1"] ? "responder" : "ainda não apresentou");
       return '<button data-n="'+esc(n)+'"><span class="ini">'+esc(iniciais(n))+'</span>'+
         '<span><span class="n">'+esc(n)+'</span><br><span class="a">'+esc(a)+'</span></span>'+
         '<span class="st'+(m.escolha?" ok":"")+'">'+st+'</span></button>';}).join("")+'</div>'+
-    '<div class="rodape"><span class="est">'+feitos+' de '+outros.length+' marcadas</span>'+
-    '<button class="b g" id="btTrocar">Trocar de nome</button></div>';
+    '<p class="mudo" style="font-size:13.5px;margin:16px 0 0">Pode mudar qualquer resposta até o fim da última apresentação.</p>'+
+    '<div class="rodape"><span class="est">'+feitos+' de '+outros.length+' respondidas</span>'+
+    '<button class="b g" id="btTrocar">Não sou eu</button></div>';
   $("#corpo").querySelectorAll(".nomes button").forEach(b=>b.onclick=()=>telaMarcar(b.dataset.n));
   $("#btTrocar").onclick=()=>{autor=null;localStorage.removeItem("wb2_autor");telaNome();};
   window.scrollTo(0,0);
@@ -221,26 +224,27 @@ function telaMarcar(n){
   $("#cabT").textContent=n;
   $("#cabP").textContent=areaDe(n);
   $("#corpo").innerHTML='<div class="pess">'+
-    '<div class="perg">01 · Que campo ficou incompleto?</div>'+
+    '<div class="perg">1 · Faltou algum dos cinco campos?</div>'+
+    '<div class="sub">Se ele respondeu os cinco, marque a última opção.</div>'+
     '<div class="chips">'+CAMPOS.map(([v,t])=>'<button class="chip'+(String(m.campo)===v?" on":"")+
       '" data-c="'+v+'">'+esc(t)+'</button>').join("")+'</div>'+
-    '<div class="perg">02 · Qual destas três você sustentaria com capacidade da sua área?</div>'+
-    '<div class="sub">Não é qual é mais importante. É qual você banca.</div>'+
+    '<div class="perg">2 · Se sobrasse capacidade na sua área, qual destas três você ajudaria a tirar do papel?</div>'+
+    '<div class="sub">Não é a mais importante. É a que você entraria junto para fazer acontecer.</div>'+
     (tem ? '<div class="opts">'+[1,2,3].map(i=>{
         const t=(prios[n+"|"+i]||"").trim();
         if(!t) return "";
         return '<button class="opt'+(m.escolha===i?" on":"")+'" data-e="'+i+'">'+
                '<span class="num">0'+i+'</span><span class="txt">'+esc(t)+'</span></button>';}).join("")+'</div>'
-        : '<div class="opt vazio">As três prioridades desta área ainda não foram lançadas. Volte em instantes.</div>')+
+        : '<div class="opt vazio">As três prioridades desta área ainda não estão aqui. Volte quando ele terminar de apresentar.</div>')+
     '</div>'+
     '<div class="rodape"><span class="est" id="est"></span>'+
-    '<button class="b p" id="btVolta">Concluir</button></div>';
+    '<button class="b p" id="btVolta">Pronto</button></div>';
 
   const salvar=async()=>{
     $("#est").textContent="salvando…";
     try{ await rpc("wb2_marcar",{p_autor:autor,p_sobre:n,p_campo:minhas[n].campo,p_escolha:minhas[n].escolha});
-         $("#est").textContent="salvo"; }
-    catch(e){ $("#est").textContent=String(e).indexOf("encerrada")>-1?"a marcação foi encerrada":"sem conexão"; }
+         $("#est").textContent="guardado"; }
+    catch(e){ $("#est").textContent=String(e).indexOf("encerrada")>-1?"as respostas já foram fechadas":"sem conexão — tente de novo"; }
   };
   minhas[n]=minhas[n]||{campo:null,escolha:null};
   $("#corpo").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
@@ -267,17 +271,17 @@ async function facilitador(){
     try{ (await rpc("wb2_prios")||[]).forEach(p=>prios[p.sobre+"|"+p.idx]=p.texto);
          marcas=await rpc("wb2_painel",{p_codigo:F})||[];
          const e=await rpc("wb2_estado_sala"); revelado=!!(e&&e[0]&&e[0].revelado); fechado=!!(e&&e[0]&&e[0].fechado);
-         $("#pEst").textContent=marcas.length+" marcações · "+(revelado?"painel revelado":"painel oculto")+(fechado?" · marcação fechada":""); }
+         $("#pEst").textContent=marcas.length+" respostas · "+(revelado?"ranking revelado":"ranking oculto")+(fechado?" · respostas fechadas":""); }
     catch(e){ $("#pEst").textContent="código inválido ou banco não configurado"; }
     $("#pRevelar").textContent = revelado ? "Ocultar" : "Revelar";
-    $("#pFechar").textContent  = fechado  ? "Reabrir marcação" : "Fechar marcação";
+    $("#pFechar").textContent  = fechado  ? "Reabrir as respostas" : "Fechar as respostas";
   }
 
   function telaPrios(){
     aba="prios";
     $("#palcoIn").innerHTML='<div class="eyebrow">Antes e durante as apresentações</div>'+
       '<h2>As três prioridades de cada área</h2>'+
-      '<p class="sub">Lance as três de cada um — do pré-work, ou na hora, enquanto a pessoa apresenta. Sem elas o segundo toque não aparece no celular de ninguém.</p>'+
+      '<p class="sub">Lance as três de cada um — do pré-work, ou na hora, enquanto a pessoa apresenta. Sem elas a segunda pergunta não aparece no celular de ninguém.</p>'+
       '<div id="prios" class="pgrade">'+TIME.map(([n,a])=>
         '<div class="pcard"><h3>'+esc(n)+' <span style="color:#8E9A94;font-weight:400;font-size:13px">· '+esc(a)+'</span></h3>'+
         [1,2,3].map(i=>'<input data-s="'+esc(n)+'" data-i="'+i+'" placeholder="prioridade '+i+'" value="'+
@@ -303,7 +307,7 @@ async function facilitador(){
     }).sort((a,b)=>b.n-a.n || a.sobre.localeCompare(b.sobre));
 
     let h='<div class="eyebrow">O que esta mesa banca</div><h2>As vinte e sete, em ordem</h2>'+
-      '<p class="sub">Cada um escolheu, em cada área ouvida, a prioridade que sustentaria com capacidade da própria. '+marcas.filter(m=>m.escolha).length+' escolhas.</p>';
+      '<p class="sub">Em cada área ouvida, cada um escolheu a prioridade que ajudaria a tirar do papel com capacidade da própria. '+marcas.filter(m=>m.escolha).length+' escolhas.</p>';
     if(!revelado) h+='<p class="sub" style="color:#FFCB3D">Painel oculto para os participantes. Esta é a sua tela — revele só às 10h55.</p>';
     h+='<div class="rank">';
     lista.forEach((l,i)=>{
@@ -325,7 +329,7 @@ async function facilitador(){
     marcas.forEach(m=>{ if(m.campo===null||m.campo===undefined) return;
       (por[m.sobre]=por[m.sobre]||[]).push(m); });
     let h='<div class="eyebrow">O que ficou faltando</div><h2>Campos incompletos, por área</h2>'+
-      '<p class="sub">Marcação nominal: todos veem quem marcou o quê.</p><div class="gradeC">';
+      '<p class="sub">Nominal: todos veem quem apontou o quê.</p><div class="gradeC">';
     TIME.forEach(([n,a])=>{
       const ms=por[n]||[];
       const cont={};
@@ -334,7 +338,7 @@ async function facilitador(){
         .map(([c,q])=>'<div class="l"><b>'+q.length+'</b> · campo '+c+' — '+esc(CAMPOS[c-1][1])+' <span style="opacity:.7">('+esc(q.join(", "))+')</span></div>').join("");
       h+='<div class="cc"><div class="n">'+esc(n)+'</div>'+
          (linhas||'<div class="l">nenhum campo apontado</div>')+
-         '<div class="l" style="opacity:.6">'+ms.length+' de 8 marcaram · '+esc(a)+'</div></div>';
+         '<div class="l" style="opacity:.6">'+ms.length+' de 8 responderam · '+esc(a)+'</div></div>';
     });
     h+='</div>';
     $("#palcoIn").innerHTML=h; window.scrollTo(0,0);
@@ -347,7 +351,7 @@ async function facilitador(){
   $("#pAtu").onclick=async()=>{ $("#pEst").textContent="atualizando…"; await carregar(); desenha(); };
   $("#pRevelar").onclick=async()=>{
     try{ await rpc("wb2_sala",{p_codigo:F,p_revelado:!revelado,p_fechado:fechado}); await carregar(); desenha(); }
-    catch(e){ $("#pEst").textContent="não foi possível mudar o painel"; }
+    catch(e){ $("#pEst").textContent="não foi possível mudar o ranking"; }
   };
   $("#pFechar").onclick=async()=>{
     try{ await rpc("wb2_sala",{p_codigo:F,p_revelado:revelado,p_fechado:!fechado}); await carregar(); desenha(); }
