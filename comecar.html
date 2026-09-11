@@ -248,7 +248,7 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
 (function(){
   'use strict';
   var STORE = 'ncc-workbook-ato1';
-  var VERSAO = '1.6.1';
+  var VERSAO = '1.6.2';
 
   function ler(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
   function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
@@ -365,8 +365,12 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
   }
 
   CAMPOS.forEach(function(par){
+    /* enquanto digita, guarda o que a pessoa escreveu — mexer no campo durante a
+       digitação atrapalha. Ao sair do campo, grava a versão limpa: é ela que o
+       Ato I vai ler, e lá não existe saneador. */
     par[0].addEventListener('input', function(){ estado[par[1]] = par[0].value; render(); });
-    par[0].addEventListener('change', function(){ estado[par[1]] = par[0].value; render(); });
+    par[0].addEventListener('change', function(){ par[0].value = v(par[0]); estado[par[1]] = par[0].value; render(); });
+    par[0].addEventListener('blur', function(){ par[0].value = v(par[0]); estado[par[1]] = par[0].value; render(); });
   });
 
   btnCopiar.addEventListener('click', function(){

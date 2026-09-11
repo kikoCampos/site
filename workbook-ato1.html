@@ -1272,7 +1272,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.1' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.2' };
 var SC_ATO = 1;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -2018,16 +2018,25 @@ function renderEng() {
 }
 
 /* ================= sínteses ================= */
+/* Os rótulos "Declaramos que…" e "Mas na prática…" convidam a repetir o conectivo.
+   A frase é o entregável: ela não pode sair com "que que" nem "na prática na prática". */
+function vGap(k) {
+  var t = v(k);
+  if (k === 'c1_gap_declara')   return t.replace(/^que\s+/i, '').trim();
+  if (k === 'c1_gap_pratica')   return t.replace(/^(mas\s+)?(na\s+pr[áa]tica[,\s]+)?/i, '').trim();
+  if (k === 'c1_gap_evidencia') return t.replace(/^(e\s+)?(eu\s+)?(sei\s+disso\s+)?porque\s+/i, '').trim();
+  return t;
+}
 function atualizarSinteses() {
   renderPacto();
   renderReencontroSintese();
   var g = document.getElementById('gapSintese');
-  if (v('c1_gap_declara') && v('c1_gap_pratica') && v('c1_gap_evidencia')) {
-    g.className = ''; g.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>. E eu sei disso porque ' + v('c1_gap_evidencia') + '.';
+  if (vGap('c1_gap_declara') && vGap('c1_gap_pratica') && vGap('c1_gap_evidencia')) {
+    g.className = ''; g.innerHTML = 'Declaramos que <b>' + vGap('c1_gap_declara') + '</b>, mas na prática <b>' + vGap('c1_gap_pratica') + '</b>. E eu sei disso porque ' + vGap('c1_gap_evidencia') + '.';
     /* a ativação agora mora no laço de evidências — qualquer código serve, não só o 1 */
   }
   /* evidências entregues → código concluído; as quatro → ato concluído */
-  [['_ev1', v('c1_gap_declara') && v('c1_gap_pratica') && v('c1_gap_evidencia')],
+  [['_ev1', vGap('c1_gap_declara') && vGap('c1_gap_pratica') && vGap('c1_gap_evidencia')],
    ['_ev2', (function(){ for (var j = 1; j <= 5; j++) if (v('c2_s' + j) === 'Essência' && v('c2_p' + j) && v('c2_evidencia')) return true; return false; })()],
    ['_ev3', v('c3_alavanca1') && v('c3_evidencia')],
    ['_ev4', v('c4_comportamento') && v('c4_evidencia')]
@@ -2057,7 +2066,7 @@ function atualizarSinteses() {
     c.className = ''; c.innerHTML = 'Nas próximas 4 semanas vou <b>' + v('c4_comportamento') + '</b>. O time vai perceber quando: ' + v('c4_evidencia') + '.' + (v('c4_feedback') ? ' Feedback combinado com: ' + v('c4_feedback') + '.' : '');
   }
   var mg = document.getElementById('mapaGap');
-  if (v('c1_gap_declara') && v('c1_gap_pratica')) { mg.className=''; mg.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>.' + (v('c1_gap_evidencia') ? ' E eu sei disso porque ' + v('c1_gap_evidencia') + '.' : ''); }
+  if (vGap('c1_gap_declara') && vGap('c1_gap_pratica')) { mg.className=''; mg.innerHTML = 'Declaramos que <b>' + vGap('c1_gap_declara') + '</b>, mas na prática <b>' + vGap('c1_gap_pratica') + '</b>.' + (vGap('c1_gap_evidencia') ? ' E eu sei disso porque ' + vGap('c1_gap_evidencia') + '.' : ''); }
   var essencias = [];
   for (var i = 1; i <= 5; i++) { if (v('c2_s' + i) === 'Essência' && v('c2_p' + i)) essencias.push(v('c2_p' + i)); }
   var mp = document.getElementById('mapaPreservar');
@@ -2094,7 +2103,7 @@ function atualizarProgresso() {
 /* ================= brief executivo ================= */
 function coletaBrief() {
   var linhas = [];
-  if (v('c1_gap_declara') && v('c1_gap_pratica')) linhas.push(['Código 1 · Gap nomeado', 'Declaramos que "' + v('c1_gap_declara') + '", mas na prática ' + v('c1_gap_pratica') + '.' + (v('c1_gap_evidencia') ? ' E eu sei disso porque ' + v('c1_gap_evidencia') + '.' : '')]);
+  if (vGap('c1_gap_declara') && vGap('c1_gap_pratica')) linhas.push(['Código 1 · Gap nomeado', 'Declaramos que "' + vGap('c1_gap_declara') + '", mas na prática ' + vGap('c1_gap_pratica') + '.' + (vGap('c1_gap_evidencia') ? ' E eu sei disso porque ' + vGap('c1_gap_evidencia') + '.' : '')]);
   var ess = [];
   for (var i = 1; i <= 5; i++) if (v('c2_s' + i) === 'Essência' && v('c2_p' + i)) ess.push(v('c2_p' + i));
   if (ess.length) linhas.push(['Código 2 · Não-negociáveis (essência)', ess.join(' · ') + (v('c2_evidencia') ? ' — Evidência de valor: ' + v('c2_evidencia') : '')]);
