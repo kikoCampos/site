@@ -61,6 +61,13 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
 .pular-conteudo{position:absolute; left:-9999px; top:0; z-index:200; background:var(--preto); color:#fff;
   font-family:var(--sans); font-weight:900; font-size:13px; padding:12px 18px; text-decoration:none;}
 .pular-conteudo:focus{left:16px; top:16px;}
+/* a chegada de quem veio da porta */
+.vindo-da-porta{border:2px solid var(--azul); border-radius:var(--r-md); background:#f2f8fd;
+  padding:18px 20px; margin:0 0 28px;}
+.vp-tit{font-family:var(--sans); font-weight:900; font-size:15px; color:var(--preto); margin:0 0 6px;}
+.vp-tit span{color:var(--azul);}
+.vp-txt{font-family:var(--sans); font-size:14px; color:var(--cinza); line-height:1.5; margin:0;}
+.vp-acoes{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
 /* ---- o livro saiu do caminho crítico: recolhido, marcado como opcional ---- */
 .opcional-livro{border:1px dashed var(--linha); border-radius:var(--r-sm); margin:0 0 18px; background:transparent;}
 .opcional-livro > summary{cursor:pointer; list-style:none; padding:11px 14px; font-family:var(--sans);
@@ -1272,7 +1279,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.2' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.3' };
 var SC_ATO = 1;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1459,6 +1466,39 @@ function montarRotasDaCapa(){
     faixa.textContent = (lo === hi) ? ('cerca de ' + lo + ' minutos por código') : (lo + ' a ' + hi + ' minutos por código');
   }
   if (typeof atualizaBotaoContinuar === 'function') atualizaBotaoContinuar();
+}
+function boasVindasDaPorta(){
+  var capa = telas[0] && telas[0].querySelector('.pagina');
+  if (!capa || document.getElementById('vindoDaPorta')) return;
+  var prox = null, ordem = Object.keys(telasEvidencia).map(Number).sort(function(a,b){ return a-b; });
+  for (var i = 0; i < ordem.length; i++) { var c = telasEvidencia[ordem[i]]; if (!estado['_ev'+c]) { prox = { cod: c, tela: ordem[i] }; break; } }
+  var feitas = Object.values(telasEvidencia).filter(function(c){ return estado['_ev'+c]; }).length;
+  var total = Object.keys(telasEvidencia).length;
+  var cx = document.createElement('div');
+  cx.id = 'vindoDaPorta';
+  cx.className = 'vindo-da-porta';
+  var faltam = total - feitas;
+  cx.innerHTML = '<p class="vp-tit"><span aria-hidden="true">✓</span> Sua frase está guardada aqui.</p>' +
+    '<p class="vp-txt">Você fechou o <b>Código ' + (Object.values(telasEvidencia)[0]) + '</b> na página anterior — ele é o primeiro dos ' + total +
+    ' deste Ato. ' + (faltam ? 'Faltam ' + faltam + (faltam === 1 ? '.' : '.') : 'Você fechou todos.') + '</p>';
+  var linha = document.createElement('div');
+  linha.className = 'vp-acoes';
+  if (prox) {
+    var b1 = document.createElement('button');
+    b1.type = 'button'; b1.className = 'acao';
+    b1.style.cssText = 'background:var(--azul); border-color:var(--azul);';
+    b1.textContent = 'Ir para o Código ' + prox.cod + ' · ' + ((typeof MIN_CODIGO === 'object' && MIN_CODIGO[prox.cod]) || 7) + ' min →';
+    b1.addEventListener('click', function(){ evento('sc_next_act_intent', { act_number: 1, via: 'porta_capa' }); irPara(prox.tela - 2 >= 0 ? prox.tela - 2 : prox.tela); });
+    linha.appendChild(b1);
+  }
+  var b2 = document.createElement('button');
+  b2.type = 'button'; b2.className = 'acao vazado';
+  b2.textContent = 'Rever a minha frase';
+  b2.addEventListener('click', function(){ irPara(Object.keys(telasEvidencia).map(Number).sort(function(a,b){return a-b;})[0]); });
+  linha.appendChild(b2);
+  cx.appendChild(linha);
+  capa.insertBefore(cx, capa.firstChild);
+  evento('sc_porta_chegada');
 }
 montarRotasDaCapa();
 
@@ -2875,6 +2915,9 @@ if (estado._tela && estado._tela > 0) {
 }
 /* deep-link do hub: /workbook-ato1.html#continuar */
 if (location.hash === '#continuar' && estado._tela > 0) { evento('sc_resume_clicked', { via: 'hub' }); irPara(estado._tela, true); }
+/* chegada da porta: fica na capa e mostra o que já foi feito. Quem vem de lá nunca
+   viu este documento — precisa do mapa antes do mergulho. */
+if (location.hash === '#daporta' || estado._veioDaPorta) { boasVindasDaPorta(); }
 </script>
 </body>
 </html>

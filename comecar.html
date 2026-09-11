@@ -221,7 +221,7 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
       <li><b>Consistência · práticas 10 a 15</b><span>Como medir, virar rotina e passar adiante, para nada morrer junto com o entusiasmo do começo.</span></li>
     </ul>
     <div class="acoes" style="margin-top:var(--e-5);">
-      <a class="btn" id="btnContinuar" href="/workbook-ato1.html#continuar">Continuar — o próximo leva 7 minutos</a>
+      <a class="btn" id="btnContinuar" href="/workbook-ato1.html#daporta">Continuar — o próximo leva 7 minutos</a>
       <a class="btn vazado" id="btnHub" href="/seucodigo/">Ver os 15 antes de decidir</a>
     </div>
 
@@ -248,7 +248,7 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
 (function(){
   'use strict';
   var STORE = 'ncc-workbook-ato1';
-  var VERSAO = '1.6.2';
+  var VERSAO = '1.6.3';
 
   function ler(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
   function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
@@ -395,7 +395,9 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
   }
 
   document.getElementById('btnContinuar').addEventListener('click', function(){
-    estado._tela = 4; salvar();
+    /* guarda onde a frase está, mas a chegada é pela capa: cair na tela 4 de 16
+       sem ter visto as três anteriores desorienta, e o Voltar leva a tela nenhuma. */
+    estado._tela = 4; estado._veioDaPorta = true; salvar();
     scSet('seucodigo_last_location', { url: '/workbook-ato1.html', ts: Date.now() });
     evento('sc_next_act_intent', { act_number: 1, via: 'porta' });
   });
