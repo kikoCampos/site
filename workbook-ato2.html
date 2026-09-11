@@ -57,6 +57,22 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
 .pular-conteudo{position:absolute; left:-9999px; top:0; z-index:200; background:var(--preto); color:#fff;
   font-family:var(--sans); font-weight:900; font-size:13px; padding:12px 18px; text-decoration:none;}
 .pular-conteudo:focus{left:16px; top:16px;}
+/* ---- o livro saiu do caminho crítico: recolhido, marcado como opcional ---- */
+.opcional-livro{border:1px dashed var(--linha); border-radius:var(--r-sm); margin:0 0 18px; background:transparent;}
+.opcional-livro > summary{cursor:pointer; list-style:none; padding:11px 14px; font-family:var(--sans);
+  font-size:13px; color:var(--cinza); display:flex; gap:10px; align-items:center; justify-content:space-between;}
+.opcional-livro > summary::-webkit-details-marker{display:none;}
+.opcional-livro > summary b{font-weight:700; color:var(--preto);}
+.opcional-livro > summary .marca{font-weight:900; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--cinza); border:1px solid var(--linha); border-radius:999px; padding:3px 9px; flex-shrink:0;}
+.opcional-livro[open] > summary{border-bottom:1px dashed var(--linha);}
+.opcional-livro > .chave, .opcional-livro > .missao{margin:0; border:0;}
+
+/* ---- uma linha dizendo o que se faz nesta tela ---- */
+.orienta{font-family:var(--sans); font-size:13.5px; line-height:1.5; color:var(--cinza);
+  border-left:3px solid var(--azul); padding:2px 0 2px 12px; margin:0 0 20px; max-width:60ch;}
+.orienta b{color:var(--preto); font-weight:700;}
+
 .selo-essencial{font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
   background:var(--azul); color:#fff; padding:5px 12px; margin-bottom:6px; display:block;}
 .barra-desfazer{position:fixed; left:16px; right:16px; bottom:16px; max-width:640px; margin:0 auto; z-index:90;
@@ -1206,7 +1222,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.5.5' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.0' };
 var SC_ATO = 2;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1530,9 +1546,9 @@ function abrirTrava(n) {
      transforma um aviso em convite. */
   var info = (typeof infoEvidencia === 'function') ? infoEvidencia(n) : { nome: '', tempo: '', numero: '' };
   var tit = document.getElementById('travaTitulo');
-  if (tit) tit.textContent = info.nome
-    ? 'Falta uma coisa só: ' + info.nome.charAt(0).toLowerCase() + info.nome.slice(1)
-    : 'Falta a sua evidência';
+  /* travessão em vez de dois-pontos: vários exercícios já têm um no nome
+     ("Triagem: sua lista de não-negociáveis"), e "só: triagem:" fica ilegível. */
+  if (tit) tit.textContent = info.nome ? 'Falta uma coisa só — ' + info.nome : 'Falta a sua evidência';
   var quanto = info.tempo ? ' Cerca de ' + info.tempo.toLowerCase().replace(/\bmin\b/, 'minutos') + '.' : '';
   document.getElementById('travaTexto').innerHTML =
     'É o que você leva do <b>Código ' + n + '</b> — o resto foi preparação.' + quanto;
@@ -1570,9 +1586,7 @@ function renderNav() {
     }
     if (!prox) return 'ato completo ✓';
     var ip = (typeof infoEvidencia === 'function') ? infoEvidencia(prox) : { nome: '' };
-    return ip.nome
-      ? 'próximo: ' + ip.nome.charAt(0).toLowerCase() + ip.nome.slice(1)
-      : 'próximo: Código ' + prox;
+    return ip.nome ? 'a seguir — ' + ip.nome : 'a seguir — Código ' + prox;
   })();
   document.getElementById('btnVoltar').disabled = (proximaTela(-1) === -1);
   var av = document.getElementById('btnAvancar');
@@ -2825,6 +2839,90 @@ function simFinalizar() {
   var n = ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15'].filter(function(k){ return a3[k]; }).length;
   if (n) t.textContent = 'III · Consistência ' + n + '/6';
   if ((a3._tela || 0) > 0) t.href = '/workbook-ato3.html#continuar';
+})();
+
+
+/* ================= o livro, fora do caminho crítico ================= */
+/* Os testadores disseram que depender do livro complicava. A chave e a missão
+   continuam inteiras — recolhidas, nomeadas como opcionais e fora do caminho de
+   quem não está com o exemplar na mão. Nenhuma evidência dependia delas. */
+(function(){
+  function capitulo(el){
+    var sec = el.closest('.etapa');
+    var g = sec ? (sec.getAttribute('data-grupo') || '') : '';
+    var m = g.match(/Código\s*(\d+)/);        /* código N = capítulo N, no livro inteiro */
+    if (m) return m[1];
+    m = (el.textContent || '').match(/Cap[íi]tulo\s*(\d+)/);
+    return m ? m[1] : null;
+  }
+  function recolher(el, rotulo){
+    if (!el || !el.parentNode || el.closest('details')) return;
+    var det = document.createElement('details');
+    det.className = 'opcional-livro';
+    var sum = document.createElement('summary');
+    var cap = capitulo(el);
+    sum.innerHTML = '<span>' + rotulo(cap) + '</span> <span class="marca">opcional</span>';
+    el.parentNode.insertBefore(det, el);
+    det.appendChild(sum);
+    det.appendChild(el);
+    det.addEventListener('toggle', function(){ if (det.open) evento('sc_livro_aberto'); });
+  }
+  document.querySelectorAll('.chave').forEach(function(el){
+    if (!el.querySelector('.chave-input')) return;
+    recolher(el, function(cap){
+      return cap ? '<b>Está com o livro?</b> Tem uma chave do Capítulo ' + cap + ' aqui.'
+                 : '<b>Está com o livro?</b> Tem uma chave do capítulo aqui.';
+    });
+  });
+  document.querySelectorAll('.missao').forEach(function(el){
+    recolher(el, function(cap){
+      return cap ? '<b>Missão no livro:</b> uma marca na margem do Capítulo ' + cap + '.'
+                 : '<b>Missão no livro:</b> uma marca na margem, com a caneta na mão.';
+    });
+  });
+  /* a chave preenchida ou já respondida abre sozinha — ninguém perde o que escreveu */
+  document.querySelectorAll('.opcional-livro').forEach(function(det){
+    var campo = det.querySelector('[data-save]');
+    if (campo && (campo.value || '').trim()) det.open = true;
+  });
+})();
+
+/* ================= uma linha por tela: o que se faz aqui ================= */
+/* "Falta um onboarding por cada etapa" foi o segundo item do feedback.
+   Não é um tour: é uma frase no topo dizendo o que a tela pede e o que ela devolve. */
+(function(){
+  function linha(tela){
+    var t = tela.getAttribute('data-titulo') || '';
+    var g = tela.getAttribute('data-grupo') || '';
+    var cod = (g.match(/Código\s*(\d+)/) || [])[1];
+    if (t === 'Capa') return null;
+    if (t === 'Ponto de partida') return tela.querySelector('#rotas')
+      ? 'Duas escolhas rápidas e você entra no primeiro código. Nada aqui é definitivo — dá para mudar depois.'
+      : 'Uma linha e você entra no primeiro código. Nada aqui é definitivo — dá para mudar depois.';
+    if (t === 'Prepare o olhar') return 'Vídeos para aprofundar, todos <b>opcionais</b>. O exercício que fecha o código está na próxima tela.';
+    if (t === 'Pratique') return 'Aquecimento. Aqui você <b>erra de graça</b> — é exatamente para isso que esta tela existe.';
+    if (t === 'Ensaie no simulador') return 'Um ensaio da conversa, em cenas. <b>Errar aqui não custa nada</b> — é o único lugar em que isso é verdade.';
+    if (t === 'Monte seu ciclo') return 'A tela que fecha o Código ' + (cod || '11') + ': você monta a cadência que vai sustentar todo o resto.';
+    if (t === 'Aplique e evidencie') return 'A tela que <b>fecha o Código ' + (cod || '') + '</b>. É daqui que sai a sua evidência — o resto foi preparação.';
+    if (g.indexOf('Recapitulação') === 0) return 'O retrato do que você registrou, em uma página. Nada de novo para preencher — refaça o termômetro só se quiser comparar com o começo.';
+    if (g.indexOf('Reencontro') === 0) {
+      var d = (g.match(/(\d+)\s*dias/) || [])[1] || '30';
+      return 'Esta tela é para daqui a ' + d + ' dias. Se você acabou de chegar, <b>agende e volte</b> — é o reencontro que transforma registro em prática.';
+    }
+    return null;
+  }
+  telas.forEach(function(tela){
+    var txt = linha(tela);
+    if (!txt) return;
+    var pag = tela.querySelector('.pagina');
+    if (!pag || pag.querySelector('.orienta')) return;
+    var p = document.createElement('p');
+    p.className = 'orienta';
+    p.innerHTML = txt;
+    var chip = pag.querySelector('.chip');
+    if (chip && chip.nextSibling) pag.insertBefore(p, chip.nextSibling);
+    else pag.insertBefore(p, pag.firstChild);
+  });
 })();
 
 /* ================= init ================= */
