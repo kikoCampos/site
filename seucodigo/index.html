@@ -26,8 +26,12 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
     var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:11px 18px;font:700 13px Lato,sans-serif;cursor:pointer';
     var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#1f6aa6;color:#fff;border:0;padding:11px 20px;font:900 13px Lato,sans-serif;cursor:pointer';
     g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
-    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
-    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
+    /* o banner é fixo no rodapé: sem folga, ele cobre o último campo da página */
+    var folga=function(){document.body.style.paddingBottom=(b.offsetHeight+32)+'px';};
+    folga(); window.addEventListener('resize',folga);
+    var limpa=function(){document.body.style.paddingBottom='';window.removeEventListener('resize',folga);};
+    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();limpa();};
+    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();limpa();};
   });
 }catch(e){}})();
 </script>
@@ -293,7 +297,7 @@ button.acao:active{transform:translateY(1px);}
     <aside class="painel" aria-labelledby="painelPratica">
       <span class="onde" id="painelOnde">Primeiro acesso</span>
       <p class="rot" id="painelRot">Próxima prática</p>
-      <p class="pratica" id="painelPratica">Gap nomeado</p>
+      <p class="pratica" id="painelPratica">Incoerência nomeada</p>
       <p class="benef" id="painelBenef">Separe o que vocês declaram do que de fato praticam.</p>
       <p class="tempo" id="painelTempo">≈ 8 minutos</p>
       <a class="principal" id="painelCta" href="/workbook-ato1.html">Começar minha prática →</a>
@@ -349,7 +353,7 @@ button.acao:active{transform:translateY(1px);}
 
     <div class="bloco">
       <h2 class="secao">Mais do ecossistema</h2>
-      <p class="volta"><a href="/comecar.html">Nomear meu gap em 3 min →</a> <a href="/livro.html">Conhecer o livro →</a> <a href="/index.html">kikocampos.com →</a></p>
+      <p class="volta"><a href="/comecar.html">Nomear a incoerência da minha empresa →</a> <a href="/livro.html">Conhecer o livro →</a> <a href="/index.html">kikocampos.com →</a></p>
     </div>
 
   </div>
@@ -359,7 +363,7 @@ button.acao:active{transform:translateY(1px);}
 <div class="pe">SEU CÓDIGO · O NOVO CÓDIGO DA MUDANÇA — TODA MUDANÇA É <b>HUMANA</b></div>
 
 <script>
-var SC_CONFIG = { accessMode: 'open', platformVersion: '1.6.0' };
+var SC_CONFIG = { accessMode: 'open', platformVersion: '1.6.1' };
 var CHAVES = ['ncc-workbook-ato1', 'ncc-workbook-ato2', 'ncc-workbook-ato3'];
 function carrega(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
 function v(o,k){ return (o[k] || '').toString().trim(); }
@@ -470,7 +474,7 @@ var totalEv = A[0].n + A[1].n + A[2].n;
 
 /* nome, benefício e duração de cada prática — o que cria intenção antes do clique */
 var PRAT = {
-  1:  ['Gap nomeado', 'Separe o que vocês declaram do que de fato praticam.', 8],
+  1:  ['Incoerência nomeada', 'Separe o que vocês declaram do que de fato praticam.', 8],
   2:  ['Não-negociáveis', 'Escolha o que precisa sobreviver a qualquer mudança.', 7],
   3:  ['Alavancas do sistema', 'Ache os dois pontos onde o seu esforço rende mais.', 8],
   4:  ['Compromisso de sombra', 'Nomeie um comportamento seu que trava o time.', 6],
@@ -561,7 +565,7 @@ function alternarRespostas(){
      minutos. Quem nunca registrou nada vê a porta; quem já tem evidência, o painel normal. */
   if (nunca && !tudoCompleto) {
     rot.textContent = 'Comece por aqui';
-    prat.textContent = 'Nomeie o gap da sua cultura';
+    prat.textContent = 'Nomeie a incoerência da sua cultura';
     benef.textContent = 'Três campos e você sai com uma frase pronta para a próxima reunião de liderança. Sem cadastro, sem o livro na mão.';
     tempo.textContent = '3 minutos';
     cta.innerHTML = 'Começar em 3 minutos <span aria-hidden="true">→</span>';
@@ -670,7 +674,7 @@ function irCodigo(n){
   var ess = [];
   for (var i = 1; i <= 5; i++) { if (v(a1,'c2_s' + i) === 'Essência' && v(a1,'c2_p' + i)) ess.push(v(a1,'c2_p' + i)); }
   var CODIGOS = [
-    [0, 1, 'Gap nomeado', (w(a1,'c1_gap_declara') && w(a1,'c1_gap_pratica')) ? 'Declaramos que <b>' + esc(w(a1,'c1_gap_declara')) + '</b>, mas na prática <b>' + esc(w(a1,'c1_gap_pratica')) + '</b>.' : '', 'exercício 1.4'],
+    [0, 1, 'Incoerência nomeada', (w(a1,'c1_gap_declara') && w(a1,'c1_gap_pratica')) ? 'Declaramos que <b>' + esc(w(a1,'c1_gap_declara')) + '</b>, mas na prática <b>' + esc(w(a1,'c1_gap_pratica')) + '</b>.' : '', 'exercício 1.4'],
     [0, 2, 'Não-negociáveis', ess.length ? '<b>' + esc(ess.join(' · ')) + '</b>' : '', 'triagem 2.3'],
     [0, 3, 'Alavancas do sistema', (w(a1,'c3_alavanca1') || w(a1,'c3_alavanca2')) ? [w(a1,'c3_alavanca1'), w(a1,'c3_alavanca2')].filter(Boolean).map(function(x){ return '• ' + esc(x); }).join('<br>') : '', 'exercício 3.4'],
     [0, 4, 'Compromisso de sombra', w(a1,'c4_comportamento') ? '<b>' + esc(w(a1,'c4_comportamento')) + '</b>' : '', 'compromisso 4.4'],
