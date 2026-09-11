@@ -26,8 +26,12 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
     var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:8px 16px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
     var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:8px 18px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
     g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
-    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
-    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
+    /* o banner é fixo no rodapé: sem folga, ele cobre o último campo da página */
+    var folga=function(){document.body.style.paddingBottom=(b.offsetHeight+32)+'px';};
+    folga(); window.addEventListener('resize',folga);
+    var limpa=function(){document.body.style.paddingBottom='';window.removeEventListener('resize',folga);};
+    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();limpa();};
+    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();limpa();};
   });
 }catch(e){}})();
 </script>
@@ -98,7 +102,9 @@ body{font-family:var(--serif); color:var(--preto); background:var(--branco); lin
 .topo .marca:hover b{color:#ffffff;}
 .trilho{flex:1; height:5px; background:#332f30; overflow:hidden;}
 .trilho .fill{height:100%; width:0%; background:#5cb3f0; transition:width .6s ease;}
-.pct{font-weight:900; font-size:12px; min-width:38px; text-align:right; color:#ffffff;}
+.pct{font-weight:900; font-size:12px; min-width:38px; text-align:right; color:#ffffff; white-space:nowrap;}
+.pct .rot{font-weight:700; opacity:.72;}
+@media(max-width:620px){ .pct .rot{display:none;} }
 .atos-nav{display:flex; gap:4px; font-family:var(--sans); flex-shrink:0;}
 .ato-tab{font-weight:900; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; padding:8px 12px;
   border:1px solid #3a3739; color:#b9b6b7; text-decoration:none; white-space:nowrap;}
@@ -582,7 +588,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"A luz do sol é o melhor dos desinfetantes."</p>
       <div class="credito">Louis Brandeis | Other People's Money (1914)</div>
     </div>
@@ -648,7 +654,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 10 · Meça para manter vivo">
   <div class="pagina">
-    <span class="chip vermelho">Código 10 · Campo real</span>
+    <span class="chip vermelho">Código 10 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>No Capítulo 10, <b>circule os drivers culturais</b> (clareza, confiança, reconhecimento, colaboração, desenvolvimento, segurança, pertencimento) e marque o que apareceu com mais força na sua última escuta. Esse é o seu campo de medição.</p>
@@ -656,7 +662,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao10" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>10.2 · Seu indicador vivo</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>10.2 · Seu indicador vivo</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Um indicador só está vivo quando alguém age por causa dele.</p>
         <label class="campo">Que indicador mostrará se a sua mudança está viva?<small>Pode ser comportamental ("conflitos resolvidos sem escalar"), não só numérico.</small></label>
@@ -702,7 +708,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Você não se eleva ao nível dos seus objetivos; você cai ao nível dos seus sistemas."</p>
       <div class="credito">James Clear | Hábitos Atômicos</div>
     </div>
@@ -762,7 +768,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       </div>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>11.2 · A microvitória</h3><span class="tempo">~5 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>11.2 · A microvitória</h3><span class="tempo">~5 MIN</span></div>
       <div class="corpo">
         <label class="campo">Complete: "Em 90 dias, as pessoas perceberão que…"</label>
         <input type="text" data-save="c11_microvitoria" data-prog="1" placeholder="ex.: as decisões entre áreas saem na própria reunião">
@@ -790,7 +796,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Ninguém sabe tudo, ninguém ignora tudo; por isso aprendemos sempre."</p>
       <div class="credito">Paulo Freire</div>
     </div>
@@ -875,7 +881,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 12 · Aprenda todos os dias">
   <div class="pagina">
-    <span class="chip vermelho">Código 12 · Campo real</span>
+    <span class="chip vermelho">Código 12 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>Releia <i>Certificado não é sinônimo de competência</i>. Na margem, <b>escreva a última coisa que você aprendeu de verdade no trabalho</b> — e como aprendeu. Aposto que não foi num curso.</p>
@@ -883,7 +889,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao12" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>12.3 · Seu 70-20-10</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>12.3 · Seu 70-20-10</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <label class="campo">Competência crítica dos próximos 90 dias</label>
         <input type="text" data-save="c12_competencia" data-prog="1" placeholder="ex.: conduzir conversas difíceis sem adiar">
@@ -919,7 +925,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Sobre a insensatez de recompensar A esperando B."</p>
       <div class="credito">Steven Kerr | Academy of Management Journal (1975)</div>
     </div>
@@ -999,7 +1005,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 13 · Alinhe os sistemas que reforçam">
   <div class="pagina">
-    <span class="chip vermelho">Código 13 · Campo real</span>
+    <span class="chip vermelho">Código 13 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>No Capítulo 13, <b>sublinhe a frase sobre as exceções</b> ("as exceções escrevem a política real"). Na margem, escreva a última exceção que a sua organização abriu — e o que ela ensinou a quem observou.</p>
@@ -1007,7 +1013,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao13" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>13.3 · Uma decisão com critério explícito</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>13.3 · Uma decisão com critério explícito</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Escolha uma decisão real dos próximos 90 dias: contratação, avaliação, reconhecimento, promoção ou sucessão.</p>
         <label class="campo">A decisão</label>
@@ -1044,7 +1050,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Liberdade e responsabilidade andam juntas."</p>
       <div class="credito">Reed Hastings | A Regra é Não Ter Regras</div>
     </div>
@@ -1105,7 +1111,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       </div>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>14.2 · Onde a cultura está vazando</h3><span class="tempo">~10 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Na sua empresa</span><h3>14.2 · Onde a cultura está vazando</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Liste os mecanismos que hoje sustentam a cultura (reuniões, fóruns, multiplicadores, comunicações, ritos, indicadores) e ache o furo.</p>
         <label class="campo">Qual é o principal ponto de vazamento?</label>
@@ -1126,9 +1132,9 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 14 · Construa a governança que dá autonomia">
   <div class="pagina">
-    <span class="chip vermelho">Código 14 · Campo real</span>
+    <span class="chip vermelho">Código 14 · Na sua empresa</span>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>14.3 · Contrato de delegação em cinco linhas</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>14.3 · Contrato de delegação em cinco linhas</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Autonomia não se anuncia: se contrata. Escreva o seu para uma decisão recorrente.</p>
         <label class="campo">1 · Que decisão passa a ser de quem?</label>
@@ -1165,7 +1171,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Plante árvores sob cuja sombra você não espera se sentar."</p>
       <div class="credito">atribuída a Nelson Henderson</div>
     </div>
@@ -1243,7 +1249,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 15 · Estruture seu legado">
   <div class="pagina">
-    <span class="chip vermelho">Código 15 · Campo real</span>
+    <span class="chip vermelho">Código 15 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>Nas últimas páginas do livro, <b>escreva o seu nome e a data</b> ao lado da pergunta do legado. Daqui a um ano, releia. O livro vira o registro do compromisso que você assumiu hoje.</p>
@@ -1251,7 +1257,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao15" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>15.3 · Seu legado e o próximo ciclo</h3><span class="tempo">~20 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>15.3 · Seu legado e o próximo ciclo</h3><span class="tempo">~20 MIN</span></div>
       <div class="corpo">
         <label class="campo">O que continua funcionando se você sair amanhã?<small>Se a resposta for "nada", este é o trabalho dos próximos 90 dias.</small></label>
         <textarea data-save="c15_continua" data-prog="1"></textarea>
@@ -1395,7 +1401,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.0' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.1' };
 var SC_ATO = 3;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -2311,7 +2317,7 @@ function atualizarProgresso() {
   /* na interface, o que conta são as evidências — a % fica interna (GA/hub) */
   var nEv = ['_ev10','_ev11','_ev12','_ev13','_ev14','_ev15'].filter(function(k){ return estado[k]; }).length;
   document.getElementById('progressoFill').style.width = (nEv / 6 * 100) + '%';
-  document.getElementById('progressoPct').textContent = nEv + '/6';
+  document.getElementById('progressoPct').innerHTML = nEv + '/6<span class="rot"> evidências</span>';
   document.getElementById('progressoPct').setAttribute('title', nEv + ' de 6 evidências concluídas');
   if (estado._progresso !== p) {
     estado._progresso = p;
@@ -2328,7 +2334,7 @@ function coletaBrief() {
 
 function gerarBrief() {
   var linhas = coletaBrief();
-  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" para gerar a sua página.'); return; }
+  if (!linhas.length) { alert('Complete pelo menos um exercício marcado como "O que você leva daqui" para gerar a sua página.'); return; }
   evento('sc_brief_generated', { act_number: SC_ATO });
   var ATOS = {
     1: { rom: 'I',   nome: 'Consciência',  arq: 'consciencia',  faixa: 'Códigos 1 a 4',   total: 4 },
@@ -2424,7 +2430,7 @@ function gerarBrief() {
 }
 function enviarEmail() {
   var linhas = coletaBrief();
-  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" antes de enviar.'); return; }
+  if (!linhas.length) { alert('Complete pelo menos um exercício marcado como "O que você leva daqui" antes de enviar.'); return; }
   var corpo = 'O CÓDIGO DO LEITOR\nO Novo Código da Mudança · Seu Código\n\n';
   linhas.forEach(function(l){ corpo += l[0].toUpperCase() + '\n' + l[1] + '\n\n'; });
   corpo += 'Reencontro em 30 dias: a evidência apareceu?\nToda mudança é humana.';

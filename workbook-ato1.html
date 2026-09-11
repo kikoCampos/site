@@ -26,8 +26,12 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
     var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:8px 16px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
     var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:8px 18px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
     g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
-    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
-    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
+    /* o banner é fixo no rodapé: sem folga, ele cobre o último campo da página */
+    var folga=function(){document.body.style.paddingBottom=(b.offsetHeight+32)+'px';};
+    folga(); window.addEventListener('resize',folga);
+    var limpa=function(){document.body.style.paddingBottom='';window.removeEventListener('resize',folga);};
+    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();limpa();};
+    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();limpa();};
   });
 }catch(e){}})();
 </script>
@@ -98,7 +102,9 @@ body{font-family:var(--serif); color:var(--preto); background:var(--branco); lin
 .topo .marca:hover b{color:#ffffff;}
 .trilho{flex:1; height:5px; background:#332f30; overflow:hidden;}
 .trilho .fill{height:100%; width:0%; background:#5cb3f0; transition:width .6s ease;}
-.pct{font-weight:900; font-size:12px; min-width:38px; text-align:right; color:#ffffff;}
+.pct{font-weight:900; font-size:12px; min-width:38px; text-align:right; color:#ffffff; white-space:nowrap;}
+.pct .rot{font-weight:700; opacity:.72;}
+@media(max-width:620px){ .pct .rot{display:none;} }
 .atos-nav{display:flex; gap:4px; font-family:var(--sans); flex-shrink:0;}
 .ato-tab{font-weight:900; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; padding:8px 12px;
   border:1px solid #3a3739; color:#b9b6b7; text-decoration:none; white-space:nowrap;}
@@ -542,7 +548,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <div class="botoes">
         <button class="acao" style="background:var(--azul); border-color:var(--azul);" onclick="estado.modo='completo'; irPara(1)">Começar meu diagnóstico →</button>
         <button class="acao vazado" id="btnContinuar" style="display:none;" onclick="continuar()">Continuar de onde parei</button>
-        <button class="acao vazado" id="btnAtalho" onclick="modoEssencial()">Sem tempo? Nomeie seu gap em 10 min →</button>
+        <button class="acao vazado" id="btnAtalho" onclick="modoEssencial()">Nomeie sua incoerência em 8 minutos →</button>
       </div>
       <p style="font-family:var(--sans); font-size:12px; color:var(--cinza);">Comece com um desafio real. Faça o <b>essencial em <span id="faixaTempo">6 a 12 minutos por código</span></b> — ou aprofunde no seu ritmo com vídeos e exercícios adicionais. Suas respostas ficam neste navegador.</p>
       <p id="retornoAviso" style="display:none; font-family:var(--sans); font-size:14px; font-weight:700; color:var(--azul); max-width:520px;"></p>
@@ -599,7 +605,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Confronte os fatos brutais da realidade."</p>
       <div class="credito">Jim Collins | Good to Great</div>
     </div>
@@ -607,7 +613,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
     <div class="objetivos">
       <div class="obj"><span class="num">①</span><p><b>Distinguir</b> cultura oficial de cultura real — e narrativa de evidência.</p></div>
       <div class="obj"><span class="num">②</span><p><b>Triangular</b> as 4 fontes: o que a empresa diz, mede, faz e tolera.</p></div>
-      <div class="obj"><span class="num">③</span><p><b>Nomear</b> o gap declarado × praticado com uma evidência concreta.</p></div>
+      <div class="obj"><span class="num">③</span><p><b>Nomear</b> a distância entre o que se declara e o que se pratica, com um fato que a sustenta.</p></div>
     </div>
     <h2 class="secao">Prepare o olhar</h2>
     <div class="videos">
@@ -666,7 +672,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
         <div class="quiz-item" data-q="q11d">
           <p class="afirmacao">"80% do tempo das nossas reuniões trata de metas internas, não de cliente."</p>
           <div class="quiz-op"><button data-v="evidencia">Evidência</button><button data-v="narrativa">Narrativa</button></div>
-          <p class="quiz-fb"><b>Evidência.</b> Observável e contável. Se o discurso é "cliente no centro", este dado nomeia o gap com precisão.</p>
+          <p class="quiz-fb"><b>Evidência.</b> Observável e contável. Se o discurso é "cliente no centro", este dado nomeia a incoerência com precisão.</p>
         </div>
       </div>
     </div>
@@ -691,7 +697,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 1 · Diagnostique sem ilusões">
   <div class="pagina">
-    <span class="chip vermelho">Código 1 · Campo real</span>
+    <span class="chip vermelho">Código 1 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>Volte à lista de incoerências do Capítulo 1 ("Dizemos colaboração, mas premiamos heróis…") e <b>sublinhe a que mais parece com a sua empresa</b>. Na margem, escreva: <b>ONDE ISSO ACONTECE</b> — e o nome da reunião, do ritual ou da decisão em que você a viu pela última vez.</p>
@@ -701,7 +707,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
     <p id="seloEssencial" style="display:none; font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.14em; text-transform:uppercase; background:var(--azul); color:#fff; padding:5px 12px; margin-bottom:6px;">Modo essencial · ≈10 min — o exercício 1.4 é o que importa agora</p>
     <details id="aprofundamento13" class="exercicio" style="padding:0;">
       <summary style="cursor:pointer; padding:12px 20px; background:var(--preto); color:var(--branco); font-family:var(--sans); font-weight:900; font-size:13px; text-transform:uppercase; letter-spacing:.04em;">1.3 · As quatro fontes de evidência — aprofundamento (~20 min)</summary>
-      <div class="cabeca" style="display:none;"><span class="tag campo-real">Campo real</span><h3>1.3</h3></div>
+      <div class="cabeca" style="display:none;"><span class="tag campo-real">Na sua empresa</span><h3>1.3</h3></div>
       <div class="corpo">
         <p class="instrucao">Escolha um valor que a sua organização declara como importante e triangule. Quando as quatro fontes apontam para o mesmo lugar, você não tem opiniões — tem evidências.</p>
         <label class="campo">Valor ou comportamento declarado<small>Ex.: colaboração, cliente no centro, inovação, segurança, diversidade…</small></label>
@@ -717,14 +723,14 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       </div>
     </details>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>1.4 · Nomeie o gap em uma frase</h3><span class="tempo">~10 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>1.4 · Nomeie a incoerência em uma frase</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
-        <p class="instrucao">Esta é a evidência de funcionamento do Código 1: o gap entre cultura declarada e praticada, nomeado com lastro concreto.</p>
+        <p class="instrucao">É o que você leva do Código 1: a distância entre o que a empresa diz e o que ela faz, dita em uma frase — com um fato que a sustenta.</p>
         <label class="campo">Declaramos que…</label>
         <input type="text" data-save="c1_gap_declara" data-prog="1" placeholder="ex.: somos colaborativos">
         <label class="campo">Mas na prática…</label>
         <input type="text" data-save="c1_gap_pratica" data-prog="1" placeholder="ex.: premiamos heróis individuais e disputas internas">
-        <label class="campo">Evidência concreta que sustenta esse diagnóstico</label>
+        <label class="campo">E eu sei disso porque…<small>Um fato que outra pessoa também viu. Uma promoção, uma decisão, uma reunião.</small></label>
         <input type="text" data-save="c1_gap_evidencia" data-prog="1" placeholder="ex.: os 3 últimos promovidos venceram disputas, não construíram pontes">
         <div class="sintese"><div class="rotulo">Seu diagnóstico em uma frase</div><p id="gapSintese" class="vazio">Preencha os três campos acima e sua frase-diagnóstico aparece aqui.</p></div>
         <div id="capturaAto2" style="display:none; background:var(--cinza-claro); border-left:4px solid var(--azul); padding:18px 20px; margin:16px 0; font-family:var(--sans);">
@@ -763,7 +769,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Preserve o núcleo, estimule o progresso."</p>
       <div class="credito">Collins &amp; Porras | Feitas para Durar</div>
     </div>
@@ -848,7 +854,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 2 · Descubra o que preservar">
   <div class="pagina">
-    <span class="chip vermelho">Código 2 · Campo real</span>
+    <span class="chip vermelho">Código 2 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p><b>Dobre o canto da página</b> do Capítulo 2 em que aparece a ideia que sua empresa não pode perder de vista ao mudar. Na margem, escreva: <b>NÃO NEGOCIÁVEL</b>. Esse canto dobrado é o seu ponto de retorno quando a transformação apertar.</p>
@@ -856,7 +862,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao2" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>2.3 · Triagem: sua lista de não-negociáveis</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>2.3 · Triagem: sua lista de não-negociáveis</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Liste até cinco práticas e classifique cada uma. Depois, nomeie a evidência de valor das que forem essência.</p>
         <div class="classif"><input type="text" data-save="c2_p1" data-prog="1" placeholder="Prática 1"><select data-save="c2_s1"><option value="">Classificar…</option><option>Essência</option><option>Costume</option><option>Vício</option></select></div>
@@ -889,7 +895,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Um sistema ruim derrota uma boa pessoa todas as vezes."</p>
       <div class="credito">W. Edwards Deming</div>
     </div>
@@ -961,7 +967,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 3 · Trate a cultura como sistema">
   <div class="pagina">
-    <span class="chip vermelho">Código 3 · Campo real</span>
+    <span class="chip vermelho">Código 3 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>No Capítulo 3, <b>circule no texto as engrenagens</b> que você marcar abaixo como "contradiz". Ao lado de cada círculo, anote na margem a primeira mudança que faria nela. O livro vira o seu mapa de guerra do sistema.</p>
@@ -969,7 +975,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao3" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>3.3 · As sete engrenagens</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Na sua empresa</span><h3>3.3 · As sete engrenagens</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Escolha uma tensão cultural concreta. Para cada engrenagem: ela <b>reforça</b> o comportamento desejado, é <b>neutra</b> ou o <b>contradiz</b>? Se duas engrenagens se contradizem, a mais forte vence.</p>
         <label class="campo">Tensão cultural escolhida<small>Colaboração, inovação, segurança, inclusão, cliente, velocidade…</small></label>
@@ -979,7 +985,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       </div>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>3.4 · Suas duas alavancas</h3><span class="tempo">~10 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>3.4 · Suas duas alavancas</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Se você pudesse mexer em apenas duas engrenagens, quais seriam? Mudar cultura não é adicionar iniciativas: é alinhar o sistema.</p>
         <label class="campo">Alavanca 1 — engrenagem e primeira mudança concreta</label>
@@ -1011,7 +1017,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Até se tornar consciente, o inconsciente dirige a sua vida — e você o chama de destino."</p>
       <div class="credito">Carl Jung</div>
     </div>
@@ -1090,7 +1096,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 4 · Revele a sombra do líder">
   <div class="pagina">
-    <span class="chip vermelho">Código 4 · Campo real</span>
+    <span class="chip vermelho">Código 4 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>Releia o quadro intenção × sombra do Capítulo 4 ("cobrar rápido" → ansiedade…). Na margem, <b>escreva a linha que falta: a sua</b>. Sua intenção mais frequente — e como ela provavelmente soa para o time. O livro ganha a linha que só você podia escrever.</p>
@@ -1098,7 +1104,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao4" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>4.3 · Auditoria da sua sombra</h3><span class="tempo">~20 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Na sua empresa</span><h3>4.3 · Auditoria da sua sombra</h3><span class="tempo">~20 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Escolha uma situação recente em que você liderou sob pressão: reunião difícil, decisão impopular, erro do time, notícia ruim.</p>
         <label class="campo">A situação</label>
@@ -1116,7 +1122,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       </div>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>4.4 · O compromisso de 4 semanas</h3><span class="tempo">~10 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>4.4 · O compromisso de 4 semanas</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
         <label class="campo">Que comportamento vou ajustar nas próximas quatro semanas?</label>
         <input type="text" data-save="c4_comportamento" data-prog="1" placeholder="ex.: escutar até o fim antes de reagir a notícia ruim">
@@ -1157,7 +1163,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <p>Toda transformação consistente começa antes da ação: no instante em que a liderança interrompe o piloto automático e olha, com rigor e honestidade, para o sistema que ela mesma ajudou a construir. Abaixo, o retrato do que você registrou neste Ato.</p>
-    <div class="sintese"><div class="rotulo">Código 1 · Seu gap nomeado</div><p id="mapaGap" class="vazio">Ainda não preenchido — exercício 1.4.</p></div>
+    <div class="sintese"><div class="rotulo">Código 1 · A incoerência que você nomeou</div><p id="mapaGap" class="vazio">Ainda não preenchido — exercício 1.4.</p></div>
     <div class="sintese"><div class="rotulo">Código 2 · O que você vai preservar</div><p id="mapaPreservar" class="vazio">Ainda não preenchido — exercício 2.3.</p></div>
     <div class="sintese"><div class="rotulo">Código 3 · Suas alavancas do sistema</div><p id="mapaAlavancas" class="vazio">Ainda não preenchido — exercício 3.4.</p></div>
     <div class="sintese"><div class="rotulo">Código 4 · Seu compromisso de sombra</div><p id="mapaSombra" class="vazio">Ainda não preenchido — exercício 4.4.</p></div>
@@ -1266,7 +1272,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.0' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.1' };
 var SC_ATO = 1;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -1414,7 +1420,7 @@ function renderBarraModo(){
   b.addEventListener('click', alternarModo);
   bar.appendChild(b);
 }
-var CODIGO_ATALHO = 1, VERBO_ATALHO = 'Nomeie seu gap';
+var CODIGO_ATALHO = 1, VERBO_ATALHO = 'Nomeie sua incoerência';
 /* tabela de minutos por código — fonte única do tempo anunciado, igual à do hub */
 var MIN_CODIGO = {1:8,2:7,3:8,4:6,5:7,6:12,7:6,8:6,9:8,10:7,11:10,12:7,13:6,14:7,15:8};
 /* a capa oferece as duas rotas — a essencial primeiro, com o tempo real */
@@ -1725,7 +1731,7 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !mod
 
 /* ================= termômetro ================= */
 var afirmacoes = [
-  'Sei nomear o principal gap entre a cultura declarada e a praticada na minha organização.',
+  'Sei nomear a principal incoerência entre a cultura declarada e a praticada na minha organização.',
   'Meu diagnóstico se apoia em evidências observáveis, não apenas em percepções.',
   'Sei o que a minha organização precisa preservar — e por quê.',
   'Distingo com clareza o que é essência, o que é costume e o que é vício.',
@@ -2017,7 +2023,7 @@ function atualizarSinteses() {
   renderReencontroSintese();
   var g = document.getElementById('gapSintese');
   if (v('c1_gap_declara') && v('c1_gap_pratica') && v('c1_gap_evidencia')) {
-    g.className = ''; g.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>. Evidência: ' + v('c1_gap_evidencia') + '.';
+    g.className = ''; g.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>. E eu sei disso porque ' + v('c1_gap_evidencia') + '.';
     /* a ativação agora mora no laço de evidências — qualquer código serve, não só o 1 */
   }
   /* evidências entregues → código concluído; as quatro → ato concluído */
@@ -2051,7 +2057,7 @@ function atualizarSinteses() {
     c.className = ''; c.innerHTML = 'Nas próximas 4 semanas vou <b>' + v('c4_comportamento') + '</b>. O time vai perceber quando: ' + v('c4_evidencia') + '.' + (v('c4_feedback') ? ' Feedback combinado com: ' + v('c4_feedback') + '.' : '');
   }
   var mg = document.getElementById('mapaGap');
-  if (v('c1_gap_declara') && v('c1_gap_pratica')) { mg.className=''; mg.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>.' + (v('c1_gap_evidencia') ? ' Evidência: ' + v('c1_gap_evidencia') + '.' : ''); }
+  if (v('c1_gap_declara') && v('c1_gap_pratica')) { mg.className=''; mg.innerHTML = 'Declaramos que <b>' + v('c1_gap_declara') + '</b>, mas na prática <b>' + v('c1_gap_pratica') + '</b>.' + (v('c1_gap_evidencia') ? ' E eu sei disso porque ' + v('c1_gap_evidencia') + '.' : ''); }
   var essencias = [];
   for (var i = 1; i <= 5; i++) { if (v('c2_s' + i) === 'Essência' && v('c2_p' + i)) essencias.push(v('c2_p' + i)); }
   var mp = document.getElementById('mapaPreservar');
@@ -2077,7 +2083,7 @@ function atualizarProgresso() {
   /* na interface, o que conta são as evidências — a % fica interna (GA/hub) */
   var nEv = ['_ev1','_ev2','_ev3','_ev4'].filter(function(k){ return estado[k]; }).length;
   document.getElementById('progressoFill').style.width = (nEv / 4 * 100) + '%';
-  document.getElementById('progressoPct').textContent = nEv + '/4';
+  document.getElementById('progressoPct').innerHTML = nEv + '/4<span class="rot"> evidências</span>';
   document.getElementById('progressoPct').setAttribute('title', nEv + ' de 4 evidências concluídas');
   if (estado._progresso !== p) {
     estado._progresso = p;
@@ -2088,7 +2094,7 @@ function atualizarProgresso() {
 /* ================= brief executivo ================= */
 function coletaBrief() {
   var linhas = [];
-  if (v('c1_gap_declara') && v('c1_gap_pratica')) linhas.push(['Código 1 · Gap nomeado', 'Declaramos que "' + v('c1_gap_declara') + '", mas na prática ' + v('c1_gap_pratica') + '.' + (v('c1_gap_evidencia') ? ' Evidência: ' + v('c1_gap_evidencia') + '.' : '')]);
+  if (v('c1_gap_declara') && v('c1_gap_pratica')) linhas.push(['Código 1 · Gap nomeado', 'Declaramos que "' + v('c1_gap_declara') + '", mas na prática ' + v('c1_gap_pratica') + '.' + (v('c1_gap_evidencia') ? ' E eu sei disso porque ' + v('c1_gap_evidencia') + '.' : '')]);
   var ess = [];
   for (var i = 1; i <= 5; i++) if (v('c2_s' + i) === 'Essência' && v('c2_p' + i)) ess.push(v('c2_p' + i));
   if (ess.length) linhas.push(['Código 2 · Não-negociáveis (essência)', ess.join(' · ') + (v('c2_evidencia') ? ' — Evidência de valor: ' + v('c2_evidencia') : '')]);
@@ -2099,7 +2105,7 @@ function coletaBrief() {
 }
 function gerarBrief() {
   var linhas = coletaBrief();
-  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" para gerar a sua página.'); return; }
+  if (!linhas.length) { alert('Complete pelo menos um exercício marcado como "O que você leva daqui" para gerar a sua página.'); return; }
   evento('sc_brief_generated', { act_number: SC_ATO });
   var ATOS = {
     1: { rom: 'I',   nome: 'Consciência',  arq: 'consciencia',  faixa: 'Códigos 1 a 4',   total: 4 },
@@ -2195,7 +2201,7 @@ function gerarBrief() {
 }
 function enviarEmail() {
   var linhas = coletaBrief();
-  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" antes de enviar.'); return; }
+  if (!linhas.length) { alert('Complete pelo menos um exercício marcado como "O que você leva daqui" antes de enviar.'); return; }
   var corpo = 'MEU CÓDIGO DE CONSCIÊNCIA — ATO I\nO Novo Código da Mudança · Workbook\n\n';
   linhas.forEach(function(l){ corpo += l[0].toUpperCase() + '\n' + l[1] + '\n\n'; });
   corpo += 'Reencontro em 30 dias: a evidência apareceu?\nToda mudança é humana.';

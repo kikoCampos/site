@@ -26,8 +26,12 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
     var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:8px 16px;font:700 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
     var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#2b7dbf;color:#fff;border:0;padding:8px 18px;font:900 12px Lato,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.05em';
     g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
-    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
-    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
+    /* o banner é fixo no rodapé: sem folga, ele cobre o último campo da página */
+    var folga=function(){document.body.style.paddingBottom=(b.offsetHeight+32)+'px';};
+    folga(); window.addEventListener('resize',folga);
+    var limpa=function(){document.body.style.paddingBottom='';window.removeEventListener('resize',folga);};
+    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();limpa();};
+    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();limpa();};
   });
 }catch(e){}})();
 </script>
@@ -98,7 +102,9 @@ body{font-family:var(--serif); color:var(--preto); background:var(--branco); lin
 .topo .marca:hover b{color:#ffffff;}
 .trilho{flex:1; height:5px; background:#332f30; overflow:hidden;}
 .trilho .fill{height:100%; width:0%; background:#5cb3f0; transition:width .6s ease;}
-.pct{font-weight:900; font-size:12px; min-width:38px; text-align:right; color:#ffffff;}
+.pct{font-weight:900; font-size:12px; min-width:38px; text-align:right; color:#ffffff; white-space:nowrap;}
+.pct .rot{font-weight:700; opacity:.72;}
+@media(max-width:620px){ .pct .rot{display:none;} }
 .atos-nav{display:flex; gap:4px; font-family:var(--sans); flex-shrink:0;}
 .ato-tab{font-weight:900; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; padding:8px 12px;
   border:1px solid #3a3739; color:#b9b6b7; text-decoration:none; white-space:nowrap;}
@@ -586,7 +592,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"O melhor líder é aquele que as pessoas mal percebem que existe; feito o trabalho, elas dirão: nós mesmos fizemos."</p>
       <div class="credito">Lao Tzu | Tao Te Ching</div>
     </div>
@@ -650,7 +656,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 5 · Conecte-se para liderar">
   <div class="pagina">
-    <span class="chip vermelho">Código 5 · Campo real</span>
+    <span class="chip vermelho">Código 5 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>No Capítulo 5, <b>sublinhe a lista de travas</b> ("na hierarquia, na falta de informação, no medo de discordar…") e marque na margem: <b>AQUI TRAVA</b> — ao lado da que mais aparece na sua operação.</p>
@@ -658,7 +664,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao5" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>5.2 · O raio da sua rede</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Na sua empresa</span><h3>5.2 · O raio da sua rede</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Escolha uma decisão ou projeto recente que exigiu mais de uma área.</p>
         <label class="campo">Onde a decisão travou — e quem precisava ter sido conectado antes de o problema escalar?</label>
@@ -670,7 +676,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       </div>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>5.3 · Seu ritual mínimo de conexão</h3><span class="tempo">~10 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>5.3 · Seu ritual mínimo de conexão</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
         <label class="campo">Qual ritual mínimo reduziria a fricção esta semana?<small>1:1, check-in, fórum transversal, conversa de alinhamento — escolha um e diga entre quem.</small></label>
         <input type="text" data-save="c5_ritual" data-prog="1" placeholder="ex.: check-in quinzenal de 20 min entre comercial e operações">
@@ -713,7 +719,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Importe-se pessoalmente e confronte diretamente."</p>
       <div class="credito">Kim Scott | Radical Candor</div>
     </div>
@@ -767,7 +773,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 6 · Enfrente as conversas">
   <div class="pagina">
-    <span class="chip vermelho">Código 6 · Campo real</span>
+    <span class="chip vermelho">Código 6 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p><b>Dobre o canto da página</b> do método (clareza, escuta, acordo explícito) no Capítulo 6. Na margem, escreva as iniciais de quem é a sua conversa adiada. Antes da conversa real, releia essa página — ela é o seu roteiro de bolso.</p>
@@ -775,7 +781,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao6" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>6.2 · O roteiro da conversa real</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>6.2 · O roteiro da conversa real</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Do ensaio para o real. Monte o roteiro com o método do capítulo:</p>
         <label class="campo">CLAREZA — qual é o tema real, em uma frase?<small>Sem rodeio e sem acusação. O que precisa ser nomeado.</small></label>
@@ -812,7 +818,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Se quer ir rápido, vá sozinho; se quer ir longe, vá acompanhado."</p>
       <div class="credito">Provérbio africano</div>
     </div>
@@ -876,7 +882,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 7 · Multiplique e dê autoria">
   <div class="pagina">
-    <span class="chip vermelho">Código 7 · Campo real</span>
+    <span class="chip vermelho">Código 7 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>Releia <i>É assim que nasce um embaixador</i> no Capítulo 7. Na margem, <b>escreva as iniciais das três pessoas</b> que vieram à sua cabeça durante a leitura. Se ninguém veio, releia — o capítulo diz onde procurar: quem já vive a cultura pelo exemplo, sem título.</p>
@@ -884,7 +890,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao7" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>7.2 · A entrega de autoria</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>7.2 · A entrega de autoria</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Escolha uma mudança que hoje ainda depende demais de você (ou do RH).</p>
         <label class="campo">Que parte real dessa mudança você vai entregar — e para quem?<small>Parte real = com decisão dentro, não só divulgação.</small></label>
@@ -917,7 +923,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"Diversidade é ser convidado para a festa; inclusão é ser convidado para dançar."</p>
       <div class="credito">Vernā Myers</div>
     </div>
@@ -955,7 +961,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <p class="fb" data-certo="<b>✓ Chave certa.</b> Presença sem voz é estética. O caso do capítulo — PcD de 3,3% para 5%, com pilotos a 8% e 10% — só virou cultura quando mudou quem decide. Agora audite a sua mesa." data-errado="<b>Ainda não.</b> É a epígrafe que abre o Capítulo 8 — e o teste de tudo o que vem depois."></p>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Campo real</span><h3>8.1 · Auditoria da última decisão</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">Na sua empresa</span><h3>8.1 · Auditoria da última decisão</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Escolha uma decisão importante recente — ou uma que está prestes a ser tomada.</p>
         <label class="campo">Quem participou da decisão?</label>
@@ -972,7 +978,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 8 · Amplie o nós com inclusão real">
   <div class="pagina">
-    <span class="chip vermelho">Código 8 · Campo real</span>
+    <span class="chip vermelho">Código 8 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p><b>Sublinhe a epígrafe de Vernā Myers</b> no Capítulo 8 e escreva na margem o nome (ou papel) da voz ausente da sua última decisão. O livro guarda o lembrete que a próxima pauta vai cobrar.</p>
@@ -980,7 +986,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <textarea data-save="missao8" data-prog="1"></textarea>
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>8.2 · A microprática da próxima decisão</h3><span class="tempo">~10 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>8.2 · A microprática da próxima decisão</h3><span class="tempo">~10 MIN</span></div>
       <div class="corpo">
         <label class="campo">Que microprática inclusiva você adota na próxima decisão crítica?<small>Ex.: cadeira fixa da operação no comitê; rodada obrigatória de quem discorda; revisão por quem será afetado.</small></label>
         <input type="text" data-save="c8_micropratica" data-prog="1" placeholder="ex.: nenhuma decisão de loja sem ouvir duas lojas antes">
@@ -1010,7 +1016,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
   </div>
   <div class="pagina">
     <div class="box-vermelho">
-      <div class="rotulo">Epígrafe</div>
+      <div class="rotulo">A frase que abre o capítulo</div>
       <p>"As histórias importam. Muitas histórias importam."</p>
       <div class="credito">Chimamanda Ngozi Adichie | O perigo de uma história única</div>
     </div>
@@ -1069,7 +1075,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
 
 <section class="etapa" data-titulo="Aplique e evidencie" data-grupo="Código 9 · Conte sua cultura em histórias">
   <div class="pagina">
-    <span class="chip vermelho">Código 9 · Campo real</span>
+    <span class="chip vermelho">Código 9 · Na sua empresa</span>
     <div class="missao">
       <div class="rotulo">Missão no livro <span>· pegue a caneta</span></div>
       <p>Releia <i>O poder das micro-histórias</i> no Capítulo 9. Na margem, <b>escreva o título da sua</b> — a micro-história recente que mostra "isso aqui acontece de verdade". Se não vier nenhuma, sua primeira missão é sair para caçar uma esta semana.</p>
@@ -1077,7 +1083,7 @@ button.acao.perigo:hover{background:var(--vermelho); color:var(--branco);}
       <input type="text" data-save="missao9" data-prog="1" placeholder="ex.: O caixa da loja 12">
     </div>
     <div class="exercicio">
-      <div class="cabeca"><span class="tag campo-real">Evidência do código</span><h3>9.2 · Construa a cena</h3><span class="tempo">~15 MIN</span></div>
+      <div class="cabeca"><span class="tag campo-real">O que você leva daqui</span><h3>9.2 · Construa a cena</h3><span class="tempo">~15 MIN</span></div>
       <div class="corpo">
         <p class="instrucao">Monte a micro-história com a anatomia do capítulo:</p>
         <label class="campo">CONTEXTO — onde e quando aconteceu?</label>
@@ -1222,7 +1228,7 @@ try { estado = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {
 estado._v = estado._v || 1; /* versão do contrato de dados */
 
 /* ================= plataforma Seu Código: config + instrumentação ================= */
-var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.0' };
+var SC_CONFIG = { accessMode: 'open', leadCapture: true, platformVersion: '1.6.1' };
 var SC_ATO = 2;
 function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
 function scSet(k, val){ try { localStorage.setItem(k, JSON.stringify(val)); } catch(e) {} }
@@ -2033,7 +2039,7 @@ function atualizarProgresso() {
   /* na interface, o que conta são as evidências — a % fica interna (GA/hub) */
   var nEv = ['_ev5','_ev6','_ev7','_ev8','_ev9'].filter(function(k){ return estado[k]; }).length;
   document.getElementById('progressoFill').style.width = (nEv / 5 * 100) + '%';
-  document.getElementById('progressoPct').textContent = nEv + '/5';
+  document.getElementById('progressoPct').innerHTML = nEv + '/5<span class="rot"> evidências</span>';
   document.getElementById('progressoPct').setAttribute('title', nEv + ' de 5 evidências concluídas');
   if (estado._progresso !== p) {
     estado._progresso = p;
@@ -2055,7 +2061,7 @@ function coletaBrief() {
 
 function gerarBrief() {
   var linhas = coletaBrief();
-  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" para gerar a sua página.'); return; }
+  if (!linhas.length) { alert('Complete pelo menos um exercício marcado como "O que você leva daqui" para gerar a sua página.'); return; }
   evento('sc_brief_generated', { act_number: SC_ATO });
   var ATOS = {
     1: { rom: 'I',   nome: 'Consciência',  arq: 'consciencia',  faixa: 'Códigos 1 a 4',   total: 4 },
@@ -2151,7 +2157,7 @@ function gerarBrief() {
 }
 function enviarEmail() {
   var linhas = coletaBrief();
-  if (!linhas.length) { alert('Complete pelo menos um exercício de "Evidência do código" antes de enviar.'); return; }
+  if (!linhas.length) { alert('Complete pelo menos um exercício marcado como "O que você leva daqui" antes de enviar.'); return; }
   var corpo = 'MEU CÓDIGO DE CORAGEM — ATO II\nO Novo Código da Mudança · Seu Código\n\n';
   linhas.forEach(function(l){ corpo += l[0].toUpperCase() + '\n' + l[1] + '\n\n'; });
   corpo += 'Reencontro em 30 dias: a evidência apareceu?\nToda mudança é humana.';

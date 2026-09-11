@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nomeie o gap da sua cultura em 3 minutos · Kiko Campos</title>
+<title>Nomeie a incoerência da sua cultura em 3 minutos · Kiko Campos</title>
 <meta name="description" content="Toda empresa tem uma incoerência que todo mundo vê e ninguém nomeia. Em três minutos você nomeia a sua e sai com a frase pronta para a próxima reunião de liderança. Sem cadastro, sem o livro na mão.">
-<meta property="og:title" content="Nomeie o gap da sua cultura em 3 minutos">
+<meta property="og:title" content="Nomeie a incoerência da sua cultura em 3 minutos">
 <meta property="og:description" content="Toda empresa tem uma incoerência que todo mundo vê e ninguém nomeia. Em três minutos, você nomeia a sua.">
 <link rel="canonical" href="https://kikocampos.com/comecar.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,8 +28,12 @@ gtag('js',new Date());gtag('config','G-RD1P3CKLSE');
     var d=document.createElement('button');d.textContent='Recusar';d.style.cssText='background:transparent;color:#b9b6b7;border:1px solid #6d6e71;padding:11px 18px;font:700 13px Lato,sans-serif;cursor:pointer';
     var a=document.createElement('button');a.textContent='Aceitar';a.style.cssText='background:#1f6aa6;color:#fff;border:0;padding:11px 20px;font:900 13px Lato,sans-serif;cursor:pointer';
     g.appendChild(d);g.appendChild(a);b.appendChild(g);document.body.appendChild(b);
-    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();};
-    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();};
+    /* o banner é fixo no rodapé: sem folga, ele cobre o último campo da página */
+    var folga=function(){document.body.style.paddingBottom=(b.offsetHeight+32)+'px';};
+    folga(); window.addEventListener('resize',folga);
+    var limpa=function(){document.body.style.paddingBottom='';window.removeEventListener('resize',folga);};
+    a.onclick=function(){localStorage.setItem('kc_cookie','accepted');gtag('consent','update',{analytics_storage:'granted'});b.remove();limpa();};
+    d.onclick=function(){localStorage.setItem('kc_cookie','declined');b.remove();limpa();};
   });
 }catch(e){}})();
 </script>
@@ -103,7 +107,7 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
 .frase.exemplo{color:#8e8b88; font-style:italic; font-size:clamp(16px,2.2vw,19px);}
 .frase.exemplo em{font-style:normal;}
 .acoes{display:flex; flex-wrap:wrap; gap:var(--e-2); margin-top:var(--e-5);}
-.btn{font-family:var(--sans); font-weight:900; font-size:var(--t-sm); letter-spacing:.02em;
+.btn{font-family:var(--sans); font-weight:900; font-size:var(--t-sm); letter-spacing:.02em; text-decoration:none; text-align:center;
   padding:14px 22px; min-height:48px; border-radius:var(--r-sm); border:2px solid var(--azul-acao);
   background:var(--azul-acao); color:#fff; cursor:pointer; transition:opacity var(--mov-rapido);}
 .btn:hover{opacity:.88;}
@@ -113,6 +117,8 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
 .copiado{font-family:var(--sans); font-weight:700; font-size:var(--t-sm); color:var(--azul-acao);
   align-self:center; opacity:0; transition:opacity var(--mov-rapido);}
 .copiado.show{opacity:1;}
+.falta{font-family:var(--sans); font-size:var(--t-sm); color:var(--cinza); align-self:center;}
+.falta.some{display:none;}
 .privacidade{font-size:var(--t-xs); color:var(--cinza-fraco); margin-top:var(--e-4); line-height:1.5;}
 
 /* ---------- a virada ---------- */
@@ -161,7 +167,7 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
   <header class="heroi">
     <p class="kicker">O Novo Código da Mudança · Kiko Campos</p>
     <h1>Toda empresa tem uma incoerência que todo mundo vê e ninguém nomeia.</h1>
-    <p class="promessa">Em três minutos você nomeia a sua — e sai daqui com <b>a frase pronta</b> para levar à próxima reunião de liderança.</p>
+    <p class="promessa">Em três minutos você nomeia a sua — e sai daqui com <b>a frase pronta</b> para a próxima vez que esse assunto aparecer na mesa.</p>
     <p class="custo">
       <span>3 minutos</span>
       <span>sem cadastro</span>
@@ -171,47 +177,48 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
   </header>
 
   <section class="bloco" aria-labelledby="tituloExercicio">
-    <h2 id="tituloExercicio" class="visually-hidden" style="position:absolute;left:-9999px;">Nomeie o gap da sua cultura</h2>
+    <h2 id="tituloExercicio" class="visually-hidden" style="position:absolute;left:-9999px;">Nomeie a incoerência da sua cultura</h2>
 
     <div class="passo">
       <span class="passo-num">Passo 1 de 3</span>
-      <label for="f1">O que a sua empresa declara</label>
-      <span class="dica" id="d1">O valor que está no site, no mural, na convenção.</span>
+      <label for="f1">Complete: <em>&ldquo;Declaramos que…&rdquo;</em></label>
+      <span class="dica" id="d1">O que está no site, no mural, no discurso da convenção.</span>
       <input type="text" id="f1" aria-describedby="d1" autocomplete="off" placeholder="somos colaborativos" maxlength="120">
     </div>
 
     <div class="passo">
       <span class="passo-num">Passo 2 de 3</span>
-      <label for="f2">O que ela faz quando aperta</label>
-      <span class="dica" id="d2">Sob pressão, com prazo curto, na hora de decidir quem sobe.</span>
+      <label for="f2"><em>&ldquo;…mas, na prática…&rdquo;</em></label>
+      <span class="dica" id="d2">O que a empresa faz quando aperta: prazo curto, pressão, hora de decidir quem sobe.</span>
       <input type="text" id="f2" aria-describedby="d2" autocomplete="off" placeholder="premiamos quem resolve sozinho" maxlength="120">
     </div>
 
     <div class="passo">
       <span class="passo-num">Passo 3 de 3</span>
-      <label for="f3">Como você sabe</label>
-      <span class="dica" id="d3">Um fato que outra pessoa poderia verificar. Uma promoção, uma decisão, uma reunião.</span>
+      <label for="f3"><em>&ldquo;E eu sei disso porque…&rdquo;</em></label>
+      <span class="dica" id="d3">Um fato que outra pessoa também viu. Uma promoção, uma decisão, uma reunião.</span>
       <input type="text" id="f3" aria-describedby="d3" autocomplete="off" placeholder="os três últimos promovidos venceram disputas, não construíram pontes" maxlength="160">
     </div>
 
     <div class="frase-caixa">
       <p class="frase-rot" id="fraseRot">O que vai sair daqui</p>
-      <p class="frase exemplo" id="frase" role="status" aria-live="polite">Declaramos que <em>somos colaborativos</em>, mas na prática <em>premiamos quem resolve sozinho</em>. Como sei: os três últimos promovidos venceram disputas, não construíram pontes.</p>
+      <p class="frase exemplo" id="frase" role="status" aria-live="polite">Uma frase assim: <em>Declaramos que o cliente está no centro, mas, na prática, a meta do mês decide tudo. E eu sei disso porque cancelamos a visita ao cliente para fechar o relatório.</em></p>
       <div class="acoes">
         <button type="button" class="btn" id="btnCopiar" disabled>Copiar minha frase</button>
-        <span class="copiado" id="copiado" role="status">Copiada. Leve para a próxima reunião.</span>
+        <span class="copiado" id="copiado" role="status">Copiada. É sua.</span>
+        <span class="falta" id="falta">Preencha os três campos e o botão libera.</span>
       </div>
       <p class="privacidade">Nada do que você escreveu sai deste navegador — nem eu vejo. Fica gravado aqui para você continuar depois, se quiser.</p>
     </div>
   </section>
 
   <section class="virada" id="virada" hidden aria-labelledby="tituloVirada">
-    <h2 id="tituloVirada">Isso foi um código. Existem quinze.</h2>
-    <p>Você acabou de fazer o <b>Código 1 — diagnosticar sem ilusões</b>. É o primeiro de três forças. Os outros catorze constroem o resto:</p>
+    <h2 id="tituloVirada">Isso foi 1 das 15 práticas do livro.</h2>
+    <p>Cada uma é curta como esta. O livro chama cada uma de <b>código</b>, e as agrupa em três partes. Você acabou de fazer a primeira: <b>enxergar o que está acontecendo de verdade</b>. As outras catorze constroem o resto:</p>
     <ul class="lista-forcas">
-      <li><b>Consciência · códigos 1 a 4</b><span>O que preservar, onde estão as alavancas do sistema, e a sombra que a sua liderança projeta sem perceber.</span></li>
-      <li><b>Coragem · códigos 5 a 9</b><span>A conversa que você vem adiando — nomeada, ensaiada e transformada em acordo.</span></li>
-      <li><b>Consistência · códigos 10 a 15</b><span>Como medir, ritualizar e entregar para quem vem depois, para nada morrer junto com o entusiasmo.</span></li>
+      <li><b>Consciência · práticas 1 a 4</b><span>O que vale a pena proteger, os dois ou três pontos em que mexer muda o resto, e o efeito que o seu jeito de agir causa sem você perceber.</span></li>
+      <li><b>Coragem · práticas 5 a 9</b><span>A conversa que você vem adiando: escrever qual é, ensaiar como começar e sair dela com um combinado.</span></li>
+      <li><b>Consistência · práticas 10 a 15</b><span>Como medir, virar rotina e passar adiante, para nada morrer junto com o entusiasmo do começo.</span></li>
     </ul>
     <div class="acoes" style="margin-top:var(--e-5);">
       <a class="btn" id="btnContinuar" href="/workbook-ato1.html#continuar">Continuar — o próximo leva 7 minutos</a>
@@ -231,7 +238,7 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
   </section>
 
   <footer class="rodape">
-    <p>Isto é uma das práticas de <em>O Novo Código da Mudança</em>, de Kiko Campos. A plataforma completa — 15 códigos, três atos — está em <a href="/seucodigo/">Seu Código</a>, e é aberta.</p>
+    <p>Isto é uma das práticas do livro <em>O Novo Código da Mudança</em>, de Kiko Campos. As quinze estão reunidas no <a href="/seucodigo/">Seu Código</a>, de graça.</p>
     <p class="assinatura">Toda mudança é <b>humana</b></p>
   </footer>
 
@@ -241,7 +248,7 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
 (function(){
   'use strict';
   var STORE = 'ncc-workbook-ato1';
-  var VERSAO = '1.6.0';
+  var VERSAO = '1.6.1';
 
   function ler(k){ try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch(e){ return {}; } }
   function scGet(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
@@ -297,9 +304,17 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
   CAMPOS.forEach(function(par){ if (estado[par[1]]) par[0].value = estado[par[1]]; });
 
   function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  function v(el){ return (el.value || '').trim(); }
+  /* o rótulo já entrega o conectivo. Se a pessoa repetir, a frase não duplica. */
+  function limpa(txt, padrao){ return (txt || '').trim().replace(padrao, '').trim(); }
+  function v(el){
+    var t = (el.value || '').trim();
+    if (el === f1) t = limpa(t, /^que\s+/i);
+    if (el === f2) t = limpa(t, /^(mas\s+)?(na\s+pr[áa]tica[,\s]+)?/i);
+    if (el === f3) t = limpa(t, /^(e\s+)?(eu\s+)?(sei\s+disso\s+)?porque\s+/i);
+    return t;
+  }
   function textoFrase(){
-    return 'Declaramos que ' + v(f1) + ', mas na prática ' + v(f2) + '. Como sei: ' + v(f3) +
+    return 'Declaramos que ' + v(f1) + ', mas na prática ' + v(f2) + '. E eu sei disso porque ' + v(f3) +
            (/[.!?]$/.test(v(f3)) ? '' : '.');
   }
 
@@ -320,8 +335,9 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
     if (completo) {
       fraseRot.textContent = 'A sua frase';
       frase.classList.remove('exemplo');
-      frase.innerHTML = 'Declaramos que <b>' + esc(v(f1)) + '</b>, mas na prática <b>' + esc(v(f2)) + '</b>. Como sei: ' + esc(v(f3)) + (/[.!?]$/.test(v(f3)) ? '' : '.');
+      frase.innerHTML = 'Declaramos que <b>' + esc(v(f1)) + '</b>, mas na prática <b>' + esc(v(f2)) + '</b>. E eu sei disso porque ' + esc(v(f3)) + (/[.!?]$/.test(v(f3)) ? '' : '.');
       btnCopiar.disabled = false;
+      document.getElementById('falta').classList.add('some');
       if (virada.hidden) {
         virada.hidden = false;
         evento('sc_entry_completed');
@@ -341,8 +357,9 @@ h1{font-family:var(--serif); font-weight:600; font-size:clamp(29px,5.4vw,44px); 
     } else {
       fraseRot.textContent = 'O que vai sair daqui';
       frase.classList.add('exemplo');
-      frase.innerHTML = 'Declaramos que <em>somos colaborativos</em>, mas na prática <em>premiamos quem resolve sozinho</em>. Como sei: os três últimos promovidos venceram disputas, não construíram pontes.';
+      frase.innerHTML = 'Uma frase assim: <em>Declaramos que o cliente está no centro, mas, na prática, a meta do mês decide tudo. E eu sei disso porque cancelamos a visita ao cliente para fechar o relatório.</em>';
       btnCopiar.disabled = true;
+      document.getElementById('falta').classList.remove('some');
     }
     salvar();
   }
