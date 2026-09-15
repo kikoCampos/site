@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Guia de desenvolvimento — acesso por código pessoal.">
+<style>*{box-sizing:border-box}html,body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Guia de Desenvolvimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root{
+  --paper:#F2F5F2; --card:#FFFFFF; --ink:#101714; --muted:#57645D; --faint:#8A968F;
+  --rule:#D5DDD7; --soft:#EDF2EE;
+  --verde:#12A551; --verde-clara:#21C25E; --verde-fundo:#E7F7ED; --verde-texto:#0C6B37;
+  --azul:#1E6FA8; --azul-fundo:#E8F1F8;
+  --ambar:#B4450E; --ambar-fundo:#FBF0E9;
+  --vermelho:#B3261E; --vermelho-fundo:#FBECEA;
+  --barra:#14232E;
+  --disp:'Archivo',system-ui,sans-serif; --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --sombra:0 1px 2px rgba(16,23,20,.05);
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --paper:#0D1211; --card:#151C19; --ink:#E7EEE9; --muted:#97A59E; --faint:#6D7C74;
+  --rule:#26312C; --soft:#1B2420;
+  --verde:#35D274; --verde-clara:#35D274; --verde-fundo:#12261B; --verde-texto:#7CE6A6;
+  --azul:#6BB4E8; --azul-fundo:#11242F;
+  --ambar:#F0864B; --ambar-fundo:#2A1A11;
+  --vermelho:#F0776C; --vermelho-fundo:#2B1412;
+  --barra:#050F0B;
+  --sombra:0 1px 2px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --paper:#0D1211; --card:#151C19; --ink:#E7EEE9; --muted:#97A59E; --faint:#6D7C74;
+  --rule:#26312C; --soft:#1B2420;
+  --verde:#35D274; --verde-clara:#35D274; --verde-fundo:#12261B; --verde-texto:#7CE6A6;
+  --azul:#6BB4E8; --azul-fundo:#11242F;
+  --ambar:#F0864B; --ambar-fundo:#2A1A11;
+  --vermelho:#F0776C; --vermelho-fundo:#2B1412;
+  --barra:#050F0B;
+  --sombra:0 1px 2px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--disp);letter-spacing:-.015em;margin:0;text-wrap:balance}
+p{margin:0 0 14px}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--verde);outline-offset:2px;border-radius:2px}
+
+/* ------- barra de topo ------- */
+.top{position:sticky;top:0;z-index:20;background:var(--barra);color:#F4F9F6;
+  display:flex;align-items:center;gap:14px;padding:9px 18px;font-family:var(--mono);
+  font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+.top .nome{font-weight:600;color:var(--verde-clara)}
+.top .sep{flex:1}
+.top .est{color:#9FB0A7;display:flex;align-items:center;gap:6px}
+.top .est.on{color:var(--verde-clara)}
+.top .est::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;
+  opacity:.35;flex:none}
+.top .est.on::before{opacity:1}
+.top button{background:none;border:1px solid #35463E;color:#C9D6CF;border-radius:2px;
+  padding:4px 9px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase}
+.top button:hover{border-color:var(--verde-clara);color:var(--verde-clara)}
+
+/* ------- progresso ------- */
+.prog{display:flex;gap:3px;padding:0 18px;background:var(--barra)}
+.prog span{flex:1;height:3px;background:#2A3A33;border-radius:2px}
+.prog span.on{background:var(--verde-clara);opacity:.4}
+.prog span.agora{background:var(--verde-clara)}
+
+.pal{max-width:760px;margin:0 auto;padding:34px 22px 120px}
+.pal.larga{max-width:1000px}
+
+/* ------- orientação ------- */
+.kick{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--verde-texto);font-weight:600;margin:0 0 9px}
+h1.tit{font-size:clamp(27px,4.4vw,38px);line-height:1.08;margin-bottom:18px;font-weight:700}
+.orienta{display:grid;grid-template-columns:1fr 1fr auto;gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:3px;margin:0 0 26px;overflow:hidden}
+.orienta>div{background:var(--card);padding:11px 13px}
+.orienta b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:4px}
+.orienta span{font-size:14.5px;line-height:1.45;color:var(--muted)}
+.orienta>div:last-child span{font-family:var(--mono);font-size:13px;color:var(--ink);white-space:nowrap}
+@media(max-width:620px){.orienta{grid-template-columns:1fr}}
+
+h2.sec{font-size:21px;font-weight:600;margin:34px 0 12px;padding-top:22px;border-top:1px solid var(--rule)}
+h3.sub{font-size:16px;font-weight:600;margin:24px 0 8px}
+.mut{color:var(--muted);font-size:15.5px}
+.peq{font-size:14px;color:var(--faint);line-height:1.5}
+
+/* ------- cartões ------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 20px}
+@media(max-width:620px){.grid2{grid-template-columns:1fr}}
+.cart{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:15px 16px 17px;
+  box-shadow:var(--sombra);border-top:3px solid var(--verde)}
+.cart.ambar{border-top-color:var(--ambar)}
+.cart.azul{border-top-color:var(--azul)}
+.cart.vermelho{border-top-color:var(--vermelho)}
+.cart h4{font-family:var(--disp);font-size:15px;font-weight:600;margin:0 0 7px}
+.cart p{margin:0;font-size:15px;color:var(--muted);line-height:1.55}
+
+.faixa{background:var(--barra);color:#F4F9F6;border-radius:3px;padding:15px 17px;margin:20px 0}
+.faixa b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--verde-clara);margin-bottom:6px;font-weight:600}
+.faixa p{margin:0;font-size:15.5px;line-height:1.55;color:#E3ECE7}
+
+.nota{border-left:3px solid var(--rule);padding:2px 0 2px 14px;margin:18px 0;
+  font-size:15px;color:var(--muted)}
+
+/* ------- tabelas ------- */
+.tw{overflow-x:auto;margin:0 0 18px;border:1px solid var(--rule);border-radius:3px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:440px}
+th{background:var(--barra);color:#F4F9F6;font-family:var(--mono);font-size:10px;letter-spacing:.07em;
+  text-transform:uppercase;font-weight:600;padding:8px 10px;text-align:left;white-space:nowrap}
+td{padding:8px 10px;border-top:1px solid var(--rule);color:var(--muted);vertical-align:top}
+tr:nth-child(even) td{background:var(--soft)}
+td.n{text-align:center;font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);
+  font-weight:500;white-space:nowrap}
+td.forte{font-weight:600;color:var(--ink)}
+.up{color:var(--verde-texto)} .down{color:var(--ambar)}
+
+/* ------- campos ------- */
+.campo{margin:0 0 18px}
+.campo label{display:block;font-family:var(--disp);font-size:15px;font-weight:600;margin-bottom:6px}
+.campo .aj{display:block;font-family:var(--serif);font-size:14px;font-weight:400;color:var(--faint);
+  margin-top:2px;line-height:1.45}
+textarea,input[type=text]{width:100%;background:var(--card);border:1px solid var(--rule);border-radius:3px;
+  padding:11px 12px;font-family:var(--serif);font-size:16px;line-height:1.55;color:var(--ink);
+  resize:vertical;box-shadow:var(--sombra)}
+textarea{min-height:84px;overflow:hidden}
+textarea::placeholder,input::placeholder{color:var(--faint);opacity:.7}
+textarea:focus,input:focus{border-color:var(--verde);outline:none;box-shadow:0 0 0 3px var(--verde-fundo)}
+.privado{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--verde-texto);background:var(--verde-fundo);
+  padding:3px 8px;border-radius:2px;margin-bottom:10px;font-weight:600}
+
+/* ------- escolha ------- */
+.opcs{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  border-radius:3px;overflow:hidden;margin:0 0 18px}
+.opc{background:var(--card);display:flex;gap:12px;align-items:flex-start;padding:13px 15px;cursor:pointer}
+.opc:hover{background:var(--soft)}
+.opc input{margin:4px 0 0;accent-color:var(--verde);width:17px;height:17px;flex:none}
+.opc.sel{background:var(--verde-fundo)}
+.opc b{font-family:var(--disp);font-size:15.5px;font-weight:600;display:block;color:var(--ink)}
+.opc span{font-size:14.5px;color:var(--muted);display:block;margin-top:2px}
+.opc input[type=text]{margin-top:6px}
+
+/* ------- leituras ------- */
+.leitura{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--azul);
+  border-radius:3px;padding:18px 20px 20px;margin:0 0 20px;box-shadow:var(--sombra)}
+.leitura.AMBAR{border-left-color:var(--ambar)}
+.leitura.VERMELHO{border-left-color:var(--vermelho)}
+.leitura.VERDE{border-left-color:var(--verde)}
+.leitura h3{font-size:19px;font-weight:600;margin:0 0 12px}
+.ev{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:620px){.ev{grid-template-columns:1fr}}
+.ev>div{background:var(--soft);border-radius:3px;padding:10px 12px}
+.ev b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:6px;font-weight:600}
+.ev .apoia b{color:var(--verde-texto)} .ev .contra b{color:var(--ambar)}
+.ev li{font-size:13.5px;color:var(--muted);margin-bottom:5px;line-height:1.4;list-style:none}
+.ev ul{margin:0;padding:0}
+.ev em{font-family:var(--mono);font-style:normal;color:var(--ink);font-weight:600}
+.rot{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--faint);font-weight:600;margin:16px 0 4px}
+.julga{display:flex;gap:10px;margin-top:18px;padding-top:16px;border-top:1px dashed var(--rule);
+  align-items:center;flex-wrap:wrap}
+.jb{background:transparent;border:1px solid var(--rule);color:var(--muted);border-radius:3px;
+  padding:9px 16px;font-family:var(--disp);font-size:14px;font-weight:600}
+.jb:hover{border-color:var(--ink);color:var(--ink)}
+.jb.sim.on{background:var(--verde-fundo);border-color:var(--verde);color:var(--verde-texto)}
+.jb.nao.on{background:var(--ambar-fundo);border-color:var(--ambar);color:var(--ambar)}
+.julga .dica{font-size:13.5px;color:var(--faint)}
+
+/* ------- tensão ------- */
+.par{background:var(--card);border:1px solid var(--rule);border-radius:3px;margin:0 0 12px;
+  box-shadow:var(--sombra);overflow:hidden}
+.par .cab{background:var(--soft);padding:10px 15px;font-family:var(--disp);font-size:15px;font-weight:600}
+.par .cps{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
+@media(max-width:620px){.par .cps{grid-template-columns:1fr}}
+.par .cps>div{background:var(--card);padding:11px 15px;font-size:14.5px;color:var(--muted)}
+.par .cps b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:4px;font-weight:600}
+
+/* ------- rodapé de navegação ------- */
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--rule);
+  padding:12px 22px;display:flex;gap:12px;align-items:center;z-index:20}
+.nav .in{max-width:760px;margin:0 auto;width:100%;display:flex;gap:12px;align-items:center}
+.nav .sep{flex:1}
+.bt{background:var(--verde);color:#FFF;border:1px solid var(--verde);border-radius:3px;
+  padding:11px 22px;font-family:var(--disp);font-size:15px;font-weight:600}
+.bt:hover{filter:brightness(1.08)}
+.bt[disabled]{opacity:.45;cursor:not-allowed;filter:none}
+.bt.sec{background:transparent;color:var(--muted);border-color:var(--rule)}
+.bt.sec:hover{color:var(--ink);border-color:var(--ink);filter:none}
+.nav .passo{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.06em;
+  text-transform:uppercase}
+@media(max-width:560px){.nav .passo{display:none}}
+
+/* ------- entrada ------- */
+.entrada{max-width:430px;margin:0 auto;padding:14vh 22px 60px;text-align:left}
+.entrada h1{font-size:34px;margin-bottom:12px;font-weight:700}
+.entrada input{text-align:center;font-family:var(--mono);font-size:20px;letter-spacing:.14em;
+  text-transform:uppercase;padding:14px}
+.entrada .bt{width:100%;margin-top:12px;padding:13px}
+.erro{color:var(--vermelho);font-size:14.5px;margin-top:10px;min-height:20px}
+.codigos{margin-top:34px;padding-top:18px;border-top:1px solid var(--rule)}
+.codigos b{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--faint);display:block;margin-bottom:9px}
+.codigos button{background:var(--card);border:1px solid var(--rule);border-radius:2px;
+  font-family:var(--mono);font-size:11px;padding:5px 8px;margin:0 5px 5px 0;color:var(--muted)}
+.codigos button:hover{border-color:var(--verde);color:var(--verde-texto)}
+
+/* ------- semanas / painel ------- */
+.sem td input{width:100%;min-width:58px;text-align:center;font-family:var(--mono);padding:7px 4px;
+  font-size:15px}
+.sem td textarea{min-height:44px;font-size:15px;padding:8px 10px}
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.05em;
+  padding:2px 7px;border-radius:2px;text-transform:uppercase;font-weight:600}
+.pill.ok{background:var(--verde-fundo);color:var(--verde-texto)}
+.pill.meio{background:var(--azul-fundo);color:var(--azul)}
+.pill.zero{background:var(--ambar-fundo);color:var(--ambar)}
+svg{display:block;max-width:100%;height:auto}
+.legenda{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.04em;
+  margin:6px 0 18px;display:flex;gap:16px;flex-wrap:wrap}
+.legenda i{font-style:normal;display:inline-flex;align-items:center;gap:5px}
+.legenda i::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--verde)}
+.legenda i.m::before{border-radius:0;width:2px;height:11px;background:var(--ink)}
+.legenda i.o::before{background:var(--rule)}
+.fim{text-align:center;padding:30px 0 10px}
+.fim .marca{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--verde-texto);margin-bottom:12px}
+.aviso{background:var(--ambar-fundo);border:1px solid var(--ambar);border-radius:3px;
+  padding:13px 15px;margin:18px 0;font-size:15px;color:var(--ambar)}
+.aviso b{display:block;font-family:var(--disp);margin-bottom:3px}
+.vazio{background:var(--soft);border:1px dashed var(--rule);border-radius:3px;padding:20px;
+  text-align:center;color:var(--faint);font-size:15px;margin:0 0 18px}
+.cit{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--verde);
+  border-radius:3px;padding:13px 16px;margin:0 0 11px;font-size:16px;line-height:1.55}
+.cit small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:5px;font-weight:600}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script id="dados" type="application/json">{"n": 9, "medias": {"Confiança": 3.41, "Conflito": 3.3, "Comprometimento": 3.15, "Accountability": 3.37, "Resultados": 3.39}, "geral": 3.32, "comportamentos": ["Confiança", "Conflito", "Comprometimento", "Accountability", "Resultados"], "itens": [{"t": "As pessoas admitem que não sabem alguma coisa, sem rodeios.", "b": "Confiança", "m": 3.33, "sd": 0.71, "d": [0, 1, 4, 4, 0]}, {"t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "b": "Confiança", "m": 3, "sd": 1.12, "d": [0, 4, 2, 2, 1]}, {"t": "Pedir ajuda aqui não é lido como fraqueza.", "b": "Confiança", "m": 4.44, "sd": 0.73, "d": [0, 0, 1, 3, 5]}, {"t": "As pessoas falam das próprias limitações sem medo do julgamento dos colegas.", "b": "Confiança", "m": 2.89, "sd": 0.78, "d": [0, 3, 4, 2, 0]}, {"t": "Quando alguém erra, reconhece e pede desculpas sem que seja preciso cobrar.", "b": "Confiança", "m": 3.78, "sd": 0.83, "d": [0, 0, 4, 3, 2]}, {"t": "O que se fala sobre um colega fora da sala é o mesmo que se fala na frente dele.", "b": "Confiança", "m": 3, "sd": 1, "d": [0, 4, 1, 4, 0]}, {"t": "Discordâncias sobre temas importantes aparecem na reunião, não depois dela.", "b": "Conflito", "m": 3.44, "sd": 0.88, "d": [0, 1, 4, 3, 1]}, {"t": "As pessoas sustentam uma posição impopular quando acreditam nela.", "b": "Conflito", "m": 3.22, "sd": 0.83, "d": [0, 2, 3, 4, 0]}, {"t": "O time pede ativamente a opinião de quem ficou calado.", "b": "Conflito", "m": 2.11, "sd": 0.6, "d": [1, 6, 2, 0, 0]}, {"t": "O debate esquenta sobre a ideia, sem virar ataque pessoal.", "b": "Conflito", "m": 4.33, "sd": 0.71, "d": [0, 0, 1, 4, 4]}, {"t": "Quando um assunto difícil aparece, o time enfrenta ali e não empurra para a próxima pauta.", "b": "Conflito", "m": 3.44, "sd": 1.13, "d": [0, 2, 3, 2, 2]}, {"t": "Decisões relevantes só avançam depois de o contraponto ser ouvido.", "b": "Conflito", "m": 3.22, "sd": 0.67, "d": [0, 1, 5, 3, 0]}, {"t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "b": "Comprometimento", "m": 2.67, "sd": 1.32, "d": [2, 3, 0, 4, 0]}, {"t": "As reuniões terminam com decisão, dono e prazo explícitos.", "b": "Comprometimento", "m": 2.89, "sd": 1.05, "d": [0, 4, 3, 1, 1]}, {"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "b": "Comprometimento", "m": 3.44, "sd": 1.24, "d": [0, 2, 4, 0, 3]}, {"t": "O time decide mesmo sem consenso pleno e sem informação completa.", "b": "Comprometimento", "m": 3.33, "sd": 1.12, "d": [0, 3, 1, 4, 1]}, {"t": "As decisões são comunicadas de forma consistente por todos às suas equipes.", "b": "Comprometimento", "m": 3, "sd": 1, "d": [1, 1, 4, 3, 0]}, {"t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "b": "Comprometimento", "m": 3.56, "sd": 1.01, "d": [0, 1, 4, 2, 2]}, {"t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "b": "Accountability", "m": 3.11, "sd": 0.78, "d": [0, 2, 4, 3, 0]}, {"t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "b": "Accountability", "m": 3.11, "sd": 1.17, "d": [0, 4, 1, 3, 1]}, {"t": "Atrasos e entregas abaixo do combinado são nomeados, com nome e data.", "b": "Accountability", "m": 3.22, "sd": 0.83, "d": [0, 2, 3, 4, 0]}, {"t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "b": "Accountability", "m": 4, "sd": 1.12, "d": [0, 1, 2, 2, 4]}, {"t": "Questionar o método de um colega dentro da área dele é bem-vindo aqui.", "b": "Accountability", "m": 3.11, "sd": 0.6, "d": [0, 1, 6, 2, 0]}, {"t": "Quem recebe uma cobrança responde com fato, não com defesa.", "b": "Accountability", "m": 3.67, "sd": 0.5, "d": [0, 0, 3, 6, 0]}, {"t": "O placar do time importa mais do que o placar de cada área.", "b": "Resultados", "m": 3.44, "sd": 1.24, "d": [0, 3, 1, 3, 2]}, {"t": "As pessoas abrem mão de recursos ou de agenda da própria área quando o time precisa.", "b": "Resultados", "m": 3.56, "sd": 0.88, "d": [0, 1, 3, 4, 1]}, {"t": "Quando a meta coletiva falha, cada um olha primeiro para a própria parte.", "b": "Resultados", "m": 3.22, "sd": 0.97, "d": [1, 0, 4, 4, 0]}, {"t": "O sucesso de um colega é tratado como resultado do time.", "b": "Resultados", "m": 3.78, "sd": 0.83, "d": [0, 0, 4, 3, 2]}, {"t": "O time acompanha um conjunto pequeno de indicadores comuns, com frequência.", "b": "Resultados", "m": 3.22, "sd": 1.3, "d": [1, 2, 1, 4, 1]}, {"t": "Ninguém aqui protege território em detrimento do objetivo comum.", "b": "Resultados", "m": 3.11, "sd": 0.78, "d": [0, 2, 4, 3, 0]}], "perfis": {"Empreendedor": {"tag": "iniciativa, risco e ritmo", "resumo": "Você é movido por autonomia e por resultado. Decide rápido, tolera bem a incerteza e prefere corrigir a rota andando a esperar a informação completa. Estrutura e processo, para você, só se justificam quando aceleram — caso contrário parecem atrito.", "forcas": ["Você é uma das pessoas que coloca assunto na mesa sem ser convidada. Num time em que quase ninguém faz isso, essa é a sua contribuição mais escassa.", "Sua tolerância a decidir sem consenso pleno destrava conversas que ficariam circulando."], "atencao": ["Seu ritmo faz você fechar a decisão antes que os perfis mais analíticos tenham terminado de processar. Eles não vão pedir mais tempo — vão apenas sair sem ter aderido.", "Informalidade com o registro é o seu ponto cego mais caro aqui: você sai da reunião com a decisão clara na cabeça e sem ela escrita em lugar nenhum."], "pedidos": ["Antes de fechar qualquer decisão relevante, pergunte nominalmente a duas pessoas que ainda não falaram. Nominalmente, não para a sala.", "Assuma o registro de uma decisão por reunião: o que ficou, quem faz, até quando. Escrito, no mesmo lugar, sempre.", "Quando alguém pedir mais tempo para analisar, conceda uma vez sem negociar. Vale mais como sinal do que como prazo."]}, "Aventureiro": {"tag": "inovação, individualidade e persuasão", "resumo": "Você combina apetite por ideia nova com facilidade para defendê-la em público. Não se intimida com discordância e costuma ser quem questiona o jeito estabelecido de fazer as coisas. Trabalha melhor com liberdade do que com método imposto.", "forcas": ["Você sustenta posição impopular, e isso é raro. Num time educado como este, você é parte do pouco atrito produtivo que existe.", "Sua capacidade de defender uma ideia em público abre espaço para que outros discordem depois de você."], "atencao": ["Sua presença ocupa espaço. Numa sala com quatro perfis reservados, a sua fluência é justamente o que faz o silêncio dos outros parecer concordância.", "Você tende a ler a estrutura como limitação. Neste time, a falta de estrutura é o problema — não o excesso."], "pedidos": ["Fale por último em pelo menos uma pauta relevante por reunião. Deixe o vácuo existir tempo suficiente para outro ocupá-lo.", "Quando defender uma ideia, termine perguntando a alguém específico o que essa pessoa vê de errado nela.", "Escolha um processo do time que hoje é informal e proponha uma versão escrita dele. Estrutura proposta por você tem outro peso."]}, "Especialista": {"tag": "precisão, cautela e estabilidade", "resumo": "Você trabalha com rigor e prefere entender bem antes de se posicionar. Constrói confiança com evidência, não com entusiasmo, e é cético com mudanças que chegam sem justificativa. Sua contribuição costuma ser a que evita o erro que ninguém viu.", "forcas": ["Você enxerga a falha no plano antes dela acontecer. É o tipo de leitura que este time mais perde quando ninguém pergunta a sua opinião.", "Sua consistência dá previsibilidade ao time — as pessoas sabem o que esperar de você."], "atencao": ["Você não se oferece para falar. Como o time também não convida (2,11 nesse item), o resultado prático é que a sua análise não entra na decisão — e depois ninguém entende por que a decisão precisou ser refeita.", "Sua avaliação do time tende a ser mais generosa que a de quem fala mais. Isso não significa que está tudo bem: significa que você está menos exposto ao atrito porque participa menos dele."], "pedidos": ["Traga uma discordância por reunião, mesmo pequena, mesmo que precise escrevê-la antes para conseguir dizer.", "Quando perceber um risco e não falar, registre para si mesmo. Em duas semanas, confira quantos se confirmaram — o número costuma ser convincente.", "Peça explicitamente a pauta com antecedência. Você decide melhor com tempo de preparação, e pedir isso é legítimo."]}, "Estudioso": {"tag": "profundidade técnica e análise", "resumo": "Você busca entender a fundo antes de agir e tem exigência alta com a qualidade do próprio trabalho. É reservado e analítico: processa internamente, e o que sai já vem depurado. Improviso e imprecisão custam caro para você.", "forcas": ["Você traz a profundidade que decisões rápidas costumam atropelar. Neste time, que decide sem informação completa com relativa facilidade, esse contrapeso é necessário.", "Sua exigência com precisão eleva o padrão do que o time considera pronto."], "atencao": ["Você depura antes de falar, e nesse intervalo a decisão já foi tomada. O time não vai esperar — ele precisa saber que existe uma análise em curso.", "Reserva e discordância se confundem de fora para dentro. Quando você não se manifesta, o time registra concordância."], "pedidos": ["Diga em voz alta quando estiver processando: “preciso de um dia para olhar isso direito”. É uma frase curta que muda a decisão.", "Mande sua análise por escrito antes da reunião quando o tema for relevante. O canal escrito é onde você contribui melhor — use-o de propósito.", "Escolha um tema por mês em que você assume a posição de quem discorda, mesmo sem certeza completa."]}, "Artesão": {"tag": "precisão com baixo atrito", "resumo": "Você entrega trabalho preciso e prefere ambientes estáveis, sem confronto desnecessário. É analítico e acomodativo ao mesmo tempo: enxerga o problema e costuma escolher não transformá-lo em conflito. Colabora com facilidade e cobra com dificuldade.", "forcas": ["Você é uma das pessoas mais fáceis de trabalhar junto neste time — e num time competitivo, isso vale mais do que parece.", "Sua atenção ao detalhe pega o que passa despercebido para quem está correndo."], "atencao": ["Evitar atrito e evitar conversa difícil são coisas diferentes, e é fácil confundi-las. O time tem accountability em 3,37 justamente porque quase ninguém inicia a cobrança.", "Sua leitura do time é a mais positiva entre os perfis analíticos. Vale checar se isso é o time indo bem ou se é você estando fora do atrito."], "pedidos": ["Escolha uma cobrança que você vem adiando e faça-a nesta semana, direto com a pessoa, sem passar pelo líder.", "Quando discordar, diga a discordância antes de dizer a concessão. A ordem muda o que o outro escuta.", "Quando notar um erro pequeno, aponte enquanto ele ainda é pequeno. É o item que o time inteiro tem baixo (3,00)."]}, "Estrategista": {"tag": "resultado com rigor", "resumo": "Você combina impulso por resultado com exigência analítica: quer mudar o estado das coisas e quer fazê-lo com método. Não é uma combinação comum — a maioria das pessoas puxa para um lado ou para o outro. Você é reservado socialmente e direto no conteúdo.", "forcas": ["Você é o único perfil deste time que junta iniciativa e rigor. É exatamente a combinação que falta no ponto mais frágil do grupo: decisão que sai com dono e prazo.", "Sua exigência de clareza expõe ambiguidade que o time hoje tolera sem perceber."], "atencao": ["Você é reservado no social e direto no conteúdo. Num time competitivo, essa combinação pode ser lida como agenda própria antes de ser lida como rigor.", "Sua vontade de estruturar vai encontrar um time que decide informalmente e não sente falta de método. Você vai parecer burocrático antes de parecer certo."], "pedidos": ["Nos primeiros trinta dias, gaste mais tempo entendendo por que as coisas são como são do que propondo como deveriam ser.", "Construa relação com os quatro perfis mais reservados antes de propor qualquer mudança de processo. Eles são seus aliados naturais e são invisíveis nas reuniões.", "Quando propuser estrutura, proponha sempre resolvendo uma dor que o time já reconhece — nunca como princípio."]}}, "composicao": [["Empreendedor", 3, "iniciativa", "Iniciativa, apetite a risco, orientação a resultado. Fala sem ser chamado."], ["Aventureiro", 2, "iniciativa", "Pensamento inovador e individualista; não se intimida com a discordância."], ["Especialista", 2, "precisão", "Altamente preciso, cético, respeita autoridade. Não se oferece para falar."], ["Estudioso", 1, "precisão", "Preciso, reservado, profundidade técnica. Processa antes de se manifestar."], ["Artesão", 1, "precisão", "Complacente e analítico, trabalho de alta precisão. Evita atrito."], ["Estrategista", 1, "iniciativa", "Orientado a resultado, analítico, impulso para mudar o status quo."]], "tipoTime": "Time de Produção", "tipoAdj": "Competitivo · Intenso · Orientado a tarefas", "pessoas": {"eduardo": {"codigo": "EDU-594794", "nome": "Eduardo Perin Favero", "perfil": "Artesão", "ref_tipo": "mesmo agrupamento", "pares": [], "niveis": {"Confiança": 4.17, "Conflito": 3.17, "Comprometimento": 3.83, "Accountability": 3.83, "Resultados": 4}, "respostas": [4, 3, 5, 4, 5, 4, 3, 3, 1, 4, 5, 3, 2, 4, 3, 5, 4, 5, 3, 5, 3, 5, 3, 4, 4, 4, 3, 5, 4, 4], "sig": [{"i": 19, "t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 5, "m": 3.11, "ref": 3.3, "b": "Accountability", "dist": [5, 2, 2, 2, 4, 2, 3, 4, 4]}, {"i": 17, "t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "v": 5, "m": 3.56, "ref": 3.3, "b": "Comprometimento", "dist": [5, 4, 3, 4, 5, 2, 3, 3, 3]}, {"i": 15, "t": "O time decide mesmo sem consenso pleno e sem informação completa.", "v": 5, "m": 3.33, "ref": 3.7, "b": "Comprometimento", "dist": [5, 4, 2, 2, 4, 3, 2, 4, 4]}, {"i": 27, "t": "O sucesso de um colega é tratado como resultado do time.", "v": 5, "m": 3.78, "ref": 3.7, "b": "Resultados", "dist": [5, 3, 3, 3, 4, 3, 5, 4, 4]}, {"i": 4, "t": "Quando alguém erra, reconhece e pede desculpas sem que seja preciso cobrar.", "v": 5, "m": 3.78, "ref": 3.7, "b": "Confiança", "dist": [5, 3, 3, 3, 3, 4, 4, 5, 4]}, {"i": 8, "t": "O time pede ativamente a opinião de quem ficou calado.", "v": 1, "m": 2.11, "ref": 2.3, "b": "Conflito", "dist": [1, 3, 2, 2, 3, 2, 2, 2, 2]}], "tipico": {"i": 1, "d": 0, "v": 3, "m": 3, "t": "Erros são ditos em voz alta enquanto ainda são pequenos."}, "frase": "Você lê este time como quem vê quase tudo funcionando — e uma única coisa falhando.", "tensao": {"p": "Como manter a harmonia e ainda nomear o que incomoda?", "pares": [["Preservar a relação  ·  Nomear o atrito", "Quando o custo do confronto é maior que o do problema.", "Quando o problema volta pela terceira vez."], ["Acomodar  ·  Discordar", "Quando a decisão é boa o suficiente e o tempo é curto.", "Quando você já concluiu que a decisão está errada."], ["Entregar  ·  Cobrar", "Quando resolver por fora é mais rápido.", "Quando resolver por fora esconde um combinado que não está sendo cumprido."]]}, "leituras": [{"n": "A leitura mais positiva do time", "cor": "AZUL", "fav": [{"t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 5, "m": 3.11, "b": "Accountability"}, {"t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "v": 5, "m": 3.56, "b": "Comprometimento"}, {"t": "O time decide mesmo sem consenso pleno e sem informação completa.", "v": 5, "m": 3.33, "b": "Comprometimento"}, {"t": "O sucesso de um colega é tratado como resultado do time.", "v": 5, "m": 3.78, "b": "Resultados"}], "con": [{"t": "O time pede ativamente a opinião de quem ficou calado.", "v": 1, "m": 2.11, "b": "Conflito"}], "leitura": "Onze dos trinta itens você avalia pelo menos um ponto acima da média, e apenas um abaixo. É a leitura mais generosa do grupo, e por isso mesmo vale entender de onde ela vem.", "contra": "O único item em que você está abaixo é justamente o mais baixo do time inteiro: convidar quem ficou calado. Você responde 1, o mínimo possível, contra média 2,11. Uma leitura uniformemente positiva não produziria esse extremo isolado.", "alt": "Pode ser exposição: talvez você participe das conversas em que as coisas funcionam. Pode ser régua: talvez o que você chama de 4 outra pessoa chame de 3.", "teste": "Peça a dois colegas que citem uma situação recente em que o time não funcionou bem. Se os exemplos forem coisas que você não presenciou, a explicação é exposição."}, {"n": "O único ponto em que você está abaixo de todos", "cor": "VERMELHO", "fav": [{"t": "O time pede ativamente a opinião de quem ficou calado.", "v": 1, "m": 2.11, "b": "Conflito"}], "con": [{"t": "Quando um assunto difícil aparece, o time enfrenta ali e não empurra para a próxima pauta.", "v": 5, "m": 3.44, "b": "Conflito"}], "leitura": "Você responde 1 em convidar quem ficou calado — o menor valor possível, e o mais baixo do time nesse item.", "contra": "Ao mesmo tempo, você avalia em 5 o item de o time enfrentar o assunto difícil na hora, contra média 3,44. Se o time evitasse a conversa, seria razoável esperar leitura mais baixa também aí.", "alt": "Enfrentar um assunto difícil e convidar quem está calado são coisas diferentes. É possível que você esteja distinguindo as duas com precisão — e que o time faça a primeira e não a segunda.", "teste": "Nas próximas duas reuniões, conte quantas vezes alguém é convidado pelo nome a falar. Zero confirma a leitura."}, {"n": "O feedback que você vê acontecer", "cor": "AMBAR", "fav": [{"t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 5, "m": 3.11, "b": "Accountability"}], "con": [{"t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "v": 3, "m": 3.11, "b": "Accountability"}], "leitura": "Você avalia em 5 o item de feedback difícil dado no momento, contra média 3,11 — a maior distância positiva sua em accountability.", "contra": "No item de as pessoas cobrarem umas às outras sem passar pelo líder, você fica próximo da média do grupo. Se o feedback fosse tão frequente, seria razoável esperar leitura mais alta também na cobrança direta.", "alt": "Você pode estar avaliando o feedback que recebe, e não o que observa entre outras pessoas.", "teste": "Pergunte a dois colegas quando foi a última vez que alguém do time deu feedback difícil a eles na hora."}]}, "felipe": {"codigo": "FEL-508613", "nome": "Felipe Cotecchia", "perfil": "Empreendedor", "ref_tipo": "mesmo perfil", "pares": ["italla", "paloma"], "niveis": {"Confiança": 3.17, "Conflito": 3.5, "Comprometimento": 3.17, "Accountability": 3.33, "Resultados": 2.83}, "respostas": [4, 2, 5, 3, 3, 2, 4, 4, 3, 5, 2, 3, 2, 2, 5, 4, 2, 4, 3, 2, 4, 3, 4, 4, 5, 2, 1, 3, 4, 2], "sig": [{"i": 26, "t": "Quando a meta coletiva falha, cada um olha primeiro para a própria parte.", "v": 1, "m": 3.22, "ref": 4, "b": "Resultados", "dist": [3, 1, 4, 3, 3, 4, 4, 4, 3]}, {"i": 14, "t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 5, "m": 3.44, "ref": 2.5, "b": "Comprometimento", "dist": [3, 5, 3, 3, 5, 5, 2, 3, 2]}, {"i": 25, "t": "As pessoas abrem mão de recursos ou de agenda da própria área quando o time precisa.", "v": 2, "m": 3.56, "ref": 4, "b": "Resultados", "dist": [4, 2, 4, 3, 4, 3, 4, 3, 5]}, {"i": 24, "t": "O placar do time importa mais do que o placar de cada área.", "v": 5, "m": 3.44, "ref": 3.5, "b": "Resultados", "dist": [4, 5, 2, 2, 2, 4, 5, 3, 4]}, {"i": 15, "t": "O time decide mesmo sem consenso pleno e sem informação completa.", "v": 4, "m": 3.33, "ref": 2, "b": "Comprometimento", "dist": [5, 4, 2, 2, 4, 3, 2, 4, 4]}, {"i": 29, "t": "Ninguém aqui protege território em detrimento do objetivo comum.", "v": 2, "m": 3.11, "ref": 3.5, "b": "Resultados", "dist": [4, 2, 3, 4, 3, 2, 4, 3, 3]}], "tipico": {"i": 3, "d": 0.10999999999999988, "v": 3, "m": 2.89, "t": "As pessoas falam das próprias limitações sem medo do julgamento dos colegas."}, "frase": "Você lê um time que diz valorizar o resultado coletivo e não abre mão de nada pela própria área.", "tensao": {"p": "Como manter o ritmo e ainda deixar registro?", "pares": [["Decidir rápido  ·  Registrar", "Quando o custo de esperar é maior que o de errar.", "Quando duas pessoas saem da sala com versões diferentes."], ["Seguir em frente  ·  Voltar ao combinado", "Quando revisitar trava a execução.", "Quando o combinado nunca foi escrito."], ["Resolver sozinho  ·  Envolver", "Quando o assunto é só seu.", "Quando a solução depende de alguém que não foi consultado."]]}, "leituras": [{"n": "Resultados: a sua maior distância", "cor": "AMBAR", "fav": [{"t": "As pessoas abrem mão de recursos ou de agenda da própria área quando o time precisa.", "v": 2, "m": 3.56, "b": "Resultados"}, {"t": "Ninguém aqui protege território em detrimento do objetivo comum.", "v": 2, "m": 3.11, "b": "Resultados"}, {"t": "Quando a meta coletiva falha, cada um olha primeiro para a própria parte.", "v": 1, "m": 3.22, "b": "Resultados"}], "con": [{"t": "O placar do time importa mais do que o placar de cada área.", "v": 5, "m": 3.44, "b": "Resultados"}], "leitura": "Resultados é o seu nível mais baixo, 2,83 contra 3,39 do time. Você lê pouca disposição de abrir mão de recursos e bastante proteção de território.", "contra": "No entanto, você avalia em 5 o item de o placar do time importar mais do que o de cada área, contra média 3,44. É o oposto do que a leitura de silo faria esperar.", "alt": "O enunciado “cada um olha primeiro para a própria parte” admite duas leituras: assumir responsabilidade ou se fechar no próprio quintal. Se você entendeu a segunda, a nota 1 significa algo diferente do que parece.", "teste": "Releia esse item com um colega e comparem como cada um o entendeu."}, {"n": "A conversa difícil que você vê menos", "cor": "VERMELHO", "fav": [{"t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "v": 2, "m": 3, "b": "Confiança"}, {"t": "Quando um assunto difícil aparece, o time enfrenta ali e não empurra para a próxima pauta.", "v": 2, "m": 3.44, "b": "Conflito"}, {"t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 2, "m": 3.11, "b": "Accountability"}], "con": [{"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 5, "m": 3.44, "b": "Comprometimento"}], "leitura": "Em quatro itens ligados a conversa difícil você fica ao menos um ponto abaixo da média do grupo.", "contra": "Ao mesmo tempo, você avalia em 5 o item de quem discordou sustentar a decisão depois, contra média 3,44. Para sustentar uma discordância, ela precisa ter acontecido.", "alt": "Pode ser que você esteja separando duas coisas: discordar de uma ideia, que acontece, e cobrar um compromisso, que não.", "teste": "Recupere a última vez que alguém te disse algo difícil no momento em que aconteceu. Se não houver, a leitura se sustenta."}, {"n": "O padrão que não vale para todos", "cor": "AZUL", "fav": [{"t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "v": 3, "m": 4, "b": "Accountability"}], "con": [{"t": "Quem recebe uma cobrança responde com fato, não com defesa.", "v": 4, "m": 3.67, "b": "Accountability"}], "leitura": "Você e mais uma pessoa são os únicos abaixo da média no item de o padrão valer para todos — 3 contra 4,00.", "contra": "No item de quem recebe cobrança responder com fato, você acompanha o grupo. Se o padrão fosse claramente desigual, seria razoável esperar leitura mais baixa também ali.", "alt": "Você pode estar pensando numa situação específica e recente, e não num padrão do time.", "teste": "Escreva qual situação te fez responder isso. Se for uma só, é episódio, não padrão."}]}, "italla": {"codigo": "ITA-955076", "nome": "Italla Tutida", "perfil": "Empreendedor", "ref_tipo": "mesmo perfil", "pares": ["felipe", "paloma"], "niveis": {"Confiança": 2.83, "Conflito": 2.33, "Comprometimento": 2.33, "Accountability": 2.67, "Resultados": 3}, "respostas": [4, 2, 4, 2, 3, 2, 2, 2, 2, 4, 2, 2, 1, 2, 3, 2, 3, 3, 3, 2, 2, 3, 3, 3, 2, 4, 4, 3, 2, 3], "sig": [{"i": 24, "t": "O placar do time importa mais do que o placar de cada área.", "v": 2, "m": 3.44, "ref": 5, "b": "Resultados", "dist": [4, 5, 2, 2, 2, 4, 5, 3, 4]}, {"i": 12, "t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 1, "m": 2.67, "ref": 3, "b": "Comprometimento", "dist": [2, 2, 1, 2, 1, 4, 4, 4, 4]}, {"i": 28, "t": "O time acompanha um conjunto pequeno de indicadores comuns, com frequência.", "v": 2, "m": 3.22, "ref": 4, "b": "Resultados", "dist": [4, 4, 2, 2, 1, 5, 4, 4, 3]}, {"i": 20, "t": "Atrasos e entregas abaixo do combinado são nomeados, com nome e data.", "v": 2, "m": 3.22, "ref": 4, "b": "Accountability", "dist": [3, 4, 2, 2, 3, 3, 4, 4, 4]}, {"i": 6, "t": "Discordâncias sobre temas importantes aparecem na reunião, não depois dela.", "v": 2, "m": 3.44, "ref": 3.5, "b": "Conflito", "dist": [3, 4, 2, 3, 5, 4, 3, 3, 4]}, {"i": 7, "t": "As pessoas sustentam uma posição impopular quando acreditam nela.", "v": 2, "m": 3.22, "ref": 3.5, "b": "Conflito", "dist": [3, 4, 2, 3, 4, 2, 3, 4, 4]}], "tipico": {"i": 16, "d": 0, "v": 3, "m": 3, "t": "As decisões são comunicadas de forma consistente por todos às suas equipes."}, "frase": "A sua leitura é a mais severa do time: treze itens abaixo da média em pelo menos um ponto, nenhum acima.", "tensao": {"p": "Como manter a exigência e ainda reconhecer o que já funciona?", "pares": [["Exigir  ·  Reconhecer", "Quando o padrão está caindo e ninguém diz.", "Quando o time precisa saber o que preservar."], ["Apontar o que falta  ·  Nomear o que existe", "Quando a lacuna é o risco.", "Quando a única informação que chega é sobre falha."], ["Decidir rápido  ·  Ouvir antes", "Quando a janela é curta.", "Quando a decisão depende de quem ainda não falou."]]}, "leituras": [{"n": "A régua ou a experiência", "cor": "AZUL", "fav": [{"t": "Discordâncias sobre temas importantes aparecem na reunião, não depois dela.", "v": 2, "m": 3.44, "b": "Conflito"}, {"t": "As pessoas sustentam uma posição impopular quando acreditam nela.", "v": 2, "m": 3.22, "b": "Conflito"}, {"t": "Decisões relevantes só avançam depois de o contraponto ser ouvido.", "v": 2, "m": 3.22, "b": "Conflito"}], "con": [{"t": "Pedir ajuda aqui não é lido como fraqueza.", "v": 4, "m": 4.44, "b": "Confiança"}, {"t": "O debate esquenta sobre a ideia, sem virar ataque pessoal.", "v": 4, "m": 4.33, "b": "Conflito"}], "leitura": "Conflito 2,33 e comprometimento 2,33 são as notas mais baixas que qualquer pessoa deu a qualquer nível neste time.", "contra": "Nos dois itens que o grupo considera seus maiores ativos — pedir ajuda e debater sem ataque pessoal — você acompanha a média. Uma severidade uniforme não teria essa exceção.", "alt": "Pode ser régua: talvez você use 2 onde outras pessoas usam 3, sem que a experiência seja diferente.", "teste": "Escolha três itens e descreva o que seria um 5 em cada um. Compare com o que um colega descreveria."}, {"n": "O conflito que você vê muito menos", "cor": "VERMELHO", "fav": [{"t": "Discordâncias sobre temas importantes aparecem na reunião, não depois dela.", "v": 2, "m": 3.44, "b": "Conflito"}, {"t": "Quando um assunto difícil aparece, o time enfrenta ali e não empurra para a próxima pauta.", "v": 2, "m": 3.44, "b": "Conflito"}, {"t": "As pessoas sustentam uma posição impopular quando acreditam nela.", "v": 2, "m": 3.22, "b": "Conflito"}], "con": [{"t": "O time pede ativamente a opinião de quem ficou calado.", "v": 2, "m": 2.11, "b": "Conflito"}], "leitura": "Em quatro itens de conflito você fica dois pontos ou mais abaixo da média.", "contra": "No item em que o time inteiro concorda que há problema — convidar quem ficou calado, média 2,11 — você não está mais baixa que os outros. Se a sua régua fosse simplesmente mais dura, esperaríamos que estivesse.", "alt": "Pode ser que você participe de um conjunto de reuniões diferente do que a maioria descreve.", "teste": "Nas duas últimas reuniões relevantes, quantas discordâncias você viu aparecer? Compare com um colega que estava nas mesmas."}, {"n": "Atrasos que não são nomeados", "cor": "AMBAR", "fav": [{"t": "Atrasos e entregas abaixo do combinado são nomeados, com nome e data.", "v": 2, "m": 3.22, "b": "Accountability"}, {"t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 2, "m": 3.11, "b": "Accountability"}, {"t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "v": 3, "m": 4, "b": "Accountability"}], "con": [{"t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "v": 3, "m": 3.11, "b": "Accountability"}, {"t": "Questionar o método de um colega dentro da área dele é bem-vindo aqui.", "v": 3, "m": 3.11, "b": "Accountability"}], "leitura": "Três itens de accountability aparecem pelo menos um ponto abaixo: atrasos nomeados, feedback no momento e padrão para todos.", "contra": "Nos dois itens que descrevem cobrar diretamente e questionar o método de um colega, você responde exatamente na média do grupo. Se a cobrança fosse tão ausente, seria razoável esperar leitura mais baixa também aí.", "alt": "Sua posição pode te expor mais aos atrasos do que a média do time.", "teste": "Pense no último atraso relevante: quem soube, quando, e quem disse alguma coisa."}]}, "leticia": {"codigo": "LET-255414", "nome": "Letícia Nunes Ribeiro", "perfil": "Aventureiro", "ref_tipo": "mesmo perfil", "pares": ["pedro"], "niveis": {"Confiança": 2.67, "Conflito": 2.83, "Comprometimento": 2.33, "Accountability": 2.5, "Resultados": 2.83}, "respostas": [3, 2, 4, 2, 3, 2, 3, 3, 2, 3, 3, 3, 2, 2, 3, 2, 1, 4, 3, 2, 2, 2, 3, 3, 2, 3, 3, 3, 2, 4], "sig": [{"i": 21, "t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "v": 2, "m": 4, "ref": 5, "b": "Accountability", "dist": [5, 3, 3, 2, 5, 4, 4, 5, 5]}, {"i": 16, "t": "As decisões são comunicadas de forma consistente por todos às suas equipes.", "v": 1, "m": 3, "ref": 4, "b": "Comprometimento", "dist": [4, 2, 3, 1, 3, 3, 3, 4, 4]}, {"i": 1, "t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "v": 2, "m": 3, "ref": 5, "b": "Confiança", "dist": [3, 2, 2, 2, 4, 2, 4, 5, 3]}, {"i": 15, "t": "O time decide mesmo sem consenso pleno e sem informação completa.", "v": 2, "m": 3.33, "ref": 4, "b": "Comprometimento", "dist": [5, 4, 2, 2, 4, 3, 2, 4, 4]}, {"i": 9, "t": "O debate esquenta sobre a ideia, sem virar ataque pessoal.", "v": 3, "m": 4.33, "ref": 5, "b": "Conflito", "dist": [4, 5, 4, 3, 4, 5, 4, 5, 5]}, {"i": 28, "t": "O time acompanha um conjunto pequeno de indicadores comuns, com frequência.", "v": 2, "m": 3.22, "ref": 4, "b": "Resultados", "dist": [4, 4, 2, 2, 1, 5, 4, 4, 3]}], "tipico": {"i": 8, "d": 0.10999999999999988, "v": 2, "m": 2.11, "t": "O time pede ativamente a opinião de quem ficou calado."}, "frase": "Você é a pessoa que lê com mais severidade dois dos três ativos que o time considera seus.", "tensao": {"p": "Como manter a energia e ainda sustentar o detalhe?", "pares": [["Mobilizar  ·  Aprofundar", "Quando o time precisa se mover.", "Quando a proposta ainda não foi examinada."], ["Conectar pessoas  ·  Fechar o combinado", "Quando falta alinhamento entre áreas.", "Quando a conversa termina sem dono e sem data."], ["Falar  ·  Escutar até o fim", "Quando o silêncio trava a sala.", "Quando alguém começou uma frase e não terminou."]]}, "leituras": [{"n": "O padrão que não vale para todos", "cor": "VERMELHO", "fav": [{"t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "v": 2, "m": 4, "b": "Accountability"}], "con": [{"t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "v": 3, "m": 3.11, "b": "Accountability"}, {"t": "Questionar o método de um colega dentro da área dele é bem-vindo aqui.", "v": 3, "m": 3.11, "b": "Accountability"}], "leitura": "Você responde 2 no item de o padrão de desempenho valer para todos, contra média 4,00 — a leitura mais baixa do time num item que o grupo considera um dos seus pontos fortes.", "contra": "Nos dois itens que descrevem cobrar diretamente e questionar o método de um colega, você responde exatamente na média. Se o padrão fosse aplicado de forma desigual, a cobrança dificilmente seria vista como normal.", "alt": "Você pode estar pensando numa pessoa específica, e não no padrão geral do time.", "teste": "Descreva a situação que te fez responder isso. Se envolver uma pessoa só, é sobre ela, não sobre o padrão."}, {"n": "A decisão que não chega", "cor": "AZUL", "fav": [{"t": "As decisões são comunicadas de forma consistente por todos às suas equipes.", "v": 1, "m": 3, "b": "Comprometimento"}, {"t": "O time decide mesmo sem consenso pleno e sem informação completa.", "v": 2, "m": 3.33, "b": "Comprometimento"}], "con": [{"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 3, "m": 3.44, "b": "Comprometimento"}], "leitura": "Você responde 1 no item de as decisões serem comunicadas de forma consistente, contra média 3,00. É a leitura mais baixa do time.", "contra": "No item de quem discordou sustentar a decisão depois, você fica próxima da média. Para sustentar uma decisão fora da sala, é preciso saber qual foi.", "alt": "Operações cross costuma estar no fim da cascata. A sua posição pode fazer a decisão chegar mais tarde e mais deformada.", "teste": "Pense na última decisão relevante do time: por qual caminho ela chegou até você, e quanto tempo depois?"}, {"n": "O debate que você vê menos seguro", "cor": "AMBAR", "fav": [{"t": "O debate esquenta sobre a ideia, sem virar ataque pessoal.", "v": 3, "m": 4.33, "b": "Conflito"}, {"t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "v": 2, "m": 3, "b": "Confiança"}], "con": [{"t": "As pessoas sustentam uma posição impopular quando acreditam nela.", "v": 3, "m": 3.22, "b": "Conflito"}], "leitura": "Você responde 3 no item de o debate esquentar sobre a ideia sem virar ataque pessoal, contra média 4,33 — a leitura mais baixa do time no item mais consensual do questionário.", "contra": "No item de sustentar uma posição impopular, você acompanha o grupo. Se o debate fosse inseguro, seria razoável esperar leitura mais baixa também ali.", "alt": "Quem se importa mais com a relação costuma sentir antes o custo relacional de um debate duro. O mesmo debate pode ser lido como seguro por uns e áspero por outros.", "teste": "Recupere uma situação em que o debate passou do ponto. Pergunte a quem estava lá se percebeu o mesmo."}]}, "luiz": {"codigo": "LUI-238287", "nome": "Luiz Ronchetti Krempel", "perfil": "Especialista", "ref_tipo": "mesmo perfil", "pares": ["porto"], "niveis": {"Confiança": 3.67, "Conflito": 4, "Comprometimento": 3.5, "Accountability": 3.5, "Resultados": 2.83}, "respostas": [3, 4, 5, 4, 3, 3, 5, 4, 3, 4, 4, 4, 1, 3, 5, 4, 3, 5, 2, 4, 3, 5, 3, 4, 2, 4, 3, 4, 1, 3], "sig": [{"i": 12, "t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 1, "m": 2.67, "ref": 4, "b": "Comprometimento", "dist": [2, 2, 1, 2, 1, 4, 4, 4, 4]}, {"i": 14, "t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 5, "m": 3.44, "ref": 2, "b": "Comprometimento", "dist": [3, 5, 3, 3, 5, 5, 2, 3, 2]}, {"i": 28, "t": "O time acompanha um conjunto pequeno de indicadores comuns, com frequência.", "v": 1, "m": 3.22, "ref": 3, "b": "Resultados", "dist": [4, 4, 2, 2, 1, 5, 4, 4, 3]}, {"i": 24, "t": "O placar do time importa mais do que o placar de cada área.", "v": 2, "m": 3.44, "ref": 4, "b": "Resultados", "dist": [4, 5, 2, 2, 2, 4, 5, 3, 4]}, {"i": 17, "t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "v": 5, "m": 3.56, "ref": 3, "b": "Comprometimento", "dist": [5, 4, 3, 4, 5, 2, 3, 3, 3]}, {"i": 18, "t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "v": 2, "m": 3.11, "ref": 4, "b": "Accountability", "dist": [3, 3, 3, 3, 2, 4, 4, 2, 4]}], "tipico": {"i": 5, "d": 0, "v": 3, "m": 3, "t": "O que se fala sobre um colega fora da sala é o mesmo que se fala na frente dele."}, "frase": "Você descreve um time que fecha decisão com firmeza rara — e que trabalha sem uma direção comum e sem números comuns.", "tensao": {"p": "Como manter o rigor e ainda chegar a tempo?", "pares": [["Aprofundar  ·  Contribuir a tempo", "Quando o custo do erro é alto e há tempo.", "Quando a decisão vai fechar sem você."], ["Filtrar  ·  Acolher o inacabado", "Quando a proposta chega pronta e precisa de exame.", "Quando a ideia ainda está em formação."], ["Sustentar o ritmo  ·  Responder na hora", "Quando a consistência é o valor em jogo.", "Quando o silêncio pode ser lido como concordância."]]}, "leituras": [{"n": "Firmeza alta, direção baixa", "cor": "AZUL", "fav": [{"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 5, "m": 3.44, "b": "Comprometimento"}, {"t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "v": 5, "m": 3.56, "b": "Comprometimento"}, {"t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 1, "m": 2.67, "b": "Comprometimento"}], "con": [{"t": "As decisões são comunicadas de forma consistente por todos às suas equipes.", "v": 3, "m": 3, "b": "Comprometimento"}, {"t": "As reuniões terminam com decisão, dono e prazo explícitos.", "v": 3, "m": 2.89, "b": "Comprometimento"}], "leitura": "Você é a pessoa que mais registra firmeza na decisão e a que menos registra convergência sobre prioridade. Os dois extremos aparecem em você ao mesmo tempo.", "contra": "Você avalia a comunicação das decisões no mesmo ponto que o grupo e o fechamento com decisão, dono e prazo também. Se a direção fosse ausente, seria razoável esperar leitura mais baixa nesses dois — que são os mecanismos que a produziriam.", "alt": "O item pede convergência literal, com as mesmas palavras. Uma régua mais exigente produziria a mesma resposta 1 sem que a direção seja difusa.", "teste": "Peça a três colegas que escrevam as três prioridades sem consultar ninguém. Se as listas baterem, esta leitura cai."}, {"n": "O placar comum", "cor": "AMBAR", "fav": [{"t": "O time acompanha um conjunto pequeno de indicadores comuns, com frequência.", "v": 1, "m": 3.22, "b": "Resultados"}, {"t": "O placar do time importa mais do que o placar de cada área.", "v": 2, "m": 3.44, "b": "Resultados"}], "con": [{"t": "As pessoas abrem mão de recursos ou de agenda da própria área quando o time precisa.", "v": 4, "m": 3.56, "b": "Resultados"}, {"t": "O sucesso de um colega é tratado como resultado do time.", "v": 4, "m": 3.78, "b": "Resultados"}], "leitura": "Você registra ausência de indicadores comuns com mais intensidade que qualquer outra pessoa — é a sua maior distância individual dos trinta itens.", "contra": "Você avalia acima da média tanto a disposição de abrir mão de recursos da própria área quanto o reconhecimento do sucesso do colega como resultado do time. Se o funcionamento fosse de silo, seria razoável esperar leitura mais baixa aí.", "alt": "Pode existir um placar comum que você considera inadequado. Ausência de instrumento e discordância sobre o instrumento produzem a mesma resposta.", "teste": "Pergunte a duas pessoas quais números o time acompanha junto. Se listarem os mesmos e você só discordar da escolha, o problema é outro."}, {"n": "Espaço para discordar, uso para cobrar", "cor": "VERMELHO", "fav": [{"t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "v": 2, "m": 3.11, "b": "Accountability"}, {"t": "Atrasos e entregas abaixo do combinado são nomeados, com nome e data.", "v": 3, "m": 3.22, "b": "Accountability"}], "con": [{"t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 4, "m": 3.11, "b": "Accountability"}], "leitura": "Você avalia o conflito deste time acima de qualquer outra pessoa e, ao mesmo tempo, registra pouca cobrança direta entre pares.", "contra": "Você avalia bem acima da média o item de feedback difícil dado no momento, o que contraria diretamente a leitura de que não há cobrança acontecendo.", "alt": "O item mistura duas coisas: a cobrança acontecer e ela não passar pelo líder. Nota baixa pode indicar que a cobrança ocorre por meio do líder.", "teste": "Recupere as duas últimas vezes em que alguém deste time cobrou alguém. Por qual caminho passou?"}]}, "marcel": {"codigo": "MAR-871863", "nome": "Marcel Marques", "perfil": "Estudioso", "ref_tipo": "mesmo agrupamento", "pares": [], "niveis": {"Confiança": 3.17, "Conflito": 3.5, "Comprometimento": 3.67, "Accountability": 3.17, "Resultados": 3.5}, "respostas": [2, 2, 5, 2, 4, 4, 4, 2, 2, 5, 5, 3, 4, 5, 5, 3, 3, 2, 4, 2, 3, 4, 3, 3, 4, 3, 4, 3, 5, 2], "sig": [{"i": 28, "t": "O time acompanha um conjunto pequeno de indicadores comuns, com frequência.", "v": 5, "m": 3.22, "ref": 2.7, "b": "Resultados", "dist": [4, 4, 2, 2, 1, 5, 4, 4, 3]}, {"i": 17, "t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "v": 2, "m": 3.56, "ref": 4.3, "b": "Comprometimento", "dist": [5, 4, 3, 4, 5, 2, 3, 3, 3]}, {"i": 13, "t": "As reuniões terminam com decisão, dono e prazo explícitos.", "v": 5, "m": 2.89, "ref": 3.3, "b": "Comprometimento", "dist": [4, 2, 2, 2, 3, 5, 3, 2, 3]}, {"i": 19, "t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 2, "m": 3.11, "ref": 4.3, "b": "Accountability", "dist": [5, 2, 2, 2, 4, 2, 3, 4, 4]}, {"i": 14, "t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 5, "m": 3.44, "ref": 3.3, "b": "Comprometimento", "dist": [3, 5, 3, 3, 5, 5, 2, 3, 2]}, {"i": 12, "t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "ref": 2.3, "b": "Comprometimento", "dist": [2, 2, 1, 2, 1, 4, 4, 4, 4]}], "tipico": {"i": 16, "d": 0, "v": 3, "m": 3, "t": "As decisões são comunicadas de forma consistente por todos às suas equipes."}, "frase": "Você vê direção e registro onde a maioria do time não vê — e vê decisões voltando onde o grupo acha que elas ficam de pé.", "tensao": {"p": "Como manter a profundidade e ainda chegar antes da decisão?", "pares": [["Analisar  ·  Concluir", "Quando o tema é novo e o erro é caro.", "Quando a análise já respondeu a pergunta que importava."], ["Processar por dentro  ·  Dizer em voz alta", "Quando a formulação ainda não está pronta.", "Quando o silêncio vai ser lido como concordância."], ["Escrever  ·  Falar", "Quando o tema exige precisão.", "Quando a decisão acontece na sala e não no documento."]]}, "leituras": [{"n": "A direção que você enxerga e o time não", "cor": "AZUL", "fav": [{"t": "O time acompanha um conjunto pequeno de indicadores comuns, com frequência.", "v": 5, "m": 3.22, "b": "Resultados"}, {"t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "b": "Comprometimento"}, {"t": "As reuniões terminam com decisão, dono e prazo explícitos.", "v": 5, "m": 2.89, "b": "Comprometimento"}], "con": [{"t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "v": 2, "m": 3.56, "b": "Comprometimento"}], "leitura": "Você é o mais alto do time em indicadores comuns e está acima da média em prioridades e em fechamento de reunião. É uma leitura de time organizado.", "contra": "Ao mesmo tempo, você é o mais baixo do grupo no item de ser raro reabrir uma decisão. Um time com direção clara e registro consistente reabriria pouco.", "alt": "Profundidade técnica pode te dar acesso a documentação e a números que a maioria não consulta. Você pode estar vendo o que existe; os outros, o que circula.", "teste": "Mostre a dois colegas onde estão as prioridades e os indicadores. Se eles não souberem que existem, a informação existe e não chega."}, {"n": "As decisões que voltam", "cor": "AMBAR", "fav": [{"t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "v": 2, "m": 3.56, "b": "Comprometimento"}], "con": [{"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 5, "m": 3.44, "b": "Comprometimento"}], "leitura": "Você responde 2 no item de ser raro reabrir uma decisão fechada, contra média 3,56 — a leitura mais baixa do time.", "contra": "No item de quem discordou sustentar a decisão depois, você responde 5, bem acima da média. Reabrir pouco e sustentar muito costumam andar juntos.", "alt": "Reabrir por fato novo é legítimo e o item não distingue. Você pode estar registrando reaberturas justificadas.", "teste": "Liste as decisões que voltaram nos últimos três meses e marque quais tinham fato novo."}, {"n": "O feedback que não chega", "cor": "VERMELHO", "fav": [{"t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 2, "m": 3.11, "b": "Accountability"}, {"t": "As pessoas admitem que não sabem alguma coisa, sem rodeios.", "v": 2, "m": 3.33, "b": "Confiança"}, {"t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "v": 2, "m": 3, "b": "Confiança"}], "con": [{"t": "O que se fala sobre um colega fora da sala é o mesmo que se fala na frente dele.", "v": 4, "m": 3, "b": "Confiança"}], "leitura": "Três itens ligados a dizer o que é difícil aparecem pelo menos um ponto abaixo da média na sua leitura.", "contra": "No item de o que se fala fora da sala ser o mesmo que se fala na frente, você está acima da média. Se houvesse pouca franqueza, seria razoável esperar leitura mais baixa também aí.", "alt": "Seu padrão de expressão é de baixa amplitude. É possível que você receba menos feedback direto do que a média — e que isso descreva a sua situação, não o time.", "teste": "Pergunte a dois colegas quando foi a última vez que te deram feedback difícil. Compare com o que eles dizem fazer com outras pessoas."}]}, "paloma": {"codigo": "PAL-518489", "nome": "Paloma Reis", "perfil": "Empreendedor", "ref_tipo": "mesmo perfil", "pares": ["felipe", "italla"], "niveis": {"Confiança": 4, "Conflito": 3, "Comprometimento": 2.83, "Accountability": 3.5, "Resultados": 4.33}, "respostas": [4, 4, 5, 3, 4, 4, 3, 3, 2, 4, 3, 3, 4, 3, 2, 2, 3, 3, 4, 3, 4, 4, 2, 4, 5, 4, 4, 5, 4, 4], "sig": [{"i": 12, "t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "ref": 1.5, "b": "Comprometimento", "dist": [2, 2, 1, 2, 1, 4, 4, 4, 4]}, {"i": 14, "t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 2, "m": 3.44, "ref": 4, "b": "Comprometimento", "dist": [3, 5, 3, 3, 5, 5, 2, 3, 2]}, {"i": 27, "t": "O sucesso de um colega é tratado como resultado do time.", "v": 5, "m": 3.78, "ref": 3, "b": "Resultados", "dist": [5, 3, 3, 3, 4, 3, 5, 4, 4]}, {"i": 24, "t": "O placar do time importa mais do que o placar de cada área.", "v": 5, "m": 3.44, "ref": 3.5, "b": "Resultados", "dist": [4, 5, 2, 2, 2, 4, 5, 3, 4]}, {"i": 5, "t": "O que se fala sobre um colega fora da sala é o mesmo que se fala na frente dele.", "v": 4, "m": 3, "ref": 2, "b": "Confiança", "dist": [4, 2, 2, 2, 3, 4, 4, 2, 4]}, {"i": 1, "t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "v": 4, "m": 3, "ref": 2, "b": "Confiança", "dist": [3, 2, 2, 2, 4, 2, 4, 5, 3]}], "tipico": {"i": 16, "d": 0, "v": 3, "m": 3, "t": "As decisões são comunicadas de forma consistente por todos às suas equipes."}, "frase": "Você lê o time como forte em resultado e frágil em adesão — sabe para onde vai e não sustenta o que combinou.", "tensao": {"p": "Como manter a velocidade e ainda garantir adesão?", "pares": [["Avançar  ·  Alinhar", "Quando a janela é curta e a direção é clara.", "Quando quem executa não participou da decisão."], ["Assumir  ·  Distribuir", "Quando ninguém está pegando.", "Quando você virou o único caminho para a coisa andar."], ["Confiar no time  ·  Verificar o combinado", "Quando as pessoas têm histórico.", "Quando o combinado nunca foi dito em voz alta."]]}, "leituras": [{"n": "Resultado alto, adesão baixa", "cor": "AMBAR", "fav": [{"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 2, "m": 3.44, "b": "Comprometimento"}, {"t": "O time decide mesmo sem consenso pleno e sem informação completa.", "v": 2, "m": 3.33, "b": "Comprometimento"}], "con": [{"t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "b": "Comprometimento"}], "leitura": "Resultados 4,33 é a nota mais alta que você dá a qualquer nível; comprometimento 2,83 é a mais baixa. A distância entre as duas é a maior do time.", "contra": "No item de todo mundo dizer as três prioridades com as mesmas palavras, você responde 4 contra média 2,67 — acima do grupo. Se a adesão fosse frágil por falta de direção, seria razoável esperar leitura mais baixa aí.", "alt": "Você pode estar separando duas coisas: saber para onde vamos, que existe, e sustentar o que foi decidido, que não.", "teste": "Recupere a última decisão que alguém do time não sustentou fora da sala. O que aconteceu depois?"}, {"n": "A confiança que você vê mais alta", "cor": "AZUL", "fav": [{"t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "v": 4, "m": 3, "b": "Confiança"}, {"t": "O que se fala sobre um colega fora da sala é o mesmo que se fala na frente dele.", "v": 4, "m": 3, "b": "Confiança"}], "con": [{"t": "Questionar o método de um colega dentro da área dele é bem-vindo aqui.", "v": 2, "m": 3.11, "b": "Accountability"}], "leitura": "Confiança 4,00 contra 3,41 do time. Você lê mais franqueza do que a média em dois itens sensíveis: erros ditos cedo e coerência entre o que se fala dentro e fora da sala.", "contra": "No item de questionar o método de um colega dentro da área dele, você responde 2 contra média 3,11. Abertura para se expor e abertura para ser questionado deveriam andar próximas.", "alt": "Confiança para mostrar erro e abertura para ter o próprio método examinado são coisas diferentes, e podem conviver em níveis distintos.", "teste": "Qual foi a última vez que alguém questionou o seu método dentro da sua área? Como foi recebido?"}, {"n": "Decidir sem consenso", "cor": "VERMELHO", "fav": [{"t": "O time decide mesmo sem consenso pleno e sem informação completa.", "v": 2, "m": 3.33, "b": "Comprometimento"}, {"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 2, "m": 3.44, "b": "Comprometimento"}], "con": [{"t": "O placar do time importa mais do que o placar de cada área.", "v": 5, "m": 3.44, "b": "Resultados"}], "leitura": "Você responde 2 nos dois itens que descrevem decidir sob incerteza e sustentar a decisão depois — ambos abaixo da média.", "contra": "No item de o placar do time importar mais que o de cada área, você responde 5, o máximo. Um time sem capacidade de decidir junto dificilmente teria placar coletivo forte.", "alt": "O enunciado de decidir sem consenso pleno pode ser lido como falha, e não como capacidade. Se você o entendeu assim, a nota baixa significa o contrário do que parece.", "teste": "Releia o item. Você o entendeu como qualidade do time ou como problema?"}]}, "pedro": {"codigo": "PED-242206", "nome": "Pedro Poli Romero", "perfil": "Aventureiro", "ref_tipo": "mesmo perfil", "pares": ["leticia"], "niveis": {"Confiança": 3.5, "Conflito": 3.5, "Comprometimento": 3.33, "Accountability": 3.83, "Resultados": 3.5}, "respostas": [3, 5, 3, 3, 5, 2, 3, 4, 2, 5, 3, 4, 4, 2, 3, 4, 4, 3, 2, 4, 4, 5, 4, 4, 3, 3, 4, 4, 4, 3], "sig": [{"i": 1, "t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "v": 5, "m": 3, "ref": 2, "b": "Confiança", "dist": [3, 2, 2, 2, 4, 2, 4, 5, 3]}, {"i": 21, "t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "v": 5, "m": 4, "ref": 2, "b": "Accountability", "dist": [5, 3, 3, 2, 5, 4, 4, 5, 5]}, {"i": 16, "t": "As decisões são comunicadas de forma consistente por todos às suas equipes.", "v": 4, "m": 3, "ref": 1, "b": "Comprometimento", "dist": [4, 2, 3, 1, 3, 3, 3, 4, 4]}, {"i": 12, "t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "ref": 2, "b": "Comprometimento", "dist": [2, 2, 1, 2, 1, 4, 4, 4, 4]}, {"i": 4, "t": "Quando alguém erra, reconhece e pede desculpas sem que seja preciso cobrar.", "v": 5, "m": 3.78, "ref": 3, "b": "Confiança", "dist": [5, 3, 3, 3, 3, 4, 4, 5, 4]}, {"i": 19, "t": "Feedback difícil é dado no momento, não guardado para o ciclo de avaliação.", "v": 4, "m": 3.11, "ref": 2, "b": "Accountability", "dist": [5, 2, 2, 2, 4, 2, 3, 4, 4]}], "tipico": {"i": 3, "d": 0.10999999999999988, "v": 3, "m": 2.89, "t": "As pessoas falam das próprias limitações sem medo do julgamento dos colegas."}, "frase": "Você lê mais abertura e mais clareza do que o time lê — e é o mais baixo do grupo justamente no item que o time considera seu maior ativo.", "tensao": {"p": "Como manter a direção e ainda ouvir o que não te contam?", "pares": [["Dar direção  ·  Buscar o contraponto", "Quando a sala está travada.", "Quando ninguém discordou de você nas últimas três reuniões."], ["Confiar no que chega  ·  Procurar o que não chega", "Quando o time reporta bem.", "Quando a notícia ruim sempre chega tarde."], ["Decidir  ·  Verificar a adesão", "Quando a janela fecha.", "Quando a decisão precisa de quem não estava na sala."]]}, "leituras": [{"n": "O que chega até você", "cor": "AZUL", "fav": [{"t": "Erros são ditos em voz alta enquanto ainda são pequenos.", "v": 5, "m": 3, "b": "Confiança"}, {"t": "Quando alguém erra, reconhece e pede desculpas sem que seja preciso cobrar.", "v": 5, "m": 3.78, "b": "Confiança"}, {"t": "As decisões são comunicadas de forma consistente por todos às suas equipes.", "v": 4, "m": 3, "b": "Comprometimento"}], "con": [{"t": "Pedir ajuda aqui não é lido como fraqueza.", "v": 3, "m": 4.44, "b": "Confiança"}], "leitura": "Você avalia acima da média a franqueza sobre erros, o pedido de desculpas espontâneo e a comunicação das decisões.", "contra": "No item de pedir ajuda não ser lido como fraqueza — o mais alto do time, média 4,44 — você responde 3, a leitura mais baixa do grupo. Se o ambiente fosse tão aberto, seria estranho que o item de maior abertura fosse o seu mais baixo.", "alt": "O que chega a quem lidera costuma passar por um filtro. A sua leitura positiva pode refletir o que as pessoas escolhem te mostrar.", "teste": "Pergunte a dois colegas se pedem ajuda a você com a mesma facilidade com que pedem entre si."}, {"n": "A conversa que não passa por você", "cor": "VERMELHO", "fav": [{"t": "O que se fala sobre um colega fora da sala é o mesmo que se fala na frente dele.", "v": 2, "m": 3, "b": "Confiança"}, {"t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "v": 2, "m": 3.11, "b": "Accountability"}], "con": [{"t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "v": 5, "m": 4, "b": "Accountability"}], "leitura": "Você responde 2 em dois itens: coerência entre o que se fala dentro e fora da sala, e cobrança direta entre pares sem passar pelo líder.", "contra": "No item de o padrão de desempenho valer para todos, você responde 5, o máximo do time. Um padrão aplicado com rigor e uma cobrança que não acontece entre pares é uma combinação que pede explicação.", "alt": "Cobrança que passa pelo líder continua sendo cobrança. O item não distingue as duas, e a leitura baixa pode significar que ela chega a você em vez de circular.", "teste": "As duas últimas cobranças que aconteceram no time passaram por você? Se sim, o padrão existe e a rota é uma só."}, {"n": "As prioridades que você vê claras", "cor": "AMBAR", "fav": [{"t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "b": "Comprometimento"}, {"t": "As decisões são comunicadas de forma consistente por todos às suas equipes.", "v": 4, "m": 3, "b": "Comprometimento"}], "con": [{"t": "Ninguém aqui protege território em detrimento do objetivo comum.", "v": 3, "m": 3.11, "b": "Resultados"}, {"t": "O time pede ativamente a opinião de quem ficou calado.", "v": 2, "m": 2.11, "b": "Conflito"}], "leitura": "Você responde 4 no item de todo mundo dizer as três prioridades com as mesmas palavras, contra média 2,67. Cinco pessoas do time responderam 1 ou 2.", "contra": "Em dois itens que dependeriam de prioridade comum — território e convite a quem está calado — você responde na média do grupo, não acima. Se a direção estivesse tão clara quanto a sua nota sugere, seria razoável esperar leitura mais alta também aí.", "alt": "Quem define a prioridade quase sempre a considera mais clara do que quem a recebe. A diferença pode ser de posição, não de percepção.", "teste": "Peça a cinco pessoas que escrevam as três prioridades sem consultar ninguém. Compare com a sua lista."}]}, "porto": {"codigo": "POR-768474", "nome": "Guilherme Porto", "perfil": "Especialista", "ref_tipo": "mesmo perfil", "pares": ["luiz"], "niveis": {"Confiança": 3.5, "Conflito": 3.83, "Comprometimento": 3.33, "Accountability": 4, "Resultados": 3.67}, "respostas": [3, 3, 4, 3, 4, 4, 4, 4, 2, 5, 4, 4, 4, 3, 2, 4, 4, 3, 4, 4, 4, 5, 3, 4, 4, 5, 3, 4, 3, 3], "sig": [{"i": 14, "t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 2, "m": 3.44, "ref": 5, "b": "Comprometimento", "dist": [3, 5, 3, 3, 5, 5, 2, 3, 2]}, {"i": 12, "t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "ref": 1, "b": "Comprometimento", "dist": [2, 2, 1, 2, 1, 4, 4, 4, 4]}, {"i": 18, "t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "v": 4, "m": 3.11, "ref": 2, "b": "Accountability", "dist": [3, 3, 3, 3, 2, 4, 4, 2, 4]}, {"i": 24, "t": "O placar do time importa mais do que o placar de cada área.", "v": 4, "m": 3.44, "ref": 2, "b": "Resultados", "dist": [4, 5, 2, 2, 2, 4, 5, 3, 4]}, {"i": 17, "t": "É raro reabrir uma decisão já fechada sem que haja fato novo.", "v": 3, "m": 3.56, "ref": 5, "b": "Comprometimento", "dist": [5, 4, 3, 4, 5, 2, 3, 3, 3]}, {"i": 25, "t": "As pessoas abrem mão de recursos ou de agenda da própria área quando o time precisa.", "v": 5, "m": 3.56, "ref": 4, "b": "Resultados", "dist": [4, 2, 4, 3, 4, 3, 4, 3, 5]}], "tipico": {"i": 1, "d": 0, "v": 3, "m": 3, "t": "Erros são ditos em voz alta enquanto ainda são pequenos."}, "frase": "Você e a outra pessoa do time com o seu perfil leem este grupo de formas quase opostas.", "tensao": {"p": "Como manter a exigência e ainda sustentar o que foi decidido?", "pares": [["Cobrar o padrão  ·  Sustentar a decisão", "Quando a entrega ficou abaixo do combinado.", "Quando a decisão já foi tomada e precisa de apoio para funcionar."], ["Examinar  ·  Executar", "Quando o método tem falha visível.", "Quando o exame já passou do ponto de retorno."], ["Manter posição  ·  Ceder", "Quando a sua leitura resiste ao contra-argumento.", "Quando o time precisa de uma direção só."]]}, "leituras": [{"n": "Duas leituras opostas do mesmo time", "cor": "AZUL", "fav": [{"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 2, "m": 3.44, "b": "Comprometimento"}, {"t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "b": "Comprometimento"}, {"t": "O placar do time importa mais do que o placar de cada área.", "v": 4, "m": 3.44, "b": "Resultados"}], "con": [{"t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "v": 5, "m": 4, "b": "Accountability"}, {"t": "As pessoas abrem mão de recursos ou de agenda da própria área quando o time precisa.", "v": 5, "m": 3.56, "b": "Resultados"}], "leitura": "Nos seis itens que mais te distinguem, você e a outra pessoa do time com o mesmo perfil divergem — em quatro deles por dois pontos ou mais, e em dois por três.", "contra": "Nem tudo diverge. Vocês dois avaliam conflito acima da média do time e ambos estão acima no item de o padrão valer para todos. Onde vocês concordam, a concordância é forte.", "alt": "Perfil igual e exposição diferente. Áreas, interlocutores e tipos de reunião distintos produzem leituras distintas sem que nenhuma esteja errada.", "teste": "Sentem os dois com os seis itens à frente e comparem o que cada um tinha em mente ao responder."}, {"n": "A adesão que não se sustenta", "cor": "VERMELHO", "fav": [{"t": "Quem discordou no debate sustenta a decisão depois, fora da sala.", "v": 2, "m": 3.44, "b": "Comprometimento"}], "con": [{"t": "Todo mundo diria, com as mesmas palavras, quais são as três prioridades do time.", "v": 4, "m": 2.67, "b": "Comprometimento"}, {"t": "As decisões são comunicadas de forma consistente por todos às suas equipes.", "v": 4, "m": 3, "b": "Comprometimento"}], "leitura": "Você responde 2 no item de quem discordou sustentar a decisão fora da sala, contra média 3,44 — a leitura mais baixa do time.", "contra": "Ao mesmo tempo, você está acima da média em prioridades claras e em comunicação consistente das decisões. Se a direção é clara e chega bem, a não sustentação fica mais difícil de explicar.", "alt": "Você pode estar pensando num caso específico e recente, e não num padrão.", "teste": "Qual foi a decisão que alguém não sustentou? Se houver uma só, é episódio."}, {"n": "Accountability: o mais alto do time", "cor": "AMBAR", "fav": [{"t": "O padrão de desempenho vale para todos, inclusive para os mais antigos ou influentes.", "v": 5, "m": 4, "b": "Accountability"}, {"t": "As pessoas cobram umas às outras diretamente, sem terceirizar para o líder.", "v": 4, "m": 3.11, "b": "Accountability"}], "con": [{"t": "Questionar o método de um colega dentro da área dele é bem-vindo aqui.", "v": 3, "m": 3.11, "b": "Accountability"}], "leitura": "Accountability 4,00 é a nota mais alta que qualquer pessoa deu a esse nível. Você lê cobrança direta e padrão equânime acima do que o grupo lê.", "contra": "No item de questionar o método de um colega dentro da área dele ser bem-vindo, você fica próximo da média. Cobrança forte e exame de método costumam andar juntos.", "alt": "Tempo de casa e posição podem te dar acesso a cobranças que outras pessoas não presenciam.", "teste": "Pergunte a dois colegas quando foi a última vez que cobraram alguém diretamente, sem passar pelo líder."}]}}}</script>
+<script>
+"use strict";
+const D = JSON.parse(document.getElementById("dados").textContent);
+const app = document.getElementById("app");
+const BK = D.comportamentos;
+const nf = v => (v==null||isNaN(v)) ? "—" : Number(v).toFixed(2).replace(".",",");
+const sd = v => (v>0?"+":"−") + Math.abs(v).toFixed(2).replace(".",",");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- servidor ---------- */
+const SB = "https://adwmzkksbzmnhjdhdtkw.supabase.co";
+const ANON = "sb_publishable_xmIazktrsioHmJryAUhdgg_Bjm_KZKZ";
+async function rpc(fn, args){
+  const r = await fetch(SB + "/rest/v1/rpc/" + fn, {method:"POST",
+    headers:{"Content-Type":"application/json", apikey:ANON, Authorization:"Bearer "+ANON},
+    body: JSON.stringify(args||{})});
+  if(!r.ok) throw new Error(await r.text());
+  const t = await r.text(); return t ? JSON.parse(t) : null;
+}
+
+/* ---------- estado ---------- */
+/* O navegador é só um cache: escreve na hora para nada se perder, e o
+   servidor recebe logo em seguida. Se a rede cair, a fila espera. */
+const CHAVE = "gd_v2";
+const RESERVADOS = ["_maxL","_maxC","_etapaL","_blocoC","_pratica","_praticaOutra",
+                    "_fechado","_julga0","_julga1","_julga2","_viuLembrete"];
+let BD = {};
+try { BD = JSON.parse(localStorage.getItem(CHAVE) || "{}"); } catch(e) { BD = {}; }
+
+function est(cod){
+  if(!BD[cod]) BD[cod] = {etapaL:1, blocoC:0, campos:{}, julga:{}, pratica:"", praticaOutra:"",
+                          semanas:[], fechado:false, exemplos:["","",""]};
+  const s = BD[cod];
+  s.campos = s.campos||{}; s.julga = s.julga||{}; s.semanas = s.semanas||[]; s.exemplos = s.exemplos||["","",""];
+  return s;
+}
+function paraServidor(s){
+  const o = Object.assign({}, s.campos);
+  o._maxL = String(s.maxL||s.etapaL||1); o._maxC = String(s.maxC||s.blocoC||0);
+  o._etapaL = String(s.etapaL||1); o._blocoC = String(s.blocoC||0);
+  o._pratica = s.pratica||""; o._praticaOutra = s.praticaOutra||"";
+  o._fechado = s.fechado ? "1" : "0"; o._viuLembrete = s.viuLembrete ? "1" : "";
+  [0,1,2].forEach(i => o["_julga"+i] = s.julga[i]||"");
+  return o;
+}
+function doServidor(s, pares){
+  pares.forEach(({campo, valor}) => {
+    if(campo === "_maxL") s.maxL = +valor||1;
+    else if(campo === "_maxC") s.maxC = +valor||0;
+    else if(campo === "_etapaL") s.etapaL = +valor||1;
+    else if(campo === "_blocoC") s.blocoC = +valor||0;
+    else if(campo === "_pratica") s.pratica = valor;
+    else if(campo === "_praticaOutra") s.praticaOutra = valor;
+    else if(campo === "_fechado") s.fechado = valor === "1";
+    else if(campo === "_viuLembrete") s.viuLembrete = valor === "1";
+    else if(/^_julga[0-2]$/.test(campo)) { if(valor) s.julga[+campo.slice(-1)] = valor; }
+    else if(campo[0] !== "_") s.campos[campo] = valor;
+  });
+}
+
+/* fila de envio: campo -> valor pendente */
+let fila = new Map(), enviando = false, ultimoEnviado = {};
+function grava(){
+  try{ localStorage.setItem(CHAVE, JSON.stringify(BD)); }catch(e){}
+  if(!R.cod || R.cod === "PAINEL"){ marca("salvo"); return; }
+  const atual = paraServidor(est(R.cod)), base = ultimoEnviado[R.cod] || {};
+  Object.keys(atual).forEach(k => { if(atual[k] !== base[k]) fila.set(k, atual[k]); });
+  escoa();
+}
+async function escoa(){
+  if(enviando || !fila.size || !R.cod || R.cod === "PAINEL") return;
+  enviando = true; marca("salvando");
+  const cod = R.cod;
+  try{
+    while(fila.size){
+      const [campo, valor] = fila.entries().next().value;
+      fila.delete(campo);
+      await rpc("gd_salvar", {p_code: cod, p_campo: campo, p_valor: valor});
+      (ultimoEnviado[cod] = ultimoEnviado[cod] || {})[campo] = valor;
+    }
+    marca("salvo agora", true);
+  } catch(e){
+    marca("sem conexão · salvo aqui");
+    setTimeout(escoa, 8000);
+  } finally { enviando = false; }
+}
+let marcaT = null;
+function marca(txt, verde){
+  const e = document.querySelector(".est"); if(!e) return;
+  e.textContent = txt; e.classList.toggle("on", !!verde);
+  if(verde){ clearTimeout(marcaT); marcaT = setTimeout(()=>{
+    const x = document.querySelector(".est");
+    if(x){ x.classList.remove("on"); x.textContent = "salvo"; } }, 2400); }
+}
+window.addEventListener("online", escoa);
+
+/* ---------- rota ---------- */
+let R = { tela:"entrada", cod:null };
+function chaveDe(cod){
+  cod = String(cod||"").trim().toUpperCase();
+  return Object.keys(D.pessoas).find(k => D.pessoas[k].codigo === cod) || null;
+}
+function vai(tela, extra){ R.tela = tela; if(extra) Object.assign(R, extra); window.scrollTo(0,0); render(); }
+
+/* ---------- SVG ---------- */
+function barras(p){
+  const L=170, W=520, H=BK.length*38+16, esc5=x=>L+((x-1)/4)*(W-L-16);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sua leitura de cada comportamento comparada à média do time">`;
+  s+=`<g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--faint)">`;
+  for(let v=1;v<=5;v++) s+=`<text x="${esc5(v)}" y="${H-2}" text-anchor="middle">${v}</text>`;
+  s+=`</g>`;
+  BK.slice().reverse().forEach((b,i)=>{
+    const y=10+i*38, mine=p.niveis[b], team=D.medias[b];
+    s+=`<text x="0" y="${y+15}" font-family="Archivo, sans-serif" font-size="13" font-weight="600" fill="var(--ink)">${b}</text>`;
+    s+=`<rect x="${L}" y="${y+3}" width="${W-L-16}" height="19" rx="2" fill="var(--soft)"/>`;
+    s+=`<rect x="${L}" y="${y+3}" width="${Math.max(2,esc5(mine)-L)}" height="19" rx="2" fill="var(--verde)" opacity=".85"/>`;
+    s+=`<rect x="${esc5(team)-1}" y="${y}" width="2.5" height="25" fill="var(--ink)"/>`;
+    s+=`<text x="${L-8}" y="${y+17}" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)">${nf(mine)}</text>`;
+  });
+  return s+`</svg>`;
+}
+function termometro(p){
+  const L=170, W=520, M=(W-L-20)/2, cx=L+M, H=BK.length*32+22;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distância entre a sua leitura e a média do time, por comportamento">`;
+  s+=`<line x1="${cx}" y1="4" x2="${cx}" y2="${H-18}" stroke="var(--rule)" stroke-width="1.5"/>`;
+  BK.slice().reverse().forEach((b,i)=>{
+    const y=8+i*32, dif=p.niveis[b]-D.medias[b], w=Math.min(M-6, Math.abs(dif)/1.2*M), pos=dif>=0;
+    s+=`<text x="0" y="${y+15}" font-family="Archivo, sans-serif" font-size="12.5" font-weight="600" fill="var(--ink)">${b}</text>`;
+    if(Math.abs(dif)>0.005)
+      s+=`<rect x="${pos?cx:cx-w}" y="${y+4}" width="${Math.max(2,w)}" height="16" rx="2" fill="${pos?"var(--verde)":"var(--ambar)"}" opacity=".85"/>`;
+    s+=`<text x="${pos?cx+Math.max(2,w)+7:cx-Math.max(2,w)-7}" y="${y+16}" text-anchor="${pos?"start":"end"}" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="${Math.abs(dif)<0.05?"var(--faint)":(pos?"var(--verde-texto)":"var(--ambar)")}">${Math.abs(dif)<0.05?"igual":sd(dif)}</text>`;
+  });
+  s+=`<text x="${cx}" y="${H-3}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--faint)">média do time</text>`;
+  return s+`</svg>`;
+}
+function distribuicao(p){
+  const L=300, W=560, RH=42, H=p.sig.length*RH+22, x5=v=>L+((v-1)/4)*(W-L-26);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Onde cada uma das nove respostas caiu, nos seis itens que mais te diferenciam">`;
+  p.sig.forEach((it,i)=>{
+    const y=10+i*RH;
+    s+=`<text x="0" y="${y+14}" font-family="Source Serif 4, Georgia, serif" font-size="11.5" fill="var(--muted)">${esc(it.t.slice(0,46))}${it.t.length>46?"…":""}</text>`;
+    s+=`<line x1="${x5(1)}" y1="${y+10}" x2="${x5(5)}" y2="${y+10}" stroke="var(--rule)" stroke-width="1"/>`;
+    const cont={};
+    it.dist.forEach(v=>{ cont[v]=(cont[v]||0)+1; });
+    const usado={};
+    it.dist.forEach((v,j)=>{
+      usado[v]=(usado[v]||0);
+      const off=(usado[v]-(cont[v]-1)/2)*7.5; usado[v]++;
+      const eu = D.pessoas[R.chave] && j===D.ordem.indexOf(R.chave);
+      s+=`<circle cx="${x5(v)}" cy="${y+10+off}" r="${eu?5:3.6}" fill="${eu?"var(--verde)":"var(--rule)"}" ${eu?'stroke="var(--verde-texto)" stroke-width="1.2"':''}/>`;
+    });
+    s+=`<line x1="${x5(it.m)}" y1="${y+1}" x2="${x5(it.m)}" y2="${y+19}" stroke="var(--ink)" stroke-width="2"/>`;
+  });
+  s+=`<g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--faint)">`;
+  for(let v=1;v<=5;v++) s+=`<text x="${x5(v)}" y="${H-3}" text-anchor="middle">${v}</text>`;
+  return s+`</g></svg>`;
+}
+
+/* ---------- campos ---------- */
+function campo(id, rot, ajuda, ph, alt){
+  const s = est(R.cod);
+  return `<div class="campo"><label for="f_${id}">${esc(rot)}${ajuda?`<span class="aj">${esc(ajuda)}</span>`:""}</label>
+   <textarea id="f_${id}" data-campo="${id}" placeholder="${esc(ph||"")}" ${alt?`style="min-height:${alt}px"`:""}>${esc(s.campos[id]||"")}</textarea></div>`;
+}
+function linha(id, rot, ph){
+  const s = est(R.cod);
+  return `<div class="campo"><label for="f_${id}">${esc(rot)}</label>
+   <input type="text" id="f_${id}" data-campo="${id}" placeholder="${esc(ph||"")}" value="${esc(s.campos[id]||"")}"></div>`;
+}
+function ligaCampos(){
+  let t=null;
+  app.querySelectorAll("[data-campo]").forEach(el=>{
+    if(el.tagName==="TEXTAREA"){ el.style.height="auto"; el.style.height=Math.max(84,el.scrollHeight)+"px"; }
+    el.addEventListener("input", ()=>{
+      if(el.tagName==="TEXTAREA"){ el.style.height="auto"; el.style.height=Math.max(84,el.scrollHeight)+"px"; }
+      est(R.cod).campos[el.dataset.campo] = el.value;
+      clearTimeout(t); t = setTimeout(grava, 700);
+    });
+    el.addEventListener("blur", grava);
+  });
+}
+const preenchido = id => (est(R.cod).campos[id]||"").trim().length > 0;
+
+/* ---------- cabeçalho / navegação ---------- */
+function topo(tot, agora){
+  const p = D.pessoas[R.chave];
+  let s = `<div class="top"><span class="nome">${esc(p?p.nome:"Painel")}</span>
+    <span style="color:#8FA098">PicPay · rodada 1</span><span class="sep"></span>
+    <span class="est">salvo</span>
+    <button onclick="sair()">sair</button></div>`;
+  if(tot) { s += `<div class="prog">` + Array.from({length:tot},(_,i)=>
+    `<span class="${i+1<agora?"on":i+1===agora?"agora":""}"></span>`).join("") + `</div>`; }
+  return s;
+}
+function rodape(voltar, avancar, rot, passo, bloq){
+  return `<div class="nav"><div class="in">
+    ${voltar?`<button class="bt sec" onclick="${voltar}">Voltar</button>`:""}
+    <span class="passo">${esc(passo||"")}</span><span class="sep"></span>
+    ${avancar?`<button class="bt" ${bloq?"disabled":""} onclick="${avancar}">${esc(rot||"Continuar")}</button>`:""}
+  </div></div>`;
+}
+function orienta(faz, porque, tempo){
+  return `<div class="orienta">
+    <div><b>o que você faz aqui</b><span>${esc(faz)}</span></div>
+    <div><b>por quê</b><span>${esc(porque)}</span></div>
+    <div><b>tempo</b><span>${esc(tempo)}</span></div></div>`;
+}
+function sair(){
+  sessionStorage.removeItem("gd_cod");
+  PN = {senha:null, linhas:null, erro:"", ex:{}};
+  fila.clear();
+  R = {tela:"entrada", cod:null, chave:null};
+  render();
+}
+
+/* ---------- LEITURA ---------- */
+const TOTL = 8;
+function leitura(){
+  const p = D.pessoas[R.chave], s = est(R.cod), n = Math.min(TOTL, Math.max(1, s.etapaL));
+  let c = "";
+  if(n===1){
+    c = `<p class="kick">Etapa 1 de 8</p><h1 class="tit">De onde vêm os números</h1>
+    ${orienta("Entender em que este material se apoia — e o que ele não consegue dizer.","Para você saber quanto peso dar a cada coisa que vier depois.","3 min")}
+    <p>Esta parte é só a leitura. A parte de escrever — escolher um foco, combinar uma prática, acompanhar — vem depois, no caderno.</p>
+    <div class="grid2">
+      <div class="cart"><h4>O que existe</h4><p>Trinta frases sobre como o time funciona, respondidas por você e por outras oito pessoas. Um questionário de perfil que você respondeu sobre si mesmo. E dois ou três exemplos que colegas seus contaram, colhidos antes deste texto ser escrito.</p></div>
+      <div class="cart ambar"><h4>O que não existe</h4><p>Ninguém observou você em reunião. Não há avaliação formal de quem trabalha com você, nem comparação com executivos de outras empresas. Nove pessoas são poucas para virar referência.</p></div>
+    </div>
+    <div class="faixa"><b>a regra que vale para tudo o que vem a seguir</b>
+      <p>As perguntas eram sobre o time, não sobre você. Então nada aqui pode dizer como você age — só como você vê.</p></div>
+    <h3 class="sub">Validade desta leitura</h3>
+    <p class="mut">Ela vale para o momento em que foi feita. Time muda, prioridade muda, pressão muda. Vale reler isto daqui a dois ciclos, ou antes se entrar ou sair gente.</p>`;
+  }
+  else if(n===2){
+    const rows = BK.slice().reverse().map(b=>{
+      const d = p.niveis[b]-D.medias[b];
+      return `<tr><td class="forte">${b}</td><td class="n">${nf(p.niveis[b])}</td><td class="n" style="color:var(--muted)">${nf(D.medias[b])}</td>
+      <td class="n ${Math.abs(d)<0.05?"":(d>0?"up":"down")}">${Math.abs(d)<0.05?"igual":sd(d)}</td></tr>`;}).join("");
+    c = `<p class="kick">Etapa 2 de 8</p><h1 class="tit">Os cinco comportamentos</h1>
+    ${orienta("Ver a sua leitura de cada comportamento ao lado da leitura do grupo.","Para situar as diferenças que vêm nas próximas etapas.","4 min")}
+    <p>A barra cheia é a sua leitura. O traço escuro é a média das nove respostas.</p>
+    ${barras(p)}
+    <div class="legenda"><i>sua leitura</i><i class="m">média das nove</i></div>
+    <div class="tw"><table><thead><tr><th>Comportamento</th><th style="text-align:center">Você</th><th style="text-align:center">Média</th><th style="text-align:center">Diferença</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="peq">Abaixo de 3,00 o comportamento está em construção; de 3,00 a 3,74, em desenvolvimento; de 3,75 para cima, consolidado.</p>`;
+  }
+  else if(n===3){
+    c = `<p class="kick">Etapa 3 de 8</p><h1 class="tit">Onde a sua leitura mais se afasta</h1>
+    ${orienta("Ver em qual comportamento você está mais longe do grupo.","Porque é aí que a sua experiência do time é diferente da dos outros.","3 min")}
+    ${termometro(p)}
+    <p class="peq">Diferença entre a sua leitura e a média das nove respostas, em pontos da escala.</p>
+    <div class="nota">Diferença grande não quer dizer que você viu melhor nem pior. Quer dizer que alguma coisa na sua experiência do time é diferente — e as próximas etapas investigam o quê.</div>`;
+  }
+  else if(n===4){
+    const rows = p.sig.map(it=>`<tr><td>${esc(it.t)}</td><td class="n" style="color:${it.v>it.m?"var(--verde-texto)":"var(--ambar)"}">${it.v}</td>
+      <td class="n" style="color:var(--muted)">${nf(it.m)}</td><td class="n">${nf(it.ref)}</td></tr>`).join("");
+    const refRot = p.pares.length ? "Mesmo perfil" : "Mesmo grupo";
+    c = `<p class="kick">Etapa 4 de 8</p><h1 class="tit">O que te diferencia</h1>
+    ${orienta("Comparar as seis respostas que mais separam você do resto do time.","Porque é aí que está o que só você viu — e o que vale conversar.","8 min")}
+    <p>Estas seis respostas não vêm do seu perfil. Vêm do que você mesmo respondeu. A última coluna mostra como respondeu ${p.pares.length?"a outra pessoa do time que tem o mesmo perfil que você":"o grupo de perfis parecidos com o seu"}. Se o perfil explicasse a sua leitura, os números seriam parecidos. Compare.</p>
+    <div class="tw"><table><thead><tr><th>A afirmação</th><th style="text-align:center">Você</th><th style="text-align:center">Média</th><th style="text-align:center">${refRot}</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="faixa"><b>o que isso desenha</b><p>${esc(p.frase)}</p></div>
+    <h2 class="sec">Onde você está entre as nove respostas</h2>
+    <p>Cada ponto é uma pessoa. O verde é você. O traço escuro é a média.</p>
+    ${distribuicao(p)}
+    <div class="legenda"><i>você</i><i class="o">as outras oito</i><i class="m">média</i></div>
+    <h3 class="sub">Onde você é típico</h3>
+    <p class="mut">O contrário também conta. Em “${esc(p.tipico.t.toLowerCase())}”, você respondeu ${p.tipico.v} e a média é ${nf(p.tipico.m)} — praticamente igual. É um tema do time, mas não é uma marca sua. Se este texto tivesse partido do seu perfil, provavelmente teria colado algum tema em você só por parecer combinar.</p>`;
+  }
+  else if(n===5){
+    const per = D.perfis[p.perfil];
+    c = `<p class="kick">Etapa 5 de 8</p><h1 class="tit">Isso combina com você?</h1>
+    ${orienta("Conferir se o perfil que o questionário te deu descreve mesmo você.","Porque ele saiu de um questionário que você respondeu — não de alguém te observando.","5 min")}
+    <p>É a pergunta óbvia, e quase sempre é pulada. Vale fazer antes de levar o resto a sério.</p>
+    <div class="cart azul" style="margin-bottom:20px"><h4>${esc(p.perfil)}</h4><p>${esc(per.resumo)}</p></div>
+    ${campo("verifica_sim","O que você reconhece nessa descrição","","Escreva com as suas palavras.")}
+    ${campo("verifica_nao","O que você não reconhece — e o que diria no lugar","","Se algo não bate, é aqui que fica registrado.")}
+    <div class="faixa"><b>por que perguntar</b><p>${p.pares.length?"A outra pessoa do time com esse mesmo nome respondeu o questionário de um jeito quase sem relação com o seu. O nome junta vocês. Ele não descreve nenhum dos dois.":"Duas pessoas com o mesmo nome de perfil, neste time, responderam de formas quase sem relação. O nome junta as pessoas. Ele não descreve nenhuma delas."}</p></div>
+    <p class="peq">Se a descrição não te representa, tudo bem: ela sozinha não basta mesmo. As etapas seguintes usam as suas respostas, não esse nome.</p>
+    ${(!preenchido("verifica_sim") && !preenchido("verifica_nao") && s.viuLembrete) ? `<div class="aviso"><b>Você deixou os dois campos em branco</b>Pode seguir assim. Só não vai existir registro do que você achou da descrição — e é esse registro que impede o perfil de virar rótulo.</div>` : ""}`;
+  }
+  else if(n===6){
+    const tem = s.exemplos.some(x=>(x||"").trim());
+    c = `<p class="kick">Etapa 6 de 8</p><h1 class="tit">Exemplos de fora</h1>
+    ${orienta("Ler o que duas ou três pessoas que trabalham com você contaram.","Porque elas falam do que você fez. O questionário só fala do que você vê.","5 min")}
+    <p>Elas responderam três perguntas abertas antes deste texto ser escrito. Não sabiam o conteúdo do questionário e ninguém sugeriu resposta. Está transcrito como foi dito.</p>
+    ${tem ? s.exemplos.map((x,i)=> (x||"").trim() ? `<div class="cit"><small>${["uma contribuição que chegou no momento certo","uma que chegou tarde, ou não chegou","o que essa pessoa pediria com mais frequência"][i]}</small>${esc(x)}</div>` : "").join("")
+          : `<div class="vazio">Os exemplos ainda não foram lançados.<br><span class="peq">No painel do facilitador é possível transcrevê-los — sem eles, o código da pessoa nem seria gerado.</span></div>`}
+    <div class="faixa"><b>quem ganha se houver conflito</b><p>Se esses exemplos contrariarem o que vem nas próximas etapas, os exemplos ganham. Eles contam o que você fez. As etapas seguintes só interpretam o que você respondeu.</p></div>`;
+  }
+  else if(n===7){
+    const nao = p.leituras.filter((_,i)=>s.julga[i]==="nao").length;
+    const respondidas = p.leituras.filter((_,i)=>s.julga[i]).length;
+    c = `<p class="kick">Etapa 7 de 8</p><h1 class="tit">O que pode estar acontecendo</h1>
+    ${orienta("Examinar três leituras possíveis dos seus números e derrubar pelo menos uma.","Porque uma leitura que você não reconhece é informação — não é erro seu.","12 min")}
+    <p>Cada uma vem com o que a apoia, o que joga contra, uma outra explicação possível e um jeito de descobrir por conta própria. <strong>Nenhuma é conclusão.</strong></p>` +
+    p.leituras.map((L,i)=>`
+      <div class="leitura ${esc(L.cor)}">
+        <p class="kick" style="margin-bottom:6px">Leitura ${i+1} de 3</p>
+        <h3>${esc(L.n)}</h3>
+        <p>${esc(L.leitura)}</p>
+        <div class="ev">
+          <div class="apoia"><b>o que apoia</b><ul>${L.fav.map(x=>`<li><em>${x.v}</em> · ${esc(x.t.slice(0,58))}${x.t.length>58?"…":""} <span style="color:var(--faint)">(média ${nf(x.m)})</span></li>`).join("")}</ul></div>
+          <div class="contra"><b>o que joga contra</b><ul>${L.con.map(x=>`<li><em>${x.v}</em> · ${esc(x.t.slice(0,58))}${x.t.length>58?"…":""} <span style="color:var(--faint)">(média ${nf(x.m)})</span></li>`).join("")}</ul></div>
+        </div>
+        <p class="rot">o que joga contra esta leitura</p><p class="mut">${esc(L.contra)}</p>
+        <p class="rot">outra explicação possível</p><p class="mut">${esc(L.alt)}</p>
+        <p class="rot">como descobrir por conta própria</p><p class="mut">${esc(L.teste)}</p>
+        <div class="julga">
+          <button class="jb sim ${s.julga[i]==="sim"?"on":""}" onclick="julgar(${i},'sim')">Faz sentido</button>
+          <button class="jb nao ${s.julga[i]==="nao"?"on":""}" onclick="julgar(${i},'nao')">Não reconheço</button>
+          <span class="dica">${s.julga[i]==="nao"?"Registrado. Isso vai para a conversa.":s.julga[i]==="sim"?"Registrado.":"Marque uma das duas."}</span>
+        </div>
+      </div>`).join("") +
+    (respondidas===3 && nao===3 ? `<div class="aviso"><b>Você não reconheceu nenhuma das três</b>Então a leitura errou, e é por aí que a conversa começa. Você pode seguir para o caderno — mas a prática que vai escolher lá provavelmente não sai daqui, e tudo bem.</div>` : "");
+  }
+  else {
+    c = `<p class="kick">Etapa 8 de 8</p><h1 class="tit">O outro lado</h1>
+    ${orienta("Reconhecer o par oposto de cada força sua e o sinal de quando trocar.","Porque força usada fora de hora vira o problema seguinte.","6 min")}
+    <p><strong>${esc(p.tensao.p)}</strong></p>
+    <p class="mut">Não são dois polos em que você escolhe um. São dois que você alterna — e o que decide é o sinal, não a preferência.</p>` +
+    p.tensao.pares.map(([tit,esq,dir])=>`<div class="par"><div class="cab">${esc(tit)}</div>
+      <div class="cps"><div><b>quando este lado serve</b>${esc(esq)}</div><div><b>quando trocar</b>${esc(dir)}</div></div></div>`).join("") +
+    `<h2 class="sec">De onde veio cada leitura</h2>
+     <p class="peq">Tudo o que você leu vem de três fontes, e só delas: as suas trinta respostas sobre o time (${D.n} pessoas responderam, em ${esc(D.tipoTime.toLowerCase())}), o questionário de perfil que você mesmo respondeu, e os exemplos transcritos de colegas. A comparação da etapa 4 usa ${p.pares.length?"a pessoa do time com o mesmo perfil":"a média do grupo de perfis parecidos, que é uma comparação mais fraca"}. Nenhuma observação direta foi feita.</p>
+     <div class="faixa"><b>antes da nossa conversa</b><p>Teste pelo menos uma das leituras na prática. Leva uma semana, e muda completamente o que vocês têm para conversar.</p></div>
+     <div class="fim"><p class="marca">fim da leitura</p>
+       <p class="mut">O caderno está liberado. A recomendação é testar antes — mas quem decide o ritmo é você.</p></div>`;
+  }
+  const lembrando = n===5 && s.viuLembrete && !preenchido("verifica_sim") && !preenchido("verifica_nao");
+  return topo(TOTL, n) + `<div class="pal">${c}</div>` +
+    rodape(n>1?`etapaL(${n-1})`:null, n<TOTL?`etapaL(${n+1})`:`irCaderno()`,
+      n<TOTL?(lembrando?"Continuar mesmo assim":"Continuar"):"Ir para o caderno",
+      `Leitura · etapa ${n} de ${TOTL}`, false);
+}
+function etapaL(n){
+  const s = est(R.cod);
+  if(s.etapaL===5 && n===6 && !preenchido("verifica_sim") && !preenchido("verifica_nao") && !s.viuLembrete){
+    s.viuLembrete = true; grava(); render();
+    const a = app.querySelector(".aviso"); if(a && a.scrollIntoView) a.scrollIntoView({block:"center"});
+    return;
+  }
+  s.etapaL = n; s.maxL = Math.max(s.maxL||1, n); grava(); vai("leitura");
+}
+function julgar(i, v){ const s=est(R.cod); s.julga[i] = s.julga[i]===v ? "" : v; grava(); render(); }
+function irCaderno(){ const s=est(R.cod); s.blocoC = Math.max(1, s.blocoC); grava(); vai("caderno"); }
+
+/* ---------- CADERNO ---------- */
+const TOTC = 5;
+function caderno(){
+  const p = D.pessoas[R.chave], s = est(R.cod), n = Math.min(TOTC, Math.max(1, s.blocoC));
+  let c = "";
+  if(n===1){
+    const sim = p.leituras.map((L,i)=>({L,i})).filter(x=>s.julga[x.i]==="sim");
+    const nao = p.leituras.map((L,i)=>({L,i})).filter(x=>s.julga[x.i]==="nao");
+    c = `<p class="kick">Caderno · bloco 1 de 5</p><h1 class="tit">O que você reconhece</h1>
+    ${orienta("Separar o que bateu com a sua experiência do que não bateu.","Porque a prática das próximas seis semanas sai daqui — e não de um plano pronto.","6 min")}
+    <div class="grid2">
+      <div class="cart"><h4>Você marcou “faz sentido”</h4><p>${sim.length?sim.map(x=>esc(x.L.n)).join("<br>"):"Nenhuma ainda."}</p></div>
+      <div class="cart ambar"><h4>Você marcou “não reconheço”</h4><p>${nao.length?nao.map(x=>esc(x.L.n)).join("<br>"):"Nenhuma."}</p></div>
+    </div>
+    ${campo("rec_por","O que bateu com a sua experiência depois de testar","Um exemplo concreto vale mais que uma explicação.","Uma situação recente em que isso aconteceu.")}
+    ${campo("rec_desc","O que você descartou — e o que o teste mostrou","","O que você foi verificar, e o que encontrou.")}
+    <h2 class="sec">Qual mudança merece a sua atenção agora</h2>
+    ${orienta("Escolher uma prática para as próximas seis semanas.","Porque duas ou três ao mesmo tempo viram nenhuma.","8 min")}
+    <div class="grid2" style="grid-template-columns:repeat(3,1fr)">
+      <div class="cart"><h4>Impacto</h4><p>Afeta uma prioridade real do seu trabalho nas próximas semanas.</p></div>
+      <div class="cart"><h4>Chance de repetir</h4><p>Você vai ter oportunidades de praticar. Se a situação for rara mas importante, o que você repete é a preparação.</p></div>
+      <div class="cart"><h4>Possibilidade</h4><p>Depende principalmente de você.</p></div>
+    </div>
+    <p class="mut">Nada vem marcado. A quarta linha está em branco porque a sua leitura pode ser melhor que a deste material.</p>
+    ${opcoes(p, s)}
+    ${campo("escolha_por","Por que esta e não as outras","","O que te fez descartar as outras três.")}`;
+  }
+  else if(n===2){
+    c = `<p class="kick">Caderno · bloco 2 de 5</p><h1 class="tit">A força que pode te ajudar</h1>
+    ${orienta("Identificar uma qualidade sua que possa sustentar a prática escolhida.","Porque prática nova sustentada por força velha dura mais do que força de vontade.","7 min")}
+    <div class="nota">Um exemplo do mecanismo, não do conteúdo: se o rigor for reconhecido como força, ele pode virar o formato da contribuição — um resumo curto com o risco, o que você já sabe e o que ainda falta conferir, preparado antes da reunião. A força deixa de competir com a prática e passa a sustentá-la.</div>
+    ${campo("forca","Uma coisa que você faz bem e que as pessoas reconhecem em você","","Pergunte a alguém se não tiver certeza.")}
+    ${campo("forca_como","Como essa força pode virar o formato da prática que você escolheu","","O que muda no jeito de fazer, não na vontade de fazer.")}
+    <h2 class="sec">Três situações de trabalho</h2>
+    ${orienta("Escrever, para três situações reais, o que você costuma fazer e o que quer testar.","Porque intenção genérica não se executa. Situação nomeada, sim.","10 min")}
+    ${[1,2,3].map(i=>`<div class="par" style="margin-bottom:14px">
+      <div class="cab">Situação ${i}</div>
+      <div style="padding:13px 15px">
+        ${linha("sit"+i,"Onde isso acontece","Ex.: reunião semanal de prioridades, às terças.")}
+        ${campo("sit"+i+"_faz","O que você costuma fazer","","Sem julgamento — só o que acontece hoje.")}
+        ${campo("sit"+i+"_testa","O que você quer testar","","Uma frase. Específica o bastante para caber na agenda.")}
+      </div></div>`).join("")}`;
+  }
+  else if(n===3){
+    c = `<p class="kick">Caderno · bloco 3 de 5</p><h1 class="tit">O que você vem adiando</h1>
+    ${orienta("Nomear uma conversa adiada, o que você protege ao adiar e o que teme que aconteça.","Porque quase toda prática nova esbarra em algo que já estava sendo evitado.","8 min")}
+    <span class="privado">só você vê isto</span>
+    <p class="peq" style="margin-bottom:18px">Estes quatro campos não aparecem no painel do facilitador. O que ele vê é o compromisso do bloco 4 e o acompanhamento semanal.</p>
+    ${campo("adia_o_que","O que você vem adiando","","Uma conversa, um pedido, uma discordância.")}
+    ${campo("adia_protege","O que você protege ao adiar","Quase sempre tem algo legítimo aí.","A relação, o clima, o seu tempo, a sua energia.")}
+    ${campo("adia_teme","O que você acredita que vai acontecer se agir","","Escreva o pior cenário, com todas as letras.")}
+    <h2 class="sec">O motivo que sustenta</h2>
+    ${orienta("Ligar a prática a um valor seu e desenhar uma situação para testar o medo.","Porque coragem que depende de disposição acaba na terceira semana.","6 min")}
+    ${campo("valor","Que valor seu fica melhor representado quando você age assim","Com as suas palavras, não com palavra de empresa.")}
+    ${campo("teste_medo","Uma situação pequena onde dá para testar se o medo se confirma","","Pequena de propósito. Se der errado, custa pouco.")}`;
+  }
+  else if(n===4){
+    c = `<p class="kick">Caderno · bloco 4 de 5</p><h1 class="tit">Peça sugestões antes de praticar</h1>
+    ${orienta("Pedir uma sugestão a duas pessoas, antes de começar.","Porque sugestão sobre o futuro é mais fácil de dar — e de receber — do que avaliação do passado.","5 min")}
+    <div class="nota">A pergunta que funciona é uma só: <em>“Nas próximas semanas eu quero fazer isto. O que você sugeriria que eu fizesse diferente?”</em> Sem pedir avaliação, sem pedir nota.</div>
+    ${campo("sug1","O que a primeira pessoa sugeriu","","Nome da pessoa e a sugestão, como ela disse.")}
+    ${campo("sug2","O que a segunda pessoa sugeriu","","Nome da pessoa e a sugestão, como ela disse.")}
+    <h2 class="sec">O que fica combinado</h2>
+    ${orienta("Preencher cinco campos curtos.","Porque a partir daqui existe uma data, e não só uma intenção.","5 min")}
+    ${linha("c_situacao","Situação — onde isso vai acontecer","Ex.: no comitê de quinta, na abertura da pauta.")}
+    ${linha("c_acao","Ação — o que você vai fazer","Ex.: apresentar o risco antes de a decisão fechar.")}
+    ${linha("c_apoio","Apoio — o que você precisa","Ex.: cinco minutos fixos na pauta.")}
+    ${linha("c_quem","Quem te dá retorno","Nome de uma pessoa.")}
+    ${linha("c_data","Data de revisão","Ex.: 23/10")}
+    ${s.fechado ? `<div class="faixa"><b>compromisso fechado</b><p>O acompanhamento semanal está liberado. Cinco minutos por semana, seis semanas.</p></div>`
+      : `<p class="peq">Enquanto os cinco campos não estiverem preenchidos, o acompanhamento fica desligado. Não há o que acompanhar sem combinado.</p>`}`;
+  }
+  else {
+    c = `<p class="kick">Caderno · bloco 5 de 5</p><h1 class="tit">O que não depende só de você</h1>
+    ${orienta("Escolher uma condição para pedir ao time — e a quem pedir.","Porque parte do que trava a prática não está nas suas mãos.","5 min")}
+    ${campo("cond","A condição que você precisa e que depende do time","","Ex.: que a pauta tenha espaço para risco antes da decisão.")}
+    ${linha("cond_quem","A quem você vai pedir","Nome de uma pessoa.")}
+    <h2 class="sec">Como saber se deu certo</h2>
+    ${orienta("Conferir, no fim do ciclo, o que a prática produziu de fato.","Porque sensação de melhora e melhora são coisas diferentes.","4 min")}
+    ${campo("sinal","O sinal que você vai procurar em seis semanas","Algo observável por outra pessoa, não só por você.","Ex.: alguém citar um risco que eu levantei.")}
+    <h2 class="sec">Em seis frases</h2>
+    ${orienta("Reunir num lugar só o que você já escreveu ao longo do caderno.","Para levar à conversa e para reler daqui a seis semanas.","6 min")}
+    <p class="peq">Os rascunhos vêm do que você escreveu. Ajuste como quiser.</p>
+    ${seisFrases(s)}
+    <div class="fim" style="padding-top:26px">
+      <button class="bt sec" onclick="window.print()">Salvar em PDF</button>
+      <p class="peq" style="margin-top:14px">No protótipo, o PDF sai pela impressão do navegador.</p>
+    </div>`;
+  }
+  return topo(TOTC, n) + `<div class="pal">${c}</div>` +
+    rodape(n>1?`blocoC(${n-1})`:`voltarLeitura()`, n<TOTC?`blocoC(${n+1})`:`vai('semanas')`,
+      n<TOTC?"Continuar":"Ir para o acompanhamento", `Caderno · bloco ${n} de ${TOTC}`,
+      n===4 && !fechavel());
+}
+const PRAT = [
+  {id:"P1", t:"Apresentar antes de fechar",
+   c:"Levar o risco à mesa antes da decisão, separando o que você já sabe do que ainda precisa verificar.",
+   x:"Tolerar apresentar algo incompleto e nomear a incerteza."},
+  {id:"P2", t:"Propor o placar",
+   c:"Levar uma proposta de dois ou três números comuns, com frequência de revisão.",
+   x:"Assumir a autoria de algo que pode ser recusado ou reescrito."},
+  {id:"P3", t:"Cobrar diretamente",
+   c:"Levar ao colega envolvido um atraso ou entrega abaixo do combinado, no momento.",
+   x:"Aceitar o desconforto de uma conversa que hoje se resolve por fora."}];
+function opcoes(p, s){
+  const html = PRAT.map(o=>`<label class="opc ${s.pratica===o.id?"sel":""}">
+      <input type="radio" name="prat" value="${o.id}" ${s.pratica===o.id?"checked":""} onchange="escolhe('${o.id}')">
+      <span><b>${esc(o.t)}</b><span>${esc(o.c)}</span>
+      <span style="color:var(--ambar);margin-top:4px">Exige de você: ${esc(o.x)}</span></span></label>`).join("") +
+    `<label class="opc ${s.pratica==="outra"?"sel":""}">
+      <input type="radio" name="prat" value="outra" ${s.pratica==="outra"?"checked":""} onchange="escolhe('outra')">
+      <span style="flex:1"><b>A sua</b><span>Se nenhuma das três servir, escreva a sua.</span>
+      <input type="text" id="outra" placeholder="A prática que você escolheu" value="${esc(s.praticaOutra||"")}" oninput="outraTxt(this.value)"></span></label>`;
+  return `<div class="opcs">${html}</div>`;
+}
+function escolhe(v){ const s=est(R.cod); s.pratica=v; grava(); render(); }
+function outraTxt(v){ const s=est(R.cod); s.praticaOutra=v; s.pratica="outra"; clearTimeout(outraTxt.t); outraTxt.t=setTimeout(grava,700); }
+function praticaTexto(){
+  const s=est(R.cod);
+  if(s.pratica==="outra") return (s.praticaOutra||"").trim();
+  const o = PRAT.find(x=>x.id===s.pratica);
+  return o ? o.t : "";
+}
+function fechavel(){
+  return ["c_situacao","c_acao","c_apoio","c_quem","c_data"].every(preenchido);
+}
+function blocoC(n){
+  const s = est(R.cod);
+  if(s.blocoC===4 && n===5 && fechavel()) s.fechado = true;
+  s.blocoC = n; s.maxC = Math.max(s.maxC||1, n); grava(); vai("caderno");
+}
+function voltarLeitura(){ const s=est(R.cod); s.etapaL=TOTL; grava(); vai("leitura"); }
+function seisFrases(s){
+  const c = s.campos, pr = praticaTexto();
+  const sug = [
+    ["f1","Estou percebendo que…", c.rec_por || ""],
+    ["f2","Meu foco neste ciclo será…", pr],
+    ["f3","Vou exercer coragem ao…", c.adia_o_que || ""],
+    ["f4","A força que me sustenta é…", c.forca || ""],
+    ["f5","O valor que isso representa é…", c.valor || ""],
+    ["f6","Vou saber que deu certo quando…", c.sinal || ""]];
+  return sug.map(([id,rot,rascunho])=>{
+    const val = c[id] !== undefined && c[id] !== "" ? c[id] : rascunho;
+    return `<div class="campo"><label for="f_${id}">${esc(rot)}</label>
+      <textarea id="f_${id}" data-campo="${id}" placeholder="Ainda não há rascunho — escreva.">${esc(val)}</textarea>
+      ${rascunho && (c[id]===undefined||c[id]==="") ? `<span class="aj">Rascunho a partir do que você já escreveu. Ajuste.</span>`:""}</div>`;
+  }).join("");
+}
+
+/* ---------- SEMANAS ---------- */
+function semanas(){
+  const s = est(R.cod);
+  if(!s.fechado){
+    return topo() + `<div class="pal"><p class="kick">Acompanhamento</p>
+      <h1 class="tit">Ainda não há o que acompanhar</h1>
+      <p>O acompanhamento liga quando o compromisso do bloco 4 estiver com os cinco campos preenchidos: situação, ação, apoio, quem te dá retorno e data de revisão.</p>
+      <div class="nota">Não é uma trava de sistema. É que acompanhar sem combinado vira só uma tabela bonita.</div></div>` +
+      rodape(`vai('caderno')`, `blocoC(4)`, "Ir ao compromisso", "Acompanhamento");
+  }
+  const linhas = Array.from({length:6},(_,i)=>{
+    const w = s.semanas[i] || {};
+    return `<tr><td class="n" style="width:34px">${i+1}</td>
+      <td style="width:88px"><input type="text" inputmode="numeric" value="${esc(w.ch||"")}" oninput="sem(${i},'ch',this.value)" aria-label="Chances na semana ${i+1}"></td>
+      <td style="width:88px"><input type="text" inputmode="numeric" value="${esc(w.te||"")}" oninput="sem(${i},'te',this.value)" aria-label="Tentativas na semana ${i+1}"></td>
+      <td><textarea oninput="sem(${i},'ob',this.value)" placeholder="O que percebi · o que ajusto">${esc(w.ob||"")}</textarea></td></tr>`;
+  }).join("");
+  const pr = praticaTexto();
+  return topo() + `<div class="pal larga">
+    <p class="kick">Acompanhamento · 6 semanas</p><h1 class="tit">A página para voltar toda semana</h1>
+    ${orienta("Marcar quantas chances você teve, quantas usou e o que percebeu.","Porque duas tentativas em vinte chances e duas em três são resultados diferentes.","5 min por semana")}
+    ${pr?`<div class="faixa"><b>o que ficou combinado</b><p>${esc(pr)}</p><p style="margin-top:8px;font-size:14px;color:#A9BBB2">${esc(s.campos.c_situacao||"")} · retorno com ${esc(s.campos.c_quem||"—")} · revisão em ${esc(s.campos.c_data||"—")}</p></div>`:""}
+    <div class="tw sem"><table><thead><tr><th>#</th><th style="text-align:center">Chances</th><th style="text-align:center">Tentativas</th><th>O que percebi</th></tr></thead><tbody>${linhas}</tbody></table></div>
+    <p class="peq">Semana em branco não é falha. Quem esqueceu preenche depois — não há trava por data.</p>
+    <div class="nota">Lembrete automático nas semanas 1 e 4. O da semana 6 é enviado pelo facilitador, junto com o convite para a conversa de fechamento.</div>
+  </div>` + rodape(`vai('caderno')`, null, null, "Acompanhamento");
+}
+function sem(i, k, v){
+  const s = est(R.cod);
+  if(!s.semanas[i]) s.semanas[i] = {};
+  s.semanas[i][k] = v;
+  try{ localStorage.setItem(CHAVE, JSON.stringify(BD)); }catch(e){}
+  clearTimeout(sem.t); sem.t = setTimeout(()=>gravaSemana(i), 700);
+}
+async function gravaSemana(i){
+  const cod = R.cod, w = est(cod).semanas[i] || {};
+  marca("salvando");
+  try{
+    await rpc("gd_semana_salvar", {p_code:cod, p_semana:i+1,
+      p_op:w.ch||"", p_tent:w.te||"", p_obs:w.ob||""});
+    marca("salvo agora", true);
+  }catch(e){ marca("sem conexão · salvo aqui"); setTimeout(()=>gravaSemana(i), 8000); }
+}
+
+/* ---------- PAINEL ---------- */
+let PN = {senha:null, linhas:null, erro:"", ex:{}};
+function painel(){
+  const cab = `<div class="top"><span class="nome">Painel do facilitador</span><span style="color:#8FA098">PicPay · rodada 1</span>
+    <span class="sep"></span><span class="est">salvo</span><button onclick="sair()">sair</button></div>`;
+  if(!PN.senha) return cab + `<div class="entrada" style="padding-top:9vh">
+    <p class="kick">Acesso restrito</p><h1>Painel</h1>
+    <p class="mut">A senha fica só no seu navegador, durante esta sessão.</p>
+    <input type="password" id="sn" autocomplete="current-password" style="letter-spacing:.2em"
+      onkeydown="if(event.key==='Enter')abrePainel()">
+    <button class="bt" onclick="abrePainel()">Entrar</button>
+    <p class="erro">${esc(PN.erro||"")}</p></div>`;
+
+  if(!PN.linhas) return cab + `<div class="pal"><p class="mut">Carregando…</p></div>`;
+
+  const L = PN.linhas;
+  const linhas = L.map(r=>`<tr>
+      <td class="forte">${esc(r.nome)}<br><span class="peq" style="font-family:var(--mono)">${esc(r.code)}</span></td>
+      <td class="n">${r.exemplos}/3</td>
+      <td class="n">${r.etapa}/${TOTL}</td>
+      <td class="n">${r.bloco}/${TOTC}</td>
+      <td class="n">${r.nao_reconheco ? `<span class="pill zero">${r.nao_reconheco}</span>` : `<span class="pill ok">0</span>`}</td>
+      <td class="n">${r.fechado?`<span class="pill ok">sim</span>`:`<span class="pill meio">não</span>`}</td>
+      <td class="n">${r.semanas}/6</td>
+      <td class="n" style="font-weight:400;color:var(--faint)">${r.ultima?new Date(r.ultima).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}):"—"}</td></tr>`).join("");
+  const totNao = L.reduce((a,r)=>a+r.nao_reconheco,0);
+  const sel = R.alvo || L[0].code;
+  const exs = PN.ex[sel] || ["","",""];
+  return cab + `<div class="pal larga">
+    <p class="kick">Só você vê esta tela</p><h1 class="tit">Onde cada pessoa está</h1>
+    ${orienta("Ver quem abriu, onde parou e o que foi descartado.","Porque leitura descartada diz mais sobre a formulação do que sobre a pessoa.","—")}
+    <div class="tw"><table><thead><tr><th>Pessoa</th><th style="text-align:center">Exemplos</th><th style="text-align:center">Leitura</th><th style="text-align:center">Caderno</th><th style="text-align:center">Não rec.</th><th style="text-align:center">Compromisso</th><th style="text-align:center">Semanas</th><th style="text-align:center">Último</th></tr></thead><tbody>${linhas}</tbody></table></div>
+    <div class="faixa"><b>o número que mais interessa</b><p>Leituras marcadas como “não reconheço”: ${totNao} de ${L.length*3}. Se esse número subir, o problema está na formulação — e vai para o registro de hipóteses rejeitadas.</p></div>
+    <div class="nota">Os campos de coragem do bloco 3 não chegam até aqui. Não é a tela que esconde: a função do banco que lê o que as pessoas escreveram exclui esses cinco campos na própria consulta.</div>
+
+    <h2 class="sec">Transcrever os exemplos dos colegas</h2>
+    <p class="mut">É o que trava o envio: sem pelo menos dois exemplos transcritos, a pessoa não recebe o guia.</p>
+    <div class="campo"><label for="alvo">Pessoa</label>
+      <select id="alvo" onchange="R.alvo=this.value;render()" style="width:100%;padding:11px 12px;font-family:var(--serif);font-size:16px;background:var(--card);color:var(--ink);border:1px solid var(--rule);border-radius:3px">
+      ${L.map(r=>`<option value="${esc(r.code)}" ${r.code===sel?"selected":""}>${esc(r.nome)}</option>`).join("")}</select></div>
+    ${[0,1,2].map(i=>`<div class="campo"><label for="ex${i}">${["Exemplo 1 — uma contribuição que chegou no momento certo","Exemplo 2 — uma que chegou tarde, ou não chegou","Exemplo 3 — o que essa pessoa pediria com mais frequência"][i]}</label>
+      <textarea id="ex${i}" placeholder="Transcreva como foi dito." oninput="exemplo('${esc(sel)}',${i},this.value)">${esc(exs[i]||"")}</textarea></div>`).join("")}
+    <p class="peq">Salvo automaticamente. No guia da pessoa, aparecem na etapa 6 — antes das leituras, nunca depois.</p>
+  </div>`;
+}
+async function abrePainel(){
+  const s = (document.getElementById("sn").value||"");
+  if(!s) return;
+  PN.erro = "";
+  try{
+    const L = await rpc("gd_painel", {p_senha: s});
+    if(!L || !L.length){ PN.erro = "Senha incorreta."; render(); return; }
+    PN.senha = s; PN.linhas = L;
+    await Promise.all(L.map(async r=>{
+      const a = await rpc("gd_abrir", {p_code: r.code});
+      PN.ex[r.code] = (a && a[0] && Array.isArray(a[0].exemplos)) ? a[0].exemplos : ["","",""];
+    }));
+    render();
+  }catch(e){ PN.erro = "Não foi possível conectar agora."; render(); }
+}
+function exemplo(code, i, v){
+  (PN.ex[code] = PN.ex[code] || ["","",""])[i] = v;
+  clearTimeout(exemplo.t);
+  exemplo.t = setTimeout(async ()=>{
+    marca("salvando");
+    try{
+      await rpc("gd_exemplos_salvar", {p_senha: PN.senha, p_code: code, p_exemplos: PN.ex[code]});
+      const r = PN.linhas.find(x=>x.code===code);
+      if(r) r.exemplos = PN.ex[code].filter(x=>(x||"").trim()).length;
+      marca("salvo agora", true);
+    }catch(e){ marca("sem conexão"); }
+  }, 800);
+}
+
+/* ---------- ENTRADA ---------- */
+function entrada(msg, ocupado){
+  return `<div class="entrada">
+    <p class="kick">PicPay · rodada 1</p>
+    <h1>Seu guia de desenvolvimento</h1>
+    <p class="mut">Digite o código que chegou no e-mail. Não há senha e não há cadastro.</p>
+    <input type="text" id="cod" placeholder="XXX-000000" autocomplete="off" spellcheck="false"
+      ${ocupado?"disabled":""} onkeydown="if(event.key==='Enter')entrar()">
+    <button class="bt" ${ocupado?"disabled":""} onclick="entrar()">${ocupado?"Abrindo…":"Entrar"}</button>
+    <p class="erro">${esc(msg||"")}</p>
+    <p class="peq" style="margin-top:22px">Cada pessoa recebe só o próprio código. O que você escrever fica guardado e você pode voltar quando quiser.</p>
+  </div>`;
+}
+async function entrar(){
+  const campo = document.getElementById("cod");
+  const v = (campo.value||"").trim().toUpperCase();
+  if(!v) return;
+  app.innerHTML = entrada("", true);
+  try{
+    if(v === "PAINEL"){ R = {tela:"painel", cod:"PAINEL", chave:null, senha:null}; render(); return; }
+    const linhas = await rpc("gd_abrir", {p_code: v});
+    const p = linhas && linhas[0];
+    const k = p ? chaveDe(p.code) : null;
+    if(!p || !k){
+      app.innerHTML = entrada("Não encontramos esse código. Confira o e-mail.");
+      const i = document.getElementById("cod"); if(i){ i.value = v; i.focus(); }
+      return;
+    }
+    const cod = p.code;
+    sessionStorage.setItem("gd_cod", cod);
+    R = {tela:"leitura", cod, chave:k};
+    const s = est(cod);
+    s.exemplos = Array.isArray(p.exemplos) ? p.exemplos : ["","",""];
+    const [campos, semanas] = await Promise.all([
+      rpc("gd_minhas", {p_code: cod}),
+      rpc("gd_semanas", {p_code: cod})]);
+    doServidor(s, campos || []);
+    (semanas||[]).forEach(w => { s.semanas[w.semana-1] =
+      {ch:w.oportunidades||"", te:w.tentativas||"", ob:w.observacao||""}; });
+    ultimoEnviado[cod] = paraServidor(s);
+    if(!s.etapaL) s.etapaL = 1;
+    try{ localStorage.setItem(CHAVE, JSON.stringify(BD)); }catch(e){}
+    window.scrollTo(0,0); render();
+  } catch(e){
+    app.innerHTML = entrada("Não foi possível abrir agora. Tente de novo em instantes.");
+    const i = document.getElementById("cod"); if(i){ i.value = v; i.focus(); }
+  }
+}
+
+/* ---------- render ---------- */
+D.ordem = Object.keys(D.pessoas);
+function render(){
+  if(R.cod && R.cod!=="PAINEL") R.chave = chaveDe(R.cod);
+  let h;
+  if(R.tela==="entrada") h = entrada();
+  else if(R.tela==="painel") h = painel();
+  else if(R.tela==="caderno") h = caderno();
+  else if(R.tela==="semanas") h = semanas();
+  else h = leitura();
+  app.innerHTML = h;
+  ligaCampos();
+  const f = document.getElementById("cod") || document.getElementById("sn");
+  if(f && !f.disabled) f.focus();
+}
+
+/* Retomar a sessão: o código volta do navegador, mas o conteúdo escrito
+   vem sempre do servidor — assim quem trocou de aparelho continua de onde parou. */
+R = {tela:"entrada", cod:null, chave:null};
+render();
+const sess = sessionStorage.getItem("gd_cod");
+if(sess){
+  if(sess === "PAINEL"){ R = {tela:"painel", cod:"PAINEL", chave:null}; render(); }
+  else { const i = document.getElementById("cod"); if(i){ i.value = sess; entrar(); } }
+}
+</script>
+</body>
+</html>
