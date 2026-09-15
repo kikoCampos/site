@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /preview/
+Disallow: /ferramentas/guia-de-desenvolvimento.html
 
 Sitemap: https://kikocampos.com/sitemap.xml
 
