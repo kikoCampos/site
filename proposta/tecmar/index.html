@@ -101,7 +101,7 @@ main{padding:0 clamp(16px,4vw,3.4rem)}
     align-items:start;animation:in .32s ease both}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.ch{animation:none}}
-@media(max-width:1000px){.ch{grid-template-columns:1fr;row-gap:1.4rem}}
+@media(max-width:1000px){.ch{grid-template-columns:1fr;row-gap:1.2rem;padding-top:1.4rem}}
 
 .rail{position:sticky;top:5.4rem;display:flex;flex-direction:column;gap:.75rem}
 .rail .num{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:.8;
@@ -232,6 +232,19 @@ ul.dash li::before{content:"";position:absolute;left:0;top:.72em;width:.7rem;hei
 .glegend i{width:20px;height:7px;border-radius:4px;background:var(--amber);display:inline-block}
 .glegend i.op{background:transparent;border:1px solid var(--line2)}
 .glegend i.ev{background:var(--orange)}
+.gantt .per{display:none;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.07em;
+            text-transform:uppercase;color:var(--amber);white-space:nowrap}
+.gantt .per.op{color:var(--ink-mute)}
+@media(max-width:860px){
+  .gwrap{overflow:visible}
+  .gantt{min-width:0;display:block;font-size:.92rem}
+  .gantt .hd,.gantt .cell{display:none}
+  .gantt .grp{padding:1.1rem 0 .25rem;margin-top:.4rem}
+  .gantt .nm{display:flex;justify-content:space-between;align-items:baseline;gap:.9rem;
+             padding:.5rem 0;border-bottom:1px solid var(--line-soft);white-space:normal}
+  .gantt .per{display:inline-block}
+  .glegend{display:none}
+}
 
 /* ---------- linha do tempo ---------- */
 .tl{border-left:1px solid var(--line);padding-left:1.4rem;display:flex;flex-direction:column;gap:1rem}
@@ -246,17 +259,46 @@ ul.dash li::before{content:"";position:absolute;left:0;top:.72em;width:.7rem;hei
 .stats span{font-size:.82rem;color:var(--muted);line-height:1.4;display:block;margin-top:.1rem}
 
 .tbl{overflow-x:auto}
+@media(max-width:760px){
+  .tbl{overflow:visible}
+  table{min-width:0;border-collapse:collapse;display:block}
+  thead{display:none}
+  tbody,tbody tr,tbody th,tbody td{display:block;width:auto}
+  tbody tr{padding:.9rem 0;border-bottom:1px solid var(--line2)}
+  tbody tr:last-child{border-bottom:0}
+  tbody th{white-space:normal;padding:0 0 .35rem;font-weight:600;font-size:.98rem;border:0}
+  tbody td{padding:.35rem 0 0;border:0;font-size:.92rem}
+  tbody td:empty{display:none}
+  tbody td::before{content:attr(data-l);display:block;font-family:"IBM Plex Mono",monospace;font-size:.58rem;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--amber);margin-bottom:.12rem}
+}
 table{border-collapse:collapse;width:100%;min-width:560px;font-size:.88rem}
 th,td{text-align:left;padding:.6rem .7rem .6rem 0;border-bottom:1px solid var(--line-soft);font-weight:400;vertical-align:top;color:var(--ink-2)}
 thead th{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);white-space:nowrap;border-bottom:1px solid var(--line2)}
 tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
+@media(max-width:760px){
+  .tbl{overflow:visible}
+  .tbl table{min-width:0;display:block}
+  .tbl thead{display:none}
+  .tbl tbody,.tbl tbody tr,.tbl tbody th,.tbl tbody td{display:block;width:auto;max-width:100%}
+  .tbl tbody tr{padding:.9rem 0;border-bottom:1px solid var(--line2)}
+  .tbl tbody tr:last-child{border-bottom:0}
+  .tbl tbody th{white-space:normal;padding:0 0 .35rem;font-weight:600;font-size:1rem;border:0}
+  .tbl tbody td{padding:.4rem 0 0;border:0;font-size:.93rem}
+  .tbl tbody td:empty{display:none}
+  .tbl tbody td::before{content:attr(data-l);display:block;font-family:"IBM Plex Mono",monospace;font-size:.58rem;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--amber);margin-bottom:.15rem}
+}
 
 /* ---------- cardápio ---------- */
 .menu{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:clamp(1.6rem,3vw,2.6rem);align-items:start}
 @media(max-width:1000px){.menu{grid-template-columns:1fr}}
 .routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.9rem}
 .route{border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem;background:var(--panel);text-align:left;cursor:pointer;font-family:inherit;color:inherit;transition:border-color .15s}
-.route:hover{border-color:var(--line2)}
+.route:hover{border-color:var(--amber)}
+.route .rv{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+           color:var(--amber);margin-top:.7rem;opacity:.8}
+.route.pick .rv{display:none}
 .route.pick{border-color:var(--orange);background:linear-gradient(180deg,var(--panel2),var(--panel))}
 .route .rn{font-family:Fraunces,Georgia,serif;font-size:1.06rem;font-weight:600;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
 .route .rc{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--muted);margin:.3rem 0 .5rem}
@@ -950,7 +992,7 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
       <div class="hd"><span class="no">Quadro 5</span><span class="tt">Calendário macro do trabalho</span></div>
       <p class="st">Os quinze módulos da rota recomendada, distribuídos entre a última semana de setembro e dezembro de 2026, com os eventos que a companhia já havia definido na mesma escala.</p>
       <div class="gwrap"><div class="gantt"><div class="hd lft">Módulo</div><div class="hd">Set · 4ª sem</div><div class="hd">Out · 1ª quinz.</div><div class="hd">Out · 2ª quinz.</div><div class="hd">Nov</div><div class="hd">Dez</div><div class="hd">2027</div><div class="grp">O que a companhia já tinha definido</div>
-<div class="nm">Webinar de lançamento e campanha</div><div class="cell"></div><div class="cell"></div><div class="cell" style="display:flex;align-items:center"><div class="bar ev" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+<div class="nm">Webinar de lançamento e campanha<span class="per">Out · 2ª quinzena</span></div><div class="cell"></div><div class="cell"></div><div class="cell" style="display:flex;align-items:center"><div class="bar ev" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
 <div class="nm">Roadshow da diretoria nas filiais</div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:4/6;display:flex;align-items:center"><div class="bar ev" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div>
 <div class="nm">Encontro de gerentes</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="display:flex;align-items:center"><div class="bar ev" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="grp">Bloco B · Consciência — o time se vê</div><div class="nm"><code>B0</code>Raio-X da Diretoria</div><div class="cell" style="grid-column:2/3;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>B1</code>Auditoria dos reforçadores</div><div class="cell" style="grid-column:2/4;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>B2</code>Leitura documental de coerência</div><div class="cell" style="grid-column:2/3;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>B3</code>Raio-X de Campo — roadshow</div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:4/6;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>B4</code>Devolutiva por unidade</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:5/7;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="grp">Bloco C · Coragem — o time se confronta</div><div class="nm"><code>C0</code>Contrato de Liderança da Diretoria</div><div class="cell"></div><div class="cell" style="grid-column:3/4;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>C1</code>Régua de Liderança — R.O.T.A.</div><div class="cell"></div><div class="cell" style="grid-column:3/4;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>C3</code>Preparação dos diretores</div><div class="cell"></div><div class="cell" style="grid-column:3/4;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>C4</code>Encontro de Gerentes</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:5/6;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="grp">Bloco A · Lançamento</div><div class="nm"><code>A0</code>Keynote e roteiro da diretoria</div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:4/5;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>A2</code>Frases-âncora da campanha</div><div class="cell"></div><div class="cell" style="grid-column:3/5;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="grp">Bloco D · Consistência — o time sustenta</div><div class="nm"><code>D0</code>Cultura nos ritos que já existem</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:6/8;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="nm"><code>D1</code>Quilômetro 1 — acompanhamento mensal</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:6/8;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="nm"><code>D2</code>Reconhecimento na Rota Certa</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:6/8;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="nm"><code>D3</code>Momento de Cultura, trimestral</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:6/8;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="grp">2027 · sustentação (fora da rota recomendada)</div><div class="nm"><code>D6</code>Tombamento onda 2 — performance e sucessão</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:7/8;display:flex;align-items:center"><div class="bar op" style="width:100%"></div></div><div class="nm"><code>D7</code>Remedição do diagnóstico</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:7/8;display:flex;align-items:center"><div class="bar op" style="width:100%"></div></div><div class="nm"><code>D8</code>Acompanhamento trimestral</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:7/8;display:flex;align-items:center"><div class="bar op" style="width:100%"></div></div></div></div><div class="glegend">
   <span><i></i> Módulos da Rota Certa recomendada</span>
@@ -1416,14 +1458,33 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
 
   /* rotas — leitura */
   var rWrap=document.getElementById('routes');
-  ROUTES.forEach(function(r){
-    rWrap.insertAdjacentHTML('beforeend','<div class="route'+(r[3]?' pick':'')+'">'+
+  ROUTES.forEach(function(r,i){
+    rWrap.insertAdjacentHTML('beforeend','<button type="button" class="route'+(r[3]?' pick':'')+'" data-r="'+i+'" aria-pressed="'+(r[3]?'true':'false')+'">'+
       '<div class="rn">Rota '+r[0]+(r[3]?' <span class="pill">Recomendada</span>':'')+'</div>'+
-      '<div class="rc">'+r[1].split(' ').length+' módulos</div><p>'+r[2]+'</p></div>');
+      '<div class="rc">'+r[1].split(' ').length+' módulos</div><p>'+r[2]+'</p>'+
+      '<div class="rv">Ver os módulos desta rota</div></button>');
+  });
+  rWrap.addEventListener('click',function(e){
+    var b=e.target.closest('[data-r]'); if(!b) return;
+    marcarRota(+b.getAttribute('data-r'));
   });
 
   /* blocos e fichas */
-  var naRota={}; ROUTES[1][1].split(' ').forEach(function(id){naRota[id]=1;});
+  var naRota={};
+  function marcarRota(k){
+    naRota={};
+    ROUTES[k][1].split(' ').forEach(function(id){naRota[id]=1;});
+    rWrap.querySelectorAll('[data-r]').forEach(function(b){
+      var on=+b.getAttribute('data-r')===k;
+      b.classList.toggle('pick',on); b.setAttribute('aria-pressed',on?'true':'false');
+    });
+    document.querySelectorAll('#blocks .mrow').forEach(function(row){
+      var id=row.getAttribute('data-row'), on=!!naRota[id], e=row.querySelector('.e');
+      row.classList.toggle('inrota',on);
+      if(e) e.textContent=(row.classList.contains('core')?'Essencial · ':'')+(on?'Na Rota '+ROUTES[k][0]+' · ':'')+e.getAttribute('data-e');
+    });
+  }
+  ROUTES[1][1].split(' ').forEach(function(id){naRota[id]=1;});
   var bWrap=document.getElementById('blocks');
   BLOCKS.forEach(function(b){
     var h='<div class="blk"><div class="bh"><h3>Bloco '+b[0]+' · '+b[1]+'</h3></div><div class="bs">'+b[2]+'</div><div class="mods">';
@@ -1431,7 +1492,7 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
       h+='<div class="mrow'+(m.core?' core':'')+(naRota[m.id]?' inrota':'')+'" data-row="'+m.id+'">'+
         '<button class="m" data-m="'+m.id+'" aria-expanded="false"><code>'+m.id+'</code>'+
         '<span class="t">'+esc(m.t)+'<small>'+esc(m.r)+'</small></span>'+
-        '<span class="e">'+(m.core?'Essencial · ':'')+(naRota[m.id]?'Na Rota Certa · ':'')+m.e+'</span><span class="vd">ver detalhe<span class="cv"></span></span></button>'+
+        '<span class="e" data-e="'+m.e+'">'+(m.core?'Essencial · ':'')+(naRota[m.id]?'Na Rota Certa · ':'')+m.e+'</span><span class="vd">ver detalhe<span class="cv"></span></span></button>'+
         '<div class="det"><dl>'+
         '<dt>O que é</dt><dd>'+esc(m.what)+'</dd>'+
         '<dt>O que entrega</dt><dd>'+esc(m.got)+'</dd>'+
@@ -1448,6 +1509,14 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
     var row=m.closest('.mrow'), was=row.classList.contains('open');
     bWrap.querySelectorAll('.mrow.open').forEach(function(r){r.classList.remove('open');r.querySelector('.m').setAttribute('aria-expanded','false');});
     if(!was){row.classList.add('open'); m.setAttribute('aria-expanded','true');}
+  });
+
+  document.querySelectorAll('table').forEach(function(t){
+    var hs=[].map.call(t.querySelectorAll('thead th'),function(h){return h.textContent.trim();});
+    if(!hs.length) return;
+    [].forEach.call(t.querySelectorAll('tbody tr'),function(tr){
+      [].forEach.call(tr.children,function(c,k){ if(c.tagName==='TD'&&hs[k]) c.setAttribute('data-l',hs[k]); });
+    });
   });
 
   show(location.hash.slice(1)||'c1');
