@@ -1,0 +1,1456 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Rota Certa · Tecmar</title></head><body><title>Rota Certa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  /* tokens do kikocampos.com */
+  --bg:#0A1830; --bg2:#0E2140; --panel:#12294D; --panel2:#16305A;
+  --ink:#EAF1FB; --ink-soft:#AFC0DB; --ink-mute:#7D91B4;
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.20);
+  --amber:#F2B33D; --orange:#FF4A12; --orange-cta:#CE420D; --blue:#5AA9E6; --good:#4FD1A1;
+  --grad:linear-gradient(100deg,#F2B33D,#FF4A12);
+  --radius:18px; --maxw:1180px;
+  /* aliases usados no documento */
+  --paper:var(--bg); --surface:var(--panel); --sunk:var(--bg2);
+  --ink-2:var(--ink-soft); --muted:var(--ink-mute); --faint:var(--ink-mute);
+  --line-soft:rgba(255,255,255,.06); --rule:rgba(255,255,255,.28);
+  --accent:var(--orange); --warn:var(--amber);
+  color-scheme:dark;
+}
+body[data-tone="light"]{
+  --bg:#F4F1E9; --bg2:#EBE6DB; --panel:#FFFFFF; --panel2:#FBF8F2;
+  --ink:#0A1830; --ink-soft:#33445F; --ink-mute:#6E7C93;
+  --line:rgba(10,24,48,.11); --line2:rgba(10,24,48,.24);
+  --amber:#9A6A12; --orange:#CE420D; --orange-cta:#CE420D;
+  --paper:#F4F1E9; --surface:#FFFFFF; --sunk:#EBE6DB;
+  --ink-2:#33445F; --muted:#6E7C93; --faint:#8A97AC;
+  --line-soft:rgba(10,24,48,.07); --rule:rgba(10,24,48,.28);
+  --accent:#CE420D; --warn:#9A6A12;
+  color-scheme:light;
+}
+body{transition:background-color .35s ease,color .35s ease}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,-apple-system,"system-ui","Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;margin:0;letter-spacing:-.02em;text-wrap:balance}
+h1 em,h2 em{font-style:italic;font-weight:600}
+h1 .g,h2 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0}
+strong{font-weight:600}
+.mono{font-family:"IBM Plex Mono",monospace}
+.lbl{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.17em;text-transform:uppercase;color:var(--amber)}
+.lbl.q{color:var(--ink-mute)}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sm{font-size:.9rem;color:var(--muted);line-height:1.55}
+.k{color:var(--ink)}
+
+/* ---------- chrome ---------- */
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:70;transition:width .35s ease}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;display:flex;align-items:center;gap:1rem;
+     padding:.8rem clamp(16px,4vw,3.4rem);background:color-mix(in srgb,var(--bg) 82%,transparent);
+     backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:.5rem;font-weight:600;font-size:.85rem;white-space:nowrap}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--grad)}
+.top .sp{flex:1}
+.ix{font-size:.8rem;font-weight:500;background:none;border:1px solid var(--line2);border-radius:100px;
+    padding:.42rem 1rem;cursor:pointer;color:var(--ink);font-family:inherit;white-space:nowrap}
+.ix:hover{border-color:var(--amber);color:var(--amber)}
+.cpt{font-family:"IBM Plex Mono",monospace;font-size:.67rem;letter-spacing:.1em;color:var(--muted);white-space:nowrap;
+     background:none;border:0;padding:.2rem .1rem;cursor:pointer;text-align:left}
+.cpt:hover{color:var(--ink)}
+.cpt i{font-style:normal;color:var(--ink);margin-right:.55rem}
+@media(max-width:620px){.cpt{display:none}}
+
+.scrim{position:fixed;inset:0;z-index:85;background:rgba(4,11,24,.58);backdrop-filter:blur(2px);
+       opacity:0;pointer-events:none;transition:opacity .26s ease}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,94vw);z-index:90;
+        background:var(--panel);border-left:1px solid var(--line);box-shadow:-24px 0 60px -30px rgba(0,0,0,.6);
+        transform:translateX(102%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+        overflow-y:auto;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+@media(prefers-reduced-motion:reduce){.drawer,.scrim{transition:none}}
+.drawer .dh{position:sticky;top:0;background:var(--panel);padding:1.1rem 1.4rem .9rem;border-bottom:1px solid var(--line);z-index:2}
+.drawer .dh .row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.drawer h2{font-size:1.25rem;line-height:1.1}
+.drawer .prog{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-top:.45rem}
+.drawer .hint{font-size:.83rem;color:var(--ink-mute);margin-top:.5rem;line-height:1.45}
+.drawer nav{padding:.5rem 1.4rem 1rem}
+.drawer .grp{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+             color:var(--amber);margin:.85rem 0 .2rem;padding-top:.55rem;border-top:1px solid var(--line)}
+.drawer .grp:first-child{margin-top:.2rem;border-top:0;padding-top:0}
+.drawer a{display:grid;grid-template-columns:2rem 1fr;gap:.7rem;align-items:baseline;text-decoration:none;
+          color:var(--ink-soft);padding:.38rem .6rem .38rem 0;border-radius:6px;position:relative;font-size:.97rem}
+.drawer a .n{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--ink-mute)}
+.drawer a:hover{color:var(--ink);background:rgba(127,157,200,.08)}
+.drawer a.on{color:var(--ink);font-weight:600}
+.drawer a.on::before{content:"";position:absolute;left:-1.4rem;top:.4rem;bottom:.4rem;width:3px;background:var(--amber);border-radius:2px}
+.drawer a.on .n{color:var(--amber)}
+.drawer .here{font-family:"IBM Plex Mono",monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-left:.5rem}
+.drawer .df{margin-top:auto;padding:.9rem 1.4rem 1.3rem;border-top:1px solid var(--line);font-size:.82rem;color:var(--ink-mute);line-height:1.5}
+
+/* ---------- grade do capítulo ---------- */
+main{padding:0 clamp(16px,4vw,3.4rem)}
+.ch{display:none}
+.ch.on{display:grid}
+.ch{max-width:1300px;margin:0 auto;padding:clamp(2.9rem,4vw,3.8rem) 0 3.5rem;
+    grid-template-columns:minmax(0,176px) minmax(0,1fr);column-gap:clamp(1.6rem,4vw,4.2rem);
+    align-items:start;animation:in .32s ease both}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ch{animation:none}}
+@media(max-width:1000px){.ch{grid-template-columns:1fr;row-gap:1.4rem}}
+
+.rail{position:sticky;top:5.4rem;display:flex;flex-direction:column;gap:.75rem}
+.rail .num{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:.8;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rail .rl{border-top:1px solid var(--line);padding-top:.7rem}
+.rail .marg{font-size:.82rem;color:var(--muted);line-height:1.5}
+.rail .marg b{color:var(--ink-2);font-weight:600;display:block}
+@media(max-width:1000px){
+  .rail{position:static;flex-direction:row;align-items:baseline;gap:.9rem;border-bottom:1px solid var(--line-soft);padding-bottom:.7rem}
+  .rail .num{font-size:1.9rem}.rail .marg{display:none}.rail .rl{border:0;padding:0}
+}
+
+.body{min-width:0}
+.body > * + *{margin-top:clamp(1.5rem,2.6vw,2.3rem)}
+
+/* abertura de capítulo */
+.opener{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,1fr);gap:clamp(1.2rem,3vw,3rem);
+        align-items:end;border-bottom:1px solid var(--line2);padding-bottom:clamp(1.1rem,2.2vw,1.6rem)}
+.opener h1{font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.03}
+.opener .ld{font-family:Fraunces,Georgia,serif;font-size:clamp(1.02rem,1.45vw,1.2rem);line-height:1.45;color:var(--ink-2)}
+@media(max-width:860px){.opener{grid-template-columns:1fr;align-items:start;gap:.9rem}}
+
+/* composição */
+.split{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:clamp(1.4rem,3vw,3.2rem);align-items:start}
+.split.l{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.split.r{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.2rem,2.6vw,2.6rem)}
+@media(max-width:860px){.split,.split.l,.split.r,.trio{grid-template-columns:1fr;gap:1.4rem}}
+.prose{max-width:60ch}
+.prose > p + p{margin-top:1rem}
+
+/* como ler */
+.howto{border-top:1px solid var(--line2);padding-top:.9rem}
+.howto .hl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;margin-top:.8rem}
+.howto .hl b{display:block;font-size:.93rem;font-weight:600;margin-bottom:.15rem}
+.howto .hl span{font-size:.89rem;color:var(--ink-soft);line-height:1.5}
+.howto em{font-style:normal;font-weight:600;color:var(--amber)}
+@media(max-width:860px){.howto .hl{grid-template-columns:1fr;gap:.9rem}}
+.prose p{color:var(--ink-2)}
+.prose p.k{color:var(--ink)}
+.lead-in{font-family:Fraunces,Georgia,serif;font-size:1.12rem;line-height:1.5;color:var(--ink)}
+
+h2.sec{font-size:clamp(1.24rem,2.2vw,1.6rem);line-height:1.2;border-top:1px solid var(--line2);padding-top:.85rem}
+h3{font-size:1.02rem;margin-bottom:.35rem}
+.eyebrow{margin-bottom:.5rem}
+
+/* filete + colunas de dados */
+.rowlist{border-top:1px solid var(--line)}
+.rowlist > div{display:grid;grid-template-columns:minmax(8rem,10.5rem) 1fr;gap:1.2rem;padding:.85rem 0;
+  border-bottom:1px solid var(--line-soft);align-items:start}
+.rowlist .k{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);padding-top:.35rem}
+.rowlist .v{font-size:.94rem;color:var(--ink-2)}
+@media(max-width:620px){.rowlist > div{grid-template-columns:1fr;gap:.2rem}}
+
+ul.dash{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.7rem}
+ul.dash li{position:relative;padding-left:1.4rem;color:var(--ink-2);font-size:.96rem}
+ul.dash li::before{content:"";position:absolute;left:0;top:.72em;width:.7rem;height:1px;background:var(--amber);opacity:.85}
+
+.note{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:var(--radius);padding:1.05rem 1.2rem}
+.note .lbl{display:block;margin-bottom:.3rem}
+.note p{color:var(--ink)}
+
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{font-size:.8rem;border:1px solid var(--line);border-radius:100px;padding:.3rem .8rem;color:var(--ink-soft);background:var(--panel)}
+
+.moment blockquote{margin:0;font-family:Fraunces,Georgia,serif;font-style:italic;
+  font-size:clamp(1.3rem,3vw,2.05rem);line-height:1.34;color:var(--ink);
+  border-left:2px solid var(--amber);padding-left:clamp(1rem,2.4vw,1.8rem)}
+.moment cite{display:block;margin-top:1rem;padding-left:clamp(1rem,2.4vw,1.8rem);font-style:normal;
+  font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* ---------- exposições ---------- */
+.ex{border-top:1px solid var(--line2);padding-top:.7rem}
+.ex .hd{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.15rem}
+.ex .no{font-family:"IBM Plex Mono",monospace;font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber)}
+.ex .tt{font-size:.92rem;font-weight:600;color:var(--ink)}
+.ex .st{font-size:.85rem;color:var(--muted);line-height:1.45;max-width:58ch}
+.ex svg{display:block;width:100%;height:auto;margin:1.3rem 0 .7rem;color:var(--ink-soft);overflow:visible}
+.ex.wide{max-width:none}
+.ex .hd + .st{margin-bottom:.2rem}
+.ex svg text{font-family:Inter,sans-serif;fill:currentColor}
+.ex svg .mn{font-family:"IBM Plex Mono",monospace;letter-spacing:.09em;text-transform:uppercase}
+.ex svg .sr{font-family:Fraunces,Georgia,serif}
+.ex .src{font-size:.75rem;color:var(--faint);border-top:1px solid var(--line);padding-top:.5rem;line-height:1.5}
+
+/* ---------- R.O.T.A. ---------- */
+.rota{border-top:1px solid var(--line2)}
+.rota > div{display:grid;grid-template-columns:4.6rem minmax(0,1fr) minmax(0,9rem);gap:clamp(1rem,2.4vw,2rem);
+  padding:clamp(1.1rem,2.2vw,1.6rem) 0;border-bottom:1px solid var(--line-soft);align-items:start}
+.rota .L{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(2.8rem,6vw,4rem);line-height:.78;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rota b{display:block;font-family:Fraunces,Georgia,serif;font-size:clamp(1.08rem,2vw,1.35rem);font-weight:600;margin-bottom:.3rem}
+.rota .d{font-size:.96rem;color:var(--ink-2)}
+.rota .ab{display:flex;flex-direction:column;gap:.25rem;padding-top:.35rem}
+.rota .ab span{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
+@media(max-width:760px){.rota > div{grid-template-columns:3.4rem 1fr}.rota .ab{grid-column:2;flex-direction:row;flex-wrap:wrap;gap:.5rem}}
+
+.layers{border-top:1px solid var(--line)}
+.layers > div{display:grid;grid-template-columns:minmax(7rem,9rem) 1fr;gap:1.2rem;padding:.8rem 0;border-bottom:1px solid var(--line-soft)}
+.layers .who{font-size:.93rem;font-weight:500}
+.layers .beh{font-size:.93rem;color:var(--ink-2)}
+@media(max-width:620px){.layers > div{grid-template-columns:1fr;gap:.15rem}}
+
+.vals{display:flex;flex-wrap:wrap;gap:.4rem}
+.vals span{font-size:.82rem;border:1px solid var(--line);border-radius:100px;padding:.28rem .8rem;color:var(--ink-mute);background:var(--panel)}
+
+/* ---------- calendário macro ---------- */
+.gwrap{overflow-x:auto}
+.gantt{min-width:780px;display:grid;grid-template-columns:16.5rem repeat(6,minmax(0,1fr));align-items:center;
+       column-gap:0;row-gap:0;font-size:.86rem}
+.gantt .hd{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.11em;text-transform:uppercase;
+           color:var(--ink-mute);padding:0 0 .55rem;text-align:center;border-bottom:1px solid var(--line2)}
+.gantt .hd.lft{text-align:left}
+.gantt .grp{grid-column:1/-1;font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.14em;
+            text-transform:uppercase;color:var(--amber);padding:1rem 0 .35rem;border-bottom:1px solid var(--line-soft)}
+.gantt .nm{padding:.42rem .9rem .42rem 0;color:var(--ink-soft);line-height:1.3}
+.gantt .nm code{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--ink-mute);margin-right:.5rem}
+.gantt .cell{height:100%;border-left:1px solid var(--line-soft);min-height:1.9rem}
+.gantt .cell:last-child{border-right:1px solid var(--line-soft)}
+.gantt .bar{height:7px;border-radius:4px;background:var(--amber);margin:0 .35rem;position:relative;z-index:1}
+.gantt .bar.op{background:transparent;border:1px solid var(--line2);height:7px}
+.gantt .bar.ev{background:var(--orange)}
+.gantt .row{display:contents}
+.gantt .evt{font-family:"IBM Plex Mono",monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+            color:var(--orange);text-align:center;padding:.15rem .2rem .4rem}
+.glegend{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:1rem;font-size:.82rem;color:var(--ink-mute)}
+.glegend span{display:inline-flex;align-items:center;gap:.5rem}
+.glegend i{width:20px;height:7px;border-radius:4px;background:var(--amber);display:inline-block}
+.glegend i.op{background:transparent;border:1px solid var(--line2)}
+.glegend i.ev{background:var(--orange)}
+
+/* ---------- linha do tempo ---------- */
+.tl{border-left:1px solid var(--line);padding-left:1.4rem;display:flex;flex-direction:column;gap:1rem}
+.tl > div{position:relative}
+.tl > div::before{content:"";position:absolute;left:calc(-1.4rem - 4px);top:.55rem;width:7px;height:7px;border-radius:50%;background:var(--bg);border:1.5px solid var(--amber)}
+.tl .w{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--amber)}
+.tl .t{font-size:.95rem;color:var(--ink-2);margin-top:.05rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:.7rem}
+.stats div{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:var(--radius);padding:.9rem 1rem}
+.stats b{display:block;font-family:Fraunces,Georgia,serif;font-size:1.55rem;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--amber)}
+.stats span{font-size:.82rem;color:var(--muted);line-height:1.4;display:block;margin-top:.1rem}
+
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.88rem}
+th,td{text-align:left;padding:.6rem .7rem .6rem 0;border-bottom:1px solid var(--line-soft);font-weight:400;vertical-align:top;color:var(--ink-2)}
+thead th{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);white-space:nowrap;border-bottom:1px solid var(--line2)}
+tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
+
+/* ---------- cardápio ---------- */
+.menu{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:clamp(1.6rem,3vw,2.6rem);align-items:start}
+@media(max-width:1000px){.menu{grid-template-columns:1fr}}
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.9rem}
+.route{border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem;background:var(--panel);text-align:left;cursor:pointer;font-family:inherit;color:inherit;transition:border-color .15s}
+.route:hover{border-color:var(--line2)}
+.route.pick{border-color:var(--orange);background:linear-gradient(180deg,var(--panel2),var(--panel))}
+.route .rn{font-family:Fraunces,Georgia,serif;font-size:1.06rem;font-weight:600;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.route .rc{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--muted);margin:.3rem 0 .5rem}
+.route p{font-size:.85rem;color:var(--ink-2)}
+.pill{font-family:"IBM Plex Mono",monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;background:var(--orange-cta);color:#fff;padding:.16rem .5rem;border-radius:100px}
+
+.blk{margin-bottom:1.8rem}
+.blk .bh{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.1rem}
+.blk .bh h3{font-size:1.04rem;margin:0}
+.blk .bs{font-size:.86rem;color:var(--muted);margin-bottom:.55rem}
+.mods{border-top:1px solid var(--line2)}
+.mrow{border-bottom:1px solid var(--line-soft);position:relative}
+.mrow.inrota::before{content:"";position:absolute;left:0;top:.95rem;width:3px;height:1.1rem;background:var(--amber);border-radius:2px}
+.mhead{display:grid;grid-template-columns:1.5rem 1fr;gap:.7rem;align-items:start}
+.box{width:16px;height:16px;border:1.5px solid var(--line2);border-radius:4px;margin-top:.85rem;display:grid;place-items:center;background:none;padding:0;cursor:pointer}
+.mrow.sel .box{background:var(--orange);border-color:var(--orange)}
+.mrow.sel .box::after{content:"";width:8px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.m{display:grid;grid-template-columns:2.4rem minmax(0,1fr) auto auto;gap:.7rem;padding:.75rem .4rem .75rem 1rem;
+   align-items:start;cursor:pointer;width:100%;text-align:left;background:none;border:0;font-family:inherit;color:inherit;border-radius:4px}
+.m:hover{background:rgba(255,255,255,.035)}
+.m code{font-family:"IBM Plex Mono",monospace;font-size:.76rem;padding-top:.2rem}
+.mrow.core code{color:var(--accent);font-weight:500}
+.m .t{font-size:.93rem;line-height:1.4;font-weight:500;min-width:0}
+.m .t small{display:block;color:var(--muted);font-size:.84rem;margin-top:.12rem;font-weight:400;line-height:1.45}
+.m .e{font-size:.6rem;color:var(--faint);font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em;padding-top:.35rem;white-space:nowrap}
+.m .vd{display:inline-flex;align-items:center;gap:.4rem;font-size:.74rem;color:var(--amber);white-space:nowrap;padding-top:.28rem;opacity:.85}
+.m .cv{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .18s}
+.mrow.open .m .vd{opacity:1}
+.mrow.open .cv{transform:rotate(-135deg) translate(-3px,-3px)}
+.mrow.open .m{background:rgba(255,255,255,.04)}
+.det{display:none;padding:.4rem 1rem 1.2rem 4.1rem;background:var(--panel);border-radius:0 0 var(--radius) var(--radius)}
+.mrow.open .det{display:block}
+.det dl{display:grid;grid-template-columns:7.2rem 1fr;gap:.4rem 1rem;margin:0}
+.det dt{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:.3rem}
+.det dd{margin:0;font-size:.9rem;color:var(--ink-2);line-height:1.6}
+@media(max-width:640px){.m{grid-template-columns:2.4rem minmax(0,1fr) auto}.m .e{grid-column:2;grid-row:2;padding-top:.2rem}
+  .det{padding-left:.6rem}.det dl{grid-template-columns:1fr;gap:.1rem}.det dd{margin-bottom:.6rem}}
+
+.pane{position:sticky;top:5.4rem;border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem;background:linear-gradient(180deg,var(--panel2),var(--panel))}
+.pane .n{font-family:Fraunces,Georgia,serif;font-size:2.5rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--amber)}
+.pane .rt{font-size:.86rem;color:var(--muted)}
+.pane .bars{display:flex;gap:.3rem;margin:.85rem 0 .2rem}
+.pane .bars div{flex:1;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--muted);border-top:2px solid var(--line);padding-top:.35rem}
+.pane .bars div.has{border-top-color:var(--accent);color:var(--ink)}
+.pane .warn{margin-top:.85rem;font-size:.8rem;color:var(--warn);border-top:1px solid var(--line-soft);padding-top:.65rem;line-height:1.5}
+.pane .warn b{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;margin-bottom:.25rem}
+@media(max-width:1000px){.pane{position:static}}
+
+.btn{display:inline-flex;align-items:center;gap:.45rem;font-size:.87rem;font-weight:600;border-radius:100px;
+     padding:.66rem 1.3rem;border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer;
+     font-family:inherit;text-decoration:none;transition:border-color .15s,color .15s}
+.btn:hover{border-color:var(--amber);color:var(--amber)}
+.btn.pri{background:linear-gradient(180deg,#E8541B,#CE420D);border-color:transparent;color:#fff;box-shadow:0 8px 24px -12px rgba(255,74,18,.7)}
+.btn.pri:hover{filter:brightness(1.09);color:#fff;border-color:transparent}
+.btn.sm{padding:.42rem .82rem;font-size:.78rem}
+
+.ch > .next{grid-column:1/-1}
+.next{margin-top:clamp(2.4rem,5vw,4rem);padding-top:1.4rem;border-top:1px solid var(--line2);
+      display:flex;gap:1.5rem;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.next .fwd{margin-left:auto;text-align:right;max-width:46ch}
+.next .fwd p{font-family:Fraunces,Georgia,serif;font-size:clamp(1.15rem,2.2vw,1.42rem);line-height:1.3;color:var(--ink);margin:.45rem 0 1rem;letter-spacing:-.015em}
+@media(max-width:620px){.next .fwd{text-align:left;margin-left:0}}
+
+:where(a,button):focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* ---------- porta de entrada ---------- */
+#gate{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;padding:1.5rem}
+#gate.off{display:none}
+#gate .card{width:100%;max-width:380px;text-align:left}
+#gate .wm{font-family:Fraunces,Georgia,serif;font-size:2.4rem;font-weight:600;letter-spacing:-.02em;line-height:1}
+#gate p{color:var(--ink-soft);font-size:.95rem;margin:.9rem 0 1.6rem;line-height:1.55}
+#gate form{display:flex;gap:.6rem}
+#gate input{flex:1;min-width:0;font-family:inherit;font-size:.95rem;color:var(--ink);background:var(--panel);
+  border:1px solid var(--line2);border-radius:100px;padding:.7rem 1.1rem;outline:none}
+#gate input:focus{border-color:var(--amber)}
+#gate .err{color:var(--orange);font-size:.86rem;margin-top:.9rem;min-height:1.2em}
+#gate .ft{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.82rem;color:var(--ink-mute);line-height:1.5}
+</style>
+
+<div id="gate">
+  <div class="card">
+    <div class="lbl">Documento confidencial</div>
+    <div class="wm" style="margin-top:.5rem">Rota <span class="grad">Certa</span></div>
+    <p>Proposta de cultura e liderança para a Tecmar. Digite a senha para abrir.</p>
+    <form id="gform" autocomplete="off">
+      <input type="password" id="gpw" placeholder="Senha" aria-label="Senha" autofocus>
+      <button class="btn pri" type="submit">Abrir</button>
+    </form>
+    <div class="err" id="gerr"></div>
+    <div class="ft">Sem a senha, fale com Kiko Campos · kiko@kikocampos.com</div>
+  </div>
+</div>
+
+<div id="bar"></div>
+
+<div class="top">
+  <span class="brand"><span class="dot"></span>kiko campos</span>
+  <button class="cpt" id="cpt" title="Abrir o índice"></button>
+  <span class="sp"></span>
+  <button class="ix" id="ixOpen" title="Lista das páginas do documento">Índice</button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Índice do documento">
+  <div class="dh">
+    <div class="row">
+      <div>
+        <h2>Índice</h2>
+        <div class="prog" id="ixProg"></div>
+      </div>
+      <button class="btn sm" id="ixClose">Fechar</button>
+    </div>
+    <p class="hint">Clique em qualquer linha para ir direto àquela página. Você pode ler em qualquer ordem.</p>
+  </div>
+  <nav id="ixList" aria-label="Páginas"></nav>
+  <div class="df">Rota Certa · Cultura e Liderança na Tecmar<br>Kiko Campos · setembro de 2026<br><span style="color:var(--amber)">Documento confidencial</span></div>
+</aside>
+
+<main>
+
+<!-- ============ 1 · CAPA ============ -->
+<section class="ch on" id="c1">
+  <aside class="rail">
+    <span class="num">—</span>
+    <div class="rl"><span class="lbl">Proposta de trabalho</span></div>
+    <p class="marg">Log-In Logística<br>Tecmar Transporte &amp; Logística<br><br>Setembro de 2026<br><br><b>Documento confidencial</b>Destinado à Log-In e à Tecmar. Termos de autoria e sigilo na página 15.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Rota <span class="g">Certa</span></h1>
+      <p class="ld">Arquitetura de cultura e desenvolvimento de liderança para a Tecmar, construída sobre o movimento que a própria companhia iniciou.</p>
+    </div>
+
+    <div class="split l">
+      <div class="prose">
+        <p class="lead-in">Ao final de 2026, a Tecmar pode ter uma régua de liderança escrita pela própria diretoria, dezessete filiais acompanhando comportamento em base mensal e um mecanismo de reconhecimento operando na ponta — dentro do orçamento e do calendário já estabelecidos.</p>
+        <p>Este documento foi construído a partir da conversa de 18 de setembro com Gabriela e Stella e da leitura das fontes públicas da companhia. As leituras aqui apresentadas são preliminares: o diagnóstico ainda não foi realizado, e é ele que confirmará, ajustará ou corrigirá o que segue.</p>
+      </div>
+      <div class="rowlist">
+        <div><span class="k">Destinatários</span><span class="v">Gabriela e Stella<br><span class="sm">Gestão da Mudança e Desenvolvimento Organizacional</span></span></div>
+        <div><span class="k">Emissão</span><span class="v">21 de setembro de 2026 · validade de 30 dias</span></div>
+        <div><span class="k">Início previsto</span><span class="v">Última semana de setembro</span></div>
+      </div>
+    </div>
+
+    <div class="howto">
+      <span class="lbl">Como ler este documento</span>
+      <div class="hl">
+        <div><b>Dezesseis páginas curtas</b><span>Cada uma cabe em uma tela. A leitura completa leva cerca de dez minutos.</span></div>
+        <div><b>Para avançar</b><span>O botão laranja <em>Prosseguir</em>, no fim de cada capítulo. Ao lado dele, <em>Anterior</em> volta.</span></div>
+        <div><b>Para ir direto a um assunto</b><span>O botão <em>Índice</em>, no alto à direita, lista todas as páginas do documento.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUMÁRIO ============ -->
+<section class="ch" id="c5">
+  <aside class="rail">
+    <span class="num">01</span>
+    <div class="rl"><span class="lbl">Sumário</span></div>
+    <p class="marg">Esta página é suficiente para uma primeira decisão. Os capítulos seguintes desenvolvem cada ponto.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>A proposta em <em>uma página</em></h1>
+      <p class="ld">O que entendemos, o que propomos, o que muda ao final de 2026 — e a resposta, item a item, ao que foi pedido na reunião de 18 de setembro.</p>
+    </div>
+
+    <div class="split">
+      <div class="prose">
+        <h3>O que entendemos</h3>
+        <p>A Tecmar foi adquirida em 2022 e operou quatro anos em autonomia, com resultado abaixo do esperado. Em abril de 2026 assumiu uma diretoria inteiramente nova, que criou o movimento Rota Certa e instalou um PMO de turnaround com sala de guerra de indicadores. O back-office já foi integrado; a cultura e a maturidade de liderança, não.</p>
+        <p>A leitura que fazemos não é a de uma empresa sem cultura, e sim a de uma empresa com oito valores publicados, sem tradução deles em comportamento por nível de liderança e sem rito que conecte comportamento a resultado. É leitura preliminar: o diagnóstico pode confirmá-la ou corrigi-la.</p>
+      </div>
+      <div class="prose">
+        <h3>O que propomos</h3>
+        <p>Um trabalho organizado em quatro blocos — Lançamento, Consciência, Coragem e Consistência —, com trinta módulos contratáveis e três rotas pré-montadas para facilitar a decisão. Cinco módulos são condição técnica dos demais.</p>
+        <p>O princípio de desenho é duplo: aproveitar o que a Tecmar já decidiu e já orçou — webinar, campanha, encontro de gerentes, roadshow e sala de guerra — e transferir a condução à equipe interna, o que torna o trabalho compatível com o orçamento e lhe dá legitimidade na operação.</p>
+      </div>
+    </div>
+
+    <h2 class="sec">A rota recomendada</h2>
+    <div class="split l">
+      <div class="prose">
+        <p>Quinze módulos entre outubro e dezembro de 2026: diagnóstico da diretoria e dos reforçadores de cultura, contrato de liderança entre os diretores, definição da régua de liderança Tecmar, lançamento, roadshow instrumentado com escuta e devolutiva, encontro de gerentes e três mecanismos de sustentação. O trabalho de 2027 é apresentado à parte.</p>
+      </div>
+      <div>
+        <p class="lbl eyebrow">O que muda ao final de 2026</p>
+        <ul class="dash">
+          <li>Uma diretoria com contrato de comportamento escrito entre pares e prova de noventa dias em curso.</li>
+          <li>Uma régua de liderança em quatro comportamentos, definida pela própria diretoria e válida para as três camadas.</li>
+          <li>Uma linha de base de cultura onde hoje não existe medição.</li>
+          <li>Dezessete filiais com acompanhamento mensal de melhoria de 1%, apurado sobre indicadores que o PMO já coleta.</li>
+          <li>Um ritual mensal de reconhecimento de comportamento em cada filial, a custo próximo de zero.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="sec">O que foi pedido, e como esta proposta responde</h2>
+    <div class="prose"><p>A coluna da esquerda reproduz o que foi solicitado ou levantado na reunião. A da direita indica onde a proposta responde, com o módulo correspondente.</p></div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Pedido ou ponto levantado na reunião</th><th>Resposta nesta proposta</th><th>Módulo</th></tr></thead>
+        <tbody>
+          <tr><th>Webinar de lançamento do movimento</th><td>Palestra de abertura e roteiro de fala de cada diretor, ancorados na régua de liderança. Desenho completo do evento e vídeo de abertura ficam como opcionais.</td><td class="mono">A0 · A1 · A3</td></tr>
+          <tr><th>Campanha de cultura com o Marketing</th><td>Frases-âncora por comportamento, prontas para aplicação em qualquer peça, de modo que campanha e régua não se contradigam.</td><td class="mono">A2</td></tr>
+          <tr><th>Trabalho com a alta liderança</th><td>Diagnóstico de como cada diretor opera e de como operam em conjunto, seguido de contrato de liderança entre pares e revisita em noventa dias.</td><td class="mono">B0 · C0 · C8</td></tr>
+          <tr><th>Encontro de gerentes</th><td>Encontro conduzido já com a régua definida e com o dado de campo em mãos, e não como evento isolado. Segundo encontro disponível como opcional.</td><td class="mono">C4 · C5</td></tr>
+          <tr><th>Roadshow da diretoria nas filiais</th><td>Protocolo de escuta, captura padronizada e devolutiva por unidade, que converte a viagem já orçada em diagnóstico das unidades visitadas.</td><td class="mono">B3 · B4 · C3</td></tr>
+          <tr><th>Envolver a primeira liderança e as filiais</th><td>Acompanhamento mensal por unidade, reconhecimento de comportamento e momento de cultura na abertura de turno — sem evento presencial para essa camada.</td><td class="mono">D0 · D1 · D2 · D3</td></tr>
+          <tr><th>Entender quem é a Tecmar antes de propor</th><td>Leitura documental de coerência e auditoria do que a companhia efetivamente premia, promove e desliga, antes de qualquer definição de comportamento.</td><td class="mono">B1 · B2</td></tr>
+          <tr><th>Definir o que é liderar bem na Tecmar</th><td>Régua de liderança redigida pela diretoria em sessão de trabalho, a partir dos valores já publicados, com exigência descrita por camada.</td><td class="mono">C1</td></tr>
+          <tr><th>Orçamento restrito</th><td>Aproveitamento dos ativos já orçados, condução transferida à equipe interna e escopo modular, com cinco módulos essenciais.</td><td class="mono">—</td></tr>
+          <tr><th>Prazo curto, com webinar em outubro</th><td>Início na última semana de setembro, com a régua definida antes do lançamento, de modo que o evento comunique um direcionamento já estabelecido.</td><td class="mono">—</td></tr>
+          <tr><th>Filiais de portes muito distintos</th><td>Cada unidade medida contra a própria série histórica, sem ranking absoluto entre filiais.</td><td class="mono">D1</td></tr>
+          <tr><th>Duas réguas de avaliação em convivência</th><td>Entra como entregável de curto prazo no diagnóstico, com decisão de unificação prevista para 2027.</td><td class="mono">B1 · D6</td></tr>
+          <tr><th>Defasagem de um nível entre as estruturas</th><td>Mapa de gap por camada, que converte a percepção de defasagem em medida comparável.</td><td class="mono">C2</td></tr>
+          <tr><th>Preparo da área de gente para conduzir</th><td>Trilha de prontidão da área, que a habilita a sustentar o trabalho sem dependência externa.</td><td class="mono">D4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="lbl">Investimento</span>
+      <p>Por módulo e por rota, com condição própria para o bloco de entrada. Os valores seguem em documento à parte, após a confirmação dos pontos de dimensionamento relacionados no capítulo final.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · CONTEXTO ============ -->
+<section class="ch" id="c2">
+  <aside class="rail">
+    <span class="num">02</span>
+    <div class="rl"><span class="lbl">Contexto</span></div>
+    <p class="marg"><b>Fonte</b>Reunião de briefing de 18 de setembro de 2026 e fontes públicas da Tecmar.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>A aquisição de 2022 e o que nela ainda <em>não foi integrado</em></h1>
+      <p class="ld">A Tecmar foi adquirida para que a Log-In desenvolvesse competência em carga fracionada. O ativo adquirido era, em boa medida, o time — e é o time que permanece fora do processo de integração.</p>
+    </div>
+
+    <div class="split l">
+      <div class="prose">
+        <p>O desenho inicial manteve a Tecmar autônoma, reportando resultado. Como estrutura de governança, funcionou; como resultado de negócio, não entregou o que se esperava. Em abril de 2026 assumiu um diretor de mercado com diretoria inteiramente nova, a controladoria da Log-In passou a responder pelo CFO e teve início o movimento Rota Certa.</p>
+        <p>A integração do back-office está concluída — folha, benefícios, facilities, saúde e desenvolvimento organizacional. <strong class="k">A cultura e a maturidade de liderança permanecem fora desse escopo.</strong> É essa a lacuna a que esta proposta se dirige.</p>
+      </div>
+      <div>
+        <p class="lbl eyebrow">Registrado na reunião</p>
+        <ul class="dash">
+          <li>Vinte anos de decisão por relação pessoal em transição para gestão da rotina.</li>
+          <li>Um nível de defasagem entre as duas estruturas: o gerente da Tecmar corresponde a um coordenador da Log-In.</li>
+          <li>Duas réguas de avaliação em convivência, com gerentes avaliando equipes mistas por modelos distintos.</li>
+          <li>Dúvida quanto ao desdobramento dos ritos de gestão para além da cúpula.</li>
+          <li>Necessidade de liderar em cenário de austeridade, com noção de custo na ponta.</li>
+          <li>Filiais de portes muito distintos, o que inviabiliza solução única.</li>
+          <li>Exigência de coerência simbólica entre o que se pede e o que se oferece.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · MANDATO ============ -->
+<section class="ch" id="c3">
+  <aside class="rail">
+    <span class="num">03</span>
+    <div class="rl"><span class="lbl">Mandato</span></div>
+    <p class="marg">O critério de desenho adotado em toda a proposta decorre desta observação.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>A observação que orienta o desenho</h1>
+      <p class="ld">O ponto de maior consequência da reunião não foi um pedido, e sim uma avaliação da própria área sobre o que foi feito até aqui.</p>
+    </div>
+
+    <div class="moment">
+      <blockquote>A gente até então fez muito um ctrl-C, ctrl-V. Vamos trazer as competências, os valores da Log-In para trabalhar na Tecmar, sem ter sido feito um diagnóstico de cultura, um entendimento de quem é essa empresa.</blockquote>
+      <cite>Briefing · 18 de setembro de 2026</cite>
+    </div>
+
+    <div class="split">
+      <div class="prose">
+        <p>Essa avaliação foi adotada como critério de desenho. Na prática, três condições decorrem dela.</p>
+      </div>
+      <div class="rowlist">
+        <div><span class="k">Primeira</span><span class="v">Nenhuma definição de comportamento antes do diagnóstico.</span></div>
+        <div><span class="k">Segunda</span><span class="v">Nenhum modelo importado de biblioteca: o que for construído parte dos valores que a Tecmar já publicou.</span></div>
+        <div><span class="k">Terceira</span><span class="v">Nenhum rito novo: a agenda de cultura entra nas reuniões que a companhia já realiza.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · ACHADO ============ -->
+<section class="ch" id="c4">
+  <aside class="rail">
+    <span class="num">04</span>
+    <div class="rl"><span class="lbl">Leitura preliminar</span></div>
+    <p class="marg"><b>Fontes</b>Manual de Conduta Ética, página de carreiras e site institucional da Tecmar, consultados em setembro de 2026.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Uma palavra, <em>três leituras</em> em circulação</h1>
+      <p class="ld">A leitura das fontes públicas foi feita antes de qualquer proposta de escopo. Ela identificou um ponto que interfere diretamente no desenho do trabalho.</p>
+    </div>
+
+    <div class="split l">
+      <div class="prose">
+        <p>“Atitude de Dono” é valor formal da Tecmar e consta do Manual de Conduta Ética e da página de carreiras. Circulam hoje três definições distintas para ele — todas legítimas, nenhuma reconciliada, cada uma solicitando um comportamento diferente.</p>
+        <p>Registramos ainda duas listas de valores em vigor, uma com oito itens e outra com sete, e um manual assinado pela direção anterior.</p>
+        <p class="k">Nada disso configura inconsistência a ser corrigida. É o retrato de uma companhia que cresceu com rapidez e passou por troca de comando. A implicação prática é outra: um programa de cultura que não enderece esse ponto solicitará três comportamentos diferentes sob a mesma palavra.</p>
+      </div>
+      <div class="note">
+        <span class="lbl">Implicação para o desenho</span>
+        <p>Enquanto as três definições não forem reconciliadas, qualquer material de cultura solicitará comportamentos distintos sob a mesma palavra — e a organização tende a ler isso como falta de clareza da liderança.</p>
+      </div>
+    </div>
+
+    <figure class="ex wide">
+        <div class="hd"><span class="no">Quadro 1</span><span class="tt">Definições em circulação e proposta de atribuição</span></div>
+        <p class="st">A alternativa proposta não elege uma das três definições: atribui cada uma à camada de liderança a que corresponde.</p>
+        <svg viewBox="0 0 560 322" role="img" aria-label="Três definições distintas de Atitude de Dono circulam hoje, vindas do Manual da Tecmar, do Manual da Log-In e da prática da direção. A proposta atribui uma delas a cada camada de liderança: diretor, gerente e primeira liderança.">
+          <text class="mn" x="0" y="7" font-size="8.5" opacity=".6">Situação atual</text>
+          <text class="sr" x="280" y="42" font-size="21" text-anchor="middle">“Atitude de Dono”</text>
+          <line x1="186" y1="54" x2="374" y2="54" stroke="currentColor" stroke-width="1" opacity=".3"/>
+          <g stroke="currentColor" stroke-width="1" opacity=".3" fill="none">
+            <path d="M280 54 L280 76 L92 76 L92 96"/>
+            <path d="M280 54 L280 96"/>
+            <path d="M280 54 L280 76 L468 76 L468 96"/>
+          </g>
+          <g text-anchor="middle">
+            <text x="92" y="114" font-size="12">Prestação de contas</text>
+            <text x="280" y="114" font-size="12">Iniciativa e antecipação</text>
+            <text x="468" y="114" font-size="12">Zelo pelo custo</text>
+            <text class="mn" x="92" y="132" font-size="8" opacity=".55">Manual Tecmar</text>
+            <text class="mn" x="280" y="132" font-size="8" opacity=".55">Manual Log-In</text>
+            <text class="mn" x="468" y="132" font-size="8" opacity=".55">Direção, na prática</text>
+          </g>
+          <line x1="0" y1="164" x2="560" y2="164" stroke="currentColor" stroke-width="1" opacity=".18"/>
+          <text class="mn" x="0" y="192" font-size="8.5" opacity=".6">Proposta · uma definição por camada</text>
+          <g>
+            <line x1="0" y1="206" x2="560" y2="206" stroke="currentColor" stroke-width="1" opacity=".45"/>
+            <line x1="0" y1="242" x2="560" y2="242" stroke="currentColor" stroke-width="1" opacity=".18"/>
+            <line x1="0" y1="278" x2="560" y2="278" stroke="currentColor" stroke-width="1" opacity=".18"/>
+            <line x1="0" y1="314" x2="560" y2="314" stroke="currentColor" stroke-width="1" opacity=".45"/>
+            <line x1="176" y1="206" x2="176" y2="314" style="stroke:var(--accent)" stroke-width="1.2"/>
+            <text x="0" y="229" font-size="11.5">Diretor</text>
+            <text x="0" y="265" font-size="11.5">Gerente</text>
+            <text x="0" y="301" font-size="11.5">Primeira liderança</text>
+            <text x="192" y="229" font-size="11.5" opacity=".78">Calcula risco, antecipa demanda e decide com a informação disponível</text>
+            <text x="192" y="265" font-size="11.5" opacity=".78">Conhece o custo da unidade que dirige e responde por ele</text>
+            <text x="192" y="301" font-size="11.5" opacity=".78">Assume o resultado das próprias decisões</text>
+          </g>
+        </svg>
+        <p class="src">Fonte: Manual de Conduta Ética e página de carreiras da Tecmar; relato da direção na reunião de 18 de setembro de 2026.</p>
+    </figure>
+
+    <h2 class="sec">A hipótese central</h2>
+    <div class="split">
+      <div class="prose">
+        <p>A hipótese que sustenta esta proposta é a de que não há ausência de cultura declarada na Tecmar, e sim ausência de tradução: os valores publicados não estão descritos como comportamento observável por camada, não aparecem em rito semanal e não têm indicador associado.</p>
+        <p>É uma hipótese, não uma conclusão. O diagnóstico pode confirmá-la, e pode também apontar para outras duas explicações — igualmente plausíveis neste momento, e com implicações distintas para o desenho do programa.</p>
+      </div>
+      <div class="rowlist">
+        <div><span class="k">Hipótese A</span><span class="v">Ausência de tradução. Os valores existem, mas não chegam a comportamento, rito ou indicador.</span></div>
+        <div><span class="k">Hipótese B</span><span class="v">Questão de sistema, e não de disposição. Se o modelo de performance nunca solicitou gestão da rotina, o gerente não foi avaliado nem promovido por ela.</span></div>
+        <div><span class="k">Hipótese C</span><span class="v">Maturidade de time na diretoria. Um colegiado formado em abril, sem história comum, tende a não produzir alinhamento espontâneo no prazo de um turnaround.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · MÉTODO ============ -->
+<section class="ch" id="c6">
+  <aside class="rail">
+    <span class="num">05</span>
+    <div class="rl"><span class="lbl">Método</span></div>
+    <p class="marg">As três forças não são fases. A ordem de entrada é que define a sustentação do esforço no primeiro mês de resultado adverso.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Três forças, e a <em>ordem</em> em que entram</h1>
+      <p class="ld">A estrutura de trabalho se organiza em consciência, coragem e consistência — cada uma respondendo a uma pergunta e ancorada em um rito já existente.</p>
+    </div>
+
+    <div class="trio">
+      <div><p class="lbl eyebrow">Consciência</p><p class="prose"><strong class="k">O time se vê.</strong> Qual a distância entre o que se declara e o que se pratica, premia e promove? Compreende o diagnóstico da diretoria, a auditoria dos reforçadores e a escuta de campo.</p></div>
+      <div><p class="lbl eyebrow">Coragem</p><p class="prose"><strong class="k">O time se confronta.</strong> Quem se compromete com o quê, diante de quem e em que prazo? Compreende o contrato da diretoria, a régua de liderança e o encontro de gerentes.</p></div>
+      <div><p class="lbl eyebrow">Consistência</p><p class="prose"><strong class="k">O time sustenta.</strong> Em que rito existente isso se instala e por qual indicador é acompanhado? Compreende a sala de guerra, a reunião de resultado, a abertura de turno e o acompanhamento mensal.</p></div>
+    </div>
+
+    <figure class="ex">
+      <div class="hd"><span class="no">Quadro 2</span><span class="tt">Encadeamento das três forças</span></div>
+      <p class="st">A consistência não encerra o percurso: devolve o trabalho aos ritos existentes, e o que ocorre neles alimenta a leitura seguinte.</p>
+      <svg viewBox="0 0 560 172" role="img" aria-label="Consciência alimenta coragem, que alimenta consistência. A consistência devolve o trabalho aos ritos existentes e, deles, novo dado retorna à consciência a cada mês.">
+        <line x1="0" y1="96" x2="560" y2="96" stroke="currentColor" stroke-width="1" opacity=".45"/>
+        <g stroke="currentColor" stroke-width="1" opacity=".45"><line x1="84" y1="88" x2="84" y2="104"/><line x1="280" y1="88" x2="280" y2="104"/><line x1="476" y1="88" x2="476" y2="104"/></g>
+        <g text-anchor="middle">
+          <text class="sr" x="84" y="42" font-size="22" opacity=".35">01</text>
+          <text class="sr" x="280" y="42" font-size="22" opacity=".35">02</text>
+          <text class="sr" x="476" y="42" font-size="22" opacity=".35">03</text>
+          <text x="84" y="72" font-size="13">Consciência</text>
+          <text x="280" y="72" font-size="13">Coragem</text>
+          <text x="476" y="72" font-size="13">Consistência</text>
+          <text x="84" y="120" font-size="10.5" opacity=".65">o time se vê</text>
+          <text x="280" y="120" font-size="10.5" opacity=".65">o time se confronta</text>
+          <text x="476" y="120" font-size="10.5" opacity=".65">o time sustenta</text>
+        </g>
+        <g fill="none" style="stroke:var(--accent)" stroke-width="1" stroke-dasharray="3 3" opacity=".9">
+          <path d="M548 100 L548 148 L12 148 L12 104"/>
+        </g>
+        <polygon points="12,94 7,106 17,106" style="fill:var(--accent)"/>
+        <text class="mn" x="280" y="166" font-size="7.2" text-anchor="middle" style="fill:var(--accent)">a cada mês o rito devolve dado novo à leitura</text>
+      </svg>
+      <p class="src">Os ritos existentes considerados são a sala de guerra do PMO, a reunião mensal de resultado e a abertura de turno na operação.</p>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 6 · ECONOMIA DO TRABALHO ============ -->
+<section class="ch" id="c7">
+  <aside class="rail">
+    <span class="num">06</span>
+    <div class="rl"><span class="lbl">Economia do trabalho</span></div>
+    <p class="marg">Dois princípios respondem à restrição orçamentária sem reduzir o escopo do que se pretende mudar.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Dois princípios de dimensionamento</h1>
+      <p class="ld">A restrição de orçamento foi tratada como premissa de desenho, e não como limitação a ser contornada depois.</p>
+    </div>
+
+    <h2 class="sec">O aproveitamento do que já está decidido</h2>
+    <div class="split l">
+      <div class="prose">
+        <p>O webinar, a campanha, o encontro de gerentes e o roadshow ocorrerão independentemente desta proposta. A questão pertinente não é o que acrescentar a eles, e sim o que instalar dentro deles.</p>
+        <p class="k">Um roadshow é uma visita. Um roadshow com protocolo de escuta, captura padronizada e devolutiva por unidade é um diagnóstico de dezessete unidades ao custo de uma viagem já orçada. A diferença entre os dois está no desenho, não no investimento.</p>
+      </div>
+      <div>
+        <p class="lbl eyebrow">Ativos existentes considerados</p>
+        <div class="chips">
+          <span class="chip">Movimento Rota Certa</span><span class="chip">Webinar de lançamento</span><span class="chip">Campanha com Marketing</span>
+          <span class="chip">Encontro de gerentes</span><span class="chip">Roadshow da diretoria</span><span class="chip">PMO do turnaround</span>
+          <span class="chip">Indicadores em operação</span><span class="chip">Gestão da rotina</span><span class="chip">Back-office integrado</span>
+          <span class="chip">25 anos e valores publicados</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec">A condução interna</h2>
+    <div class="split l">
+      <div class="prose">
+        <p>A recomendação é que a condução permaneça com a equipe da companhia. Não se trata de concessão comercial: em duas transformações de grande porte no varejo, as decisões deliberadas de não terceirizar a condução produziram os melhores resultados — mais de trezentas sessões de cultura conduzidas integralmente por equipe interna e uma escola de liderança construída sem consultoria externa, com catorze mil gerentes formados em dois anos.</p>
+        <p>Diante do gerente de filial, o gestor direto ou um profissional da casa dispõe de uma legitimidade que um consultor externo não constrói em uma visita. O efeito sobre o custo é consequência, não objetivo.</p>
+      </div>
+      <div class="note">
+        <span class="lbl">Escopo do que se contrata</span>
+        <p>Arquitetura, instrumentação e transferência de capacidade para a equipe interna conduzir. O trabalho não é dimensionado em dias de sala.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · A RÉGUA ============ -->
+<section class="ch" id="c8">
+  <aside class="rail">
+    <span class="num">07</span>
+    <div class="rl"><span class="lbl">A régua de liderança</span></div>
+    <p class="marg"><b>Natureza da peça</b>Sugestão de estrutura para a sessão de trabalho com a diretoria. A definição final é da companhia.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Uma proposta de régua: <span class="g">quatro comportamentos</span></h1>
+      <p class="ld">A pergunta sobre o que significa liderar bem na Tecmar permaneceu em aberto na reunião. Enquanto não houver resposta escrita, a defasagem entre as duas estruturas permanece percepção, e não medida.</p>
+    </div>
+
+    <div class="prose">
+      <p class="lead-in">A estrutura proposta reúne os oito valores publicados em quatro comportamentos, e as quatro iniciais formam a palavra do movimento que a própria direção criou.</p>
+    </div>
+
+    <div class="rota">
+      <div>
+        <span class="L">R</span>
+        <span><b>Respeito</b><span class="d">Ao cliente, ao colega e à vida. Na operação, tem endereço concreto: a carga que chega íntegra, o veículo que retorna, o colega tratado com consideração.</span></span>
+        <span class="ab"><span>Respeito ao Cliente</span><span>Segurança</span><span>Ética</span></span>
+      </div>
+      <div>
+        <span class="L">O</span>
+        <span><b>Olho de dono</b><span class="d">Responde pelas próprias decisões e cuida do custo e do ativo como se fossem seus. É o valor que a companhia já publica e sobre o qual a direção relata a maior distância entre discurso e prática.</span></span>
+        <span class="ab"><span>Atitude de Dono</span></span>
+      </div>
+      <div>
+        <span class="L">T</span>
+        <span><b>Time</b><span class="d">Trabalha em conjunto, reconhece o bom desempenho e dá retorno sem aguardar o fim do ciclo. Aqui está a correção de menor custo do trabalho: o ciclo de feedback da Tecmar é anual, o da Log-In é semanal.</span></span>
+        <span class="ab"><span>Trabalho em Equipe</span><span>Reconhecimento</span></span>
+      </div>
+      <div>
+        <span class="L">A</span>
+        <span><b>Aberto e simples</b><span class="d">Comunica o que precisa ser comunicado, sem rodeio e sem camada intermediária. Em uma companhia que deixa para trás vinte anos de decisão por relação pessoal, é o comportamento de maior dificuldade e de maior consequência.</span></span>
+        <span class="ab"><span>Transparência</span><span>Simplicidade</span></span>
+      </div>
+    </div>
+
+    <h2 class="sec">De onde saem os quatro</h2>
+    <div class="split l">
+      <div class="prose">
+        <p>Não de biblioteca externa: dos oito valores que a Tecmar publica. Nenhum foi descartado — cada um permanece no comportamento que o solicita, conforme indicado ao lado de cada letra.</p>
+        <p>O agrupamento responde a uma limitação prática conhecida: réguas extensas não são operadas na ponta. Um encarregado em conferência de carga às cinco da manhã não recorre a uma lista de oito itens; age a partir de dois ou três critérios incorporados.</p>
+        <p class="sm">O número quatro é decisão de desenho, não princípio. Poderiam ser três ou cinco, e as quatro letras podem ser substituídas na sessão com a diretoria. O que se recomenda preservar é o critério: poucos comportamentos, extraídos dos valores publicados, descritos por camada.</p>
+      </div>
+      <div>
+        <p class="lbl eyebrow">Valores publicados pela Tecmar</p>
+        <div class="vals">
+          <span>Segurança</span><span>Ética</span><span>Atitude de Dono</span><span>Respeito ao Cliente</span>
+          <span>Simplicidade</span><span>Trabalho em Equipe</span><span>Reconhecimento</span><span>Transparência</span>
+        </div>
+        <div class="note" style="margin-top:1.4rem">
+          <span class="lbl">Autoria</span>
+          <p>A régua é redigida pela diretoria, em sessão de trabalho conduzida por nós. Modelo definido externamente tende a permanecer como peça de parede — condição que a própria área indicou querer evitar.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec">A exigência varia conforme a camada</h2>
+    <div class="split">
+      <div class="prose">
+        <p>É neste ponto que as três definições concorrentes de “Atitude de Dono” deixam de competir entre si. Nenhuma é descartada: cada uma passa a ser a exigência de um nível.</p>
+      </div>
+      <div class="layers">
+        <div><span class="who">Diretor</span><span class="beh">Calcula risco, antecipa demanda e decide com a informação disponível. <span class="sm">Leitura do Manual da Log-In.</span></span></div>
+        <div><span class="who">Gerente</span><span class="beh">Conhece o custo da unidade que dirige e responde por esse número. <span class="sm">Leitura da direção da Tecmar.</span></span></div>
+        <div><span class="who">Primeira liderança</span><span class="beh">Assume o resultado das próprias decisões, de forma pessoal e transparente. <span class="sm">Leitura do Manual da Tecmar.</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · MECANISMOS ============ -->
+<section class="ch" id="c9">
+  <aside class="rail">
+    <span class="num">08</span>
+    <div class="rl"><span class="lbl">Sustentação</span></div>
+    <p class="marg">Nenhum dos quatro mecanismos exige rito novo, verba adicional ou evento com consultor.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Os mecanismos que sustentam a régua</h1>
+      <p class="ld">Uma régua escrita não altera comportamento por si. Ela precisa aparecer em momentos que já existem na rotina da companhia e em rituais de baixo custo de operação.</p>
+    </div>
+
+    <h2 class="sec">Nos ritos existentes</h2>
+    <div class="split l">
+      <div class="prose">
+        <p>Sala de guerra do PMO, reunião mensal de resultado e abertura de turno na operação. A alteração na reunião de resultado é de pergunta, não de agenda: em lugar de tratar exclusivamente do que ocorreu no mês anterior, inclui-se qual comportamento se altera no mês seguinte.</p>
+      </div>
+      <div class="note">
+        <span class="lbl">Implicação</span>
+        <p>Custo zero de implantação e efeito observável no ciclo seguinte de reunião.</p>
+      </div>
+    </div>
+
+    <h2 class="sec">Quilômetro 1: cada unidade medida contra a própria série</h2>
+    <div class="split l">
+      <div class="prose">
+        <p>Acompanhamento mensal de melhoria de 1% por unidade, com três indicadores: um de segurança, um de custo e um de cliente. A escolha dos três decorre do propósito que a companhia publica — entregar no tempo certo e com segurança.</p>
+        <p>A base de comparação é a média dos três meses anteriores da própria filial. Volume não entra no cálculo, o que responde à disparidade de portes registrada na reunião.</p>
+        <p class="sm">Alternativa considerada e não recomendada: ranking absoluto entre filiais. Tende a premiar sempre as mesmas unidades e a desmobilizar as demais em poucos ciclos.</p>
+      </div>
+      <div class="note">
+        <span class="lbl">Por que a base é a própria série</span>
+        <p>A comparação contra a própria média permite que uma unidade de dez pessoas lidere o acompanhamento e um armazém de sessenta caminhões fique atrás — que é o comportamento que se pretende distinguir.</p>
+      </div>
+    </div>
+
+    <figure class="ex wide">
+        <div class="hd"><span class="no">Quadro 3</span><span class="tt">Duas filiais de portes distintos na mesma escala</span></div>
+        <p class="st">Variação percentual acumulada contra a média dos três meses anteriores de cada unidade.</p>
+        <svg viewBox="0 0 560 180" role="img" aria-label="Gráfico de duas séries. A filial pequena acumula mais três vírgula um por cento e a filial grande mais um vírgula um por cento no mesmo período, de modo que a unidade menor lidera o acompanhamento.">
+          <g stroke="currentColor" stroke-width="1" opacity=".14">
+            <line x1="40" y1="46" x2="264" y2="46"/><line x1="40" y1="82" x2="264" y2="82"/><line x1="40" y1="118" x2="264" y2="118"/>
+            <line x1="336" y1="46" x2="560" y2="46"/><line x1="336" y1="82" x2="560" y2="82"/><line x1="336" y1="118" x2="560" y2="118"/>
+          </g>
+          <g stroke="currentColor" stroke-width="1" opacity=".5"><line x1="40" y1="154" x2="264" y2="154"/><line x1="336" y1="154" x2="560" y2="154"/></g>
+          <g class="mn" font-size="8" opacity=".55" text-anchor="end">
+            <text x="32" y="49">+3%</text><text x="32" y="85">+2%</text><text x="32" y="121">+1%</text><text x="32" y="157">0</text>
+          </g>
+          <text x="40" y="14" font-size="11">Filial A</text><text class="mn" x="40" y="28" font-size="8" opacity=".55">10 pessoas</text>
+          <text x="336" y="14" font-size="11">Filial B</text><text class="mn" x="336" y="28" font-size="8" opacity=".55">armazém · 60 caminhões</text>
+          <polyline points="62,154 128,120 194,88 252,44" fill="none" style="stroke:var(--accent)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="252" cy="44" r="3.2" style="fill:var(--accent)"/>
+          <text class="mn" x="252" y="34" font-size="8.5" text-anchor="end" style="fill:var(--accent)">+3,1%</text>
+          <polyline points="358,154 424,142 490,134 548,118" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" opacity=".55"/>
+          <circle cx="548" cy="118" r="3.2" fill="currentColor" opacity=".55"/>
+          <text class="mn" x="548" y="108" font-size="8.5" text-anchor="end" opacity=".55">+1,1%</text>
+          <g class="mn" font-size="8" opacity=".45" text-anchor="middle">
+            <text x="62" y="170">out</text><text x="128" y="170">nov</text><text x="194" y="170">dez</text><text x="252" y="170">jan</text>
+            <text x="358" y="170">out</text><text x="424" y="170">nov</text><text x="490" y="170">dez</text><text x="548" y="170">jan</text>
+          </g>
+        </svg>
+        <p class="src">A linha zero corresponde à média dos três meses anteriores de cada filial; não há escala absoluta comum entre os painéis. Valores hipotéticos, para demonstração do método de comparação.</p>
+    </figure>
+
+    <div class="note">
+      <span class="lbl">Condição contratual sugerida</span>
+      <p>Unidade abaixo da linha recebe suporte estruturado antes de qualquer cobrança. Sem essa regra, o acompanhamento tende a ser lido como punição e o mecanismo se encerra em poucos ciclos.</p>
+    </div>
+
+    <h2 class="sec">Reconhecimento mensal de comportamento</h2>
+    <div class="split l">
+      <div class="prose">
+        <p>Entrega mensal, pelo líder local, de um reconhecimento a quem tenha demonstrado um dos comportamentos da régua. “Reconhecimento” é valor publicado pela Tecmar e, pelo que apuramos, ainda não operado — o ritual coloca em prática algo que a companhia já declarou.</p>
+        <p>O produto relevante não é a peça entregue, e sim a observação de comportamento que o líder precisa realizar ao longo de trinta dias para escolher alguém. Em cenário de austeridade, reconhecimento é a alavanca de gestão de pessoas que não demanda verba.</p>
+        <p class="sm">O Quilômetro 1 e o reconhecimento permanecem separados por desenho: o primeiro mede a unidade e observa resultado; o segundo distingue a pessoa e observa comportamento. Unificados em um prêmio único, a filial de maior porte tende a vencer sistematicamente.</p>
+      </div>
+      <div>
+        <h3>Princípio trimestral</h3>
+        <p class="prose">A cada trimestre, um comportamento da régua é convertido em material pronto para condução em dez minutos pelo próprio líder: uma página de orientação, um cartaz em forma de pergunta e um vídeo breve com um líder da casa. São quatro entregas no ano — volume compatível com o orçamento e suficiente para dar foco trimestral ao acompanhamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 · PRIMEIRA LIDERANÇA ============ -->
+<section class="ch" id="c10">
+  <aside class="rail">
+    <span class="num">09</span>
+    <div class="rl"><span class="lbl">Primeira liderança</span></div>
+    <p class="marg">Camada mais numerosa da companhia e a de maior custo de reunião presencial.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Como a régua <em>alcança a operação</em></h1>
+      <p class="ld">Encarregados, supervisores e líderes de turno formam a camada mais numerosa e a que determina, na prática, se a cultura declarada existe.</p>
+    </div>
+
+    <div class="split l">
+      <div class="prose">
+        <p class="k">A leitura que fazemos é que essa camada opera melhor como canal de entrega da cultura do que como público de treinamento. O desenho proposto parte dessa leitura, e não de uma restrição de custo.</p>
+        <p>O conteúdo chega a ela por multiplicação: a arquitetura entra na diretoria, a diretoria instrumenta os gerentes e o gerente conduz o conteúdo dentro dos ritos que a primeira liderança já realiza — entre eles a abertura de turno. A camada não assiste ao conteúdo: ela o entrega.</p>
+        <p>A única entrega síncrona recomendada são quatro sessões breves ao longo do ano, uma por trimestre, conduzidas pelo próprio gerente a partir de roteiro pronto. O que se contrata é o roteiro, não a facilitação.</p>
+        <p class="sm">Caso o diagnóstico indique lacuna técnica relevante nessa camada, o módulo C6 prevê o aprofundamento correspondente.</p>
+      </div>
+      <div class="note">
+        <span class="lbl">Consequência de desenho</span>
+        <p>Quem conduz o conteúdo o aprende com profundidade maior do que quem o assiste. A multiplicação não é apenas a via de menor custo: é também a de maior retenção.</p>
+      </div>
+    </div>
+
+    <figure class="ex wide">
+        <div class="hd"><span class="no">Quadro 4</span><span class="tt">Cadeia de multiplicação até a operação</span></div>
+        <p class="st">Nenhum dos cinco vetores de chegada exige evento síncrono com consultor externo.</p>
+        <svg viewBox="0 0 560 196" role="img" aria-label="A arquitetura desenha, a diretoria instrumenta, o gerente entrega e a primeira liderança conduz dentro dos ritos que já realiza. Cinco vetores levam o conteúdo à operação sem evento com consultor.">
+          <g class="mn" font-size="8" opacity=".5" text-anchor="end">
+            <text x="556" y="28">desenha</text><text x="556" y="76">instrumenta</text><text x="556" y="124">entrega</text>
+          </g>
+          <g>
+            <text x="0" y="28" font-size="12">Arquitetura</text>
+            <line x1="0" y1="40" x2="560" y2="40" stroke="currentColor" stroke-width="1" opacity=".22"/>
+            <text x="48" y="76" font-size="12">Diretoria</text>
+            <line x1="48" y1="88" x2="560" y2="88" stroke="currentColor" stroke-width="1" opacity=".22"/>
+            <text x="96" y="124" font-size="12">Gerentes</text>
+            <line x1="96" y1="136" x2="560" y2="136" stroke="currentColor" stroke-width="1" opacity=".22"/>
+            <text x="144" y="172" font-size="12.5" style="fill:var(--accent)">Primeira liderança</text>
+            <line x1="144" y1="184" x2="560" y2="184" style="stroke:var(--accent)" stroke-width="1.4"/>
+          </g>
+          <g stroke="currentColor" stroke-width="1" opacity=".22" fill="none">
+            <path d="M24 40 L24 64"/><path d="M72 88 L72 112"/><path d="M120 136 L120 160"/>
+          </g>
+        </svg>
+        <p class="src">Vetores de chegada à primeira liderança: gerente instrumentado, abertura de turno, roadshow, reconhecimento mensal e devolutiva do pulso.</p>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 10 · CALENDÁRIO ============ -->
+<section class="ch" id="c11">
+  <aside class="rail">
+    <span class="num">10</span>
+    <div class="rl"><span class="lbl">Calendário e medição</span></div>
+    <p class="marg">O calendário se encaixa nas datas que a companhia já definiu.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Sequência de execução e acompanhamento</h1>
+      <p class="ld">O webinar, a campanha, o encontro de gerentes e o roadshow preservam as datas já estabelecidas. O que se propõe é a ordem do que os antecede.</p>
+    </div>
+
+    <figure class="ex wide">
+      <div class="hd"><span class="no">Quadro 5</span><span class="tt">Calendário macro do trabalho</span></div>
+      <p class="st">Os quinze módulos da rota recomendada, distribuídos entre a última semana de setembro e dezembro de 2026, com os eventos que a companhia já havia definido na mesma escala.</p>
+      <div class="gwrap"><div class="gantt"><div class="hd lft">Módulo</div><div class="hd">Set · 4ª sem</div><div class="hd">Out · 1ª quinz.</div><div class="hd">Out · 2ª quinz.</div><div class="hd">Nov</div><div class="hd">Dez</div><div class="hd">2027</div><div class="grp">O que a companhia já tinha definido</div>
+<div class="nm">Webinar de lançamento e campanha</div><div class="cell"></div><div class="cell"></div><div class="cell" style="display:flex;align-items:center"><div class="bar ev" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+<div class="nm">Roadshow da diretoria nas filiais</div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:4/6;display:flex;align-items:center"><div class="bar ev" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div>
+<div class="nm">Encontro de gerentes</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="display:flex;align-items:center"><div class="bar ev" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="grp">Bloco B · Consciência — o time se vê</div><div class="nm"><code>B0</code>Raio-X da Diretoria</div><div class="cell" style="grid-column:2/3;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>B1</code>Auditoria dos reforçadores</div><div class="cell" style="grid-column:2/4;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>B2</code>Leitura documental de coerência</div><div class="cell" style="grid-column:2/3;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>B3</code>Raio-X de Campo — roadshow</div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:4/6;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>B4</code>Devolutiva por unidade</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:5/7;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="grp">Bloco C · Coragem — o time se confronta</div><div class="nm"><code>C0</code>Contrato de Liderança da Diretoria</div><div class="cell"></div><div class="cell" style="grid-column:3/4;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>C1</code>Régua de Liderança — R.O.T.A.</div><div class="cell"></div><div class="cell" style="grid-column:3/4;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>C3</code>Preparação dos diretores</div><div class="cell"></div><div class="cell" style="grid-column:3/4;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>C4</code>Encontro de Gerentes</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:5/6;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="grp">Bloco A · Lançamento</div><div class="nm"><code>A0</code>Keynote e roteiro da diretoria</div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:4/5;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="nm"><code>A2</code>Frases-âncora da campanha</div><div class="cell"></div><div class="cell" style="grid-column:3/5;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="grp">Bloco D · Consistência — o time sustenta</div><div class="nm"><code>D0</code>Cultura nos ritos que já existem</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:6/8;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="nm"><code>D1</code>Quilômetro 1 — acompanhamento mensal</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:6/8;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="nm"><code>D2</code>Reconhecimento na Rota Certa</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:6/8;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="nm"><code>D3</code>Momento de Cultura, trimestral</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:6/8;display:flex;align-items:center"><div class="bar" style="width:100%"></div></div><div class="grp">2027 · sustentação (fora da rota recomendada)</div><div class="nm"><code>D6</code>Tombamento onda 2 — performance e sucessão</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:7/8;display:flex;align-items:center"><div class="bar op" style="width:100%"></div></div><div class="nm"><code>D7</code>Remedição do diagnóstico</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:7/8;display:flex;align-items:center"><div class="bar op" style="width:100%"></div></div><div class="nm"><code>D8</code>Acompanhamento trimestral</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell" style="grid-column:7/8;display:flex;align-items:center"><div class="bar op" style="width:100%"></div></div></div></div><div class="glegend">
+  <span><i></i> Módulos da Rota Certa recomendada</span>
+  <span><i class="op"></i> Sustentação em 2027, contratada à parte</span>
+  <span><i class="ev"></i> Eventos que a companhia já tinha definido</span>
+</div>
+      <p class="src">A ordem decorre das dependências técnicas: o diagnóstico precede o contrato e a régua; a régua precede o lançamento e o encontro de gerentes; os mecanismos entram em regime depois da devolutiva de campo.</p>
+    </figure>
+
+    <h2 class="sec">O mesmo calendário, período a período</h2>
+    <div class="split l">
+      <div class="tl">
+        <div><div class="w">Última semana de setembro</div><div class="t">Diagnóstico da diretoria e auditoria dos reforçadores de cultura em campo.</div></div>
+        <div><div class="w">1ª quinzena de outubro</div><div class="t">Contrato de liderança da diretoria, definição da régua e preparação dos diretores para o roadshow.</div></div>
+        <div><div class="w">Outubro</div><div class="t">Webinar de lançamento e campanha no dia seguinte.</div></div>
+        <div><div class="w">Outubro e novembro</div><div class="t">Roadshow com escuta estruturada e devolutiva por unidade.</div></div>
+        <div><div class="w">Novembro</div><div class="t">Encontro de gerentes, já com o dado de campo disponível.</div></div>
+        <div><div class="w">Dezembro</div><div class="t">Mecanismos em regime. Primeiro acompanhamento mensal publicado.</div></div>
+        <div><div class="w">2027</div><div class="t">Régua única de avaliação, remedição e acompanhamento trimestral.</div></div>
+      </div>
+      <div>
+        <div class="note">
+          <span class="lbl">Dependência de data</span>
+          <p>A régua de liderança precisa existir antes do webinar. O evento comunicará direcionamentos de comportamento; caso a régua venha depois, o lançamento afirma uma coisa e a régua corrige outra dois meses adiante, o que tende a ser lido como falta de rumo.</p>
+        </div>
+        <p class="sm" style="margin-top:1.2rem">É essa dependência que posiciona o início na última semana de setembro.</p>
+      </div>
+    </div>
+
+    <h2 class="sec">Como o trabalho é acompanhado</h2>
+    <div class="split">
+      <div class="prose">
+        <p>Sem indicador novo. Os três do acompanhamento mensal — segurança, custo por unidade e cliente — já são coletados pelo PMO. A eles se somam dois indicadores gerados pelo próprio trabalho.</p>
+      </div>
+      <div class="rowlist">
+        <div><span class="k">Diretoria</span><span class="v">Diagnóstico remedido em seis meses: verifica se o contrato de liderança se converteu em prática.</span></div>
+        <div><span class="k">Campo</span><span class="v">Proporção de contribuições da operação que receberam retorno com responsável e prazo definidos.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 · ESCOPO ============ -->
+<section class="ch full" id="c12">
+  <aside class="rail">
+    <span class="num">11</span>
+    <div class="rl"><span class="lbl">Escopo</span></div>
+    <p class="marg">Trinta módulos em quatro blocos. Cinco são condição técnica dos demais; os outros vinte e cinco são de escolha da companhia.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>O escopo, módulo a módulo</h1>
+      <p class="ld">Tudo o que foi descrito até aqui está organizado em trinta módulos contratáveis, agrupados em quatro blocos correspondentes às três forças e ao lançamento.</p>
+    </div>
+
+    <div class="prose">
+      <p>A recomendação é a Rota Certa. Os módulos que a compõem estão assinalados na lista. Cada linha abre a ficha completa: o que é, o que a companhia recebe, por que existe, formato e público.</p>
+    </div>
+
+    <div class="routes" id="routes"></div>
+    <div id="blocks"></div>
+  </div>
+</section>
+
+<!-- ============ 12 · INVESTIMENTO ============ -->
+<section class="ch" id="c13">
+  <aside class="rail">
+    <span class="num">12</span>
+    <div class="rl"><span class="lbl">Investimento</span></div>
+    <p class="marg">Valores por rota em documento à parte, após a definição do dimensionamento.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Estrutura comercial</h1>
+      <p class="ld">O investimento segue três regras, aplicáveis a qualquer composição de escopo.</p>
+    </div>
+
+    <div class="split l">
+      <div class="rowlist">
+        <div><span class="k">Regra 1</span><span class="v"><strong class="k">Preço por módulo.</strong> Cada um dos trinta itens tem valor próprio e pode ser contratado isoladamente.</span></div>
+        <div><span class="k">Regra 2</span><span class="v"><strong class="k">Desconto por rota.</strong> Aplica-se à rota completa, não a módulos avulsos, e é proporcional à extensão da rota.</span></div>
+        <div><span class="k">Regra 3</span><span class="v"><strong class="k">Bloco de entrada.</strong> Diagnóstico da diretoria, contrato de liderança e régua constituem a condição técnica de eficácia dos demais e têm condição comercial própria.</span></div>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Rota</th><th>Módulos</th><th>Investimento</th></tr></thead>
+          <tbody>
+            <tr><th>Rota Mínima</th><td>3</td><td class="mono" style="color:var(--muted)">sob proposta</td></tr>
+            <tr><th>Rota Certa · recomendada</th><td>15</td><td class="mono" style="color:var(--muted)">sob proposta</td></tr>
+            <tr><th>Rota Completa</th><td>27 + 3 em 2027</td><td class="mono" style="color:var(--muted)">sob proposta</td></tr>
+            <tr><th>Bloco de entrada</th><td>3</td><td class="mono" style="color:var(--muted)">sob proposta</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2 class="sec">Condições</h2>
+    <div class="rowlist">
+      <div><span class="k">Pagamento</span><span class="v">50% na assinatura e 50% em até 10 dias da conclusão do último módulo do bloco contratado.</span></div>
+      <div><span class="k">Reajuste</span><span class="v">Módulos executados em 2027 seguem correção a combinar.</span></div>
+      <div><span class="k">Despesas</span><span class="v">Deslocamento e hospedagem fora de São Paulo, reembolsados a custo, mediante aprovação prévia.</span></div>
+      <div><span class="k">Não incluído</span><span class="v">Licenças de instrumentos de terceiros, produção gráfica e audiovisual, locação de espaço e plataforma de transmissão.</span></div>
+      <div><span class="k">Contratação</span><span class="v">Via pessoa jurídica, com nota fiscal de serviço.</span></div>
+      <div><span class="k">Validade</span><span class="v">30 dias a partir da emissão.</span></div>
+    </div>
+    <p class="sm">Os valores de cada rota seguem em documento à parte: o dimensionamento depende do número de pessoas por camada e do número de filiais próprias, pontos relacionados no capítulo seguinte.</p>
+  </div>
+</section>
+
+<!-- ============ 13 · QUEM CONDUZ ============ -->
+<section class="ch" id="c14">
+  <aside class="rail">
+    <span class="num">13</span>
+    <div class="rl"><span class="lbl">Responsável técnico</span></div>
+    <p class="marg">Condução direta de todos os módulos do bloco de entrada.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Quem <em>conduz</em> o trabalho</h1>
+      <p class="ld">Kiko Campos, executivo sênior de Pessoas e Cultura. Vinte anos conectando estratégia, cultura e liderança à execução em operações de grande porte, em onze países, junto a CEOs, comitês executivos e conselhos.</p>
+    </div>
+
+    <div class="split l">
+      <div class="prose">
+        <p>Foi Diretor Global de RH, Transformação e Cultura na Vale — mais de 170 mil pessoas em doze países — e Diretor Executivo de RH, Talentos e Cultura no Grupo Carrefour Brasil. É autor de <em>O Novo Código da Mudança</em>, que sistematiza quinze códigos em três forças: consciência, coragem e consistência, estrutura que organiza também esta proposta.</p>
+        <p class="k">O precedente mais próximo do problema da Tecmar é a integração cultural pós-aquisição do Grupo BIG pelo Carrefour Brasil: 936 lojas, cerca de 150 mil pessoas, quatro culturas de origem e seis bandeiras operando com lógicas distintas.</p>
+      </div>
+      <div class="stats">
+        <div><b>R$ 1,7 bi</b><span>sinergias aceleradas</span></div>
+        <div><b>&lt;60% → 76%</b><span>engajamento</span></div>
+        <div><b>70% → 35%</b><span>turnover</span></div>
+        <div><b>14 mil</b><span>líderes formados em dois anos</span></div>
+        <div><b>+3,7 p.p.</b><span>margem do varejo</span></div>
+        <div><b>1º global</b><span>satisfação de cliente do grupo, 2024</span></div>
+      </div>
+    </div>
+    <p class="sm">Documentado no caso <em>Cultura como Motor da Transformação: o Caso Carrefour Brasil (2018–2025)</em>, HR-026E, versão expandida, preparado para discussão em Stanford Graduate School of Business, junho de 2025, de autoria própria.</p>
+
+    <h2 class="sec">O precedente, subsistema por subsistema</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Subsistema</th><th>O que foi feito</th><th>Resultado divulgado</th><th>Versão Tecmar</th></tr></thead>
+        <tbody>
+          <tr><th>Régua de liderança</th><td>Três camadas: valores, comportamentos aceleradores e competências por nível</td><td>Engajamento de menos de 60% para 76%</td><td class="mono">C1</td></tr>
+          <tr><th>Escuta e dados</th><td>Pesquisa reduzida de mais de 50 para 12 questões, resultado em dias, condução interna, devolutiva em cascata</td><td>93% de adesão · 33,5 mil respondentes</td><td class="mono">B5 · B4</td></tr>
+          <tr><th>Desenvolvimento</th><td>Escola de líderes em três trilhas, construída internamente, com 170 executivos da casa como docentes</td><td>14 mil gerentes · +7 p.p. de favorabilidade</td><td class="mono">C4 · C5 · C6</td></tr>
+          <tr><th>Talentos</th><td>Mapeamento com três níveis de prontidão e risco de perda</td><td>Mais de 1.500 gestores mapeados</td><td class="mono">D6</td></tr>
+          <tr><th>Seleção</th><td>Entrevistas e testes redesenhados a partir do framework cultural</td><td>Mais de 850 pessoas em programas afirmativos</td><td class="mono">D5</td></tr>
+          <tr><th>Performance</th><td>Avaliação integrando comportamentos; indicador de cliente na avaliação do gerente de loja</td><td>Mais de 80% das lojas com melhora · 1º global</td><td class="mono">D1 · D6</td></tr>
+          <tr><th>Reconhecimento</th><td>Destaque público mensal, com suporte estruturado antes de cobrança</td><td>Melhor empregador em dois ciclos</td><td class="mono">D2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 · NOTAS TÉCNICAS ============ -->
+<section class="ch" id="c16">
+  <aside class="rail">
+    <span class="num">14</span>
+    <div class="rl"><span class="lbl">Notas técnicas</span></div>
+    <p class="marg">Delimitação de escopo, riscos, propriedade intelectual e ordem de execução. Material de suporte à decisão, não de narrativa.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Delimitação, riscos e <em>condições de uso</em></h1>
+      <p class="ld">Delimitar o escopo pelo negativo evita expectativa mal formada, e é parte da proposta. O mesmo vale para os riscos conhecidos, para os termos de autoria e sigilo e para a ordem técnica entre os módulos.</p>
+    </div>
+
+    <h2 class="sec">O que este trabalho não é</h2>
+    <div class="split l">
+      <ul class="dash">
+        <li><strong class="k">Não é implantar a cultura da Log-In na Tecmar.</strong> A régua de liderança nasce dos valores que a Tecmar já publicou.</li>
+        <li><strong class="k">Não é reescrever valores.</strong> A companhia já tem os seus; o trabalho é traduzi-los em comportamento e consequência.</li>
+        <li><strong class="k">Não é um evento.</strong> O lançamento é um dos trinta módulos, e o menos determinante deles.</li>
+        <li><strong class="k">Não é um programa de treinamento para todos os líderes.</strong> A primeira liderança é alcançada por multiplicação, não por sala.</li>
+        <li><strong class="k">Não substitui a decisão de gente.</strong> Instrumentos de perfil comportamental não são insumo de decisão de desligamento.</li>
+      </ul>
+      <div class="note">
+        <span class="lbl">Cláusula de uso dos instrumentos</span>
+        <p>A regra acima vale para todo o contrato. Ela protege a validade do instrumento dentro da companhia: a partir do momento em que um inventário comportamental é percebido como critério de desligamento, as respostas deixam de ser confiáveis.</p>
+      </div>
+    </div>
+
+    <h2 class="sec">Riscos e condições de eficácia</h2>
+    <div class="rowlist">
+      <div><span class="k">Patrocínio ausente</span><span class="v">Terceirizado ao consultor ou à área de RH, o trabalho não altera comportamento de linha.<br><span class="sm"><strong class="k">Mitigação:</strong> sessão de alinhamento com a direção e o PMO antes do desenho final, com gestão de consequência formalizada na agenda da direção.</span></span></div>
+      <div><span class="k">Austeridade e cultura</span><span class="v">A retirada dos benefícios informais herdados do modelo anterior tende a ser lida como corte.<br><span class="sm"><strong class="k">Mitigação:</strong> nomear a troca publicamente — o que termina e o que entra no lugar — antes que a operação a nomeie.</span></span></div>
+      <div><span class="k">Duas réguas de avaliação</span><span class="v">Enquanto coexistirem, a expressão “empresa única” permanece no plano do discurso.<br><span class="sm"><strong class="k">Mitigação:</strong> entra como entregável de curto prazo em B1, com decisão em D6, e não como pauta de longo prazo.</span></span></div>
+      <div><span class="k">Déficit técnico lido como resistência</span><span class="v">Quando a causa é competência, sensibilização não move indicador.<br><span class="sm"><strong class="k">Mitigação:</strong> o mapa de gap por camada (C2) separa as duas causas antes do desenho do programa de gerentes.</span></span></div>
+      <div><span class="k">Escuta sem resposta</span><span class="v">Situação pior do que não visitar: confirma a percepção de que não há escuta.<br><span class="sm"><strong class="k">Mitigação:</strong> B4 é condição de B3 — cada unidade encerra a visita com um item que a direção responde em prazo definido, inclusive quando a resposta for negativa.</span></span></div>
+    </div>
+
+    <h2 class="sec">Propriedade intelectual e confidencialidade</h2>
+    <div class="split l">
+      <div class="rowlist">
+        <div><span class="k">Confidencialidade</span><span class="v">Este documento e seu conteúdo são confidenciais e destinam-se exclusivamente à Log-In Logística e à Tecmar, para avaliação desta contratação. A reprodução ou o compartilhamento fora do círculo de decisão depende de autorização escrita.</span></div>
+        <div><span class="k">Autoria dos instrumentos</span><span class="v">Metodologia, modelos, instrumentos, roteiros e materiais de condução — incluindo a estrutura de régua em quatro comportamentos e a organização em consciência, coragem e consistência — são de autoria de Kiko Campos e permanecem sob sua titularidade.</span></div>
+        <div><span class="k">Licença de uso</span><span class="v">A contratação concede à companhia licença de uso interno, não exclusiva e sem prazo, sobre os materiais entregues, no âmbito da Tecmar e da Log-In. Não abrange redistribuição, revenda, sublicenciamento nem uso por terceiros.</span></div>
+        <div><span class="k">O que é da companhia</span><span class="v">A régua de liderança redigida pela diretoria, os dados do diagnóstico, as contribuições da operação e as peças personalizadas com a marca Tecmar são de titularidade da companhia.</span></div>
+        <div><span class="k">Dados pessoais</span><span class="v">Instrumentos comportamentais e pesquisas são tratados conforme a LGPD. Resultados individuais são devolvidos à própria pessoa e ao seu gestor direto quando previsto, e não são compartilhados fora desse círculo.</span></div>
+        <div><span class="k">Reciprocidade</span><span class="v">O consultor mantém sigilo sobre informações, documentos e dados da companhia a que tiver acesso, durante e após o contrato.</span></div>
+        <div><span class="k">Menção pública</span><span class="v">Qualquer referência pública ao trabalho — caso, palestra, artigo ou material institucional — depende de autorização escrita da companhia, com o nível de identificação que ela definir.</span></div>
+      </div>
+      <div class="note">
+        <span class="lbl">Por que isto está na proposta</span>
+        <p>A clareza sobre autoria e sigilo antes da contratação evita a discussão no momento em que o material já está em uso. Os termos acima são a base do contrato e podem ser ajustados na revisão jurídica das duas partes.</p>
+      </div>
+    </div>
+
+    <h2 class="sec">Dependências técnicas entre módulos</h2>
+    <div class="split l">
+      <div class="prose">
+        <p>As dependências abaixo não são condições comerciais: são a ordem em que o trabalho funciona. Um módulo executado fora dela consome orçamento sem produzir o efeito previsto.</p>
+      </div>
+      <div class="rowlist">
+        <div><span class="k">C0 requer B0</span><span class="v">O contrato entre pares pressupõe o diagnóstico da diretoria.</span></div>
+        <div><span class="k">C1 requer B0 e B2</span><span class="v">A régua pressupõe o diagnóstico e a leitura documental de coerência.</span></div>
+        <div><span class="k">C4 requer C1</span><span class="v">O encontro de gerentes pressupõe a régua definida.</span></div>
+        <div><span class="k">B3 requer C3</span><span class="v">O roadshow pressupõe a preparação dos diretores.</span></div>
+        <div><span class="k">D1 e D2 requerem D0</span><span class="v">Os mecanismos mensais pressupõem a entrada nos ritos existentes.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 · PONTOS A CONFIRMAR ============ -->
+<section class="ch" id="c15">
+  <aside class="rail">
+    <span class="num">15</span>
+    <div class="rl"><span class="lbl">Pontos em aberto</span></div>
+    <p class="marg">A resposta a estes cinco pontos altera escopo e dimensionamento. Por isso antecedem a contratação.</p>
+  </aside>
+  <div class="body">
+    <div class="opener">
+      <h1>Pontos a confirmar com a companhia</h1>
+      <p class="ld">Cinco questões identificadas nas fontes públicas da Tecmar que não é possível resolver externamente. Não são correções: são informações que alteram escopo e investimento.</p>
+    </div>
+
+    <div class="split l">
+      <div class="rowlist">
+        <div><span class="k">Nº de filiais</span><span class="v">O site institucional informa 52 filiais, sendo 30 parceiras, em 18 estados; o briefing indicou 17.<br><span class="sm">Define o alcance do roadshow, o público do acompanhamento mensal e o programa de gerentes.</span></span></div>
+        <div><span class="k">Filiais parceiras</span><span class="v">As 30 unidades parceiras levam a marca Tecmar até o cliente.<br><span class="sm">Eventual exclusão do escopo convém ser decisão explícita.</span></span></div>
+        <div><span class="k">Pessoas por camada</span><span class="v">Quantitativo de diretores, gerentes e líderes de primeira linha.<br><span class="sm">Dimensiona o diagnóstico, a régua, o mapa de gap e o multiplicador.</span></span></div>
+        <div><span class="k">Listas de valores</span><span class="v">O Manual publica oito valores; a página de carreiras publica sete, sem Transparência.<br><span class="sm">A régua precisa partir de uma lista única.</span></span></div>
+        <div><span class="k">Manual vigente</span><span class="v">O documento em vigor está assinado pela direção anterior.<br><span class="sm">A reemissão com a nova assinatura é a demonstração de menor custo de que a diretoria assume o tema.</span></span></div>
+      </div>
+      <div>
+        <p class="lbl eyebrow">Encaminhamento proposto</p>
+        <div class="tl">
+          <div><div class="w">Passo 1</div><div class="t">Leitura assíncrona deste documento, sem necessidade de reunião para a primeira passagem.</div></div>
+          <div><div class="w">Passo 2</div><div class="t">Conversa de alinhamento na semana de 22 de setembro: definição de rota e resposta aos cinco pontos.</div></div>
+          <div><div class="w">Passo 3</div><div class="t">Noventa minutos com a direção da Tecmar e o PMO, para alinhamento de patrocínio e gestão de consequência.</div></div>
+          <div><div class="w">Passo 4</div><div class="t">Início na última semana de setembro, com o diagnóstico em campo.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="moment">
+      <blockquote>A Tecmar tem vinte e cinco anos, uma rede construída e valores publicados. O que parece faltar não é identidade, e sim tradução e consequência.</blockquote>
+    </div>
+    <p class="sm">Kiko Campos · kiko@kikocampos.com · (11) 98369-2989 · kikocampos.com</p>
+  </div>
+</section>
+
+</main>
+
+
+<script>
+(function(){
+  var SENHA='rota-certa-2026', g=document.getElementById('gate');
+  function abrir(){g.classList.add('off');document.body.style.overflow='';}
+  try{ if(sessionStorage.getItem('rc-ok')==='1') abrir(); }catch(e){}
+  document.body.style.overflow='hidden';
+  document.getElementById('gform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('gpw').value.trim().toLowerCase();
+    if(v===SENHA){ try{sessionStorage.setItem('rc-ok','1')}catch(e){} abrir(); }
+    else { document.getElementById('gerr').textContent='Senha incorreta.'; document.getElementById('gpw').select(); }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var CH=[
+    ['c1','Capa'],['c5','A proposta em uma página'],['c2','Contexto'],['c3','Mandato'],
+    ['c4','Leitura preliminar'],['c6','Método'],
+    ['c7','Economia do trabalho'],['c8','A régua de liderança'],['c9','Mecanismos de sustentação'],
+    ['c10','Primeira liderança'],['c11','Calendário e medição'],['c12','Escopo'],
+    ['c13','Investimento'],['c14','Quem conduz'],['c16','Notas técnicas'],['c15','Pontos a confirmar']
+  ];
+  var FWD={
+    c1:'A proposta inteira, resumida em uma página.',
+    c5:'Agora o contexto, como foi registrado na reunião.',
+    c2:'Há, no entanto, um ponto de maior consequência.',
+    c3:'Cumprido esse critério, a leitura das fontes públicas.',
+    c4:'Definida a hipótese, o método de trabalho.',
+    c6:'Antes do escopo, dois princípios de dimensionamento.',
+    c7:'E então a peça central da proposta.',
+    c8:'Uma régua escrita, porém, não se sustenta sozinha.',
+    c9:'Resta a camada que opera a carga.',
+    c10:'Com o desenho definido, a sequência de execução.',
+    c11:'O escopo contratável, módulo a módulo.',
+    c12:'A estrutura comercial.',
+    c13:'A responsabilidade técnica pelo trabalho.',
+    c14:'Antes do fecho, a delimitação técnica do escopo.',
+    c16:'Por fim, os pontos que dependem da companhia.',
+    c15:''
+  };
+
+  function M(id,b,t,e,dep,core,r,o){return {id:id,b:b,t:t,e:e,dep:dep,core:core,r:r,what:o.w,got:o.g,why:o.y,how:o.h,who:o.q};}
+  var MODS=[
+    M('A0','A','Keynote de lançamento e roteiro da diretoria','Baixo',['C1'],1,'Ancora o webinar já agendado em conteúdo de liderança.',
+      {w:'Palestra de abertura do webinar “A Rota Certa começa por você”, mais o roteiro de fala de cada diretor.',g:'Keynote ao vivo de 45 minutos e um roteiro escrito por diretor, ancorado no modelo de liderança.',y:'O webinar acontece de todo jeito. Sem conteúdo ancorado numa régua, ele comunica intenção genérica — e a organização tende a lê-lo como mais uma comunicação genérica.',h:'Online, ao vivo. Duas reuniões de preparação.',q:'Toda a organização.'}),
+    M('A1','A','Desenho completo do webinar','Baixo',['A0'],0,'Estrutura a participação em um evento com cinco diretores.',
+      {w:'A engenharia do evento: sequência, quem fala quando, onde entra interação e como se captura a reação ao vivo.',g:'Roteiro minuto a minuto, dinâmica de participação e instrumento de captura de percepção durante a transmissão.',y:'Evento online sem estrutura perde a audiência em quinze minutos. E a captura dá o primeiro dado de percepção.',h:'Duas reuniões de desenho e acompanhamento no dia.',q:'RH, Marketing e diretoria.'}),
+    M('A2','A','Frases-âncora da campanha','Baixo',[],0,'Fornece ao Marketing texto alinhado à régua de liderança.',
+      {w:'As frases que traduzem cada comportamento do modelo em linguagem de operação rodoviária.',g:'Um conjunto de frases por comportamento, prontas para o Marketing aplicar em qualquer peça.',y:'Sem isso, a campanha inventa vocabulário próprio e o modelo contradiz a campanha dois meses depois.',h:'Entrega documental.',q:'Marketing e Comunicação Interna.'}),
+    M('A3','A','Vídeo de abertura com histórias de colaboradores','Médio',[],0,'Abre o evento com depoimentos da operação.',
+      {w:'Vídeo curto com gente da casa contando o que já superaram na Tecmar.',g:'Roteiro, seleção de personagens, pauta das entrevistas e direção da gravação.',y:'A plateia acredita em quem está no mesmo crachá que ela. Foi o que funcionou na convenção do Grupo BIG.',h:'Direção do conteúdo. A produção audiovisual permanece com a companhia.',q:'Toda a organização.'}),
+
+    M('B0','B','Raio-X da Diretoria','Médio',[],1,'Mapeia o funcionamento individual e coletivo da diretoria.',
+      {w:'Leitura estruturada da diretoria: perfil comportamental de cada um, composição do time e diagnóstico de efetividade de equipe.',g:'Perfil individual, mapa de composição, diagnóstico de efetividade, entrevistas 1:1 e relatório com os pontos cegos coletivos.',y:'A diretoria foi formada em abril e nunca trabalhou junta. É ela que conduz todo o resto — e um grupo nesse estágio não se alinha sozinho no prazo de um turnaround.',h:'Instrumento online + entrevista de 45 min por diretor + devolutiva coletiva.',q:'N1 — a diretoria da Tecmar.'}),
+    M('B1','B','Auditoria dos reforçadores de cultura','Médio-alto',[],0,'Identifica o que a companhia efetivamente premia, promove e desliga.',
+      {w:'Em vez de perguntar às pessoas qual é a cultura, olhamos o que o sistema recompensa: avaliação, promoções, desligamentos, variável, calibração, alçadas, seleção, reconhecimento e integração.',g:'A Matriz de Reforço: uma página cruzando os oito valores com nove subsistemas, cada cruzamento classificado como reforçado, neutro ou contraditado.',y:'Responde com evidência se o problema é cultura ou é sistema. E justifica, sem argumentação, o trabalho nos subsistemas de gente.',h:'Análise documental. Requer acesso agregado ou anonimizado e acordo de confidencialidade.',q:'RH e Desenvolvimento Organizacional.'}),
+    M('B2','B','Leitura documental de coerência','Baixo',[],0,'Compara os documentos publicados com a prática observada.',
+      {w:'Leitura do Manual de Conduta, da página de carreiras, da comunicação interna e dos ritos, procurando as incoerências.',g:'Mapa das incoerências, com recomendação do que precisa ser unificado antes do lançamento.',y:'Já produziu dois achados antes do contrato: as três definições de “Atitude de Dono” e as duas listas de valores que não batem.',h:'Análise documental. É o módulo mais barato do cardápio.',q:'RH e Desenvolvimento Organizacional.'}),
+    M('B3','B','Raio-X de Campo — kit do roadshow','Médio',['C3'],0,'Converte o roadshow já orçado em diagnóstico das unidades.',
+      {w:'O protocolo que o diretor leva para a filial: uma sessão cronometrada de escuta com a equipe local, com material de captura padronizado.',g:'Kit do diretor — roteiro de sessão, regras de abertura, folha de captura — e a consolidação comparável das unidades.',y:'Dezessete visitas com o mesmo instrumento produzem um diagnóstico. Sem instrumento, produzem dezessete conversas que ninguém soma.',h:'Kit + consolidação. Quem aplica é o diretor, na visita já orçada.',q:'Operação das filiais.'}),
+    M('B4','B','Devolutiva por unidade e backlog','Médio',['B3'],0,'Encerra o ciclo de escuta e alimenta o acompanhamento mensal.',
+      {w:'A resposta que volta para cada filial depois da visita.',g:'Uma página por filial: o que foi ouvido, o que será feito, por quem e até quando. Mais o backlog de melhoria de cada unidade.',y:'Escuta sem resposta é pior do que não visitar. E é deste backlog que sai o que cada filial vai perseguir no Quilômetro 1.',h:'Consolidação + modelo de devolutiva para o diretor assinar.',q:'Operação das filiais.'}),
+    M('B5','B','Pulso digital na operação','Baixo',[],0,'Estabelece a linha de base de cultura, hoje inexistente.',
+      {w:'Doze perguntas respondidas pelo celular em três minutos, desenhadas para operação.',g:'Resultado por filial e por camada em poucos dias, com devolutiva em cascata feita pelo gerente, não pelo RH.',y:'Hoje não há medição de clima na Tecmar. Sem linha de base, nada pode ser remedido — e sem remedição não há prova de que funcionou.',h:'Instrumento digital, rodável pelo time interno.',q:'Toda a organização.'}),
+    M('B6','B','Perfil comportamental estendido aos gerentes','Alto',['B0'],0,'Estende a leitura comportamental à camada gerencial.',
+      {w:'O mesmo instrumento do Raio-X aplicado à camada de gerentes.',g:'Perfil individual por gerente e mapa da camada.',y:'Faz sentido se o diagnóstico apontar problema de dinâmica. Se apontar déficit técnico — hipótese mais provável —, o dinheiro rende mais no mapa de gap e no encontro.',h:'Instrumento online + devolutiva em grupo. É o item mais caro do cardápio.',q:'N2 — gerentes.'}),
+
+    M('C0','C','Contrato de Liderança da Diretoria','Médio',['B0'],1,'Define entre pares o padrão de cobrança da diretoria.',
+      {w:'Um dia fechado com a diretoria, conduzido sobre o resultado do Raio-X.',g:'Contrato de comportamento entre pares, prova de 90 dias definida e o tema na agenda de gestão do número um.',y:'É o módulo que cria patrocínio real. Sem ele, cultura continua sendo assunto do RH — e o RH é quem apanha quando o resultado não vem.',h:'Um dia presencial. Não refaz estratégia: a rota já foi definida pelo diretor.',q:'N1 — a diretoria.'}),
+    M('C1','C','Régua de Liderança Tecmar — R.O.T.A.','Médio',['B0','B2'],1,'Resposta escrita à pergunta sobre o que é liderar bem na Tecmar.',
+      {w:'Quatro comportamentos observáveis, construídos a partir dos oito valores que a Tecmar já publicou.',g:'O modelo escrito, a descrição de cada comportamento para diretor, gerente e primeira liderança, e o guia de bolso de uma página.',y:'É a régua de tudo. Sem ela, o gap de competência é opinião, a avaliação não tem critério, o webinar não tem conteúdo e o encontro de gerentes não tem o que praticar.',h:'Meio dia de sessão com a diretoria + redação. Sai com a assinatura deles.',q:'Todas as camadas.'}),
+    M('C2','C','Mapa de gap por camada','Médio',['C1'],0,'Converte a percepção de defasagem em medida por camada.',
+      {w:'Medição de onde cada camada está em relação ao modelo.',g:'Distribuição por camada e por comportamento, com os dois ou três gaps prioritários de cada nível.',y:'Separa déficit técnico de resistência. Se a causa for competência, sensibilização não move indicador e o programa precisa ser outro.',h:'Autoavaliação combinada com avaliação do gestor direto.',q:'N1, N2 e primeira liderança.'}),
+    M('C3','C','Preparação dos diretores para o roadshow','Baixo',['C0'],0,'Prepara a condução da visita antes da sua realização.',
+      {w:'Duas horas para os diretores saberem conduzir a sessão de escuta na filial.',g:'Ensaio do protocolo, alinhamento do discurso de abertura e a regra do que não prometer em campo.',y:'Diretor recém-chegado do mercado rodoviário não é facilitador. Sem ensaio, a visita vira discurso e a operação sai calada.',h:'Uma sessão de duas horas, online.',q:'N1.'}),
+    M('C4','C','Encontro de Gerentes','Médio',['C1'],0,'Qualifica o encontro já previsto com régua e dado de campo.',
+      {w:'Um dia presencial com a segunda camada, em construção coletiva.',g:'Sessão com diário de bordo, jogo de liderança e caso de simulação do papel do gestor. Cada gerente sai com compromisso datado.',y:'Vocês já decidiram fazer esse encontro. O que muda é chegar com o modelo definido e com o que a operação disse no roadshow sobre a mesa.',h:'Um dia presencial em São Paulo.',q:'N2 — gerentes.'}),
+    M('C5','C','Segundo Encontro de Gerentes','Médio',['C4'],0,'Converte um encontro isolado em programa com continuidade.',
+      {w:'O retorno com os mesmos gerentes, sessenta dias depois.',g:'Revisão dos compromissos, correção de rota e nova rodada de prática sobre os casos reais que apareceram.',y:'Sem retorno, o primeiro encontro não sobrevive à segunda-feira. O ciclo de transferência é onde o aprendizado vira comportamento.',h:'Um dia presencial ou meio dia online.',q:'N2 — gerentes.'}),
+    M('C6','C','Roteiros trimestrais da primeira liderança','Baixo',['C1'],0,'Alcança a camada mais numerosa por multiplicação interna.',
+      {w:'Quatro sessões de noventa minutos no ano, conduzidas pelo próprio gerente com roteiro pronto.',g:'Quatro roteiros completos, um por comportamento do trimestre, com dinâmica, perguntas e material de apoio.',y:'A primeira liderança é a camada mais cara de reunir. Aqui ela é alcançada por multiplicação: compra-se o roteiro, não o consultor na sala.',h:'Material entregue. A aplicação é do gerente.',q:'Encarregados e supervisores.'}),
+    M('C7','C','Devolutiva individual de perfil por diretor','Médio',['B0'],0,'Converte o relatório coletivo em conversa individual de desenvolvimento.',
+      {w:'Uma conversa individual com cada diretor sobre o próprio perfil, aplicado ao papel dele no turnaround.',g:'Sessão de uma hora por diretor, com plano pessoal de duas ou três mudanças observáveis.',y:'É o que converte diagnóstico em comportamento individual — e o que faz o contrato da diretoria ter dono.',h:'Uma hora por pessoa.',q:'N1.'}),
+    M('C8','C','Retorno de 90 dias da diretoria','Baixo',['C0'],0,'Estabelece a data de revisão do contrato de liderança.',
+      {w:'A revisita do contrato de liderança, no prazo que a própria diretoria definiu.',g:'Meia diária: o que foi cumprido, o que não foi, o que muda daqui para frente.',y:'É a primeira prova pública de que a nova diretoria cobra a si mesma — e é o que a organização observa para decidir se acredita.',h:'Meio dia.',q:'N1.'}),
+    M('C9','C','Manual de Conduta reemitido pela nova diretoria','Baixo',['C1'],0,'Demonstração formal de que a nova diretoria assume o tema.',
+      {w:'Republicar o Manual de Conduta Ética com a assinatura da nova diretoria e o modelo de liderança dentro.',g:'Texto revisado, lista única de valores e nova carta de abertura assinada.',y:'O manual no ar hoje leva a assinatura da direção anterior e publica oito valores enquanto a página de carreiras publica sete. Uma canetada resolve as duas coisas.',h:'Revisão de texto. A diagramação fica da companhia.',q:'Toda a organização.'}),
+
+    M('D0','D','Cultura nos ritos que já existem','Baixo',['C0'],1,'Insere comportamento na pauta das reuniões existentes.',
+      {w:'A entrada do tema em três ritos que a Tecmar e a Log-In já operam: sala de guerra, reunião mensal de resultado e abertura de turno.',g:'Desenho da entrada em cada rito, a nova pergunta da reunião de resultado e o roteiro de um minuto para a abertura de turno.',y:'Não cria rito novo, não pede verba e muda a conversa de desempenho na semana seguinte.',h:'Uma sessão de desenho com a área e o PMO, mais os materiais.',q:'De N1 à primeira liderança.'}),
+    M('D1','D','Quilômetro 1 — acompanhamento mensal por unidade','Médio',['D0'],0,'Traz a cultura para a conversa de resultado mensal.',
+      {w:'Placar mensal de melhoria de 1% por filial, com cada unidade competindo contra a própria média dos três meses anteriores.',g:'Três indicadores definidos, regulamento, régua de apuração e modelo de placar de uma página por filial.',y:'Resolve a disparidade de porte: a filial de dez pessoas disputa em pé de igualdade com o armazém de sessenta caminhões. E os três indicadores são o propósito que a Tecmar já publica.',h:'Desenho do mecanismo. A apuração é do PMO, com dados que já existem.',q:'As 17 filiais.'}),
+    M('D2','D','Reconhecimento na Rota Certa','Baixo',['D0'],0,'Opera reconhecimento de comportamento sem demandar verba.',
+      {w:'Ritual mensal em cada filial, com diploma entregue pelo líder local a quem viveu um dos comportamentos do modelo.',g:'Regras do ritual, critérios por comportamento, arte do diploma e roteiro de entrega para o líder.',y:'“Reconhecimento” é valor publicado da Tecmar e nunca foi operado. E o produto real é o líder ter sido obrigado a observar comportamento por trinta dias para escolher alguém.',h:'Kit entregue uma vez. Aplicação mensal pelo líder da unidade.',q:'As 17 filiais.'}),
+    M('D3','D','Momento de Cultura, trimestral','Médio',['C1','D0'],0,'Trabalha um comportamento por trimestre, em lugar de oito valores simultâneos.',
+      {w:'A cada trimestre, um comportamento do modelo vira material pronto para o líder conduzir em dez minutos, dentro de reunião que já existe.',g:'Por trimestre: kit de uma página, cartaz em forma de pergunta e vídeo curto de um líder da casa. Quatro entregas no ano.',y:'Oito valores lançados de uma vez não entram numa operação rodoviária. Um por trimestre entra — e dá foco trimestral ao placar.',h:'Quatro entregas no ano. A produção gráfica fica da companhia.',q:'Todas as camadas.'}),
+    M('D4','D','Gente na Rota — prontidão da área de gente','Médio',[],0,'Prepara a área de gente para conduzir o trabalho internamente.',
+      {w:'Diagnóstico e desenvolvimento do próprio time de gente, que nesta proposta é quem conduz a maior parte do trabalho.',g:'Diagnóstico de prontidão, os quatro papéis do parceiro de negócio aplicados à Tecmar, e quatro encontros conduzidos em rodízio pelo próprio time.',y:'Toda a arquitetura assume condução interna. Se o time não estiver pronto, o modelo barato não se sustenta. É a mitigação do maior risco da proposta.',h:'Diagnóstico + quatro encontros ao longo do ano.',q:'Time de RH e DO da Tecmar e da Log-In.'}),
+    M('D5','D','Tombamento onda 1 — seleção e integração','Médio',['B1'],0,'Leva a régua para os processos de seleção e integração.',
+      {w:'O modelo entrando no processo seletivo e nos primeiros trinta dias de quem chega.',g:'Três perguntas comportamentais por comportamento no roteiro de entrevista, e a Rota Certa no primeiro dia de integração, com a primeira conversa do gestor roteirizada.',y:'A Tecmar já promete esses valores na página de carreiras. Hoje não verifica nenhum deles — e os primeiros trinta dias ensinam a cultura antiga por osmose.',h:'Materiais + uma sessão com a equipe de seleção.',q:'Recrutamento, seleção e integração.'}),
+    M('D6','D','Tombamento onda 2 — 2027','Alto',['D5'],0,'Leva a régua para as decisões de performance e sucessão.',
+      {w:'O modelo entrando na avaliação, no desenvolvimento, no desligamento e na sucessão.',g:'Régua única de avaliação, meta comportamental no PDI, roteiro de desligamento coerente e mapeamento de talentos em versão leve.',y:'Enquanto houver duas réguas para times mistos, “empresa única” é discurso. É aqui que isso se resolve.',h:'Projeto de 2027, em ondas.',q:'RH e Desenvolvimento Organizacional.'}),
+    M('D7','D','Remedição do diagnóstico','Baixo',['B0'],0,'Remede o diagnóstico e verifica o efeito do trabalho.',
+      {w:'Repetir em seis meses as medições do Raio-X da Diretoria e do pulso digital.',g:'Comparativo contra a linha de base e leitura do que mudou — e do que não mudou.',y:'Sem remedição não há evidência, e sem evidência a continuidade em 2027 vira discussão de opinião dentro do orçamento.',h:'Reaplicação dos instrumentos + relatório.',q:'N1 e toda a organização.'}),
+    M('D8','D','Acompanhamento trimestral em 2027','Médio',[],0,'Mantém a cultura como pauta permanente da diretoria.',
+      {w:'Quatro sessões ao longo de 2027 com a diretoria, sobre os indicadores e o contrato de liderança.',g:'Sessão trimestral com leitura de indicadores, revisão do contrato e definição do foco do trimestre seguinte.',y:'Transformação perde energia quando a crise passa. A cadência externa segura o tema na agenda depois que o turnaround estabiliza.',h:'Quatro sessões no ano.',q:'N1.'})
+  ];
+  var BLOCKS=[
+    ['A','Lançamento','o evento já está decidido; este bloco trata do conteúdo que ele carrega'],
+    ['B','Consciência','nenhuma definição de comportamento antes do diagnóstico'],
+    ['C','Coragem','um contrato entre pares e uma régua para toda a organização'],
+    ['D','Consistência','instala-se nos ritos existentes, sem criar rito novo']
+  ];
+  var ROUTES=[
+    ['Mínima','A0 C1 C4','Apenas o que foi solicitado, acrescido da régua sem a qual o webinar não tem conteúdo. Sem diagnóstico e sem contrato, a diretoria conduz o lançamento sem acordo prévio entre si.',0],
+    ['Certa','A0 A2 B0 B1 B2 B3 B4 C0 C1 C3 C4 D0 D1 D2 D3','Diagnóstico, contrato, régua, lançamento, roadshow instrumentado, encontro de gerentes e os três mecanismos de sustentação. Deixa linha de base estabelecida e condução transferida à equipe interna.',1],
+    ['Completa','A0 A1 A2 A3 B0 B1 B2 B3 B4 B5 B6 C0 C1 C2 C3 C4 C5 C6 C7 C8 C9 D0 D1 D2 D3 D4 D5 D6 D7 D8','Escopo integral, incluindo o tombamento nos subsistemas de gente e o acompanhamento ao longo de 2027.',0]
+  ];
+
+  var sel=new Set(), byId={}; MODS.forEach(function(m){byId[m.id]=m;});
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+  /* índice */
+  var ixList=document.getElementById('ixList'), drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'), ixProg=document.getElementById('ixProg'),
+      cpt=document.getElementById('cpt'), bar;
+  var GRUPOS=[['Abertura',2],['O diagnóstico',3],['O desenho do trabalho',6],['A contratação',5]];
+  (function(){
+    var i=0, h='';
+    GRUPOS.forEach(function(g){
+      h+='<div class="grp">'+g[0]+'</div>';
+      for(var k=0;k<g[1]&&i<CH.length;k++,i++){
+        h+='<a href="#'+CH[i][0]+'" data-c="'+CH[i][0]+'"><span class="n">'+String(i+1).padStart(2,'0')+'</span>'+
+           '<span>'+CH[i][1]+'</span></a>';
+      }
+    });
+    ixList.innerHTML=h;
+  })();
+  function abrir(v){
+    drawer.classList.toggle('on',v); scrim.classList.toggle('on',v);
+    document.body.style.overflow=v?'hidden':'';
+    if(v){var a=ixList.querySelector('a.on'); if(a&&a.scrollIntoView) a.scrollIntoView({block:'nearest'});}
+  }
+  document.getElementById('ixOpen').onclick=function(){abrir(true);};
+  cpt.onclick=function(){abrir(true);};
+  document.getElementById('ixClose').onclick=function(){abrir(false);};
+  scrim.onclick=function(){abrir(false);};
+
+  /* rodapé de capítulo */
+  CH.forEach(function(c,i){
+    var el=document.getElementById(c[0]); if(!el) return;
+    var nx=CH[i+1], pv=CH[i-1];
+    var h='<div class="next">';
+    h+= pv?'<button class="btn" data-c="'+pv[0]+'">← Anterior</button>':'<span></span>';
+    if(nx){
+      h+='<div class="fwd"><span class="lbl">A seguir · '+nx[1]+'</span>'+
+         '<p>'+FWD[c[0]]+'</p><button class="btn pri" data-c="'+nx[0]+'">Prosseguir →</button></div>';
+    } else {
+      h+='<div class="fwd"><span class="lbl q">Fim do documento</span><p>Rota Certa · Cultura e Liderança na Tecmar</p></div>';
+    }
+    el.insertAdjacentHTML('beforeend',h+'</div>');
+  });
+
+  var TONE={c1:'dark',c5:'light',c2:'light',c3:'dark',c4:'light',c6:'dark',c7:'light',c8:'dark',
+            c9:'light',c10:'dark',c11:'light',c12:'light',c13:'light',c14:'dark',c16:'light',c15:'dark'};
+  bar=document.getElementById('bar');
+  function show(id){
+    if(!document.getElementById(id)) id='c1';
+    var i=0; CH.forEach(function(c,k){if(c[0]===id) i=k;});
+    document.querySelectorAll('.ch').forEach(function(s){s.classList.toggle('on',s.id===id);});
+    document.body.setAttribute('data-tone',TONE[id]==='light'?'light':'dark');
+    document.querySelectorAll('[data-c]').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-c')===id);});
+    cpt.innerHTML='<i>Página '+(i+1)+' de '+CH.length+'</i>'+CH[i][1];
+    bar.style.width=((i+1)/CH.length*100)+'%';
+    abrir(false);
+    ixProg.textContent='Você está na página '+(i+1)+' de '+CH.length;
+    window.scrollTo(0,0);
+    if(location.hash.slice(1)!==id){try{history.replaceState(null,'','#'+id)}catch(e){}}
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('[data-c]');
+    if(!a) return; e.preventDefault(); show(a.getAttribute('data-c'));
+  });
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1)||'c1');});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){abrir(false);return;}
+    if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft') return;
+    var cur=location.hash.slice(1)||'c1', i=0;
+    CH.forEach(function(c,k){if(c[0]===cur) i=k;});
+    var j=i+(e.key==='ArrowRight'?1:-1);
+    if(j>=0&&j<CH.length) show(CH[j][0]);
+  });
+
+  /* rotas — leitura */
+  var rWrap=document.getElementById('routes');
+  ROUTES.forEach(function(r){
+    rWrap.insertAdjacentHTML('beforeend','<div class="route'+(r[3]?' pick':'')+'">'+
+      '<div class="rn">Rota '+r[0]+(r[3]?' <span class="pill">Recomendada</span>':'')+'</div>'+
+      '<div class="rc">'+r[1].split(' ').length+' módulos</div><p>'+r[2]+'</p></div>');
+  });
+
+  /* blocos e fichas */
+  var naRota={}; ROUTES[1][1].split(' ').forEach(function(id){naRota[id]=1;});
+  var bWrap=document.getElementById('blocks');
+  BLOCKS.forEach(function(b){
+    var h='<div class="blk"><div class="bh"><h3>Bloco '+b[0]+' · '+b[1]+'</h3></div><div class="bs">'+b[2]+'</div><div class="mods">';
+    MODS.filter(function(m){return m.b===b[0];}).forEach(function(m){
+      h+='<div class="mrow'+(m.core?' core':'')+(naRota[m.id]?' inrota':'')+'" data-row="'+m.id+'">'+
+        '<button class="m" data-m="'+m.id+'" aria-expanded="false"><code>'+m.id+'</code>'+
+        '<span class="t">'+esc(m.t)+'<small>'+esc(m.r)+'</small></span>'+
+        '<span class="e">'+(m.core?'Essencial · ':'')+(naRota[m.id]?'Na Rota Certa · ':'')+m.e+'</span><span class="vd">ver detalhe<span class="cv"></span></span></button>'+
+        '<div class="det"><dl>'+
+        '<dt>O que é</dt><dd>'+esc(m.what)+'</dd>'+
+        '<dt>O que entrega</dt><dd>'+esc(m.got)+'</dd>'+
+        '<dt>Por que importa</dt><dd>'+esc(m.why)+'</dd>'+
+        '<dt>Formato</dt><dd>'+esc(m.how)+'</dd>'+
+        '<dt>Para quem</dt><dd>'+esc(m.who)+'</dd>'+
+        (m.dep.length?'<dt>Precisa de</dt><dd>'+m.dep.join(' · ')+' — ordem técnica, não condição comercial.</dd>':'')+
+        '</dl></div></div>';
+    });
+    bWrap.insertAdjacentHTML('beforeend',h+'</div></div>');
+  });
+  bWrap.addEventListener('click',function(e){
+    var m=e.target.closest('[data-m]'); if(!m) return;
+    var row=m.closest('.mrow'), was=row.classList.contains('open');
+    bWrap.querySelectorAll('.mrow.open').forEach(function(r){r.classList.remove('open');r.querySelector('.m').setAttribute('aria-expanded','false');});
+    if(!was){row.classList.add('open'); m.setAttribute('aria-expanded','true');}
+  });
+
+  show(location.hash.slice(1)||'c1');
+})();
+</script>
+</body></html>
