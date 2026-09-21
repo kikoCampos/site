@@ -538,6 +538,26 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
 .op-panel li .e{grid-column:2/3;font-size:.8rem;color:var(--muted);line-height:1.4}
 .op-panel li .p{grid-row:1;grid-column:3;font-size:.8rem;color:var(--muted);white-space:nowrap}
 .op-panel a{color:var(--amber)}
+
+/* mobile: cartões compactos nas tabelas curtas (esforço, investimento, rotas) */
+@media(max-width:760px){
+  .tbl table.esf tbody td,.tbl table.op-t tbody td{position:relative;padding:.28rem 0 0 38%;min-height:1.4rem}
+  .tbl table.esf tbody td::before,.tbl table.op-t tbody td::before{position:absolute;left:0;top:.42rem;width:35%;margin:0;line-height:1.3}
+  .tbl table.op-t tbody tr{padding:.85rem .6rem .85rem .9rem}
+  .tbl table.op-t tbody tr.sel{box-shadow:inset 3px 0 0 var(--amber);background:rgba(154,106,18,.06)}
+  .tbl table.op-t tbody th{padding-bottom:.2rem}
+  .tbl table.rotas-t tbody td.rk{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem 1.1rem 0 0}
+  .tbl table.rotas-t tbody td.rk::before{margin:0}
+  .tbl table.rotas-t tbody td.rk:empty{display:none}
+  .tbl table.rotas-t tbody tr{padding:.7rem .5rem}
+  .rotas-t tr.hl th,.rotas-t tr.hl td{background:none}
+  .rotas-t tr.hl{background:rgba(242,179,61,.10)}
+  .tbl table.esf tbody tr{padding:.7rem 0}
+  figure.mhide{display:none}
+  .op-panel li{grid-template-columns:2.2rem 1fr}
+  .op-panel li .p{grid-column:2;grid-row:auto}
+  .op-panel li .e{grid-column:2}
+}
 </style>
 
 <div id="gate">
@@ -688,7 +708,7 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
         <tr><th>Manual de Conduta Ética da Log-In</th><td>“Assume responsabilidades, calcula riscos, busca soluções com agilidade e antecipa expectativas.”</td><td>Iniciativa e antecipação</td></tr>
         <tr><th>Direção da Tecmar, na prática</th><td>Saber quanto custa a operação que se dirige; visão de unidade de negócio.</td><td>Zelo pelo custo</td></tr>
       </tbody></table></div>
-    <figure class="ex wide">
+    <figure class="ex wide mhide">
         <div class="hd"><span class="no">Quadro 1</span><span class="tt">Uma leitura para cada nível</span></div>
         <p class="st">As três leituras se completam: cada uma passa a valer para o nível de liderança a que corresponde.</p>
         <svg viewBox="0 0 560 322" role="img" aria-label="Três definições distintas de Atitude de Dono circulam hoje, vindas do Manual da Tecmar, do Manual da Log-In e da prática da direção. A proposta atribui uma delas a cada camada de liderança: diretor, gerente e primeira liderança.">
@@ -765,7 +785,7 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
       <div><p class="lbl eyebrow">Coragem · o time se compromete</p><p class="prose">Quem se compromete com o quê, diante de quem e em que prazo? Contrato da diretoria, régua de liderança e encontro de gerentes.</p></div>
       <div><p class="lbl eyebrow">Consistência · o time sustenta</p><p class="prose">Em que reunião isso entra e como é acompanhado? Sala de guerra, reunião de resultado, abertura de turno e acompanhamento mensal.</p></div>
     </div>
-    <figure class="ex">
+    <figure class="ex mhide">
       <div class="hd"><span class="no">Quadro 2</span><span class="tt">Como os três movimentos se ligam</span></div>
       <p class="st">Todo mês, as reuniões de gestão trazem informação nova para o próximo ciclo.</p>
       <svg viewBox="0 0 560 172" role="img" aria-label="Consciência alimenta coragem, que alimenta consistência. A consistência devolve o trabalho aos ritos existentes e, deles, novo dado retorna à consciência a cada mês.">
@@ -866,7 +886,7 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
         <span><b>Aberto e simples</b><span class="d">Diz o que precisa ser dito, sem rodeio e sem intermediário. Numa empresa em transição para um modelo corporativo, é o comportamento mais desafiador e o de maior efeito.</span></span>
         <span class="ab"><span>Transparência</span><span>Simplicidade</span></span>
       </div>
-    </div><figure class="ex wide q6"><div class="hd"><span class="no">Quadro 3</span><span class="tt">De oito valores a quatro comportamentos</span></div>
+    </div><figure class="ex wide q6 mhide"><div class="hd"><span class="no">Quadro 3</span><span class="tt">De oito valores a quatro comportamentos</span></div>
       <p class="st">Nenhum valor publicado foi descartado: cada um permanece dentro do comportamento que o solicita.</p>
       <svg viewBox="0 0 560 330" role="img" aria-label="Os oito valores publicados pela Tecmar ligados aos quatro comportamentos da régua: Respeito ao Cliente, Segurança e Ética em Respeito; Atitude de Dono em Olho de dono; Trabalho em Equipe e Reconhecimento em Time; Transparência e Simplicidade em Aberto e simples."><text class="mn" x="0" y="8" font-size="8" opacity=".6">Valores publicados</text><text class="mn" x="560" y="8" font-size="8" opacity=".6" text-anchor="end">Régua proposta</text><text x="0" y="30" font-size="11.5">Respeito ao Cliente</text><path d="M150 26 C 280 26, 300 64, 390 64" fill="none" style="stroke:var(--amber)" stroke-width="1" opacity=".55"/><circle cx="150" cy="26" r="2.4" style="fill:var(--amber)"/><text x="0" y="68" font-size="11.5">Segurança</text><path d="M150 64 C 280 64, 300 64, 390 64" fill="none" style="stroke:var(--amber)" stroke-width="1" opacity=".55"/><circle cx="150" cy="64" r="2.4" style="fill:var(--amber)"/><text x="0" y="106" font-size="11.5">Ética</text><path d="M150 102 C 280 102, 300 64, 390 64" fill="none" style="stroke:var(--amber)" stroke-width="1" opacity=".55"/><circle cx="150" cy="102" r="2.4" style="fill:var(--amber)"/><text x="0" y="144" font-size="11.5">Atitude de Dono</text><path d="M150 140 C 280 140, 300 140, 390 140" fill="none" style="stroke:var(--amber)" stroke-width="1" opacity=".55"/><circle cx="150" cy="140" r="2.4" style="fill:var(--amber)"/><text x="0" y="182" font-size="11.5">Trabalho em Equipe</text><path d="M150 178 C 280 178, 300 197, 390 197" fill="none" style="stroke:var(--amber)" stroke-width="1" opacity=".55"/><circle cx="150" cy="178" r="2.4" style="fill:var(--amber)"/><text x="0" y="220" font-size="11.5">Reconhecimento</text><path d="M150 216 C 280 216, 300 197, 390 197" fill="none" style="stroke:var(--amber)" stroke-width="1" opacity=".55"/><circle cx="150" cy="216" r="2.4" style="fill:var(--amber)"/><text x="0" y="258" font-size="11.5">Transparência</text><path d="M150 254 C 280 254, 300 273, 390 273" fill="none" style="stroke:var(--amber)" stroke-width="1" opacity=".55"/><circle cx="150" cy="254" r="2.4" style="fill:var(--amber)"/><text x="0" y="296" font-size="11.5">Simplicidade</text><path d="M150 292 C 280 292, 300 273, 390 273" fill="none" style="stroke:var(--amber)" stroke-width="1" opacity=".55"/><circle cx="150" cy="292" r="2.4" style="fill:var(--amber)"/><circle cx="390" cy="64" r="3" style="fill:var(--amber)"/><text class="sr" x="408" y="73" font-size="28" font-weight="700" style="fill:var(--amber)">R</text><text x="438" y="69" font-size="12.5">Respeito</text><circle cx="390" cy="140" r="3" style="fill:var(--amber)"/><text class="sr" x="408" y="149" font-size="28" font-weight="700" style="fill:var(--amber)">O</text><text x="438" y="145" font-size="12.5">Olho de dono</text><circle cx="390" cy="197" r="3" style="fill:var(--amber)"/><text class="sr" x="408" y="206" font-size="28" font-weight="700" style="fill:var(--amber)">T</text><text x="438" y="202" font-size="12.5">Time</text><circle cx="390" cy="273" r="3" style="fill:var(--amber)"/><text class="sr" x="408" y="282" font-size="28" font-weight="700" style="fill:var(--amber)">A</text><text x="438" y="278" font-size="12.5">Aberto e simples</text></svg>
       <p class="src">Fonte: Manual de Conduta Ética da Tecmar. Comparada com os valores publicados pela Log-In.</p></figure>
@@ -916,7 +936,7 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
       </div>
       <div class="note"><span class="lbl">Por que assim</span><p>Quem conduz um conteúdo aprende mais do que quem assiste. É o caminho mais barato e o que fica mais tempo.</p></div>
     </div>
-    <figure class="ex wide">
+    <figure class="ex wide mhide">
         <div class="hd"><span class="no">Quadro 4</span><span class="tt">Como o conteúdo chega à operação</span></div>
         <p class="st">Todo o conteúdo chega pela própria linha de liderança, sem consultor em sala.</p>
         <svg viewBox="0 0 560 196" role="img" aria-label="A arquitetura desenha, a diretoria instrumenta, o gerente entrega e a primeira liderança conduz dentro dos ritos que já realiza. Cinco vetores levam o conteúdo à operação sem evento com consultor.">
