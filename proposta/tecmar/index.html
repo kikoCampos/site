@@ -519,6 +519,25 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
   .gantt .per{display:block;margin-left:auto;white-space:normal;text-align:right;max-width:9.5rem;line-height:1.35}
 }
 
+
+.op-t tbody tr{cursor:pointer;transition:background .15s}
+.op-t tbody tr:hover{background:rgba(154,106,18,.06)}
+.op-t tbody tr.sel th{color:var(--amber)}
+.op-t tbody tr.sel{box-shadow:inset 3px 0 0 var(--amber)}
+.op-t tbody tr th::after{content:" ›";color:var(--muted);font-weight:400}
+.op-hint{font-size:.84rem;color:var(--muted);margin:.2rem 0 .6rem}
+.op-panel{border-top:1px solid var(--line2);margin-top:18px;padding-top:16px}
+.op-panel .op-h{display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:baseline}
+.op-panel .op-h b{font-family:Fraunces,Georgia,serif;font-size:1.35rem;font-weight:600}
+.op-panel .op-h span{font-size:.9rem;color:var(--muted)}
+.op-panel .op-d{margin:.5rem 0 .9rem;max-width:62ch;line-height:1.55}
+.op-panel .op-g{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:.9rem 0 .2rem}
+.op-panel ul{list-style:none;margin:0;padding:0}
+.op-panel li{display:grid;grid-template-columns:2.6rem 1fr auto;gap:.2rem .8rem;padding:.45rem 0;border-bottom:1px solid var(--line2);font-size:.9rem}
+.op-panel li code{font-family:inherit;color:var(--amber);font-weight:600}
+.op-panel li .e{grid-column:2/3;font-size:.8rem;color:var(--muted);line-height:1.4}
+.op-panel li .p{grid-row:1;grid-column:3;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.op-panel a{color:var(--amber)}
 </style>
 
 <div id="gate">
@@ -1043,15 +1062,17 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
         <div><span class="k">Regra 3</span><span class="v"><strong class="k">Valor por escopo.</strong> Quanto maior o escopo contratado, menor o valor por hora de trabalho do consultor.</span></div>
       </div>
     </div>
-      <div class="tbl" style="margin-top:28px"><table>
+      <p class="op-hint" style="margin-top:28px">Clique em uma opção para ver o que ela inclui.</p>
+      <div class="tbl"><table class="op-t">
         <thead><tr><th>Opção</th><th>Ações</th><th>Investimento</th></tr></thead>
         <tbody>
-          <tr><th>Versão reduzida</th><td>6</td><td class="mono">R$ 273 mil</td></tr>
-          <tr><th>Recomendação</th><td>17</td><td class="mono">R$ 562 mil</td></tr>
-          <tr><th>Versão ampliada</th><td>27 + 3 em 2027</td><td class="mono">R$ 720 mil + R$ 144 mil em 2027</td></tr>
-          <tr><th>Ações iniciais</th><td>3</td><td class="mono">R$ 180 mil</td></tr>
-          <tr><th>Ação avulsa</th><td>Anexo A</td><td class="mono">Sob consulta</td></tr>
+          <tr data-op="red"><th>Versão reduzida</th><td>6</td><td class="mono">R$ 273 mil</td></tr>
+          <tr data-op="rec"><th>Recomendação</th><td>17</td><td class="mono">R$ 562 mil</td></tr>
+          <tr data-op="amp"><th>Versão ampliada</th><td>27 + 3 em 2027</td><td class="mono">R$ 720 mil + R$ 144 mil em 2027</td></tr>
+          <tr data-op="ini"><th>Ações iniciais</th><td>3</td><td class="mono">R$ 180 mil</td></tr>
+          <tr data-op="avu"><th>Ação avulsa</th><td>Anexo A</td><td class="mono">Sob consulta</td></tr>
         </tbody></table></div>
+      <div class="op-panel" id="op-panel" aria-live="polite"></div>
       <p class="sm" style="margin-top:10px">Valores para uma base de 17 filiais, cinco diretores e cerca de vinte gerentes. Serão confirmados depois das respostas às seis perguntas do final da proposta.</p>
     <h2 class="sec">Condições</h2>
     <div class="rowlist">
@@ -1400,6 +1421,30 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
   });
 
   show(location.hash.slice(1)||'capa');
+})();
+(function(){
+  var OP={red:['Versão reduzida','A0 B0 B2 C0 C1 C4','O essencial para começar com direção: diagnóstico da diretoria, leitura dos documentos, contrato entre os diretores, régua R.O.T.A., palestra de lançamento e encontro de gerentes. Mantém o diagnóstico antes da régua.'],rec:['Recomendação','A0 A2 B0 B1 B2 B3 B4 B5 C0 C1 C3 C4 D0 D1 D2 D3 D4','As três fases, de setembro a dezembro: entender, alinhar e levar à operação. A cultura chega às 17 filiais pelo roadshow e pelos ritos que já existem, com pesquisa de clima e preparação do RH.'],amp:['Versão ampliada','A0 A1 A2 A3 B0 B1 B2 B3 B4 B5 B6 C0 C1 C2 C3 C4 C5 C6 C7 C8 C9 D0 D1 D2 D3 D4 D5 D6 D7 D8','Todas as trinta ações. Além da recomendação, leva a régua para seleção, avaliação e promoção, aprofunda o trabalho com os gerentes e acompanha a diretoria ao longo de 2027.'],ini:['Ações iniciais','B0 C0 C1','O ponto de partida, contratado de forma independente: diagnóstico da diretoria, contrato entre os diretores e régua R.O.T.A. Permite começar agora e decidir o restante com o diagnóstico em mãos.'],avu:['Ação avulsa','','Qualquer uma das trinta ações pode ser contratada separadamente, com valor definido por ação. A lista completa, com entregáveis e período, está no Anexo A.']};
+
+  var BL={A:'Bloco A · Lançamento',B:'Bloco B · Consciência',C:'Bloco C · Coragem',D:'Bloco D · Consistência'};
+  var nm={},pe={},en={};
+  [].forEach.call(document.querySelectorAll('.rotas-t tr[data-mod]'),function(tr){var id=tr.getAttribute('data-mod');
+    nm[id]=tr.querySelector('th').textContent.replace(/^\s*\w\d\s*·\s*/,'');var t=tr.querySelectorAll('td');pe[id]=t[t.length-1].textContent;});
+  var an=document.getElementById('aA');
+  if(an)[].forEach.call(an.querySelectorAll('table.esf tbody tr'),function(tr){var m=tr.querySelector('th').textContent.match(/^\s*(\w\d)/);var t=tr.querySelector('td');if(m&&t)en[m[1]]=t.textContent;});
+  var pn=document.getElementById('op-panel'); if(!pn)return;
+  var rows=document.querySelectorAll('.op-t tr[data-op]');
+  function sel(k){var o=OP[k];if(!o)return;
+    [].forEach.call(rows,function(r){r.classList.toggle('sel',r.getAttribute('data-op')===k);});
+    var tr=document.querySelector('.op-t tr[data-op="'+k+'"]'),tds=tr.querySelectorAll('td'),val=tds[tds.length-1].textContent;
+    var ids=o[1]?o[1].split(' '):[];
+    var h='<div class="op-h"><b>'+o[0]+'</b><span>'+(ids.length?ids.length+' ações · ':'')+val+'</span></div><p class="op-d">'+o[2]+'</p>';
+    if(!ids.length){h+='<p><a href="#aA">Ver o Anexo A</a></p>';}
+    var g='';ids.forEach(function(id){var b=id.charAt(0);if(b!==g){if(g)h+='</ul>';h+='<p class="op-g">'+BL[b]+'</p><ul>';g=b;}
+      h+='<li><code>'+id+'</code><span>'+(nm[id]||id)+'</span><span class="p">'+(pe[id]||'')+'</span>'+(en[id]&&en[id].trim().toLowerCase()!==(nm[id]||'').trim().toLowerCase()&&en[id].indexOf(nm[id])!==0?'<span class="e">'+en[id]+'</span>':'')+'</li>';});
+    if(g)h+='</ul>';
+    pn.innerHTML=h;}
+  [].forEach.call(rows,function(r){r.addEventListener('click',function(){sel(r.getAttribute('data-op'));});});
+  sel('rec');
 })();
 </script>
 </body></html>
