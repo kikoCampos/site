@@ -192,8 +192,48 @@ tr.pause th,tr.pause td{color:var(--muted);font-weight:400;padding-block:.45rem}
   .top,#bar,.drawer,.scrim,.next{display:none!important}
   .ch{display:grid!important;break-after:page;animation:none}
 }
+
+#gate{position:fixed;inset:0;z-index:200;background:#0A1830;color:#EAF1FB;display:grid;place-items:center;padding:1.5rem}
+#gate.off{display:none}
+#gate .card{width:100%;max-width:380px;text-align:left}
+#gate .wm{font-family:Fraunces,Georgia,serif;font-size:2.4rem;font-weight:600;letter-spacing:-.02em;line-height:1;margin-top:.5rem}
+#gate p{color:#AFC0DB;font-size:.95rem;margin:.9rem 0 1.6rem;line-height:1.55}
+#gate form{display:flex;gap:.6rem}
+#gate input{flex:1;min-width:0;font-family:inherit;font-size:.95rem;color:#EAF1FB;background:#12294D;border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:.7rem 1.1rem;outline:none}
+#gate input:focus{border-color:#F2B33D}
+#gate .err{color:#FF4A12;font-size:.86rem;margin-top:.9rem;min-height:1.2em}
+#gate .ft{margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:#7D91B4;line-height:1.5}
+#gate .lbl{color:#F2B33D}
 </style>
 </head><body data-tone="dark" style="margin:0">
+<div id="gate">
+  <div class="card">
+    <div class="lbl">Documento confidencial</div>
+    <div class="wm">Primeiro <span class="g">Time</span></div>
+    <p>Proposta para a diretoria da Huge Networks. Digite a senha para abrir.</p>
+    <form id="gform" autocomplete="off">
+      <input type="password" id="gpw" placeholder="Senha" aria-label="Senha" autofocus>
+      <button class="btn pri" type="submit">Abrir</button>
+    </form>
+    <div class="err" id="gerr" role="alert"></div>
+    <div class="ft">Sem a senha, fale com Kiko Campos · kiko@kikocampos.com</div>
+  </div>
+</div>
+<script>
+(function(){
+  var SENHA='primeiro-time-2026', g=document.getElementById('gate');
+  function abrir(){g.classList.add('off');document.body.style.overflow='';}
+  document.body.style.overflow='hidden';
+  try{ if(sessionStorage.getItem('pt-ok')==='1'){ abrir(); } }catch(e){}
+  document.getElementById('gform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('gpw').value.trim().toLowerCase();
+    if(v===SENHA){ try{sessionStorage.setItem('pt-ok','1')}catch(e){} abrir(); }
+    else { document.getElementById('gerr').textContent='Senha incorreta.'; document.getElementById('gpw').select(); }
+  });
+})();
+</script>
+
 
 <div id="bar" aria-hidden="true"></div>
 <header class="top">
