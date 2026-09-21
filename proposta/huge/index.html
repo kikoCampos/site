@@ -1,0 +1,746 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Primeiro Time Huge Networks</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#0A1830; --bg2:#0E2140; --panel:#12294D; --panel2:#16305A;
+  --ink:#EAF1FB; --ink-2:#AFC0DB; --muted:#7D91B4;
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.20); --line-soft:rgba(255,255,255,.06);
+  --amber:#F2B33D; --orange:#FF4A12; --cta:#CE420D;
+  --grad:linear-gradient(100deg,#F2B33D,#FF4A12);
+  --radius:18px;
+  --serif:Fraunces,Georgia,serif; --sans:Inter,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+body[data-tone="light"]{
+  --bg:#F4F1E9; --bg2:#EBE6DB; --panel:#FFFFFF; --panel2:#FBF8F2;
+  --ink:#0A1830; --ink-2:#33445F; --muted:#6E7C93;
+  --line:rgba(10,24,48,.11); --line2:rgba(10,24,48,.24); --line-soft:rgba(10,24,48,.07);
+  --amber:#9A6A12; --orange:#CE420D;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.66 var(--sans);-webkit-font-smoothing:antialiased;transition:background-color .35s ease,color .35s ease}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;letter-spacing:-.02em;text-wrap:balance}
+h1 em,h2 em{font-style:italic;font-weight:600}
+.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0}
+strong{font-weight:600;color:var(--ink)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.lbl{font-family:var(--mono);font-size:.66rem;letter-spacing:.17em;text-transform:uppercase;color:var(--amber)}
+.lbl.q{color:var(--muted)}
+
+/* chrome */
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:70;transition:width .35s ease}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;display:flex;align-items:center;gap:1rem;padding:.8rem clamp(16px,4vw,3.4rem);background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:.5rem;font-weight:600;font-size:.85rem;white-space:nowrap}
+.brand::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.cpt{font-family:var(--mono);font-size:.67rem;letter-spacing:.1em;color:var(--muted);white-space:nowrap;background:none;border:0;padding:.2rem .1rem;cursor:pointer;text-align:left;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.cpt:hover{color:var(--ink)}
+.cpt i{font-style:normal;color:var(--ink);margin-right:.55rem}
+.top .sp{flex:1}
+.ix{font:500 .8rem/1 var(--sans);background:none;border:1px solid var(--line2);border-radius:100px;padding:.5rem 1rem;cursor:pointer;color:var(--ink);white-space:nowrap}
+.ix:hover{border-color:var(--amber);color:var(--amber)}
+@media(max-width:620px){.cpt{display:none}}
+
+.scrim{position:fixed;inset:0;z-index:85;background:rgba(4,11,24,.58);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .26s ease}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,94vw);z-index:90;background:#12294D;color:#EAF1FB;border-left:1px solid rgba(255,255,255,.1);box-shadow:-24px 0 60px -30px rgba(0,0,0,.6);transform:translateX(102%);transition:transform .28s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.drawer .dh{position:sticky;top:0;background:#12294D;padding:1.4rem 1.6rem 1rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.drawer .row{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.drawer h2{font-size:1.35rem}
+.drawer .prog{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:#7D91B4;margin-top:.35rem}
+.drawer .hint{font-size:.84rem;color:#AFC0DB;margin-top:.6rem;line-height:1.5}
+.drawer nav{padding:.6rem 1.6rem 2rem 3rem}
+.drawer .grp{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#F2B33D;margin:1.4rem 0 .4rem -1.4rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)}
+.drawer .grp:first-child{border-top:0;padding-top:0}
+.drawer a{display:grid;grid-template-columns:2rem 1fr;gap:.7rem;align-items:baseline;text-decoration:none;color:#AFC0DB;padding:.38rem .6rem .38rem 0;border-radius:6px;position:relative;font-size:.97rem}
+.drawer a .n{font-family:var(--mono);font-size:.68rem;color:#7D91B4}
+.drawer a:hover{color:#EAF1FB;background:rgba(127,157,200,.08)}
+.drawer a.on{color:#EAF1FB;font-weight:600}
+.drawer a.on::before{content:"";position:absolute;left:-1.4rem;top:.4rem;bottom:.4rem;width:3px;border-radius:2px;background:linear-gradient(#F2B33D,#FF4A12)}
+.drawer .btn{color:#EAF1FB;border-color:rgba(255,255,255,.2)}
+
+/* chapters */
+main{padding-inline:clamp(16px,4vw,3.4rem)}
+.ch{display:none}
+.ch.on{display:grid}
+.ch{max-width:1240px;margin:0 auto;padding:clamp(2.9rem,4vw,3.8rem) 0 3.5rem;grid-template-columns:minmax(0,176px) minmax(0,1fr);column-gap:clamp(1.6rem,4vw,4.2rem);align-items:start;animation:in .32s ease both}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ch{animation:none}.drawer,.scrim,#bar,body{transition:none}}
+@media(max-width:860px){.ch{grid-template-columns:1fr}.rail{position:static!important;flex-direction:row!important;align-items:baseline;gap:1rem!important;margin-bottom:1.6rem}.rail .rl{border:0!important;padding:0!important}.rail .marg{display:none}}
+.rail{position:sticky;top:5.4rem;display:flex;flex-direction:column;gap:.75rem}
+.rail .num{font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:.8;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rail .rl{border-top:1px solid var(--line);padding-top:.7rem}
+.rail .marg{font-size:.82rem;color:var(--muted);line-height:1.5}
+.rail .marg b{display:block;color:var(--ink);font-weight:600}
+.body{min-width:0}
+.body > * + *{margin-top:clamp(1.8rem,3vw,2.6rem)}
+.opener{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:1.4rem 3rem;align-items:end;padding-bottom:1.3rem;border-bottom:1px solid var(--line2)}
+.opener h1{font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.03}
+.opener .ld{font-family:var(--serif);font-size:clamp(1.02rem,1.45vw,1.2rem);line-height:1.45;color:var(--ink-2)}
+@media(max-width:860px){.opener{grid-template-columns:1fr;gap:.9rem}}
+.split{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:clamp(1.4rem,3vw,3.2rem);align-items:start}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.prose > p + p{margin-top:1rem}
+.prose p{color:var(--ink-2);max-width:64ch}
+.lead-in{font-family:var(--serif);font-size:clamp(1.12rem,1.7vw,1.32rem);line-height:1.5;color:var(--ink)!important}
+.rowlist{border-top:1px solid var(--line)}
+.rowlist > div{display:grid;grid-template-columns:minmax(8rem,10.5rem) 1fr;gap:1.2rem;padding:.85rem 0;border-bottom:1px solid var(--line-soft);align-items:start}
+.rowlist .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);padding-top:.35rem}
+.rowlist .v{font-size:.94rem;color:var(--ink-2)}
+@media(max-width:620px){.rowlist > div{grid-template-columns:1fr;gap:.2rem}}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem 2.2rem}
+@media(max-width:860px){.trio{grid-template-columns:1fr}}
+.trio h3{font-family:var(--sans);font-size:.92rem;letter-spacing:0;margin-bottom:.35rem}
+.trio p{font-size:.9rem;color:var(--ink-2)}
+.howto{padding-top:1.4rem;border-top:1px solid var(--line)}
+.howto .lbl{display:block;margin-bottom:1rem}
+.howto b{color:var(--amber)}
+.resumo{border:1px solid var(--line2);border-left:3px solid var(--amber);border-radius:var(--radius);padding:1.3rem 1.5rem;background:var(--panel)}
+.resumo .rg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem 2rem;margin-top:.9rem}
+.resumo .rg b{display:block;font-family:var(--mono);font-weight:400;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);margin-bottom:.2rem}
+.resumo .rg span{font-size:.93rem;color:var(--ink)}
+@media(max-width:760px){.resumo .rg{grid-template-columns:1fr}}
+.pull{font-family:var(--serif);font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.35;padding-left:1.2rem;border-left:2px solid var(--orange);max-width:40ch;color:var(--ink)}
+.note{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:var(--radius);padding:1.05rem 1.3rem}
+.note .lbl{display:block;margin-bottom:.3rem}
+.note p{color:var(--ink);font-size:.96rem}
+.grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 2.6rem;border-top:1px solid var(--line)}
+.grid4 > div{padding:1.3rem 0 1.4rem;border-bottom:1px solid var(--line)}
+.grid4 h3{font-size:1.28rem;font-weight:600;margin-bottom:.35rem}
+.grid4 p{color:var(--ink-2);font-size:.96rem}
+@media(max-width:760px){.grid4{grid-template-columns:1fr}}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6rem 2.2rem}
+@media(max-width:860px){.cols3{grid-template-columns:1fr}}
+.cols3 > div{border-top:1px solid var(--line2);padding-top:1rem}
+.cols3 .lbl{display:block;margin-bottom:.6rem}
+.cols3 h3{font-size:1.7rem;font-weight:400;margin-bottom:.5rem}
+.cols3 p{color:var(--ink-2);font-size:.95rem}
+.flow{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;font-family:var(--serif);font-size:1.15rem}
+.flow span{color:var(--muted);font-family:var(--sans)}
+ul.dash{list-style:none;margin:0;padding:0}
+ul.dash li{position:relative;padding:.55rem 0 .55rem 1.3rem;border-bottom:1px solid var(--line-soft);color:var(--ink)}
+ul.dash li::before{content:"";position:absolute;left:0;top:1.25rem;width:.7rem;height:1px;background:var(--amber)}
+.big{font-family:var(--serif);font-weight:600;font-size:clamp(3rem,7vw,5.2rem);line-height:.95;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.q{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,2.6vw,1.9rem);line-height:1.3;color:var(--ink);max-width:30ch}
+
+/* tables */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.9rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:.7rem .9rem .7rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--mono);font-weight:400;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line2);padding-bottom:.6rem}
+tbody th{font-weight:600;color:var(--ink)}
+td{color:var(--ink-2)}
+td small,th small{display:block;font-weight:400;font-size:.8rem;color:var(--muted);margin-top:.15rem}
+tr.pause th,tr.pause td{color:var(--muted);font-weight:400;padding-block:.45rem}
+.r{text-align:right;white-space:nowrap}
+.hl{color:var(--amber)!important;font-weight:600}
+.nw{white-space:nowrap}
+@media(max-width:700px){
+  table{min-width:0;display:block}
+  thead{display:none}
+  tbody,tbody tr,tbody th,tbody td{display:block;width:auto}
+  tbody tr{padding:.9rem 0;border-bottom:1px solid var(--line2)}
+  tbody th{padding:0 0 .35rem;border:0;font-size:.98rem}
+  tbody td{padding:.35rem 0 0;border:0;font-size:.92rem;text-align:left}
+  tbody td:empty{display:none}
+  tbody td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);margin-bottom:.12rem}
+  tr.pause{padding:.4rem 0}
+}
+
+/* part covers */
+.ch.cover{min-height:calc(100vh - 3.6rem);align-content:center}
+.ch.cover .rail .num{font-size:clamp(3.4rem,7vw,5.4rem)}
+.pc .pn{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.pc h1{font-size:clamp(2.4rem,5.4vw,4rem);line-height:1.02;margin:.55rem 0 .9rem}
+.pc .pq{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,1.8vw,1.35rem);color:var(--ink-2);max-width:44ch}
+.pc .secs{list-style:none;margin:.7rem 0 0;padding:1.3rem 0 0;border-top:1px solid var(--line)}
+.pc .secs li{padding:.3rem 0;font-size:.95rem;color:var(--ink-2)}
+.pc .secs b{font-family:var(--mono);font-weight:400;font-size:.7rem;color:var(--amber);margin-right:.7rem;display:inline-block;min-width:1.4rem}
+.rl5{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:2.6rem;position:relative}
+.rl5::before{content:"";position:absolute;left:0;right:0;top:6px;height:1px;background:var(--line2)}
+.rl5 div{position:relative;padding:1.4rem .6rem 0 0;font-size:.76rem;color:var(--muted);line-height:1.35}
+.rl5 div::before{content:"";position:absolute;left:0;top:0;width:13px;height:13px;border-radius:50%;background:var(--bg);border:1px solid var(--line2)}
+.rl5 div b{display:block;font-family:var(--mono);font-weight:400;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase}
+.rl5 div.now{color:var(--ink)}
+.rl5 div.now::before{border:2px solid var(--amber);box-shadow:0 0 0 4px rgba(242,179,61,.15)}
+.rl5 div.done::before{background:var(--amber);border-color:var(--amber)}
+@media(max-width:620px){.rl5{grid-template-columns:1fr 1fr;row-gap:1.4rem}.rl5::before{display:none}}
+
+/* capa + fecho */
+.opener.cap h1{font-size:clamp(3rem,8vw,5.6rem);line-height:.95}
+.def{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:1rem!important}
+
+/* next */
+.next{grid-column:1/-1;margin-top:clamp(2.4rem,5vw,4rem);padding-top:1.4rem;border-top:1px solid var(--line2);display:flex;gap:1.5rem;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.next .fwd{margin-left:auto;text-align:right;max-width:46ch}
+.next .fwd p{font-family:var(--serif);font-size:clamp(1.15rem,2.2vw,1.42rem);line-height:1.3;color:var(--ink);margin:.45rem 0 1rem}
+.btn{display:inline-flex;align-items:center;gap:.45rem;font:600 .87rem/1 var(--sans);border-radius:100px;padding:.72rem 1.3rem;border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s}
+.btn:hover{border-color:var(--amber);color:var(--amber)}
+.btn.pri{background:linear-gradient(180deg,#E8541B,#CE420D);border-color:transparent;color:#fff;box-shadow:0 8px 22px -10px rgba(206,66,13,.7)}
+.btn.pri:hover{color:#fff;filter:brightness(1.06)}
+.btn.sm{padding:.45rem .9rem;font-size:.78rem}
+.foot{max-width:1240px;margin:0 auto;padding:1.6rem 0 2.6rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.8rem;color:var(--muted)}
+
+@media print{
+  .top,#bar,.drawer,.scrim,.next{display:none!important}
+  .ch{display:grid!important;break-after:page;animation:none}
+}
+</style>
+</head><body data-tone="dark" style="margin:0">
+
+<div id="bar" aria-hidden="true"></div>
+<header class="top">
+  <span class="brand">kiko campos</span>
+  <button class="cpt" id="cpt" type="button"><i id="cptN">Página 1 de 1</i><span id="cptT">Capa</span></button>
+  <span class="sp"></span>
+  <button class="ix" id="ixOpen" type="button" aria-controls="drawer" aria-expanded="false">Índice</button>
+</header>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Índice" aria-hidden="true">
+  <div class="dh">
+    <div class="row"><h2>Índice</h2><button class="btn sm" id="ixClose" type="button">Fechar</button></div>
+    <div class="prog" id="ixProg">Você está na página 1</div>
+    <p class="hint">Clique em qualquer linha para ir direto àquela página. Você pode ler em qualquer ordem.</p>
+  </div>
+  <nav id="ixList"></nav>
+</aside>
+
+<main>
+
+<!-- CAPA -->
+<section class="ch dark" id="capa" data-num="" data-title="Capa" data-group="Abertura" data-teaser="Na abertura, a proposta em uma página.">
+  <aside class="rail"><span class="num">—</span><div class="rl"><span class="lbl">Proposta de trabalho</span></div>
+    <p class="marg">Huge Networks<br>Diretoria executiva<br><br>Setembro de 2026<br><br><b>Documento confidencial</b>Destinado a Erick Nascimento e à diretoria executiva.</p></aside>
+  <div class="body">
+    <div class="opener cap"><h1>Primeiro <span class="g">Time</span></h1><p class="ld">Encontro de entrosamento da diretoria da Huge Networks.</p></div>
+    <div class="split">
+      <div class="prose">
+        <p class="lead-in">Um dia e meio para o time se conhecer de verdade, combinar como trabalha junto e sair com compromissos de cada um com o time.</p>
+        <p class="def">primeiro time, s. — o grupo para quem o diretor decide primeiro, antes da própria área.</p>
+      </div>
+      <div class="rowlist">
+        <div><span class="k">Cliente</span><span class="v">Huge Networks · Diretoria executiva</span></div>
+        <div><span class="k">Versão</span><span class="v">Proposta técnica e comercial · v1</span></div>
+        <div><span class="k">Data</span><span class="v">21 de setembro de 2026 · Confidencial</span></div>
+        <div><span class="k">Janela sugerida</span><span class="v">Entre 27 de outubro e 13 de novembro de 2026</span></div>
+      </div>
+    </div>
+    <div class="howto">
+      <span class="lbl">Como ler este documento</span>
+      <div class="trio">
+        <div><h3>Por onde começar</h3><p>A página 1 resume a proposta. As seguintes explicam cada ponto. As condições comerciais estão na Parte 4.</p></div>
+        <div><h3>Para avançar</h3><p>O botão laranja <b>Prosseguir</b>, no fim de cada página. Ao lado dele, <b>Anterior</b> volta.</p></div>
+        <div><h3>Para ir direto a um assunto</h3><p>O botão <b>Índice</b>, no alto à direita, lista todas as seções.</p></div>
+      </div>
+    </div>
+    <p style="font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--muted);max-width:none">© 2026 Kiko Campos · kikocampos.com · Conteúdo proprietário e confidencial. Reprodução, distribuição ou uso parcial sem autorização expressa são vedados.</p>
+  </div>
+</section>
+
+<!-- 1 -->
+<section class="ch light" id="s1" data-num="1" data-title="A proposta em uma página" data-group="Abertura" data-teaser="Ler a ficha alinha o escopo antes do mérito.">
+  <aside class="rail"><span class="num">1</span><div class="rl"><span class="lbl">Proposta técnica e comercial · v1</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>A proposta <em>em uma página</em></h1><p class="ld">A Huge contrata uma fase por vez, e a Fase 1 é a única decisão que precisa ser tomada agora.</p></div>
+    <div class="resumo"><span class="lbl">Em resumo</span>
+      <div class="rg">
+        <div><b>Público</b><span>Erick Nascimento e a diretoria executiva, até 10 participantes</span></div>
+        <div><b>Formato</b><span>Um dia e meio fora do escritório, precedido de conversas individuais e do Predictive Index</span></div>
+        <div><b>Janela sugerida</b><span>Entre 27 de outubro e 13 de novembro de 2026</span></div>
+        <div><b>Interlocução</b><span>Erick Nascimento</span></div>
+        <div><b>Coordenação de agenda</b><span>Jean e Sérgio</span></div>
+        <div><b>Consultor</b><span>Kiko Campos · kiko@kikocampos.com · (11) 98369-2989</span></div>
+        <div><b>Data e validade</b><span>21 de setembro de 2026 · válida por 30 dias</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTE 1 -->
+<section class="ch dark cover" id="p1" data-num="" data-title="Abertura da parte" data-group="Parte 1 · Por que e para quê" data-teaser="Três executivos em cento e vinte dias. O negócio não espera o time ficar pronto.">
+  <aside class="rail"><span class="num">1</span><div class="rl"><span class="lbl">Parte 1</span></div></aside>
+  <div class="body"><div class="pc">
+    <div class="pn">Parte 1 de 4</div>
+    <h1>Por que e para quê</h1>
+    <p class="pq">O contexto da diretoria, o que um dia e meio precisa resolver e como o resultado será medido.</p>
+    <ul class="secs"><li><b>2</b>Por que agora</li><li><b>3</b>O desafio</li><li><b>4</b>Objetivo</li><li><b>5</b>Linha de base</li></ul>
+    <div class="rl5"><div class="now"><b>Parte 1</b>Por que e para quê</div><div><b>Parte 2</b>Como funciona</div><div><b>Parte 3</b>Como acontece</div><div><b>Parte 4</b>O que se recebe e condições</div></div>
+  </div></div>
+</section>
+
+<!-- 2 -->
+<section class="ch light" id="s2" data-num="2" data-title="Por que agora" data-group="Parte 1 · Por que e para quê" data-teaser="Quatro sintomas. Cada diretor vai reconhecer ao menos um.">
+  <aside class="rail"><span class="num">2</span><div class="rl"><span class="lbl">Por que agora</span></div><p class="marg">Três executivos em cento e vinte dias. O aprendizado mútuo custa tempo.</p></aside>
+  <div class="body">
+    <div class="opener"><h1>Time novo não vira time <em>por convivência</em></h1><p class="ld">O negócio não espera o time ficar pronto.</p></div>
+    <div class="split">
+      <div class="prose">
+        <p>A Huge construiu o maior ecossistema de mitigação de DDoS do Brasil. Rede, produto e cobertura foram redesenhados várias vezes para sustentar essa escala. Em 2026, a diretoria ganhou uma composição nova.</p>
+        <p>Em cento e vinte dias chegaram três executivos de fora, para estratégia, marketing e comercial. Trazem repertório de companhias grandes e se somam à cultura de fundadores que levou a Huge até aqui. <strong>É uma combinação valiosa, e ela não se integra sozinha.</strong></p>
+      </div>
+      <div class="prose">
+        <p>Nos primeiros meses de um time, cada um aprende por conta própria como o outro decide, reage sob pressão e prefere ser cobrado. Esse aprendizado custa tempo, e custa mais numa empresa em que o negócio não espera o time ficar pronto.</p>
+        <p>Este programa encurta esse caminho: um dia e meio para o grupo se conhecer de verdade, combinar como trabalha junto e sair com compromissos de cada um com o time.</p>
+      </div>
+    </div>
+    <p class="pull">Um dia e meio que termina com combinados de trabalho, frentes com dono e datas de verificação.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="ch light" id="s3" data-num="3" data-title="O desafio" data-group="Parte 1 · Por que e para quê" data-teaser="O contrato de saída da sala: confiança, linguagem comum e combinados com dono.">
+  <aside class="rail"><span class="num">3</span><div class="rl"><span class="lbl">O desafio</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>O que um dia e meio <em>precisa resolver</em></h1><p class="ld">Quatro sintomas de um time recém-formado.</p></div>
+    <div class="grid4">
+      <div><h3>Um time novo, sem linguagem comum</h3><p>Estilos e trajetórias diferentes, e nenhuma leitura compartilhada de como cada um decide, reage sob pressão e prefere ser cobrado.</p></div>
+      <div><h3>Leituras diferentes do mesmo negócio</h3><p>Cada diretor conhece bem a própria área e pouco a dos pares.</p></div>
+      <div><h3>Combinados que dependem de todos e não têm dono</h3><p>O que envolve mais de uma área tende a ficar no meio do caminho.</p></div>
+      <div><h3>Papéis que se sobrepõem</h3><p>Com a chegada dos novos executivos, quem faz o quê entre pares ainda não foi combinado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="ch light" id="s4" data-num="4" data-title="Objetivo" data-group="Parte 1 · Por que e para quê" data-teaser="As metas são medidas no pré-work e verificadas nos gates.">
+  <aside class="rail"><span class="num">4</span><div class="rl"><span class="lbl">Objetivo</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>O que estará diferente <em>em noventa dias</em></h1><p class="ld">Sair do encontro como Primeiro Time.</p></div>
+    <ul class="dash">
+      <li>Confiança suficiente para discordar dentro da sala</li>
+      <li>Linguagem comum sobre como cada um trabalha</li>
+      <li class="hl">Combinados de trabalho com dono e prazo</li>
+      <li>Uma frente por diretor, com trinta dias e indicador</li>
+    </ul>
+    <div class="note"><span class="lbl">Critério de sucesso</span><p>O critério de sucesso não é a avaliação de reação. É o movimento dos indicadores, medidos no pré-work e revisitados em cada gate.</p></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="ch light" id="s5" data-num="5" data-title="Linha de base" data-group="Parte 1 · Por que e para quê" data-teaser="Três forças, nesta ordem. Consciência, Coragem, Consistência.">
+  <aside class="rail"><span class="num">5</span><div class="rl"><span class="lbl">Linha de base</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Medido antes, <em>medido depois</em></h1><p class="ld">Sem linha de base, o gate de 30 dias vira uma reunião de impressões.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Indicador</th><th>Fonte</th><th>Hoje</th><th>Meta · 90 dias</th></tr></thead>
+      <tbody>
+        <tr><th>Confiança no time, pelas cinco disfunções de Lencioni</th><td>Autoavaliação</td><td>pré-work</td><td>melhora nas cinco</td></tr>
+        <tr><th>Combinados do time cumpridos no prazo</th><td>Diretoria</td><td>definidos no encontro</td><td>cumpridos no prazo, medido em cada gate</td></tr>
+        <tr><th>Pedidos entre pares respondidos</th><td>Registro do encontro</td><td>definidos no encontro</td><td>todos com resposta e dono</td></tr>
+        <tr><th>Ritmo sustentável da diretoria</th><td>Autoavaliação</td><td>pré-work</td><td>melhora no gate de 90 dias</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- PARTE 2 -->
+<section class="ch dark cover" id="p2" data-num="" data-title="Abertura da parte" data-group="Parte 2 · Como funciona" data-teaser="O método que organiza o encontro.">
+  <aside class="rail"><span class="num">2</span><div class="rl"><span class="lbl">Parte 2</span></div></aside>
+  <div class="body"><div class="pc">
+    <div class="pn">Parte 2 de 4</div>
+    <h1>Como funciona</h1>
+    <p class="pq">O método, os princípios de sala e o precedente mais recente.</p>
+    <ul class="secs"><li><b>6</b>Como funciona</li><li><b>7</b>Condução</li><li><b>8</b>Precedente</li></ul>
+    <div class="rl5"><div class="done"><b>Parte 1</b>Por que e para quê</div><div class="now"><b>Parte 2</b>Como funciona</div><div><b>Parte 3</b>Como acontece</div><div><b>Parte 4</b>O que se recebe e condições</div></div>
+  </div></div>
+</section>
+
+<!-- 6 -->
+<section class="ch dark" id="s6" data-num="6" data-title="Como funciona" data-group="Parte 2 · Como funciona" data-teaser="Poucas estruturas, bem aplicadas. Oitenta por cento do tempo é do grupo.">
+  <aside class="rail"><span class="num">6</span><div class="rl"><span class="lbl">Como funciona</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>A ordem importa mais <em>do que as etapas</em></h1><p class="ld">O programa segue os 15 Códigos de <em>O Novo Código da Mudança</em>, organizados em três forças.</p></div>
+    <div class="cols3">
+      <div><span class="lbl">Dia 1 · tarde</span><h3>Consciência</h3><p>O time se vê. Perfis, confiança e o que cada um muda no próprio raio de controle.</p></div>
+      <div><span class="lbl">Dia 2 · manhã</span><h3>Coragem</h3><p>O time se confronta: cada área exposta aos pares e a frase do que vão acertar juntos.</p></div>
+      <div><span class="lbl">Dia 2 · tarde e gates</span><h3>Consistência</h3><p>O time sustenta o que combinou, com dono, prazo e data de verificação.</p></div>
+    </div>
+    <div class="flow" aria-hidden="true">Consciência <span>→</span> Coragem <span>→</span> Consistência</div>
+    <p class="pull">A régua é a da casa: os valores da própria Huge, traduzidos em comportamentos observáveis.</p>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="ch light" id="s7" data-num="7" data-title="Condução" data-group="Parte 2 · Como funciona" data-teaser="Precedente recente, setembro de 2026, com o mesmo desenho.">
+  <aside class="rail"><span class="num">7</span><div class="rl"><span class="lbl">Condução</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Como a sala <em>funciona</em></h1><p class="ld">Poucas estruturas, bem aplicadas. Oitenta por cento do tempo é do grupo.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Princípio</th><th>Como se traduz</th></tr></thead>
+      <tbody>
+        <tr><th>Formato de sprint</th><td>Um dia e meio juntos e trinta dias para entregar. Todo compromisso sai da sala com dono, prazo e data de verificação.</td></tr>
+        <tr><th>Poucas estruturas</th><td>Três por dia, bem aplicadas. Trocar de dinâmica a cada quarenta minutos consome o tempo de conversa, que é o objetivo.</td></tr>
+        <tr><th>Oitenta por cento do grupo</th><td>Exposição do facilitador limitada a um quinto de cada bloco. O resto é trabalho do time.</td></tr>
+        <tr><th>Tensão calibrada</th><td>A franqueza cresce ao longo do Dia 2, protegida por dados agregados até o grupo estar pronto para o nominal.</td></tr>
+        <tr><th>A régua é a da casa</th><td>Os valores da própria Huge, traduzidos em comportamentos observáveis. Nenhum framework externo substitui esse vocabulário.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="ch light" id="s8" data-num="8" data-title="Precedente" data-group="Parte 2 · Como funciona" data-teaser="Como o trabalho acontece, da preparação ao último bloco.">
+  <aside class="rail"><span class="num">8</span><div class="rl"><span class="lbl">Precedente</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>O mesmo desenho, <em>aplicado em setembro de 2026</em></h1><p class="ld">Precedente recente, com o mesmo desenho.</p></div>
+    <div class="split">
+      <div class="prose">
+        <p>Predictive Index e Lencioni no primeiro dia, combinados e frentes no segundo. O desenho foi aplicado com a diretoria de um <strong>banco digital</strong>.</p>
+        <p>O time saiu da sala com combinados de trabalho, frentes com dono e um ritmo de encontros próprio.</p>
+      </div>
+      <div><span class="lbl q" style="display:block;margin-bottom:.6rem">O que saiu da sala</span>
+        <ul class="dash"><li>Combinados de trabalho</li><li>Frentes com dono</li><li class="hl">Ritmo de encontros próprio</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTE 3 -->
+<section class="ch dark cover" id="p3" data-num="" data-title="Abertura da parte" data-group="Parte 3 · Como acontece" data-teaser="Uma fase por vez. A continuidade é decidida no gate de 90 dias.">
+  <aside class="rail"><span class="num">3</span><div class="rl"><span class="lbl">Parte 3</span></div></aside>
+  <div class="body"><div class="pc">
+    <div class="pn">Parte 3 de 4</div>
+    <h1>Como acontece</h1>
+    <p class="pq">As fases, a preparação, o pré-work, a agenda dos dois dias e o papel do CEO.</p>
+    <ul class="secs"><li><b>9</b>Estrutura</li><li><b>10</b>Preparação</li><li><b>11</b>Pré-work</li><li><b>12</b>Agenda · Dia 1</li><li><b>13</b>Agenda · Dia 2</li><li><b>14</b>O papel do CEO</li></ul>
+    <div class="rl5"><div class="done"><b>Parte 1</b>Por que e para quê</div><div class="done"><b>Parte 2</b>Como funciona</div><div class="now"><b>Parte 3</b>Como acontece</div><div><b>Parte 4</b>O que se recebe e condições</div></div>
+  </div></div>
+</section>
+
+<!-- 9 -->
+<section class="ch light" id="s9" data-num="9" data-title="Estrutura" data-group="Parte 3 · Como acontece" data-teaser="A preparação decide metade do resultado.">
+  <aside class="rail"><span class="num">9</span><div class="rl"><span class="lbl">Estrutura</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Uma fase <em>por vez</em></h1><p class="ld">A continuidade é decidida no gate de 90 dias.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Fase</th><th>Quando</th><th>Foco</th></tr></thead>
+      <tbody>
+        <tr><th>Fase 1<small>Preparação e encontro de um dia e meio</small></th><td>Outubro a novembro de 2026</td><td>Consciência e Coragem</td></tr>
+        <tr><th>Fase 2<small>Devolutivas individuais e gates de 30, 60 e 90 dias</small></th><td>Novembro de 2026 a fevereiro de 2027</td><td>Consistência</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><span class="lbl">Contratação</span><p>A Huge contrata uma fase por vez. A continuidade depois do ciclo é definida no gate de 90 dias.</p></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="ch light" id="s10" data-num="10" data-title="Preparação" data-group="Parte 3 · Como acontece" data-teaser="Menos de vinte minutos por diretor. A pergunta única organiza o Dia 2.">
+  <aside class="rail"><span class="num">10</span><div class="rl"><span class="lbl">Preparação</span></div><p class="marg">Todo prazo é contado a partir da data do encontro.</p></aside>
+  <div class="body">
+    <div class="opener"><h1>A preparação decide <em>metade do resultado</em></h1><p class="ld">Todo prazo é contado a partir da data do encontro.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Quando</th><th>O que acontece</th><th>Responsável</th></tr></thead>
+      <tbody>
+        <tr><th class="nw">D−15</th><td>Aceite da Fase 1 e data do encontro</td><td>Erick</td></tr>
+        <tr><th class="nw">D−14</th><td>Conversa de 60 minutos com Erick: o que ele quer que o time leve do encontro e o papel dele em cada bloco</td><td class="nw">Erick e Kiko</td></tr>
+        <tr><th class="nw">D−14</th><td>Lista final de participantes e abertura de agendas</td><td class="nw">Jean e Sérgio</td></tr>
+        <tr><th class="nw">D−14</th><td>Disparo do Predictive Index e da autoavaliação das cinco disfunções</td><td>Kiko</td></tr>
+        <tr><th class="nw">D−12 a D−5</th><td>Conversas individuais de 30 minutos, com as mesmas perguntas para todos</td><td>Kiko</td></tr>
+        <tr><th class="nw">D−5</th><td>Informações de contexto do negócio para os exercícios do Dia 2</td><td>Jean</td></tr>
+        <tr><th class="nw">D−3</th><td>Mapa de perfis, agenda final e validação com Erick</td><td>Kiko</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="ch dark" id="s11" data-num="11" data-title="Pré-work" data-group="Parte 3 · Como acontece" data-teaser="Consciência. O primeiro dia não tem cobrança.">
+  <aside class="rail"><span class="num">11</span><div class="rl"><span class="lbl">Pré-work</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Menos de vinte minutos <em>por diretor</em></h1><p class="ld">A pergunta única é o que organiza o Dia 2.</p></div>
+    <div class="cols3">
+      <div><span class="lbl">01</span><h3 style="font-size:1.35rem;font-weight:600">Predictive Index</h3><p>Perfil comportamental de cada diretor, lido em agregado no Dia 1.</p></div>
+      <div><span class="lbl">02</span><h3 style="font-size:1.35rem;font-weight:600">Cinco disfunções</h3><p>Autoavaliação de Lencioni: onde a confiança do time falha hoje.</p></div>
+      <div><span class="lbl">03</span><h3 style="font-size:1.35rem;font-weight:600">Uma pergunta</h3><p>Respondida por escrito, por todos, antes do encontro.</p></div>
+    </div>
+    <p class="q">O que este time precisa fazer junto que hoje ninguém faz sozinho?</p>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="ch light" id="s12" data-num="12" data-title="Agenda · Dia 1" data-group="Parte 3 · Como acontece" data-teaser="Coragem pela manhã, Consistência à tarde.">
+  <aside class="rail"><span class="num">12</span><div class="rl"><span class="lbl">Agenda · Dia 1 · tarde</span></div><p class="marg">Consciência. O dia não tem cobrança: produz vínculo, leitura comum e um compromisso individual.</p></aside>
+  <div class="body">
+    <div class="opener"><h1>O time <em>se vê</em></h1><p class="ld">Consciência. O dia produz vínculo, leitura comum e um compromisso individual.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Horário</th><th>Bloco</th><th>O que acontece</th><th>O que sai da sala</th></tr></thead>
+      <tbody>
+        <tr><th class="nw">14h00 · 30′</th><td><strong>Abertura</strong></td><td>Erick abre: por que este time e por que agora. Contrato de sala</td><td>Três regras afixadas</td></tr>
+        <tr><th class="nw">14h30 · 60′</th><td><strong>Quem é você sem o crachá</strong></td><td>Cinco minutos por pessoa, proibido citar a empresa</td><td>Base relacional</td></tr>
+        <tr class="pause"><th>15h30</th><td>Intervalo</td><td></td><td></td></tr>
+        <tr><th class="nw">15h45 · 60′</th><td><strong>O espelho</strong></td><td>Predictive Index e Lencioni em agregado: o perfil do time e onde a confiança falha</td><td>Cartaz dos pontos cegos</td></tr>
+        <tr><th class="nw">16h45 · 60′</th><td><strong>Eficácia de equipe</strong></td><td>A contribuição de cada par e um pedido que nunca foi feito</td><td>Quadro de contribuições e pedidos</td></tr>
+        <tr><th class="nw">17h45 · 30′</th><td><strong>Meu 15%</strong></td><td>O que cada um muda no próprio raio de controle a partir de amanhã</td><td>Folha do 15%</td></tr>
+        <tr><th class="nw">18h15 · 15′</th><td><strong>Ponte para o Dia 2</strong></td><td>A pergunta que a manhã seguinte vai responder</td><td>Pergunta do dia</td></tr>
+        <tr><th class="nw">18h30 · 90′</th><td><strong>Mão na massa</strong></td><td>Atividade em subgrupos, fora da hierarquia</td><td>Observação para o Dia 2</td></tr>
+        <tr><th class="nw">20h00</th><td><strong>Jantar</strong></td><td>A conversa lateral acontece sem facilitador</td><td></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="ch light" id="s13" data-num="13" data-title="Agenda · Dia 2" data-group="Parte 3 · Como acontece" data-teaser="O comportamento do líder define o teto de profundidade do grupo.">
+  <aside class="rail"><span class="num">13</span><div class="rl"><span class="lbl">Agenda · Dia 2</span></div><p class="marg">A pergunta do dia vai para a parede no minuto zero.</p></aside>
+  <div class="body">
+    <div class="opener"><h1>O time <em>combina</em></h1><p class="ld">Coragem pela manhã, Consistência à tarde.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Horário</th><th>Bloco</th><th>O que acontece</th><th>O que sai da sala</th></tr></thead>
+      <tbody>
+        <tr><th class="nw">09h00 · 15′</th><td><strong>Abertura</strong></td><td>Regras de sala e horários combinados para o celular</td><td>Pergunta afixada</td></tr>
+        <tr><th class="nw">09h15 · 75′</th><td><strong>O que cada um vê</strong></td><td>Cada diretor apresenta sua área aos pares, seis minutos sem tela: uma oportunidade, um risco e uma dependência</td><td>Mural das áreas</td></tr>
+        <tr class="pause"><th>10h30</th><td>Intervalo</td><td></td><td></td></tr>
+        <tr><th class="nw">10h45 · 60′</th><td><strong>O jogo que vamos jogar juntos</strong></td><td>Se este time acertar uma coisa junto nos próximos doze meses, qual é? Escrita individual, voto silencioso e convergência</td><td>A frase do time</td></tr>
+        <tr class="pause"><th>11h45</th><td>Almoço</td><td></td><td></td></tr>
+        <tr><th class="nw">12h45 · 25′</th><td><strong>O que o líder faz que ajuda o time</strong></td><td>Exercício de Lencioni: o que mais ajuda e um pedido</td><td>Leitura para o líder</td></tr>
+        <tr><th class="nw">13h10 · 60′</th><td><strong>Nossos combinados</strong></td><td>O que fazemos juntos nos próximos noventa dias, e o que paramos de fazer</td><td>Combinados com o que sai</td></tr>
+        <tr class="pause"><th>14h10</th><td>Intervalo</td><td></td><td></td></tr>
+        <tr><th class="nw">14h25 · 80′</th><td><strong>Quem faz o quê</strong></td><td>Uma frente por diretor, com trinta dias e indicador. Papéis entre pares</td><td>Frentes com dono</td></tr>
+        <tr><th class="nw">15h45 · 35′</th><td><strong>Como este time se encontra</strong></td><td>Frequência, pauta e datas dos próximos encontros</td><td>Ritmo e calendário</td></tr>
+        <tr><th class="nw">16h20 · 30′</th><td><strong>Fechamento</strong></td><td>Cada dono e cada prazo, nomeados em voz alta</td><td>Quadro assinado</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="ch dark" id="s14" data-num="14" data-title="O papel do CEO" data-group="Parte 3 · Como acontece" data-teaser="O que a companhia recebe e em que condições.">
+  <aside class="rail"><span class="num">14</span><div class="rl"><span class="lbl">O papel do CEO</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Combinado antes, <em>com ele</em></h1><p class="ld">O comportamento do líder define o teto de profundidade do grupo. Por isso, o papel do CEO em cada bloco é combinado com ele na conversa de preparação.</p></div>
+    <div class="cols3">
+      <div><h3 style="font-size:1.4rem">Onde conduz</h3><p>Abertura do Dia 1 e fechamento do Dia 2: por que este time e por que agora.</p></div>
+      <div><h3 style="font-size:1.4rem">Onde participa como par</h3><p>Os blocos em que a leitura dele vale o mesmo que a dos outros — e é dita depois deles.</p></div>
+      <div><h3 style="font-size:1.4rem">Onde o facilitador conduz</h3><p>Os blocos em que o grupo fala antes do líder.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTE 4 -->
+<section class="ch dark cover" id="p4" data-num="" data-title="Abertura da parte" data-group="Parte 4 · O que se recebe e condições" data-teaser="O que sai da sala. O relatório executivo vai para Erick em até dez dias.">
+  <aside class="rail"><span class="num">4</span><div class="rl"><span class="lbl">Parte 4</span></div></aside>
+  <div class="body"><div class="pc">
+    <div class="pn">Parte 4 de 4</div>
+    <h1>O que se recebe <em>e em que condições</em></h1>
+    <p class="pq">Entregáveis, acompanhamento, investimento, condições e o próximo passo.</p>
+    <ul class="secs"><li><b>15</b>Entregáveis da Fase 1</li><li><b>16</b>Fase 2</li><li><b>17</b>Investimento</li><li><b>18</b>Escopo do investimento</li><li><b>19</b>Condições</li><li><b>20</b>Próximo passo</li><li><b>21</b>Sobre o consultor</li></ul>
+    <div class="rl5"><div class="done"><b>Parte 1</b>Por que e para quê</div><div class="done"><b>Parte 2</b>Como funciona</div><div class="done"><b>Parte 3</b>Como acontece</div><div class="now"><b>Parte 4</b>O que se recebe e condições</div></div>
+  </div></div>
+</section>
+
+<!-- 15 -->
+<section class="ch light" id="s15" data-num="15" data-title="Entregáveis da Fase 1" data-group="Parte 4 · O que se recebe e condições" data-teaser="Encontro não muda comportamento. O que muda é o acompanhamento.">
+  <aside class="rail"><span class="num">15</span><div class="rl"><span class="lbl">Entregáveis da Fase 1</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>O que sai <em>da sala</em></h1><p class="ld">O relatório executivo é confidencial e vai para Erick em até dez dias.</p></div>
+    <div class="grid4">
+      <div><h3>Mapa do time</h3><p>Leitura das conversas individuais cruzada com o Predictive Index: perfis, complementaridades e pontos cegos, em agregado.</p></div>
+      <div><h3>Mural das áreas</h3><p>Oportunidades, riscos e dependências de cada área, na mesma parede.</p></div>
+      <div><h3>A frase do time</h3><p>O que este grupo decidiu acertar junto nos próximos doze meses.</p></div>
+      <div><h3>Combinados com dono</h3><p>Com o que o time deixa de fazer declarado.</p></div>
+      <div><h3>Quem faz o quê</h3><p>Frentes com dono, prazo e indicador, e os papéis entre pares.</p></div>
+      <div><h3>Ritmo de encontros</h3><p>Frequência, pauta e calendário de gates.</p></div>
+      <div><h3>Relatório executivo confidencial</h3><p>Para Erick, consolidado em até dez dias, com a leitura do grupo, riscos e recomendações.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 -->
+<section class="ch light" id="s16" data-num="16" data-title="Fase 2" data-group="Parte 4 · O que se recebe e condições" data-teaser="O investimento da Fase 1.">
+  <aside class="rail"><span class="num">16</span><div class="rl"><span class="lbl">Fase 2</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>O time <em>sustenta</em></h1><p class="ld">Encontro não muda comportamento. O que muda é o acompanhamento que vem depois. A Fase 2 transforma os combinados em prática observável.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Etapa</th><th>O que acontece</th><th class="r">Horas</th></tr></thead>
+      <tbody>
+        <tr><th>Devolutivas individuais</th><td>Uma sessão de 45 minutos por diretor nas duas semanas seguintes: Predictive Index, o 15% e a frente assumida</td><td class="r">7h</td></tr>
+        <tr><th>Gate de 30 dias</th><td>Sessão de 3 horas: combinados, primeira leitura dos indicadores, ajuste de rota</td><td class="r">5h</td></tr>
+        <tr><th>Gate de 60 dias</th><td>Sessão de 3 horas: evolução e ritmo de encontros do time</td><td class="r">5h</td></tr>
+        <tr><th>Gate de 90 dias</th><td>Sessão de 4 horas: fechamento do ciclo e recomendação de continuidade</td><td class="r">7h</td></tr>
+        <tr><th>Curadoria</th><td>Consolidação dos indicadores entre os gates e apoio pontual ao CEO</td><td class="r">4h</td></tr>
+        <tr><th class="hl">Total estimado</th><td style="color:var(--ink)">Faturado por hora dedicada, com teto de 32 horas sem novo aceite</td><td class="r" style="color:var(--ink);font-weight:600">28h</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- 17 -->
+<section class="ch dark" id="s17" data-num="17" data-title="Investimento" data-group="Parte 4 · O que se recebe e condições" data-teaser="O que está e o que não está no honorário.">
+  <aside class="rail"><span class="num">17</span><div class="rl"><span class="lbl">Investimento</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Investimento <em>da Fase 1</em></h1><p class="ld">A Huge contrata uma fase por vez, e a Fase 1 é a única decisão que precisa ser tomada agora.</p></div>
+    <div class="split" style="align-items:end">
+      <div><span class="lbl" style="display:block;margin-bottom:.8rem">Fase 1</span><div class="big">R$ 75.000</div></div>
+      <p style="color:var(--ink-2);font-size:.96rem">Preparação, conversa com o CEO, conversas individuais, encontro e entregáveis. Metade no aceite e metade em até dez dias após o encontro. A Fase 2 é faturada apenas pelas horas utilizadas.</p>
+    </div>
+    <div class="tw"><table>
+      <thead><tr><th>Fase</th><th>Escopo</th><th>Horas</th><th class="r">Investimento</th></tr></thead>
+      <tbody>
+        <tr><th>Fase 1</th><td>Preparação, conversa com o CEO, conversas individuais, encontro e entregáveis</td><td>34h</td><td class="r hl">R$ 75.000</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-family:var(--mono);font-size:.74rem;line-height:1.7;color:var(--muted)">Fase 1, composição das 34 horas: conversa com o CEO 1h · conversas individuais 5h · leitura do Predictive Index e do contexto 4h · desenho da experiência e materiais 6h · condução do Dia 1 6h · condução do Dia 2 8h · consolidação e relatório 4h.</p>
+  </div>
+</section>
+
+<!-- 18 -->
+<section class="ch light" id="s18" data-num="18" data-title="Escopo do investimento" data-group="Parte 4 · O que se recebe e condições" data-teaser="Pagamento, adiamento e o que vai e o que não vai para o CEO.">
+  <aside class="rail"><span class="num">18</span><div class="rl"><span class="lbl">Escopo do investimento</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>O que está e o que <em>não está incluído</em></h1><p class="ld">O que está e o que não está no honorário.</p></div>
+    <div class="split">
+      <div><span class="lbl" style="display:block;margin-bottom:.6rem">Incluído</span>
+        <ul class="dash"><li>Honorários de preparação, condução e consolidação</li><li>Instrumentos e materiais do consultor</li><li>Relatórios previstos nesta proposta</li></ul></div>
+      <div><span class="lbl q" style="display:block;margin-bottom:.6rem">Não incluído</span>
+        <ul class="dash"><li style="color:var(--ink-2)">Espaço, alimentação, atividade em subgrupos e audiovisual, contratados pela Huge</li><li style="color:var(--ink-2)">Licenças do Predictive Index, fornecidas pela Huge</li><li style="color:var(--ink-2)">Deslocamento fora da Grande São Paulo</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 -->
+<section class="ch light" id="s19" data-num="19" data-title="Condições" data-group="Parte 4 · O que se recebe e condições" data-teaser="Três passos até 17 de outubro para manter a janela.">
+  <aside class="rail"><span class="num">19</span><div class="rl"><span class="lbl">Condições</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Condições e <em>confidencialidade</em></h1><p class="ld">Pagamento, adiamento e a separação entre o que vai e o que não vai para o CEO.</p></div>
+    <div class="rowlist">
+      <div><span class="k">Pagamento</span><span class="v">Fase 1: 50% no aceite e 50% em até 10 dias após o encontro. Fase 2: faturamento mensal por hora, com relatório de horas.</span></div>
+      <div><span class="k">Adiamento</span><span class="v">Uma remarcação sem custo com dez dias de antecedência. Com menos de cinco dias úteis: 30% do valor da fase, pela agenda bloqueada.</span></div>
+      <div><span class="k">O que vai para o CEO</span><span class="v">Leitura do grupo, riscos coletivos e recomendações.</span></div>
+      <div><span class="k">O que não vai</span><span class="v">Falas atribuídas das conversas individuais e resultados individuais do Predictive Index. Sem essa separação, o grupo não se expõe.</span></div>
+      <div><span class="k">Confidencialidade</span><span class="v">Integral sobre dados de negócio, indicadores e conteúdos discutidos.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 20 -->
+<section class="ch light" id="s20" data-num="20" data-title="Próximo passo" data-group="Parte 4 · O que se recebe e condições" data-teaser="Quem conduz o trabalho.">
+  <aside class="rail"><span class="num">20</span><div class="rl"><span class="lbl">Próximo passo</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Para <em>começar</em></h1><p class="ld">Para manter a janela entre 27 de outubro e 13 de novembro, três passos precisam acontecer até 17 de outubro.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>Até</th><th>Passo</th><th>Quem</th></tr></thead>
+      <tbody>
+        <tr><th class="hl">17/10</th><td>Conversa de 60 minutos entre o CEO e o consultor, para definir o que o time leva do encontro e o papel dele em cada bloco</td><td class="nw">Erick e Kiko</td></tr>
+        <tr><th class="hl">17/10</th><td>Aceite da Fase 1 e data do encontro</td><td>Erick</td></tr>
+        <tr><th class="hl">17/10</th><td>Lista de participantes e agendas abertas para as conversas individuais</td><td class="nw">Jean e Sérgio</td></tr>
+      </tbody>
+    </table></div>
+    <p class="pull">Um encontro sem preparação é entretenimento, e queima a primeira vez que este time terá para se ver como time.</p>
+  </div>
+</section>
+
+<!-- 21 -->
+<section class="ch light" id="s21" data-num="21" data-title="Sobre o consultor" data-group="Parte 4 · O que se recebe e condições" data-teaser="Para fechar, a pergunta do pré-work.">
+  <aside class="rail"><span class="num">21</span><div class="rl"><span class="lbl">Sobre o consultor</span></div></aside>
+  <div class="body">
+    <div class="opener"><h1>Kiko <em>Campos</em></h1><p class="ld">Executivo sênior de Pessoas e Cultura, palestrante e autor.</p></div>
+    <div class="split">
+      <div class="prose">
+        <p>Executivo sênior de Pessoas e Cultura, palestrante e autor. Vinte anos conectando estratégia, cultura e liderança à execução em operações de grande porte, em 11 países, ao lado de CEOs, comitês e conselhos.</p>
+        <p>Foi Diretor Global de RH, Transformação &amp; Cultura na <strong>Vale</strong>, com mais de 170 mil pessoas em 12 países, onde multiplicou por 10 a participação em programas de desenvolvimento de líderes e criou o primeiro Modelo Global de Liderança da companhia.</p>
+        <p>Foi Diretor Executivo de RH, Talentos &amp; Cultura no <strong>Grupo Carrefour Brasil</strong>, onde conduziu a integração cultural pós-aquisição do Grupo BIG: R$ 1,7 bi em sinergias aceleradas, +20 p.p. de engajamento, turnover de 70% para 35% e 14 mil líderes formados.</p>
+        <p>Trajetória anterior em Waggl (GM LATAM), Across Consultoria de RH (CEO), McKinsey &amp; Company (People &amp; Change), Volkswagen, Braskem e LAB SSJ.</p>
+      </div>
+      <div><span class="lbl" style="display:block;margin-bottom:.6rem">O método</span>
+        <p style="font-family:var(--serif);font-size:1.25rem;line-height:1.4;margin-bottom:1rem">Autor de <em>O Novo Código da Mudança</em>, que sistematiza os 15 Códigos em Consciência, Coragem e Consistência.</p>
+        <ul class="dash"><li>Consciência</li><li>Coragem</li><li>Consistência</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- FECHO -->
+<section class="ch dark cover" id="fecho" data-num="" data-title="Fecho" data-group="Fecho" data-teaser="">
+  <aside class="rail"><span class="num">—</span><div class="rl"><span class="lbl">Fecho</span></div></aside>
+  <div class="body"><div class="pc">
+    <div class="pn">kiko campos</div>
+    <h1>A resposta de cada diretor, escrita antes do encontro, <em>organiza o Dia 2.</em></h1>
+    <p class="pq">O que este time precisa fazer junto que hoje ninguém faz sozinho?</p>
+    <div class="rowlist" style="margin-top:2.4rem">
+      <div><span class="k">Contato</span><span class="v"><a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a> · (11) 98369-2989 · kikocampos.com</span></div>
+    </div>
+    <p style="margin-top:1.6rem;font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--muted)">© 2026 Kiko Campos · kikocampos.com · Conteúdo proprietário e confidencial. Reprodução, distribuição ou uso parcial sem autorização expressa são vedados.</p>
+  </div></div>
+</section>
+
+</main>
+
+<footer class="foot" style="padding-inline:clamp(16px,4vw,3.4rem)">
+  <span>Kiko Campos · <a href="mailto:kiko@kikocampos.com">kiko@kikocampos.com</a> · (11) 98369-2989 · kikocampos.com</span>
+  <span>Primeiro Time · Huge Networks · Confidencial</span>
+</footer>
+
+<script>
+(function(){
+  var chs=[].slice.call(document.querySelectorAll('.ch'));
+  var n=chs.length, cur=0;
+  var bar=document.getElementById('bar'), cptN=document.getElementById('cptN'), cptT=document.getElementById('cptT');
+  var drawer=document.getElementById('drawer'), scrim=document.getElementById('scrim'), list=document.getElementById('ixList'), prog=document.getElementById('ixProg'), openB=document.getElementById('ixOpen');
+
+  // label tables for mobile
+  document.querySelectorAll('table').forEach(function(t){
+    var hs=[].slice.call(t.querySelectorAll('thead th')).map(function(h){return h.textContent.trim();});
+    t.querySelectorAll('tbody tr').forEach(function(r){
+      [].slice.call(r.children).forEach(function(c,i){ if(c.tagName==='TD' && hs[i]) c.setAttribute('data-l',hs[i]); });
+    });
+  });
+
+  // index
+  var lastG=null, links=[];
+  chs.forEach(function(c,i){
+    var g=c.dataset.group;
+    if(g!==lastG){ var d=document.createElement('div'); d.className='grp'; d.textContent=g; list.appendChild(d); lastG=g; }
+    var a=document.createElement('a'); a.href='#'+c.id;
+    a.innerHTML='<span class="n">'+(c.dataset.num||'')+'</span><span></span>';
+    a.lastChild.textContent=c.dataset.title;
+    a.addEventListener('click',function(e){ e.preventDefault(); close(); go(i); });
+    list.appendChild(a); links.push(a);
+  });
+
+  // next / prev
+  chs.forEach(function(c,i){
+    var nx=document.createElement('div'); nx.className='next';
+    if(i>0){ var b=document.createElement('button'); b.className='btn'; b.type='button'; b.textContent='← Anterior'; b.onclick=function(){go(i-1);}; nx.appendChild(b); }
+    if(i<n-1){
+      var t=chs[i+1], f=document.createElement('div'); f.className='fwd';
+      var l=document.createElement('span'); l.className='lbl'; l.textContent='A seguir · '+(t.dataset.num? t.dataset.num+' · ':'')+t.dataset.title;
+      var p=document.createElement('p'); p.textContent=c.dataset.teaser||t.dataset.title;
+      var b2=document.createElement('button'); b2.className='btn pri'; b2.type='button'; b2.textContent='Prosseguir →'; b2.onclick=function(){go(i+1);};
+      f.appendChild(l); f.appendChild(p); f.appendChild(b2); nx.appendChild(f);
+    }
+    c.appendChild(nx);
+  });
+
+  function go(i,noPush){
+    if(i<0||i>=n) return;
+    chs[cur].classList.remove('on'); cur=i; var c=chs[i]; c.classList.add('on');
+    document.body.dataset.tone=c.classList.contains('light')?'light':'dark';
+    bar.style.width=((i+1)/n*100)+'%';
+    cptN.textContent='Página '+(i+1)+' de '+n; cptT.textContent=c.dataset.title;
+    prog.textContent='Você está na página '+(i+1)+' de '+n;
+    links.forEach(function(a,j){ a.classList.toggle('on',j===i); if(j===i) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    if(!noPush){ try{ history.replaceState(null,'','#'+c.id); }catch(e){} }
+    window.scrollTo(0,0);
+  }
+  function open(){ drawer.classList.add('on'); scrim.classList.add('on'); drawer.setAttribute('aria-hidden','false'); openB.setAttribute('aria-expanded','true'); var a=links[cur]; if(a) a.scrollIntoView({block:'center'}); }
+  function close(){ drawer.classList.remove('on'); scrim.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); openB.setAttribute('aria-expanded','false'); }
+  openB.onclick=open; document.getElementById('cpt').onclick=open; document.getElementById('ixClose').onclick=close; scrim.onclick=close;
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') return close();
+    if(drawer.classList.contains('on')) return;
+    if(e.target.closest && e.target.closest('input,textarea')) return;
+    if(e.key==='ArrowRight') go(cur+1); else if(e.key==='ArrowLeft') go(cur-1);
+  });
+  var start=0, h=(location.hash||'').slice(1);
+  chs.forEach(function(c,i){ if(c.id===h) start=i; });
+  chs.forEach(function(c){ c.classList.remove('on'); });
+  cur=start; chs[start].classList.add('on'); go(start,true);
+  window.addEventListener('hashchange',function(){ var id=location.hash.slice(1); chs.forEach(function(c,i){ if(c.id===id && i!==cur) go(i,true); }); });
+})();
+</script>
+</body></html>
