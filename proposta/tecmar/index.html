@@ -1,8 +1,13 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
-<title>Rota Certa · Três encontros</title>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Rota Certa · Três encontros</title></head><body><script>
+window.rcCount=function(path,title,ev){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:path,title:title,event:!!ev});}}catch(e){}};
+(function(){var t=null;window.rcSec=function(id,title){if(!window.rcOk)return;rcCount('/proposta/tecmar/encontros/'+id,title||id,false);clearTimeout(t);t=setTimeout(function(){rcCount('leu-30s/'+id,'Ficou 30s ou mais: '+(title||id),true);},30000);};})();
+</script>
+<script data-goatcounter="https://kikocampos.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+
 <style>
 :root{
   /* tokens do kikocampos.com */
@@ -558,10 +563,8 @@ tbody th{font-weight:500;color:var(--ink);padding-right:1rem}
   .op-panel li .p{grid-column:2;grid-row:auto}
   .op-panel li .e{grid-column:2}
 }
-</style>
-<style>
+
 /* ---------- encontros 2026 ---------- */
-.ch{display:grid}
 .seq{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2.6vw,2.4rem);border-top:1px solid var(--line2);padding-top:1.1rem;position:relative}
 .seq > div{display:flex;flex-direction:column;gap:.3rem}
 .seq .w{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--amber)}
@@ -640,14 +643,51 @@ a.ix{text-decoration:none}
   .agenda{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
   .howto .letter{max-width:none}
 }
+
+@media print{
+  .ch{display:grid!important}
+  #gate,#bar,.top,.drawer,.scrim,.next{display:none!important}
+}
 </style>
-</head><body data-tone="light">
+
+<div id="gate">
+  <div class="card">
+    <div class="lbl">Documento confidencial</div>
+    <div class="wm" style="margin-top:.5rem">Rota <span class="grad">Certa</span></div>
+    <p>Três encontros para 2026: a diretoria, a companhia e a liderança. Digite a senha para abrir.</p>
+    <form id="gform" autocomplete="off">
+      <input type="password" id="gpw" placeholder="Senha" aria-label="Senha" autofocus>
+      <button class="btn pri" type="submit">Abrir</button>
+    </form>
+    <div class="err" id="gerr"></div>
+    <div class="ft">Sem a senha, fale com Kiko Campos · kiko@kikocampos.com</div>
+  </div>
+</div>
+
+<div id="bar"></div>
+
 <div class="top">
   <span class="brand"><span class="dot"></span>kiko campos</span>
-  <span class="cpt"><i>Rota Certa</i>Três encontros para 2026</span>
+  <button class="cpt" id="cpt" title="Abrir o índice"></button>
   <span class="sp"></span>
-  <a class="ix" href="rc-encontros-2809.pdf" download>Baixar PDF</a>
+  <button class="ix" id="ixOpen" title="Lista das páginas do documento">Índice</button>
 </div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Índice do documento">
+  <div class="dh">
+    <div class="row">
+      <div>
+        <h2>Índice</h2>
+        <div class="prog" id="ixProg"></div>
+      </div>
+      <button class="btn sm" id="ixClose">Fechar</button>
+    </div>
+    <p class="hint">Clique em qualquer linha para ir direto àquela página.</p>
+  </div>
+  <nav id="ixList" aria-label="Páginas"></nav>
+  <div class="df">Rota Certa · Três encontros para 2026<br>Kiko Campos · setembro de 2026<br><span style="color:var(--amber)">Documento confidencial</span></div>
+</aside>
 
 <main>
 
@@ -831,16 +871,91 @@ a.ix{text-decoration:none}
   <div class="prose wide">
     <p>Kiko Campos é executivo sênior de Pessoas e Cultura, palestrante e autor. Foi Diretor Global de RH, Transformação e Cultura na Vale e Diretor Executivo de RH, Talentos e Cultura no Grupo Carrefour Brasil, onde liderou a integração cultural do Grupo BIG, uma operação combinada de 936 lojas e cerca de 150 mil pessoas. É autor de <em>O Novo Código da Mudança</em> e conta com uma equipe de mais de 30 consultores seniores, entre ex-CEOs, CHROs e executivos de RH.</p>
   </div>
-  <div class="next">
-    <div class="fwd">
-      <span class="lbl">Rota Certa</span>
-      <p>A narrativa já diz que a Rota Certa começa em cada pessoa. Os três encontros começam pela liderança, que é quem as pessoas observam primeiro.</p>
-      <a class="btn" href="rc-encontros-2809.pdf" download>Baixar a proposta em PDF</a>
-    </div>
-  </div>
+  <p><a class="btn" href="rc-encontros-2809.pdf" download onclick="window.rcCount&&rcCount('pdf-download-encontros','Baixou o PDF dos encontros',true)">Baixar a proposta em PDF</a></p>
   <p class="sm foot">Kiko Campos · kiko@kikocampos.com · (11) 98369-2989 · kikocampos.com</p>
 </div></section>
 
 </main>
 
+<script>
+(function(){
+  var SENHA='rota-certa-2026', g=document.getElementById('gate');
+  function abrir(){g.classList.add('off');document.body.style.overflow='';}
+  try{ if(sessionStorage.getItem('rc-ok')==='1'){ window.rcOk=true; abrir(); } }catch(e){}
+  document.body.style.overflow='hidden';
+  document.getElementById('gform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('gpw').value.trim().toLowerCase();
+    if(v===SENHA){ try{sessionStorage.setItem('rc-ok','1')}catch(e){} window.rcOk=true; window.rcCount&&rcCount('senha-ok','Entrou com a senha',true); abrir(); }
+    else { window.rcCount&&rcCount('senha-errada','Senha incorreta',true); document.getElementById('gerr').textContent='Senha incorreta.'; document.getElementById('gpw').select(); }
+  });
+})();
+</script>
+<script>
+(function(){
+  var SEQ=["capa","s1","s2","s3","s4","s5","s6"];
+  var TITLES={"capa":"Capa","s1":"1 · Em resumo","s2":"2 · Roda de Engajamento","s3":"3 · Webinar de lançamento","s4":"4 · Workshop de Liderança","s5":"5 · Investimento","s6":"6 · Próximos passos"};
+  var FWD={"capa":"A proposta em uma página.","s1":"O primeiro encontro, com a diretoria.","s2":"O lançamento para a companhia inteira.","s3":"O encontro com a liderança, em dois formatos.","s4":"Valores por encontro e em conjunto.","s5":"Quatro passos até o primeiro encontro.","s6":""};
+  var TONE={"capa":"dark","s1":"light","s2":"light","s3":"light","s4":"light","s5":"light","s6":"dark"};
+  var GRUPOS=[["Abertura",["capa","s1"]],["Os três encontros",["s2","s3","s4"]],["Condições",["s5","s6"]]];
+  var ixList=document.getElementById('ixList'), drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'), ixProg=document.getElementById('ixProg'),
+      cpt=document.getElementById('cpt'), bar=document.getElementById('bar');
+  (function(){
+    var h='';
+    GRUPOS.forEach(function(g){
+      h+='<div class="grp">'+g[0]+'</div>';
+      g[1].forEach(function(id){
+        var t=TITLES[id], m=t.match(/^([^·]+?)\s·\s(.*)$/), n=m?m[1]:'', l=m?m[2]:t;
+        h+='<a href="#'+id+'" data-c="'+id+'"><span class="n">'+n+'</span><span>'+l+'</span></a>';
+      });
+    });
+    ixList.innerHTML=h;
+  })();
+  function abrir(v){
+    drawer.classList.toggle('on',v); scrim.classList.toggle('on',v);
+    document.body.style.overflow=v?'hidden':'';
+  }
+  document.getElementById('ixOpen').onclick=function(){abrir(true);};
+  document.getElementById('ixClose').onclick=function(){abrir(false);};
+  scrim.onclick=function(){abrir(false);}; cpt.onclick=function(){abrir(true);};
+  SEQ.forEach(function(id,i){
+    var el=document.getElementById(id); if(!el) return;
+    var nx=SEQ[i+1], pv=SEQ[i-1], h='<div class="next">';
+    h+= pv?'<button class="btn" data-c="'+pv+'">← Anterior</button>':'<span></span>';
+    if(nx) h+='<div class="fwd"><span class="lbl">A seguir · '+TITLES[nx]+'</span><p>'+FWD[id]+'</p><button class="btn pri" data-c="'+nx+'">Prosseguir →</button></div>';
+    else h+='<div class="fwd"><span class="lbl q">Fim do documento</span><p>A narrativa já diz que a Rota Certa começa em cada pessoa. Os três encontros começam pela liderança, que é quem as pessoas observam primeiro.</p><button class="btn" data-c="capa">Voltar à capa</button></div>';
+    el.insertAdjacentHTML('beforeend',h+'</div>');
+  });
+  function show(id){
+    if(!document.getElementById(id)) id='capa';
+    var i=SEQ.indexOf(id);
+    try{window.rcSec&&window.rcSec(id,TITLES[id]||id);}catch(e){}
+    document.querySelectorAll('.ch').forEach(function(s){s.classList.toggle('on',s.id===id);});
+    document.body.setAttribute('data-tone',TONE[id]==='light'?'light':'dark');
+    document.querySelectorAll('#ixList [data-c]').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-c')===id);});
+    cpt.innerHTML='<i>Página '+(i+1)+' de '+SEQ.length+'</i>'+TITLES[id]; bar.style.width=((i+1)/SEQ.length*100)+'%';
+    ixProg.textContent='Você está na página '+(i+1)+' de '+SEQ.length;
+    abrir(false); window.scrollTo(0,0);
+    if(location.hash.slice(1)!==id){try{history.replaceState(null,'','#'+id)}catch(e){}}
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('[data-c]'); if(!a) return;
+    e.preventDefault(); show(a.getAttribute('data-c'));
+  });
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1)||'capa');});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&e.target.tagName==='INPUT') return;
+    if(e.key==='Escape'){abrir(false);return;}
+    if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft') return;
+    var cur=location.hash.slice(1)||'capa', i=SEQ.indexOf(cur); if(i<0) return;
+    var j=i+(e.key==='ArrowRight'?1:-1); if(j>=0&&j<SEQ.length) show(SEQ[j]);
+  });
+  document.querySelectorAll('.tbl table').forEach(function(t){
+    var hs=[].map.call(t.querySelectorAll('thead th'),function(th){return th.textContent;});
+    [].forEach.call(t.querySelectorAll('tbody tr'),function(tr){[].forEach.call(tr.children,function(c,k){if(c.tagName==='TD'&&hs[k]&&!c.getAttribute('data-l'))c.setAttribute('data-l',hs[k]);});});
+  });
+  show(location.hash.slice(1)||'capa');
+})();
+</script>
 </body></html>
