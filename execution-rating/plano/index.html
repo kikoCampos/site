@@ -24,13 +24,17 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);overflow:hidden;-webkit-font-smoothing:antialiased}
 .viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
 .stage{width:1600px;height:900px;position:relative;transform-origin:center center;flex:none}
-.slide{position:absolute;inset:0;background:var(--slide);padding:64px 96px 76px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s;overflow:hidden}
-.slide.on{opacity:1;visibility:visible}
-@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+.slide{position:absolute;inset:0;background:var(--slide);padding:64px 96px 76px;display:flex;flex-direction:column;visibility:hidden;overflow:hidden}
+.slide.on{visibility:visible;animation:enter .32s ease both}
+@keyframes enter{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.slide.on.back{animation-name:enterBack}
+@keyframes enterBack{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.slide.on{animation:none}}
 .slide.orange{background:var(--cover)}
 
 /* cabeçalho de slide */
@@ -218,18 +222,55 @@ tr.total td.r{color:var(--orange)}
 .dec b{display:block;font-family:var(--display);font-size:26px;font-weight:600;margin-bottom:8px;line-height:1.15}
 .dec p{font-size:17px;line-height:1.45;color:#FFE9DC}
 
+/* índice */
+.agenda{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line2)}
+.agenda > div{padding:28px 32px 0 0;min-width:0}
+.agenda > div + div{padding-left:32px;border-left:1px solid var(--line)}
+.ch-n{font-family:var(--display);font-style:italic;font-size:56px;line-height:1;color:var(--orange)}
+.agenda h3{font-size:26px;margin:12px 0 20px}
+.agenda button{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);color:var(--ink-soft);font:inherit;font-size:19px;padding:13px 0;cursor:pointer}
+.agenda button span{font-family:var(--mono);font-size:14px;color:var(--ink-mute)}
+.agenda button:hover{color:var(--ink)}
+.agenda button:hover span{color:var(--orange)}
+.sign{margin-top:28px;font-family:var(--mono);font-size:14px;letter-spacing:.08em;color:#FFE2CF}
+.where{white-space:nowrap}
+
+/* overlay de índice */
+.toc{position:fixed;inset:0;z-index:20;background:rgba(7,18,37,.96);display:flex;align-items:center;justify-content:center;padding:32px 20px}
+.toc-in{width:min(980px,100%);max-height:100%;overflow:auto}
+.toc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.toc-head button{background:none;border:1px solid var(--line2);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:12px;letter-spacing:.1em;cursor:pointer}
+.toc ol{list-style:none;margin:0;padding:0;columns:3 240px;column-gap:40px}
+.toc li{break-inside:avoid}
+.toc li button{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);color:var(--ink-soft);font-family:var(--body);font-size:16px;padding:12px 0;cursor:pointer}
+.toc li button span{font-family:var(--mono);font-size:12px;color:var(--ink-mute);min-width:22px}
+.toc li button:hover,.toc li button[aria-current="true"]{color:var(--ink)}
+.toc li button[aria-current="true"] span{color:var(--orange)}
+
+/* celular na vertical */
+.rotate{position:fixed;inset:0;z-index:30;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px;text-align:center}
+.rotate .ico{width:56px;height:88px;border:2px solid var(--ink-soft);border-radius:10px;transform:rotate(-90deg);margin-bottom:12px}
+.rotate b{font-family:var(--display);font-size:26px;font-weight:600}
+.rotate p{color:var(--ink-soft);max-width:30ch;line-height:1.5}
+.rotate button{margin-top:6px;background:none;border:1px solid var(--line2);color:var(--ink);border-radius:999px;padding:10px 18px;font:inherit;cursor:pointer}
+
 /* navegação */
-.nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px calc(14px + env(safe-area-inset-bottom,0px));pointer-events:none;z-index:5}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 16px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none;z-index:5}
 .nav > *{pointer-events:auto}
-.count{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--ink-mute);font-variant-numeric:tabular-nums}
+.count{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--ink-soft);font-variant-numeric:tabular-nums;background:none;border:0;cursor:pointer;padding:10px 4px;display:flex;gap:10px;align-items:center}
+.count .t{color:var(--ink-mute);letter-spacing:.02em;font-family:var(--body)}
+.count:hover .t{color:var(--ink)}
 .btns{display:flex;gap:8px}
-.btns button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:rgba(10,24,48,.85);color:var(--ink);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.btns button{min-width:44px;height:44px;border-radius:999px;border:1px solid var(--line2);background:rgba(10,24,48,.85);color:var(--ink);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 14px;font-family:var(--body)}
+.btns button.txt{font-size:13px;gap:8px}
 .btns button:hover{border-color:var(--orange)}
 .btns button:disabled{opacity:.35;cursor:default}
 button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-.prog{position:fixed;left:0;bottom:0;height:3px;background:var(--orange);width:0;transition:width .35s ease;z-index:6}
-.hint{font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:.1em}
-@media (max-width:700px){.hint{display:none}}
+.prog{position:fixed;left:0;bottom:0;height:3px;background:var(--orange);width:0;transition:width .3s ease;z-index:6}
+.hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:.06em}
+.stage{cursor:pointer}
+.stage button{cursor:pointer}
+@media (max-width:900px){.hint,.btns .fs{display:none}}
 </style>
 </head>
 <body>
@@ -247,9 +288,21 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
   </div>
 </section>
 
+<!-- 2 índice -->
+<section class="slide" data-title="Índice">
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
+  <h2>Quatro perguntas, <em>dezesseis slides</em>.</h2>
+  <div class="body agenda">
+    <div><div class="ch-n">I</div><h3>Por que existe</h3><button data-go="3"><span>03</span>O problema</button><button data-go="4"><span>04</span>Tese e metas</button></div>
+    <div><div class="ch-n">II</div><h3>O que é</h3><button data-go="5"><span>05</span>O produto</button><button data-go="6"><span>06</span>Como funciona</button><button data-go="7"><span>07</span>Régua e resultado</button><button data-go="8"><span>08</span>Ofertas</button></div>
+    <div><div class="ch-n">III</div><h3>Por que é um negócio</h3><button data-go="9"><span>09</span>Mercado</button><button data-go="10"><span>10</span>Unit economics</button></div>
+    <div><div class="ch-n">IV</div><h3>Como chegamos lá</h3><button data-go="11"><span>11</span>Quem traz o quê</button><button data-go="12"><span>12</span>Formalização</button><button data-go="13"><span>13</span>Go-to-market</button><button data-go="14"><span>14</span>Roteiro e gates</button><button data-go="15"><span>15</span>Riscos</button><button data-go="16"><span>16</span>Próximas decisões</button></div>
+  </div>
+</section>
+
 <!-- 2 problema -->
-<section class="slide" data-title="Problema">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>01 · O problema</span></div>
+<section class="slide" data-title="O problema">
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>O comprador paga cinco assessores. <em>Nenhum olha o time.</em></h2>
   <div class="body">
     <div class="chairs">
@@ -270,7 +323,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 3 tese e metas -->
 <section class="slide" data-title="Tese e metas">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>02 · A tese</span></div>
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <p class="quote">A diligência do ativo você já faz. Falta a de quem vai operá-lo.</p>
   <p class="sub" style="font-size:24px;max-width:56ch">Antes de investir em escala, o primeiro ano prova que fundos e conselhos pagam por isso. A janela é de pioneirismo e dura até uma Big Four empacotar algo parecido.</p>
   <div class="metrics">
@@ -282,8 +335,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 </section>
 
 <!-- 4 produto -->
-<section class="slide" data-title="Produto">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>03 · O produto</span></div>
+<section class="slide" data-title="O produto">
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>Due diligence de pessoas em <em>10 dias úteis</em>, com relatório assinado.</h2>
   <div class="body">
     <div class="cols flow">
@@ -297,7 +350,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 5 matriz -->
 <section class="slide" data-title="Como funciona">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>04 · Como funciona</span></div>
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>A ferramenta organiza e calcula. <em>O avaliador decide.</em></h2>
   <div class="body" style="margin-top:30px">
     <div class="matrix">
@@ -320,7 +373,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 6 régua e ponte -->
 <section class="slide" data-title="Régua e resultado">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>05 · Régua e resultado</span></div>
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>Uma régua escrita vira <em>valor em reais</em> para o comitê.</h2>
   <div class="body two">
     <div>
@@ -345,7 +398,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 7 ofertas -->
 <section class="slide" data-title="Ofertas">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>06 · Ofertas</span></div>
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>Um produto principal e <em>duas extensões</em>. Nada além no ano 1.</h2>
   <div class="body">
     <div class="cols ladder">
@@ -363,7 +416,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 8 mercado -->
 <section class="slide" data-title="Mercado">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>07 · Mercado</span></div>
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>O limite não é o tamanho do mercado. É <em>acesso e prova</em>.</h2>
   <div class="body market">
     <div>
@@ -382,8 +435,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 </section>
 
 <!-- 9 economia -->
-<section class="slide" data-title="Economia">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>08 · Unit economics</span></div>
+<section class="slide" data-title="Unit economics">
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>R$ 134 mil de contribuição por rating. Equilíbrio no <em>nono</em>.</h2>
   <div class="body two" style="grid-template-columns:1.1fr 1fr">
     <div>
@@ -417,8 +470,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 </section>
 
 <!-- 10 parceiros -->
-<section class="slide" data-title="Parcerias">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>09 · Quem traz o quê</span></div>
+<section class="slide" data-title="Quem traz o quê">
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>Veículo próprio, papéis distintos, <em>um só dono</em> da régua e do dado.</h2>
   <div class="body" style="margin-top:28px">
     <div class="partners">
@@ -434,7 +487,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 11 formalização -->
 <section class="slide" data-title="Formalização">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>10 · Formalização</span></div>
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>Do não vinculante ao vinculante, <em>na ordem da prova</em>.</h2>
   <div class="body">
     <div class="steps">
@@ -453,7 +506,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 12 gtm -->
 <section class="slide" data-title="Go-to-market">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>11 · Go-to-market</span></div>
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>Ticket alto não se vende por prospecção. Vende-se <em>mostrando o objeto</em>.</h2>
   <div class="body">
     <div class="cols gtm">
@@ -465,8 +518,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 </section>
 
 <!-- 13 roteiro -->
-<section class="slide" data-title="Roteiro">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>12 · Roteiro e gates</span></div>
+<section class="slide" data-title="Roteiro e gates">
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>Nada se constitui antes de <em>o mercado pagar</em>.</h2>
   <div class="body" style="margin-top:48px">
     <div class="road">
@@ -484,7 +537,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 14 riscos -->
 <section class="slide" data-title="Riscos">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>13 · Riscos</span></div>
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>O risco número um é ninguém reconhecer <em>a cadeira vazia</em>.</h2>
   <div class="body" style="margin-top:28px">
     <table>
@@ -503,8 +556,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 </section>
 
 <!-- 15 decisões -->
-<section class="slide orange" data-title="Decisões">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span>14 · Próximas duas semanas</span></div>
+<section class="slide orange" data-title="Próximas decisões">
+  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
   <h2>Seis decisões destravam o plano. <em>Nenhuma exige dinheiro.</em></h2>
   <div class="body" style="justify-content:flex-end">
     <div class="dec">
@@ -515,6 +568,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
       <div><div class="n">05</div><b>Segundo avaliador</b><p>Quem calibra os primeiros pilotos ao lado de Kiko.</p></div>
       <div><div class="n">06</div><b>Agenda das dez conversas</b><p>Três primeiras marcadas até o fim de outubro.</p></div>
     </div>
+    <p class="sign">Kiko Campos · kiko@kikocampos.com · kikocampos.com</p>
   </div>
 </section>
 
@@ -522,46 +576,103 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <div class="prog" id="prog"></div>
 <div class="nav">
-  <span class="count" id="count">01 / 15</span>
-  <span class="hint">← → para navegar</span>
-  <span class="btns"><button id="prev" aria-label="Slide anterior">←</button><button id="next" aria-label="Próximo slide">→</button></span>
+  <button class="count" id="count" aria-label="Abrir índice"><span id="cnum">01 / 16</span><span class="t" id="ctitle"></span></button>
+  <span class="hint">← → navegar · clique avança · I índice · F tela cheia</span>
+  <span class="btns"><button class="txt" id="tocBtn" aria-label="Abrir índice">☰ Índice</button><button class="fs" id="fsBtn" aria-label="Tela cheia">⤢</button><button id="prev" aria-label="Slide anterior">←</button><button id="next" aria-label="Próximo slide">→</button></span>
+</div>
+
+<div class="toc" id="toc" hidden role="dialog" aria-modal="true" aria-label="Índice">
+  <div class="toc-in">
+    <div class="toc-head"><span>Índice</span><button id="tocClose">Fechar · Esc</button></div>
+    <ol id="tocList"></ol>
+  </div>
+</div>
+
+<div class="rotate" id="rotate" hidden>
+  <div class="ico" aria-hidden="true"></div>
+  <b>Gire o celular</b>
+  <p>A apresentação foi feita para a tela deitada. Na horizontal, cada slide ocupa a tela inteira.</p>
+  <button id="rotateOk">Ver assim mesmo</button>
 </div>
 
 <script>
 (function(){
   var stage=document.getElementById('stage');
   var slides=[].slice.call(document.querySelectorAll('.slide'));
-  var n=slides.length, i=0, lock=false;
-  var count=document.getElementById('count'), prog=document.getElementById('prog');
+  var n=slides.length, i=0, lock=false, last=0;
+  var cnum=document.getElementById('cnum'), ctitle=document.getElementById('ctitle'), prog=document.getElementById('prog');
   var prev=document.getElementById('prev'), next=document.getElementById('next');
+  var toc=document.getElementById('toc'), tocList=document.getElementById('tocList');
+  var rotate=document.getElementById('rotate'), rotateDismissed=false;
+  function pad(x){return String(x).padStart(2,'0');}
+  slides.forEach(function(s,j){
+    var w=s.querySelector('.where'); if(w) w.textContent=pad(j+1)+' · '+s.dataset.title;
+    var li=document.createElement('li'), b=document.createElement('button');
+    b.type='button'; b.innerHTML='<span>'+pad(j+1)+'</span>'+s.dataset.title; b.dataset.go=j+1;
+    li.appendChild(b); tocList.appendChild(li);
+  });
   function fit(){
-    var s=Math.min(window.innerWidth/1600,(window.innerHeight-56)/900);
+    var reserve=window.innerHeight<500?52:64;
+    var s=Math.min(window.innerWidth/1600,(window.innerHeight-reserve)/900);
     stage.style.transform='scale('+s+')';
+    var portrait=window.innerWidth<window.innerHeight && window.innerWidth<760;
+    rotate.hidden=!(portrait && !rotateDismissed);
   }
   function show(k){
-    i=Math.max(0,Math.min(n-1,k));
-    slides.forEach(function(s,j){s.classList.toggle('on',j===i);s.setAttribute('aria-hidden',j===i?'false':'true');});
-    count.textContent=String(i+1).padStart(2,'0')+' / '+String(n).padStart(2,'0');
+    var target=Math.max(0,Math.min(n-1,k)); var dir=target<i;
+    i=target;
+    slides.forEach(function(s,j){
+      var on=j===i; s.classList.toggle('on',on); s.classList.toggle('back',on&&dir);
+      s.setAttribute('aria-hidden',on?'false':'true');
+    });
+    cnum.textContent=pad(i+1)+' / '+pad(n); ctitle.textContent=i?slides[i].dataset.title:'';
     prog.style.width=((i+1)/n*100)+'%';
     prev.disabled=i===0; next.disabled=i===n-1;
+    [].forEach.call(tocList.querySelectorAll('button'),function(b){b.setAttribute('aria-current',String(+b.dataset.go===i+1));});
     try{history.replaceState(null,'','#'+(i+1));}catch(e){}
+  }
+  function openToc(){toc.hidden=false; var c=tocList.querySelector('[aria-current="true"]'); (c||tocList.querySelector('button')).focus();}
+  function closeToc(){toc.hidden=true;}
+  function fullscreen(){
+    try{ if(document.fullscreenElement){document.exitFullscreen();} else {var p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen(); if(p&&p.catch)p.catch(function(){});} }catch(e){}
   }
   prev.addEventListener('click',function(){show(i-1)});
   next.addEventListener('click',function(){show(i+1)});
+  document.getElementById('count').addEventListener('click',openToc);
+  document.getElementById('tocBtn').addEventListener('click',openToc);
+  document.getElementById('tocClose').addEventListener('click',closeToc);
+  document.getElementById('fsBtn').addEventListener('click',fullscreen);
+  document.getElementById('rotateOk').addEventListener('click',function(){rotateDismissed=true;fit();});
+  toc.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-go]'); if(b){closeToc(); show(+b.dataset.go-1); return;}
+    if(e.target===toc) closeToc();
+  });
+  stage.addEventListener('click',function(e){
+    var go=e.target.closest('button[data-go]'); if(go){show(+go.dataset.go-1); return;}
+    if(e.target.closest('a,button')) return;
+    var sel=window.getSelection&&String(window.getSelection()); if(sel) return;
+    var r=stage.getBoundingClientRect();
+    show(i+((e.clientX-r.left)<r.width/3?-1:1));
+  });
   document.addEventListener('keydown',function(e){
-    if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>-1){e.preventDefault();show(i+1);}
+    if(!toc.hidden){ if(e.key==='Escape'||e.key==='i'||e.key==='I'){e.preventDefault();closeToc();} return; }
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>-1){ if(e.key==='Enter'&&e.target.closest('button')) return; e.preventDefault();show(i+1);}
     else if(['ArrowLeft','PageUp','Backspace'].indexOf(e.key)>-1){e.preventDefault();show(i-1);}
     else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(n-1);}
+    else if(e.key==='i'||e.key==='I'){e.preventDefault();openToc();}
+    else if(e.key==='f'||e.key==='F'){fullscreen();}
   });
   window.addEventListener('wheel',function(e){
-    if(lock||Math.abs(e.deltaY)<20) return;
-    lock=true; show(i+(e.deltaY>0?1:-1)); setTimeout(function(){lock=false},700);
+    if(!toc.hidden) return;
+    var now=Date.now(); if(now-last<650||Math.abs(e.deltaY)<20) return;
+    last=now; show(i+(e.deltaY>0?1:-1));
   },{passive:true});
-  var x0=null;
-  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  var x0=null,y0=null;
+  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
   document.addEventListener('touchend',function(e){
-    if(x0===null) return; var dx=e.changedTouches[0].clientX-x0;
-    if(Math.abs(dx)>40) show(i+(dx<0?1:-1)); x0=null;
+    if(x0===null||!toc.hidden) return; var dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)) show(i+(dx<0?1:-1)); x0=null;
   });
   window.addEventListener('resize',fit);
   fit();
