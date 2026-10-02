@@ -20,7 +20,7 @@
   --orange-tint:rgba(255,74,18,.14); --blue-tint:rgba(90,169,230,.14); --amber-tint:rgba(242,179,61,.14);
   --display:"Fraunces",Georgia,"Times New Roman",serif;
   --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --mono:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -38,12 +38,12 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);over
 .slide.orange{background:var(--cover)}
 
 /* cabeçalho de slide */
-.bar{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:44px}
+.bar{display:flex;justify-content:space-between;align-items:center;font-family:var(--body);font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink-mute);margin-bottom:44px}
 .bar .brand{display:flex;align-items:center;gap:12px;color:var(--ink-soft)}
 .bar .brand i{width:9px;height:9px;border-radius:50%;background:var(--orange)}
 .orange .bar,.orange .bar .brand{color:rgba(255,255,255,.85)}
 .orange .bar .brand i{background:#fff}
-.eyebrow{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+.eyebrow{font-family:var(--body);font-size:20px;letter-spacing:0;text-transform:none;color:var(--amber);margin-bottom:16px}
 .orange .eyebrow{color:#fff}
 h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;text-wrap:balance}
 h1{font-size:104px;line-height:.98;max-width:13ch}
@@ -55,7 +55,7 @@ p{margin:0}
 .sub{font-family:var(--display);font-style:italic;font-size:26px;line-height:1.35;color:var(--ink-soft);max-width:44ch;margin-top:20px}
 .orange .sub{color:#FFE9DC}
 .body{flex:1;min-height:0;margin-top:40px;display:flex;flex-direction:column}
-.k{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+.k{font-family:var(--body);font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink-mute);margin-bottom:10px}
 .soft{color:var(--ink-soft)}
 .mute{color:var(--ink-mute)}
 .num{font-variant-numeric:tabular-nums}
@@ -72,10 +72,10 @@ p{margin:0}
 
 /* cadeiras */
 .chairs{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:8px}
-.chair{border:1px solid var(--line2);border-radius:14px;padding:22px 20px;height:150px;display:flex;flex-direction:column;justify-content:space-between}
-.chair .t{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--ink-mute);text-transform:uppercase}
+.chair{border-top:1px solid var(--line2);padding:18px 4px 0 0;height:118px;display:flex;flex-direction:column;justify-content:space-between}
+.chair .t{font-family:var(--mono);font-size:12px;letter-spacing:0;color:var(--ink-mute);text-transform:none}
 .chair b{font-family:var(--display);font-size:24px;font-weight:600;line-height:1.15}
-.chair.empty{border:2px dashed var(--orange);background:var(--orange-tint)}
+.chair.empty{border-top:2px solid var(--orange)}
 .chair.empty .t{color:var(--orange)}
 .statline{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;margin-top:56px;padding-top:32px;border-top:1px solid var(--line2)}
 .big{font-family:var(--display);font-size:120px;font-weight:600;line-height:.9;color:var(--orange);font-variant-numeric:tabular-nums}
@@ -100,14 +100,14 @@ p{margin:0}
 /* matriz */
 .matrix{display:grid;grid-template-columns:330px repeat(4,1fr);border-top:1px solid var(--line2)}
 .matrix > div{padding:9px 12px;border-bottom:1px solid var(--line);font-size:17px;display:flex;align-items:center;min-height:56px}
-.matrix .ch{font-family:var(--mono);font-size:13px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase;flex-direction:column;align-items:flex-start;justify-content:center}
+.matrix .ch{font-family:var(--mono);font-size:13px;color:var(--ink-mute);letter-spacing:0;text-transform:none;flex-direction:column;align-items:flex-start;justify-content:center}
 .matrix .ch b{font-family:var(--body);font-size:17px;color:var(--ink);font-weight:500;letter-spacing:0;text-transform:none}
 .matrix .rl{font-weight:500;padding-left:0}
-.chip{border-radius:8px;padding:7px 12px;font-size:15.5px;line-height:1.3;width:100%}
-.chip span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1px}
-.chip.t{background:var(--blue-tint);border:1px solid rgba(90,169,230,.4)}
+.chip{padding:2px 0 2px 12px;font-size:16px;line-height:1.3;width:100%}
+.chip span{display:block;font-family:var(--body);font-size:13px;letter-spacing:0;text-transform:none;margin-bottom:1px}
+.chip.t{border-left:2px solid var(--blue)}
 .chip.t span{color:var(--blue)}
-.chip.h{background:var(--orange-tint);border:1px solid rgba(255,74,18,.5)}
+.chip.h{border-left:2px solid var(--orange)}
 .chip.h span{color:var(--orange)}
 .legend{display:flex;gap:32px;margin-top:16px;font-size:15px;color:var(--ink-mute)}
 .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:8px;vertical-align:middle}
@@ -133,12 +133,12 @@ p{margin:0}
 
 /* ofertas */
 .ladder{grid-template-columns:repeat(3,1fr)}
-.ladder .tag{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+.ladder .tag{font-family:var(--mono);font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink-mute)}
 .ladder .main .tag{color:var(--orange)}
 .ladder h3{font-size:30px;margin:14px 0}
 .ladder .price{font-family:var(--display);font-size:46px;font-weight:600;margin-top:22px;font-variant-numeric:tabular-nums}
 .ladder .price small{font-family:var(--body);font-size:17px;color:var(--ink-mute);font-weight:400}
-.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:auto;padding-top:24px;border-top:1px solid var(--line)}
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:36px;margin-top:auto;padding-top:24px;border-top:1px solid var(--line)}
 .rules b{display:block;font-weight:500;font-size:18px;margin-bottom:6px}
 .rules p{font-size:16.5px;color:var(--ink-soft);line-height:1.45}
 
@@ -154,14 +154,14 @@ p{margin:0}
 .fun .src{font-size:14px;color:var(--ink-mute)}
 .fun.goal .val{color:var(--orange)}
 .fun.goal .b i{background:var(--orange)}
-.icp{padding:16px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:52px 1fr;gap:16px}
-.icp .r{font-family:var(--display);font-style:italic;font-size:44px;line-height:.9;color:var(--orange)}
+.icp{padding:16px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:28px 1fr;gap:12px}
+.icp .r{font-family:var(--body);font-size:18px;line-height:1.6;color:var(--ink-mute)}
 .icp b{display:block;font-family:var(--display);font-size:23px;font-weight:600;margin-bottom:6px}
 .icp p{font-size:16.5px;color:var(--ink-soft);line-height:1.45}
 
 /* tabelas */
 table{width:100%;border-collapse:collapse}
-th{font-family:var(--mono);font-size:13px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);text-align:left;padding:10px 18px 10px 0;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:13px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink-mute);text-align:left;padding:10px 18px 10px 0;border-bottom:1px solid var(--line2)}
 td{padding:12px 18px 12px 0;border-bottom:1px solid var(--line);font-size:18px;color:var(--ink-soft);vertical-align:top;line-height:1.4}
 td:first-child{color:var(--ink);font-weight:500}
 td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -175,19 +175,19 @@ tr.total td.r{color:var(--orange)}
 /* parceiros */
 .partners{display:grid;grid-template-columns:270px 1fr 1fr 1.2fr;border-top:1px solid var(--line2)}
 .partners > div{padding:13px 22px 13px 0;border-bottom:1px solid var(--line);font-size:16.5px;line-height:1.4;color:var(--ink-soft);min-width:0}
-.partners .h{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);padding-top:10px;padding-bottom:10px}
+.partners .h{font-family:var(--mono);font-size:12.5px;letter-spacing:0;text-transform:none;color:var(--ink-mute);padding-top:10px;padding-bottom:10px}
 .partners .who b{display:block;font-family:var(--display);font-size:22px;font-weight:600;color:var(--ink);line-height:1.15}
 .partners .who span{font-size:14px;color:var(--amber)}
 .partners .must{color:var(--ink)}
 
 /* formalização */
 .steps{display:grid;grid-template-columns:1fr 56px 1fr 56px 1fr;align-items:stretch}
-.step{border:1px solid var(--line2);border-radius:14px;padding:26px 28px;min-width:0}
+.step{border-top:1px solid var(--line2);padding:22px 8px 0 0;min-width:0}
 .step .k{color:var(--amber)}
 .step h3{margin:6px 0 12px}
 .step p{font-size:18px;line-height:1.45;color:var(--ink-soft)}
 .step .bind{margin-top:14px;font-size:15px;color:var(--ink-mute)}
-.step.main{border-color:var(--orange)}
+.step.main{border-top:2px solid var(--orange)}
 .arrow{display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:28px}
 .why{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:auto;padding-top:24px;border-top:1px solid var(--line)}
 .why b{display:block;font-size:18px;font-weight:500;margin-bottom:6px}
@@ -208,7 +208,7 @@ tr.total td.r{color:var(--orange)}
 .ph li::before{content:"";position:absolute;left:0;top:.65em;width:8px;height:1.5px;background:var(--ink-mute)}
 .gate{position:relative;padding:0 14px;text-align:center;min-width:0}
 .gate .d{width:26px;height:26px;transform:rotate(45deg);border:2px solid var(--ink-mute);background:var(--slide);margin:-13px auto 18px}
-.gate.key .d{border-color:var(--orange);background:#3a1d1b}
+.gate.key .d{border-color:var(--orange)}
 .gate b{display:block;font-size:17px;margin-bottom:6px}
 .gate.key b{color:var(--orange)}
 .gate .when{font-family:var(--mono);font-size:13px;color:var(--amber);margin-bottom:8px}
@@ -232,14 +232,14 @@ tr.total td.r{color:var(--orange)}
 .agenda button span{font-family:var(--mono);font-size:14px;color:var(--ink-mute)}
 .agenda button:hover{color:var(--ink)}
 .agenda button:hover span{color:var(--orange)}
-.sign{margin-top:28px;font-family:var(--mono);font-size:14px;letter-spacing:.08em;color:#FFE2CF}
+.sign{margin-top:28px;font-family:var(--mono);font-size:14px;letter-spacing:0;color:#FFE2CF}
 .where{white-space:nowrap}
 
 /* overlay de índice */
 .toc{position:fixed;inset:0;z-index:20;background:rgba(7,18,37,.96);display:flex;align-items:center;justify-content:center;padding:32px 20px}
 .toc-in{width:min(980px,100%);max-height:100%;overflow:auto}
-.toc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
-.toc-head button{background:none;border:1px solid var(--line2);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:12px;letter-spacing:.1em;cursor:pointer}
+.toc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;font-family:var(--mono);font-size:12px;letter-spacing:0;text-transform:none;color:var(--amber)}
+.toc-head button{background:none;border:1px solid var(--line2);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:12px;letter-spacing:0;cursor:pointer}
 .toc ol{list-style:none;margin:0;padding:0;columns:3 240px;column-gap:40px}
 .toc li{break-inside:avoid}
 .toc li button{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);color:var(--ink-soft);font-family:var(--body);font-size:16px;padding:12px 0;cursor:pointer}
@@ -257,8 +257,8 @@ tr.total td.r{color:var(--orange)}
 /* navegação */
 .nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 16px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none;z-index:5}
 .nav > *{pointer-events:auto}
-.count{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--ink-soft);font-variant-numeric:tabular-nums;background:none;border:0;cursor:pointer;padding:10px 4px;display:flex;gap:10px;align-items:center}
-.count .t{color:var(--ink-mute);letter-spacing:.02em;font-family:var(--body)}
+.count{font-family:var(--mono);font-size:13px;letter-spacing:0;color:var(--ink-soft);font-variant-numeric:tabular-nums;background:none;border:0;cursor:pointer;padding:10px 4px;display:flex;gap:10px;align-items:center}
+.count .t{color:var(--ink-mute);letter-spacing:0;font-family:var(--body)}
 .count:hover .t{color:var(--ink)}
 .btns{display:flex;gap:8px}
 .btns button{min-width:44px;height:44px;border-radius:999px;border:1px solid var(--line2);background:rgba(10,24,48,.85);color:var(--ink);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 14px;font-family:var(--body)}
@@ -267,7 +267,7 @@ tr.total td.r{color:var(--orange)}
 .btns button:disabled{opacity:.35;cursor:default}
 button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 .prog{position:fixed;left:0;bottom:0;height:3px;background:var(--orange);width:0;transition:width .3s ease;z-index:6}
-.hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:.06em}
+.hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-mute);letter-spacing:0}
 .stage{cursor:pointer}
 .stage button{cursor:pointer}
 @media (max-width:900px){.hint,.btns .fs{display:none}}
@@ -279,10 +279,9 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 1 capa -->
 <section class="slide orange cover" data-title="Capa">
-  <svg class="cover-x" viewBox="0 0 620 620" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="2"><path d="M80 80 L540 540 M540 80 L80 540"/><rect x="170" y="170" width="280" height="280" transform="rotate(45 310 310)"/></g></svg>
-  <div class="bar"><span class="brand"><i></i>kiko campos &nbsp;×&nbsp; Execution Rating</span><span>WGBR · Hays Brasil · Templo</span></div>
+  <div class="bar"><span class="brand">Kiko Campos</span><span>Outubro de 2026</span></div>
   <div class="push">
-    <div class="eyebrow">Plano de negócios · Outubro de 2026</div>
+    <div class="eyebrow">Execution Rating · plano de negócios</div>
     <h1>A diligência de quem vai <em>operar o ativo</em></h1>
     <p class="sub">Due diligence de pessoas para fundos, conselhos e compradores, levada ao mercado em quatro fases e três gates.</p>
   </div>
@@ -290,19 +289,19 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 2 índice -->
 <section class="slide" data-title="Índice">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>Quatro perguntas, <em>dezesseis slides</em>.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>O plano em quatro partes</h2>
   <div class="body agenda">
-    <div><div class="ch-n">I</div><h3>Por que existe</h3><button data-go="3"><span>03</span>O problema</button><button data-go="4"><span>04</span>Tese e metas</button></div>
-    <div><div class="ch-n">II</div><h3>O que é</h3><button data-go="5"><span>05</span>O produto</button><button data-go="6"><span>06</span>Como funciona</button><button data-go="7"><span>07</span>Régua e resultado</button><button data-go="8"><span>08</span>Ofertas</button></div>
-    <div><div class="ch-n">III</div><h3>Por que é um negócio</h3><button data-go="9"><span>09</span>Mercado</button><button data-go="10"><span>10</span>Unit economics</button></div>
-    <div><div class="ch-n">IV</div><h3>Como chegamos lá</h3><button data-go="11"><span>11</span>Quem traz o quê</button><button data-go="12"><span>12</span>Formalização</button><button data-go="13"><span>13</span>Go-to-market</button><button data-go="14"><span>14</span>Roteiro e gates</button><button data-go="15"><span>15</span>Riscos</button><button data-go="16"><span>16</span>Próximas decisões</button></div>
+    <div><h3>Por que existe</h3><button data-go="3"><span>03</span>O problema</button><button data-go="4"><span>04</span>Tese e metas</button></div>
+    <div><h3>O que é</h3><button data-go="5"><span>05</span>O produto</button><button data-go="6"><span>06</span>Como funciona</button><button data-go="7"><span>07</span>Régua e resultado</button><button data-go="8"><span>08</span>Ofertas</button></div>
+    <div><h3>Por que é um negócio</h3><button data-go="9"><span>09</span>Mercado</button><button data-go="10"><span>10</span>Unit economics</button></div>
+    <div><h3>Como chegamos lá</h3><button data-go="11"><span>11</span>Quem traz o quê</button><button data-go="12"><span>12</span>Formalização</button><button data-go="13"><span>13</span>Go-to-market</button><button data-go="14"><span>14</span>Roteiro e gates</button><button data-go="15"><span>15</span>Riscos</button><button data-go="16"><span>16</span>Próximas decisões</button></div>
   </div>
 </section>
 
 <!-- 2 problema -->
 <section class="slide" data-title="O problema">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
   <h2>O comprador paga cinco assessores. <em>Nenhum olha o time.</em></h2>
   <div class="body">
     <div class="chairs">
@@ -323,9 +322,9 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 3 tese e metas -->
 <section class="slide" data-title="Tese e metas">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
   <p class="quote">A diligência do ativo você já faz. Falta a de quem vai operá-lo.</p>
-  <p class="sub" style="font-size:24px;max-width:56ch">Antes de investir em escala, o primeiro ano prova que fundos e conselhos pagam por isso. A janela é de pioneirismo e dura até uma Big Four empacotar algo parecido.</p>
+  <p class="sub" style="font-size:24px;max-width:56ch">O primeiro ano serve para provar que fundos e conselhos pagam por isso, antes de investir em escala. Hoje ninguém oferece esse serviço no Brasil; isso deve mudar quando uma Big Four montar algo parecido.</p>
   <div class="metrics">
     <div><div class="v">10</div><div class="l">ratings entregues em 12 meses</div></div>
     <div><div class="v">2,5–3 <small>R$ mi</small></div><div class="l">de receita no ano 1</div></div>
@@ -336,8 +335,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 4 produto -->
 <section class="slide" data-title="O produto">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>Due diligence de pessoas em <em>10 dias úteis</em>, com relatório assinado.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>Due diligence de pessoas em 10 dias úteis, com relatório assinado</h2>
   <div class="body">
     <div class="cols flow">
       <div><div class="k">Entra</div><h3>Evidência de várias fontes</h3><p>Data room; entrevistas com 10 a 15 pessoas-chave; questionários curtos; referências.</p></div>
@@ -350,8 +349,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 5 matriz -->
 <section class="slide" data-title="Como funciona">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>A ferramenta organiza e calcula. <em>O avaliador decide.</em></h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>A ferramenta organiza e calcula. Quem decide é o avaliador.</h2>
   <div class="body" style="margin-top:30px">
     <div class="matrix">
       <div class="ch">Atividade</div>
@@ -373,8 +372,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 6 régua e ponte -->
 <section class="slide" data-title="Régua e resultado">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>Uma régua escrita vira <em>valor em reais</em> para o comitê.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>Da nota na régua ao valor em reais que o comitê usa</h2>
   <div class="body two">
     <div>
       <div class="k">Subdimensão “Decidir” · governança</div>
@@ -398,8 +397,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 7 ofertas -->
 <section class="slide" data-title="Ofertas">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>Um produto principal e <em>duas extensões</em>. Nada além no ano 1.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>No primeiro ano, um produto principal e duas extensões</h2>
   <div class="body">
     <div class="cols ladder">
       <div><div class="tag">Entrada · 5 dias úteis</div><h3>Outside-in</h3><p>Leilão ou fase inicial, sem acesso à gestão. Confiança baixa declarada.</p><div class="price">R$ 120–250 <small>mil</small></div></div>
@@ -407,17 +406,16 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
       <div><div class="tag">Recorrência · 12 e 24 meses</div><h3>Revisão pós-decisão</h3><p>Previsão comparada ao resultado. Produz o dado que sustenta o preço.</p><div class="price">R$ 40–80 <small>mil cada</small></div></div>
     </div>
     <div class="rules">
-      <div><b>A revisão já vem na proposta.</b><p>Opção pré-precificada desde o primeiro contrato.</p></div>
-      <div><b>O Outside-in vira funil.</b><p>O valor pago é abatido do Rating completo.</p></div>
-      <div><b>A casa não coloca executivos.</b><p>Quem faz a busca, o cliente escolhe.</p></div>
+            <div><b>O Outside-in é abatido do Rating completo</b><p>Quem começa pela versão de 5 dias e avança paga só a diferença. A revisão aos 12 meses já entra na proposta com preço.</p></div>
+      <div><b>Não fazemos colocação de executivos</b><p>Quando o plano recomenda substituir alguém, o cliente escolhe quem conduz a busca.</p></div>
     </div>
   </div>
 </section>
 
 <!-- 8 mercado -->
 <section class="slide" data-title="Mercado">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>O limite não é o tamanho do mercado. É <em>acesso e prova</em>.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>Dez ratings no ano são menos de 3% das decisões que podemos atender</h2>
   <div class="body market">
     <div>
       <div class="fun"><div class="row"><span class="name">Transações de M&amp;A por ano</span><span class="val">≈ 1.250</span></div><div class="b"><i style="width:100%"></i></div><span class="src">834 de jan a ago de 2026, R$ 210,7 bi (TTR Data), anualizado</span></div>
@@ -436,8 +434,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 9 economia -->
 <section class="slide" data-title="Unit economics">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>R$ 134 mil de contribuição por rating. Equilíbrio no <em>nono</em>.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>Cada rating deixa R$ 134 mil; nove pagam a estrutura do ano</h2>
   <div class="body two" style="grid-template-columns:1.1fr 1fr">
     <div>
       <div class="k">Um rating · ticket médio de R$ 280 mil</div>
@@ -471,8 +469,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 10 parceiros -->
 <section class="slide" data-title="Quem traz o quê">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>Veículo próprio, papéis distintos, <em>um só dono</em> da régua e do dado.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>A régua e os dados ficam no veículo; cada parceiro tem um papel definido</h2>
   <div class="body" style="margin-top:28px">
     <div class="partners">
       <div class="h">Parte</div><div class="h">Aporta</div><div class="h">Recebe</div><div class="h">Inegociável</div>
@@ -487,8 +485,8 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 11 formalização -->
 <section class="slide" data-title="Formalização">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>Do não vinculante ao vinculante, <em>na ordem da prova</em>.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>Primeiro memorandos, depois pilotos; contrato definitivo só com receita</h2>
   <div class="body">
     <div class="steps">
       <div class="step"><div class="k">Fase 0 · out–nov 2026</div><h3>Memorando de entendimento</h3><p>Papel, remuneração, regra de conflito, propriedade do dado e exclusividade.</p><p class="bind">Não vinculante, exceto confidencialidade</p></div>
@@ -506,20 +504,20 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 12 gtm -->
 <section class="slide" data-title="Go-to-market">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>Ticket alto não se vende por prospecção. Vende-se <em>mostrando o objeto</em>.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>Vamos vender mostrando um laudo pronto, por indicação, a quem assina o cheque</h2>
   <div class="body">
     <div class="cols gtm">
-      <div><div class="k">Provar</div><h3>Antes de vender</h3><p>Laudo-exemplo a partir do caso Clarim. Piloto retrospectivo em 10 a 15 deals já fechados. Três pilotos pagos a cerca de metade do preço, em troca de caso publicável e uso dos dados anonimizados.</p></div>
-      <div><div class="k">Abrir</div><h3>Por apresentação, não lista fria</h3><p>Dez conversas com gestoras, começando por Tiago Waiselfisz e pelo VAB. Carteira da operação local com Fernanda. Boutiques e advogados de M&amp;A. Conselhos e IBGC. Um piloto em inglês com Jay.</p></div>
-      <div><div class="k">Nomear</div><h3>Tornar o tema público</h3><p>Uma tese só, repetida em artigo, LinkedIn, palestras para associações de private equity e um estudo anual sobre o que compradores dizem e fazem com capital humano.</p></div>
+      <div><h3>Prova antes da venda</h3><p>Laudo-exemplo a partir do caso Clarim. Piloto retrospectivo em 10 a 15 deals já fechados. Três pilotos pagos a cerca de metade do preço, em troca de caso publicável e uso dos dados anonimizados.</p></div>
+      <div><h3>Portas abertas por indicação</h3><p>Dez conversas com gestoras, começando por Tiago Waiselfisz e pelo VAB. Carteira da operação local com Fernanda. Boutiques e advogados de M&amp;A. Conselhos e IBGC. Um piloto em inglês com Jay.</p></div>
+      <div><h3>O tema em público</h3><p>Uma tese só, repetida em artigo, LinkedIn, palestras para associações de private equity e um estudo anual sobre o que compradores dizem e fazem com capital humano.</p></div>
     </div>
   </div>
 </section>
 
 <!-- 13 roteiro -->
 <section class="slide" data-title="Roteiro e gates">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
   <h2>Nada se constitui antes de <em>o mercado pagar</em>.</h2>
   <div class="body" style="margin-top:48px">
     <div class="road">
@@ -531,14 +529,14 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
       <div class="gate"><div class="d"></div><b>Gate 3</b><div class="when">set/27</div><p>10 ratings, margem acima de 45%, equilíbrio</p></div>
       <div class="ph"><div class="k">Fase 3</div><h3>Escala</h3><div class="when">a partir de out 2027</div><ul><li>Revisões de 12 meses começam</li><li>Segundo signatário; 22 ratings no ano 2</li><li>Decisão sobre a Templo e novas ofertas</li></ul></div>
     </div>
-    <p class="note">Se o Gate 1 falhar, o custo da tentativa é de dois meses de conversas e um laudo-exemplo.</p>
+    <p class="note">Se o Gate 1 não passar, gastamos dois meses de conversas e um laudo-exemplo para descobrir isso.</p>
   </div>
 </section>
 
 <!-- 14 riscos -->
 <section class="slide" data-title="Riscos">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>O risco número um é ninguém reconhecer <em>a cadeira vazia</em>.</h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>O maior risco é o comprador não sentir falta do serviço</h2>
   <div class="body" style="margin-top:28px">
     <table>
       <thead><tr><th style="width:30%">Risco</th><th style="width:30%">Sinal de alerta</th><th>Mitigação</th></tr></thead>
@@ -557,16 +555,16 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 <!-- 15 decisões -->
 <section class="slide orange" data-title="Próximas decisões">
-  <div class="bar"><span class="brand"><i></i>Execution Rating</span><span class="where"></span></div>
-  <h2>Seis decisões destravam o plano. <em>Nenhuma exige dinheiro.</em></h2>
+  <div class="bar"><span class="brand">Execution Rating</span><span class="where"></span></div>
+  <h2>O que precisamos decidir nas próximas duas semanas</h2>
   <div class="body" style="justify-content:flex-end">
     <div class="dec">
-      <div><div class="n">01</div><b>Papel de Rodrigo Rojas</b><p>Escopo, dedicação, percentual e vesting, por escrito.</p></div>
-      <div><div class="n">02</div><b>Veículo próprio</b><p>Confirmar com Fernanda e Herman a separação da busca.</p></div>
-      <div><div class="n">03</div><b>Memorandos</b><p>Minuta única com cinco cláusulas para os três parceiros.</p></div>
-      <div><div class="n">04</div><b>Preço de lançamento</b><p>Preço-alvo e desconto de piloto antes das conversas.</p></div>
-      <div><div class="n">05</div><b>Segundo avaliador</b><p>Quem calibra os primeiros pilotos ao lado de Kiko.</p></div>
-      <div><div class="n">06</div><b>Agenda das dez conversas</b><p>Três primeiras marcadas até o fim de outubro.</p></div>
+      <div><b>Papel de Rodrigo Rojas</b><p>Escopo, dedicação, percentual e vesting, por escrito.</p></div>
+      <div><b>Veículo próprio</b><p>Confirmar com Fernanda e Herman a separação da busca.</p></div>
+      <div><b>Memorandos</b><p>Minuta única com cinco cláusulas para os três parceiros.</p></div>
+      <div><b>Preço de lançamento</b><p>Preço-alvo e desconto de piloto antes das conversas.</p></div>
+      <div><b>Segundo avaliador</b><p>Quem calibra os primeiros pilotos ao lado de Kiko.</p></div>
+      <div><b>Agenda das dez conversas</b><p>Três primeiras marcadas até o fim de outubro.</p></div>
     </div>
     <p class="sign">Kiko Campos · kiko@kikocampos.com · kikocampos.com</p>
   </div>
