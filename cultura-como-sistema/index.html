@@ -139,6 +139,25 @@ p{margin:0}
 .lb p{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-align:center}
 @media (max-width:900px){.gal{grid-template-columns:repeat(2,minmax(0,1fr))}.gal figure{grid-area:auto!important}.gal figure:first-child{grid-column:span 2!important}.vids{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.vids{grid-template-columns:1fr}.vid.row{grid-template-columns:1fr}.vid.row .thumb{grid-row:auto}}
+/* Vídeo embutido */
+.evid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(18px,3vw,40px);align-items:center;margin-top:clamp(14px,2.6vh,24px)}
+.evid>*{min-width:0}
+.vembed{position:relative;aspect-ratio:16/9;max-height:42vh;width:100%;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--bg2)}
+.vembed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vfacade{position:absolute;inset:0;padding:0;border:0;background:none;cursor:pointer;display:block;width:100%}
+.vfacade img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.vfacade::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,24,48,.75),transparent 55%)}
+.vfacade .play{left:50%;top:50%;bottom:auto;width:64px;height:64px;margin:-32px 0 0 -32px}
+.vfacade .play::before{left:25px;top:20px;border-left-width:19px;border-top-width:12px;border-bottom-width:12px}
+.vfacade:hover img{transform:scale(1.03)}
+.vfacade:hover .play{transform:scale(1.08);background:var(--orange)}
+.vlabel{position:absolute;left:16px;bottom:14px;z-index:1;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.vfallback{position:absolute;left:16px;bottom:14px;z-index:2;font-size:.8rem;color:var(--ink)}
+.stats.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stats.two .stat{padding-left:0;border-left:0}
+.stats.two .stat:nth-child(2n){padding-left:16px;border-left:1px solid var(--line)}
+.stats.two .stat b{font-size:clamp(1.5rem,2.4vw,2.2rem)}
+@media (max-width:900px){.evid{grid-template-columns:1fr}}
 /* Cena do livro */
 .scene{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line2);padding-top:14px}
 .scene .src{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
@@ -894,20 +913,30 @@ td:first-child{color:var(--ink);font-weight:500}
     <p class="eyebrow">Escala e efeito</p>
     <h2>Enquanto a matriz formava algumas centenas por ciclo, o Brasil formou <em class="grad">14 mil em dois anos</em>.</h2>
   </div>
-  <figure class="band"><img src="img/formatura-escola-2024.jpg" alt="Formatura da Escola de Líderes, 2024" style="object-position:center 55%"><figcaption><span>Formatura da Escola de Líderes · 2024</span><a href="https://www.youtube.com/watch?v=sr6EEpZXs4A" target="_blank" rel="noopener">▶ Assistir o vídeo ↗</a></figcaption></figure>
-  <div class="stats">
-    <div class="stat hl"><b>14 mil</b><span>gestores formados em dois anos</span></div>
-    <div class="stat"><b>320</b><span>transmissões ao vivo, 2022–2024</span></div>
-    <div class="stat"><b>300 mil</b><span>visualizações na plataforma</span></div>
-    <div class="stat"><b>18% → 12%</b><span>turnover de líderes nas áreas de maior participação</span></div>
-    <div class="stat"><b>+7 p.p.</b><span>de favorabilidade em liderança entre formados</span></div>
-    <div class="stat"><b>+9 / +6 p.p.</b><span>de mulheres e de pessoas negras na liderança, entre formados</span></div>
+  <div class="evid">
+    <div class="stack" style="gap:8px">
+    <div class="vembed" data-yt="sr6EEpZXs4A" data-title="Formatura da Escola de Líderes 2024">
+      <button type="button" class="vfacade" aria-label="Reproduzir o vídeo da formatura da Escola de Líderes 2024">
+        <img src="img/formatura-escola-2024.jpg" alt="" style="object-position:center 55%">
+        <i class="play" aria-hidden="true"></i>
+        <span class="vlabel">Formatura da Escola de Líderes · 2024</span>
+      </button>
+    </div>
+    <a class="small" href="https://www.youtube.com/watch?v=sr6EEpZXs4A" target="_blank" rel="noopener" style="color:var(--ink-mute)">Assistir no YouTube ↗</a>
+    </div>
+    <div class="stats two">
+      <div class="stat hl"><b>14 mil</b><span>gestores formados em dois anos</span></div>
+      <div class="stat"><b>320</b><span>transmissões ao vivo, 2022–2024</span></div>
+      <div class="stat"><b>300 mil</b><span>visualizações na plataforma</span></div>
+      <div class="stat"><b>18% → 12%</b><span>turnover de líderes nas áreas de maior participação</span></div>
+      <div class="stat"><b>+7 p.p.</b><span>favorabilidade em liderança entre formados</span></div>
+      <div class="stat"><b>+9 / +6 p.p.</b><span>mulheres e pessoas negras na liderança, entre formados</span></div>
+    </div>
   </div>
   <div class="grid2" style="margin-top:clamp(20px,3.6vh,32px)">
     <div class="stack">
       <div class="scene"><span class="src">Cena · 2023, integração final das operações</span><p>Um diretor me disse:</p><q>Percebi que não adianta pedir confiança se eu mesmo não confio.</q><p>Nada no processo mudou. Mudou o comportamento de quem liderava, e o time passou a compartilhar erros e pedir ajuda.</p></div>
-      <p class="small">Trilhas por camada (primeira, média e sênior liderança). A Digital Retail Academy levou cloud, dados e IA a mais de 80 mil pessoas.</p>
-    </div>
+          </div>
     <p class="maxim">Não faltava orçamento para formar líderes. Faltava acreditar que os líderes da casa sabiam ensinar.</p>
   </div>
 </div>
@@ -1170,6 +1199,7 @@ td:first-child{color:var(--ink);font-weight:500}
 
   function go(i,fromHash){
     i=Math.max(0,Math.min(N-1,i));
+    if(i!==cur)stopVideos();
     slides[cur].classList.remove('is-active');
     cur=i;
     const s=slides[cur];s.classList.add('is-active');s.scrollTop=0;
@@ -1311,6 +1341,15 @@ td:first-child{color:var(--ink);font-weight:500}
   }
   $('lessons').addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const l=+b.dataset.l,v=+b.dataset.v;ans[l]=v;b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));readout();});
   readout();
+
+  /* ---- Vídeo embutido (carrega só ao clicar) ---- */
+  document.querySelectorAll('.vembed').forEach(v=>{
+    v.querySelector('.vfacade').addEventListener('click',()=>{
+      const id=v.dataset.yt;
+      v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1" title="'+v.dataset.title+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+    });
+  });
+  function stopVideos(){document.querySelectorAll('.vembed iframe').forEach(f=>{const v=f.parentElement;const id=v.dataset.yt;v.innerHTML='<button type="button" class="vfacade" aria-label="Reproduzir o vídeo"><img src="img/formatura-escola-2024.jpg" alt="" style="object-position:center 55%"><i class="play" aria-hidden="true"></i><span class="vlabel">'+v.dataset.title+'</span></button>';v.querySelector('.vfacade').addEventListener('click',()=>{v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1" title="'+v.dataset.title+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';});});}
 
   /* ---- Lightbox ---- */
   const lb=document.createElement('div');lb.className='lb';lb.hidden=true;lb.setAttribute('role','dialog');lb.setAttribute('aria-label','Foto ampliada');lb.innerHTML='<img alt=""><p></p>';document.body.appendChild(lb);
