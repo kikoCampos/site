@@ -1,0 +1,1330 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cultura como Sistema · Case Walmart, BIG e Carrefour · Kiko Campos</title>
+<meta name="description" content="Do Walmart ao BIG, do BIG ao Carrefour: como a cultura foi tratada como sistema de gestão em duas transformações. Estudo de caso de Kiko Campos, com ferramentas, dados e cenas reais.">
+<link rel="canonical" href="https://kikocampos.com/cultura-como-sistema/">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/favicon.png">
+<meta property="og:type" content="article"><meta property="og:url" content="https://kikocampos.com/cultura-como-sistema/">
+<meta property="og:title" content="Cultura como Sistema — o case Walmart, BIG e Carrefour">
+<meta property="og:description" content="Do Walmart ao BIG, do BIG ao Carrefour: como a cultura foi tratada como sistema de gestão em duas transformações. Estudo de caso de Kiko Campos, com ferramentas, dados e cenas reais.">
+<meta property="og:site_name" content="Kiko Campos"><meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://kikocampos.com/cultura-como-sistema/og-cultura-como-sistema.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cultura como Sistema — o case Walmart, BIG e Carrefour"><meta name="twitter:description" content="Do Walmart ao BIG, do BIG ao Carrefour: como a cultura foi tratada como sistema de gestão em duas transformações. Estudo de caso de Kiko Campos, com ferramentas, dados e cenas reais."><meta name="twitter:image" content="https://kikocampos.com/cultura-como-sistema/og-cultura-como-sistema.jpg">
+<!-- Google Analytics 4 (verbatim) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RD1P3CKLSE"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);
+if(document.cookie.indexOf('kc_cookie=accepted')>-1){gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});}
+gtag('config','G-RD1P3CKLSE');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: deck de slides em tela cheia, um quadro editorial de 1180px por slide; trilha da travessia como barra de progresso.
+   Identidade kikocampos.com — tema escuro único, deliberado. */
+:root{
+  color-scheme: dark;
+  --bg:#0A1830; --bg2:#0E2140; --panel:#12294d;
+  --line:rgba(234,241,251,.10); --line2:rgba(234,241,251,.22);
+  --ink:#EAF1FB; --ink-soft:#AFC0DB; --ink-mute:#7D91B4;
+  --orange:#FF4A12; --orange-cta:#CE420D; --amber:#F2B33D; --blue:#5AA9E6; --good:#4FD1A1;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1180px;
+  --nav-h:64px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--body);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden;
+  background:
+    radial-gradient(1150px 640px at 82% -12%, rgba(90,169,230,.13), transparent 60%),
+    radial-gradient(900px 560px at 2% -6%, rgba(255,74,18,.11), transparent 55%),
+    var(--bg);}
+::selection{background:rgba(255,74,18,.35)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+/* ---------- Deck ---------- */
+.deck{position:fixed;inset:0;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));top:env(safe-area-inset-top,0px)}
+.slide{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding-inline:clamp(16px,4vw,48px);display:none;scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.slide.is-active{display:flex;animation:enter .55s cubic-bezier(.2,.7,.2,1)}
+@keyframes enter{from{transform:translateY(14px);opacity:.35}to{transform:none;opacity:1}}
+.frame{width:100%;max-width:var(--maxw);margin:auto;padding-block:clamp(20px,3.6vh,56px)}
+
+/* ---------- Tipografia ---------- */
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600;margin:0}
+.runhead{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:clamp(14px,2.8vh,34px)}
+.runhead span{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute)}
+.runhead span:first-child{color:var(--amber)}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.015em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:1.0;letter-spacing:-.025em}
+h2{font-size:clamp(1.8rem,3.4vw,3rem);line-height:1.06}
+h3{font-size:clamp(1.15rem,1.6vw,1.45rem);line-height:1.2;font-weight:500}
+h1 em,h2 em,h3 em{font-style:italic;font-weight:500}
+.grad{background:linear-gradient(100deg,var(--amber),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0}
+.lead{color:var(--ink-soft);font-size:clamp(1rem,1.25vw,1.18rem);line-height:1.62;max-width:58ch}
+.lead em{color:var(--ink);font-family:var(--display);font-style:italic}
+.body{color:var(--ink-soft);font-size:clamp(.95rem,1.05vw,1.04rem);line-height:1.65;max-width:62ch}
+.body strong,.lead strong{color:var(--ink);font-weight:600}
+.small{font-size:.84rem;color:var(--ink-mute);line-height:1.55}
+.mono{font-family:var(--mono)}
+.stack{display:flex;flex-direction:column;gap:clamp(14px,2.2vh,22px)}
+.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:start}
+.grid2>*{min-width:0}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+
+/* Frase-síntese */
+.maxim{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(1.25rem,2vw,1.75rem);line-height:1.3;color:var(--ink);max-width:34ch;padding-left:20px;border-left:2px solid var(--orange)}
+/* Conceito / nota didática: só filetes */
+.note{border-top:1px solid var(--line2);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.note .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.note p{color:var(--ink-soft);font-size:.95rem;line-height:1.6}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border:1px solid var(--line2);border-radius:100px;font-size:.78rem;color:var(--ink-soft)}
+.pill .d{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+
+/* Fotografia */
+.ph{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.ph img{width:100%;max-width:100%;object-fit:cover;border-radius:14px;border:1px solid var(--line);display:block;cursor:zoom-in;background:var(--bg2);filter:saturate(.92)}
+.ph figcaption,.gal figcaption{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.ph img{max-height:30vh}
+.ph.short img{max-height:34vh}
+#toolPanel .ph img{max-height:22vh;object-position:center 22%!important}
+.band{position:relative;margin:clamp(14px,2.6vh,24px) 0}
+.band img{width:100%;height:clamp(100px,17vh,200px);object-fit:cover;border-radius:14px;border:1px solid var(--line);display:block;cursor:zoom-in}
+.band figcaption{position:absolute;left:14px;bottom:12px;display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.band figcaption span{background:rgba(10,24,48,.72);padding:5px 9px;border-radius:4px}
+.band figcaption a{color:var(--ink);text-decoration:none;background:var(--orange-cta);padding:5px 11px;border-radius:100px}
+.band figcaption a:hover{background:var(--orange)}
+.bgwrap{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.bgwrap img{width:100%;height:100%;object-fit:cover;display:block}
+.bgwrap::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,24,48,.97) 0%,rgba(10,24,48,.88) 42%,rgba(10,24,48,.5) 100%),linear-gradient(0deg,rgba(10,24,48,.95) 0%,transparent 45%)}
+.slide.is-active .bgwrap img{animation:kb 14s ease-out both}
+@keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+.has-bg>.frame{position:relative;z-index:1;padding-bottom:56px}
+.bgcap{position:absolute;right:clamp(16px,3vw,32px);bottom:14px;z-index:1;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+/* Galeria */
+.gal{display:grid;grid-auto-flow:dense;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(80px,13vh,150px);gap:10px}
+.gal figure{margin:0;position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--line)}
+.gal figure.w2{grid-column:span 2}.gal figure.h2{grid-row:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;transition:transform .6s cubic-bezier(.2,.7,.2,1);filter:saturate(.9)}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:18px 10px 8px;background:linear-gradient(0deg,rgba(10,24,48,.92),transparent);color:var(--ink-soft)}
+/* Vídeos */
+.vids{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vh,22px) clamp(16px,2.4vw,28px)}
+.vid{display:flex;flex-direction:column;gap:7px;text-decoration:none;color:var(--ink);min-width:0}
+.thumb{position:relative;display:block;border-radius:12px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/8}
+.vids .thumb{max-height:19vh;width:100%}
+.vids .vgo{display:none}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,24,48,.55),transparent 55%)}
+.play{position:absolute;left:14px;bottom:12px;z-index:1;width:42px;height:42px;border-radius:50%;background:var(--orange-cta);box-shadow:0 10px 26px -8px rgba(255,74,18,.7);transition:transform .25s}
+.play::before{content:"";position:absolute;left:16px;top:13px;border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.vid:hover .thumb img{transform:scale(1.04)}
+.vid:hover .play{transform:scale(1.08);background:var(--orange)}
+.vctx{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.vt{font-family:var(--display);font-size:1.08rem;line-height:1.25;font-weight:500}
+.vgo{font-size:.78rem;color:var(--ink-mute)}
+.vid:hover .vgo{color:var(--ink)}
+.vid.row{display:grid;grid-template-columns:200px 1fr;column-gap:16px;row-gap:4px;align-items:start}
+.vid.row .thumb{grid-row:1/4}
+/* Lightbox */
+.lb[hidden]{display:none}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(6,14,28,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px 16px;cursor:zoom-out}
+.lb img{max-width:100%;max-height:82vh;border-radius:10px;object-fit:contain}
+.lb p{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-align:center}
+@media (max-width:900px){.gal{grid-template-columns:repeat(2,minmax(0,1fr))}.gal figure{grid-area:auto!important}.gal figure:first-child{grid-column:span 2!important}.vids{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.vids{grid-template-columns:1fr}.vid.row{grid-template-columns:1fr}.vid.row .thumb{grid-row:auto}}
+/* Cena do livro */
+.scene{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line2);padding-top:14px}
+.scene .src{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.scene p{color:var(--ink-soft);font-size:.96rem;line-height:1.62;max-width:60ch}
+.scene q{display:block;font-family:var(--display);font-style:italic;font-size:clamp(1.15rem,1.7vw,1.45rem);line-height:1.32;color:var(--ink);quotes:"“" "”"}
+.sig{font-family:var(--display);font-style:italic;font-size:1.2rem;color:var(--ink)}
+/* Números */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.stat{padding:18px 18px 18px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.stat:not(:nth-child(3n+1)){padding-left:18px;border-left:1px solid var(--line)}
+.stat b{font-family:var(--display);font-weight:500;font-size:clamp(1.7rem,3vw,2.6rem);line-height:1;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat span{font-size:.86rem;color:var(--ink-soft);line-height:1.45}
+.stat.hl b{color:var(--amber)}
+
+/* Tabelas editoriais */
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;text-align:left;padding:0 14px 10px 0;border-bottom:1px solid var(--line2)}
+td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);color:var(--ink-soft);vertical-align:top;font-variant-numeric:tabular-nums}
+td:first-child{color:var(--ink);font-weight:500}
+
+/* Listas */
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.list li{padding:11px 0;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:.98rem;line-height:1.5;display:grid;grid-template-columns:2.2rem 1fr;gap:6px}
+.list li:first-child{border-top:1px solid var(--line)}
+.list li i{font-style:normal;font-family:var(--mono);font-size:.72rem;color:var(--orange);padding-top:4px}
+.list li b{color:var(--ink);font-weight:600}
+
+/* ---------- Capa ---------- */
+.cover .frame{display:flex;flex-direction:column;gap:clamp(18px,3.4vh,34px)}
+.brandmark{display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.02rem;letter-spacing:-.005em}
+.brandmark .dot{width:11px;height:11px;border-radius:50%;background:var(--orange);box-shadow:0 0 16px rgba(255,74,18,.7)}
+.cover h1{max-width:12ch}
+.route{width:100%;height:auto;display:block;margin-top:6px}
+.route text{font-family:var(--mono);fill:var(--ink-soft);font-size:13px;letter-spacing:.06em}
+.route .yr{font-family:var(--display);fill:var(--ink);font-size:26px;letter-spacing:-.01em;font-weight:500}
+.byline{display:flex;gap:28px;flex-wrap:wrap;align-items:baseline;border-top:1px solid var(--line);padding-top:16px}
+.byline span{font-size:.86rem;color:var(--ink-mute)}
+.byline strong{color:var(--ink);font-weight:600}
+
+/* ---------- Divisor de ato ---------- */
+.act .frame{display:flex;flex-direction:column;gap:clamp(14px,3vh,34px)}
+.act .num{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(4rem,min(12vw,15vh),10rem);line-height:.8;color:transparent;-webkit-text-stroke:1px var(--line2);letter-spacing:-.04em}
+.act blockquote{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,4.2vw,3.5rem);line-height:1.12;letter-spacing:-.015em;max-width:22ch}
+.act blockquote em{font-style:italic}
+.act cite{font-style:normal;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+
+/* ---------- Schein ---------- */
+.strata{display:flex;flex-direction:column}
+.stratum{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line);position:relative}
+.stratum:first-child{border-top:1px solid var(--line2)}
+.stratum .lvl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);padding-top:4px}
+.stratum h3{margin-bottom:6px}
+.stratum p{color:var(--ink-soft);font-size:.94rem}
+.stratum .ex{margin-top:8px;font-family:var(--display);font-style:italic;color:var(--amber);font-size:1rem}
+.stratum.s2{background:linear-gradient(90deg,rgba(90,169,230,.05),transparent 70%)}
+.stratum.s3{background:linear-gradient(90deg,rgba(255,74,18,.07),transparent 70%)}
+.depth{position:absolute;right:0;top:18px;font-family:var(--mono);font-size:.66rem;color:var(--ink-mute);letter-spacing:.12em}
+
+/* ---------- Linha do tempo ---------- */
+.tl{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-top:1px solid var(--line2);position:relative}
+.tl button{background:none;border:0;border-right:1px solid var(--line);padding:14px 10px 16px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:6px;position:relative}
+.tl button:last-child{border-right:0}
+.tl button::before{content:"";position:absolute;top:-5px;left:10px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--line2)}
+.tl button b{font-family:var(--display);font-size:clamp(1.05rem,1.6vw,1.45rem);font-weight:500;color:var(--ink-soft)}
+.tl button small{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+.tl button[aria-selected="true"]::before{background:var(--orange);border-color:var(--orange);box-shadow:0 0 12px rgba(255,74,18,.7)}
+.tl button[aria-selected="true"] b{color:var(--ink)}
+.tl button:hover b{color:var(--ink)}
+.tl-detail{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(20px,4vw,56px);padding-top:clamp(22px,4vh,40px)}
+.tl-detail>*{min-width:0}
+.tl-detail .big{font-family:var(--display);font-size:clamp(2.6rem,6vw,5rem);line-height:.95;font-weight:500;letter-spacing:-.03em}
+.tl-detail .phase{margin-top:10px}
+
+/* ---------- Big Voice chart ---------- */
+.chart{width:100%;height:auto;display:block}
+.chart .lbl{fill:var(--ink);font-family:var(--body);font-size:14px}
+.chart .ax{fill:var(--ink-mute);font-family:var(--mono);font-size:11px}
+.chart .val{fill:var(--ink-soft);font-family:var(--mono);font-size:12px}
+.chart .delta{fill:var(--amber);font-family:var(--mono);font-size:12.5px;font-weight:600}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .bar{stroke:var(--line2);stroke-width:2}
+.chart .from{fill:var(--bg);stroke:var(--ink-mute);stroke-width:1.5}
+.chart .to{fill:var(--orange)}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:.82rem;color:var(--ink-mute)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
+
+/* ---------- Ferramentas (abas) ---------- */
+.tools{display:grid;grid-template-columns:minmax(220px,.8fr) 1.6fr;gap:clamp(24px,4vw,56px)}
+.tools>*{min-width:0}
+.tabs{display:flex;flex-direction:column;border-top:1px solid var(--line2)}
+.tabs button{background:none;border:0;border-bottom:1px solid var(--line);padding:13px 0;text-align:left;cursor:pointer;display:grid;grid-template-columns:2rem 1fr;align-items:baseline;color:var(--ink-soft);font-size:.98rem}
+.tabs button i{font-style:normal;font-family:var(--mono);font-size:.7rem;color:var(--ink-mute)}
+.tabs button[aria-selected="true"]{color:var(--ink)}
+.tabs button[aria-selected="true"] i{color:var(--orange)}
+.tabs button[aria-selected="true"] span{border-bottom:1px solid var(--orange)}
+.tabs button:hover{color:var(--ink)}
+.panel{display:flex;flex-direction:column;gap:18px}
+.panel h3{font-size:clamp(1.6rem,2.6vw,2.3rem);font-weight:600}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+.facts div{padding:12px 14px 12px 0;display:flex;flex-direction:column;gap:5px}
+.facts div+div{padding-left:14px;border-left:1px solid var(--line)}
+.facts dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.facts dd{margin:0;color:var(--ink);font-size:.93rem;line-height:1.45}
+
+/* ---------- Jeito Big camadas ---------- */
+.layers{display:flex;flex-direction:column;gap:0}
+.layer{display:grid;grid-template-columns:230px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.layer:first-child{border-top:1px solid var(--line2)}
+.layer h3{font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:600}
+.layer h3 small{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;margin-top:6px}
+.layer ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.layer li{padding:7px 14px;border:1px solid var(--line2);border-radius:100px;font-size:.88rem;color:var(--ink)}
+.layer.l1 li{border-color:rgba(90,169,230,.45)}
+.layer.l2 li{border-color:rgba(242,179,61,.5)}
+.layer.l3 li{border-color:rgba(255,74,18,.55)}
+
+/* ---------- Infraestrutura ---------- */
+.infra{display:grid;grid-template-columns:1.7fr 1fr;gap:clamp(20px,3vw,44px);align-items:center}
+.infra>*{min-width:0}
+.infra svg{width:100%;height:auto;display:block}
+.infra .st{stroke:var(--ink-soft);stroke-width:1.4;fill:none}
+.infra .gnd{stroke:var(--ink-soft);stroke-width:1.4}
+.infra .hatch{stroke:var(--line2);stroke-width:1}
+.infra .cap{fill:var(--ink-mute);font-family:var(--mono);font-size:15px;letter-spacing:.12em}
+.infra .sign{fill:var(--ink);font-family:var(--display);font-size:34px;font-weight:600}
+.infra .pipe .tube{stroke:var(--line2);stroke-width:9;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s}
+.infra .pipe .core{stroke:var(--bg);stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.infra .pipe .flow{stroke:var(--orange);stroke-width:2.2;fill:none;stroke-dasharray:6 10;opacity:0;stroke-linecap:round;stroke-linejoin:round}
+.infra .pipe text{fill:var(--ink-soft);font-family:var(--body);font-size:20px;transition:fill .2s}
+.infra .pipe{cursor:pointer}
+.infra .pipe:hover text{fill:var(--ink)}
+.infra .pipe.on .tube{stroke:rgba(255,74,18,.55)}
+.infra .pipe.on .flow{opacity:1;animation:flow 1.1s linear infinite}
+.infra .pipe.on text{fill:var(--ink);font-weight:600}
+@keyframes flow{to{stroke-dashoffset:-32}}
+.infra-detail{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line2);padding-top:16px}
+.infra-detail h3{font-size:1.6rem;font-weight:600}
+
+/* ---------- i4Cs ---------- */
+.cs{display:flex;align-items:baseline;gap:clamp(8px,1.6vw,22px);flex-wrap:wrap;font-family:var(--display);font-size:clamp(1.3rem,2.4vw,2.1rem);font-weight:500}
+.cs span{color:var(--ink-soft)}
+.cs .i{color:var(--orange);font-style:italic;font-weight:600}
+.cs .sep{color:var(--line2);font-weight:300}
+
+/* ---------- Rede ---------- */
+.nets{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.nets figure{margin:0;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+.nets svg{width:100%;height:auto}
+.nets figcaption{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.nets .e{stroke:var(--line2);stroke-width:1.2}
+.nets .e2{stroke:rgba(242,179,61,.55);stroke-width:1.2}
+.nets .n{fill:var(--bg);stroke:var(--ink-soft);stroke-width:1.4}
+.nets .n.top{fill:var(--ink-soft)}
+.nets .n.hub{fill:var(--orange);stroke:var(--orange)}
+
+/* ---------- 555 ---------- */
+.m555{display:grid;grid-template-columns:150px repeat(5,minmax(0,1fr));border-top:1px solid var(--line2)}
+.m555>div{padding:12px 10px 12px 0;border-bottom:1px solid var(--line);font-size:.84rem;color:var(--ink-soft);line-height:1.35;min-width:0}
+.m555>div.h{font-family:var(--display);font-size:1.15rem;color:var(--ink);font-weight:500;display:flex;align-items:center;gap:10px}
+.m555>div.h b{font-family:var(--mono);font-size:.7rem;color:var(--orange);font-weight:600}
+.m555>div:not(.h){padding-left:10px;border-left:1px solid var(--line)}
+.rank{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.rank div{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:12px}
+.rank b{font-family:var(--display);font-size:1.6rem;font-weight:600}
+.rank .top b{color:var(--good)}
+.rank .flop b{color:var(--amber)}
+
+/* ---------- Viradas ---------- */
+.turns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,36px)}
+.turn{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line2);padding-top:14px}
+.turn .where{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.turn b{font-family:var(--display);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:500;line-height:1;color:var(--amber);letter-spacing:-.02em}
+.turn p{font-size:.92rem;color:var(--ink-soft)}
+
+/* ---------- Mecanismos (síntese) ---------- */
+.mech{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(24px,4vw,60px)}
+.mech>*{min-width:0}
+.mech-list{display:flex;flex-direction:column;border-top:1px solid var(--line2)}
+.mech-list button{background:none;border:0;border-bottom:1px solid var(--line);padding:10px 0;text-align:left;cursor:pointer;display:grid;grid-template-columns:2rem 1fr;color:var(--ink-soft);font-size:.96rem;line-height:1.35}
+.mech-list button i{font-style:normal;font-family:var(--mono);font-size:.7rem;color:var(--ink-mute);padding-top:3px}
+.mech-list button[aria-pressed="true"]{color:var(--ink)}
+.mech-list button[aria-pressed="true"] i{color:var(--orange)}
+.mech-list button:hover{color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{padding:6px 12px;border:1px solid var(--line);border-radius:100px;font-size:.86rem;color:var(--ink-mute);transition:all .25s;display:inline-flex;gap:8px;align-items:center}
+.chip small{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--ink-mute)}
+.chip.on{border-color:var(--orange);color:var(--ink);box-shadow:0 0 0 1px rgba(255,74,18,.25)}
+.chip.on small{color:var(--amber)}
+.mech-why{min-height:4.8em}
+
+/* ---------- Diagnóstico ---------- */
+.lessons{display:flex;flex-direction:column;border-top:1px solid var(--line2)}
+.lesson{display:grid;grid-template-columns:2.4rem 1.1fr 1fr auto;gap:18px;padding:10px 0;border-bottom:1px solid var(--line);align-items:start}
+.lesson>*{min-width:0}
+.lesson .n{font-family:var(--display);font-style:italic;font-size:1.5rem;color:var(--orange);line-height:1}
+.lesson h3{font-size:1.08rem;font-weight:600;margin-bottom:4px}
+.lesson .q{font-size:.88rem;color:var(--ink-soft);line-height:1.5}
+.lesson .q b{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:500;display:block;margin-bottom:3px}
+.seg{display:flex;border:1px solid var(--line2);border-radius:100px;overflow:hidden;align-self:center}
+.seg button{background:none;border:0;padding:7px 12px;font-size:.78rem;color:var(--ink-mute);cursor:pointer;white-space:nowrap}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{color:var(--bg);background:var(--amber);font-weight:600}
+.readout{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;padding-top:18px}
+.meter{display:flex;gap:4px}
+.meter i{width:16px;height:6px;border-radius:3px;background:var(--line2)}
+.meter i.on{background:linear-gradient(90deg,var(--amber),var(--orange))}
+
+/* ---------- Referências ---------- */
+.refs{columns:2;column-gap:40px;font-size:.8rem;color:var(--ink-mute);line-height:1.5}
+.refs p{break-inside:avoid;margin-bottom:6px}
+
+/* ---------- Barra de navegação ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));padding:0 clamp(16px,3vw,32px) env(safe-area-inset-bottom,0px);display:flex;align-items:center;gap:clamp(12px,2vw,24px);border-top:1px solid var(--line);background:rgba(10,24,48,.86);backdrop-filter:blur(10px);z-index:20}
+.bar .brandmark{font-size:.9rem;white-space:nowrap}
+.trail{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.trail-acts{display:flex;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+.trail-acts span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:6px}
+.trail-acts span.cur{color:var(--amber)}
+.trail-line{position:relative;height:2px;background:var(--line2);border-radius:2px}
+.trail-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--amber),var(--orange));border-radius:2px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.trail-dot{position:absolute;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px rgba(255,74,18,.8);transition:left .5s cubic-bezier(.2,.7,.2,1)}
+.ctrl{display:flex;align-items:center;gap:6px}
+.ctrl button{background:none;border:1px solid var(--line2);border-radius:100px;height:36px;min-width:36px;padding:0 12px;cursor:pointer;color:var(--ink);font-size:.86rem}
+.ctrl button:hover{border-color:var(--ink-soft)}
+.ctrl button:disabled{opacity:.3;cursor:default}
+.count{font-family:var(--mono);font-size:.76rem;color:var(--ink-soft);font-variant-numeric:tabular-nums;min-width:4.4em;text-align:center}
+
+/* Índice */
+.index{position:fixed;inset:0;z-index:40;background:rgba(10,24,48,.97);overflow-y:auto;padding-inline:clamp(16px,4vw,48px)}
+.index .frame{padding-block:48px}
+.index-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px 40px;margin-top:28px}
+.index-grid h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin:0 0 8px;font-weight:600}
+.index-grid button{display:grid;grid-template-columns:2.2rem 1fr;width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:9px 0;text-align:left;cursor:pointer;color:var(--ink-soft);font-size:.92rem}
+.index-grid button i{font-style:normal;font-family:var(--mono);font-size:.7rem;color:var(--ink-mute);padding-top:2px}
+.index-grid button:hover,.index-grid button.cur{color:var(--ink)}
+.index-grid button.cur i{color:var(--orange)}
+.index-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:900px){
+  .grid2,.tools,.infra,.mech,.tl-detail{grid-template-columns:1fr}
+  .tl{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tl button:nth-child(4){border-right:0}
+  .tl button:nth-child(n+5){border-top:1px solid var(--line)}
+  .turns{grid-template-columns:1fr}
+  .m555{grid-template-columns:1fr 1fr}
+  .m555>div.h{grid-column:1/-1;border-left:0;padding-left:0}
+  .m555>div:not(.h){border-left:0;padding-left:0}
+  .lesson{grid-template-columns:2rem 1fr}
+  .lesson .q,.lesson .seg{grid-column:2}
+  .lesson .seg{justify-self:start}
+  .bar .brandmark .wm{display:none}
+}
+@media (max-width:620px){
+  :root{--nav-h:58px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:not(:nth-child(3n+1)){padding-left:0;border-left:0}
+  .stat:nth-child(2n){padding-left:14px;border-left:1px solid var(--line)}
+  .stratum,.layer{grid-template-columns:1fr;gap:6px}
+  .depth{display:none}
+  .facts{grid-template-columns:1fr}
+  .facts div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .nets{grid-template-columns:1fr}
+  .rank{grid-template-columns:1fr}
+  .refs{columns:1}
+  .trail-acts{display:none}
+  .bar .brandmark{display:none}
+  .ctrl .idx-label{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head><body>
+
+
+<main class="deck" id="deck" aria-live="polite">
+
+<!-- ============ 1 · CAPA ============ -->
+<section class="slide cover has-bg" data-act="Abertura" data-title="Cultura como sistema">
+<div class="bgwrap"><img src="img/k-cover-i4cs.jpg" alt="Kiko Campos conduz a aplicação do i4Cs com líderes, 2023" style="object-position:62% center"></div>
+<div class="frame">
+  <a class="brandmark" href="/" style="color:inherit;text-decoration:none"><span class="dot"></span>kiko campos</a>
+  <p class="eyebrow">Estudo de caso · Cultura, liderança e integração · 2018–2025</p>
+  <h1>Cultura como <em class="grad">sistema</em></h1>
+  <p class="lead">Do Walmart ao BIG, do BIG ao Carrefour. Como uma operação desacreditada se tornou referência do grupo em cultura, liderança e cliente. Um caso contado por dentro, para quem faz a mudança chegar à ponta.</p>
+  <svg class="route" viewBox="0 0 1180 190" role="img" aria-label="A travessia: Walmart Brasil em 2018, Grupo BIG em 2019, Carrefour Brasil de 2022 a 2025">
+    <defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="#5AA9E6"/><stop offset=".5" stop-color="#F2B33D"/><stop offset="1" stop-color="#FF4A12"/></linearGradient></defs>
+    <path id="routePath" d="M10 120 C 180 120, 220 60, 390 70 S 640 140, 790 100 S 1040 40, 1170 70" fill="none" stroke="url(#rg)" stroke-width="2"/>
+    <path d="M10 132 C 180 132, 220 72, 390 82 S 640 152, 790 112 S 1040 52, 1170 82" fill="none" stroke="rgba(234,241,251,.10)" stroke-width="1"/>
+    <g><circle cx="10" cy="120" r="6" fill="#5AA9E6"/><text class="yr" x="0" y="172">2018</text><text x="0" y="38">WALMART BRASIL</text><text x="0" y="56" style="fill:var(--ink-mute)">a descrença</text></g>
+    <g><circle cx="390" cy="70" r="6" fill="#F2B33D"/><text class="yr" x="372" y="122">2019</text><text x="372" y="22">GRUPO BIG</text><text x="372" y="40" style="fill:var(--ink-mute)">o método</text></g>
+    <g><circle cx="790" cy="100" r="6" fill="#FF6A2E"/><text class="yr" x="772" y="152">2022</text><text x="772" y="52">CARREFOUR BRASIL</text><text x="772" y="70" style="fill:var(--ink-mute)">a travessia</text></g>
+    <g><circle cx="1170" cy="70" r="6" fill="#FF4A12"/><text class="yr" x="1100" y="122">2025</text></g>
+    <circle r="5" fill="#EAF1FB" id="traveler"><animateMotion dur="9s" repeatCount="indefinite" rotate="auto"><mpath href="#routePath"/></animateMotion></circle>
+  </svg>
+  <div class="byline">
+    <span><strong>Kiko Campos</strong> · Diretor Sênior de RH, Grupo Carrefour Brasil (2019–2025)</span>
+    <span>Use as setas ← → ou deslize para navegar</span>
+  </div>
+</div>
+</section>
+
+<!-- ============ NOTA DO AUTOR ============ -->
+<section class="slide" data-act="Abertura" data-title="Por que escrevi este caso">
+<div class="frame">
+  <div class="runhead"><span>Abertura</span><span>Nota do autor</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">Por que escrevi este caso</p>
+      <h2>Seis anos, duas transformações e <em>uma convicção que sobreviveu a ambas</em>.</h2>
+      <figure class="ph "><img src="img/k-retrato-bracos.jpg" alt="Retrato de Kiko Campos, 2022" style="aspect-ratio:16/10;object-position:center 25%" loading="lazy"><figcaption>Kiko Campos · 2022</figcaption></figure>
+    </div>
+    <div class="stack">
+      <p class="maxim">Este não é um relato de sucesso. É um registro de método.</p>
+      <p class="lead">Entre 2019 e 2025, liderei o RH de uma companhia que mudou de dono, de nome, de marca e de cultura. Duas vezes. Primeiro, a operação que o Walmart deixou no Brasil virou Grupo BIG. Depois, o BIG foi incorporado pelo Carrefour, na maior consolidação da história do varejo alimentar brasileiro.</p>
+      <p class="body">A maior parte do que se publica sobre fusões fala de sinergia, preço e governança. Pouco se escreve sobre o que acontece <strong>no corredor da loja às sete da manhã</strong>, quando o time descobre que a empresa mudou de novo. É ali que uma integração dá certo ou fracassa.</p>
+      <p class="body">Há resultados aqui, e eles importam. Mas há também decisões difíceis, lojas fechadas e crises que expuseram a companhia. Deixei tudo isso no texto porque um caso que só mostra acertos não ensina ninguém. Escrevi para quem precisa fazer a mudança chegar à ponta. Espero que encontrem aqui menos inspiração e mais ferramenta.</p>
+      <p class="sig">Kiko Campos</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 2 · COMO LER ============ -->
+<section class="slide" data-act="Abertura" data-title="Como ler este caso">
+<div class="frame">
+  <div class="runhead"><span>Abertura</span><span>Guia de leitura</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">A tese</p>
+      <h2>Cultura não é o que a empresa declara. É o que ela <em class="grad">tolera, recompensa e promove</em>, todos os dias.</h2>
+      <p class="lead">Quando é tratada como sistema de gestão, a cultura sustenta um turnaround, amortece uma integração e muda indicadores de negócio. Dois ciclos, mais de 150 mil pessoas e o mesmo princípio.</p>
+      <p class="maxim">Cultura não se impõe; se desenha. Não se copia; se constrói com o que é genuíno. Não se sustenta com discurso; se sustenta com experiências repetidas.</p>
+    </div>
+    <div class="stack">
+      <p class="eyebrow">O que levar deste caso</p>
+      <ol class="list">
+        <li><i>01</i><span><b>A distinção.</b> Campanha termina. Sistema continua funcionando quando ninguém está olhando.</span></li>
+        <li><i>02</i><span><b>O mecanismo.</b> Cada ferramenta, em cada ciclo, e o que ela muda no comportamento.</span></li>
+        <li><i>03</i><span><b>A prática.</b> Cinco perguntas de diagnóstico para levar para a sua organização na segunda-feira.</span></li>
+      </ol>
+      <div class="note"><span class="tag">Como o caso está organizado</span><p>Três atos, na ordem em que aconteceram: a descrença (2018), o método (2019–2021) e a travessia (2021–2025). Cada ato traz contexto, um conceito de apoio, as ferramentas, a evidência e cenas que vivi, extraídas do livro <i>O Novo Código da Mudança</i>.</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 3 · LINHA DO TEMPO ============ -->
+<section class="slide" data-act="Abertura" data-title="Sete anos, em sequência">
+<div class="frame">
+  <div class="runhead"><span>Abertura</span><span>Linha do tempo</span></div>
+  <div class="stack" style="margin-bottom:clamp(22px,4vh,40px)">
+    <p class="eyebrow">Sete anos, em sequência</p>
+    <h2>Mudou o dono, o nome, a marca e a cultura. <em>Duas vezes.</em></h2>
+  </div>
+  <div class="tl" role="tablist" aria-label="Anos" id="tl"></div>
+  <div class="tl-detail" id="tlDetail" aria-live="polite"></div>
+</div>
+</section>
+
+<!-- ============ 4 · LENTE: SCHEIN ============ -->
+<section class="slide" data-act="Abertura" data-title="A lente: os três níveis de Schein">
+<div class="frame">
+  <div class="runhead"><span>Abertura</span><span>Conceito de apoio · Schein (2010)</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">A lente de leitura</p>
+      <h2>Cultura tem camadas. A mudança que importa acontece <em>embaixo</em>.</h2>
+      <p class="lead">Edgar Schein, do MIT, descreve a cultura em três níveis. O que se vê é a superfície. O que governa o comportamento são os pressupostos que ninguém escreve, porque todo mundo já sabe.</p>
+      <p class="body">Campanhas mexem no primeiro nível. Sistemas chegam ao terceiro. É por isso que valor declarado e valor vivido raramente coincidem no começo de uma transformação.</p>
+    </div>
+    <div class="strata">
+      <div class="stratum">
+        <span class="lvl">Nível 1 · Visível</span>
+        <div><h3>Artefatos</h3><p>O que se vê, se ouve e se toca: pôsteres, rituais, layouts, a forma como uma reunião começa.</p><p class="ex">A live mensal do 555. O pôster dos 4Cs.</p></div>
+        <span class="depth">raso</span>
+      </div>
+      <div class="stratum s2">
+        <span class="lvl">Nível 2 · Declarado</span>
+        <div><h3>Valores expostos</h3><p>O que a empresa diz que valoriza: estratégia, metas, filosofia.</p><p class="ex">Jeito Big. 4Cs. i4Cs.</p></div>
+        <span class="depth">médio</span>
+      </div>
+      <div class="stratum s3">
+        <span class="lvl">Nível 3 · Invisível</span>
+        <div><h3>Pressupostos básicos</h3><p>Crenças tidas como certas, que orientam a ação sem precisar ser ditas.</p><p class="ex">De "Já vimos isso antes, nada muda" para "Aqui, liderar inclui ensinar".</p></div>
+        <span class="depth">profundo</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 5 · ATO I ============ -->
+<section class="slide act" data-act="Ato I · 2018" data-title="Ato I · A descrença">
+<div class="frame">
+  <div class="runhead"><span>Ato I · 2018</span><span>Walmart Brasil</span></div>
+  <div class="num">I</div>
+  <p class="eyebrow">Uma empresa que já tinha ouvido tudo</p>
+  <blockquote>“Já vimos isso antes. <em>Nada muda.</em>”</blockquote>
+  <cite>Frase que circulava nas lojas, 2018</cite>
+  <p class="lead">Não era resistência, era memória. Quando uma organização acumula mudanças anunciadas e abandonadas, as pessoas aprendem a esperar a próxima passar. O ceticismo deixa de ser opinião e vira mecanismo de proteção.</p>
+</div>
+</section>
+
+<!-- ============ 6 · DIAGNÓSTICO ============ -->
+<section class="slide" data-act="Ato I · 2018" data-title="O diagnóstico">
+<div class="frame">
+  <div class="runhead"><span>Ato I · 2018</span><span>Contexto e diagnóstico</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">O ponto de partida</p>
+      <h2>O problema mais caro não aparecia no balanço.</h2>
+      <p class="body">Em junho de 2018, o Walmart vendeu 80% da operação brasileira para a Advent International, que se comprometeu a investir R$ 1,9 bilhão. Eram oito bandeiras herdadas de aquisições, hipermercados deficitários e um atacarejo sem competitividade. O varejo saía da recessão, o atacarejo crescia mais de 15% ao ano e redes regionais ganhavam espaço pela proximidade com o cliente.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>2017</th><th>Faturamento bruto</th><th>Vendas/m²</th><th>Share</th></tr></thead>
+          <tbody>
+            <tr><td>Carrefour</td><td>R$ 49,7 bi</td><td>R$ 33 mil</td><td>14%</td></tr>
+            <tr><td>GPA</td><td>R$ 48,5 bi</td><td>R$ 31 mil</td><td>13%</td></tr>
+            <tr><td>Walmart Brasil</td><td>R$ 28,2 bi <span style="color:var(--orange)">(–4,3%)</span></td><td>R$ 27 mil</td><td>8,5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Fonte: Valor Econômico (2018); relatórios setoriais.</p>
+    </div>
+    <div class="stack">
+      <p class="eyebrow">Na linguagem de Schein, uma cultura cristalizada</p>
+      <ol class="list">
+        <li><i>01</i><span>Decisões tomadas em Bentonville, com pouca autonomia local.</span></li>
+        <li><i>02</i><span>Bandeiras operando como feudos, disputando recurso e prioridade.</span></li>
+        <li><i>03</i><span>Favorabilidade de clima <b>abaixo de 60%</b> em 2017.</span></li>
+        <li><i>04</i><span>Turnover gerencial <b>acima de 35%</b> ao ano.</span></li>
+        <li><i>05</i><span>Nenhum símbolo ou ritual que sustentasse o que a empresa dizia valorizar.</span></li>
+      </ol>
+      <p class="maxim">Descrença não se combate com campanha. Se combate com coerência repetida.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 7 · TEORIA E / O ============ -->
+<section class="slide" data-act="Ato I · 2018" data-title="A aposta dupla: Teoria E e Teoria O">
+<div class="frame">
+  <div class="runhead"><span>Ato I · 2018</span><span>Conceito de apoio · Beer &amp; Nohria (2000)</span></div>
+  <div class="stack" style="margin-bottom:clamp(20px,4vh,36px)">
+    <p class="eyebrow">A aposta da Advent</p>
+    <h2>A maior parte dos turnarounds escolhe um caminho. <em>Este precisava dos dois.</em></h2>
+  </div>
+  <div class="grid2">
+    <div class="stack">
+      <svg viewBox="0 0 520 300" class="chart" role="img" aria-label="Teoria E, valor econômico rápido, e Teoria O, capacidade organizacional, sustentadas ao mesmo tempo">
+        <line x1="40" y1="260" x2="500" y2="260" class="grid"/><line x1="40" y1="20" x2="40" y2="260" class="grid"/>
+        <text x="500" y="284" text-anchor="end" class="ax">TEORIA E · VALOR ECONÔMICO →</text>
+        <text x="20" y="20" class="ax" transform="rotate(-90 20 20)" text-anchor="end">TEORIA O · CAPACIDADE →</text>
+        <circle cx="400" cy="230" r="7" class="from"/><text x="400" y="214" text-anchor="middle" class="val">só E: corte sem gente</text>
+        <circle cx="90" cy="70" r="7" class="from"/><text x="104" y="58" class="val">só O: gente sem resultado</text>
+        <path d="M70 240 Q 250 220 420 70" fill="none" stroke="#F2B33D" stroke-width="2" stroke-dasharray="4 6"/>
+        <circle cx="420" cy="70" r="9" class="to"/><text x="410" y="44" text-anchor="end" class="delta">E + O ao mesmo tempo</text>
+      </svg>
+    </div>
+    <div class="stack">
+      <div class="note"><span class="tag">Teoria E · economia</span><p>Resultado rápido: renegociar contratos, reduzir estoques, converter hipermercados em atacarejo, recuperar margem.</p></div>
+      <div class="note"><span class="tag">Teoria O · organização</span><p>Mais lento e mais arriscado: reconstruir engajamento, devolver autonomia à liderança local e criar os símbolos que a empresa nunca tivera.</p></div>
+      <p class="body">A agenda de RH de 2019–2022 foi desenhada para sustentar as duas ao mesmo tempo: liderar a transformação cultural, reconstruir orgulho, fortalecer diversidade e reconhecimento.</p>
+      <p class="maxim">A Advent havia comprado lojas. Era preciso reconstruir o que não estava à venda.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 8 · ATO II ============ -->
+<section class="slide act has-bg" data-act="Ato II · 2019–21" data-title="Ato II · O método">
+<div class="bgwrap"><img src="img/k-bigtalks-palco.jpg" alt="Kiko Campos no palco do Big Talks, com líderes conectados no telão, 2021" style="object-position:70% 20%"></div>
+<span class="bgcap">Kiko Campos · Big Talks, Grupo BIG, 2021</span>
+<div class="frame">
+  <div class="runhead"><span>Ato II · 2019–2021</span><span>Grupo BIG</span></div>
+  <div class="num">II</div>
+  <p class="eyebrow">Jeito Big: cultura como método de turnaround</p>
+  <blockquote>Cultura importada não pega. <em>Cultura construída por quem vai vivê-la, sim.</em></blockquote>
+  <div class="grid2"><p class="lead">Mais de 50 mil pessoas precisavam de uma linguagem comum. A decisão mais importante foi sobre quem faria o trabalho: <strong>o RH interno desenhou, produziu e conduziu tudo, sem consultoria externa.</strong> Reduziu custo e, principalmente, deu legitimidade.</p>
+  <div class="scene"><span class="src">Cena · 2019, início do Jeito Big</span><p>Um gerente me disse algo que nunca esqueci:</p><q>Aqui embaixo, a gente aprende mais com o que o chefe faz no corredor do que com o que ele fala na convenção.</q></div></div>
+</div>
+</section>
+
+<!-- ============ 9 · ARQUITETURA JEITO BIG ============ -->
+<section class="slide" data-act="Ato II · 2019–21" data-title="A arquitetura do Jeito Big">
+<div class="frame">
+  <div class="runhead"><span>Ato II · 2019–2021</span><span>Modelo cultural</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">A arquitetura</p>
+      <h2>Três camadas, <em>uma coerência</em>.</h2>
+      <p class="lead">O valor do modelo não estava nas palavras escolhidas. Estava na coerência entre as camadas: o que se espera de todos, o que acelera a virada e o que se exige de quem lidera.</p>
+      <div class="note"><span class="tag">A lógica de desenho</span><p>Valores para todos. Comportamentos para o momento do negócio. Competências para quem lidera. Cada camada vira critério em um processo diferente, e é isso que impede o modelo de virar quadro na parede.</p></div>
+      <figure class="ph "><img src="img/jeitobig-campanha.jpg" alt="Peças da campanha Jeito Big, 2020" style="aspect-ratio:16/9;object-position:center" loading="lazy"><figcaption>Peças da campanha Jeito Big, 2020</figcaption></figure>
+    </div>
+    <div class="layers">
+      <div class="layer l1"><h3>Básicos<small>valores de todos</small></h3><ul><li>Ambição</li><li>Coragem</li><li>Resiliência</li><li>Foco no Cliente</li></ul></div>
+      <div class="layer l2"><h3>Impulsionadores<small>o que acelera</small></h3><ul><li>Senso de Urgência</li><li>Dor de Dono</li><li>Capacidade de Execução</li><li>Inconformismo</li></ul></div>
+      <div class="layer l3"><h3>Gigantes<small>quem lidera</small></h3><ul><li>Comunicação Eficaz</li><li>Clareza de Direção</li><li>Colaborar e Influenciar</li><li>Gestão de Pessoas e Times</li></ul></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 10 · CAIXA DE FERRAMENTAS ============ -->
+<section class="slide" data-act="Ato II · 2019–21" data-title="A caixa de ferramentas">
+<div class="frame">
+  <div class="runhead"><span>Ato II · 2019–2021</span><span>Ferramentas · toque para explorar</span></div>
+  <div class="stack" style="margin-bottom:clamp(20px,3.6vh,34px)">
+    <p class="eyebrow">Da declaração ao comportamento</p>
+    <h2>Valor declarado só vira valor vivido quando alguém o pratica <em>sob pressão</em>.</h2>
+  </div>
+  <div class="tools">
+    <div class="tabs" role="tablist" aria-label="Ferramentas do Jeito Big" id="toolTabs"></div>
+    <div class="panel" id="toolPanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 11 · BIG VOICE ============ -->
+<section class="slide" data-act="Ato II · 2019–21" data-title="Big Voice: escutar melhor">
+<div class="frame">
+  <div class="runhead"><span>Ato II · 2019–2021</span><span>Escuta · inspirada no Q12 da Gallup</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">Escutar menos perguntas, entender mais respostas</p>
+      <h2>De <span class="mono" style="font-weight:500">50+</span> perguntas para <em class="grad">12</em>.</h2>
+      <p class="body">A pesquisa de clima herdada tinha mais de 50 perguntas e era difícil de transformar em ação. O Big Voice reduziu o instrumento a 12 questões essenciais. Em 2020, <strong>93% de adesão, 33,5 mil pessoas</strong>.</p>
+      <p class="body">O eNPS subiu <strong>30 pontos</strong>, com 46% mais promotores. E o dado mais relevante estava fora da pesquisa: as áreas com melhor Big Voice eram também as de NPS de cliente mais alto e menos ruptura. Não prova causalidade, mas mostra uma correlação que a liderança passou a levar a sério.</p>
+      <p class="maxim">O tamanho do questionário é uma decisão de liderança, não um detalhe técnico de RH.</p>
+      <p class="small">Questionário grande gera diagnóstico grande e ação pequena. E ação pequena corrói a confiança no processo.</p>
+    </div>
+    <div class="stack">
+      <svg class="chart" viewBox="0 0 690 262" role="img" aria-label="Big Voice, antes e em 2020: favorabilidade geral de 68 para 76 por cento; liderança de 63 para 72; feedback de 52 para 66; reconhecimento de 51 para 64; cuidado e bem-estar de 62 para 72">
+        <g>
+          <line class="grid" x1="180" y1="10" x2="180" y2="226"/><line class="grid" x1="285" y1="10" x2="285" y2="226"/><line class="grid" x1="390" y1="10" x2="390" y2="226"/><line class="grid" x1="495" y1="10" x2="495" y2="226"/><line class="grid" x1="600" y1="10" x2="600" y2="226"/>
+          <text class="ax" x="180" y="248" text-anchor="middle">40%</text><text class="ax" x="285" y="248" text-anchor="middle">50%</text><text class="ax" x="390" y="248" text-anchor="middle">60%</text><text class="ax" x="495" y="248" text-anchor="middle">70%</text><text class="ax" x="600" y="248" text-anchor="middle">80%</text>
+        </g>
+        <g><text class="lbl" x="0" y="35">Favorabilidade geral</text><line class="bar" x1="474" y1="30" x2="558" y2="30"/><circle class="from" cx="474" cy="30" r="6"/><circle class="to" cx="558" cy="30" r="7"/><text class="val" x="474" y="19" text-anchor="middle">68</text><text class="val" x="558" y="19" text-anchor="middle">76</text><text class="delta" x="618" y="35">+8 p.p.</text></g>
+        <g><text class="lbl" x="0" y="79">Liderança</text><line class="bar" x1="421.5" y1="74" x2="516" y2="74"/><circle class="from" cx="421.5" cy="74" r="6"/><circle class="to" cx="516" cy="74" r="7"/><text class="val" x="421.5" y="63" text-anchor="middle">63</text><text class="val" x="516" y="63" text-anchor="middle">72</text><text class="delta" x="618" y="79">+9 p.p.</text></g>
+        <g><text class="lbl" x="0" y="123">Feedback</text><line class="bar" x1="306" y1="118" x2="453" y2="118"/><circle class="from" cx="306" cy="118" r="6"/><circle class="to" cx="453" cy="118" r="7"/><text class="val" x="306" y="107" text-anchor="middle">52</text><text class="val" x="453" y="107" text-anchor="middle">66</text><text class="delta" x="618" y="123">+14 p.p.</text></g>
+        <g><text class="lbl" x="0" y="167">Reconhecimento</text><line class="bar" x1="295.5" y1="162" x2="432" y2="162"/><circle class="from" cx="295.5" cy="162" r="6"/><circle class="to" cx="432" cy="162" r="7"/><text class="val" x="295.5" y="151" text-anchor="middle">51</text><text class="val" x="432" y="151" text-anchor="middle">64</text><text class="delta" x="618" y="167">+13 p.p.</text></g>
+        <g><text class="lbl" x="0" y="211">Cuidado e bem-estar</text><line class="bar" x1="411" y1="206" x2="516" y2="206"/><circle class="from" cx="411" cy="206" r="6"/><circle class="to" cx="516" cy="206" r="7"/><text class="val" x="411" y="195" text-anchor="middle">62</text><text class="val" x="516" y="195" text-anchor="middle">72</text><text class="delta" x="618" y="211">+10 p.p.</text></g>
+      </svg>
+      <div class="legend"><span><i style="border:1.5px solid var(--ink-mute)"></i>Antes</span><span><i style="background:var(--orange)"></i>2020</span><span>Favorabilidade, em %</span></div>
+      <p class="small">Os maiores saltos estão em feedback e reconhecimento. Nenhum dos dois depende de política. Os dois dependem do gesto diário do líder.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 12 · RESULTADO JEITO BIG ============ -->
+<section class="slide" data-act="Ato II · 2019–21" data-title="O que mudou no negócio">
+<div class="frame">
+  <div class="runhead"><span>Ato II · 2019–2021</span><span>Evidência</span></div>
+  <div class="stack">
+    <p class="eyebrow">O que mudou no negócio</p>
+    <h2>A cultura deixou de ser custo e passou a ser <em>argumento de valuation</em>.</h2>
+  </div>
+  <div class="stats">
+    <div class="stat hl"><b>+3,7 p.p.</b><span>de margem do varejo entre 2019 e 2021</span></div>
+    <div class="stat"><b>R$ 700 mi</b><span>em ganhos comerciais acumulados</span></div>
+    <div class="stat"><b>14% → 6%</b><span>de ruptura</span></div>
+    <div class="stat"><b>70% → 99%</b><span>de pontualidade logística</span></div>
+    <div class="stat"><b>–R$ 77 mi</b><span>em excesso de estoque</span></div>
+    <div class="stat"><b>1 milhão</b><span>de clientes ativos no app Big &amp; Você</span></div>
+  </div>
+  <div class="grid2" style="margin-top:clamp(22px,4vh,36px)">
+    <p class="body">Mais de mil multiplicadores (supervisores, coordenadores e talentos emergentes) sustentaram os rituais na ponta. Em 2021, com engajamento em alta e margem recuperada, a Advent iniciou os roadshows do IPO. O IPO não aconteceu: em março de 2021, o Carrefour anunciou a compra do Grupo BIG.</p>
+    <p class="maxim">O Jeito Big não chegou ao pregão. Mas transformou um ativo desacreditado em um ativo desejado.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============ 13 · ATO III ============ -->
+<section class="slide act has-bg" data-act="Ato III · 2021–25" data-title="Ato III · A travessia">
+<div class="bgwrap"><img src="img/k-auditorio-2024.jpg" alt="Kiko Campos fala a um auditório lotado de líderes do Carrefour Brasil, 2024" style="object-position:60% center"></div>
+<span class="bgcap">Kiko Campos · encontro com líderes, Carrefour Brasil, 2024</span>
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2021–2025</span><span>Carrefour Brasil</span></div>
+  <div class="num">III</div>
+  <p class="eyebrow">Juntar quatro empresas sem apagar nenhuma</p>
+  <blockquote>“Eu aprendo rápido o processo novo. <em>O que eu não aceito é aprender a ser tratado pior.</em>”</blockquote>
+  <cite>Frase ouvida em uma roda de conversa durante a integração</cite>
+  <p class="lead">Integração é, antes de tudo, um processo de luto e de pertencimento. Para quem vinha do BIG, era a terceira troca de identidade em quatro anos. Para quem vinha do Carrefour, Atacadão e Sam's Club, era a chegada de milhares de colegas com outra história, outro vocabulário e outra forma de decidir. Quem ignora o luto não chega ao pertencimento.</p>
+</div>
+</section>
+
+<!-- ============ 14 · ESCALA ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="A escala da integração">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2021–2025</span><span>Contexto</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">A maior consolidação do varejo alimentar brasileiro</p>
+      <h2>A meta financeira era clara. O risco estava no que <em>não entra na planilha</em>.</h2>
+      <div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <div class="stat hl"><b>R$ 7,5 bi</b><span>aquisição (70% em dinheiro, 30% em ações)</span></div>
+        <div class="stat" style="padding-left:18px;border-left:1px solid var(--line)"><b>R$ 1,7 bi</b><span>de sinergias anuais até 2025</span></div>
+        <div class="stat" style="padding-left:0;border-left:0"><b>150 mil+</b><span>pessoas em 936 lojas</span></div>
+        <div class="stat" style="padding-left:18px;border-left:1px solid var(--line)"><b>23%</b><span>de participação de mercado</span></div>
+      </div>
+    </div>
+    <div class="stack">
+      <p class="eyebrow">Três movimentos, nesta ordem</p>
+      <ol class="list">
+        <li><i>01</i><span><b>Criar</b> a nova organização: governança, processos e cultura.</span></li>
+        <li><i>02</i><span><b>Conectar</b> sistemas, supply chain, TI, reporting e estruturas comerciais.</span></li>
+        <li><i>03</i><span><b>Capturar</b> as sinergias financeiras e operacionais.</span></li>
+      </ol>
+      <p class="maxim">Padronização muda regras. Integração muda pertencimento.</p>
+      <p class="body">A ordem importava: sem o primeiro, os outros dois não se sustentariam. Até o fim de 2022, mais de 30 hipermercados Big viraram Atacadão, com vendas por m² 1,5 vez maiores, e a receita consolidada chegou a R$ 120,6 bilhões (+38,2%).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ PRESERVAR ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="O que a gente não pode perder">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2021–2025</span><span>Ferramenta · preservar antes de mudar</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">Preservar não é romantizar o passado</p>
+      <h2>As lojas não pediam uma cultura nova. Pediam que a empresa <em>não perdesse o que já era bom</em>.</h2>
+      <figure class="ph "><img src="img/k-cava-quadro.jpg" alt="Kiko Campos no quadro: da dor à solução, ÇaVa RH, nov/2022" style="aspect-ratio:16/10;object-position:center 30%" loading="lazy"><figcaption>Kiko Campos · ÇaVa RH, nov/2022</figcaption></figure>
+      <p class="maxim">Conservar é segurar o passado. Preservar é carregar o essencial.</p>
+    </div>
+    <div class="stack">
+      <p class="body">A pressão por padronizar era enorme: consolidar sistemas, unificar práticas, “falar uma língua só”. Quando são apagados os rituais que organizam a vida das pessoas, elas ficam desorientadas. E desorientação, em ambiente operacional, vira ruído, retrabalho e perda de confiança.</p>
+      <div class="scene"><span class="src">Cena · visitas de loja na integração</span><p>Um dos momentos mais fortes era quando uma liderança sênior perguntava o nome de alguém, escutava uma história, agradecia pelo trabalho e perguntava: “o que, aqui, a gente não pode perder?”. A resposta quase nunca vinha em linguagem corporativa.</p>
+        <q>Não perder o respeito. Não perder a proximidade. Não perder a união do time. Não perder a nossa disciplina.</q><p class="sig" style="font-size:1.05rem">Isso é cultura.</p></div>
+      <div class="note"><span class="tag">Ritual mínimo · as manhãs de loja</span><p>Com a correria, os encontros rápidos no início do turno tinham sido descontinuados em várias unidades. Quando foram retomados, o efeito foi imediato: devolviam continuidade. Às vezes, preservar um ritual simples é mais transformador do que criar um novo.</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 15 · INFRAESTRUTURA INVISÍVEL ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="De valores a critérios">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2021–2025</span><span>Ferramenta central · toque nos canos</span></div>
+  <div class="stack" style="margin-bottom:clamp(14px,2.6vh,26px)">
+    <p class="eyebrow">Os 4Cs: clientes, coragem, compromisso com a mudança, cooperação</p>
+    <h2>Clareza não é prática. Os valores precisavam <em>descer para o encanamento</em>.</h2>
+  </div>
+  <div class="infra">
+    <svg viewBox="0 0 1000 540" role="img" aria-label="Corte de uma loja: acima do chão, o que se vê, como pôster e campanha. Abaixo do chão, sete canos que alimentam a loja: proposta de valor, seleção, onboarding, desenvolvimento, performance, sucessão e reconhecimento." id="infraSvg">
+      <text class="cap" x="40" y="40">O QUE SE VÊ</text>
+      <text class="cap" x="40" y="62" style="letter-spacing:.04em;fill:var(--ink-mute)">pôster · guia de uso · workshops</text>
+      <text class="cap" x="40" y="84" style="letter-spacing:.04em;fill:var(--ink-mute)">120 mil pessoas · 80% com clareza</text>
+      <path class="st" d="M320 200 V 92 L 500 46 L 680 92 V 200"/>
+      <rect class="st" x="440" y="130" width="120" height="70"/>
+      <line class="st" x1="500" y1="130" x2="500" y2="200"/>
+      <rect class="st" x="345" y="125" width="70" height="40"/><rect class="st" x="585" y="125" width="70" height="40"/>
+      <text class="sign" x="500" y="112" text-anchor="middle">4Cs</text>
+      <line class="gnd" x1="20" y1="210" x2="980" y2="210"/>
+      <g id="hatch"></g>
+      <text class="cap" x="980" y="240" text-anchor="end">O QUE SUSTENTA</text>
+      <text class="cap" x="980" y="262" text-anchor="end" style="letter-spacing:.04em">a infraestrutura invisível</text>
+      <g id="pipes"></g>
+    </svg>
+    <div class="infra-detail" id="infraDetail" aria-live="polite"></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 16 · i4Cs ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="Quando a cultura é posta à prova">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2020–2023</span><span>Crise e correção do modelo</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">Quando a cultura é posta à prova</p>
+      <h2>Duas tragédias expuseram a distância entre o que a empresa dizia e o que acontecia na ponta.</h2>
+      <p class="body">Em 19 de novembro de 2020, <strong>João Alberto Silveira Freitas</strong>, um homem negro de 40 anos, morreu após ser espancado por seguranças em uma loja Carrefour em Porto Alegre. Antes de ser uma crise de reputação, foi uma morte, e a evidência de que o racismo estrutural se manifesta também nos corredores de uma empresa. Em 2021, a companhia firmou um Termo de Ajustamento de Conduta antirracista com o Ministério Público.</p>
+      <p class="body">Em abril de 2022, já na integração, um novo episódio de abordagem discriminatória em Salvador mostrou que medidas pontuais não bastavam. <strong>O problema era de sistema.</strong></p>
+    </div>
+    <div class="stack">
+      <p class="eyebrow">Colocar o “i” na frente</p>
+      <div class="cs" aria-label="i4Cs: Inclusão, Clientes, Coragem, Compromisso, Cooperação"><span class="i">Inclusão</span><span class="sep">/</span><span>Clientes</span><span class="sep">/</span><span>Coragem</span><span class="sep">/</span><span>Compromisso</span><span class="sep">/</span><span>Cooperação</span></div>
+      <p class="body">Menos de um ano depois do lançamento, a companhia reabriu o modelo. A Inclusão passou a ser o primeiro pilar. Em poucas semanas, o novo modelo foi validado pela alta liderança e levado a todo o país.</p>
+      <div class="note"><span class="tag">Como foi feito</span><p>Um Manifesto da Inclusão escrito por muitas mãos: mais de 40 workshops regionais em que as equipes gravaram suas próprias versões. Entre jun/2022 e mar/2023, mais de 15 mil líderes participaram diretamente, sem intermediários.</p></div>
+      <p class="body">Em uma organização com dezenas de milhares de pessoas, inclusão não pode ser um evento. Precisa virar um sistema.</p>
+      <p class="maxim">Maturidade cultural não é acertar na primeira versão. É ter coragem de mudar a segunda.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 17 · DA PROMESSA À PRÁTICA ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="Inclusão: da promessa à prática">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2021–2023</span><span>Evidência</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">Da promessa à prática</p>
+      <h2>A resposta não ficou no comunicado. Virou <em>orçamento, meta e critério de promoção</em>.</h2>
+      <p class="body">Nas áreas impactadas diretamente pelos workshops, o eNPS subiu <strong>11 pontos</strong>. A presença de mulheres e de pessoas negras em cargos de liderança cresceu de forma contínua.</p>
+      <p class="maxim">Inclusão não é campanha. É critério de gestão, ou não é nada.</p>
+      <p class="small">Inclusão não apaga uma tragédia, e nenhum indicador deveria ser usado para isso.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Programa</th><th>Alcance</th></tr></thead>
+        <tbody>
+          <tr><td>Estágio Afirmativo (desde 2021)</td><td>400+ jovens negros em três ciclos</td></tr>
+          <tr><td>Trainee Afirmativo (2021–2023)</td><td>150+ trainees negros contratados</td></tr>
+          <tr><td>Aceleração de Carreiras para Pessoas Negras</td><td>300+ participantes, promoção acima de 40%</td></tr>
+          <tr><td>Bolsas em Tecnologia e Inovação</td><td>600+ bolsas, com universidades e ONGs</td></tr>
+          <tr><td>ELLAs (2019–2022) e Mulheridades (2023)</td><td>2.700 mulheres formadas; 1.200 na 1ª turma do sucessor</td></tr>
+          <tr><td>Parcerias</td><td>MOVER; Universidade Zumbi dos Palmares</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 18 · ESCOLA DE LÍDERES ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="Liderança em rede: a Escola de Líderes">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2022–2024</span><span>Conceito de apoio · McChrystal, Team of Teams</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">Liderança em rede</p>
+      <h2>A restrição que <em>virou método</em>.</h2>
+      <p class="body">No varejo alimentar, o EBITDA ajustado gira entre 4% e 6%. Não havia espaço para consultoria cara. A Escola de Líderes nasceu em 2022 dessa restrição, com três escolhas:</p>
+      <ol class="list">
+        <li><i>01</i><span><b>Professores da casa.</b> Mais de 170 executivos deram aulas e painéis.</span></li>
+        <li><i>02</i><span><b>Infraestrutura própria.</b> Estúdio profissional e plataforma remodelada.</span></li>
+        <li><i>03</i><span><b>Múltiplos formatos.</b> Presencial, online, mobile e sob demanda.</span></li>
+      </ol>
+      <p class="body">Abilio Diniz foi padrinho e professor de turma no primeiro ano; Alexandre Bompard, CEO global, nos seguintes. A formação teve certificação credenciada pelo MEC.</p>
+      <p class="maxim">Liderança é serviço. E serviço inclui ensinar.</p>
+    </div>
+    <div class="stack">
+      <figure class="ph "><img src="img/encontro-lideres-mesas.jpg" alt="Encontro de Líderes Carrefour, 2022" style="aspect-ratio:16/9;object-position:center" loading="lazy"><figcaption>Encontro de Líderes Carrefour, 2022</figcaption></figure>
+      <div class="scene"><span class="src">Cena · o dia em que o organograma sumiu</span><p>No auge da integração, reunimos mais de cem líderes. Começamos sem projetar o organograma, só com uma pergunta:</p><q>O que você faria se não precisasse pedir permissão?</q><p>O silêncio deu lugar a uma avalanche de ideias. Sem o mapa de cargos, as pessoas falaram de propósito, cliente e resultado. Naquele dia, liderança deixou de ser título e virou rede.</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 19 · ESCALA E EFEITO ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="Escola de Líderes: escala e efeito">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2022–2024</span><span>Evidência</span></div>
+  <div class="stack">
+    <p class="eyebrow">Escala e efeito</p>
+    <h2>Enquanto a matriz formava algumas centenas por ciclo, o Brasil formou <em class="grad">14 mil em dois anos</em>.</h2>
+  </div>
+  <figure class="band"><img src="img/formatura-escola-2024.jpg" alt="Formatura da Escola de Líderes, 2024" style="object-position:center 55%"><figcaption><span>Formatura da Escola de Líderes · 2024</span><a href="https://www.youtube.com/watch?v=sr6EEpZXs4A" target="_blank" rel="noopener">▶ Assistir o vídeo ↗</a></figcaption></figure>
+  <div class="stats">
+    <div class="stat hl"><b>14 mil</b><span>gestores formados em dois anos</span></div>
+    <div class="stat"><b>320</b><span>transmissões ao vivo, 2022–2024</span></div>
+    <div class="stat"><b>300 mil</b><span>visualizações na plataforma</span></div>
+    <div class="stat"><b>18% → 12%</b><span>turnover de líderes nas áreas de maior participação</span></div>
+    <div class="stat"><b>+7 p.p.</b><span>de favorabilidade em liderança entre formados</span></div>
+    <div class="stat"><b>+9 / +6 p.p.</b><span>de mulheres e de pessoas negras na liderança, entre formados</span></div>
+  </div>
+  <div class="grid2" style="margin-top:clamp(20px,3.6vh,32px)">
+    <div class="stack">
+      <div class="scene"><span class="src">Cena · 2023, integração final das operações</span><p>Um diretor me disse:</p><q>Percebi que não adianta pedir confiança se eu mesmo não confio.</q><p>Nada no processo mudou. Mudou o comportamento de quem liderava, e o time passou a compartilhar erros e pedir ajuda.</p></div>
+      <p class="small">Trilhas por camada (primeira, média e sênior liderança). A Digital Retail Academy levou cloud, dados e IA a mais de 80 mil pessoas.</p>
+    </div>
+    <p class="maxim">Não faltava orçamento para formar líderes. Faltava acreditar que os líderes da casa sabiam ensinar.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============ 20 · PROGRAMA 555 ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="O cliente como ritual: Programa 555">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2023–2024</span><span>Ferramenta · ritual de cliente</span></div>
+  <div class="stack" style="margin-bottom:clamp(18px,3.2vh,30px)">
+    <p class="eyebrow">O cliente como ritual</p>
+    <h2>Todo varejista diz que o cliente está no centro. O 555 transformou a frase em <em>um número por loja</em>.</h2>
+  </div>
+  <div class="m555" role="table" aria-label="Programa 555: três dimensões com cinco indicadores cada">
+    <div class="h" role="rowheader"><b>5</b>Negócio</div><div>Sortimento</div><div>Precificação</div><div>Promoções</div><div>Disponibilidade de estoque</div><div>Eficiência de processos</div>
+    <div class="h" role="rowheader"><b>5</b>Serviço</div><div>Tempo de espera</div><div>Eficiência de caixa</div><div>Cordialidade</div><div>Suporte digital</div><div>Resolução de problemas</div>
+    <div class="h" role="rowheader"><b>5</b>Atendimento</div><div>Acolhimento inclusivo</div><div>Experiência em loja</div><div>Pós-venda</div><div>Canais de contato</div><div>NPS</div>
+  </div>
+  <div class="grid2" style="margin-top:clamp(20px,3.6vh,32px)">
+    <div class="stack">
+      <p class="body">Muitos indicadores já existiam, espalhados em relatórios que ninguém lia junto. O 555 os consolidou em <strong>um score individual para cada loja, hipermercado e clube</strong>, construído a partir da avaliação de clientes e sócios, e não de percepções internas. A base foram as Regras de Ouro do Atendimento Inclusivo, criadas em 2022.</p>
+      <p class="maxim">O que se vê em público vira compromisso.</p>
+    </div>
+    <div class="stack">
+      <div class="rank">
+        <div class="top"><b>Top 10</b><span class="small">As viradas celebradas no mesmo palco.</span></div>
+        <div class="flop"><b>Flop 10</b><span class="small">Tratado como ponto de partida, nunca como punição.</span></div>
+      </div>
+      <p class="body">Uma live mensal de <strong>60 minutos</strong>, em formato de programa de TV, com todas as bandeiras expostas. Mais de <strong>30 mil pessoas</strong> conectadas todo mês. O COO assumiu o tema, com mensagens semanais a toda a operação.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 21 · TRÊS VIRADAS ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="Três viradas do 555">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2023–2024</span><span>Evidência · mini-casos</span></div>
+  <div class="stack" style="margin-bottom:clamp(20px,3.6vh,34px)">
+    <p class="eyebrow">Três viradas</p>
+    <h2>Em 2024, o Brasil alcançou o <em class="grad">melhor NPS do Carrefour no mundo</em>.</h2>
+  </div>
+  <div class="turns">
+    <article class="turn"><span class="where">Atacadão · Minas Gerais</span><b>+20</b><p>pontos de NPS em seis meses. Escalas de caixa reorganizadas e reposição rápida com disciplina semanal. Do Flop 10 ao Top 10.</p></article>
+    <article class="turn"><span class="where">Hipermercado Carrefour · Brasília</span><b>+18</b><p>pontos de NPS em oito meses. Reuniões diárias pautadas pelo 555 com caixas, atendentes e repositores; treinamento em empatia.</p></article>
+    <article class="turn"><span class="where">Sam's Club · São Paulo</span><b>+15</b><p>pontos de NPS em um ano. Processos do balcão de serviços redesenhados e cartilha digital de benefícios; mais renovações.</p></article>
+  </div>
+  <div class="grid2" style="margin-top:clamp(22px,4vh,36px)">
+    <p class="body"><strong>Mais de 80% das lojas</strong> melhoraram seus scores entre 2023 e 2024. As filas caíram até 20% onde o programa foi aplicado com consistência.</p>
+    <p class="maxim">O 555 não criou o cuidado com o cliente. Deu a ele cadência, visibilidade e palco.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============ 22 · O CUSTO ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="O custo da integração">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2022–2025</span><span>A parte difícil</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">O custo da integração, e o que o amorteceu</p>
+      <h2>A cultura não evitou a dor. Evitou que ela <em>desmontasse a companhia</em>.</h2>
+      <div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <div class="stat hl"><b>123</b><span>lojas deficitárias fechadas, 2022–2024</span></div>
+        <div class="stat" style="padding-left:18px;border-left:1px solid var(--line)"><b>R$ 524 mi</b><span>em baixas de ativos e estoques</span></div>
+      </div>
+      <p class="body">Por trás de cada loja fechada havia um time, um bairro e famílias. O papel do RH foi garantir que a decisão financeira viesse com uma resposta humana: comunicação transparente, realocação sempre que possível e presença física nas unidades.</p>
+      <p class="maxim">Fechar uma loja é uma decisão financeira. Como ela é fechada é uma decisão cultural.</p>
+    </div>
+    <div class="stack">
+      <p class="eyebrow">Escuta contínua, não anual</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Instrumento</th><th>O que mostrou</th></tr></thead>
+          <tbody>
+            <tr><td>Melhores Juntos (2022)</td><td>112 mil respondentes; favorabilidade 70%, liderança 71%, cultura 73%</td></tr>
+            <tr><td>Pulso (2022–2023)</td><td>Adesão acima de 89%, usada para ajustar o i4Cs ao longo do ciclo</td></tr>
+            <tr><td>Pulso Sempre Juntos (2024)</td><td>Orgulho de pertencer acima de 75%</td></tr>
+            <tr><td>Glint (2023)</td><td>Brasil no top 3 global do grupo em cultura e liderança</td></tr>
+            <tr><td>Ipsos (2024)</td><td>Operação brasileira entre as mais bem avaliadas em reputação</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><span class="tag">Nota de leitura</span><p>A favorabilidade de 70% em 2022 é menor que os 76% do BIG em 2020. Não é queda da mesma base: é o retrato de uma companhia nova, três vezes maior, no meio da travessia. O número honesto é mais útil que o número bonito.</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 23 · O RH QUE MUDOU PRIMEIRO ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="O RH que precisou mudar primeiro">
+<div class="frame">
+  <div class="runhead"><span>Ato III · 2019–2025</span><span>O papel do RH</span></div>
+  <div class="grid2">
+    <div class="stack">
+      <p class="eyebrow">O RH que precisou mudar primeiro</p>
+      <h2>O RH só teria legitimidade para pedir coerência se fosse o <em>primeiro a demonstrá-la</em>.</h2>
+      <p class="lead">Existe uma armadilha comum: o RH desenha a mudança para os outros e se exclui dela. Aprendi na prática que a cultura não se move pela força das campanhas, mas pela coerência dos comportamentos no topo. Podíamos ter um EVP impecável e vídeos emocionantes; se um diretor gritava na reunião, o modelo se quebrava ali. E se quebrava em silêncio.</p>
+      <figure class="ph "><img src="img/k-cava-palco.jpg" alt="Kiko Campos no ÇaVa RH, encontro do time de RH, nov/2022" style="aspect-ratio:16/5;object-position:center 22%" loading="lazy"><figcaption>Kiko Campos · ÇaVa RH, nov/2022</figcaption></figure>
+      <p class="maxim">O RH não virou protagonista porque pediu espaço. Virou porque entregou coerência.</p>
+    </div>
+    <div class="stack">
+      <ol class="list">
+        <li><i>01</i><span><b>Arquitetura, não campanha.</b> O i4Cs entrou em todos os subsistemas. A campanha termina; o sistema continua funcionando quando ninguém está olhando.</span></li>
+        <li><i>02</i><span><b>Um time, não uma rede de escritórios.</b> O ÇaVa RH nasceu como comunidade integradora: troca, formação conjunta e reconhecimento mútuo.</span></li>
+        <li><i>03</i><span><b>Viver a inclusão antes de pedi-la.</b> Seleção afirmativa, promoções com recorte de diversidade e linguagem inclusiva dentro do próprio RH.</span></li>
+        <li><i>04</i><span><b>Presença na ponta.</b> O RH nas lojas e nos CDs, conduzindo oficinas e ouvindo as pessoas diretamente.</span></li>
+      </ol>
+      <div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <div class="stat hl"><b>Top Employer</b><span>dois ciclos. Não era prêmio de vaidade: era uma auditoria que obrigava a provar que a cultura não ficou no discurso</span></div>
+        <div class="stat" style="padding-left:18px;border-left:1px solid var(--line)"><b>53 mil</b><span>beneficiários do Bolsa Família contratados em menos de um ano</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ ARQUIVO VIVO ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="Arquivo vivo">
+<div class="frame">
+  <div class="runhead"><span>2019–2025</span><span>Arquivo vivo · toque para ampliar</span></div>
+  <div class="grid2" style="margin-bottom:clamp(14px,2.6vh,24px);align-items:end">
+    <div class="stack"><p class="eyebrow">Pedagogia da presença</p><h2>Cultura não se ensina por comunicação. <em>Se aprende por convivência.</em></h2></div>
+    <p class="body">Palcos, salas, estúdios e corredores. Sete anos de rituais que tornaram a cultura visível para quem estava na ponta.</p>
+  </div>
+  <div class="gal">
+    <figure style="grid-area:1/1/3/3"><img src="img/g-i4cs-plateia.jpg" alt="Plateia de líderes na aplicação do i4Cs, 2023" loading="lazy"><figcaption>i4Cs · Turma SP, 2023</figcaption></figure>
+    <figure style="grid-area:1/3/2/4"><img src="img/k-conarh-palco.jpg" alt="Kiko Campos na Arena Escola do Caos, CONARH 2022" loading="lazy" style="object-position:45% 30%"><figcaption>Kiko · CONARH, 2022</figcaption></figure>
+    <figure style="grid-area:1/4/2/5"><img src="img/k-cava-2024.jpg" alt="Kiko Campos no ÇaVa RH, 2024" loading="lazy" style="object-position:88% 30%"><figcaption>Kiko · ÇaVa RH, 2024</figcaption></figure>
+    <figure style="grid-area:2/3/3/4"><img src="img/g-jornada-4cs.jpg" alt="Jornada 4Cs, 2022" loading="lazy"><figcaption>Jornada 4Cs, 2022</figcaption></figure>
+    <figure style="grid-area:2/4/3/5"><img src="img/g-escola-sala.jpg" alt="Escola de Liderança Corporativa, 2022" loading="lazy"><figcaption>Escola de Liderança, 2022</figcaption></figure>
+    <figure style="grid-area:3/1/4/3"><img src="img/g-formatura.jpg" alt="Formatura da Escola de Líderes, 2024" loading="lazy" style="object-position:center 40%"><figcaption>Formatura da Escola, 2024</figcaption></figure>
+    <figure style="grid-area:3/3/4/5"><img src="img/k-estudio-gravacao.jpg" alt="Kiko Campos grava conteúdo no estúdio interno do BIG, 2021" loading="lazy" style="object-position:center 30%"><figcaption>Kiko · estúdio interno, 2021</figcaption></figure>
+  </div>
+</div>
+</section>
+
+<!-- ============ VIDEOTECA ============ -->
+<section class="slide" data-act="Ato III · 2021–25" data-title="Para ver e ouvir">
+<div class="frame">
+  <div class="runhead"><span>2019–2025</span><span>Videoteca · abre no YouTube</span></div>
+  <div class="stack" style="margin-bottom:clamp(16px,3vh,28px)">
+    <p class="eyebrow">Para ver e ouvir</p>
+    <h2>O caso, contado <em>em movimento</em>.</h2>
+  </div>
+  <div class="vids">
+    <a class="vid " href="https://www.youtube.com/watch?v=-u5DI7-zJ-w" target="_blank" rel="noopener"><span class="thumb"><img src="img/yt--u5DI7-zJ-w.jpg" alt="" loading="lazy"><i class="play" aria-hidden="true"></i></span><span class="vctx">Cultura · série interna</span><span class="vt">Transformação cultural · episódio 01</span><span class="vgo">Assistir no YouTube ↗</span></a>
+    <a class="vid " href="https://www.youtube.com/watch?v=w-JHO-kIeAA" target="_blank" rel="noopener"><span class="thumb"><img src="img/yt-w-JHO-kIeAA.jpg" alt="" loading="lazy"><i class="play" aria-hidden="true"></i></span><span class="vctx">Grupo BIG · estúdio próprio</span><span class="vt">Big Talk: os bastidores de um programa de liderança</span><span class="vgo">Assistir no YouTube ↗</span></a>
+    <a class="vid " href="https://www.youtube.com/watch?v=fivOvSSTX44" target="_blank" rel="noopener"><span class="thumb"><img src="img/yt-fivOvSSTX44.jpg" alt="" loading="lazy"><i class="play" aria-hidden="true"></i></span><span class="vctx">O RH que mudou primeiro</span><span class="vt">Transformação interna no RH</span><span class="vgo">Assistir no YouTube ↗</span></a>
+    <a class="vid " href="https://www.youtube.com/watch?v=GXFHrcOra4U" target="_blank" rel="noopener"><span class="thumb"><img src="img/yt-GXFHrcOra4U.jpg" alt="" loading="lazy"><i class="play" aria-hidden="true"></i></span><span class="vctx">Escola de Líderes</span><span class="vt">Resumo da Escola de Líderes 2023</span><span class="vgo">Assistir no YouTube ↗</span></a>
+    <a class="vid " href="https://www.youtube.com/watch?v=rjB0aA82gb4" target="_blank" rel="noopener"><span class="thumb"><img src="img/yt-rjB0aA82gb4.jpg" alt="" loading="lazy"><i class="play" aria-hidden="true"></i></span><span class="vctx">Escola de Líderes</span><span class="vt">Masterclass Escola de Líderes</span><span class="vgo">Assistir no YouTube ↗</span></a>
+    <a class="vid " href="https://www.youtube.com/watch?v=uzdGjFnSFCw" target="_blank" rel="noopener"><span class="thumb"><img src="img/yt-uzdGjFnSFCw.jpg" alt="" loading="lazy"><i class="play" aria-hidden="true"></i></span><span class="vctx">Inclusão · Papo de Liderança</span><span class="vt">Papo de Liderança #4: liderança inclusiva</span><span class="vgo">Assistir no YouTube ↗</span></a>
+  </div>
+</div>
+</section>
+
+<!-- ============ 24 · SÍNTESE: MECANISMOS ============ -->
+<section class="slide" data-act="Fechamento" data-title="Leitura analítica: os seis mecanismos">
+<div class="frame">
+  <div class="runhead"><span>Fechamento</span><span>Leitura analítica · Schein, mecanismos primários de incorporação</span></div>
+  <div class="stack" style="margin-bottom:clamp(18px,3.2vh,30px)">
+    <p class="eyebrow">Por que funcionou</p>
+    <h2>Cada ferramenta acionou um dos seis mecanismos que, segundo Schein, <em>fixam uma cultura</em>.</h2>
+  </div>
+  <div class="mech">
+    <div class="mech-list" id="mechList"></div>
+    <div class="stack">
+      <p class="body mech-why" id="mechWhy"></p>
+      <div class="chips" id="mechChips"></div>
+      <p class="small">Selecione um mecanismo para ver as ferramentas do caso que o acionaram. As marcas indicam o ciclo: BIG (2019–21) ou CRF (2021–25).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 25 · LIÇÕES + AUTODIAGNÓSTICO ============ -->
+<section class="slide" data-act="Fechamento" data-title="Cinco lições e autodiagnóstico">
+<div class="frame">
+  <div class="runhead"><span>Fechamento</span><span>Autodiagnóstico · responda pela sua organização</span></div>
+  <div class="stack" style="margin-bottom:clamp(14px,2.6vh,24px)">
+    <p class="eyebrow">Cinco lições para quem vai atravessar uma integração</p>
+    <h2>O caso é do varejo. <em>As lições servem para qualquer organização.</em></h2>
+  </div>
+  <div class="lessons" id="lessons"></div>
+  <div class="readout"><div class="meter" id="meter" aria-hidden="true"></div><p class="body" id="readout" aria-live="polite"></p></div>
+</div>
+</section>
+
+<!-- ============ 26 · ENCERRAMENTO ============ -->
+<section class="slide" data-act="Fechamento" data-title="Encerramento e referências">
+<div class="frame">
+  <div class="runhead"><span>Fechamento</span><span>Referências</span></div>
+  <div class="stack">
+    <p class="eyebrow">Entre 2018 e 2025, estratégias, donos e mercados mudaram</p>
+    <div class="grid2" style="align-items:center">
+      <h1 style="max-width:16ch;font-size:clamp(2.1rem,4.4vw,4rem)">Estratégia define para onde ir. <em class="grad">Cultura define se as pessoas chegam juntas.</em></h1>
+      <div class="stack"><figure class="ph short"><img src="img/k-retrato-pensando.jpg" alt="Retrato de Kiko Campos, 2022" style="aspect-ratio:16/9;object-position:center 30%" loading="lazy"></figure><a class="vid row" href="https://www.youtube.com/watch?v=2WyR8dPYdl0" target="_blank" rel="noopener"><span class="thumb"><img src="img/yt-2WyR8dPYdl0.jpg" alt="" loading="lazy"><i class="play" aria-hidden="true"></i></span><span class="vctx">Palestra · MindSight 2024</span><span class="vt">Cultura organizacional que vira resultado</span><span class="vgo">Assistir no YouTube ↗</span></a></div>
+    </div>
+    <hr class="rule" style="margin-block:clamp(12px,2.4vh,24px)">
+    <div class="refs">
+      <p>Campos, K. <i>O Novo Código da Mudança</i>. Cenas e frases citadas nesta apresentação.</p>
+      <p>Beer, M., &amp; Nohria, N. (2000). Cracking the code of change. <i>Harvard Business Review</i>.</p>
+      <p>Buckingham, M., &amp; Coffman, C. (1999). <i>First, break all the rules</i>. Simon &amp; Schuster.</p>
+      <p>Edmondson, A. (2018). <i>The fearless organization</i>. Wiley.</p>
+      <p>Kotter, J. (1996). <i>Leading change</i>. Harvard Business School Press.</p>
+      <p>McChrystal, S. (2015). <i>Team of teams</i>. Penguin.</p>
+      <p>Oakes, K. (2021). <i>Culture renovation</i>. McGraw-Hill.</p>
+      <p>Reichheld, F. (2003). The one number you need to grow. <i>Harvard Business Review</i>.</p>
+      <p>Schein, E. H. (2010). <i>Organizational culture and leadership</i> (4ª ed.). Jossey-Bass.</p>
+      <p>Senn, L., &amp; Hart, J. (2010). <i>Winning teams, winning cultures</i>. Senn Delaney.</p>
+      <p>Ulrich, D. (2015). <i>Victory through organization</i>. McGraw-Hill.</p>
+      <p>Wenger, E. (1998). <i>Communities of practice</i>. Cambridge University Press.</p>
+      <p>Fontes internas: Grupo BIG (2019–2021) e Grupo Carrefour Brasil (2021–2025): documentos de integração cultural, 4Cs e i4Cs, Escola de Líderes, Programa 555 e pesquisas Pulso, Melhores Juntos e Glint.</p>
+    </div>
+    <div class="byline" style="margin-top:8px">
+      <a class="brandmark" href="/" style="color:inherit;text-decoration:none"><span class="dot"></span>kiko campos</a>
+      <span>Toda mudança é humana.</span>
+      <a class="mono" href="/" style="color:var(--ink-soft)">kikocampos.com</a>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<!-- Índice -->
+<div class="index" id="index" hidden role="dialog" aria-modal="true" aria-label="Índice">
+  <div class="frame">
+    <div class="index-top"><p class="eyebrow">Índice do caso</p><div class="ctrl"><button id="closeIdx" aria-label="Fechar índice">Fechar ✕</button></div></div>
+    <h2 style="margin-top:12px">Cultura como sistema</h2>
+    <div class="index-grid" id="indexGrid"></div>
+  </div>
+</div>
+
+<nav class="bar" aria-label="Navegação da apresentação">
+  <a class="brandmark" href="/" style="color:inherit;text-decoration:none" title="Voltar ao kikocampos.com"><span class="dot"></span><span class="wm">kiko campos</span></a>
+  <div class="trail">
+    <div class="trail-acts" id="trailActs"></div>
+    <div class="trail-line"><div class="trail-fill" id="trailFill"></div><div class="trail-dot" id="trailDot"></div></div>
+  </div>
+  <div class="ctrl">
+    <button id="openIdx" aria-label="Abrir índice">☰<span class="idx-label">&nbsp;Índice</span></button>
+    <button id="prev" aria-label="Slide anterior">←</button>
+    <span class="count" id="count">01 / 26</span>
+    <button id="next" aria-label="Próximo slide">→</button>
+  </div>
+</nav>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const N=slides.length;
+  let cur=0;
+  const pad=n=>String(n).padStart(2,'0');
+  const $=id=>document.getElementById(id);
+
+  /* ---- Trilha por ato ---- */
+  const acts=[];slides.forEach((s,i)=>{const a=s.dataset.act;const last=acts[acts.length-1];if(!last||last.name!==a)acts.push({name:a,start:i,end:i});else last.end=i;});
+  $('trailActs').innerHTML=acts.map(a=>`<span style="width:${((a.end-a.start+1)/N*100).toFixed(2)}%">${a.name}</span>`).join('');
+
+  function go(i,fromHash){
+    i=Math.max(0,Math.min(N-1,i));
+    slides[cur].classList.remove('is-active');
+    cur=i;
+    const s=slides[cur];s.classList.add('is-active');s.scrollTop=0;
+    $('count').textContent=pad(cur+1)+' / '+pad(N);
+    const pct=N>1?cur/(N-1)*100:0;
+    $('trailFill').style.width=pct+'%';$('trailDot').style.left=pct+'%';
+    [...$('trailActs').children].forEach((el,k)=>el.classList.toggle('cur',cur>=acts[k].start&&cur<=acts[k].end));
+    $('prev').disabled=cur===0;$('next').disabled=cur===N-1;
+    if(!fromHash){try{history.replaceState(null,'','#s'+(cur+1));}catch(e){}}
+    document.querySelectorAll('#indexGrid button').forEach(b=>b.classList.toggle('cur',+b.dataset.i===cur));
+  }
+  $('prev').onclick=()=>go(cur-1);
+  $('next').onclick=()=>go(cur+1);
+  document.addEventListener('keydown',e=>{
+    if(!$('index').hidden){if(e.key==='Escape')closeIdx();return;}
+    if(['ArrowRight','PageDown'].includes(e.key)||(e.key===' '&&!/BUTTON/.test(document.activeElement.tagName))){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home')go(0);else if(e.key==='End')go(N-1);
+  });
+  let tx=null,ty=null;
+  $('deck').addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+  $('deck').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4)go(cur+(dx<0?1:-1));tx=null;},{passive:true});
+
+  /* ---- Índice ---- */
+  $('indexGrid').innerHTML=acts.map(a=>`<div><h4>${a.name}</h4>${slides.slice(a.start,a.end+1).map((s,k)=>`<button data-i="${a.start+k}"><i>${pad(a.start+k+1)}</i><span>${s.dataset.title}</span></button>`).join('')}</div>`).join('');
+  $('indexGrid').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;closeIdx();go(+b.dataset.i);});
+  function openIdx(){$('index').hidden=false;$('closeIdx').focus();}
+  function closeIdx(){$('index').hidden=true;$('openIdx').focus();}
+  $('openIdx').onclick=openIdx;$('closeIdx').onclick=closeIdx;
+
+  /* ---- Linha do tempo ---- */
+  const years=[
+    ['Jun 2018','Walmart','Walmart anuncia a venda de 80% da operação brasileira à Advent International.','Ato I · a descrença'],
+    ['2019','Grupo BIG','Nasce o Grupo BIG e o Jeito Big. Começam os Culture Shaping Workshops.','Ato II · o método'],
+    ['2020','Grupo BIG','Big Voice: 93% de adesão; favorabilidade de 68% para 76%. Em novembro, a morte de João Alberto Freitas em uma loja Carrefour em Porto Alegre.','Ato II · o método'],
+    ['Mar 2021','Transição','Carrefour Brasil anuncia a aquisição do Grupo BIG por R$ 7,5 bilhões. O IPO é suspenso.','Ato III · a travessia'],
+    ['2022','Carrefour','Integração. Lançamento dos 4Cs, da Escola de Líderes e da Digital Retail Academy. Em abril, o episódio de Salvador. Os 4Cs viram i4Cs.','Ato III · a travessia'],
+    ['2023','Carrefour','O Programa 555 chega ao Brasil. Lives mensais com mais de 30 mil pessoas conectadas.','Ato III · a travessia'],
+    ['2024','Carrefour','Melhor NPS global do Carrefour. 53 mil contratações via Bolsa Família. Top Employer.','Ato III · a travessia'],
+    ['2025','Carrefour','Consolidação do legado e encerramento do ciclo.','Fechamento']
+  ];
+  $('tl').innerHTML=years.map((y,i)=>`<button role="tab" aria-selected="${i===0}" data-i="${i}"><b>${y[0]}</b><small>${y[1]}</small></button>`).join('');
+  function showYear(i){
+    [...$('tl').children].forEach((b,k)=>b.setAttribute('aria-selected',k===i));
+    const y=years[i];
+    $('tlDetail').innerHTML=`<div><div class="big">${y[0]}</div><p class="eyebrow phase">${y[3]}</p></div><p class="lead" style="align-self:center">${y[2]}</p>`;
+  }
+  $('tl').addEventListener('click',e=>{const b=e.target.closest('button');if(b)showYear(+b.dataset.i);});
+  showYear(0);
+
+  /* ---- Ferramentas do Jeito Big ---- */
+  const tools=[
+    {img:'k-bigtalks-telao',cap:'Kiko Campos · Big Talks, 2021',n:'A sombra do líder',d:'Workshops que mostravam aos gestores como cada gesto seu era lido, amplificado e copiado pelo time.',f:[['Nível de Schein','Artefato que molda pressupostos'],['Mecanismo','Modelagem e ensino'],['Alcance','Toda a liderança']],q:'O líder não é apenas um emissor de mensagens. Ele é um ambiente.'},
+    {n:'Mood Elevator',d:'Uma linguagem simples para nomear estados emocionais e sair do ceticismo herdado, inspirada na metodologia da Senn Delaney.',f:[['Nível de Schein','Pressupostos'],['Mecanismo','Linguagem comum'],['Origem','Senn Delaney']],q:'Quando um líder entra em uma sala, o clima muda antes da pauta começar.'},
+    {img:'big-2020-workshop',cap:'Grupo BIG · palco, 2020',n:'Culture Shaping Workshops',d:'Sessões em que as equipes nomeavam suas crenças limitantes e firmavam compromissos concretos.',f:[['Nível de Schein','Pressupostos'],['Mecanismo','Reflexão coletiva'],['Alcance','300+ sessões, 2019–2021']],q:'Cultura não muda por decreto. Cultura se renova quando as pessoas mudam juntas.'},
+    {img:'jeitobig-kit',cap:'Kit de expressão e reforço da cultura BIG',n:'Símbolos, rituais e reconhecimento',d:'Rituais semanais de comunicação e histórias reais de colaboradores. Todo mês, alguém era reconhecido pelo “comportamento destaque” do Jeito Big: não o melhor vendedor, mas o melhor exemplo. Três regras: o comportamento vinha antes do resultado, a história era contada e o reconhecimento era público e específico.',f:[['Nível de Schein','Artefatos'],['Mecanismo','Recompensa e narrativa'],['Cadência','Semanal e mensal']],q:'A cultura não vive nos slogans. Ela vive no cotidiano, e o cotidiano é feito de rituais.'},
+    {n:'MAT · Mapeamento de Talentos',d:'Um processo antes longo e burocrático foi reduzido a três níveis de prontidão, com um retrato claro de sucessão.',f:[['Nível de Schein','Valores em critério'],['Mecanismo','Critério de promoção'],['1º ciclo','1.500 gestores mapeados']],q:'Processo completo que ninguém usa não sustenta sucessão. Processo simples, sim.'},
+    {img:'k-estudio-gravacao',cap:'Kiko Campos · gravação no estúdio interno, 2021',n:'BigFlix e multiplicadores',d:'Foi ouvindo as pessoas que trocamos um LMS complicado por uma plataforma de streaming interna, tão simples quanto assistir a um vídeo em casa. Perdemos parte da analítica detalhada e ganhamos alcance real. Mais de mil multiplicadores sustentaram os rituais na ponta.',f:[['Nível de Schein','Artefatos e valores'],['Trade-off','Menos métrica, mais gente'],['Acesso','De 16% para quase 90%']],q:'Conteúdo que não circula não vira cultura.'}
+  ];
+  $('toolTabs').innerHTML=tools.map((t,i)=>`<button role="tab" aria-selected="${i===0}" data-i="${i}"><i>${pad(i+1)}</i><span>${t.n}</span></button>`).join('');
+  function showTool(i){
+    [...$('toolTabs').children].forEach((b,k)=>b.setAttribute('aria-selected',k===i));
+    const t=tools[i];
+    $('toolPanel').innerHTML=(t.img?`<figure class="ph"><img src="img/${t.img}.jpg" alt="${t.cap}" style="aspect-ratio:16/7"><figcaption>${t.cap}</figcaption></figure>`:'')+`<p class="eyebrow">Ferramenta ${pad(i+1)} de ${pad(tools.length)}</p><h3>${t.n}</h3><p class="lead">${t.d}</p><dl class="facts">${t.f.map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('')}</dl><p class="maxim" style="font-size:clamp(1.05rem,1.6vw,1.35rem)">${t.q}</p>`;
+  }
+  $('toolTabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)showTool(+b.dataset.i);});
+  showTool(0);
+
+  /* ---- Infraestrutura: canos ---- */
+  const pipes=[
+    ['Proposta de valor','Reescrita com base nos 4Cs. É a promessa que a empresa faz a quem chega e a quem fica.'],
+    ['Seleção','Passou a buscar evidências de comportamento alinhado a cada C. A cultura começa em quem entra.'],
+    ['Onboarding','Começava pelos 4Cs. O primeiro dia ensina o que a empresa realmente valoriza.'],
+    ['Desenvolvimento','Trilhas de liderança e técnicas alinhadas ao modelo, depois ampliadas pela Escola de Líderes.'],
+    ['Performance','Comportamentos 4C viraram critério formal de avaliação. O "como" passou a pesar junto com o "quanto".'],
+    ['Sucessão','Movimentações passaram a considerar a vivência do modelo. Quem é promovido ensina o que a empresa premia.'],
+    ['Reconhecimento','O programa "Você é 4C" registrava mais de 10 mil reconhecimentos por mês em 2022, em lojas e escritórios.']
+  ];
+  const NS='http://www.w3.org/2000/svg';
+  const g=$('pipes');
+  let hatch='';for(let x=30;x<980;x+=22)hatch+=`<line class="hatch" x1="${x}" y1="212" x2="${x-12}" y2="224"/>`;$('hatch').innerHTML=hatch;
+  pipes.forEach((p,i)=>{
+    const y=272+i*38, rx=340+i*53.3;
+    const d=`M40 ${y} H ${rx} V 200`;
+    const el=document.createElementNS(NS,'g');el.setAttribute('class','pipe');el.setAttribute('tabindex','0');el.setAttribute('role','button');el.setAttribute('aria-label',p[0]);el.dataset.i=i;
+    el.innerHTML=`<path class="tube" d="${d}"/><path class="core" d="${d}"/><path class="flow" d="${d}"/><text x="44" y="${y-10}">${p[0]}</text><rect x="30" y="${y-30}" width="${rx-20}" height="38" fill="transparent"/>`;
+    g.appendChild(el);
+  });
+  function showPipe(i){
+    [...g.children].forEach((el,k)=>el.classList.toggle('on',k===i));
+    $('infraDetail').innerHTML=`<p class="eyebrow">Subsistema ${pad(i+1)} de 07</p><h3>${pipes[i][0]}</h3><p class="body">${pipes[i][1]}</p><p class="maxim" style="font-size:1.2rem">Valor que não entra na avaliação, na promoção e na demissão é decoração.</p>`;
+  }
+  g.addEventListener('click',e=>{const el=e.target.closest('.pipe');if(el)showPipe(+el.dataset.i);});
+  g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const el=e.target.closest('.pipe');if(el){e.preventDefault();e.stopPropagation();showPipe(+el.dataset.i);}}});
+  showPipe(4);
+
+  /* ---- Mecanismos de Schein ---- */
+  const mechs=[
+    ['O que os líderes observam, medem e controlam','Números que viviam espalhados em relatórios passaram a ser olhados juntos, todo mês, em público. O que é medido em público vira compromisso.',['Big Voice','Programa 555','Pulso e Melhores Juntos']],
+    ['Como reagem a incidentes críticos e crises','A parte difícil define a cultura. Reabrir o modelo menos de um ano depois e pôr a Inclusão em primeiro foi a resposta. Fechar lojas com presença e transparência, também.',['i4Cs','Manifesto da Inclusão','Fechamento de lojas com cuidado']],
+    ['Como alocam recursos','Com margem de 4% a 6%, cada real diz o que importa. Estúdio próprio, plataforma própria e programas afirmativos com orçamento e meta.',['Escola de Líderes','BigFlix','Programas afirmativos','Digital Retail Academy']],
+    ['O que modelam, ensinam e treinam','O líder é um ambiente. Quando 170 executivos viram professores, o exemplo deixa de ser implícito e passa a ser ensinado.',['Sombra do líder','170 executivos professores','Culture Shaping Workshops','Multiplicadores']],
+    ['Como distribuem recompensas e status','Se o líder reconhece só quem entrega meta, sua sombra ensina competição. Se reconhece quem ajuda outro time, ensina cooperação. Reconhecimento é a forma mais direta de dizer “é isso que queremos ver mais”.',['Você é 4C','Top 10 do 555','Histórias e rituais']],
+    ['Como recrutam, promovem e desligam','As pessoas observam quem cresce, quem some, quem é protegido e quem é exposto. Valor que não entra na avaliação, na promoção e na demissão é decoração.',['4Cs na seleção','4Cs na performance','MAT','Estágio e Trainee Afirmativos']]
+  ];
+  const cycle={'Big Voice':'BIG','Programa 555':'CRF','Pulso e Melhores Juntos':'CRF','i4Cs':'CRF','Manifesto da Inclusão':'CRF','Fechamento de lojas com cuidado':'CRF','Escola de Líderes':'CRF','BigFlix':'BIG','Programas afirmativos':'CRF','Digital Retail Academy':'CRF','Sombra do líder':'BIG','170 executivos professores':'CRF','Culture Shaping Workshops':'BIG','Multiplicadores':'BIG','Você é 4C':'CRF','Top 10 do 555':'CRF','Histórias e rituais':'BIG','4Cs na seleção':'CRF','4Cs na performance':'CRF','MAT':'BIG','Estágio e Trainee Afirmativos':'CRF'};
+  const allTools=Object.keys(cycle);
+  $('mechList').innerHTML=mechs.map((m,i)=>`<button aria-pressed="${i===0}" data-i="${i}"><i>${pad(i+1)}</i><span>${m[0]}</span></button>`).join('');
+  $('mechChips').innerHTML=allTools.map(t=>`<span class="chip" data-t="${t}">${t}<small>${cycle[t]}</small></span>`).join('');
+  function showMech(i){
+    [...$('mechList').children].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));
+    $('mechWhy').textContent=mechs[i][1];
+    document.querySelectorAll('#mechChips .chip').forEach(c=>c.classList.toggle('on',mechs[i][2].includes(c.dataset.t)));
+  }
+  $('mechList').addEventListener('click',e=>{const b=e.target.closest('button');if(b)showMech(+b.dataset.i);});
+  showMech(0);
+
+  /* ---- Lições + autodiagnóstico ---- */
+  const lessons=[
+    ['Cultura é sistema, não campanha','Quais decisões de pessoas tomadas no último trimestre usaram os valores como critério explícito?'],
+    ['Legitimidade vale mais que sofisticação','Quantos dos seus executivos ensinam o que cobram?'],
+    ['Uma cultura madura sabe se corrigir','Quando sua empresa mudou um valor pela última vez porque a realidade mostrou que ele não bastava?'],
+    ['Transparência com cuidado gera compromisso','Seus piores resultados são discutidos em público ou escondidos em relatório?'],
+    ['A parte difícil define a cultura','Como foi comunicada a última decisão difícil, e o que o time aprendeu sobre a empresa com ela?']
+  ];
+  const opts=['Ainda não','Em parte','Sim'];
+  const ans=new Array(lessons.length).fill(null);
+  $('lessons').innerHTML=lessons.map((l,i)=>`<div class="lesson"><span class="n">${i+1}</span><div><h3>${l[0]}</h3></div><p class="q"><b>Pergunta de diagnóstico</b>${l[1]}</p><div class="seg" role="group" aria-label="Resposta para a lição ${i+1}">${opts.map((o,k)=>`<button aria-pressed="false" data-l="${i}" data-v="${k}">${o}</button>`).join('')}</div></div>`).join('');
+  $('meter').innerHTML='<i></i>'.repeat(10);
+  function readout(){
+    const done=ans.filter(a=>a!==null).length, score=ans.reduce((s,a)=>s+(a||0),0);
+    [...$('meter').children].forEach((m,k)=>m.classList.toggle('on',k<score));
+    let t;
+    if(done<lessons.length)t=`<strong>${done} de 5 respondidas.</strong> A leitura aparece quando as cinco estiverem respondidas.`;
+    else if(score<=3)t=`<strong>${score} de 10 · cultura como campanha.</strong> Os valores ainda vivem no mural, não nas decisões. O primeiro passo não é comunicar mais. É levar os valores para a seleção e a promoção.`;
+    else if(score<=7)t=`<strong>${score} de 10 · cultura em transição.</strong> Parte do sistema já opera. A outra parte ainda depende do esforço de quem acredita. Consistência não é rigidez: é ritmo.`;
+    else t=`<strong>${score} de 10 · cultura como sistema.</strong> Os valores já decidem coisas. O risco agora é outro: uma cultura que não se revisita diante da realidade vira dogma.`;
+    $('readout').innerHTML=t;
+  }
+  $('lessons').addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const l=+b.dataset.l,v=+b.dataset.v;ans[l]=v;b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));readout();});
+  readout();
+
+  /* ---- Lightbox ---- */
+  const lb=document.createElement('div');lb.className='lb';lb.hidden=true;lb.setAttribute('role','dialog');lb.setAttribute('aria-label','Foto ampliada');lb.innerHTML='<img alt=""><p></p>';document.body.appendChild(lb);
+  document.addEventListener('click',e=>{if(!lb.hidden){lb.hidden=true;return;}const im=e.target.closest('.ph img,.band img,.gal img');if(im){lb.querySelector('img').src=im.src;lb.querySelector('img').alt=im.alt;lb.querySelector('p').textContent=im.alt;lb.hidden=false;}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden){lb.hidden=true;e.stopImmediatePropagation();}},true);
+
+  /* ---- Movimento reduzido ---- */
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){const t=$('traveler');if(t){t.querySelector('animateMotion').remove();t.setAttribute('cx',390);t.setAttribute('cy',70);}}
+
+  /* ---- Início ---- */
+  const m=/^#s(\d+)$/.exec(location.hash);
+  go(m?(+m[1]-1):0,true);
+  window.addEventListener('hashchange',()=>{const m=/^#s(\d+)$/.exec(location.hash);if(m&&+m[1]-1!==cur)go(+m[1]-1,true);});
+})();
+</script>
+
+</body></html>
