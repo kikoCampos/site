@@ -213,6 +213,27 @@ td.dt,th.dt{text-align:center;width:58px;padding-inline:4px}
 .codewrap summary::-webkit-details-marker{display:none}
 .codewrap summary:hover{color:var(--ink);border-bottom-color:var(--orange)}
 @media (max-width:560px){.steps{flex-wrap:nowrap;gap:6px;margin-bottom:26px}.step{padding:5px 10px;font-size:.62rem;letter-spacing:.1em}.step:not(.on) .lb{display:none}.prog{margin-bottom:20px}.stem{min-height:0}.opts{margin-top:22px;gap:12px}.opt{min-height:0;padding:18px 20px 20px;gap:12px}}
+
+.deliv{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px 20px;border:1px solid rgba(79,209,161,.35);border-radius:14px;background:rgba(79,209,161,.06);color:var(--ink);font-size:.95rem}
+.deliv #dmsg{flex:1;min-width:220px}
+.deliv .btn{padding:10px 18px;font-size:.88rem}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.2);border-top-color:var(--good);animation:spin .8s linear infinite;flex:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pairs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.pairs li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.pairs li:last-child{border-bottom:0}
+.pairs li .tg{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);white-space:nowrap;align-self:center}
+.dev{border-left:2px solid var(--amber);padding:4px 0 4px 18px;display:flex;flex-direction:column;gap:6px}
+.dev .dq{font-family:var(--display);font-weight:500;font-size:1.15rem}
+.plan{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:pl}
+.plan li{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.plan li:last-child{border-bottom:0}
+.plan .when{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);padding-top:4px}
+@media (max-width:560px){.plan li{grid-template-columns:1fr;gap:6px}}
+.sheet h2{font-size:24px}
+.sheet .plan li{grid-template-columns:130px 1fr;padding:12px 0}
+.sheet .flat{box-shadow:none}
+.sheet section{gap:16px!important}
 /* folha do PDF: mesma noite azul, sem efeitos que o renderizador não reproduz */
 #sheetHost{position:fixed;left:-10000px;top:0}
 .sheet{width:794px;min-height:1123px;padding:58px 62px 44px;background:radial-gradient(700px 420px at 90% -10%, rgba(90,169,230,.16), transparent 60%),radial-gradient(600px 380px at 0% 0%, rgba(255,74,18,.12), transparent 55%),#0A1830;color:#EAF1FB;font-family:var(--body);font-size:12.5px;line-height:1.45;display:flex;flex-direction:column;gap:18px;overflow:hidden}
@@ -344,7 +365,68 @@ function profileHTML(s,peaks,means){
     return `<div class="prow ${pk?"pk":""}"><div class="nm">${DIM[d].nome}<small>${DIM[d].origem}</small></div><div class="bar"><span class="f ${pk?"pk":""}" style="width:${Math.max(3,s[d]/max*100).toFixed(1)}%"></span>${ref}</div><div class="sc">${pk?"Pico":""}</div></div>`}).join("")}
     <div class="legend"><span>menos priorizado</span><span>${means?"traço claro: média da turma":""}</span><span>mais priorizado</span></div></div>`;
 }
-function reportBody(p,opt){
+/* ---------- conteúdo do relatório completo ---------- */
+const ENDPOINT=""; /* URL do script Google (planilha + e-mail). Vazio = sem envio automático. */
+const TOKEN="la-kc-2026";
+const PLANO={
+ M:["Antes de cada reunião de decisão, escreva em uma linha qual é o problema e, embaixo, uma formulação alternativa. Leve as duas para a mesa.","Em toda pauta importante, pergunte: o que teria de ser verdade para esta proposta estar errada?","Uma vez por semana, leia algo de fora do seu setor e anote uma ideia aplicável a um problema que você tem agora."],
+ P:["Antes de decidir, liste quem ganha, quem perde e quem ainda precisa ser ouvido.","Em duas conversas por semana, fale menos de um terço do tempo e termine resumindo o que a outra pessoa quis dizer.","Procure a pessoa mais afetada por uma decisão recente e pergunte como ela a recebeu."],
+ X:["Transforme uma decisão em aberto num teste pequeno, com duas semanas de prazo e critério de sucesso definido antes de começar.","Uma vez por semana, faça algo rotineiro de um jeito diferente e registre o que aprendeu.","Diante de cada proposta grande, pergunte qual seria a versão menor e reversível."],
+ R:["Termine toda reunião com três linhas: o que decidimos, quem faz e até quando.","Escolha um tema que está em análise há mais de um mês e marque uma data para decidir.","Quando sentir que falta informação, pergunte qual dado mudaria a decisão. Se nenhum mudaria, decida."],
+ A:["Ao fim de cada semana, escreva três linhas: o que aconteceu, o que eu fiz e o que faria diferente.","Peça a duas pessoas de confiança um feedback específico sobre uma decisão recente sua.","Antes de defender uma posição, pergunte a si mesmo se ela é certa ou apenas familiar."]
+};
+const PICO_USO={M:"Defina um prazo para a fase das perguntas e respeite-o.",P:"Separe ouvir de concordar: depois de ouvir, decida.",X:"Antes de mudar de rumo, confira se o teste já teve tempo de mostrar resultado.",R:"Antes de fechar, faça uma pergunta a mais sobre o diagnóstico.",A:"Dê à autocrítica um tempo fixo e transforme-a numa ação concreta."};
+const PAIRS=(()=>{const m={};ITEMS.forEach((it,i)=>{const k=[it[2],it[4]].sort().join("");(m[k]=m[k]||[]).push(i)});return m})();
+function leitura(p){
+  const firm=[],vari=[];
+  Object.entries(PAIRS).forEach(([k,idx])=>{const w={};idx.forEach(i=>{const it=ITEMS[i];const d=p.a[i]==="A"?it[2]:it[4];w[d]=(w[d]||0)+1});const x=k[0],y=k[1],wx=w[x]||0,wy=w[y]||0;
+    if(wx===3)firm.push([x,y]);else if(wy===3)firm.push([y,x]);else vari.push(wx>wy?[x,y]:[y,x])});
+  const rank=d=>p.peaks.includes(d)?0:d===p.low?2:1;
+  firm.sort((a,b)=>rank(a[0])-rank(b[0])||rank(b[1])-rank(a[1]));
+  const dev=[];ITEMS.forEach((it,i)=>{const A=p.a[i]==="A",ch=A?it[2]:it[4],ot=A?it[4]:it[2];if(p.peaks.includes(ot)&&!p.peaks.includes(ch))dev.push({stem:it[0],txt:A?it[1]:it[3],ch,ot})});
+  return {firm,vari,dev};
+}
+function secLeitura(p){
+  const L=leitura(p);
+  return `<section class="stack" style="gap:22px">
+   <div class="stack" style="gap:12px"><div class="eyebrow">Leitura das suas 30 escolhas</div>
+   <h2>Em ${L.firm.length} dos 10 confrontos, você escolheu sempre o mesmo lado. <em class="grad">Em ${L.vari.length}, a situação decidiu.</em></h2>
+   <p class="lead">Cada par de dimensões se enfrentou três vezes. Escolher sempre o mesmo lado revela um padrão automático. Variar conforme a situação é, em si, um sinal de agilidade.</p></div>
+   <div class="two">
+    <div class="flat stack" style="gap:10px"><div class="eyebrow">Seus padrões automáticos</div>${L.firm.length?`<ul class="pairs">${L.firm.slice(0,5).map(([w,l])=>`<li><span class="pt"><b>${DIM[w].nome}</b> sobre ${DIM[l].nome}</span><span class="tg">3 de 3</span></li>`).join("")}</ul>`:`<p class="soft">Nenhum. Você variou em todos os confrontos.</p>`}</div>
+    <div class="flat stack" style="gap:10px"><div class="eyebrow" style="color:var(--blue)">Onde você variou</div>${L.vari.length?`<ul class="pairs">${L.vari.slice(0,5).map(([w,l])=>`<li><span class="pt">${DIM[w].nome} e ${DIM[l].nome}</span><span class="tg">conforme o caso</span></li>`).join("")}</ul>`:`<p class="soft">Nenhum. Em todos os confrontos, você escolheu sempre o mesmo lado.</p>`}</div>
+   </div>
+   <div class="stack" style="gap:12px"><div class="eyebrow">Quando você saiu do próprio padrão</div>
+   ${L.dev.length?L.dev.slice(0,2).map(x=>`<div class="dev"><p class="dq">${esc(x.stem)}</p><p>Você escolheu: <em>“${esc(x.txt)}”</em></p><p class="mute small">Aqui você foi de ${DIM[x.ch].nome} em vez de ${DIM[x.ot].nome}, seu pico. Vale perguntar o que nessa situação pediu outra resposta.</p></div>`).join(""):`<p class="soft">Em nenhuma situação em que seus picos estavam em jogo você escolheu o outro lado. Essa consistência é força e, ao mesmo tempo, o lugar onde mora o ponto cego.</p>`}
+   </div></section>`;
+}
+function secPlano(p){
+  const pr=PLANO[p.low];
+  return `<section class="stack" style="gap:22px">
+   <div class="stack" style="gap:12px"><div class="eyebrow">Plano para os próximos 30 dias</div>
+   <h2>Exercitar <em class="grad">${DIM[p.low].nome}</em> sem abrir mão do que você já faz bem.</h2>
+   <p class="lead">Learning agility se desenvolve na prática, não em sala. São três práticas pequenas, pensadas para caber na agenda de quem decide.</p></div>
+   <ol class="plan">
+    <li><span class="when">Semanas 1 e 2</span><p>${pr[0]}</p></li>
+    <li><span class="when">Semanas 3 e 4</span><p>${pr[1]}</p></li>
+    <li><span class="when">O mês inteiro</span><p>${pr[2]}</p></li>
+    <li><span class="when">Dia 30</span><p>Refaça este assessment e compare o formato. O objetivo não é virar outra pessoa, e sim ter mais de um caminho disponível.</p></li>
+   </ol>
+   <div class="flat stack" style="gap:10px"><div class="eyebrow">Para usar seus picos com consciência</div>${p.peaks.map(d=>`<p><b>${DIM[d].nome}.</b> <span class="soft">${PICO_USO[d]}</span></p>`).join("")}</div>
+  </section>`;
+}
+function secConceito(){
+  return `<section class="stack" style="gap:22px">
+   <div class="stack" style="gap:12px"><div class="eyebrow">Sobre o modelo</div>
+   <h2>O que é <em class="grad">learning agility</em></h2>
+   <p class="lead">É a capacidade e a disposição de aprender com a experiência e aplicar esse aprendizado em situações novas. O conceito foi proposto por Michael Lombardo e Robert Eichinger em 2000, a partir das pesquisas do Center for Creative Leadership sobre executivos que descarrilavam. Eles eram tão inteligentes quanto os que davam certo, mas paravam de aprender quando o repertório antigo deixava de funcionar.</p></div>
+   <div class="panel"><div class="dimlist">${DIMS.map(d=>`<div class="it"><span class="t">${DIM[d].nome}</span><span class="o">${DIM[d].origem}</span><span class="ds">${DIM[d].tagline}</span></div>`).join("")}</div></div>
+   <div class="two">
+    <div class="flat stack" style="gap:8px"><div class="eyebrow">Como ler este relatório</div><p class="soft small">Cada situação opôs duas atitudes igualmente boas. O perfil mostra o que você prioriza em relação a si mesmo, não o quanto vale. Um pico é uma direção natural. O ponto de atenção é o caminho que você usa menos, não uma falha.</p></div>
+    <div class="flat stack" style="gap:8px"><div class="eyebrow">O que esta ferramenta não é</div><p class="soft small">É uma ferramenta de autoconhecimento e de conversa. Não é um teste validado psicometricamente, não mede potencial e não deve ser usada em decisões de carreira.</p></div>
+   </div></section>`;
+}
+function reportA(p,opt){
   const rel=opt&&opt.means;const [a,b]=p.peaks;
   return `
   <div class="stack">
@@ -353,10 +435,14 @@ function reportBody(p,opt){
     <p class="lead">${rel?"Os destaques mostram onde você puxa mais do que a média desta turma. Não é uma nota, é uma direção.":"Este perfil mostra o que você prioriza quando não existe playbook. Não é uma nota: as cinco dimensões somam sempre 30, e o que importa é o formato."}</p>
   </div>
   <div class="panel glow">${profileHTML(p.s,p.peaks,opt&&opt.means)}</div>
-  <div class="two">${p.peaks.map(d=>`<div class="panel glow-o stack" style="gap:12px"><div class="eyebrow">Pico</div><div class="pkname">${DIM[d].nome}</div><p class="soft">${DIM[d].traz}</p><p class="mute small"><span style="color:var(--ink);font-weight:600">Risco do excesso.</span> ${DIM[d].excesso}</p></div>`).join("")}</div>
+  <div class="two">${p.peaks.map(d=>`<div class="panel glow-o stack" style="gap:12px"><div class="eyebrow">Pico</div><div class="pkname">${DIM[d].nome}</div><p class="soft">${DIM[d].traz}</p><p class="mute small"><span style="color:var(--ink);font-weight:600">Risco do excesso.</span> ${DIM[d].excesso}</p></div>`).join("")}</div>`;
+}
+function reportB(p){
+  return `
   <div class="ask"><div class="eyebrow">Ponto de atenção · ${DIM[p.low].nome}</div><div class="big">“${DIM[p.low].pergunta}”</div><p class="small">Leve esta pergunta para a próxima decisão difícil.</p></div>
   <div class="flat stack" style="gap:8px"><div class="eyebrow" style="color:var(--blue)">Quem complementa você</div><p>Pessoas com pico em <strong>${DIM[p.low].nome}</strong>. Num grupo sem playbook, são elas que enxergam o que tende a passar por você.${G.grupo?" Seu grupo de trabalho foi formado para ter essa complementaridade.":""}</p></div>`;
 }
+function reportBody(p,opt){return reportA(p,opt)+reportB(p)}
 function person(r,means,sds){
   const s=score(r.a);
   if(means){const z={};DIMS.forEach(d=>z[d]=(s[d]-means[d])/(sds[d]||1));const o=DIMS.slice().sort((x,y)=>z[y]-z[x]);return {...r,s,z,peaks:o.slice(0,2),low:o[4]}}
@@ -377,8 +463,8 @@ function vIntro(){
       <div class="eyebrow">${G.grupo?esc(G.grupo)+" · Learning agility":"Ferramenta · Learning agility"}</div>
       <h1>Como você aprende quando <em class="grad">não existe playbook?</em></h1>
       <p class="lead">Learning agility é a capacidade de aprender com a experiência e aplicar esse aprendizado no inédito. Em temas humanos, é ela que separa quem decide bem de quem repete o que já funcionou.</p>
-      <div class="row" style="gap:18px"><button class="btn btn-p" id="go">Começar <span class="arrow">→</span></button><span class="soft small">Seu resultado individual é só seu.</span></div>
-      <div class="tags"><span class="tag">30 situações</span><span class="tag">10 minutos</span><span class="tag">Perfil na hora</span></div>
+      <div class="row" style="gap:18px"><button class="btn btn-p" id="go">Começar <span class="arrow">→</span></button><span class="soft small">Relatório completo no seu e-mail.</span></div>
+      <div class="tags"><span class="tag">30 situações</span><span class="tag">10 minutos</span><span class="tag">Relatório completo</span></div>
     </div>
     <div class="panel glow"><div class="eyebrow" style="margin-bottom:6px">As cinco dimensões</div>
       <div class="dimlist">${DIMS.map(d=>`<div class="it"><span class="t">${DIM[d].nome}</span><span class="o">${DIM[d].origem}</span><span class="ds">${DIM[d].tagline}</span></div>`).join("")}</div>
@@ -405,7 +491,7 @@ function vCtx(){
     <div class="field"><span class="q">Função principal</span><div class="choices">${radios("ff",FUNCS,c.f)}</div></div>
     <div class="field"><span class="q">Sua relação com IA no trabalho</span><div class="choices">${radios("fi",IAS,c.i)}</div></div>
     <div class="field"><label class="q" for="fd">Em uma frase, o dilema humano mais difícil que você já viveu <span class="mute" style="font-weight:400">(opcional)</span></label><span class="hint">Pode abrir a conversa do seu grupo. Sem nome de empresa ou de pessoa.</span><textarea id="fd" maxlength="140">${esc(c.d)}</textarea><div class="count" id="fdc"></div></div>
-    <label class="consent" for="fok"><input type="checkbox" id="fok" ${c.ok?"checked":""}><span>Autorizo o uso das minhas respostas pelo facilitador da atividade para formar grupos de trabalho. Meu resultado individual é só meu, a formação dos grupos usa apenas a combinação de perfis, e as respostas não serão usadas para nenhuma outra finalidade.</span></label>
+    <label class="consent" for="fok"><input type="checkbox" id="fok" ${c.ok?"checked":""}><span>Autorizo o registro das minhas respostas por Kiko Campos para gerar e enviar meu relatório por e-mail e, em atividades em grupo, formar grupos de trabalho. A formação dos grupos usa apenas a combinação de perfis, e as respostas não serão usadas para nenhuma outra finalidade.</span></label>
     <div class="err" id="ferr"></div>
     <div class="spread"><button class="lnk" type="button" id="back">Voltar</button><button class="btn btn-p" type="submit">Ir para as situações <span class="arrow">→</span></button></div>
    </form></div>`;
@@ -443,20 +529,56 @@ document.addEventListener("keydown",e=>{if(S.view!=="items"||/INPUT|TEXTAREA|SEL
 function vReport(){
   const r={...S.ctx,a:S.a};const p=person(r);const code=encode(r);
   const wa="https://wa.me/?text="+encodeURIComponent((G.para?G.para+", segue":"Segue")+" meu código do assessment de learning agility"+(G.grupo?" ("+G.grupo+")":"")+":\n\n"+code);
+  const codeStep=`<div class="stack" style="gap:14px"><div class="row"><a class="btn btn-p" href="${wa}" target="_blank" rel="noopener">Enviar pelo WhatsApp <span class="arrow">→</span></a></div>
+      <details class="codewrap"><summary>Prefere e-mail ou outro canal? Ver e copiar o código</summary><div class="stack" style="gap:12px;margin-top:14px"><div class="codebox" id="code">${code}</div><div><button class="btn btn-g" id="copy">Copiar código</button></div></div></details></div>`;
   $("#v").innerHTML=`${steps(2)}<div class="stack-lg">
-    ${reportBody(p,null)}
-    <div class="panel reco stack">
+    <div class="deliv" id="deliv"><span class="spin"></span><span id="dmsg">Preparando seu relatório completo…</span><button class="btn btn-g" id="dpdf" hidden>Baixar relatório completo (PDF)</button></div>
+    ${reportA(p,null)}
+    ${reportB(p)}
+    <hr class="hr">${secLeitura(p)}
+    <hr class="hr">${secPlano(p)}
+    <div class="panel reco stack" id="send" hidden>
       <div class="eyebrow">Último passo</div>
       <h2>${G.grupo?`Envie seu código ${G.para?"para "+esc(G.para):"ao facilitador"}${G.prazo?` <em class="grad">até ${esc(G.prazo)}.</em>`:"."}`:`Está numa atividade em grupo? <em class="grad">Envie seu código ao facilitador.</em>`}</h2>
       <p class="soft">É com ele que os grupos de trabalho são formados. O botão abre o WhatsApp com a mensagem pronta, com o seu código dentro. Ele carrega só as suas respostas.</p>
-      <div class="row"><a class="btn btn-p" href="${wa}" target="_blank" rel="noopener">Enviar pelo WhatsApp <span class="arrow">→</span></a>${downloads?`<button class="btn btn-g" id="pdf">Baixar meu relatório</button>`:""}</div>
-      <details class="codewrap"><summary>Prefere e-mail ou outro canal? Ver e copiar o código</summary><div class="stack" style="gap:12px;margin-top:14px"><div class="codebox" id="code">${code}</div><div><button class="btn btn-g" id="copy">Copiar código</button></div></div></details>
+      ${codeStep}
     </div>
+    <hr class="hr">${secConceito()}
     <div class="spread"><p class="mute small">${G.grupo?"Quando o grupo se reunir, você vai ver como seu perfil se compara ao da turma.":"Seu resultado fica salvo neste navegador."}</p><button class="lnk" id="redo">Refazer respostas</button></div>
   </div>`;
   $("#copy").onclick=()=>copyText(code,$("#code"));
   $("#redo").onclick=()=>{S.a=Array(N).fill(null);S.i=0;save();S.view="items";render()};
-  if($("#pdf"))$("#pdf").onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await savePDF(p,null)}finally{b.disabled=false}};
+  deliver(p,code);
+}
+let LAST_PDF=null;
+const autoDL=()=>{try{return matchMedia("(hover:hover) and (pointer:fine)").matches}catch(e){return false}};
+function blobB64(b){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]);r.onerror=rej;r.readAsDataURL(b)})}
+async function deliver(p,code){
+  const key="la_done_"+code.slice(-16);const done=store.get(key)||{};
+  const msg=t=>{const m=$("#dmsg");if(m)m.innerHTML=t};const spin=on=>{const s=document.querySelector("#deliv .spin");if(s)s.hidden=!on};
+  const showSend=on=>{const s=$("#send");if(s)s.hidden=!on};
+  showSend(!ENDPOINT&&(!!G.grupo||!!done.err));
+  try{LAST_PDF=await pdfBlob(p,null)}catch(e){LAST_PDF=null}
+  const btn=$("#dpdf");
+  if(LAST_PDF&&btn&&downloads){btn.hidden=false;btn.onclick=async()=>{try{await downloads.save({filename:fname(p),data:LAST_PDF})}catch(e){if(e&&e.code!=="declined")toast("O PDF não foi salvo.")}}}
+  if(LAST_PDF&&downloads&&autoDL()&&!done.dl){try{await downloads.save({filename:fname(p),data:LAST_PDF});done.dl=1}catch(e){}}
+  if(ENDPOINT&&!done.mail&&!done.err){
+    msg("Enviando seu relatório para "+esc(p.e)+"…");
+    try{
+      const body={token:TOKEN,grupo:G.grupo,para:G.para,n:p.n,e:p.e,c:p.c,func:FUNCS[p.f]||"",ia:IAS[p.i]||"",d:p.d||"",s:p.s,peaks:p.peaks.map(d=>DIM[d].nome).join(" e "),low:DIM[p.low].nome,head:"Diante do inédito, você começa por "+DIM[p.peaks[0]].verbo+" e "+DIM[p.peaks[1]].verbo+".",pergunta:DIM[p.low].pergunta,code,fname:fname(p),pdf:LAST_PDF?await blobB64(LAST_PDF):""};
+      const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)});
+      const j=await r.json();if(j&&j.ok){done.mail=1;done.mailed=!!j.mailed}else done.err=1;
+    }catch(e){done.err=1}
+  }
+  store.set(key,done);spin(false);
+  const parts=[];
+  if(done.mail)parts.push(done.mailed?`Enviamos o relatório completo para <b>${esc(p.e)}</b>.`:`Suas respostas foram registradas.`);
+  if(done.mail)parts.push(G.grupo?`Suas respostas já chegaram ${G.para?"para "+esc(G.para):"ao facilitador"}: não precisa enviar código.`:"");
+  if(done.dl)parts.push("Uma cópia em PDF foi baixada neste aparelho.");
+  if(!parts.join(""))parts.push(LAST_PDF?"Seu relatório completo está pronto em PDF.":"Seu relatório completo está abaixo.");
+  if(done.err)parts.push("Não conseguimos enviar por e-mail agora. Use o botão de WhatsApp no fim da página.");
+  msg(parts.filter(Boolean).join(" "));
+  showSend(!done.mail&&(!!G.grupo||!!done.err));
 }
 function copyText(t,el,msg){
   const fallback=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Código selecionado. Copie com Ctrl+C ou Cmd+C.")};
@@ -468,16 +590,20 @@ const LIBS={h2c:"https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2c
 const loaded={};
 function lib(k){return loaded[k]||(loaded[k]=new Promise((res,rej)=>{const s=document.createElement("script");s.src=LIBS[k];s.onload=res;s.onerror=()=>rej(new Error("lib"));document.head.appendChild(s)}))}
 
-function sheetHTML(p,means){
-  return `<div class="sheet"><div class="shead"><div class="brand"><span class="dot"></span>Kiko Campos</div><span class="eyebrow">${esc(p.n||"")} · ${esc(G.grupo||"Learning agility")} · ${new Date().toLocaleDateString("pt-BR").replace(/\//g,".")}</span></div>${reportBody(p,{means})}<div class="sfoot"><span>Ferramenta de autoconhecimento. Não é um teste validado e não mede potencial.</span><span>kikocampos.com</span></div></div>`;
+function sheetHTML(p,means,body,k,tot){
+  return `<div class="sheet"><div class="shead"><div class="brand"><span class="dot"></span>Kiko Campos</div><span class="eyebrow">${esc(p.n||"")} · ${esc(G.grupo||"Learning agility")} · ${new Date().toLocaleDateString("pt-BR").replace(/\//g,".")}</span></div>${body}<div class="sfoot"><span>Ferramenta de autoconhecimento. Não é um teste validado e não mede potencial.</span><span>kikocampos.com · ${k}/${tot}</span></div></div>`;
 }
 async function pdfBlob(p,means){
   await Promise.all([lib("h2c"),lib("pdf")]);await document.fonts.ready;
-  const host=$("#sheetHost");host.innerHTML=sheetHTML(p,means);const el=host.firstElementChild;
-  const canvas=await html2canvas(el,{scale:2,backgroundColor:"#0A1830",useCORS:true});
-  const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4"});
-  let w=210,h=canvas.height*210/canvas.width;if(h>297){w=w*297/h;h=297}doc.setFillColor(10,24,48);doc.rect(0,0,210,297,"F");doc.addImage(canvas.toDataURL("image/jpeg",0.92),"JPEG",(210-w)/2,0,w,h);host.innerHTML="";
-  return doc.output("blob");
+  const pages=[reportA(p,{means}),reportB(p)+secLeitura(p),secPlano(p),secConceito()];
+  const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4",compress:true});const host=$("#sheetHost");
+  for(let k=0;k<pages.length;k++){
+    host.innerHTML=sheetHTML(p,means,pages[k],k+1,pages.length);const el=host.firstElementChild;
+    const canvas=await html2canvas(el,{scale:1.6,backgroundColor:"#0A1830",useCORS:true,logging:false});
+    if(k)doc.addPage();let w=210,h=canvas.height*210/canvas.width;if(h>297){w=w*297/h;h=297}
+    doc.setFillColor(10,24,48);doc.rect(0,0,210,297,"F");doc.addImage(canvas.toDataURL("image/jpeg",0.86),"JPEG",(210-w)/2,0,w,h);
+  }
+  host.innerHTML="";return doc.output("blob");
 }
 const fname=p=>"Learning Agility - "+(p.n||"participante").replace(/[^\p{L}\p{N} ]/gu,"").trim()+".pdf";
 async function savePDF(p,means){
@@ -597,9 +723,9 @@ function renderPainel(){
     const sel=P.open!=null&&pp[P.open]?P.open:0;const p=pp[sel];
     pv.innerHTML=`<div class="stack-lg">
       <div class="panel spread"><div class="row"><label for="who" class="eyebrow">Participante</label><select id="who" style="width:auto;min-width:220px">${pp.map((x,i)=>`<option value="${i}" ${i===sel?"selected":""}>${esc(x.n)}</option>`).join("")}</select></div>
-      ${downloads?`<div class="row"><button class="btn btn-g" id="one">Baixar este PDF</button><button class="btn btn-p" id="all">Baixar os ${pp.length} PDFs</button></div>`:`<span class="mute small">Os downloads aparecem quando você abre a página pelo Claude.</span>`}</div>
-      <p class="mute small">Leitura relativa à turma, pronta para enviar por e-mail. Destinatário: ${esc(p.e)}.</p>
-      <div class="stack-lg">${reportBody(p,{means:C.means})}</div></div>`;
+      ${downloads?`<div class="row"><button class="btn btn-g" id="one">Baixar este relatório</button><button class="btn btn-p" id="all">Baixar os ${pp.length} PDFs</button></div>`:`<span class="mute small">Os downloads aparecem quando você abre a página pelo Claude.</span>`}</div>
+      <p class="mute small">Leitura relativa à turma, em PDF de 4 páginas, pronta para enviar por e-mail. Destinatário: ${esc(p.e)}.</p>
+      <div class="stack-lg">${reportBody(p,{means:C.means})}<hr class="hr">${secLeitura(p)}<hr class="hr">${secPlano(p)}</div></div>`;
     $("#who").onchange=e=>{P.open=+e.target.value;renderPainel()};
     if($("#one"))$("#one").onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await savePDF(p,C.means)}finally{b.disabled=false}};
     if($("#all"))$("#all").onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await lib("zip");const z=new JSZip();for(let i=0;i<pp.length;i++){b.textContent=`Gerando ${i+1} de ${pp.length}…`;z.file(fname(pp[i]),await pdfBlob(pp[i],C.means))}
