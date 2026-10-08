@@ -150,7 +150,7 @@ select option{background:var(--bg2)}
 
 /* relatório */
 .profile{display:flex;flex-direction:column;gap:20px}
-.prow{display:grid;grid-template-columns:160px 1fr 40px;gap:18px;align-items:center}
+.prow{display:grid;grid-template-columns:160px 1fr 44px;gap:18px;align-items:center}
 @media (max-width:540px){.prow{grid-template-columns:108px 1fr 30px;gap:12px}}
 .prow .nm{font-family:var(--display);font-weight:600;font-size:1.08rem;line-height:1.15}
 .prow .nm small{display:block;font-family:var(--mono);font-weight:500;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-top:4px}
@@ -159,10 +159,10 @@ select option{background:var(--bg2)}
 .bar .f.pk{background:linear-gradient(90deg,var(--amber),var(--orange));box-shadow:0 0 18px rgba(255,74,18,.45)}
 .bar .tk{position:absolute;top:-5px;bottom:-5px;width:2px;border-radius:2px;background:var(--ink)}
 .bar .md{position:absolute;top:-4px;bottom:-4px;width:1px;background:var(--line2)}
-.prow .sc{font-family:var(--mono);font-size:.9rem;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.prow .sc{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;text-align:right;color:var(--ink-soft)}
 .prow.pk .sc{color:var(--amber)}
-.legend{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--ink-mute);padding-left:178px}
-@media (max-width:540px){.legend{padding-left:0}}
+.legend{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);padding-left:178px;padding-right:62px}
+@media (max-width:540px){.legend{padding-left:0;padding-right:0}}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media (max-width:700px){.two{grid-template-columns:1fr}}
 .pkname{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4vw,2.6rem);line-height:1}
@@ -208,6 +208,11 @@ td.dt,th.dt{text-align:center;width:58px;padding-inline:4px}
 .fade{animation:fade .35s ease both}
 @keyframes fade{from{opacity:.001;transform:translateY(6px)}to{opacity:1;transform:none}}
 
+
+.codewrap summary{cursor:pointer;color:var(--ink-soft);font-size:.92rem;list-style:none;display:inline-block;border-bottom:1px solid var(--line2);padding-bottom:3px}
+.codewrap summary::-webkit-details-marker{display:none}
+.codewrap summary:hover{color:var(--ink);border-bottom-color:var(--orange)}
+@media (max-width:560px){.steps{flex-wrap:nowrap;gap:6px;margin-bottom:26px}.step{padding:5px 10px;font-size:.62rem;letter-spacing:.1em}.step:not(.on) .lb{display:none}.prog{margin-bottom:20px}.stem{min-height:0}.opts{margin-top:22px;gap:12px}.opt{min-height:0;padding:18px 20px 20px;gap:12px}}
 /* folha do PDF: mesma noite azul, sem efeitos que o renderizador não reproduz */
 #sheetHost{position:fixed;left:-10000px;top:0}
 .sheet{width:794px;min-height:1123px;padding:58px 62px 44px;background:radial-gradient(700px 420px at 90% -10%, rgba(90,169,230,.16), transparent 60%),radial-gradient(600px 380px at 0% 0%, rgba(255,74,18,.12), transparent 55%),#0A1830;color:#EAF1FB;font-family:var(--body);font-size:12.5px;line-height:1.45;display:flex;flex-direction:column;gap:18px;overflow:hidden}
@@ -218,9 +223,9 @@ td.dt,th.dt{text-align:center;width:58px;padding-inline:4px}
 .sheet .grad{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#F2B33D}
 .sheet h1{font-size:30px}
 .sheet .lead{font-size:14px}
-.sheet .prow{grid-template-columns:150px 1fr 34px}
+.sheet .prow{grid-template-columns:150px 1fr 40px}
 .sheet .prow .nm{font-size:15px}
-.sheet .legend{padding-left:168px}
+.sheet .legend{padding-left:168px;padding-right:58px}
 .sheet .panel{padding:22px;box-shadow:none}
 .sheet .pkname{font-size:26px}
 .sheet .ask{padding:18px 20px}
@@ -331,13 +336,13 @@ let downloads=null,isOwner=false;
 
 /* ---------- componentes ---------- */
 function topbar(right){return `<div class="top"><div class="in"><div class="brand"><span class="dot"></span>Kiko Campos</div>${right||(G.grupo?`<span class="chip"><span class="lv"></span>${esc(G.grupo)}</span>`:`<span class="chip"><span class="lv"></span>Learning agility</span>`)}</div></div>`}
-function steps(k){const L=["Você","Situações","Seu perfil"];return `<div class="steps">${L.map((t,i)=>`<span class="step ${i===k?"on":i<k?"done":""}">${String(i+1).padStart(2,"0")} · ${t}</span>`).join("")}</div>`}
+function steps(k){const L=["Você","Situações","Seu perfil"];return `<div class="steps">${L.map((t,i)=>`<span class="step ${i===k?"on":i<k?"done":""}">${String(i+1).padStart(2,"0")}<span class="lb"> · ${t}</span></span>`).join("")}</div>`}
 function profileHTML(s,peaks,means){
   const max=12;
   return `<div class="profile">${DIMS.map(d=>{const pk=peaks.includes(d);
     const ref=means?`<span class="tk" style="left:calc(${(means[d]/max*100).toFixed(1)}% - 1px)" title="Média da turma"></span>`:`<span class="md" style="left:50%"></span>`;
-    return `<div class="prow ${pk?"pk":""}"><div class="nm">${DIM[d].nome}<small>${DIM[d].origem}</small></div><div class="bar"><span class="f ${pk?"pk":""}" style="width:${Math.max(3,s[d]/max*100).toFixed(1)}%"></span>${ref}</div><div class="sc">${s[d]}</div></div>`}).join("")}
-    <div class="legend"><span>0</span><span>${means?"traço claro: média da turma":"linha fina: ponto médio da escala"}</span><span>12</span></div></div>`;
+    return `<div class="prow ${pk?"pk":""}"><div class="nm">${DIM[d].nome}<small>${DIM[d].origem}</small></div><div class="bar"><span class="f ${pk?"pk":""}" style="width:${Math.max(3,s[d]/max*100).toFixed(1)}%"></span>${ref}</div><div class="sc">${pk?"Pico":""}</div></div>`}).join("")}
+    <div class="legend"><span>menos priorizado</span><span>${means?"traço claro: média da turma":""}</span><span>mais priorizado</span></div></div>`;
 }
 function reportBody(p,opt){
   const rel=opt&&opt.means;const [a,b]=p.peaks;
@@ -443,9 +448,9 @@ function vReport(){
     <div class="panel reco stack">
       <div class="eyebrow">Último passo</div>
       <h2>${G.grupo?`Envie seu código ${G.para?"para "+esc(G.para):"ao facilitador"}${G.prazo?` <em class="grad">até ${esc(G.prazo)}.</em>`:"."}`:`Está numa atividade em grupo? <em class="grad">Envie seu código ao facilitador.</em>`}</h2>
-      <p class="soft">É com ele que os grupos de trabalho são formados. O código carrega só as suas respostas.</p>
-      <div class="codebox" id="code">${code}</div>
-      <div class="row"><button class="btn btn-p" id="copy">Copiar código</button><a class="btn btn-g" href="${wa}" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>${downloads?`<button class="btn btn-g" id="pdf">Baixar meu relatório</button>`:""}</div>
+      <p class="soft">É com ele que os grupos de trabalho são formados. O botão abre o WhatsApp com a mensagem pronta, com o seu código dentro. Ele carrega só as suas respostas.</p>
+      <div class="row"><a class="btn btn-p" href="${wa}" target="_blank" rel="noopener">Enviar pelo WhatsApp <span class="arrow">→</span></a>${downloads?`<button class="btn btn-g" id="pdf">Baixar meu relatório</button>`:""}</div>
+      <details class="codewrap"><summary>Prefere e-mail ou outro canal? Ver e copiar o código</summary><div class="stack" style="gap:12px;margin-top:14px"><div class="codebox" id="code">${code}</div><div><button class="btn btn-g" id="copy">Copiar código</button></div></div></details>
     </div>
     <div class="spread"><p class="mute small">${G.grupo?"Quando o grupo se reunir, você vai ver como seu perfil se compara ao da turma.":"Seu resultado fica salvo neste navegador."}</p><button class="lnk" id="redo">Refazer respostas</button></div>
   </div>`;
