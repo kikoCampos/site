@@ -356,7 +356,7 @@ let downloads=null,isOwner=false;
 
 
 /* ---------- componentes ---------- */
-function topbar(right){return `<div class="top"><div class="in"><div class="brand"><span class="dot"></span>Kiko Campos</div>${right||(G.grupo?`<span class="chip"><span class="lv"></span>${esc(G.grupo)}</span>`:`<span class="chip"><span class="lv"></span>Learning agility</span>`)}</div></div>`}
+function topbar(right){return `<div class="top"><div class="in"><a class="brand" href="https://kikocampos.com" style="color:inherit;text-decoration:none"><span class="dot"></span>Kiko Campos</a>${right||(G.grupo?`<span class="chip"><span class="lv"></span>${esc(G.grupo)}</span>`:`<span class="chip"><span class="lv"></span>Learning agility</span>`)}</div></div>`}
 function steps(k){const L=["Você","Situações","Seu perfil"];return `<div class="steps">${L.map((t,i)=>`<span class="step ${i===k?"on":i<k?"done":""}">${String(i+1).padStart(2,"0")}<span class="lb"> · ${t}</span></span>`).join("")}</div>`}
 function profileHTML(s,peaks,means){
   const max=12;
@@ -463,7 +463,7 @@ function vIntro(){
       <div class="eyebrow">${G.grupo?esc(G.grupo)+" · Learning agility":"Ferramenta · Learning agility"}</div>
       <h1>Como você aprende quando <em class="grad">não existe playbook?</em></h1>
       <p class="lead">Learning agility é a capacidade de aprender com a experiência e aplicar esse aprendizado no inédito. Em temas humanos, é ela que separa quem decide bem de quem repete o que já funcionou.</p>
-      <div class="row" style="gap:18px"><button class="btn btn-p" id="go">Começar <span class="arrow">→</span></button><span class="soft small">Relatório completo no seu e-mail.</span></div>
+      <div class="row" style="gap:18px"><button class="btn btn-p" id="go">Começar <span class="arrow">→</span></button>${S.a.every(x=>x)?`<button class="btn btn-g" id="seeRep">Ver meu relatório</button>`:""}<span class="soft small">Relatório completo no seu e-mail.</span></div>
       <div class="tags"><span class="tag">30 situações</span><span class="tag">10 minutos</span><span class="tag">Relatório completo</span></div>
     </div>
     <div class="panel glow"><div class="eyebrow" style="margin-bottom:6px">As cinco dimensões</div>
@@ -476,6 +476,7 @@ function vIntro(){
    </div>
   </div>`;
   $("#go").onclick=()=>{S.view="ctx";render()};
+  if($("#seeRep"))$("#seeRep").onclick=()=>{S.view="report";render()};
 }
 function vCtx(){
   const c=S.ctx;
@@ -544,10 +545,11 @@ function vReport(){
       ${codeStep}
     </div>
     <hr class="hr">${secConceito()}
-    <div class="spread"><p class="mute small">${G.grupo?"Quando o grupo se reunir, você vai ver como seu perfil se compara ao da turma.":"Seu resultado fica salvo neste navegador."}</p><button class="lnk" id="redo">Refazer respostas</button></div>
+    <hr class="hr"><div class="spread"><div class="row"><button class="btn btn-g" id="home">Voltar ao início</button><a class="btn btn-p" href="https://kikocampos.com">Ir para kikocampos.com <span class="arrow">→</span></a></div><button class="lnk" id="redo">Refazer respostas</button></div>
   </div>`;
   $("#copy").onclick=()=>copyText(code,$("#code"));
   $("#redo").onclick=()=>{S.a=Array(N).fill(null);S.i=0;save();S.view="items";render()};
+  $("#home").onclick=()=>{S.view="intro";render()};
   deliver(p,code);
 }
 let LAST_PDF=null;
