@@ -1,0 +1,68 @@
+/* Sem Playbook · identidade kikocampos.com (noite azul-marinho, Fraunces, mono âmbar). Tema único escuro. */
+:root{
+  --bg:#0A1830; --bg2:#0E2140; --panel:#12294d; --panel2:#16305a;
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.22);
+  --ink:#EAF1FB; --ink-soft:#AFC0DB; --ink-mute:#7D91B4;
+  --orange:#FF4A12; --orange-cta:#CE420D; --amber:#F2B33D; --good:#4FD1A1; --blue:#5AA9E6; --red:#FF6B6B;
+  --display:"Fraunces", Georgia, serif;
+  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --radius:18px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%}
+[hidden]{display:none!important}
+body{background:
+  radial-gradient(1150px 640px at 82% -12%, rgba(90,169,230,.15), transparent 60%),
+  radial-gradient(900px 560px at 2% -6%, rgba(255,74,18,.13), transparent 55%),
+  var(--bg);
+  background-attachment:fixed;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.015em;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.9rem,6vw,3rem);line-height:1.05;letter-spacing:-.02em}
+h2{font-size:clamp(1.4rem,4vw,2rem);line-height:1.1}
+h3{font-size:1.2rem;line-height:1.25}
+h1 em,h2 em{font-style:italic}
+.grad{background:linear-gradient(100deg,var(--amber),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600}
+.soft{color:var(--ink-soft)} .mute{color:var(--ink-mute)}
+.wrap{max-width:560px;margin:0 auto;padding:28px 20px 96px}
+.panel{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.stack>*+*{margin-top:14px}
+label.f{display:block;margin-top:16px}
+label.f span.l{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+label.f span.h{display:block;color:var(--ink-mute);font-size:.86rem;margin-bottom:8px}
+input[type=text],input[type=search],textarea,select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:12px;color:var(--ink);font:inherit;padding:12px 14px;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--amber)}
+textarea{min-height:76px;resize:vertical}
+.count{text-align:right;font-family:var(--mono);font-size:.7rem;color:var(--ink-mute);margin-top:4px}
+.count.over{color:var(--red)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:var(--ink);font:600 1rem var(--body);padding:14px 18px;border-radius:999px;cursor:pointer;width:100%;transition:.15s}
+.btn:hover{border-color:var(--amber)}
+.btn-p{background:var(--orange);border-color:var(--orange);color:#fff}
+.btn-p:hover{background:var(--orange-cta)}
+.btn-g{background:transparent}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.choice{display:grid;gap:10px;margin-top:10px}
+.choice button{text-align:left;padding:16px 18px;border-radius:14px;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--ink);font:600 1.02rem var(--body);cursor:pointer}
+.choice button small{display:block;font-weight:400;color:var(--ink-mute);font-size:.86rem;margin-top:2px}
+.choice button.on{border-color:var(--amber);background:rgba(242,179,61,.12)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.row .btn{width:auto;flex:1}
+.pill{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line2);border-radius:999px;padding:4px 10px;color:var(--ink-soft)}
+.pill.ok{color:var(--good);border-color:rgba(79,209,161,.4)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#fff;color:#0A1830;padding:10px 16px;border-radius:999px;font-weight:600;font-size:.92rem;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.2s;z-index:50}
+.toast.on{opacity:1}
+.list{list-style:none;margin:0;padding:0}
+.list li{padding:10px 0;border-top:1px solid var(--line)}
+.list li:first-child{border-top:0}
+.waiting{text-align:center;padding:40px 0}
+.waiting .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--amber);animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.topbar .pill{white-space:nowrap}
+hr.fine{border:0;border-top:1px solid var(--line);margin:18px 0}
+.lock{border-color:rgba(79,209,161,.4);background:rgba(79,209,161,.06)}
+.k{font-family:var(--mono);font-size:.78rem;color:var(--ink-mute)}
+.big{font-family:var(--display);font-size:clamp(3rem,12vw,7rem);line-height:1;font-weight:600}

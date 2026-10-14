@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Sem Playbook · telão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="sp.css">
+<style>
+  html,body{height:100%;overflow:hidden}
+  body{font-size:clamp(18px,1.6vw,28px)}
+  .stage{height:100vh;padding:5vh 6vw;display:flex;flex-direction:column;justify-content:center;gap:3vh;position:relative}
+  .stage.center{align-items:center;text-align:center}
+  h1{font-size:clamp(2.6rem,6vw,6rem)}
+  h2{font-size:clamp(1.8rem,3.6vw,3.4rem)}
+  .corner{position:absolute;top:4vh;left:6vw;display:flex;gap:16px;align-items:center}
+  .corner .eyebrow{font-size:clamp(.8rem,1.1vw,1.1rem)}
+  .qr{position:absolute;right:6vw;bottom:5vh;background:#fff;padding:12px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#0A1830;font:600 .8rem var(--mono)}
+  .frases{display:flex;flex-wrap:wrap;gap:1.2vw 2.4vw;max-width:80vw}
+  .frases span{font-family:var(--display);font-size:clamp(1.3rem,2.4vw,2.6rem);opacity:0;animation:in .8s forwards;color:var(--ink-soft)}
+  .frases span:nth-child(odd){color:var(--ink)} @keyframes in{to{opacity:1}}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16vw,1fr));gap:1.6vw}
+  .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:18px;padding:1.6vw}
+  .card .n{font-family:var(--display);font-size:clamp(2rem,4vw,4rem);line-height:1}
+  .card ul{list-style:none;margin:.6vw 0 0;padding:0;color:var(--ink-soft);font-size:clamp(.9rem,1.2vw,1.3rem)}
+  .big{font-size:clamp(5rem,16vw,18rem);line-height:.95}
+  .tally{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;width:100%}
+  .tally .card{text-align:center}
+  .tally .lbl{font-family:var(--mono);font-size:clamp(.8rem,1.1vw,1.2rem);letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+  .tally .v{font-family:var(--display);font-size:clamp(3rem,7vw,8rem);line-height:1}
+  .tally .sub{color:var(--ink-mute);font-size:clamp(.9rem,1.2vw,1.3rem)}
+  .mesas{display:grid;grid-template-columns:repeat(auto-fit,minmax(22vw,1fr));gap:1.4vw;width:100%}
+  .mesas .card{min-height:14vh}
+  .mesas .rec{font-family:var(--display);font-size:clamp(1.4rem,2.4vw,2.6rem);margin-top:.4vw}
+  .mesas .q{color:var(--ink-soft);font-size:clamp(.85rem,1.15vw,1.25rem);margin-top:.5vw}
+  .mesas .k{display:block;margin-top:.6vw}
+  .riscos{display:grid;grid-template-columns:1fr 1fr;gap:3vw;width:100%}
+  .riscos h3{font-family:var(--mono);font-size:clamp(.9rem,1.2vw,1.3rem);letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:1.2vw}
+  .riscos .sim h3{color:var(--red)} .riscos .nao h3{color:var(--blue)}
+  .riscos li{font-family:var(--display);font-size:clamp(1.2rem,2vw,2.3rem);line-height:1.25;padding:.6vw 0;border-top:1px solid var(--line);list-style:none}
+  .riscos ul{margin:0;padding:0}
+  .joao{max-width:78vw}
+  .joao .legenda{font-family:var(--mono);font-size:clamp(.9rem,1.2vw,1.3rem);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+  .joao .fala{font-family:var(--display);font-size:clamp(1.8rem,3.4vw,3.6rem);line-height:1.25;margin-top:2vh}
+  .joao .fala.dim{color:var(--ink-mute)}
+  .reviravolta{background:#050c1c}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:3vw;width:100%}
+  .vs .card{padding:2.4vw}
+  .nuvem{display:flex;flex-wrap:wrap;gap:1vw 2.2vw;justify-content:center;max-width:86vw}
+  .nuvem span{font-family:var(--display);font-size:clamp(1.1rem,2vw,2.4rem);color:var(--ink-soft)} .nuvem span:nth-child(3n){color:var(--ink);font-size:clamp(1.4rem,2.6vw,3rem)} .nuvem span:nth-child(5n){color:var(--amber)}
+  .timer{font-family:var(--mono);font-size:clamp(2rem,5vw,6rem);color:var(--amber)}
+  #setup{position:fixed;inset:auto 0 0 0;background:#fff;color:#0A1830;padding:16px 24px;font:14px var(--mono);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  #setup input{font:inherit;padding:6px 8px;border:1px solid #ccc;border-radius:6px;width:300px}
+  .status{position:absolute;bottom:3vh;left:6vw;font-family:var(--mono);font-size:.8rem;color:var(--ink-mute)}
+</style>
+</head>
+<body>
+<div id="stage" class="stage center"><p class="eyebrow">Sem Playbook</p><h1>Conectando…</h1></div>
+<div id="setup" hidden>
+  <b>Voz do João</b>
+  <input id="el_key" placeholder="chave ElevenLabs (xi-api-key)">
+  <input id="el_voice" placeholder="voice id (padrão: voz pt-BR do navegador se vazio)" style="width:360px">
+  <button id="el_save">Salvar</button><button id="el_test">Testar</button><button id="el_close">Fechar</button>
+  <span id="el_msg"></span>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="sp.js"></script>
+<script>
+const { $, esc, store, api, REC_TXT, DEMO } = SP;
+const MESA_URL = location.href.replace(/telao\.html.*$/, "") ;
+const S = { tela: null, data: null, played: store.get("played") || {}, audioReady: false, lastKey: "" };
+const R = {};
+
+function corner(t) { return `<div class="corner"><span class="eyebrow">Sem Playbook · VAB · 21 de outubro</span>${t ? `<span class="pill">${t}</span>` : ""}</div>`; }
+function timer(cfg) { if (!cfg.prazo) return ""; const ms = new Date(cfg.prazo) - Date.now(); if (ms <= 0) return `<div class="timer">0:00</div>`; const m = Math.floor(ms / 60000), s = Math.floor((ms % 60000) / 1000); return `<div class="timer">${m}:${String(s).padStart(2, "0")}</div>`; }
+
+R.chegada = d => `${corner("Chegada")}<div class="frases">${d.frases.slice(-14).map((f, i) => `<span style="animation-delay:${i * .25}s">${esc(f)}</span>`).join("") || `<h2 class="soft">O dilema humano mais difícil que você já viveu num conselho.</h2>`}</div>
+  <div class="qr"><div id="qr"></div>check-in</div><div class="status">${d.checkins} de ${d.inscritos || "?"} na sala</div>`;
+R.chegada.after = () => { try { new QRCode($("#qr"), { text: MESA_URL, width: 150, height: 150, correctLevel: QRCode.CorrectLevel.M }); } catch (e) { } };
+
+R.mesas = d => `${corner("Mesas")}<h2>As mesas foram formadas para reunir pessoas que aprendem de <em class="grad">jeitos diferentes</em>.</h2>
+  <div class="grid">${d.mesas.map(m => `<div class="card"><div class="n">${m.mesa}</div><ul>${m.quem.map(n => `<li>${esc(n)}</li>`).join("") || "<li class='mute'>—</li>"}</ul></div>`).join("")}</div>`;
+
+R.voto = d => `${corner("Voto silencioso")}<div class="stage center" style="padding:0;height:auto"><p class="eyebrow">Antes de falar</p><div class="big grad">${d.votos_n}</div><h2>votos recebidos</h2><p class="soft">O resultado aparece no placar, depois da recomendação das mesas.</p></div>`;
+
+R.aguardando = d => `${corner("Ato 1 · consultorias trabalhando")}<div class="stage center" style="padding:0;height:auto"><p class="eyebrow">Recomendações enviadas</p><div class="big grad">${d.recs_n} <span class="soft" style="font-size:.4em">de ${d.n_mesas}</span></div>${timer(d.config)}<p class="soft">Mesas que enviaram: ${d.mesas.filter(m => m.rec).map(m => m.mesa).join(", ") || "nenhuma ainda"}</p></div>`;
+
+R.placar = d => `${corner("Placar · Ato 1")}
+  <div class="tally">${["aprovar", "condicoes", "rejeitar"].map(k => `<div class="card"><div class="lbl">${REC_TXT[k]}</div><div class="v">${d.recs[k]}</div><div class="sub">consultorias · ${d.votos[k]} votos individuais</div></div>`).join("")}</div>
+  <div class="mesas">${d.mesas.map(m => `<div class="card"><span class="k">MESA ${m.mesa}</span>${m.rec ? `<div class="rec">${REC_TXT[m.rec.rec]}</div><div class="q">${esc(m.rec.porque)}</div>${[m.rec.cond1, m.rec.cond2, m.rec.cond3].filter(Boolean).map(c => `<div class="q">· ${esc(c)}</div>`).join("")}${m.rec.divergente ? `<div class="q mute">Divergente: ${esc(m.rec.divergente)}</div>` : ""}` : `<div class="q mute">não enviou</div>`}</div>`).join("")}</div>`;
+
+R.riscos = d => `${corner("Mapa de riscos")}<h2>O que o conselho assume, segundo as consultorias</h2>
+  <div class="riscos"><div class="sim"><h3>Se aprovar</h3><ul>${d.riscos_sim.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div><div class="nao"><h3>Se não aprovar</h3><ul>${d.riscos_nao.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div></div>`;
+
+R.joao = d => { const j = d.joao_atual; return `${corner()}<div class="joao"><div class="legenda">João · conselheiro independente · agente de IA</div><div class="fala ${j ? "" : "dim"}" id="fala">${j ? esc(j.texto) : "O conselheiro está lendo as recomendações."}</div></div>`; };
+R.reviravolta = d => { const j = d.joao_atual; return `${corner()}<div class="joao"><div class="legenda">João · conselheiro independente · agente de IA</div><div class="fala ${j ? "" : "dim"}" id="fala">${j ? esc(j.texto) : "…"}</div>${timer(d.config)}</div>`; };
+R.reviravolta.cls = "reviravolta";
+
+R.placar2 = d => `${corner("Placar 2 · depois das notícias")}
+  <div class="tally"><div class="card"><div class="lbl">Mantiveram</div><div class="v">${d.mantiveram}</div></div><div class="card"><div class="lbl">Mudaram</div><div class="v">${d.mudaram}</div></div><div class="card"><div class="lbl">Responderam</div><div class="v">${d.pos_n}<span class="soft" style="font-size:.4em"> de ${d.n_mesas}</span></div>${timer(d.config)}</div></div>
+  <div class="mesas">${d.mesas.map(m => `<div class="card"><span class="k">MESA ${m.mesa}</span>${m.pos ? `<div class="rec">${m.pos.sobrevive === "mantemos" ? "Mantém" : "Muda → " + (REC_TXT[m.pos.nova_rec] || "")}</div>${m.pos.o_que_muda ? `<div class="q">${esc(m.pos.o_que_muda)}</div>` : ""}<div class="q"><span class="k">Instrução:</span> ${esc(m.pos.instrucao)}</div>` : `<div class="q mute">ainda não respondeu</div>`}</div>`).join("")}</div>`;
+
+R.plenaria = d => { const ids = String(d.config.mesas_escolhidas || "").split(",").map(x => parseInt(x, 10)).filter(Boolean); const ms = ids.map(i => d.mesas.find(m => m.mesa === i)).filter(Boolean);
+  return `${corner("Plenária")}<h2>Duas consultorias, dois caminhos. <em class="grad">O conselho ouve.</em></h2><div class="vs">${ms.map(m => `<div class="card"><span class="k">MESA ${m.mesa}</span>${m.rec ? `<div class="rec" style="font-family:var(--display);font-size:clamp(1.6rem,3vw,3.2rem)">${REC_TXT[m.rec.rec]}${m.pos && m.pos.sobrevive === "mudamos" ? ` → ${REC_TXT[m.pos.nova_rec] || ""}` : ""}</div><p class="soft" style="margin-top:1vw">${esc(m.rec.porque)}</p><p style="margin-top:1vw"><span class="k">Risco de aprovar:</span> ${esc(m.rec.risco_sim)}</p><p><span class="k">Risco de não aprovar:</span> ${esc(m.rec.risco_nao)}</p>${m.pos ? `<p style="margin-top:1vw"><span class="k">Instrução:</span> ${esc(m.pos.instrucao)}</p>` : ""}` : "<p class='mute'>sem recomendação</p>"}</div>`).join("") || "<p class='mute'>Escolha as duas mesas no painel.</p>"}</div>`; };
+
+R.casoB = d => `${corner()}<div class="stage center" style="padding:0;height:auto"><p class="eyebrow">Caso (B)</p><h1>O que a Montadora <em class="grad">fez</em>.</h1></div>`;
+R.checklist = d => `${corner("Checklist da comunidade")}<h2 style="text-align:center">O que um conselho precisa olhar antes de aprovar a <em class="grad">nova força de trabalho</em></h2><div class="nuvem" style="margin:0 auto">${d.colheita.map(f => `<span>${esc(f)}</span>`).join("") || "<span class='mute'>as frases chegam agora</span>"}</div><div class="status">${d.colheita_n} frases</div>`;
+
+/* ---------- voz ---------- */
+async function falar(j) {
+  if (!j || S.played[j.id]) return; S.played[j.id] = 1; store.set("played", S.played);
+  const key = store.get("el_key"), voice = store.get("el_voice");
+  if (key && voice) {
+    try {
+      const r = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice}?output_format=mp3_44100_128`, { method: "POST", headers: { "xi-api-key": key, "Content-Type": "application/json" }, body: JSON.stringify({ text: j.texto, model_id: "eleven_multilingual_v2", voice_settings: { stability: .55, similarity_boost: .75, style: .2 } }) });
+      if (!r.ok) throw new Error("ElevenLabs " + r.status);
+      const blob = await r.blob(); const a = new Audio(URL.createObjectURL(blob)); await a.play(); return;
+    } catch (e) { console.warn("TTS", e); }
+  }
+  try { const u = new SpeechSynthesisUtterance(j.texto); u.lang = "pt-BR"; u.rate = .95; const v = speechSynthesis.getVoices().find(x => /pt[-_]BR/i.test(x.lang)); if (v) u.voice = v; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) { }
+}
+
+/* ---------- ciclo ---------- */
+async function tick() {
+  let d; try { d = await api("telao"); } catch (e) { return; }
+  if (!d.ok) return; S.data = d;
+  const tela = d.config.tela_telao; const r = R[tela] || R.chegada;
+  const key = tela + "|" + JSON.stringify([d.checkins, d.votos_n, d.recs_n, d.pos_n, d.colheita_n, d.frases.length, d.config.mesas_escolhidas, d.config.prazo, d.joao_atual && d.joao_atual.id]);
+  if (key !== S.lastKey || d.config.prazo) {
+    const st = $("#stage"); st.className = "stage " + (["voto", "aguardando", "casoB"].includes(tela) ? "center" : "") + " " + (r.cls || "");
+    if (key !== S.lastKey) { st.innerHTML = r(d); if (r.after) r.after(d); }
+    else if (d.config.prazo) { const t = st.querySelector(".timer"); if (t) t.outerHTML = timer(d.config); }
+    S.lastKey = key;
+  }
+  if ((tela === "joao" || tela === "reviravolta") && d.joao_atual) falar(d.joao_atual);
+}
+tick(); setInterval(tick, 4000);
+
+/* ---------- configuração da voz: tecla V ---------- */
+document.addEventListener("keydown", e => { if (e.key.toLowerCase() === "v") { $("#setup").hidden = !$("#setup").hidden; $("#el_key").value = store.get("el_key") || ""; $("#el_voice").value = store.get("el_voice") || ""; } if (e.key.toLowerCase() === "f") document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); });
+$("#el_save").onclick = () => { store.set("el_key", $("#el_key").value.trim()); store.set("el_voice", $("#el_voice").value.trim()); $("#el_msg").textContent = "salvo"; };
+$("#el_test").onclick = () => { store.set("el_key", $("#el_key").value.trim()); store.set("el_voice", $("#el_voice").value.trim()); delete S.played["teste"]; falar({ id: "teste", texto: "Esta consultoria recomendou, e escreveu o porquê e os riscos. Minha pergunta: quem perde com isso, e quem vai ouvir?" }); $("#el_msg").textContent = "tocando…"; };
+$("#el_close").onclick = () => $("#setup").hidden = true;
+/* o navegador exige um clique antes de tocar áudio: o primeiro clique na tela libera */
+document.addEventListener("click", () => { if (!S.audioReady) { S.audioReady = true; try { speechSynthesis.getVoices(); } catch (e) { } } }, { once: true });
+</script>
+</body>
+</html>

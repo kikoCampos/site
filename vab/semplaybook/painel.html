@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Sem Playbook · painel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="sp.css">
+<style>
+  .wrap{max-width:1180px}
+  .cols{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+  @media(max-width:900px){.cols{grid-template-columns:1fr}}
+  .seq{display:grid;gap:8px}
+  .step{display:grid;grid-template-columns:34px 1fr auto auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px}
+  .step .n{font-family:var(--mono);color:var(--amber);font-size:.8rem}
+  .step .t{font-weight:600}.step .t small{display:block;font-weight:400;color:var(--ink-mute);font-size:.82rem}
+  .step .btn{width:auto;padding:8px 14px;font-size:.9rem}
+  .step.on{border-color:var(--amber);background:rgba(242,179,61,.08)}
+  .mini{font-size:.9rem}
+  .raw{font-size:.9rem;border-top:1px solid var(--line);padding:10px 0}
+  .raw b{font-family:var(--mono);color:var(--amber);font-size:.72rem;letter-spacing:.12em}
+  .joaobox textarea{min-height:150px;font-family:var(--display);font-size:1.05rem;line-height:1.45}
+  .stat{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:.78rem;color:var(--ink-soft)}
+  .stat b{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"><p class="eyebrow">Sem Playbook · painel</p><h2>Conectando…</h2></div>
+<script src="sp.js"></script>
+<script>
+const { $, $$, esc, store, toast, api, REC_TXT, DEMO, token } = SP;
+const S = { d: null, joao: null, busy: false, editing: false };
+const SEQ = [
+  { n: "0", t: "Chegada", s: "Telão: frases anônimas + QR. Celular: check-in", cel: "checkin", tel: "chegada" },
+  { n: "1", t: "Mostrar as mesas", s: "19h20 · Telão: mapa das mesas. Celular: sua mesa", cel: "mesa", tel: "mesas" },
+  { n: "2", t: "Voto silencioso", s: "19h30 · 2 minutos. Celular: três botões", cel: "voto", tel: "voto", prazo: 2 },
+  { n: "3", t: "Abrir a recomendação", s: "19h32 · 28 minutos. Celular: formulário da consultoria", cel: "recomendacao", tel: "aguardando", prazo: 28 },
+  { n: "4", t: "Placar", s: "20h00 · Telão: recomendações e votos", cel: "fechado", tel: "placar" },
+  { n: "5", t: "Mapa de riscos", s: "Telão: riscos de aprovar / de não aprovar", cel: "fechado", tel: "riscos" },
+  { n: "6", t: "João · conjunto", s: "20h02 · gerar à direita, ler, tocar", cel: "fechado", tel: "joao", joao: "conjunto" },
+  { n: "7", t: "Reviravolta", s: "20h05 · João anuncia; celular abre o Ato 2 (15 min)", cel: "reviravolta", tel: "reviravolta", joao: "reviravolta", prazo: 15 },
+  { n: "8", t: "Placar 2", s: "20h20 · quem manteve, quem mudou", cel: "fechado", tel: "placar2" },
+  { n: "9", t: "João · duas mesas", s: "20h22 · escolha as mesas abaixo, gere e toque uma por vez", cel: "fechado", tel: "joao", joao: "mesa" },
+  { n: "10", t: "Plenária", s: "20h30 · as duas mesas lado a lado, sem áudio", cel: "fechado", tel: "plenaria" },
+  { n: "11", t: "O que a Montadora fez", s: "20h45 · só o título", cel: "fechado", tel: "casoB" },
+  { n: "12", t: "Colheita e checklist", s: "20h55 · celular: uma frase; telão: nuvem", cel: "colheita", tel: "checklist" },
+  { n: "13", t: "Encerrar", s: "21h10 · celular: agradecimento", cel: "fechado", tel: "checklist" }
+];
+
+async function set(obj) { const r = await api("set", { set: obj }); if (!r.ok) toast("Erro: " + (r.erro || "")); return r; }
+
+function render() {
+  const d = S.d; const c = d.config;
+  const mesasOpts = d.mesas.map(m => `<option value="${m.mesa}">Mesa ${m.mesa}${m.rec ? " · " + REC_TXT[m.rec.rec] : " · (sem envio)"}</option>`).join("");
+  const esc2 = String(c.mesas_escolhidas || "").split(",").map(x => parseInt(x, 10)).filter(Boolean);
+  $("#app").innerHTML = `
+  <div class="topbar"><div><p class="eyebrow">Sem Playbook · painel de controle</p><h2>Boa noite, Camila.</h2></div><div class="stat">${DEMO ? "<span class='pill'>demonstração local</span>" : ""}<span>check-ins <b>${d.checkins}</b></span><span>votos <b>${d.votos_n}</b></span><span>recomendações <b>${d.recs_n}/${d.n_mesas}</b></span><span>pós <b>${d.pos_n}</b></span><span>colheita <b>${d.colheita_n}</b></span></div></div>
+  <div class="cols">
+    <div class="panel">
+      <p class="eyebrow" style="margin-bottom:10px">Sequência da noite</p>
+      <div class="seq">${SEQ.map(s => `<div class="step ${c.tela_telao === s.tel && c.tela_celular === s.cel ? "on" : ""}"><span class="n">${s.n}</span><span class="t">${s.t}<small>${s.s}</small></span>${s.prazo ? `<button class="btn btn-g" data-prazo="${s.prazo}">⏱ ${s.prazo} min</button>` : "<span></span>"}<button class="btn ${c.tela_telao === s.tel && c.tela_celular === s.cel ? "" : "btn-p"}" data-cel="${s.cel}" data-tel="${s.tel}">Ir</button></div>`).join("")}</div>
+      <hr class="fine">
+      <div class="row"><label class="f" style="margin:0;flex:1"><span class="l">Mesas da plenária e do João</span><div class="row" style="margin-top:4px"><select id="m1">${mesasOpts}</select><select id="m2">${mesasOpts}</select><button class="btn btn-g" id="setm">Definir</button></div></label></div>
+      <p class="mute mini" style="margin-top:8px">Escolhidas agora: ${esc2.length ? esc2.map(x => "Mesa " + x).join(" e ") : "nenhuma"}</p>
+      <hr class="fine">
+      <div class="row"><button class="btn btn-g" id="prazo0">Zerar cronômetro</button><button class="btn btn-g" id="reset">Zerar rodada (ensaio)</button>${DEMO ? `<button class="btn btn-g" id="demoload">Carregar 5 mesas de teste</button>` : ""}</div>
+      <p class="mute mini" style="margin-top:10px">Telão: <code>telao.html</code> em tela cheia (tecla F). Voz do João: tecla V no telão. Celular: QR na tela de chegada.</p>
+    </div>
+    <div class="stack">
+      <div class="panel joaobox">
+        <p class="eyebrow" style="margin-bottom:10px">João</p>
+        <div class="row" style="margin-top:0"><button class="btn btn-p" data-j="conjunto">Gerar · conjunto</button><button class="btn btn-p" data-j="reviravolta">Gerar · reviravolta</button></div>
+        <div class="row"><select id="jm">${mesasOpts}</select><button class="btn btn-p" data-j="mesa">Gerar · mesa</button></div>
+        <hr class="fine">
+        ${S.joao ? `<p class="k">${S.joao.modo}${S.joao.mesa ? " · mesa " + S.joao.mesa : ""} · ${S.joao.id}</p><textarea id="jt">${esc(S.joao.texto)}</textarea><p class="count"><span id="wc"></span></p>
+        <div class="row"><button class="btn btn-g" id="jre">Gerar de novo</button><button class="btn btn-p" id="jplay">Tocar no telão</button></div>` : `<p class="soft mini">Gere uma fala, leia, corrija se precisar e toque. O telão toca uma vez e mostra a legenda.</p>`}
+        ${c.joao_atual ? `<p class="k" style="margin-top:10px">No telão agora: ${c.joao_atual}</p>` : ""}
+      </div>
+      <div class="panel">
+        <p class="eyebrow" style="margin-bottom:6px">Texto bruto das mesas</p>
+        ${d.mesas.map(m => `<div class="raw"><b>MESA ${m.mesa}</b>${m.rec ? ` · <b>${REC_TXT[m.rec.rec]}</b><br>${esc(m.rec.porque)}${[m.rec.cond1, m.rec.cond2, m.rec.cond3].filter(Boolean).map(x => "<br>· " + esc(x)).join("")}<br><span class="mute">sim: ${esc(m.rec.risco_sim)} · não: ${esc(m.rec.risco_nao)}${m.rec.divergente ? " · div.: " + esc(m.rec.divergente) : ""}${m.rec.indicador ? " · ind.: " + esc(m.rec.indicador) : ""}</span>` : " <span class='mute'>sem envio</span>"}${m.pos ? `<br><span class="k">pós:</span> ${m.pos.sobrevive}${m.pos.o_que_muda ? " · " + esc(m.pos.o_que_muda) : ""} · <i>${esc(m.pos.instrucao)}</i>` : ""}</div>`).join("")}
+      </div>
+    </div>
+  </div>`;
+  bind();
+}
+
+function bind() {
+  const d = S.d;
+  $$("[data-cel]").forEach(b => b.onclick = async () => { const s = SEQ.find(x => x.cel === b.dataset.cel && x.tel === b.dataset.tel); const o = { tela_celular: s.cel, tela_telao: s.tel }; if (s.prazo) o.prazo = new Date(Date.now() + s.prazo * 60000).toISOString(); else o.prazo = ""; if (s.tel !== "joao" && s.tel !== "reviravolta") o.joao_atual = ""; await set(o); toast(s.t); refresh(); });
+  $$("[data-prazo]").forEach(b => b.onclick = async () => { await set({ prazo: new Date(Date.now() + parseInt(b.dataset.prazo, 10) * 60000).toISOString() }); toast("Cronômetro: " + b.dataset.prazo + " min"); refresh(); });
+  $("#prazo0").onclick = async () => { await set({ prazo: "" }); refresh(); };
+  $("#setm").onclick = async () => { const a = $("#m1").value, b = $("#m2").value; if (a === b) return toast("Escolha duas mesas diferentes."); await set({ mesas_escolhidas: a + "," + b }); toast("Mesas " + a + " e " + b); refresh(); };
+  $("#reset").onclick = async () => { if (!confirm("Apagar check-ins, votos, recomendações, pós, colheita e falas do João? (inscritos ficam)")) return; await api("reset_rodada"); S.joao = null; toast("Rodada zerada."); refresh(); };
+  if ($("#demoload")) $("#demoload").onclick = async () => { const nomes = ["Ana Lima", "Bruno Reis", "Carla Souza", "Diego Prado", "Elisa Nunes", "Fábio Costa", "Gabriela Ito", "Hugo Melo", "Iara Pires", "João Duarte", "Karen Luz", "Léo Braga", "Marta Sá", "Nei Rocha", "Olga Dias", "Paulo Vaz", "Rita Alves", "Saulo Teles", "Tânia Reis", "Ulisses Maia"]; await api("demo_inscritos", { lista: nomes.map((n, i) => ({ nome: n, mesa: (i % 5) + 1, empresa: ["Alfa", "Beta", "Gama", "Delta"][i % 4] })) }); toast("20 inscritos em 5 mesas."); refresh(); };
+  $$("[data-j]").forEach(b => b.onclick = async () => { if (S.busy) return; S.busy = true; b.disabled = true; b.textContent = "Gerando…"; const r = await api("joao_gerar", { modo: b.dataset.j, mesa: b.dataset.j === "mesa" ? $("#jm").value : "" }); S.busy = false; if (r.ok) { S.joao = r; render(); } else { toast("Erro: " + (r.erro || "")); render(); } });
+  if ($("#jt")) { const wc = () => $("#wc").textContent = $("#jt").value.trim().split(/\s+/).filter(Boolean).length + " palavras (máx. 120)"; wc(); $("#jt").oninput = wc; $("#jt").onfocus = () => S.editing = true; $("#jt").onblur = () => S.editing = false;
+    $("#jre").onclick = async () => { if (S.busy) return; S.busy = true; const r = await api("joao_gerar", { modo: S.joao.modo, mesa: S.joao.mesa || "" }); S.busy = false; if (r.ok) { S.joao = r; render(); } else toast("Erro: " + (r.erro || "")); };
+    $("#jplay").onclick = async () => { const t = $("#jt").value.trim(); if (t !== S.joao.texto) { await api("joao_texto", { id: S.joao.id, texto: t }); S.joao.texto = t; } const tela = S.joao.modo === "reviravolta" ? "reviravolta" : "joao"; const o = { id: S.joao.id, tela }; await api("joao_tocar", o); if (S.joao.modo === "reviravolta") await set({ tela_celular: "reviravolta", prazo: new Date(Date.now() + 15 * 60000).toISOString() }); toast("Tocando no telão."); refresh(); };
+  }
+}
+
+async function refresh() { try { const d = await api("painel"); if (!d.ok) { $("#app").innerHTML = `<p class="eyebrow">Sem Playbook · painel</p><h2>Acesso negado.</h2><p class="soft">Abra o painel com <code>?k=SENHA</code> (OPERATOR_TOKEN).</p>`; return; } S.d = d; if (!S.editing) render(); } catch (e) { } }
+refresh(); setInterval(refresh, 6000);
+</script>
+</body>
+</html>

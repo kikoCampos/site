@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="theme-color" content="#0A1830">
+<title>Sem Playbook · a sua mesa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="sp.css">
+<style>
+  .name-list{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:8px}
+  .name-list button{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);color:var(--ink);font:inherit;padding:12px 14px;cursor:pointer}
+  .name-list button:first-child{border-top:0}
+  .name-list button small{color:var(--ink-mute);margin-left:8px}
+  .cond input{margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script src="sp.js"></script>
+<script>
+const { $, $$, esc, store, toast, api, counters, DEMO } = SP;
+const S = { me: store.get("me") || null, tela: null, cfg: null, mesaInfo: null, busy: false, typing: false };
+const TEXTO_MESA = "As mesas foram formadas para reunir pessoas que aprendem de jeitos diferentes diante do que não tem resposta pronta. Ninguém viu o perfil de ninguém: só a combinação.";
+
+function head(t) { return `<div class="topbar"><span class="eyebrow">Sem Playbook · 21 out</span>${S.me ? `<span class="pill">Mesa ${S.me.mesa || "?"} · ${esc(S.me.nome.split(" ")[0])}</span>` : ""}</div>`; }
+function waiting(msg) { return `<div class="panel waiting"><span class="dot"></span><p class="soft" style="margin-top:14px">${msg}</p></div>`; }
+
+/* ---------- identificação ---------- */
+async function viewIdent() {
+  const r = await api("inscritos"); const lista = (r.lista || []).sort((a, b) => a.nome.localeCompare(b.nome));
+  $("#app").innerHTML = head() + `
+  <h1>Quem é <em class="grad">você</em>?</h1>
+  <p class="soft" style="margin-top:10px">Escolha o seu nome. Ele liga você à sua mesa.</p>
+  <div class="panel" style="margin-top:20px">
+    ${lista.length ? `<input type="search" id="q" placeholder="Digite o nome" autocomplete="off"><div class="name-list" id="nl"></div>` : `
+    <label class="f"><span class="l">Seu nome</span><input type="text" id="nome" maxlength="80"></label>
+    <label class="f"><span class="l">Número da mesa</span><input type="text" id="mesa" inputmode="numeric" maxlength="2"></label>
+    <div class="row"><button class="btn btn-p" id="go">Entrar</button></div>`}
+  </div>`;
+  if (lista.length) {
+    const nl = $("#nl"); const draw = q => { nl.innerHTML = lista.filter(p => !q || p.nome.toLowerCase().includes(q)).slice(0, 40).map(p => `<button data-n="${esc(p.nome)}" data-m="${p.mesa}">${esc(p.nome)}<small>${esc(p.empresa || "")}</small></button>`).join("") || `<button disabled>Nome não encontrado. Procure a Camila.</button>`; };
+    draw(""); $("#q").oninput = e => draw(e.target.value.trim().toLowerCase());
+    nl.onclick = e => { const b = e.target.closest("button[data-n]"); if (!b) return; S.me = { nome: b.dataset.n, mesa: parseInt(b.dataset.m, 10) || 0 }; store.set("me", S.me); S.tela = null; tick(); };
+  } else {
+    $("#go").onclick = () => { const n = $("#nome").value.trim(); const m = parseInt($("#mesa").value, 10); if (!n || !m) return toast("Nome e mesa, por favor."); S.me = { nome: n, mesa: m }; store.set("me", S.me); S.tela = null; tick(); };
+  }
+}
+
+/* ---------- telas ---------- */
+const V = {};
+V.checkin = () => {
+  const done = store.get("checkin_done");
+  if (done) return head() + `<h1>Check-in <em class="grad">feito</em>.</h1><p class="soft" style="margin-top:12px">Olhe para o telão. A sua mesa aparece em instantes.</p>`;
+  return head() + `<h1>Bem-vindo, <em class="grad">${esc(S.me.nome.split(" ")[0])}</em>.</h1>
+  <p class="soft" style="margin-top:10px">Uma pergunta antes de sentar. Opcional, anônima.</p>
+  <div class="panel" style="margin-top:20px">
+    <label class="f"><span class="l">O dilema humano mais difícil que você já viveu num conselho ou numa diretoria</span><span class="h">Uma frase. Aparece no telão sem o seu nome, só se você autorizar.</span><textarea id="dilema" maxlength="140"></textarea></label>
+    <label class="f" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="consent" style="margin-top:4px"><span class="soft">Autorizo exibir a frase, anônima, no telão</span></label>
+    <div class="row"><button class="btn btn-p" id="send">Fazer check-in</button></div>
+  </div>`;
+};
+V.checkin.bind = () => { if (!$("#send")) return; counters(); $("#send").onclick = async () => { if (S.busy) return; S.busy = true; const r = await api("checkin", { nome: S.me.nome, mesa: S.me.mesa, dilema: $("#dilema").value.trim(), consent: $("#consent").checked }); S.busy = false; if (r.ok) { if (r.mesa) { S.me.mesa = r.mesa; store.set("me", S.me); } store.set("checkin_done", 1); toast("Check-in feito."); render(); } else toast("Não foi. Tente de novo."); }; };
+
+V.mesa = () => {
+  const info = S.mesaInfo || { quem: [] };
+  return head() + `<p class="eyebrow">Sua mesa</p><h1 class="big grad">${S.me.mesa || "?"}</h1>
+  <div class="panel" style="margin-top:18px"><p class="eyebrow" style="margin-bottom:10px">Quem senta com você</p>
+  <ul class="list">${(info.quem || []).filter(n => n !== S.me.nome).map(n => `<li>${esc(n)}</li>`).join("") || `<li class="mute">A lista aparece quando as mesas forem carregadas.</li>`}</ul>
+  <hr class="fine"><p class="soft">${TEXTO_MESA}</p></div>`;
+};
+
+V.voto = () => {
+  const done = store.get("voto_done");
+  if (done) return head() + `<h1>Registrado.</h1><p class="soft" style="margin-top:12px">Agora a mesa conversa. Ninguém vê o seu voto até o placar.</p>`;
+  return head() + `<p class="eyebrow">Voto silencioso · 2 minutos</p><h1>Antes de falar com a mesa: o que <em class="grad">você</em> recomendaria ao conselho?</h1>
+  <div class="choice" style="margin-top:20px">
+    <button data-v="aprovar">Recomendo aprovar<small>A Opção 3 como a gestão apresentou</small></button>
+    <button data-v="condicoes">Recomendo aprovar com condições<small>O mapa entra, mas com travas</small></button>
+    <button data-v="rejeitar">Recomendo rejeitar<small>Outro caminho</small></button>
+  </div><p class="mute" style="margin-top:14px;font-size:.86rem">Um toque registra. Não dá para mudar.</p>`;
+};
+V.voto.bind = () => { $$(".choice button").forEach(b => b.onclick = async () => { if (S.busy) return; S.busy = true; const r = await api("voto", { nome: S.me.nome, mesa: S.me.mesa, voto: b.dataset.v }); S.busy = false; if (r.ok) { store.set("voto_done", b.dataset.v); render(); } else toast("Não foi. Tente de novo."); }); };
+
+V.recomendacao = () => {
+  const rec = S.mesaInfo && S.mesaInfo.rec;
+  if (rec) return head() + `<div class="panel lock"><p class="eyebrow">Mesa ${S.me.mesa}</p><h2 style="margin-top:8px">Recomendação enviada.</h2><p class="soft" style="margin-top:10px">Olhe para o telão.</p><hr class="fine"><p><b>${SP.REC_TXT[rec.rec] || rec.rec}</b></p><p class="soft" style="margin-top:6px">${esc(rec.porque)}</p></div>`;
+  const draft = store.get("rec_draft") || {};
+  return head() + `<p class="eyebrow">Recomendação ao conselho · Mesa ${S.me.mesa}</p><h1>O que a consultoria <em class="grad">recomenda</em>?</h1>
+  <p class="soft" style="margin-top:10px">Um único celular da mesa envia. Quem envia é quem a mesa escolher.</p>
+  <div class="panel stack" style="margin-top:18px">
+    <div><span class="eyebrow">Recomendação</span>
+    <div class="choice" id="rec">
+      <button data-v="aprovar" ${draft.rec === "aprovar" ? 'class="on"' : ""}>Aprovar</button>
+      <button data-v="condicoes" ${draft.rec === "condicoes" ? 'class="on"' : ""}>Aprovar com condições</button>
+      <button data-v="rejeitar" ${draft.rec === "rejeitar" ? 'class="on"' : ""}>Rejeitar</button>
+    </div></div>
+    <div id="conds" class="cond" ${draft.rec === "condicoes" ? "" : "hidden"}><label class="f"><span class="l">Condições</span><span class="h">Até três, uma por linha. Pode ser por força de trabalho.</span>
+      <input type="text" id="c1" maxlength="100" placeholder="1." value="${esc(draft.c1 || "")}"><input type="text" id="c2" maxlength="100" placeholder="2." value="${esc(draft.c2 || "")}"><input type="text" id="c3" maxlength="100" placeholder="3." value="${esc(draft.c3 || "")}"></label></div>
+    <label class="f"><span class="l">Por quê</span><span class="h">Como o presidente do conselho registraria em ata.</span><textarea id="porque" maxlength="200">${esc(draft.porque || "")}</textarea></label>
+    <label class="f"><span class="l">O maior risco que o conselho assume se aprovar</span><textarea id="rs" maxlength="120">${esc(draft.rs || "")}</textarea></label>
+    <label class="f"><span class="l">O maior risco que o conselho assume se não aprovar</span><textarea id="rn" maxlength="120">${esc(draft.rn || "")}</textarea></label>
+    <label class="f"><span class="l">Opinião divergente <span class="mute" style="text-transform:none;letter-spacing:0">(opcional)</span></span><span class="h">"Um sócio preferia recomendar a Opção 1 porque..."</span><input type="text" id="div" maxlength="100" value="${esc(draft.div || "")}"></label>
+    <label class="f"><span class="l">Indicador <span class="mute" style="text-transform:none;letter-spacing:0">(opcional)</span></span><span class="h">O que o conselho deve cobrar da gestão na próxima reunião.</span><input type="text" id="ind" maxlength="80" value="${esc(draft.ind || "")}"></label>
+    <div class="row"><button class="btn btn-p" id="send">Enviar ao conselho</button></div>
+  </div>`;
+};
+V.recomendacao.bind = () => {
+  if (!$("#send")) return; counters(); const d = () => store.get("rec_draft") || {};
+  const saveDraft = () => store.set("rec_draft", { rec: ($(".choice button.on") || {}).dataset?.v, c1: $("#c1").value, c2: $("#c2").value, c3: $("#c3").value, porque: $("#porque").value, rs: $("#rs").value, rn: $("#rn").value, div: $("#div").value, ind: $("#ind").value });
+  $$("#rec button").forEach(b => b.onclick = () => { $$("#rec button").forEach(x => x.classList.remove("on")); b.classList.add("on"); $("#conds").hidden = b.dataset.v !== "condicoes"; saveDraft(); });
+  $$("input,textarea").forEach(el => { el.addEventListener("focus", () => S.typing = true); el.addEventListener("blur", () => S.typing = false); el.addEventListener("input", saveDraft); });
+  $("#send").onclick = async () => {
+    const rec = ($("#rec button.on") || {}).dataset?.v; if (!rec) return toast("Escolha a recomendação.");
+    const porque = $("#porque").value.trim(), rs = $("#rs").value.trim(), rn = $("#rn").value.trim();
+    if (!porque) return toast("Falta o porquê."); if (!rs || !rn) return toast("Faltam os dois riscos.");
+    if (rec === "condicoes" && !$("#c1").value.trim()) return toast("Escreva ao menos uma condição.");
+    if (S.busy) return; S.busy = true;
+    const r = await api("recomendacao", { nome: S.me.nome, mesa: S.me.mesa, rec, cond1: rec === "condicoes" ? $("#c1").value.trim() : "", cond2: rec === "condicoes" ? $("#c2").value.trim() : "", cond3: rec === "condicoes" ? $("#c3").value.trim() : "", porque, risco_sim: rs, risco_nao: rn, divergente: $("#div").value.trim(), indicador: $("#ind").value.trim() });
+    S.busy = false;
+    if (r.ok) { store.del("rec_draft"); toast(`Mesa ${S.me.mesa} enviou. Olhe para o telão.`); await loadMesa(); render(); }
+    else if (r.locked) { toast("Outro celular da mesa já enviou."); await loadMesa(); render(); }
+    else toast("Não foi: " + (r.erro || "tente de novo."));
+  };
+};
+
+V.reviravolta = () => {
+  const info = S.mesaInfo || {}; const rec = info.rec;
+  if (info.pos) return head() + `<div class="panel lock"><p class="eyebrow">Mesa ${S.me.mesa}</p><h2 style="margin-top:8px">${info.pos.sobrevive === "mantemos" ? "Mantiveram." : "Mudaram."}</h2><p class="soft" style="margin-top:10px">Olhe para o telão.</p></div>`;
+  const draft = store.get("pos_draft") || {};
+  return head() + `<p class="eyebrow">Depois das notícias · Mesa ${S.me.mesa}</p><h1>A recomendação <em class="grad">sobrevive</em>?</h1>
+  ${rec ? `<p class="soft" style="margin-top:10px">Vocês tinham recomendado: <b>${SP.REC_TXT[rec.rec] || rec.rec}</b>.</p>` : `<p class="soft" style="margin-top:10px">Esta mesa não enviou recomendação no Ato 1.</p>`}
+  <div class="panel stack" style="margin-top:18px">
+    <div class="choice" id="sob"><button data-v="mantemos" ${draft.sob === "mantemos" ? 'class="on"' : ""}>Mantemos</button><button data-v="mudamos" ${draft.sob === "mudamos" ? 'class="on"' : ""}>Mudamos</button></div>
+    <div id="muda" ${draft.sob === "mudamos" ? "" : "hidden"}>
+      <label class="f"><span class="l">O que muda</span><textarea id="oq" maxlength="200">${esc(draft.oq || "")}</textarea></label>
+      <div><span class="eyebrow">Nova recomendação</span><div class="choice" id="nova"><button data-v="aprovar" ${draft.nova === "aprovar" ? 'class="on"' : ""}>Aprovar</button><button data-v="condicoes" ${draft.nova === "condicoes" ? 'class="on"' : ""}>Aprovar com condições</button><button data-v="rejeitar" ${draft.nova === "rejeitar" ? 'class="on"' : ""}>Rejeitar</button></div></div>
+    </div>
+    <label class="f"><span class="l">O que recomendamos que o conselho instrua a gestão a fazer até a assembleia</span><textarea id="ins" maxlength="140">${esc(draft.ins || "")}</textarea></label>
+    <div class="row"><button class="btn btn-p" id="send">Enviar ao conselho</button></div>
+  </div>`;
+};
+V.reviravolta.bind = () => {
+  if (!$("#send")) return; counters();
+  const saveDraft = () => store.set("pos_draft", { sob: ($("#sob button.on") || {}).dataset?.v, nova: ($("#nova button.on") || {}).dataset?.v, oq: $("#oq").value, ins: $("#ins").value });
+  $$("#sob button").forEach(b => b.onclick = () => { $$("#sob button").forEach(x => x.classList.remove("on")); b.classList.add("on"); $("#muda").hidden = b.dataset.v !== "mudamos"; saveDraft(); });
+  $$("#nova button").forEach(b => b.onclick = () => { $$("#nova button").forEach(x => x.classList.remove("on")); b.classList.add("on"); saveDraft(); });
+  $$("input,textarea").forEach(el => { el.addEventListener("focus", () => S.typing = true); el.addEventListener("blur", () => S.typing = false); el.addEventListener("input", saveDraft); });
+  $("#send").onclick = async () => {
+    const sob = ($("#sob button.on") || {}).dataset?.v; if (!sob) return toast("Mantemos ou mudamos?");
+    const ins = $("#ins").value.trim(); if (!ins) return toast("Falta a instrução à gestão.");
+    const nova = ($("#nova button.on") || {}).dataset?.v; if (sob === "mudamos" && (!nova || !$("#oq").value.trim())) return toast("Diga o que muda e a nova recomendação.");
+    if (S.busy) return; S.busy = true;
+    const r = await api("pos", { nome: S.me.nome, mesa: S.me.mesa, sobrevive: sob, o_que_muda: $("#oq").value.trim(), nova_rec: nova || "", instrucao: ins });
+    S.busy = false;
+    if (r.ok) { store.del("pos_draft"); toast(`Mesa ${S.me.mesa} enviou.`); await loadMesa(); render(); }
+    else if (r.locked) { toast("Outro celular da mesa já enviou."); await loadMesa(); render(); }
+    else toast("Não foi: " + (r.erro || "tente de novo."));
+  };
+};
+
+V.colheita = () => {
+  if (store.get("colheita_done")) return head() + `<h1>Obrigado.</h1><p class="soft" style="margin-top:12px">A sua frase já está no telão, junto com as outras.</p>`;
+  return head() + `<p class="eyebrow">Colheita</p><h1>O que um conselho precisa olhar antes de aprovar a <em class="grad">nova força de trabalho</em>?</h1>
+  <div class="panel" style="margin-top:18px"><label class="f"><span class="l">Uma frase</span><textarea id="fr" maxlength="140"></textarea></label><div class="row"><button class="btn btn-p" id="send">Enviar</button></div></div>`;
+};
+V.colheita.bind = () => { if (!$("#send")) return; counters(); $("#send").onclick = async () => { const f = $("#fr").value.trim(); if (!f) return toast("Escreva uma frase."); if (S.busy) return; S.busy = true; const r = await api("colheita", { nome: S.me.nome, mesa: S.me.mesa, frase: f }); S.busy = false; if (r.ok) { store.set("colheita_done", 1); render(); } else toast("Não foi. Tente de novo."); }; };
+
+V.fechado = () => head() + `<h1>Sem Playbook.</h1><p class="soft" style="margin-top:12px">Obrigado por recomendar sem resposta pronta. O checklist da comunidade chega em uma semana.</p>`;
+V.aguarde = () => head() + waiting("Aguarde. A próxima tela abre no tempo certo.");
+
+/* ---------- ciclo ---------- */
+async function loadMesa() { if (!S.me || !S.me.mesa) return; try { S.mesaInfo = await api("mesa", { mesa: S.me.mesa }); } catch (e) { } }
+function render() {
+  if (!S.me) return viewIdent();
+  const v = V[S.tela] || V.aguarde;
+  $("#app").innerHTML = v(); if (v.bind) v.bind();
+  window.scrollTo(0, 0);
+}
+async function tick() {
+  if (!S.me) return render();
+  try {
+    const r = await api("state"); S.cfg = r.config;
+    const tela = r.config.tela_celular;
+    if (tela !== S.tela) { S.tela = tela; if (["mesa", "recomendacao", "reviravolta"].includes(tela)) await loadMesa(); render(); }
+    else if (!S.typing && ["recomendacao", "reviravolta"].includes(tela)) { const antes = JSON.stringify(S.mesaInfo); await loadMesa(); if (JSON.stringify(S.mesaInfo) !== antes) render(); }
+  } catch (e) { if (!S.tela) { $("#app").innerHTML = head() + waiting("Sem conexão. Tentando de novo…"); } }
+}
+if (SP.qs.get("sair")) { ["me", "checkin_done", "voto_done", "rec_draft", "pos_draft", "colheita_done"].forEach(store.del); history.replaceState(null, "", location.pathname); }
+tick(); setInterval(tick, 5000);
+</script>
+</body>
+</html>
