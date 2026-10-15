@@ -4,301 +4,279 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<meta name="theme-color" content="#0A1830">
-<title>Sem Playbook · VAB · Kiko Campos</title>
-<meta name="description" content="Encontro VAB, 21 de outubro de 2026. Repositório de consulta sobre liderar CLT, PJ, serviços contratados e agentes de IA ao mesmo tempo.">
-<link rel="icon" type="image/png" sizes="32x32" href="/board/icon-32.png">
-<link rel="apple-touch-icon" href="/board/icon-180.png">
+<meta name="theme-color" content="#4A161D">
+<title>Sem Playbook · Virtual Advisory Board</title>
+<meta name="description" content="Encontro VAB, 21 de outubro de 2026. Material de consulta sobre liderar CLT, as a service, PJ e agentes de IA ao mesmo tempo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Identidade kikocampos.com, em registro editorial: noite azul-marinho, Fraunces, mono âmbar nos rótulos.
-   Filetes finos e espaço em branco; nenhuma caixa preenchida. Tema único escuro, como o resto do site. */
+/* Identidade VAB: vinho, bordô e rosa sobre papel; sans limpa; rótulos em caixa-alta espaçada.
+   Arquitetura de capítulos: um capítulo por vez, índice lateral, setas do teclado, barra de progresso. */
 :root{
-  --bg:#0A1830; --bg2:#0E2140;
-  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.22);
-  --ink:#EAF1FB; --ink-soft:#AFC0DB; --ink-mute:#7D91B4;
-  --orange:#FF4A12; --amber:#F2B33D; --blue:#5AA9E6;
-  --display:"Fraunces", Georgia, serif;
-  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
-  color-scheme:dark;
+  --wine:#4A161D; --bordo:#7A2A33; --bordo2:#8E3741; --rose:#E3B9BF; --rose2:#F0D9DC;
+  --paper:#F6F1EF; --paper2:#EFE7E4; --ink:#2B1418; --ink2:#6B5559; --mute:#9A8589;
+  --line:#DCCFD1; --line2:#C9B4B8;
+  --sans:"Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", "Courier New", monospace;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
 html,body{margin:0;padding:0}
-body{background:
-  radial-gradient(1150px 640px at 82% -12%, rgba(90,169,230,.13), transparent 60%),
-  radial-gradient(900px 560px at 2% -6%, rgba(255,74,18,.11), transparent 55%),
-  var(--bg);
-  background-attachment:fixed;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
 [hidden]{display:none!important}
-.wrap{max-width:1120px;margin:0 auto;padding-inline:22px}
-h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.015em;text-wrap:balance;margin:0}
-h1{font-size:clamp(2.5rem,6.4vw,4.6rem);line-height:1.02;letter-spacing:-.025em}
-h2{font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.08}
-h3{font-size:1.18rem;line-height:1.28;font-weight:500}
-em{font-style:italic}
-.grad{background:linear-gradient(100deg,var(--amber),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1,h2,h3{font-weight:400;letter-spacing:-.022em;margin:0;text-wrap:balance}
 p{margin:0}
-.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600}
-.mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
-.soft{color:var(--ink-soft)}
-.mute{color:var(--ink-mute)}
+.lbl{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--bordo)}
+.lbl::before{content:"";width:14px;height:14px;background:var(--bordo);flex:none}
+.lbl.plain::before{display:none}
+.soft{color:var(--ink2)}
 
-/* topo */
-.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,24,48,.78);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:28px;height:60px}
-.brand{font-family:var(--display);font-size:1.08rem;text-decoration:none;white-space:nowrap}
-.brand span{color:var(--ink-mute);font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-left:10px}
-.nav{display:flex;gap:22px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
-.nav::-webkit-scrollbar{display:none}
-@media (max-width:560px){.brand span{display:none}.top .wrap{gap:18px}.nav{gap:16px}}
-.nav a{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;white-space:nowrap;padding:6px 0;border-bottom:1px solid transparent}
-.nav a:hover,.nav a.on{color:var(--ink);border-bottom-color:var(--amber)}
+/* barra superior */
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--bordo);z-index:70;transition:width .35s ease}
+.top{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:1.1rem;padding:.75rem clamp(16px,4vw,3.2rem);
+  background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .mark{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-size:.86rem;font-weight:500;white-space:nowrap}
+.top .mark svg{height:22px;width:auto;color:var(--bordo)}
+.top .sp{flex:1}
+.cpt{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cpt b{font-weight:500;color:var(--bordo);margin-right:.5rem}
+.ix{font-family:var(--sans);font-size:.82rem;font-weight:500;background:none;border:1px solid var(--line2);color:var(--ink);padding:.42rem 1rem;cursor:pointer;white-space:nowrap}
+.ix:hover{border-color:var(--bordo);color:var(--bordo)}
+@media(max-width:640px){.cpt{display:none}}
+body.on-cover .top{display:none}
 
-/* seções */
-section{padding-block:88px;border-top:1px solid var(--line)}
-section:first-of-type{border-top:0}
-.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:end;margin-bottom:48px}
-.head p{color:var(--ink-soft);max-width:52ch}
-.head .eyebrow{color:var(--amber);margin-bottom:14px}
-@media (max-width:820px){.head{grid-template-columns:1fr;gap:16px}}
+/* índice */
+.scrim{position:fixed;inset:0;z-index:85;background:rgba(43,20,24,.35);opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(460px,94vw);z-index:90;background:var(--paper);border-left:1px solid var(--line);
+  transform:translateX(102%);transition:transform .28s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.drawer .dh{position:sticky;top:0;background:var(--paper);padding:1.2rem 1.5rem 1rem;border-bottom:1px solid var(--line);z-index:2}
+.drawer .row{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.drawer h2{font-size:1.3rem}
+.drawer .x{background:none;border:0;font:500 .82rem var(--sans);color:var(--ink2);cursor:pointer;padding:.3rem 0}
+.drawer .x:hover{color:var(--bordo)}
+.drawer input{width:100%;margin-top:1rem;background:none;border:0;border-bottom:1px solid var(--line2);font:inherit;font-size:.95rem;padding:.55rem 0;color:var(--ink);outline:none}
+.drawer input:focus{border-bottom-color:var(--bordo)}
+.drawer nav{padding:.6rem 1.5rem 1.2rem}
+.drawer .grp{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bordo);margin:1rem 0 .3rem;padding-top:.7rem;border-top:1px solid var(--line)}
+.drawer .grp:first-child{border-top:0;margin-top:.2rem;padding-top:0}
+.drawer nav a{display:grid;grid-template-columns:2.2rem 1fr auto;gap:.6rem;align-items:baseline;text-decoration:none;color:var(--ink2);padding:.42rem 0;font-size:.97rem;position:relative}
+.drawer nav a .n{font-family:var(--mono);font-size:.68rem;color:var(--mute)}
+.drawer nav a .c{font-family:var(--mono);font-size:.64rem;color:var(--mute)}
+.drawer nav a:hover{color:var(--ink)}
+.drawer nav a.on{color:var(--ink);font-weight:500}
+.drawer nav a.on .n{color:var(--bordo)}
+.drawer nav a.on::before{content:"";position:absolute;left:-1.5rem;top:.45rem;bottom:.45rem;width:2px;background:var(--bordo)}
+.results{padding:.4rem 1.5rem 1.2rem}
+.results .r{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:.8rem 0;cursor:pointer;color:var(--ink);font:inherit;text-decoration:none}
+.results .r small{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bordo)}
+.results .r span{display:block;font-size:.95rem;line-height:1.35;margin-top:.2rem}
+.results .r:hover span{color:var(--bordo)}
+.results .none{color:var(--mute);font-size:.92rem;padding:.8rem 0}
+.drawer .df{margin-top:auto;padding:1rem 1.5rem 1.4rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--mute);line-height:1.5}
 
-/* abertura */
-.hero{padding-block:96px 72px}
-.hero h1{max-width:15ch;margin-top:22px}
-.hero .lead{color:var(--ink-soft);font-size:1.16rem;line-height:1.65;max-width:56ch;margin-top:28px}
-.forces{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:64px;border-top:1px solid var(--line2)}
-.force{padding:22px 22px 4px 0;border-right:1px solid var(--line)}
-.force + .force{padding-left:22px}
-.force:last-child{border-right:0}
-.force .n{font-family:var(--mono);font-size:.68rem;color:var(--amber);letter-spacing:.14em}
-.force h3{margin-top:10px;font-size:1.4rem}
-.force p{color:var(--ink-soft);font-size:.92rem;margin-top:8px}
-@media (max-width:820px){.forces{grid-template-columns:1fr 1fr}.force:nth-child(2){border-right:0}.force:nth-child(3){padding-left:0}.force:nth-child(n+3){border-top:1px solid var(--line)}}
-@media (max-width:480px){.forces{grid-template-columns:1fr}.force,.force + .force{padding-left:0;border-right:0}.force + .force{border-top:1px solid var(--line)}}
+/* capa */
+.cover{position:relative;min-height:100vh;min-height:100dvh;color:#fff;background:var(--wine);overflow:hidden;display:none}
+.cover.on{display:flex}
+.cover::before{content:"";position:absolute;inset:0;background:url(img/vab-capa.jpg) right center/cover no-repeat;opacity:.9}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(74,22,29,.94) 0%,rgba(74,22,29,.72) 48%,rgba(122,42,51,.25) 100%)}
+.cover .in{position:relative;z-index:1;width:100%;max-width:1320px;margin:0 auto;padding:clamp(2rem,6vh,4.5rem) clamp(20px,5vw,4.5rem);display:flex;flex-direction:column;justify-content:space-between;gap:3rem}
+.cover .logo{width:clamp(170px,18vw,230px);height:auto}
+.cover .kick{font-family:var(--mono);font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose)}
+.cover h1{font-size:clamp(3.6rem,11vw,9.4rem);line-height:.95;letter-spacing:-.045em;font-weight:400;margin-top:1.2rem}
+.cover .sub{font-size:clamp(1.15rem,2vw,1.6rem);font-weight:300;max-width:30ch;margin-top:1.4rem;color:#F6E9EB}
+.cover .foot{display:flex;flex-wrap:wrap;gap:1.2rem 2.6rem;align-items:center;justify-content:space-between}
+.cover .meta{display:flex;flex-wrap:wrap;gap:.6rem 2.2rem;font-size:1.02rem}
+.cover .acts{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn-c{font:500 .9rem var(--sans);padding:.8rem 1.5rem;cursor:pointer;border:1px solid rgba(255,255,255,.55);background:none;color:#fff}
+.btn-c.solid{background:#fff;color:var(--wine);border-color:#fff}
+.btn-c:hover{background:rgba(255,255,255,.12)}
+.btn-c.solid:hover{background:var(--rose2)}
+.cover .hint{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);opacity:.85}
 
-/* atividade */
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line2)}
-.step{padding:24px 24px 0 0}
-.step + .step{padding-left:24px;border-left:1px solid var(--line)}
-.step .n{font-family:var(--display);font-style:italic;font-size:2.2rem;color:var(--amber);line-height:1}
-.step h3{margin-top:14px}
-.step p{color:var(--ink-soft);font-size:.95rem;margin-top:8px;max-width:34ch}
-.note{margin-top:40px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
-@media (max-width:760px){.steps{grid-template-columns:1fr}.step + .step{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:24px}}
+/* capítulo */
+main{padding:0 clamp(16px,4vw,3.2rem)}
+.ch{display:none;max-width:1280px;margin:0 auto;padding:clamp(2.6rem,5vw,4rem) 0 2.5rem;
+  grid-template-columns:minmax(0,170px) minmax(0,1fr);column-gap:clamp(1.6rem,4vw,4.2rem);align-items:start;animation:in .32s ease both}
+.ch.on{display:grid}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ch{animation:none}}
+.rail{position:sticky;top:5.2rem;display:flex;flex-direction:column;gap:.8rem}
+.rail .num{font-size:clamp(3rem,5vw,4.4rem);line-height:.8;font-weight:300;color:var(--rose);letter-spacing:-.04em}
+.rail .rl{border-top:1px solid var(--bordo);padding-top:.7rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bordo)}
+.rail .marg{font-size:.82rem;color:var(--ink2);line-height:1.5}
+@media(max-width:1000px){
+  .ch{grid-template-columns:1fr;row-gap:1.2rem;padding-top:1.6rem}
+  .rail{position:static;flex-direction:row;align-items:baseline;gap:1rem;border-bottom:1px solid var(--line);padding-bottom:.8rem}
+  .rail .num{font-size:2.3rem}.rail .rl{border:0;padding:0}.rail .marg{display:none}
+}
+.body{min-width:0}
+.body > * + *{margin-top:clamp(1.8rem,3vw,2.6rem)}
+.opener{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(1.2rem,3vw,3.2rem);align-items:end;border-bottom:1px solid var(--bordo);padding-bottom:clamp(1.2rem,2.2vw,1.7rem)}
+.opener h1{font-size:clamp(2.1rem,4.4vw,3.5rem);line-height:1.04;margin-top:.9rem}
+.opener .ld{font-size:clamp(1.02rem,1.4vw,1.16rem);line-height:1.55;color:var(--ink2)}
+@media(max-width:860px){.opener{grid-template-columns:1fr;align-items:start;gap:1rem}}
+
+/* forças */
+.forces{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.2rem,2.4vw,2.4rem)}
+.force{border-top:1px solid var(--bordo);padding-top:1.1rem}
+.force .ic{display:flex;justify-content:space-between;align-items:flex-start}
+.force svg{width:34px;height:34px;color:var(--bordo)}
+.force .L{font-size:2.4rem;line-height:.9;font-weight:300;color:var(--rose)}
+.force h3{font-size:1.45rem;margin-top:1rem}
+.force p{margin-top:.5rem;color:var(--ink2);font-size:.95rem}
+@media(max-width:900px){.forces{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.forces{grid-template-columns:1fr}}
+.pull{display:flex;flex-wrap:wrap;gap:.4rem 2.4rem;font-size:clamp(1.15rem,2vw,1.5rem);border-top:1px solid var(--line);padding-top:1.3rem}
+.pull span{color:var(--ink2)} .pull b{font-weight:400;color:var(--bordo)}
+
+/* passos */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.2rem,2.6vw,2.6rem)}
+.step{border-top:1px solid var(--bordo);padding-top:1.1rem}
+.step .n{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;color:var(--bordo)}
+.step h3{font-size:1.3rem;margin-top:.7rem}
+.step p{margin-top:.5rem;color:var(--ink2);font-size:.95rem}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.who > div{padding:1rem 1.4rem 0 0}
+.who > div + div{padding-left:1.4rem;border-left:1px solid var(--line)}
+.who b{display:block;font-weight:500}
+.who span{font-size:.92rem;color:var(--ink2)}
+@media(max-width:760px){.who{grid-template-columns:1fr}.who > div + div{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:1rem}}
+.note{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 
 /* dados */
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line2)}
-.stat{padding:28px 24px 30px 0;border-bottom:1px solid var(--line)}
-.stat:not(:nth-child(4n+1)){padding-left:24px;border-left:1px solid var(--line)}
-.stat .v{font-family:var(--display);font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:1;letter-spacing:-.03em}
-.stat .v small{font-size:.45em;color:var(--ink-mute);letter-spacing:0;margin-left:4px}
-.stat p{margin-top:14px;font-size:.93rem;color:var(--ink-soft);max-width:30ch}
-.stat .src{margin-top:12px;display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);text-decoration:none;border-bottom:1px solid var(--line2)}
-.stat .src:hover{color:var(--amber)}
-@media (max-width:900px){.stats{grid-template-columns:1fr 1fr}.stat:not(:nth-child(4n+1)){padding-left:0;border-left:0}.stat:nth-child(2n){padding-left:24px;border-left:1px solid var(--line)}}
-@media (max-width:480px){.stats{grid-template-columns:1fr}.stat:nth-child(2n){padding-left:0;border-left:0}}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(1.2rem,2.4vw,2.4rem)}
+.stat{border-top:1px solid var(--bordo);padding:1.1rem 0 1.8rem}
+.stat .v{font-size:clamp(2.8rem,5vw,3.9rem);font-weight:300;line-height:1;letter-spacing:-.04em;color:var(--wine)}
+.stat .v small{font-size:.42em;color:var(--bordo);margin-left:.15em;letter-spacing:0}
+.stat p{margin-top:.8rem;font-size:.93rem;color:var(--ink2);max-width:30ch}
+.stat .src{display:inline-block;margin-top:.8rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bordo);text-decoration:none;border-bottom:1px solid var(--rose);background:none;border-top:0;border-left:0;border-right:0;padding:0 0 2px;cursor:pointer}
+.stat .src:hover{border-bottom-color:var(--bordo)}
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.stats{grid-template-columns:1fr}}
 
 /* biblioteca */
-.filters{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding-bottom:22px;border-bottom:1px solid var(--line2)}
-.chip{appearance:none;background:none;border:0;border-bottom:1px solid transparent;color:var(--ink-soft);font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:6px 0;cursor:pointer}
-.chip:hover{color:var(--ink)}
-.chip[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--amber)}
-.chip .c{color:var(--ink-mute);margin-left:6px}
-.tools{display:flex;gap:18px;align-items:center;margin-top:18px;flex-wrap:wrap}
-.search{flex:1 1 260px;background:none;border:0;border-bottom:1px solid var(--line2);color:var(--ink);font:inherit;font-size:1rem;padding:10px 0;outline:none}
-.search::placeholder{color:var(--ink-mute)}
-.search:focus{border-bottom-color:var(--amber)}
-.toggle{display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;user-select:none}
-.toggle input{accent-color:var(--amber)}
-.count{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-left:auto}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 36px;margin-top:8px}
-@media (max-width:980px){.grid{grid-template-columns:1fr 1fr}}
-@media (max-width:620px){.grid{grid-template-columns:1fr}}
-.card{display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px;padding:26px 0;border-bottom:1px solid var(--line);align-content:start}
-.cover{width:88px;aspect-ratio:3/4;border:1px solid var(--line2);overflow:hidden;background:var(--bg2);cursor:pointer;padding:0}
-.cover img{width:100%;height:100%;object-fit:cover;object-position:top;opacity:.92;transition:opacity .2s}
-.cover:hover img{opacity:1}
-.cover.type{display:flex;align-items:flex-end;padding:10px;cursor:default;background:none}
-.cover.type span{font-family:var(--display);font-style:italic;font-size:1.05rem;line-height:1.1;color:var(--ink-mute)}
-.card .meta{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
-.card .meta i{font-style:normal;color:var(--ink-mute)}
-.card h3{margin-top:8px}
-.card p{margin-top:8px;font-size:.9rem;color:var(--ink-soft)}
-.card .act{margin-top:12px;display:flex;gap:16px;flex-wrap:wrap}
-.btn{appearance:none;background:none;border:0;padding:0;cursor:pointer;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--amber);padding-bottom:3px}
-.btn:hover{color:var(--amber)}
-.btn.ghost{border-bottom-color:var(--line2);color:var(--ink-soft)}
-.empty{padding:48px 0;color:var(--ink-mute)}
+.tools{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:.8rem}
+.tools .count{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.seg{display:flex;gap:1.2rem}
+.seg button{background:none;border:0;border-bottom:1px solid transparent;padding:.3rem 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);cursor:pointer}
+.seg button[aria-pressed="true"]{color:var(--bordo);border-bottom-color:var(--bordo)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(1.6rem,3vw,3rem)}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{display:grid;grid-template-columns:84px minmax(0,1fr);gap:1.1rem;padding:1.3rem 0;border-bottom:1px solid var(--line)}
+.cv{width:84px;aspect-ratio:3/4;border:1px solid var(--line);overflow:hidden;background:var(--paper2);padding:0;cursor:pointer}
+.cv img{width:100%;height:100%;object-fit:cover;object-position:top}
+.cv:hover{border-color:var(--bordo)}
+.cv.t{display:flex;align-items:flex-end;padding:.55rem;cursor:default;background:none;border-color:var(--line)}
+.cv.t span{font-size:.82rem;line-height:1.15;color:var(--bordo)}
+.card .m{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--bordo)}
+.card .m i{font-style:normal;color:var(--mute)}
+.card h3{font-size:1.08rem;line-height:1.3;font-weight:500;letter-spacing:-.01em;margin-top:.35rem}
+.card p{margin-top:.4rem;font-size:.9rem;color:var(--ink2);line-height:1.55}
+.card .act{margin-top:.6rem}
+.go{background:none;border:0;padding:0 0 2px;border-bottom:1px solid var(--bordo);font:500 .82rem var(--sans);color:var(--bordo);cursor:pointer;text-decoration:none}
+.go:hover{color:var(--wine)}
+.go.ext{border-bottom-color:var(--line2);color:var(--ink2)}
 
-/* tensões */
-.tension{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:32px;padding:30px 0;border-top:1px solid var(--line)}
-.tension:first-child{border-top:1px solid var(--line2)}
-.tension h3{font-size:1.35rem}
-.tension .side .who{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
-.tension .side p{margin-top:8px;color:var(--ink-soft);font-size:.95rem}
-.tension .side + .side{border-left:1px solid var(--line);padding-left:32px}
-@media (max-width:820px){.tension{grid-template-columns:1fr;gap:16px}.tension .side + .side{border-left:0;padding-left:0}}
+/* tensões, ouvir, cautelas */
+.tension{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(1.2rem,2.6vw,2.6rem);border-top:1px solid var(--bordo);padding-top:1.1rem}
+.tension + .tension{margin-top:2rem}
+.tension h3{font-size:1.4rem}
+.tension .s b{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bordo);font-weight:400}
+.tension .s p{margin-top:.45rem;color:var(--ink2);font-size:.95rem}
+.tension .s + .s{border-left:1px solid var(--line);padding-left:clamp(1.2rem,2.6vw,2.6rem)}
+@media(max-width:860px){.tension{grid-template-columns:1fr;gap:1rem}.tension .s + .s{border-left:0;padding-left:0}}
+.list > div{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:1.6rem;padding:1.1rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.list > div:first-child{border-top:1px solid var(--bordo)}
+.list .f{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bordo)}
+.list h3{font-size:1.1rem;font-weight:500;letter-spacing:-.01em}
+.list p{font-size:.92rem;color:var(--ink2);margin-top:.2rem}
+@media(max-width:700px){.list > div{grid-template-columns:1fr;gap:.4rem}}
+.cautions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(1.6rem,3vw,3rem);list-style:none;padding:0;margin:0}
+.cautions li{border-top:1px solid var(--bordo);padding:1rem 0 1.4rem}
+.cautions b{display:block;font-weight:500;font-size:1.05rem}
+.cautions span{display:block;margin-top:.35rem;color:var(--ink2);font-size:.93rem}
+@media(max-width:760px){.cautions{grid-template-columns:1fr}}
 
-/* ouvir */
-.list{border-top:1px solid var(--line2)}
-.row{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:24px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.row .f{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
-.row h3{font-size:1.1rem}
-.row p{color:var(--ink-soft);font-size:.92rem;margin-top:4px}
-@media (max-width:640px){.row{grid-template-columns:1fr;gap:6px}}
-
-/* cautelas */
-.cautions{list-style:none;padding:0;margin:0;border-top:1px solid var(--line2);columns:2;column-gap:48px}
-.cautions li{break-inside:avoid;padding:20px 0;border-bottom:1px solid var(--line)}
-.cautions b{font-family:var(--display);font-weight:500;font-size:1.08rem;display:block;margin-bottom:6px}
-.cautions span{color:var(--ink-soft);font-size:.93rem}
-@media (max-width:760px){.cautions{columns:1}}
-
-footer{border-top:1px solid var(--line);padding-block:40px 64px;color:var(--ink-mute);font-size:.86rem}
-footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+/* navegação de rodapé */
+.pager{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;border-top:1px solid var(--line);padding:1.3rem 0 3rem}
+.pager button{background:none;border:0;cursor:pointer;text-align:left;font:inherit;color:var(--ink);padding:0}
+.pager button + button{text-align:right}
+.pager small{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.pager span{display:block;font-size:1.05rem;margin-top:.25rem}
+.pager button:hover span{color:var(--bordo)}
+.pager button:disabled{visibility:hidden}
+body.on-cover main,body.on-cover .pager{display:none}
 
 /* leitor */
-.reader{position:fixed;inset:0;z-index:50;background:#071223;display:flex;flex-direction:column}
-.reader-bar{display:flex;align-items:center;gap:18px;padding:14px 22px;border-bottom:1px solid var(--line)}
+.reader{position:fixed;inset:0;z-index:100;background:#2B1418;display:flex;flex-direction:column}
+.reader-bar{display:flex;align-items:center;gap:1rem;padding:.85rem 1.3rem;border-bottom:1px solid rgba(255,255,255,.12);color:#fff}
 .reader-bar .t{min-width:0;flex:1}
-.reader-bar .t b{display:block;font-family:var(--display);font-weight:500;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.reader-bar .t span{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
-.reader-bar .z{display:flex;gap:6px}
-.reader-bar button{appearance:none;background:none;border:1px solid var(--line2);color:var(--ink);font-family:var(--mono);font-size:.72rem;height:34px;min-width:34px;padding:0 10px;cursor:pointer;border-radius:2px}
-.reader-bar button:hover{border-color:var(--amber);color:var(--amber)}
-.pages{flex:1;overflow:auto;padding:28px 16px 80px;-webkit-overflow-scrolling:touch}
-.page{margin:0 auto 18px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.35);position:relative}
-.page canvas{display:block;width:100%;height:auto;user-select:none;-webkit-user-select:none;pointer-events:none}
-.page .pn{position:absolute;right:-48px;bottom:0;font-family:var(--mono);font-size:.62rem;color:var(--ink-mute)}
-@media (max-width:900px){.page .pn{display:none}}
-.reader-msg{margin:80px auto;text-align:center;color:var(--ink-soft);max-width:40ch}
-.reader-msg a{color:var(--amber)}
-@media print{.reader,.pages{display:none!important}}
+.reader-bar .t b{display:block;font-weight:500;font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reader-bar .t span{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rose)}
+.reader-bar .z{display:flex;gap:.4rem}
+.reader-bar button{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font:500 .8rem var(--sans);height:34px;min-width:34px;padding:0 .7rem;cursor:pointer}
+.reader-bar button:hover{border-color:var(--rose);color:var(--rose)}
+.pages{flex:1;overflow:auto;padding:1.6rem 1rem 5rem;-webkit-overflow-scrolling:touch}
+.page{margin:0 auto 1.1rem;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.page canvas{display:block;width:100%;height:auto;pointer-events:none;user-select:none;-webkit-user-select:none}
+.reader-msg{margin:5rem auto;text-align:center;color:var(--rose2);max-width:40ch}
+@media print{body{display:none}}
 </style>
 </head>
-<body>
+<body class="on-cover">
+<div id="bar"></div>
+
+<section class="cover on" id="capa" aria-label="Capa">
+  <div class="in">
+    <img class="logo" src="img/vab-logo.png" alt="Virtual Advisory Board" width="230" height="89">
+    <div>
+      <p class="kick">Encontro VAB · Material de consulta</p>
+      <h1>Sem Playbook</h1>
+      <p class="sub">Uma simulação de conselho para decidir dilemas humanos com IA.</p>
+    </div>
+    <div class="foot">
+      <div class="meta"><span>21 de outubro de 2026</span><span>19h às 21h30</span><span>São Paulo</span></div>
+      <div class="acts">
+        <button class="btn-c solid" type="button" data-go="tese">Começar</button>
+        <button class="btn-c" type="button" data-index>Índice</button>
+      </div>
+    </div>
+    <p class="hint">Navegue pelo índice, pelas setas do teclado ou pelos botões ao fim de cada capítulo.</p>
+  </div>
+</section>
 
 <header class="top">
-  <div class="wrap">
-    <a class="brand" href="#inicio">Sem Playbook<span>VAB · 21.10.26</span></a>
-    <nav class="nav" aria-label="Seções">
-      <a href="#tese">Tese</a>
-      <a href="#atividade">Atividade</a>
-      <a href="#dados">Dados</a>
-      <a href="#biblioteca">Biblioteca</a>
-      <a href="#tensoes">Tensões</a>
-      <a href="#ouvir">Ouvir</a>
-      <a href="#cautelas">Cautelas</a>
-    </nav>
-  </div>
+  <a class="mark" href="#capa" data-go="capa" aria-label="Voltar à capa">
+    <svg viewBox="0 0 24 40" aria-hidden="true"><path d="M3 2 L10 38 M9 2 L16 38 M15 8 L21 38" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+    Sem Playbook
+  </a>
+  <span class="sp"></span>
+  <span class="cpt" id="cpt"></span>
+  <button class="ix" type="button" data-index>Índice</button>
 </header>
 
-<main>
-<section class="hero" id="inicio">
-  <div class="wrap">
-    <p class="eyebrow">Encontro VAB · 21 de outubro de 2026</p>
-    <h1>Não há playbook para liderar <em class="grad">quatro forças</em> ao mesmo tempo.</h1>
-    <p class="lead" id="tese">A empresa de hoje entrega resultado com empregados, prestadores, serviços contratados e agentes de IA. Cada força tem contrato, risco e lógica de gestão diferentes, e nenhuma consultoria publicou ainda o manual de como liderar as quatro juntas. Este é o material de consulta para o encontro: o que as principais casas de gestão, pesquisa e governança já sabem, onde discordam e o que ainda ninguém respondeu.</p>
-    <div class="forces">
-      <div class="force"><span class="n">01</span><h3>CLT</h3><p>Vínculo, carreira, cultura. A força para a qual todas as práticas de RH foram desenhadas.</p></div>
-      <div class="force"><span class="n">02</span><h3>As a service</h3><p>Trabalho contratado por resultado. Entra pelo orçamento de compras, raramente pela agenda de liderança.</p></div>
-      <div class="force"><span class="n">03</span><h3>PJ</h3><p>Prestador pessoa jurídica, sob regra ainda indefinida no STF. Muitas vezes gerido como CLT, sem os direitos.</p></div>
-      <div class="force"><span class="n">04</span><h3>Agentes de IA</h3><p>Executam tarefas inteiras com autonomia. Precisam de dono, limites, avaliação e governança.</p></div>
-    </div>
-  </div>
-</section>
+<main id="chapters"></main>
+<nav class="pager" id="pager" aria-label="Capítulos">
+  <button type="button" id="prev"><small>Anterior</small><span></span></button>
+  <button type="button" id="next"><small>Próximo</small><span></span></button>
+</nav>
 
-<section id="atividade">
-  <div class="wrap">
-    <div class="head">
-      <div><p class="eyebrow">A atividade</p><h2>Cada mesa é uma <em>consultoria</em> contratada pelo conselho.</h2></div>
-      <p>As mesas recebem um caso e entregam recomendação, não decisão. Quem decide é o conselho, representado pelo João, conselheiro agêntico que vota e pergunta como faria um board de verdade, não como banca que dá nota.</p>
-    </div>
-    <div class="steps">
-      <div class="step"><span class="n">i</span><h3>Diagnóstico</h3><p>A mesa lê o caso e escolhe nesta biblioteca as evidências que sustentam sua leitura.</p></div>
-      <div class="step"><span class="n">ii</span><h3>Recomendação</h3><p>Uma proposta ao conselho, com no máximo três evidências citadas. Menos é mais defensável.</p></div>
-      <div class="step"><span class="n">iii</span><h3>Conselho</h3><p>O João questiona tese e evidência. O conselho vota. A mesa aprende o que um board de fato pergunta.</p></div>
-    </div>
-    <p class="note">A plataforma da atividade abre no dia do encontro.</p>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Índice" aria-hidden="true">
+  <div class="dh">
+    <div class="row"><h2>Índice</h2><button class="x" type="button" id="dClose">Fechar</button></div>
+    <input type="search" id="q" placeholder="Buscar em toda a biblioteca" aria-label="Buscar em toda a biblioteca">
   </div>
-</section>
-
-<section id="dados">
-  <div class="wrap">
-    <div class="head">
-      <div><p class="eyebrow">A tese em dados</p><h2>A adoção correu na frente do <em>modelo de gestão</em>.</h2></div>
-      <p>Oito números para abrir a conversa. As pessoas já usam IA e agentes; o elo que deveria liderar a transição é o que mais se desgastou; quase nenhuma empresa redesenhou como lidera essa mistura.</p>
-    </div>
-    <div class="stats" id="stats"></div>
-  </div>
-</section>
-
-<section id="biblioteca">
-  <div class="wrap">
-    <div class="head">
-      <div><p class="eyebrow">Biblioteca</p><h2>O que as consultorias <em>já publicaram</em>.</h2></div>
-      <p>Relatórios, artigos, pesquisas e podcasts de 2021 a outubro de 2026. Os marcados com capa podem ser lidos aqui mesmo; os demais abrem na fonte original. Organizados pela pergunta que respondem, não por quem publicou.</p>
-    </div>
-    <div class="filters" id="filters" role="group" aria-label="Filtrar por tema"></div>
-    <div class="tools">
-      <input class="search" id="q" type="search" placeholder="Buscar por tema, autor ou número" aria-label="Buscar">
-      <label class="toggle"><input type="checkbox" id="onlyHere"> Só leitura no site</label>
-      <span class="count" id="count"></span>
-    </div>
-    <div class="grid" id="grid" aria-live="polite"></div>
-  </div>
-</section>
-
-<section id="tensoes">
-  <div class="wrap">
-    <div class="head">
-      <div><p class="eyebrow">Onde as fontes discordam</p><h2>Escolher um lado faz parte do <em>trabalho</em>.</h2></div>
-      <p>Nenhum conselho decide com evidência unânime. Quatro tensões em que pesquisas sérias apontam para lados diferentes, ou em que o mesmo dado sustenta leituras opostas.</p>
-    </div>
-    <div id="tensions"></div>
-  </div>
-</section>
-
-<section id="ouvir">
-  <div class="wrap">
-    <div class="head">
-      <div><p class="eyebrow">Para ouvir e assistir</p><h2>Para quem prefere <em>ouvir</em>.</h2></div>
-      <p>Os dois melhores pontos de partida: o episódio da McKinsey sobre parceria entre pessoas e agentes e a entrevista de Bob Sternfels à HBR, em que ele descreve a própria firma como força de trabalho mista.</p>
-    </div>
-    <div class="list" id="listen"></div>
-  </div>
-</section>
-
-<section id="cautelas">
-  <div class="wrap">
-    <div class="head">
-      <div><p class="eyebrow">Cautelas de leitura</p><h2>Antes de citar, <em>desconfie</em>.</h2></div>
-      <p>A força "as a service" é a menos estudada: nenhuma consultoria trata o serviço contratado por resultado como objeto de liderança. E boa parte dos números vem de quem vende a solução.</p>
-    </div>
-    <ul class="cautions">
-      <li><b>Viés de origem</b><span>Microsoft, Anthropic, IBM, Nvidia e Accenture vendem agentes ou sua implantação. Os números são úteis, mas não independentes.</span></li>
-      <li><b>O 95% do MIT</b><span>A amostra do GenAI Divide é pequena e a própria cobertura reporta contagens diferentes. Serve como provocação, não como dado de mercado.</span></li>
-      <li><b>Previsão não é medição</b><span>O dado do Gartner sobre média gerência é uma previsão de outubro de 2024 para 2026. O que foi medido depois, na McKinsey, aponta outra direção.</span></li>
-      <li><b>Agentes da McKinsey</b><span>A entrevista à HBR fala em 20 mil agentes; a Business Insider reportou 25 mil semanas depois. Mais seguro citar "cerca de 20 mil".</span></li>
-      <li><b>Tema 1389 em aberto</b><span>A regra sobre PJ pode mudar a qualquer sessão do STF. Conferir o andamento antes de usar.</span></li>
-      <li><b>Survey mede percepção</b><span>A maioria dos números aqui é o que executivos e empregados dizem, não o que as empresas fizeram. Os estudos de caso de Stanford e os dados de folha de pagamento são exceção.</span></li>
-    </ul>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <p>Curadoria de Kiko Campos para o encontro VAB. Atualizado em 15 de outubro de 2026.</p>
-    <p>Material para consulta durante o encontro. Os direitos de cada relatório pertencem a seus autores.</p>
-  </div>
-</footer>
+  <nav id="toc"></nav>
+  <div class="results" id="results" hidden></div>
+  <div class="df">Curadoria de Kiko Campos para o encontro VAB. Atualizado em 15 de outubro de 2026. Os direitos de cada relatório pertencem a seus autores.</div>
+</aside>
 
 <div class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle">
   <div class="reader-bar">
@@ -306,7 +284,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
     <div class="z">
       <button type="button" id="zOut" aria-label="Diminuir">−</button>
       <button type="button" id="zIn" aria-label="Aumentar">+</button>
-      <button type="button" id="rClose" aria-label="Fechar">Fechar</button>
+      <button type="button" id="rClose">Fechar</button>
     </div>
   </div>
   <div class="pages" id="pages"></div>
@@ -432,72 +410,178 @@ const TENSIONS = [
   {h:'Quem é o RH dos agentes?', a:{w:'Jensen Huang, Nvidia', p:'O departamento de TI de cada empresa será o RH dos agentes de IA.'}, b:{w:'IBM CHRO Study 2026', p:'Onde o CHRO divide a fronteira entre humano e IA, a confiança para contestar a máquina sobe de 43% para 76%.'}}
 ];
 
+
+
+/* ícones de linha das quatro forças */
+const IC = {
+  clt:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="16" cy="10" r="5"/><path d="M6 28c0-5.5 4.5-9 10-9s10 3.5 10 9"/><path d="M13 22l3 3 3-3"/></svg>',
+  svc:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 4h12l5 5v19H8z"/><path d="M20 4v5h5"/><path d="M12 17l3 3 6-6"/></svg>',
+  pj:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="10" width="24" height="16"/><path d="M12 10V6h8v4"/><path d="M4 17h24"/></svg>',
+  ag:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="9" y="9" width="14" height="14"/><rect x="13" y="13" width="6" height="6"/><path d="M13 4v5M19 4v5M13 23v5M19 23v5M4 13h5M4 19h5M23 13h5M23 19h5"/></svg>'
+};
+
+const LIB = {
+  ecossistema:{t:'A força de trabalho virou <em>ecossistema</em>.', ld:'A mistura de CLT, PJ e serviços já era tratada como ecossistema antes dos agentes. O diagnóstico continua válido: a empresa gere uma força integrada com práticas desenhadas só para o empregado.'},
+  agentes:{t:'O agente deixou de ser ferramenta e virou <em>força de trabalho</em>.', ld:'Com gerência, onboarding e governança próprios. O consenso de 2026 é que a governança anda atrás da adoção. A McKinsey é o caso vivo: cerca de 20 mil agentes ao lado de 40 mil pessoas.'},
+  lider:{t:'O líder no meio é o gargalo e a <em>alavanca</em>.', ld:'O gestor é o grupo cujo engajamento mais caiu, o que mais absorve o redesenho do trabalho e o maior preditor de adoção de IA no time.'},
+  governanca:{t:'A pauta subiu ao conselho. A supervisão, <em>ainda não</em>.', ld:'Conselhos olham IA como risco de tecnologia, não como mudança na composição e na liderança da força de trabalho. Em 46% das empresas, o CHRO nem participa da estratégia de IA.'},
+  brasil:{t:'A força PJ está sem <em>regra definitiva</em>.', ld:'O STF ainda não julgou o Tema 1389. Em 18 de junho de 2026, os processos represados voltaram a andar até a segunda instância; no TST seguem suspensos, e a tese valerá para todos.'}
+};
+
+const CH = [
+  {id:'tese', n:'01', g:'A noite', nav:'A tese', marg:'Quatro forças de trabalho já convivem. Nenhuma empresa tem o padrão de como combiná-las.', html:()=>`
+    <div class="opener"><div><span class="lbl">01 · A tese</span><h1>Não há playbook para liderar <em>quatro forças</em> ao mesmo tempo.</h1></div>
+    <p class="ld">A empresa de hoje entrega resultado com empregados, prestadores, serviços contratados e agentes de IA. Cada força tem contrato, risco e lógica de gestão diferentes, e nenhuma consultoria publicou ainda o manual de como liderar as quatro juntas.</p></div>
+    <div class="forces">
+      <div class="force"><div class="ic">${IC.clt}<span class="L">C</span></div><h3>CLT</h3><p>O que é permanente e específico da empresa. A força para a qual todas as práticas de RH foram desenhadas.</p></div>
+      <div class="force"><div class="ic">${IC.svc}<span class="L">S</span></div><h3>As a service</h3><p>Executivos e especialistas por mandato, para picos e transições. Contratados por resultado.</p></div>
+      <div class="force"><div class="ic">${IC.pj}<span class="L">P</span></div><h3>PJ</h3><p>Profissionais independentes e fracionados, para especialidades raras. Sob regra ainda indefinida no STF.</p></div>
+      <div class="force"><div class="ic">${IC.ag}<span class="L">A</span></div><h3>Agentes de IA</h3><p>Fluxos de alto volume de informação, sempre com dono humano, limites e avaliação.</p></div>
+    </div>
+    <p class="pull"><span>Sem Playbook é o nome da era.</span><b>Não é a resposta do caso.</b></p>`},
+  {id:'noite', n:'02', g:'A noite', nav:'A atividade', marg:'Cada mesa recomenda. O conselho decide. Ninguém dá nota.', html:()=>`
+    <div class="opener"><div><span class="lbl">02 · A atividade</span><h1>Cada mesa é uma <em>consultoria</em> contratada pelo conselho.</h1></div>
+    <p class="ld">As mesas recebem o caso e entregam recomendação, não decisão. Quem decide é o conselho, presidido pelo João, conselheiro agêntico que pergunta e vota como faria um board de verdade, não como banca que dá nota.</p></div>
+    <div class="steps">
+      <div class="step"><span class="n">PASSO 1</span><h3>Diagnóstico</h3><p>A mesa lê o caso e escolhe nesta biblioteca as evidências que sustentam sua leitura.</p></div>
+      <div class="step"><span class="n">PASSO 2</span><h3>Recomendação</h3><p>Aprovar, rejeitar ou aprovar com condições, com os riscos de dizer sim e de dizer não. Poucas evidências, bem escolhidas.</p></div>
+      <div class="step"><span class="n">PASSO 3</span><h3>Conselho</h3><p>O João questiona tese e evidência no telão. Duas consultorias que recomendaram caminhos diferentes se defendem ao vivo.</p></div>
+    </div>
+    <div class="who">
+      <div><b>João</b><span>Presidente do conselho. Agente de IA, com voz e legenda no telão.</span></div>
+      <div><b>As mesas</b><span>Consultorias formadas por perfis complementares de learning agility.</span></div>
+      <div><b>Kiko Campos</b><span>Facilitador da noite e autor desta curadoria.</span></div>
+    </div>
+    <p class="note">A plataforma da atividade abre no dia do encontro.</p>`},
+  {id:'dados', n:'03', g:'Evidência', nav:'A tese em dados', marg:'Oito números para abrir a conversa. Toque na fonte para abrir o relatório.', html:()=>`
+    <div class="opener"><div><span class="lbl">03 · A tese em dados</span><h1>A adoção correu na frente do <em>modelo de gestão</em>.</h1></div>
+    <p class="ld">As pessoas já usam IA e agentes. O elo que deveria liderar a transição é o que mais se desgastou. Quase nenhuma empresa redesenhou como lidera essa mistura.</p></div>
+    <div class="stats">${STATS.map(s=>`<div class="stat"><div class="v">${s.v}<small>${s.s}</small></div><p>${esc(s.p)}</p>${s.doc?`<button class="src" type="button" data-doc="${s.doc}">${esc(s.src)}</button>`:`<a class="src" href="${s.u}" ${EXT}>${esc(s.src)}</a>`}</div>`).join('')}</div>`},
+  ...['ecossistema','agentes','lider','governanca','brasil'].map((k,i)=>({id:k, n:String(4+i).padStart(2,'0'), g:'Biblioteca', nav:THEMES.find(t=>t.k===k).n, lib:k,
+    marg:'Os materiais com capa abrem aqui mesmo, para leitura. Os demais abrem na fonte original.', html:()=>libHTML(k, String(4+i).padStart(2,'0'))})),
+  {id:'tensoes', n:'09', g:'Leitura crítica', nav:'Onde as fontes discordam', marg:'Nenhum conselho decide com evidência unânime.', html:()=>`
+    <div class="opener"><div><span class="lbl">09 · Onde as fontes discordam</span><h1>Escolher um lado faz parte do <em>trabalho</em>.</h1></div>
+    <p class="ld">Quatro tensões em que pesquisas sérias apontam para lados diferentes, ou em que o mesmo dado sustenta leituras opostas.</p></div>
+    <div>${TENSIONS.map(t=>`<div class="tension"><h3>${esc(t.h)}</h3><div class="s"><b>${esc(t.a.w)}</b><p>${esc(t.a.p)}</p></div><div class="s"><b>${esc(t.b.w)}</b><p>${esc(t.b.p)}</p></div></div>`).join('')}</div>`},
+  {id:'ouvir', n:'10', g:'Leitura crítica', nav:'Para ouvir', marg:'Podcasts, entrevistas e webcasts.', html:()=>`
+    <div class="opener"><div><span class="lbl">10 · Para ouvir</span><h1>Para quem prefere <em>ouvir</em>.</h1></div>
+    <p class="ld">Dois bons pontos de partida: o episódio da McKinsey sobre a parceria entre pessoas e agentes e a entrevista de Bob Sternfels à HBR, em que ele descreve a própria firma como força de trabalho mista.</p></div>
+    <div class="list">${LISTEN.map(l=>`<div><span class="f">${l.f} · ${l.d}</span><div><h3>${esc(l.t)}</h3><p>${esc(l.o)}. ${esc(l.i)}</p></div><a class="go ext" href="${l.u}" ${EXT}>Abrir</a></div>`).join('')}</div>`},
+  {id:'cautelas', n:'11', g:'Leitura crítica', nav:'Cautelas de leitura', marg:'Antes de citar um número, saiba de onde ele vem.', html:()=>`
+    <div class="opener"><div><span class="lbl">11 · Cautelas de leitura</span><h1>Antes de citar, <em>desconfie</em>.</h1></div>
+    <p class="ld">A força as a service é a menos estudada: nenhuma consultoria trata o serviço contratado por resultado como objeto de liderança. E boa parte dos números vem de quem vende a solução.</p></div>
+    <ul class="cautions">
+      <li><b>Viés de origem</b><span>Microsoft, Anthropic, IBM, Nvidia e Accenture vendem agentes ou sua implantação. Os números são úteis, mas não independentes.</span></li>
+      <li><b>O 95% do MIT</b><span>A amostra do GenAI Divide é pequena e a própria cobertura reporta contagens diferentes. Serve como provocação, não como dado de mercado.</span></li>
+      <li><b>Previsão não é medição</b><span>O dado do Gartner sobre média gerência é uma previsão de outubro de 2024. O que a McKinsey mediu em 2026 aponta outra direção.</span></li>
+      <li><b>Agentes da McKinsey</b><span>A entrevista à HBR fala em 20 mil agentes; a Business Insider reportou 25 mil semanas depois. Mais seguro citar cerca de 20 mil.</span></li>
+      <li><b>Tema 1389 em aberto</b><span>A regra sobre PJ pode mudar a qualquer sessão do STF. Confira o andamento antes de usar.</span></li>
+      <li><b>Survey mede percepção</b><span>A maioria dos números é o que executivos e empregados dizem, não o que as empresas fizeram. Os estudos de caso de Stanford e os dados de folha de pagamento são a exceção.</span></li>
+    </ul>`}
+];
+
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const EXT = 'target="_blank" rel="noopener"';
 const byDoc = Object.fromEntries(ITEMS.filter(x => x.doc).map(x => [x.doc, x]));
-const ext = 'target="_blank" rel="noopener"';
+const sortItems = l => l.slice().sort((a,b) => (b.doc?1:0)-(a.doc?1:0) || b.y.localeCompare(a.y));
 
-/* dados */
-$('#stats').innerHTML = STATS.map(s => `
-  <div class="stat"><div class="v">${s.v}<small>${s.s}</small></div><p>${esc(s.p)}</p>
-  ${s.doc ? `<a class="src" href="#doc=${s.doc}" data-doc="${s.doc}">${esc(s.src)}</a>` : `<a class="src" href="${s.u}" ${ext}>${esc(s.src)}</a>`}</div>`).join('');
-
-/* tensões */
-$('#tensions').innerHTML = TENSIONS.map(t => `
-  <div class="tension"><h3>${esc(t.h)}</h3>
-    <div class="side"><div class="who">${esc(t.a.w)}</div><p>${esc(t.a.p)}</p></div>
-    <div class="side"><div class="who">${esc(t.b.w)}</div><p>${esc(t.b.p)}</p></div></div>`).join('');
-
-/* ouvir */
-$('#listen').innerHTML = LISTEN.map(l => `
-  <div class="row"><span class="f">${l.f} · ${l.d}</span>
-    <div><h3>${esc(l.t)}</h3><p>${esc(l.o)}. ${esc(l.i)}</p></div>
-    <a class="btn" href="${l.u}" ${ext}>Abrir</a></div>`).join('');
-
-/* biblioteca */
-let theme = 'todos';
-const counts = k => k === 'todos' ? ITEMS.length : ITEMS.filter(x => x.k.includes(k)).length;
-$('#filters').innerHTML = THEMES.map(t => `<button class="chip" type="button" data-k="${t.k}" aria-pressed="${t.k === theme}">${t.n}<span class="c">${counts(t.k)}</span></button>`).join('');
-$('#filters').addEventListener('click', e => {
-  const b = e.target.closest('.chip'); if (!b) return;
-  theme = b.dataset.k;
-  document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.k === theme));
-  render();
-});
-$('#q').addEventListener('input', render);
-$('#onlyHere').addEventListener('change', render);
-
-const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-function render(){
-  const q = norm($('#q').value.trim());
-  const only = $('#onlyHere').checked;
-  const list = ITEMS
-    .filter(x => theme === 'todos' || x.k.includes(theme))
-    .filter(x => !only || x.doc)
-    .filter(x => !q || norm([x.o, x.t, x.i, x.f, x.d].join(' ')).includes(q))
-    .sort((a, b) => (b.doc ? 1 : 0) - (a.doc ? 1 : 0) || b.y.localeCompare(a.y));
-  $('#count').textContent = list.length + (list.length === 1 ? ' material' : ' materiais');
-  $('#grid').innerHTML = list.length ? list.map(card).join('') : '<p class="empty">Nada encontrado com esse filtro.</p>';
-}
 function card(x){
-  const cover = x.doc
-    ? `<button class="cover" type="button" data-doc="${x.doc}" aria-label="Ler ${esc(x.t)}"><img src="capas/${x.doc}.jpg" alt="" loading="lazy" width="88" height="117"></button>`
-    : `<div class="cover type" aria-hidden="true"><span>${esc(x.f)}</span></div>`;
-  const act = x.doc
-    ? `<button class="btn" type="button" data-doc="${x.doc}">Ler aqui</button>`
-    : `<a class="btn ghost" href="${x.u}" ${ext}>Abrir na fonte</a>`;
-  return `<article class="card">${cover}<div>
-    <div class="meta">${esc(x.o)} <i>· ${esc(x.d)} · ${esc(x.f)}</i></div>
-    <h3>${esc(x.t)}</h3><p>${esc(x.i)}</p><div class="act">${act}</div></div></article>`;
+  const cv = x.doc ? `<button class="cv" type="button" data-doc="${x.doc}" aria-label="Ler ${esc(x.t)}"><img src="capas/${x.doc}.jpg" alt="" loading="lazy" width="84" height="112"></button>`
+                   : `<div class="cv t" aria-hidden="true"><span>${esc(x.f)}</span></div>`;
+  const act = x.doc ? `<button class="go" type="button" data-doc="${x.doc}">Ler aqui</button>` : `<a class="go ext" href="${x.u}" ${EXT}>Abrir na fonte</a>`;
+  return `<article class="card">${cv}<div><div class="m">${esc(x.o)} <i>· ${esc(x.d)} · ${esc(x.f)}</i></div><h3>${esc(x.t)}</h3><p>${esc(x.i)}</p><div class="act">${act}</div></div></article>`;
 }
-render();
+function libHTML(k, n){
+  const t = THEMES.find(z => z.k === k).n;
+  return `<div class="opener"><div><span class="lbl">${n} · Biblioteca · ${esc(t)}</span><h1>${LIB[k].t}</h1></div><p class="ld">${LIB[k].ld}</p></div>
+    <div class="tools"><div class="seg" role="group" aria-label="Filtrar"><button type="button" data-f="all" aria-pressed="true">Tudo</button><button type="button" data-f="here" aria-pressed="false">Leitura no site</button></div><span class="count"></span></div>
+    <div class="grid" data-lib="${k}"></div>`;
+}
+function fillLib(sec, mode){
+  const k = sec.dataset.lib; if (!k) return;
+  const list = sortItems(ITEMS.filter(x => x.k.includes(k) && (mode !== 'here' || x.doc)));
+  sec.querySelector('.grid').innerHTML = list.map(card).join('');
+  sec.querySelector('.count').textContent = list.length + (list.length === 1 ? ' material' : ' materiais');
+}
 
-/* navegação: marca a seção visível */
-const navIO = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return;
-  document.querySelectorAll('.nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
-}), {rootMargin:'-45% 0px -50% 0px'});
-document.querySelectorAll('main section[id]').forEach(s => navIO.observe(s));
+/* monta capítulos */
+const main = $('#chapters');
+CH.forEach(c => {
+  const s = document.createElement('section');
+  s.className = 'ch'; s.id = c.id; if (c.lib) s.dataset.lib = c.lib;
+  s.setAttribute('aria-labelledby', c.id + '-h');
+  s.innerHTML = `<aside class="rail"><span class="num">${c.n}</span><span class="rl">${esc(c.g)}</span><p class="marg">${esc(c.marg)}</p></aside><div class="body">${c.html()}</div>`;
+  const h = s.querySelector('h1'); if (h) h.id = c.id + '-h';
+  main.appendChild(s);
+  if (c.lib) fillLib(s, 'all');
+});
+main.addEventListener('click', e => {
+  const b = e.target.closest('.seg button'); if (!b) return;
+  const sec = b.closest('.ch');
+  sec.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  fillLib(sec, b.dataset.f);
+});
+
+/* índice */
+const SEQ = ['capa', ...CH.map(c => c.id)];
+const toc = $('#toc'); let lastG = '';
+toc.innerHTML = `<a href="#capa" data-go="capa"><span class="n">00</span><span>Capa</span><span class="c"></span></a>` + CH.map(c => {
+  const g = c.g !== lastG ? `<div class="grp">${esc(c.g)}</div>` : ''; lastG = c.g;
+  const cnt = c.lib ? ITEMS.filter(x => x.k.includes(c.lib)).length : '';
+  return g + `<a href="#${c.id}" data-go="${c.id}"><span class="n">${c.n}</span><span>${esc(c.nav)}</span><span class="c">${cnt}</span></a>`;
+}).join('');
+const drawer = $('#drawer'), scrim = $('#scrim');
+function index(on){
+  drawer.classList.toggle('on', on); scrim.classList.toggle('on', on); drawer.setAttribute('aria-hidden', !on);
+  if (on) setTimeout(() => $('#q').focus(), 200);
+}
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-index]')) { index(true); return; }
+  const g = e.target.closest('[data-go]'); if (g) { e.preventDefault(); show(g.dataset.go); index(false); }
+});
+$('#dClose').addEventListener('click', () => index(false));
+scrim.addEventListener('click', () => index(false));
+
+/* busca global */
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+$('#q').addEventListener('input', e => {
+  const q = norm(e.target.value.trim()), res = $('#results');
+  toc.hidden = !!q; res.hidden = !q; if (!q) return;
+  const hits = sortItems(ITEMS.filter(x => norm([x.o, x.t, x.i, x.f, x.d].join(' ')).includes(q))).slice(0, 30);
+  res.innerHTML = hits.length ? hits.map(x => x.doc
+      ? `<button class="r" type="button" data-doc="${x.doc}"><small>${esc(x.o)} · Ler aqui</small><span>${esc(x.t)}</span></button>`
+      : `<a class="r" href="${x.u}" ${EXT}><small>${esc(x.o)} · Abrir na fonte</small><span>${esc(x.t)}</span></a>`).join('')
+    : '<p class="none">Nada encontrado.</p>';
+});
+
+/* navegação entre capítulos */
+function show(id){
+  if (!SEQ.includes(id)) id = 'capa';
+  const cover = id === 'capa';
+  document.body.classList.toggle('on-cover', cover);
+  $('#capa').classList.toggle('on', cover);
+  document.querySelectorAll('.ch').forEach(s => s.classList.toggle('on', s.id === id));
+  const i = SEQ.indexOf(id), c = CH.find(z => z.id === id);
+  $('#bar').style.width = (i / (SEQ.length - 1) * 100) + '%';
+  $('#cpt').innerHTML = c ? `<b>${c.n}</b>${esc(c.nav)}` : '';
+  toc.querySelectorAll('a').forEach(a => a.classList.toggle('on', a.dataset.go === id));
+  const p = CH.find(z => z.id === SEQ[i-1]), n = CH.find(z => z.id === SEQ[i+1]);
+  $('#prev').disabled = !p; $('#prev span').textContent = p ? p.n + ' · ' + p.nav : '';
+  $('#next').disabled = !n; $('#next span').textContent = n ? n.n + ' · ' + n.nav : '';
+  if (location.hash.slice(1) !== id) history.replaceState(null, '', '#' + id);
+  window.scrollTo(0, 0);
+}
+const cur = () => { const h = location.hash.slice(1); return SEQ.includes(h) ? h : 'capa'; };
+$('#prev').addEventListener('click', () => show(SEQ[SEQ.indexOf(cur()) - 1]));
+$('#next').addEventListener('click', () => show(SEQ[SEQ.indexOf(cur()) + 1]));
+document.addEventListener('keydown', e => {
+  if (!$('#reader').hidden || drawer.classList.contains('on')) { if (e.key === 'Escape') index(false); return; }
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+  const j = SEQ.indexOf(cur()) + (e.key === 'ArrowRight' ? 1 : -1);
+  if (j >= 0 && j < SEQ.length) show(SEQ[j]);
+});
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -507,72 +591,52 @@ document.querySelectorAll('main section[id]').forEach(s => navIO.observe(s));
   const lib = window.pdfjsLib;
   if (lib) lib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   const reader = document.getElementById('reader'), pages = document.getElementById('pages');
-  let doc = null, zoom = 1, obs = null, task = null, lastFocus = null;
-
-  function widthFor(){ return Math.min(pages.clientWidth - 32, 980) * zoom; }
+  let doc = null, zoom = 1, obs = null, task = null, back = 'capa', lastFocus = null;
+  const widthFor = () => Math.min(pages.clientWidth - 32, 980) * zoom;
 
   async function open(slug){
     const x = byDoc[slug]; if (!x) return;
     lastFocus = document.activeElement;
+    const h = location.hash.slice(1); if (!h.startsWith('doc=')) back = h || 'capa';
     document.getElementById('rTitle').textContent = x.t;
     document.getElementById('rMeta').textContent = x.o + ' · ' + x.d;
     reader.hidden = false; document.body.style.overflow = 'hidden';
-    if (location.hash !== '#doc=' + slug) history.replaceState(null, '', '#doc=' + slug);
+    history.replaceState(null, '', '#doc=' + slug);
     document.getElementById('rClose').focus();
-    pages.innerHTML = '<p class="reader-msg">Carregando…</p>';
-    zoom = 1;
+    pages.innerHTML = '<p class="reader-msg">Carregando…</p>'; zoom = 1;
     if (!lib) { pages.innerHTML = '<p class="reader-msg">O leitor não carregou nesta conexão. Tente de novo em instantes.</p>'; return; }
     try {
       if (task) task.destroy();
       task = lib.getDocument({url: 'docs/' + slug + '.pdf', disableAutoFetch: true});
-      doc = await task.promise;
-      layout();
-    } catch (e) {
-      pages.innerHTML = '<p class="reader-msg">Não foi possível abrir este material agora.</p>';
-    }
+      doc = await task.promise; layout();
+    } catch (e) { pages.innerHTML = '<p class="reader-msg">Não foi possível abrir este material agora.</p>'; }
   }
-
   async function layout(){
-    if (!doc) return;
-    if (obs) obs.disconnect();
-    pages.innerHTML = '';
-    const first = await doc.getPage(1);
-    const vp1 = first.getViewport({scale: 1});
-    const w = widthFor();
+    if (!doc) return; if (obs) obs.disconnect(); pages.innerHTML = '';
+    const vp1 = (await doc.getPage(1)).getViewport({scale: 1}), w = widthFor();
     for (let i = 1; i <= doc.numPages; i++){
-      const box = document.createElement('div');
-      box.className = 'page'; box.dataset.n = i;
-      box.style.width = w + 'px';
-      box.style.height = (w * vp1.height / vp1.width) + 'px';
-      box.innerHTML = '<span class="pn">' + i + '</span>';
-      pages.appendChild(box);
+      const b = document.createElement('div'); b.className = 'page'; b.dataset.n = i;
+      b.style.width = w + 'px'; b.style.height = (w * vp1.height / vp1.width) + 'px'; pages.appendChild(b);
     }
     obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) draw(e.target); }), {root: pages, rootMargin: '600px 0px'});
     pages.querySelectorAll('.page').forEach(p => obs.observe(p));
   }
-
-  async function draw(box){
-    if (box.dataset.done) return; box.dataset.done = '1';
-    const page = await doc.getPage(+box.dataset.n);
-    const w = parseFloat(box.style.width);
-    const vp0 = page.getViewport({scale: 1});
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const vp = page.getViewport({scale: (w / vp0.width) * dpr});
-    const c = document.createElement('canvas');
-    c.width = vp.width; c.height = vp.height;
-    box.style.height = (w * vp0.height / vp0.width) + 'px';
-    box.insertBefore(c, box.firstChild);
+  async function draw(b){
+    if (b.dataset.done) return; b.dataset.done = '1';
+    const page = await doc.getPage(+b.dataset.n), w = parseFloat(b.style.width), vp0 = page.getViewport({scale: 1});
+    const dpr = Math.min(window.devicePixelRatio || 1, 2), vp = page.getViewport({scale: (w / vp0.width) * dpr});
+    const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height;
+    b.style.height = (w * vp0.height / vp0.width) + 'px'; b.appendChild(c);
     await page.render({canvasContext: c.getContext('2d'), viewport: vp}).promise;
   }
-
   function close(){
     reader.hidden = true; document.body.style.overflow = '';
     if (obs) obs.disconnect(); pages.innerHTML = '';
     if (task) { task.destroy(); task = null; } doc = null;
-    if (location.hash.startsWith('#doc=')) history.replaceState(null, '', '#biblioteca');
+    history.replaceState(null, '', '#' + back);
+    if (back === 'capa' || !document.getElementById(back)) show(back);
     if (lastFocus) lastFocus.focus();
   }
-
   document.addEventListener('click', e => {
     const t = e.target.closest('[data-doc]'); if (!t) return;
     e.preventDefault(); open(t.dataset.doc);
@@ -584,10 +648,15 @@ document.querySelectorAll('main section[id]').forEach(s => navIO.observe(s));
   reader.addEventListener('contextmenu', e => e.preventDefault());
   let rt; window.addEventListener('resize', () => { if (reader.hidden) return; clearTimeout(rt); rt = setTimeout(layout, 250); });
 
-  /* link direto: #doc=slug abre o material (útil para o telão e o João) */
-  function fromHash(){ const m = location.hash.match(/^#doc=([\w-]+)/); if (m && (reader.hidden || !doc)) open(m[1]); }
-  window.addEventListener('hashchange', fromHash);
-  fromHash();
+  /* abre pelo endereço: #capitulo ou #doc=slug (útil para o telão e para o João) */
+  function route(){
+    const h = location.hash.slice(1);
+    if (h.startsWith('doc=')) { if (reader.hidden) { show(back); open(h.slice(4)); } return; }
+    if (!reader.hidden) close();
+    show(h || 'capa');
+  }
+  window.addEventListener('hashchange', route);
+  route();
 })();
 </script>
 </body>
