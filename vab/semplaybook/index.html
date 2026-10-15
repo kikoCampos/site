@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="theme-color" content="#0A1830">
+<title>Sem Playbook · VAB · Kiko Campos</title>
+<meta name="description" content="Encontro VAB, 21 de outubro de 2026. Repositório de consulta sobre liderar CLT, PJ, serviços contratados e agentes de IA ao mesmo tempo.">
+<link rel="icon" type="image/png" sizes="32x32" href="/board/icon-32.png">
+<link rel="apple-touch-icon" href="/board/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Identidade kikocampos.com, em registro editorial: noite azul-marinho, Fraunces, mono âmbar nos rótulos.
+   Filetes finos e espaço em branco; nenhuma caixa preenchida. Tema único escuro, como o resto do site. */
+:root{
+  --bg:#0A1830; --bg2:#0E2140;
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.22);
+  --ink:#EAF1FB; --ink-soft:#AFC0DB; --ink-mute:#7D91B4;
+  --orange:#FF4A12; --amber:#F2B33D; --blue:#5AA9E6;
+  --display:"Fraunces", Georgia, serif;
+  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+html,body{margin:0;padding:0}
+body{background:
+  radial-gradient(1150px 640px at 82% -12%, rgba(90,169,230,.13), transparent 60%),
+  radial-gradient(900px 560px at 2% -6%, rgba(255,74,18,.11), transparent 55%),
+  var(--bg);
+  background-attachment:fixed;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:22px}
+h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.015em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.5rem,6.4vw,4.6rem);line-height:1.02;letter-spacing:-.025em}
+h2{font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.08}
+h3{font-size:1.18rem;line-height:1.28;font-weight:500}
+em{font-style:italic}
+.grad{background:linear-gradient(100deg,var(--amber),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600}
+.mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.soft{color:var(--ink-soft)}
+.mute{color:var(--ink-mute)}
+
+/* topo */
+.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,24,48,.78);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:60px}
+.brand{font-family:var(--display);font-size:1.08rem;text-decoration:none;white-space:nowrap}
+.brand span{color:var(--ink-mute);font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-left:10px}
+.nav{display:flex;gap:22px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+@media (max-width:560px){.brand span{display:none}.top .wrap{gap:18px}.nav{gap:16px}}
+.nav a{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;white-space:nowrap;padding:6px 0;border-bottom:1px solid transparent}
+.nav a:hover,.nav a.on{color:var(--ink);border-bottom-color:var(--amber)}
+
+/* seções */
+section{padding-block:88px;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:end;margin-bottom:48px}
+.head p{color:var(--ink-soft);max-width:52ch}
+.head .eyebrow{color:var(--amber);margin-bottom:14px}
+@media (max-width:820px){.head{grid-template-columns:1fr;gap:16px}}
+
+/* abertura */
+.hero{padding-block:96px 72px}
+.hero h1{max-width:15ch;margin-top:22px}
+.hero .lead{color:var(--ink-soft);font-size:1.16rem;line-height:1.65;max-width:56ch;margin-top:28px}
+.forces{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:64px;border-top:1px solid var(--line2)}
+.force{padding:22px 22px 4px 0;border-right:1px solid var(--line)}
+.force + .force{padding-left:22px}
+.force:last-child{border-right:0}
+.force .n{font-family:var(--mono);font-size:.68rem;color:var(--amber);letter-spacing:.14em}
+.force h3{margin-top:10px;font-size:1.4rem}
+.force p{color:var(--ink-soft);font-size:.92rem;margin-top:8px}
+@media (max-width:820px){.forces{grid-template-columns:1fr 1fr}.force:nth-child(2){border-right:0}.force:nth-child(3){padding-left:0}.force:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:480px){.forces{grid-template-columns:1fr}.force,.force + .force{padding-left:0;border-right:0}.force + .force{border-top:1px solid var(--line)}}
+
+/* atividade */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line2)}
+.step{padding:24px 24px 0 0}
+.step + .step{padding-left:24px;border-left:1px solid var(--line)}
+.step .n{font-family:var(--display);font-style:italic;font-size:2.2rem;color:var(--amber);line-height:1}
+.step h3{margin-top:14px}
+.step p{color:var(--ink-soft);font-size:.95rem;margin-top:8px;max-width:34ch}
+.note{margin-top:40px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}.step + .step{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:24px}}
+
+/* dados */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line2)}
+.stat{padding:28px 24px 30px 0;border-bottom:1px solid var(--line)}
+.stat:not(:nth-child(4n+1)){padding-left:24px;border-left:1px solid var(--line)}
+.stat .v{font-family:var(--display);font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:1;letter-spacing:-.03em}
+.stat .v small{font-size:.45em;color:var(--ink-mute);letter-spacing:0;margin-left:4px}
+.stat p{margin-top:14px;font-size:.93rem;color:var(--ink-soft);max-width:30ch}
+.stat .src{margin-top:12px;display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);text-decoration:none;border-bottom:1px solid var(--line2)}
+.stat .src:hover{color:var(--amber)}
+@media (max-width:900px){.stats{grid-template-columns:1fr 1fr}.stat:not(:nth-child(4n+1)){padding-left:0;border-left:0}.stat:nth-child(2n){padding-left:24px;border-left:1px solid var(--line)}}
+@media (max-width:480px){.stats{grid-template-columns:1fr}.stat:nth-child(2n){padding-left:0;border-left:0}}
+
+/* biblioteca */
+.filters{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding-bottom:22px;border-bottom:1px solid var(--line2)}
+.chip{appearance:none;background:none;border:0;border-bottom:1px solid transparent;color:var(--ink-soft);font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:6px 0;cursor:pointer}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--amber)}
+.chip .c{color:var(--ink-mute);margin-left:6px}
+.tools{display:flex;gap:18px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.search{flex:1 1 260px;background:none;border:0;border-bottom:1px solid var(--line2);color:var(--ink);font:inherit;font-size:1rem;padding:10px 0;outline:none}
+.search::placeholder{color:var(--ink-mute)}
+.search:focus{border-bottom-color:var(--amber)}
+.toggle{display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;user-select:none}
+.toggle input{accent-color:var(--amber)}
+.count{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 36px;margin-top:8px}
+@media (max-width:980px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.grid{grid-template-columns:1fr}}
+.card{display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px;padding:26px 0;border-bottom:1px solid var(--line);align-content:start}
+.cover{width:88px;aspect-ratio:3/4;border:1px solid var(--line2);overflow:hidden;background:var(--bg2);cursor:pointer;padding:0}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:top;opacity:.92;transition:opacity .2s}
+.cover:hover img{opacity:1}
+.cover.type{display:flex;align-items:flex-end;padding:10px;cursor:default;background:none}
+.cover.type span{font-family:var(--display);font-style:italic;font-size:1.05rem;line-height:1.1;color:var(--ink-mute)}
+.card .meta{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.card .meta i{font-style:normal;color:var(--ink-mute)}
+.card h3{margin-top:8px}
+.card p{margin-top:8px;font-size:.9rem;color:var(--ink-soft)}
+.card .act{margin-top:12px;display:flex;gap:16px;flex-wrap:wrap}
+.btn{appearance:none;background:none;border:0;padding:0;cursor:pointer;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--amber);padding-bottom:3px}
+.btn:hover{color:var(--amber)}
+.btn.ghost{border-bottom-color:var(--line2);color:var(--ink-soft)}
+.empty{padding:48px 0;color:var(--ink-mute)}
+
+/* tensões */
+.tension{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:32px;padding:30px 0;border-top:1px solid var(--line)}
+.tension:first-child{border-top:1px solid var(--line2)}
+.tension h3{font-size:1.35rem}
+.tension .side .who{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.tension .side p{margin-top:8px;color:var(--ink-soft);font-size:.95rem}
+.tension .side + .side{border-left:1px solid var(--line);padding-left:32px}
+@media (max-width:820px){.tension{grid-template-columns:1fr;gap:16px}.tension .side + .side{border-left:0;padding-left:0}}
+
+/* ouvir */
+.list{border-top:1px solid var(--line2)}
+.row{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:24px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.row .f{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.row h3{font-size:1.1rem}
+.row p{color:var(--ink-soft);font-size:.92rem;margin-top:4px}
+@media (max-width:640px){.row{grid-template-columns:1fr;gap:6px}}
+
+/* cautelas */
+.cautions{list-style:none;padding:0;margin:0;border-top:1px solid var(--line2);columns:2;column-gap:48px}
+.cautions li{break-inside:avoid;padding:20px 0;border-bottom:1px solid var(--line)}
+.cautions b{font-family:var(--display);font-weight:500;font-size:1.08rem;display:block;margin-bottom:6px}
+.cautions span{color:var(--ink-soft);font-size:.93rem}
+@media (max-width:760px){.cautions{columns:1}}
+
+footer{border-top:1px solid var(--line);padding-block:40px 64px;color:var(--ink-mute);font-size:.86rem}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+
+/* leitor */
+.reader{position:fixed;inset:0;z-index:50;background:#071223;display:flex;flex-direction:column}
+.reader-bar{display:flex;align-items:center;gap:18px;padding:14px 22px;border-bottom:1px solid var(--line)}
+.reader-bar .t{min-width:0;flex:1}
+.reader-bar .t b{display:block;font-family:var(--display);font-weight:500;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reader-bar .t span{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.reader-bar .z{display:flex;gap:6px}
+.reader-bar button{appearance:none;background:none;border:1px solid var(--line2);color:var(--ink);font-family:var(--mono);font-size:.72rem;height:34px;min-width:34px;padding:0 10px;cursor:pointer;border-radius:2px}
+.reader-bar button:hover{border-color:var(--amber);color:var(--amber)}
+.pages{flex:1;overflow:auto;padding:28px 16px 80px;-webkit-overflow-scrolling:touch}
+.page{margin:0 auto 18px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.35);position:relative}
+.page canvas{display:block;width:100%;height:auto;user-select:none;-webkit-user-select:none;pointer-events:none}
+.page .pn{position:absolute;right:-48px;bottom:0;font-family:var(--mono);font-size:.62rem;color:var(--ink-mute)}
+@media (max-width:900px){.page .pn{display:none}}
+.reader-msg{margin:80px auto;text-align:center;color:var(--ink-soft);max-width:40ch}
+.reader-msg a{color:var(--amber)}
+@media print{.reader,.pages{display:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Sem Playbook<span>VAB · 21.10.26</span></a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#tese">Tese</a>
+      <a href="#atividade">Atividade</a>
+      <a href="#dados">Dados</a>
+      <a href="#biblioteca">Biblioteca</a>
+      <a href="#tensoes">Tensões</a>
+      <a href="#ouvir">Ouvir</a>
+      <a href="#cautelas">Cautelas</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <p class="eyebrow">Encontro VAB · 21 de outubro de 2026</p>
+    <h1>Não há playbook para liderar <em class="grad">quatro forças</em> ao mesmo tempo.</h1>
+    <p class="lead" id="tese">A empresa de hoje entrega resultado com empregados, prestadores, serviços contratados e agentes de IA. Cada força tem contrato, risco e lógica de gestão diferentes, e nenhuma consultoria publicou ainda o manual de como liderar as quatro juntas. Este é o material de consulta para o encontro: o que as principais casas de gestão, pesquisa e governança já sabem, onde discordam e o que ainda ninguém respondeu.</p>
+    <div class="forces">
+      <div class="force"><span class="n">01</span><h3>CLT</h3><p>Vínculo, carreira, cultura. A força para a qual todas as práticas de RH foram desenhadas.</p></div>
+      <div class="force"><span class="n">02</span><h3>As a service</h3><p>Trabalho contratado por resultado. Entra pelo orçamento de compras, raramente pela agenda de liderança.</p></div>
+      <div class="force"><span class="n">03</span><h3>PJ</h3><p>Prestador pessoa jurídica, sob regra ainda indefinida no STF. Muitas vezes gerido como CLT, sem os direitos.</p></div>
+      <div class="force"><span class="n">04</span><h3>Agentes de IA</h3><p>Executam tarefas inteiras com autonomia. Precisam de dono, limites, avaliação e governança.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="atividade">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">A atividade</p><h2>Cada mesa é uma <em>consultoria</em> contratada pelo conselho.</h2></div>
+      <p>As mesas recebem um caso e entregam recomendação, não decisão. Quem decide é o conselho, representado pelo João, conselheiro agêntico que vota e pergunta como faria um board de verdade, não como banca que dá nota.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="n">i</span><h3>Diagnóstico</h3><p>A mesa lê o caso e escolhe nesta biblioteca as evidências que sustentam sua leitura.</p></div>
+      <div class="step"><span class="n">ii</span><h3>Recomendação</h3><p>Uma proposta ao conselho, com no máximo três evidências citadas. Menos é mais defensável.</p></div>
+      <div class="step"><span class="n">iii</span><h3>Conselho</h3><p>O João questiona tese e evidência. O conselho vota. A mesa aprende o que um board de fato pergunta.</p></div>
+    </div>
+    <p class="note">A plataforma da atividade abre no dia do encontro.</p>
+  </div>
+</section>
+
+<section id="dados">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">A tese em dados</p><h2>A adoção correu na frente do <em>modelo de gestão</em>.</h2></div>
+      <p>Oito números para abrir a conversa. As pessoas já usam IA e agentes; o elo que deveria liderar a transição é o que mais se desgastou; quase nenhuma empresa redesenhou como lidera essa mistura.</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</section>
+
+<section id="biblioteca">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">Biblioteca</p><h2>O que as consultorias <em>já publicaram</em>.</h2></div>
+      <p>Relatórios, artigos, pesquisas e podcasts de 2021 a outubro de 2026. Os marcados com capa podem ser lidos aqui mesmo; os demais abrem na fonte original. Organizados pela pergunta que respondem, não por quem publicou.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filtrar por tema"></div>
+    <div class="tools">
+      <input class="search" id="q" type="search" placeholder="Buscar por tema, autor ou número" aria-label="Buscar">
+      <label class="toggle"><input type="checkbox" id="onlyHere"> Só leitura no site</label>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="tensoes">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">Onde as fontes discordam</p><h2>Escolher um lado faz parte do <em>trabalho</em>.</h2></div>
+      <p>Nenhum conselho decide com evidência unânime. Quatro tensões em que pesquisas sérias apontam para lados diferentes, ou em que o mesmo dado sustenta leituras opostas.</p>
+    </div>
+    <div id="tensions"></div>
+  </div>
+</section>
+
+<section id="ouvir">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">Para ouvir e assistir</p><h2>Para quem prefere <em>ouvir</em>.</h2></div>
+      <p>Os dois melhores pontos de partida: o episódio da McKinsey sobre parceria entre pessoas e agentes e a entrevista de Bob Sternfels à HBR, em que ele descreve a própria firma como força de trabalho mista.</p>
+    </div>
+    <div class="list" id="listen"></div>
+  </div>
+</section>
+
+<section id="cautelas">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">Cautelas de leitura</p><h2>Antes de citar, <em>desconfie</em>.</h2></div>
+      <p>A força "as a service" é a menos estudada: nenhuma consultoria trata o serviço contratado por resultado como objeto de liderança. E boa parte dos números vem de quem vende a solução.</p>
+    </div>
+    <ul class="cautions">
+      <li><b>Viés de origem</b><span>Microsoft, Anthropic, IBM, Nvidia e Accenture vendem agentes ou sua implantação. Os números são úteis, mas não independentes.</span></li>
+      <li><b>O 95% do MIT</b><span>A amostra do GenAI Divide é pequena e a própria cobertura reporta contagens diferentes. Serve como provocação, não como dado de mercado.</span></li>
+      <li><b>Previsão não é medição</b><span>O dado do Gartner sobre média gerência é uma previsão de outubro de 2024 para 2026. O que foi medido depois, na McKinsey, aponta outra direção.</span></li>
+      <li><b>Agentes da McKinsey</b><span>A entrevista à HBR fala em 20 mil agentes; a Business Insider reportou 25 mil semanas depois. Mais seguro citar "cerca de 20 mil".</span></li>
+      <li><b>Tema 1389 em aberto</b><span>A regra sobre PJ pode mudar a qualquer sessão do STF. Conferir o andamento antes de usar.</span></li>
+      <li><b>Survey mede percepção</b><span>A maioria dos números aqui é o que executivos e empregados dizem, não o que as empresas fizeram. Os estudos de caso de Stanford e os dados de folha de pagamento são exceção.</span></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Curadoria de Kiko Campos para o encontro VAB. Atualizado em 15 de outubro de 2026.</p>
+    <p>Material para consulta durante o encontro. Os direitos de cada relatório pertencem a seus autores.</p>
+  </div>
+</footer>
+
+<div class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle">
+  <div class="reader-bar">
+    <div class="t"><b id="rTitle"></b><span id="rMeta"></span></div>
+    <div class="z">
+      <button type="button" id="zOut" aria-label="Diminuir">−</button>
+      <button type="button" id="zIn" aria-label="Aumentar">+</button>
+      <button type="button" id="rClose" aria-label="Fechar">Fechar</button>
+    </div>
+  </div>
+  <div class="pages" id="pages"></div>
+</div>
+
+<script>
+const THEMES = [
+  {k:'todos', n:'Tudo'},
+  {k:'ecossistema', n:'Ecossistema'},
+  {k:'agentes', n:'Agentes'},
+  {k:'lider', n:'Líder no meio'},
+  {k:'governanca', n:'Governança'},
+  {k:'brasil', n:'Brasil e PJ'}
+];
+const D = 'docs/';
+const HBR = t => 'https://hbr.org/search?term=' + encodeURIComponent(t);
+
+/* o: organização · t: título · d: data · y: ordenação · f: formato · k: temas · i: ideia central · doc: leitura no site · u: fonte */
+const ITEMS = [
+  // Força de trabalho como ecossistema
+  {o:'MIT SMR + Deloitte', t:'Workforce Ecosystems: A New Strategic Approach to the Future of Work', d:'2021', y:'2021-04', f:'Relatório', k:['ecossistema'], i:'87% dos executivos contam externos como parte da força de trabalho; planejamento, avaliação e remuneração seguem desenhados só para empregados.', u:'https://www2.deloitte.com/us/en/insights/focus/technology-and-the-future-of-work/workforce-ecosystems-practical-guidance-for-leaders.html'},
+  {o:'MIT SMR + Deloitte', t:'Orchestrating Workforce Ecosystems', d:'mai 2022', y:'2022-05', f:'Relatório', k:['ecossistema'], i:'Propõe orquestrar em vez de gerir: RH, TI e compras coordenando quem faz o trabalho, dentro e fora da empresa.', u:'https://www.deloitte.com/content/dam/insights/articles/2022/us164825_cir-2022-mit-smr-report/orchestrating-workforce-ecosystems.pdf'},
+  {o:'Altman, Kiron, Schwartz, Jones', t:'Workforce Ecosystems: Reaching Strategic Goals with People, Partners, and Technologies', d:'MIT Press · 2023', y:'2023-04', f:'Livro', k:['ecossistema'], i:'O framework de orquestração com casos de Amazon, NASA, Unilever e Walmart, incluindo ética e política pública.', u:'https://mitsloan.mit.edu/node/45719'},
+  {o:'ManpowerGroup', t:'The Human Edge — Global Future of Work Trends', d:'2026', y:'2026-02', f:'Relatório', k:['ecossistema'], i:'Dezesseis tendências em quatro forças, entre elas "Hybrid Super Teams" de humanos, máquinas e agentes e "Gig Goes Big": 27% da Gen Z complementa a renda com gig.', doc:'manpower-human-edge-2026'},
+  {o:'McKinsey', t:'HR Monitor 2026: a turning point for the people function', d:'jun 2026', y:'2026-06', f:'Benchmark', k:['ecossistema','governanca'], i:'Só 11% fazem planejamento de força de trabalho com horizonte de três anos ou mais; quase dois terços planejam até doze meses.', doc:'mckinsey-hr-monitor-2026'},
+  {o:'Insight222', t:'The Great Reallocation: Understanding the impact of AI on talent strategy', d:'set 2026', y:'2026-09', f:'Relatório', k:['ecossistema'], i:'Decisões de força de trabalho viraram portas de mão única; num caso, 34% das funções marcadas para corte continham julgamento humano central.', doc:'insight222-great-reallocation-2026'},
+  {o:'Lightcast', t:'Fault Lines', d:'2026', y:'2026-02', f:'Relatório', k:['ecossistema'], i:'Geopolítica, IA e escassez de mão de obra como três falhas que reconfiguram, de forma permanente, oferta e demanda de talento.', doc:'lightcast-fault-lines-2026'},
+  {o:'World Economic Forum', t:"Chief People Officers' Outlook", d:'mai 2026', y:'2026-05', f:'Survey', k:['ecossistema'], i:'Prioridade número um dos CPOs: rever estrutura organizacional e desenho de cargos (74%). Requalificação e implantação de IA empatam com 70%.', doc:'wef-cpo-outlook-2026'},
+  {o:'World Economic Forum', t:'Four Futures for Jobs in the New Economy: AI and Talent in 2030', d:'2026', y:'2026-01', f:'Cenários', k:['ecossistema'], i:'Quatro cenários para o trabalho em 2030, cruzando velocidade de avanço da IA e prontidão da força de trabalho.', doc:'wef-four-futures-jobs-2030'},
+  {o:'World Economic Forum', t:'Future of Jobs Report 2025', d:'jan 2025', y:'2025-01', f:'Relatório', k:['ecossistema'], i:'Mais de mil empregadores, 14 milhões de trabalhadores: 170 milhões de empregos criados e 92 milhões deslocados até 2030.', u:'https://www.weforum.org/publications/the-future-of-jobs-report-2025/'},
+  {o:'Kiko Campos', t:'Futuro do Trabalho 2026 — Curadoria Estratégica', d:'set 2026', y:'2026-09', f:'Curadoria', k:['ecossistema','lider'], i:'139 relatórios de mais de 40 instituições: em 2026, o que separa quem captura valor de quem não captura é arquitetura organizacional, não tecnologia.', doc:'kiko-campos-curadoria-futuro-do-trabalho-2026'},
+
+  // Agentes como força de trabalho
+  {o:'McKinsey', t:'The agentic organization: Contours of the next paradigm for the AI era', d:'set 2025', y:'2025-09', f:'Artigo', k:['agentes'], i:'A maior mudança de paradigma organizacional desde a revolução digital: cinco pilares, times pequenos orientados a resultado e governança contínua.', u:'https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-agentic-organization-contours-of-the-next-paradigm-for-the-ai-era'},
+  {o:'McKinsey', t:'The State of Organizations 2026', d:'2026', y:'2026-02', f:'Relatório', k:['agentes','lider'], i:'Inclui o capítulo "Humans and AI agents". 72% dos líderes dizem não estar prontos; só 14% veem a liderança puxando a adoção de IA de forma consistente.', doc:'mckinsey-state-of-organizations-2026'},
+  {o:'McKinsey', t:'The state of AI in 2026: On the road to ROI', d:'ago 2026', y:'2026-08', f:'Survey', k:['agentes'], i:'40% das grandes empresas já escalam agentes (eram 27%). Só 14% viram queda de quadro, contra 32% que esperavam.', doc:'mckinsey-state-of-ai-2026'},
+  {o:'McKinsey', t:'From adoption to impact: Three horizons of AI transformation', d:'jul 2026', y:'2026-07', f:'Artigo', k:['agentes','lider'], i:'Uso individual não vira valor se a organização em volta não muda. Quem avança concentra esforço onde há mais valor e redesenha o trabalho.', doc:'mckinsey-three-horizons-2026'},
+  {o:'McKinsey', t:'Building the foundations for agentic AI at scale', d:'abr 2026', y:'2026-04', f:'Artigo', k:['agentes'], i:'Quase dois terços já experimentaram agentes, menos de 10% escalaram. Oito em cada dez citam limitação de dados.', doc:'mckinsey-foundations-agentic-ai-2026'},
+  {o:'McKinsey Global Institute', t:'Agents, robots, and us: Skill partnerships in the age of AI', d:'nov 2025', y:'2025-11', f:'Relatório', k:['agentes','lider'], i:'Trabalho como parceria entre pessoas, agentes e robôs: 57% das horas nos EUA são tecnicamente automatizáveis, mas 70% das habilidades seguem úteis.', u:'https://www.mckinsey.com/~/media/mckinsey/mckinsey%20global%20institute/our%20research/agents%20robots%20and%20us%20skill%20partnerships%20in%20the%20age%20of%20ai/agents-robots-and-us-skill-partnerships-in-the-age-of-ai.pdf'},
+  {o:'Microsoft', t:'Work Trend Index 2025 — The Frontier Firm is born', d:'abr 2025', y:'2025-04', f:'Relatório', k:['agentes'], i:'Cunhou "agent boss" e "human-agent ratio": cada pessoa passa a construir, delegar e gerir agentes.', u:'https://blogs.microsoft.com/blog/2025/04/23/the-2025-annual-work-trend-index-the-frontier-firm-is-born/'},
+  {o:'Microsoft', t:'Work Trend Index 2026 — Agents, human agency, and the opportunity for every organization', d:'mai 2026', y:'2026-05', f:'Relatório', k:['agentes','lider'], i:'Cultura, apoio do gestor e práticas de talento explicam mais que o dobro do impacto da IA do que fatores individuais. Só 26% veem a liderança alinhada.', doc:'microsoft-work-trend-index-2026'},
+  {o:'Microsoft', t:'Becoming a Frontier Firm — Our Frontier Playbook (2ª edição)', d:'set 2026', y:'2026-09', f:'Playbook', k:['agentes','governanca'], i:'A metodologia interna da Microsoft e as sete perguntas que, segundo eles, aparecem em todo conselho, inclusive como governar agentes sem perder o centro humano.', doc:'microsoft-frontier-firm-playbook-2026'},
+  {o:'MIT SMR + BCG', t:'The Emerging Agentic Enterprise', d:'nov 2025', y:'2025-11', f:'Relatório', k:['agentes'], i:'76% veem o agente mais como colega do que como ferramenta. A adoção corre na frente do redesenho de processos e de direitos de decisão.', u:'https://www.bcg.com/press/20november2025-la-ia-agentica-acelera-su-adopcion-y-redefine-la-interaccion-entre-personas-y-tecnologia'},
+  {o:'Deloitte', t:'Tech Trends 2026 — The agentic reality check: preparing for a silicon-based workforce', d:'2026', y:'2025-12', f:'Relatório', k:['agentes'], i:'Agentes como nova categoria de trabalho, ao lado da força "de carbono". Só 11% têm agentes em produção.', u:'https://www.deloitte.com/content/dam/insights/articles/2025/us188546_tt-26/pdf/DI_Tech-trends-2026.pdf'},
+  {o:'Deloitte', t:'State of AI in the Enterprise 2026', d:'jan 2026', y:'2026-01', f:'Survey', k:['agentes','governanca'], i:'74% planejam usar IA agêntica em dois anos; só 21% têm modelo maduro de governança para agentes autônomos.', doc:'deloitte-state-of-ai-enterprise-2026'},
+  {o:'Deloitte', t:'HR Reimagined 2.0 — Parte 4: Agentic AI for HR Workflow Design', d:'jun 2026', y:'2026-06', f:'Webinar', k:['agentes','ecossistema'], i:'Redesenho dos fluxos de RH com agentes, e a pergunta de fundo: o modelo de BP, CoE e operações sobrevive aos próximos três a cinco anos?', doc:'deloitte-hr-reimagined-agentic-2026'},
+  {o:'Accenture', t:'The age of co-intelligence: How humans, AI agents and robots are redefining value', d:'2026', y:'2026-03', f:'Relatório', k:['agentes'], i:'Mais de 50% das horas de trabalho serão impactadas por agentes. Humanos na liderança, não apenas "no loop".', doc:'accenture-age-of-co-intelligence-2026'},
+  {o:'Anthropic', t:'The 2026 State of AI Agents Report', d:'2026', y:'2026-03', f:'Survey', k:['agentes'], i:'57% já usam agentes em fluxos de várias etapas; 16% em processos que cruzam áreas e times.', doc:'anthropic-state-of-ai-agents-2026'},
+  {o:'Anthropic', t:'Anthropic Economic Index report: Cadences', d:'jun 2026', y:'2026-06', f:'Paper', k:['agentes'], i:'O uso de IA deixou de ser conversa e virou tarefa agêntica de longa duração, o que muda como se mede seu impacto econômico.', doc:'anthropic-economic-index-cadences-2026'},
+  {o:'Stanford Digital Economy Lab', t:'The Enterprise AI Playbook: Lessons from 51 Successful Deployments', d:'abr 2026', y:'2026-04', f:'Estudo de casos', k:['agentes','lider'], i:'Modelo por exceção, em que a IA faz 80% ou mais e o humano revisa exceções, rendeu ganho mediano de 71%, contra 30% no modelo de aprovação.', doc:'stanford-enterprise-ai-playbook-2026'},
+  {o:'IBM Institute for Business Value', t:'Rewiring the C-suite — CEO Study 2026', d:'2026', y:'2026-05', f:'Survey', k:['agentes','governanca'], i:'2.000 CEOs: 77% dizem que liderança de talento e de tecnologia estão convergindo; 85% querem que todo líder funcional seja especialista em tecnologia do seu domínio.', doc:'ibm-ceo-study-2026'},
+  {o:'IBM Institute for Business Value', t:'Building the IT foundation for agentic AI at scale — Tech Leader Study 2026', d:'2026', y:'2026-06', f:'Survey', k:['agentes','governanca'], i:'2.000 CIOs e CTOs: governança desenhada desde o início é o que torna possível controlar agentes em produção.', doc:'ibm-tech-leader-study-2026'},
+  {o:'Atlassian', t:"Leading with Context: Lessons from Atlassian's AI Journey", d:'2026', y:'2026-07', f:'Relatório', k:['agentes','lider'], i:'85% dos trabalhadores do conhecimento usam IA; só 6% dos executivos veem retorno na organização inteira.', doc:'atlassian-leading-with-context-2026'},
+  {o:'Nvidia · Jensen Huang', t:'"O TI será o RH dos agentes"', d:'CES · jan 2025', y:'2025-01', f:'Keynote', k:['agentes','governanca'], i:'A frase que reabriu a discussão sobre quem gere a força de trabalho digital. Em entrevista posterior, Huang fala em humanos e "humanos digitais".', u:'https://fortune.com/2025/10/20/jensen-huang-nvidia-ai-future-workforce-digital-humans-hiring-onboarding-orientation/'},
+
+  // O líder no meio
+  {o:'Gallup', t:'State of the Global Workplace 2026', d:'abr 2026', y:'2026-04', f:'Relatório', k:['lider'], i:'Engajamento de gerentes caiu de 31% para 22% em três anos, a maior queda entre todos os grupos. Empresas de melhor prática mantêm 79%.', u:'https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx'},
+  {o:'BCG', t:'The Three Dimensions of Leadership for the AI Era', d:'29 set 2026', y:'2026-09', f:'Artigo', k:['lider'], i:'Executivos bem preparados geram três vezes mais vantagem competitiva do que uma IA madura. Só 25% dos empregados sentem apoio dos líderes no uso de IA.', doc:'bcg-three-dimensions-leadership-2026'},
+  {o:'BCG', t:'AI at Work 2026: Strategy Matters More Than Tools', d:'jun 2026', y:'2026-06', f:'Survey', k:['lider','agentes'], i:'65% dos gestores esperam que agentes façam metade do seu trabalho em três anos; 47% já gastam mais tempo dirigindo a IA do que executando.', u:'https://www.bcg.com/publications/2026/ai-at-work-why-strategy-matters-more-than-tools'},
+  {o:'BCG', t:'AI Will Reshape More Jobs Than It Replaces', d:'abr 2026', y:'2026-04', f:'Artigo', k:['lider','ecossistema'], i:'De 50% a 55% dos empregos nos EUA serão remodelados em dois a três anos; a substituição integral é mais lenta. Exige refazer trilhas de carreira.', doc:'bcg-ai-reshape-jobs-2026'},
+  {o:'BCG', t:'Agentic AI Turns Every Team into Its Own Transformation Engine', d:'jun 2026', y:'2026-06', f:'Artigo', k:['lider','agentes'], i:'Com a ex-CPO da Woolworths: a mudança deixa de ser programa central e passa a acontecer time a time.', doc:'bcg-agentic-ai-every-team-2026'},
+  {o:'McKinsey', t:'Building expertise in the age of AI: Who trains the next generation?', d:'jul 2026', y:'2026-07', f:'Artigo', k:['lider'], i:'Se a IA absorve o trabalho de entrada, onde se forma o julgamento? Propõe integrar gestão do conhecimento, desenho de cargo e coaching.', doc:'mckinsey-building-expertise-2026'},
+  {o:'Stanford Digital Economy Lab', t:'Canaries in the Coal Mine? (revisão de agosto de 2026)', d:'ago 2026', y:'2026-08', f:'Paper', k:['lider','ecossistema'], i:'Jovens de 22 a 25 anos em ocupações expostas à IA estão 19% abaixo dos pares. O efeito vem de menos contratação, não de demissão.', u:'https://digitaleconomy.stanford.edu/news/canariesaug26/'},
+  {o:'Anthropic', t:'Labor market impacts of AI: A new measure and early evidence', d:'mar 2026', y:'2026-03', f:'Paper', k:['lider','ecossistema'], i:'Sem alta sistemática de desemprego entre os mais expostos, mas com sinal de contratação menor de jovens.', doc:'anthropic-labor-market-impacts-2026'},
+  {o:'Stanford, NYU, MIT, Princeton', t:'The efficiency-gain illusion', d:'mai 2026', y:'2026-05', f:'Paper', k:['lider'], i:'Em três estudos com 2.691 pessoas, usuários recorrem à IA mesmo quando ela não economiza tempo, e superestimam o ganho em tarefas simples.', doc:'stanford-efficiency-gain-illusion-2026'},
+  {o:'Harvard Business Review', t:'AI Adoption Is Overloading Your Middle Managers', d:'jun 2026', y:'2026-06', f:'Artigo', k:['lider'], i:'Shin e Sucher: o gestor médio fica preso entre a ambição do C-level e a operação, sem suporte formal para conduzir a adoção.', u:HBR('AI Adoption Is Overloading Your Middle Managers')},
+  {o:'Harvard Business Review', t:'3 Forces Are Redefining the Transition from Manager to Leader', d:'jun 2026', y:'2026-06', f:'Artigo', k:['lider'], i:'Watkins atualiza o clássico da transição para líder de empresa: governar sistemas de IA pouco compreendidos é uma das forças novas.', u:HBR('3 Forces Are Redefining the Transition from Manager to Leader')},
+  {o:'Harvard Business Review', t:'To Thrive in the AI Era, Companies Need Agent Managers', d:'fev 2026', y:'2026-02', f:'Artigo', k:['lider','agentes'], i:'Srinivasan e Wei propõem o papel de "agent manager", como o product manager surgiu na era do software. Casos da Salesforce.', u:'https://hbr.org/2026/02/to-thrive-in-the-ai-era-companies-need-agent-managers'},
+  {o:'Harvard Business Review', t:'Create an Onboarding Plan for AI Agents', d:'mar 2026', y:'2026-03', f:'Artigo', k:['lider','agentes'], i:'Fuller: tratar agentes como empregados, com papel definido, limites, responsabilização e avaliação periódica.', u:'https://hbr.org/2026/03/create-an-onboarding-plan-for-ai-agents'},
+  {o:'Harvard Business Review', t:'Agentic AI Is Already Changing the Workforce', d:'mai 2025', y:'2025-05', f:'Artigo', k:['lider','agentes','ecossistema'], i:'Sete ações para RH e compras integrarem agentes como colegas digitais em times híbridos.', u:'https://www.ebsco.com/articles/business-and-management/d1baf651-0cba-5146-8ae5-ae348e7fdd6f/agentic-ai-is-already-changing-the-workforce'},
+  {o:'Harvard Business Review', t:'What Companies Get Wrong About Decision Rights', d:'jul-ago 2026', y:'2026-07', f:'Artigo', k:['lider','governanca'], i:'Quatro erros comuns em direitos de decisão, a pergunta que vira central quando agentes passam a decidir.', u:HBR('What Companies Get Wrong About Decision Rights')},
+  {o:'Harvard Business Review', t:'The 5 AI Tensions Leaders Need to Navigate', d:'dez 2025', y:'2025-12', f:'Artigo', k:['lider'], i:'Hinds e Sutton, a partir de mais de cem construtores, executivos e pesquisadores: os ganhos da IA vêm com perdas que o líder precisa administrar.', u:HBR('The 5 AI Tensions Leaders Need to Navigate')},
+  {o:'Harvard Business Review', t:'9 Trends Shaping Work in 2026 and Beyond', d:'fev 2026', y:'2026-02', f:'Artigo', k:['lider','ecossistema'], i:'Gartner: só um em cada cinquenta investimentos em IA entrega valor transformacional; um em cada cinco tem retorno mensurável.', u:HBR('9 Trends Shaping Work in 2026 and Beyond')},
+  {o:'Gartner', t:'Top Strategic Predictions for 2025', d:'out 2024', y:'2024-10', f:'Previsão', k:['lider'], i:'Até 2026, 20% das organizações usariam IA para eliminar mais da metade das posições de média gerência.', u:'https://www.ciodive.com/news/Gartner-symposium-top-predictions-CIOs-AI-impact/730659/'},
+  {o:'PwC', t:'Global Workforce Hopes and Fears Survey 2025', d:'nov 2025', y:'2025-11', f:'Survey', k:['lider'], i:'Otimismo com o próprio papel: 72% entre executivos, 43% entre não gestores. 58% confiam no gestor direto.', u:'https://www.pwc.com/hopesandfears'},
+
+  // Governança e conselho
+  {o:'NACD', t:'2026 Governance Outlook', d:'dez 2025', y:'2025-12', f:'Survey', k:['governanca'], i:'Conselhos priorizam execução, sucessão e prontidão da força de trabalho. 76% dizem que IA entra no crescimento de 2026, com retorno ainda modesto.', u:'https://www.nacdonline.org/about/newsroom/press-release/press-release/boards-prioritize-strategic-execution-technology-people-2026/'},
+  {o:'NACD', t:'Blue Ribbon Commission — Technology Leadership in the Boardroom', d:'out 2024', y:'2024-10', f:'Relatório', k:['governanca'], i:'Distingue governança de IA, papel da gestão, de supervisão de IA, papel do conselho.', u:'https://www.dandodiary.com/2024/10/articles/corporate-governance/guest-post-nacd-weighs-in-on-board-oversight-of-artificial-intelligence/'},
+  {o:'IBM Institute for Business Value', t:'Designing the Thinking Organization — CHRO Study 2026', d:'2026', y:'2026-09', f:'Survey', k:['governanca','lider'], i:'46% não envolvem o CHRO na estratégia de IA. Onde o CHRO divide a fronteira humano-IA, 76% dos empregados se sentem seguros para contestar a IA, contra 43%.', doc:'ibm-chro-study-2026'},
+  {o:'Deloitte', t:'2026 Global Human Capital Trends', d:'mar 2026', y:'2026-03', f:'Relatório', k:['governanca','lider'], i:'Três pontos de virada, a começar por "humano × máquina". 66% reconhecem a importância de desenhar essa interação; 7% têm progresso forte.', doc:'deloitte-human-capital-trends-2026'},
+  {o:'Mercer', t:'Global Talent Trends 2026', d:'fev 2026', y:'2026-02', f:'Survey', k:['governanca','lider'], i:'82% do C-level vê o futuro do RH em gerir talento humano e agentes lado a lado. Medo de perder o emprego para a IA foi de 28% para 40%.', u:'https://www.mercer.com/en-us/about/newsroom/mercer-s-global-talent-trends-2026-report/'},
+  {o:'BCG', t:'Creating People Advantage 2026: Four Power Moves for the CHRO', d:'mar 2026', y:'2026-03', f:'Survey', k:['governanca'], i:'Metade das organizações espera impacto alto ou transformacional da IA agêntica. O CHRO como dono da transformação, não executor.', doc:'bcg-creating-people-advantage-2026'},
+  {o:'BCG', t:'How CFOs Are Funding and Scaling AI Agents', d:'2026', y:'2026-08', f:'Artigo', k:['governanca','agentes'], i:'O agente pela ótica do CFO: como financiar, medir e escalar uma força de trabalho que é ao mesmo tempo investimento e despesa.', doc:'bcg-cfos-funding-ai-agents-2026'},
+  {o:'McKinsey', t:'The AI transformation manifesto', d:'abr 2026', y:'2026-04', f:'Artigo', k:['governanca'], i:'Doze temas que separam empresas reconfiguradas para a IA. A vantagem está no como e na velocidade, não na ferramenta.', doc:'mckinsey-ai-transformation-manifesto-2026'},
+  {o:'McKinsey', t:'A new operating model for people management', d:'fev 2025', y:'2025-02', f:'Artigo', k:['governanca','ecossistema'], i:'Mais pessoal, mais tecnológico, mais humano: um sistema de gestão de pessoas mais estratégico, fluido e orientado por dados.', doc:'mckinsey-new-operating-model-people-2025'},
+  {o:'World Economic Forum + Accenture', t:'Organizational Transformation in the Age of AI', d:'mar 2026', y:'2026-03', f:'White paper', k:['governanca'], i:'Cinco frentes de transformação, entre elas experiência de talento e planejamento de força de trabalho, e os princípios para escalar.', doc:'wef-organizational-transformation-ai-2026'},
+  {o:'Universidade de Melbourne + KPMG', t:'Trust, attitudes and use of artificial intelligence: A global study 2025', d:'abr 2025', y:'2025-04', f:'Survey', k:['governanca'], i:'48 mil pessoas em 47 países: 66% usam IA com regularidade, só 46% se dispõem a confiar nela.', u:'https://figshare.unimelb.edu.au/articles/report/Trust_attitudes_and_use_of_artificial_intelligence_A_global_study_2025/28822919'},
+  {o:'MIT NANDA', t:'The GenAI Divide: State of AI in Business 2025', d:'ago 2025', y:'2025-08', f:'Relatório', k:['governanca'], i:'95% das organizações sem retorno mensurável de IA generativa. O problema está em integração e aprendizagem, não no modelo.', u:'https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/'},
+  {o:'Edelman', t:'Trust Barometer 2026 — Relatório Brasil', d:'2026', y:'2026-01', f:'Survey', k:['governanca','brasil'], i:'Confiança no Brasil sob a lente da "insularidade": quem confia em quem, e o que isso significa para empregador e liderança.', u:'https://www.edelman.com.br'},
+
+  // Brasil e PJ
+  {o:'Poder360', t:'Gilmar Mendes retira suspensão dos processos sobre pejotização', d:'18 jun 2026', y:'2026-06', f:'Notícia', k:['brasil'], i:'Fim da paralisação iniciada em abril de 2025. O relator quer levar o Tema 1389 ao plenário ainda em 2026.', u:'https://www.poder360.com.br/poder-justica/gilmar-mendes-retira-suspensao-dos-processos-sobre-pejotizacao/'},
+  {o:'TRT-6', t:'Processos sobre pejotização voltam a tramitar', d:'2026', y:'2026-06', f:'Comunicado', k:['brasil'], i:'Cerca de 1.500 ações só em Pernambuco. No TST, os processos seguem suspensos até a tese do STF.', u:'https://www.trt6.jus.br/portal/node/1219447'},
+  {o:'FIERGS', t:'Informe CONTRAB 16/2026 — julgados trabalhistas do STF', d:'ago 2026', y:'2026-08', f:'Informe', k:['brasil'], i:'Balanço do semestre: Tema 1389 sem julgamento iniciado e sua ligação com a ADPF 324, que liberou a terceirização.', u:'https://www.fiergs.org.br/sites/default/files/paragraph--files/informe_contrab_-_16.2026_-_julgados_trabalhistas.pdf'},
+  {o:'STF', t:'Tema 1389 — ARE 1.532.603', d:'em andamento', y:'2026-10', f:'Processo', k:['brasil'], i:'Fonte primária para conferir o andamento: quando contratar PJ é válido mesmo havendo elementos de vínculo.', u:'https://portal.stf.jus.br/jurisprudenciaRepercussao/verAndamentoProcesso.asp?incidente=7138684&numeroProcesso=1532603&classeProcesso=ARE&numeroTema=1389'}
+];
+
+const LISTEN = [
+  {f:'Podcast', o:'The McKinsey Podcast', t:'The rise of the human–AI workforce', i:'Krivkovich e Madgavkar sobre o que agentes fazem e não fazem, e como liderar a parceria.', d:'nov 2025', u:'https://www.mckinsey.com.br/capabilities/people-and-organizational-performance/our-insights/the-rise-of-the-human-ai-workforce'},
+  {f:'Podcast', o:'HBR IdeaCast', t:'Where McKinsey — and Consulting — Go From Here', i:'Bob Sternfels sobre o equilíbrio entre agentes e pessoas e o fim do modelo puramente consultivo.', d:'jan 2026', u:'https://hbr.org/podcast/2026/01/where-mckinsey-and-consulting-go-from-here'},
+  {f:'Entrevista', o:'Harvard Business Review', t:'"We Want to Make Ourselves Better"', i:'A versão escrita, com a frase dos 40 mil humanos e 20 mil agentes.', d:'jan 2026', u:'https://www.ebsco.com/articles/history/74ad9cff-c130-55ac-bcb2-2011032382f8/we-want-to-make-ourselves-better'},
+  {f:'Webcast', o:'Deloitte Dbriefs', t:'2026 Global Human Capital Trends', i:'Os três pontos de virada e os princípios de desenho "humano × máquina".', d:'abr 2026', u:'https://www.deloitte.com/us/en/dbriefs-webcasts/2026-global-human-capital-trends.html'},
+  {f:'Podcast', o:'Deloitte Bélgica', t:'Human Capital Trends 2026', i:'Série com o coautor Yves Van Durme sobre o que significa escolher a vantagem humana.', d:'2026', u:'https://www.deloitte.com/be/en/services/consulting/research/human-capital-trends.html'},
+  {f:'Entrevista', o:'Big Think', t:'Are young workers canaries in the AI coal mine?', i:'Brynjolfsson e Chandar explicam o achado sobre jovens e o que ele não diz.', d:'2025', u:'https://bigthink.com/business/are-young-workers-canaries-in-the-ai-coal-mine/'}
+];
+
+const STATS = [
+  {v:'22', s:'%', p:'dos gerentes estão engajados no mundo, contra 31% em 2022. É a maior queda entre todos os grupos.', src:'Gallup 2026', u:'https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx'},
+  {v:'8,7', s:'×', p:'mais chance de o trabalho ser transformado pela IA quando o gestor apoia ativamente seu uso.', src:'Gallup 2026', u:'https://www.brianheger.com/state-of-the-global-workplace-2026-the-human-side-of-the-ai-revolution-gallup/'},
+  {v:'82', s:'%', p:'do C-level vê o futuro do RH em gerir talento humano e agentes digitais lado a lado.', src:'Mercer 2026', u:'https://www.mercer.com/en-us/about/newsroom/mercer-s-global-talent-trends-2026-report/'},
+  {v:'46', s:'%', p:'das empresas não envolvem o CHRO quando definem a estratégia de IA.', src:'IBM CHRO Study 2026', doc:'ibm-chro-study-2026'},
+  {v:'40', s:'%', p:'das grandes empresas já escalam agentes. Só 14% viram, de fato, queda de quadro.', src:'McKinsey, ago 2026', doc:'mckinsey-state-of-ai-2026'},
+  {v:'65', s:'%', p:'dos gestores esperam que agentes façam metade do seu trabalho em até três anos.', src:'BCG AI at Work 2026', u:'https://www.bcg.com/press/3june2026-ai-reshaping-jobs-faster-than-companies-reshaping-work'},
+  {v:'7', s:'%', p:'têm progresso forte no desenho da interação entre pessoas e máquinas, embora 66% a considerem crítica.', src:'Deloitte 2026', doc:'deloitte-human-capital-trends-2026'},
+  {v:'87', s:'%', p:'dos executivos contam externos como força de trabalho. As práticas de gestão seguem desenhadas só para empregados.', src:'MIT SMR + Deloitte', u:'https://www2.deloitte.com/us/en/insights/focus/technology-and-the-future-of-work/workforce-ecosystems-practical-guidance-for-leaders.html'}
+];
+
+const TENSIONS = [
+  {h:'A média gerência vai acabar?', a:{w:'Gartner, previsão de 2024', p:'Até 2026, uma em cada cinco organizações eliminaria mais da metade das posições de média gerência com IA.'}, b:{w:'McKinsey, medição de 2026', p:'Só 14% das empresas que usam IA viram queda de quadro no último ano, menos da metade das que esperavam.'}},
+  {h:'O gestor é o problema ou a solução?', a:{w:'Gallup e HBR', p:'O gerente é o grupo mais desgastado: engajamento em 22% e sobrecarga sem suporte formal na adoção de IA.'}, b:{w:'Gallup e Microsoft', p:'O apoio do gestor é o maior preditor de adoção: 8,7 vezes mais chance de transformação, e fatores organizacionais pesam o dobro dos individuais.'}},
+  {h:'A IA tira emprego?', a:{w:'Stanford Digital Economy Lab', p:'Jovens em ocupações expostas estão 19% abaixo dos pares, porque as empresas contratam menos para a porta de entrada.'}, b:{w:'Anthropic e BCG', p:'Sem alta sistemática de desemprego entre os mais expostos; a IA remodela mais empregos do que substitui.'}},
+  {h:'Quem é o RH dos agentes?', a:{w:'Jensen Huang, Nvidia', p:'O departamento de TI de cada empresa será o RH dos agentes de IA.'}, b:{w:'IBM CHRO Study 2026', p:'Onde o CHRO divide a fronteira entre humano e IA, a confiança para contestar a máquina sobe de 43% para 76%.'}}
+];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const byDoc = Object.fromEntries(ITEMS.filter(x => x.doc).map(x => [x.doc, x]));
+const ext = 'target="_blank" rel="noopener"';
+
+/* dados */
+$('#stats').innerHTML = STATS.map(s => `
+  <div class="stat"><div class="v">${s.v}<small>${s.s}</small></div><p>${esc(s.p)}</p>
+  ${s.doc ? `<a class="src" href="#doc=${s.doc}" data-doc="${s.doc}">${esc(s.src)}</a>` : `<a class="src" href="${s.u}" ${ext}>${esc(s.src)}</a>`}</div>`).join('');
+
+/* tensões */
+$('#tensions').innerHTML = TENSIONS.map(t => `
+  <div class="tension"><h3>${esc(t.h)}</h3>
+    <div class="side"><div class="who">${esc(t.a.w)}</div><p>${esc(t.a.p)}</p></div>
+    <div class="side"><div class="who">${esc(t.b.w)}</div><p>${esc(t.b.p)}</p></div></div>`).join('');
+
+/* ouvir */
+$('#listen').innerHTML = LISTEN.map(l => `
+  <div class="row"><span class="f">${l.f} · ${l.d}</span>
+    <div><h3>${esc(l.t)}</h3><p>${esc(l.o)}. ${esc(l.i)}</p></div>
+    <a class="btn" href="${l.u}" ${ext}>Abrir</a></div>`).join('');
+
+/* biblioteca */
+let theme = 'todos';
+const counts = k => k === 'todos' ? ITEMS.length : ITEMS.filter(x => x.k.includes(k)).length;
+$('#filters').innerHTML = THEMES.map(t => `<button class="chip" type="button" data-k="${t.k}" aria-pressed="${t.k === theme}">${t.n}<span class="c">${counts(t.k)}</span></button>`).join('');
+$('#filters').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  theme = b.dataset.k;
+  document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.k === theme));
+  render();
+});
+$('#q').addEventListener('input', render);
+$('#onlyHere').addEventListener('change', render);
+
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+function render(){
+  const q = norm($('#q').value.trim());
+  const only = $('#onlyHere').checked;
+  const list = ITEMS
+    .filter(x => theme === 'todos' || x.k.includes(theme))
+    .filter(x => !only || x.doc)
+    .filter(x => !q || norm([x.o, x.t, x.i, x.f, x.d].join(' ')).includes(q))
+    .sort((a, b) => (b.doc ? 1 : 0) - (a.doc ? 1 : 0) || b.y.localeCompare(a.y));
+  $('#count').textContent = list.length + (list.length === 1 ? ' material' : ' materiais');
+  $('#grid').innerHTML = list.length ? list.map(card).join('') : '<p class="empty">Nada encontrado com esse filtro.</p>';
+}
+function card(x){
+  const cover = x.doc
+    ? `<button class="cover" type="button" data-doc="${x.doc}" aria-label="Ler ${esc(x.t)}"><img src="capas/${x.doc}.jpg" alt="" loading="lazy" width="88" height="117"></button>`
+    : `<div class="cover type" aria-hidden="true"><span>${esc(x.f)}</span></div>`;
+  const act = x.doc
+    ? `<button class="btn" type="button" data-doc="${x.doc}">Ler aqui</button>`
+    : `<a class="btn ghost" href="${x.u}" ${ext}>Abrir na fonte</a>`;
+  return `<article class="card">${cover}<div>
+    <div class="meta">${esc(x.o)} <i>· ${esc(x.d)} · ${esc(x.f)}</i></div>
+    <h3>${esc(x.t)}</h3><p>${esc(x.i)}</p><div class="act">${act}</div></div></article>`;
+}
+render();
+
+/* navegação: marca a seção visível */
+const navIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  document.querySelectorAll('.nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+}), {rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s => navIO.observe(s));
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+/* Leitor: renderiza as páginas em canvas, sem barra de download nem impressão. */
+(function(){
+  const lib = window.pdfjsLib;
+  if (lib) lib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const reader = document.getElementById('reader'), pages = document.getElementById('pages');
+  let doc = null, zoom = 1, obs = null, task = null, lastFocus = null;
+
+  function widthFor(){ return Math.min(pages.clientWidth - 32, 980) * zoom; }
+
+  async function open(slug){
+    const x = byDoc[slug]; if (!x) return;
+    lastFocus = document.activeElement;
+    document.getElementById('rTitle').textContent = x.t;
+    document.getElementById('rMeta').textContent = x.o + ' · ' + x.d;
+    reader.hidden = false; document.body.style.overflow = 'hidden';
+    if (location.hash !== '#doc=' + slug) history.replaceState(null, '', '#doc=' + slug);
+    document.getElementById('rClose').focus();
+    pages.innerHTML = '<p class="reader-msg">Carregando…</p>';
+    zoom = 1;
+    if (!lib) { pages.innerHTML = '<p class="reader-msg">O leitor não carregou nesta conexão. Tente de novo em instantes.</p>'; return; }
+    try {
+      if (task) task.destroy();
+      task = lib.getDocument({url: 'docs/' + slug + '.pdf', disableAutoFetch: true});
+      doc = await task.promise;
+      layout();
+    } catch (e) {
+      pages.innerHTML = '<p class="reader-msg">Não foi possível abrir este material agora.</p>';
+    }
+  }
+
+  async function layout(){
+    if (!doc) return;
+    if (obs) obs.disconnect();
+    pages.innerHTML = '';
+    const first = await doc.getPage(1);
+    const vp1 = first.getViewport({scale: 1});
+    const w = widthFor();
+    for (let i = 1; i <= doc.numPages; i++){
+      const box = document.createElement('div');
+      box.className = 'page'; box.dataset.n = i;
+      box.style.width = w + 'px';
+      box.style.height = (w * vp1.height / vp1.width) + 'px';
+      box.innerHTML = '<span class="pn">' + i + '</span>';
+      pages.appendChild(box);
+    }
+    obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) draw(e.target); }), {root: pages, rootMargin: '600px 0px'});
+    pages.querySelectorAll('.page').forEach(p => obs.observe(p));
+  }
+
+  async function draw(box){
+    if (box.dataset.done) return; box.dataset.done = '1';
+    const page = await doc.getPage(+box.dataset.n);
+    const w = parseFloat(box.style.width);
+    const vp0 = page.getViewport({scale: 1});
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const vp = page.getViewport({scale: (w / vp0.width) * dpr});
+    const c = document.createElement('canvas');
+    c.width = vp.width; c.height = vp.height;
+    box.style.height = (w * vp0.height / vp0.width) + 'px';
+    box.insertBefore(c, box.firstChild);
+    await page.render({canvasContext: c.getContext('2d'), viewport: vp}).promise;
+  }
+
+  function close(){
+    reader.hidden = true; document.body.style.overflow = '';
+    if (obs) obs.disconnect(); pages.innerHTML = '';
+    if (task) { task.destroy(); task = null; } doc = null;
+    if (location.hash.startsWith('#doc=')) history.replaceState(null, '', '#biblioteca');
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-doc]'); if (!t) return;
+    e.preventDefault(); open(t.dataset.doc);
+  });
+  document.getElementById('rClose').addEventListener('click', close);
+  document.getElementById('zIn').addEventListener('click', () => { zoom = Math.min(zoom + .25, 2.5); layout(); });
+  document.getElementById('zOut').addEventListener('click', () => { zoom = Math.max(zoom - .25, .5); layout(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !reader.hidden) close(); });
+  reader.addEventListener('contextmenu', e => e.preventDefault());
+  let rt; window.addEventListener('resize', () => { if (reader.hidden) return; clearTimeout(rt); rt = setTimeout(layout, 250); });
+
+  /* link direto: #doc=slug abre o material (útil para o telão e o João) */
+  function fromHash(){ const m = location.hash.match(/^#doc=([\w-]+)/); if (m && (reader.hidden || !doc)) open(m[1]); }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
+</body>
+</html>
