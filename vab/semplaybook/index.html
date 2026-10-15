@@ -70,6 +70,8 @@ body.on-cover .top{display:none}
 .drawer nav a .n{font-family:var(--mono);font-size:.68rem;color:var(--mute)}
 .drawer nav a .c{font-family:var(--mono);font-size:.64rem;color:var(--mute)}
 .drawer nav a:hover{color:var(--ink)}
+.drawer nav a.sub{font-size:.9rem;padding:.28rem 0}
+.drawer nav a.sub span:nth-child(2)::before{content:"— ";color:var(--line2)}
 .drawer nav a.on{color:var(--ink);font-weight:500}
 .drawer nav a.on .n{color:var(--bordo)}
 .drawer nav a.on::before{content:"";position:absolute;left:-1.5rem;top:.45rem;bottom:.45rem;width:2px;background:var(--bordo)}
@@ -170,8 +172,8 @@ main{padding:0 clamp(16px,4vw,3.2rem)}
 .seg button[aria-pressed="true"]{color:var(--bordo);border-bottom-color:var(--bordo)}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(1.6rem,3vw,3rem)}
 @media(max-width:860px){.grid{grid-template-columns:1fr}}
-.card{display:grid;grid-template-columns:84px minmax(0,1fr);gap:1.1rem;padding:1.3rem 0;border-bottom:1px solid var(--line)}
-.cv{width:84px;aspect-ratio:3/4;border:1px solid var(--line);overflow:hidden;background:var(--paper2);padding:0;cursor:pointer}
+.card{display:grid;grid-template-columns:64px minmax(0,1fr);gap:1rem;padding:1.05rem 0;border-bottom:1px solid var(--line)}
+.cv{width:64px;aspect-ratio:3/4;border:1px solid var(--line);overflow:hidden;background:var(--paper2);padding:0;cursor:pointer}
 .cv img{width:100%;height:100%;object-fit:cover;object-position:top}
 .cv:hover{border-color:var(--bordo)}
 .cv.t{display:flex;align-items:flex-end;padding:.55rem;cursor:default;background:none;border-color:var(--line)}
@@ -206,14 +208,53 @@ main{padding:0 clamp(16px,4vw,3.2rem)}
 @media(max-width:760px){.cautions{grid-template-columns:1fr}}
 
 /* navegação de rodapé */
-.pager{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;border-top:1px solid var(--line);padding:1.3rem 0 3rem}
-.pager button{background:none;border:0;cursor:pointer;text-align:left;font:inherit;color:var(--ink);padding:0}
-.pager button + button{text-align:right}
-.pager small{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
-.pager span{display:block;font-size:1.05rem;margin-top:.25rem}
-.pager button:hover span{color:var(--bordo)}
-.pager button:disabled{visibility:hidden}
-body.on-cover main,body.on-cover .pager{display:none}
+/* doca de navegação, sempre visível */
+body:not(.on-cover){padding-bottom:76px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:65;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);padding:.6rem clamp(12px,3vw,2.4rem) calc(.6rem + env(safe-area-inset-bottom,0px));
+  display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center}
+body.on-cover .dock,body.on-cover main{display:none}
+.dock .mid{display:flex;align-items:center;justify-content:center;gap:.8rem;min-width:0}
+.dock .where{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;text-align:center}
+.dock .where b{color:var(--bordo);font-weight:500;margin-right:.4rem}
+.nb{display:inline-flex;align-items:center;gap:.5rem;font:500 .88rem var(--sans);padding:.6rem 1.1rem;border:1px solid var(--line2);background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap;min-height:44px}
+.nb:hover{border-color:var(--bordo);color:var(--bordo)}
+.nb.pri{background:var(--bordo);border-color:var(--bordo);color:#fff}
+.nb.pri:hover{background:var(--wine);color:#fff}
+.nb:disabled{opacity:.3;cursor:default;pointer-events:none}
+.nb .lb{max-width:24ch;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:760px){.nb .lb{display:none}.nb{padding:.6rem .9rem}.dock{gap:.5rem}.dock .where{font-size:.62rem;letter-spacing:.08em}}
+/* passos no topo */
+.steps-top{display:flex;gap:4px;align-items:center}
+.steps-top button{width:34px;height:20px;background:none;border:0;padding:0;cursor:pointer;position:relative}
+.steps-top button::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--line2)}
+.steps-top button.done::before{background:var(--rose)}
+.steps-top button.on::before{background:var(--bordo);height:3px;top:8px}
+.steps-top button:hover::before{background:var(--bordo2)}
+@media(max-width:760px){.steps-top{display:none}}
+/* capa: atalhos para os capítulos */
+.cover .chips{display:flex;flex-wrap:wrap;gap:.2rem 1.6rem;border-top:1px solid rgba(255,255,255,.25);padding-top:1rem}
+.cover .chips button{background:none;border:0;color:#F6E9EB;font:400 .92rem var(--sans);padding:.35rem 0;cursor:pointer}
+.cover .chips button b{font-family:var(--mono);font-weight:400;font-size:.7rem;color:var(--rose);margin-right:.45rem}
+.cover .chips button:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+/* biblioteca */
+.libbar{position:sticky;top:57px;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);padding:.6rem 0 .2rem;margin-top:1.4rem}
+.tabs{display:flex;gap:1.4rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;background:none;border:0;border-bottom:2px solid transparent;padding:.45rem 0;font:500 .9rem var(--sans);color:var(--ink2);cursor:pointer;white-space:nowrap}
+.tabs button i{font-style:normal;font-family:var(--mono);font-size:.66rem;color:var(--mute);margin-left:.35rem}
+.tabs button[aria-selected="true"]{color:var(--bordo);border-bottom-color:var(--bordo)}
+.libtools{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;padding:.5rem 0 .4rem}
+.libtools input[type=search]{flex:1 1 220px;background:none;border:0;border-bottom:1px solid var(--line2);font:inherit;font-size:.95rem;padding:.45rem 0;color:var(--ink);outline:none;min-height:40px}
+.libtools input[type=search]:focus{border-bottom-color:var(--bordo)}
+.libtools label{display:flex;gap:.45rem;align-items:center;font-size:.85rem;color:var(--ink2);cursor:pointer}
+.libtools input[type=checkbox]{accent-color:var(--bordo);width:16px;height:16px}
+.libtools .count{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-left:auto}
+.themeintro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(1rem,3vw,3rem);align-items:end;padding:1.4rem 0 .2rem}
+.themeintro h2{font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.15}
+.themeintro p{color:var(--ink2);font-size:.95rem}
+@media(max-width:760px){.themeintro{grid-template-columns:1fr}}
+.body > .libbar + *{margin-top:0}
 
 /* leitor */
 .reader{position:fixed;inset:0;z-index:100;background:#2B1418;display:flex;flex-direction:column}
@@ -227,6 +268,8 @@ body.on-cover main,body.on-cover .pager{display:none}
 .pages{flex:1;overflow:auto;padding:1.6rem 1rem 5rem;-webkit-overflow-scrolling:touch}
 .page{margin:0 auto 1.1rem;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.35)}
 .page canvas{display:block;width:100%;height:auto;pointer-events:none;user-select:none;-webkit-user-select:none}
+@media(max-width:640px){.reader-bar{flex-wrap:wrap;row-gap:.5rem}.reader-bar .t{order:5;flex-basis:100%}.reader-bar .t b{white-space:normal;font-size:.95rem;line-height:1.3}.reader-bar .pg{margin-left:auto}}
+.reader-bar .pg{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--rose);white-space:nowrap}
 .reader-msg{margin:5rem auto;text-align:center;color:var(--rose2);max-width:40ch}
 @media print{body{display:none}}
 </style>
@@ -249,7 +292,7 @@ body.on-cover main,body.on-cover .pager{display:none}
         <button class="btn-c" type="button" data-index>Índice</button>
       </div>
     </div>
-    <p class="hint">Navegue pelo índice, pelas setas do teclado ou pelos botões ao fim de cada capítulo.</p>
+    <nav class="chips" id="coverChips" aria-label="Capítulos"></nav>
   </div>
 </section>
 
@@ -259,14 +302,18 @@ body.on-cover main,body.on-cover .pager{display:none}
     Sem Playbook
   </a>
   <span class="sp"></span>
-  <span class="cpt" id="cpt"></span>
-  <button class="ix" type="button" data-index>Índice</button>
+  <nav class="steps-top" id="stepsTop" aria-label="Progresso"></nav>
 </header>
 
 <main id="chapters"></main>
-<nav class="pager" id="pager" aria-label="Capítulos">
-  <button type="button" id="prev"><small>Anterior</small><span></span></button>
-  <button type="button" id="next"><small>Próximo</small><span></span></button>
+<nav class="dock" id="dock" aria-label="Navegação entre capítulos">
+  <button class="nb" type="button" data-index aria-label="Abrir índice"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5"/></svg><span class="lb">Índice</span></button>
+  <div class="mid">
+    <button class="nb" type="button" id="prev" aria-label="Capítulo anterior">←<span class="lb" id="prevL">Anterior</span></button>
+    <span class="where" id="where"></span>
+    <button class="nb pri" type="button" id="next" aria-label="Próximo capítulo"><span class="lb" id="nextL">Próximo</span>→</button>
+  </div>
+  <span aria-hidden="true" style="width:1px"></span>
 </nav>
 
 <div class="scrim" id="scrim"></div>
@@ -282,12 +329,13 @@ body.on-cover main,body.on-cover .pager{display:none}
 
 <div class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle">
   <div class="reader-bar">
+    <button type="button" id="rBack" aria-label="Voltar">← Voltar</button>
     <div class="t"><b id="rTitle"></b><span id="rMeta"></span></div>
+    <span class="pg" id="rPage"></span>
     <div class="z">
       <button type="button" id="zOut" aria-label="Diminuir">−</button>
       <button type="button" id="zIn" aria-label="Aumentar">+</button>
-      <button type="button" id="rClose">Fechar</button>
-    </div>
+          </div>
   </div>
   <div class="pages" id="pages"></div>
 </div>
@@ -459,18 +507,17 @@ const CH = [
     <div class="opener"><div><span class="lbl">03 · A tese em dados</span><h1>A adoção correu na frente do <em>modelo de gestão</em>.</h1></div>
     <p class="ld">As pessoas já usam IA e agentes. O elo que deveria liderar a transição é o que mais se desgastou. Quase nenhuma empresa redesenhou como lidera essa mistura.</p></div>
     <div class="stats">${STATS.map(s=>`<div class="stat"><div class="v">${s.v}<small>${s.s}</small></div><p>${esc(s.p)}</p>${s.doc?`<button class="src" type="button" data-doc="${s.doc}">${esc(s.src)}</button>`:`<a class="src" href="${s.u}" ${EXT}>${esc(s.src)}</a>`}</div>`).join('')}</div>`},
-  ...['ecossistema','agentes','lider','governanca','brasil'].map((k,i)=>({id:k, n:String(4+i).padStart(2,'0'), g:'Biblioteca', nav:THEMES.find(t=>t.k===k).n, lib:k,
-    marg:'Os materiais com capa abrem aqui mesmo, para leitura. Os demais abrem na fonte original.', html:()=>libHTML(k, String(4+i).padStart(2,'0'))})),
-  {id:'tensoes', n:'09', g:'Leitura crítica', nav:'Onde as fontes discordam', marg:'Nenhum conselho decide com evidência unânime.', html:()=>`
-    <div class="opener"><div><span class="lbl">09 · Onde as fontes discordam</span><h1>Escolher um lado faz parte do <em>trabalho</em>.</h1></div>
+  {id:'biblioteca', n:'04', g:'Evidência', nav:'Biblioteca', marg:'Escolha um tema nas abas ou busque por autor, assunto ou número. Os materiais com capa abrem aqui mesmo.', html:()=>libHTML()},
+  {id:'tensoes', n:'05', g:'Leitura crítica', nav:'Onde as fontes discordam', marg:'Nenhum conselho decide com evidência unânime.', html:()=>`
+    <div class="opener"><div><span class="lbl">05 · Onde as fontes discordam</span><h1>Escolher um lado faz parte do <em>trabalho</em>.</h1></div>
     <p class="ld">Quatro tensões em que pesquisas sérias apontam para lados diferentes, ou em que o mesmo dado sustenta leituras opostas.</p></div>
     <div>${TENSIONS.map(t=>`<div class="tension"><h3>${esc(t.h)}</h3><div class="s"><b>${esc(t.a.w)}</b><p>${esc(t.a.p)}</p></div><div class="s"><b>${esc(t.b.w)}</b><p>${esc(t.b.p)}</p></div></div>`).join('')}</div>`},
-  {id:'ouvir', n:'10', g:'Leitura crítica', nav:'Para ouvir', marg:'Podcasts, entrevistas e webcasts.', html:()=>`
-    <div class="opener"><div><span class="lbl">10 · Para ouvir</span><h1>Para quem prefere <em>ouvir</em>.</h1></div>
+  {id:'ouvir', n:'06', g:'Leitura crítica', nav:'Para ouvir', marg:'Podcasts, entrevistas e webcasts.', html:()=>`
+    <div class="opener"><div><span class="lbl">06 · Para ouvir</span><h1>Para quem prefere <em>ouvir</em>.</h1></div>
     <p class="ld">Dois bons pontos de partida: o episódio da McKinsey sobre a parceria entre pessoas e agentes e a entrevista de Bob Sternfels à HBR, em que ele descreve a própria firma como força de trabalho mista.</p></div>
     <div class="list">${LISTEN.map(l=>`<div><span class="f">${l.f} · ${l.d}</span><div><h3>${esc(l.t)}</h3><p>${esc(l.o)}. ${esc(l.i)}</p></div><a class="go ext" href="${l.u}" ${EXT}>Abrir</a></div>`).join('')}</div>`},
-  {id:'cautelas', n:'11', g:'Leitura crítica', nav:'Cautelas de leitura', marg:'Antes de citar um número, saiba de onde ele vem.', html:()=>`
-    <div class="opener"><div><span class="lbl">11 · Cautelas de leitura</span><h1>Antes de citar, <em>desconfie</em>.</h1></div>
+  {id:'cautelas', n:'07', g:'Leitura crítica', nav:'Cautelas de leitura', marg:'Antes de citar um número, saiba de onde ele vem.', html:()=>`
+    <div class="opener"><div><span class="lbl">07 · Cautelas de leitura</span><h1>Antes de citar, <em>desconfie</em>.</h1></div>
     <p class="ld">A força as a service é a menos estudada: nenhuma consultoria trata o serviço contratado por resultado como objeto de liderança. E boa parte dos números vem de quem vende a solução.</p></div>
     <ul class="cautions">
       <li><b>Viés de origem</b><span>Microsoft, Anthropic, IBM, Nvidia e Accenture vendem agentes ou sua implantação. Os números são úteis, mas não independentes.</span></li>
@@ -481,58 +528,79 @@ const CH = [
       <li><b>Survey mede percepção</b><span>A maioria dos números é o que executivos e empregados dizem, não o que as empresas fizeram. Os estudos de caso de Stanford e os dados de folha de pagamento são a exceção.</span></li>
     </ul>`}
 ];
+const TABS = ['ecossistema','agentes','lider','governanca','brasil'];
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const EXT = 'target="_blank" rel="noopener"';
 const byDoc = Object.fromEntries(ITEMS.filter(x => x.doc).map(x => [x.doc, x]));
 const sortItems = l => l.slice().sort((a,b) => (b.doc?1:0)-(a.doc?1:0) || b.y.localeCompare(a.y));
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
 function card(x){
-  const cv = x.doc ? `<button class="cv" type="button" data-doc="${x.doc}" aria-label="Ler ${esc(x.t)}"><img src="capas/${x.doc}.jpg" alt="" loading="lazy" width="84" height="112"></button>`
+  const cv = x.doc ? `<button class="cv" type="button" data-doc="${x.doc}" aria-label="Ler ${esc(x.t)}"><img src="capas/${x.doc}.jpg" alt="" loading="lazy" width="64" height="85"></button>`
                    : `<div class="cv t" aria-hidden="true"><span>${esc(x.f)}</span></div>`;
-  const act = x.doc ? `<button class="go" type="button" data-doc="${x.doc}">Ler aqui</button>` : `<a class="go ext" href="${x.u}" ${EXT}>Abrir na fonte</a>`;
+  const act = x.doc ? `<button class="go" type="button" data-doc="${x.doc}">Ler aqui</button>` : `<a class="go ext" href="${x.u}" ${EXT}>Abrir na fonte ↗</a>`;
   return `<article class="card">${cv}<div><div class="m">${esc(x.o)} <i>· ${esc(x.d)} · ${esc(x.f)}</i></div><h3>${esc(x.t)}</h3><p>${esc(x.i)}</p><div class="act">${act}</div></div></article>`;
 }
-function libHTML(k, n){
-  const t = THEMES.find(z => z.k === k).n;
-  return `<div class="opener"><div><span class="lbl">${n} · Biblioteca · ${esc(t)}</span><h1>${LIB[k].t}</h1></div><p class="ld">${LIB[k].ld}</p></div>
-    <div class="tools"><div class="seg" role="group" aria-label="Filtrar"><button type="button" data-f="all" aria-pressed="true">Tudo</button><button type="button" data-f="here" aria-pressed="false">Leitura no site</button></div><span class="count"></span></div>
-    <div class="grid" data-lib="${k}"></div>`;
+
+/* biblioteca: um capítulo, com abas por tema, busca e filtro */
+let tab = 'todos';
+function libHTML(){
+  const tabs = [{k:'todos', n:'Tudo'}, ...TABS.map(k => THEMES.find(t => t.k === k))];
+  return `<div class="opener"><div><span class="lbl">04 · Biblioteca</span><h1>O que as consultorias <em>já publicaram</em>.</h1></div>
+    <p class="ld">${ITEMS.length} materiais de 2021 a outubro de 2026, organizados pela pergunta que respondem. ${ITEMS.filter(x=>x.doc).length} podem ser lidos aqui mesmo; os demais abrem na fonte original.</p></div>
+    <div class="libbar">
+      <div class="tabs" role="tablist" aria-label="Temas">${tabs.map(t => `<button type="button" role="tab" data-tab="${t.k}" aria-selected="${t.k === tab}">${esc(t.n)}<i>${t.k === 'todos' ? ITEMS.length : ITEMS.filter(x => x.k.includes(t.k)).length}</i></button>`).join('')}</div>
+      <div class="libtools">
+        <input type="search" id="libq" placeholder="Buscar por autor, assunto ou número" aria-label="Buscar na biblioteca">
+        <label><input type="checkbox" id="libhere"> Só os que abrem aqui</label>
+        <span class="count" id="libcount"></span>
+      </div>
+    </div>
+    <div id="libintro"></div>
+    <div class="grid" id="libgrid" role="tabpanel"></div>`;
 }
-function fillLib(sec, mode){
-  const k = sec.dataset.lib; if (!k) return;
-  const list = sortItems(ITEMS.filter(x => x.k.includes(k) && (mode !== 'here' || x.doc)));
-  sec.querySelector('.grid').innerHTML = list.map(card).join('');
-  sec.querySelector('.count').textContent = list.length + (list.length === 1 ? ' material' : ' materiais');
+function fillLib(){
+  const q = norm(($('#libq') || {value:''}).value.trim()), only = $('#libhere') && $('#libhere').checked;
+  const list = sortItems(ITEMS.filter(x => (tab === 'todos' || x.k.includes(tab)) && (!only || x.doc) && (!q || norm([x.o, x.t, x.i, x.f, x.d].join(' ')).includes(q))));
+  document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === tab));
+  $('#libintro').innerHTML = tab === 'todos' ? '' : `<div class="themeintro"><h2>${LIB[tab].t}</h2><p>${LIB[tab].ld}</p></div>`;
+  $('#libgrid').innerHTML = list.length ? list.map(card).join('') : '<p class="soft" style="padding:2rem 0">Nada encontrado com esse filtro.</p>';
+  $('#libcount').textContent = list.length + (list.length === 1 ? ' material' : ' materiais');
+}
+function setTab(k, scroll){
+  tab = TABS.includes(k) ? k : 'todos'; fillLib();
+  history.replaceState(null, '', '#' + (tab === 'todos' ? 'biblioteca' : tab));
+  if (scroll) { const bar = $('.libbar'); if (bar && bar.getBoundingClientRect().top < 57) window.scrollTo({top: bar.offsetTop - 57}); }
 }
 
 /* monta capítulos */
 const main = $('#chapters');
 CH.forEach(c => {
   const s = document.createElement('section');
-  s.className = 'ch'; s.id = c.id; if (c.lib) s.dataset.lib = c.lib;
-  s.setAttribute('aria-labelledby', c.id + '-h');
+  s.className = 'ch'; s.id = c.id; s.setAttribute('aria-labelledby', c.id + '-h');
   s.innerHTML = `<aside class="rail"><span class="num">${c.n}</span><span class="rl">${esc(c.g)}</span><p class="marg">${esc(c.marg)}</p></aside><div class="body">${c.html()}</div>`;
   const h = s.querySelector('h1'); if (h) h.id = c.id + '-h';
   main.appendChild(s);
-  if (c.lib) fillLib(s, 'all');
 });
-main.addEventListener('click', e => {
-  const b = e.target.closest('.seg button'); if (!b) return;
-  const sec = b.closest('.ch');
-  sec.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
-  fillLib(sec, b.dataset.f);
-});
+fillLib();
+main.addEventListener('click', e => { const b = e.target.closest('.tabs button'); if (b) setTab(b.dataset.tab, true); });
+$('#libq').addEventListener('input', fillLib);
+$('#libhere').addEventListener('change', fillLib);
 
-/* índice */
+/* índice, capa e passos */
 const SEQ = ['capa', ...CH.map(c => c.id)];
 const toc = $('#toc'); let lastG = '';
 toc.innerHTML = `<a href="#capa" data-go="capa"><span class="n">00</span><span>Capa</span><span class="c"></span></a>` + CH.map(c => {
   const g = c.g !== lastG ? `<div class="grp">${esc(c.g)}</div>` : ''; lastG = c.g;
-  const cnt = c.lib ? ITEMS.filter(x => x.k.includes(c.lib)).length : '';
-  return g + `<a href="#${c.id}" data-go="${c.id}"><span class="n">${c.n}</span><span>${esc(c.nav)}</span><span class="c">${cnt}</span></a>`;
+  let html = g + `<a href="#${c.id}" data-go="${c.id}"><span class="n">${c.n}</span><span>${esc(c.nav)}</span><span class="c">${c.id === 'biblioteca' ? ITEMS.length : ''}</span></a>`;
+  if (c.id === 'biblioteca') html += TABS.map(k => `<a href="#${k}" data-go="${k}" class="sub"><span class="n"></span><span>${esc(THEMES.find(t => t.k === k).n)}</span><span class="c">${ITEMS.filter(x => x.k.includes(k)).length}</span></a>`).join('');
+  return html;
 }).join('');
+$('#coverChips').innerHTML = CH.map(c => `<button type="button" data-go="${c.id}"><b>${c.n}</b>${esc(c.nav)}</button>`).join('');
+$('#stepsTop').innerHTML = CH.map(c => `<button type="button" data-go="${c.id}" title="${c.n} · ${esc(c.nav)}" aria-label="${c.n} · ${esc(c.nav)}"></button>`).join('');
+
 const drawer = $('#drawer'), scrim = $('#scrim');
 function index(on){
   drawer.classList.toggle('on', on); scrim.classList.toggle('on', on); drawer.setAttribute('aria-hidden', !on);
@@ -540,72 +608,93 @@ function index(on){
 }
 document.addEventListener('click', e => {
   if (e.target.closest('[data-index]')) { index(true); return; }
-  const g = e.target.closest('[data-go]'); if (g) { e.preventDefault(); show(g.dataset.go); index(false); }
+  const g = e.target.closest('[data-go]'); if (g) { e.preventDefault(); index(false); go(g.dataset.go); }
 });
 $('#dClose').addEventListener('click', () => index(false));
 scrim.addEventListener('click', () => index(false));
 
-/* busca global */
-const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+/* busca global no índice */
 $('#q').addEventListener('input', e => {
   const q = norm(e.target.value.trim()), res = $('#results');
   toc.hidden = !!q; res.hidden = !q; if (!q) return;
   const hits = sortItems(ITEMS.filter(x => norm([x.o, x.t, x.i, x.f, x.d].join(' ')).includes(q))).slice(0, 30);
   res.innerHTML = hits.length ? hits.map(x => x.doc
       ? `<button class="r" type="button" data-doc="${x.doc}"><small>${esc(x.o)} · Ler aqui</small><span>${esc(x.t)}</span></button>`
-      : `<a class="r" href="${x.u}" ${EXT}><small>${esc(x.o)} · Abrir na fonte</small><span>${esc(x.t)}</span></a>`).join('')
+      : `<a class="r" href="${x.u}" ${EXT}><small>${esc(x.o)} · Abrir na fonte ↗</small><span>${esc(x.t)}</span></a>`).join('')
     : '<p class="none">Nada encontrado.</p>';
 });
 
-/* navegação entre capítulos */
-function show(id){
-  if (!SEQ.includes(id)) id = 'capa';
-  const cover = id === 'capa';
+/* navegação: cada capítulo é uma entrada no histórico, então o botão Voltar do navegador funciona */
+const chapterOf = id => TABS.includes(id) ? 'biblioteca' : (SEQ.includes(id) ? id : 'capa');
+let current = null;
+function render(id){
+  const ch = chapterOf(id), cover = ch === 'capa';
+  if (ch === 'biblioteca') { tab = TABS.includes(id) ? id : (id === 'biblioteca' ? 'todos' : tab); fillLib(); }
   document.body.classList.toggle('on-cover', cover);
   $('#capa').classList.toggle('on', cover);
-  document.querySelectorAll('.ch').forEach(s => s.classList.toggle('on', s.id === id));
-  const i = SEQ.indexOf(id), c = CH.find(z => z.id === id);
+  document.querySelectorAll('.ch').forEach(s => s.classList.toggle('on', s.id === ch));
+  const i = SEQ.indexOf(ch), c = CH.find(z => z.id === ch);
   $('#bar').style.width = (i / (SEQ.length - 1) * 100) + '%';
-  $('#cpt').innerHTML = c ? `<b>${c.n}</b>${esc(c.nav)}` : '';
-  toc.querySelectorAll('a').forEach(a => a.classList.toggle('on', a.dataset.go === id));
-  const p = CH.find(z => z.id === SEQ[i-1]), n = CH.find(z => z.id === SEQ[i+1]);
-  $('#prev').disabled = !p; $('#prev span').textContent = p ? p.n + ' · ' + p.nav : '';
-  $('#next').disabled = !n; $('#next span').textContent = n ? n.n + ' · ' + n.nav : '';
-  if (location.hash.slice(1) !== id) history.replaceState(null, '', '#' + id);
-  window.scrollTo(0, 0);
+  $('#where').innerHTML = c ? `<b>${c.n} / 0${CH.length}</b>${esc(c.nav)}` : '';
+  document.title = (c ? c.nav + ' · ' : '') + 'Sem Playbook · Virtual Advisory Board';
+  toc.querySelectorAll('a').forEach(a => a.classList.toggle('on', a.dataset.go === ch || (ch === 'biblioteca' && a.dataset.go === tab)));
+  $('#stepsTop').querySelectorAll('button').forEach((b, k) => { b.classList.toggle('on', k + 1 === i); b.classList.toggle('done', k + 1 < i); });
+  const p = SEQ[i - 1], n = SEQ[i + 1], pc = CH.find(z => z.id === p), nc = CH.find(z => z.id === n);
+  $('#prev').disabled = i <= 0; $('#prevL').textContent = pc ? pc.nav : 'Capa';
+  $('#next').disabled = !n; $('#nextL').textContent = nc ? nc.nav : '';
+  if (ch !== current) window.scrollTo(0, 0);
+  current = ch;
 }
-const cur = () => { const h = location.hash.slice(1); return SEQ.includes(h) ? h : 'capa'; };
-$('#prev').addEventListener('click', () => show(SEQ[SEQ.indexOf(cur()) - 1]));
-$('#next').addEventListener('click', () => show(SEQ[SEQ.indexOf(cur()) + 1]));
+function go(id){
+  const target = TABS.includes(id) ? id : chapterOf(id);
+  if (location.hash.slice(1) !== target) history.pushState(null, '', '#' + target);
+  render(target);
+}
+$('#prev').addEventListener('click', () => go(SEQ[SEQ.indexOf(current) - 1]));
+$('#next').addEventListener('click', () => go(SEQ[SEQ.indexOf(current) + 1]));
 document.addEventListener('keydown', e => {
-  if (!$('#reader').hidden || drawer.classList.contains('on')) { if (e.key === 'Escape') index(false); return; }
-  if (e.target.tagName === 'INPUT') return;
+  if (!$('#reader').hidden) return;
+  if (drawer.classList.contains('on')) { if (e.key === 'Escape') index(false); return; }
+  if (/INPUT|TEXTAREA/.test(e.target.tagName)) return;
   if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-  const j = SEQ.indexOf(cur()) + (e.key === 'ArrowRight' ? 1 : -1);
-  if (j >= 0 && j < SEQ.length) show(SEQ[j]);
+  const j = SEQ.indexOf(current) + (e.key === 'ArrowRight' ? 1 : -1);
+  if (j >= 0 && j < SEQ.length) go(SEQ[j]);
 });
+/* deslizar no celular */
+let tx = null, ty = null;
+document.addEventListener('touchstart', e => { if (e.target.closest('.tabs,.reader,.drawer')) { tx = null; return; } tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive: true});
+document.addEventListener('touchend', e => {
+  if (tx === null || !$('#reader').hidden) return;
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+  if (Math.abs(dx) > 70 && Math.abs(dy) < 45) { const j = SEQ.indexOf(current) + (dx < 0 ? 1 : -1); if (j >= 0 && j < SEQ.length) go(SEQ[j]); }
+}, {passive: true});
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-/* Leitor: renderiza as páginas em canvas, sem barra de download nem impressão. */
+/* Leitor: renderiza as páginas em canvas, sem barra de download nem impressão.
+   Abrir um material vira uma entrada no histórico: o Voltar do navegador fecha o leitor. */
 (function(){
   const lib = window.pdfjsLib;
   if (lib) lib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-  const reader = document.getElementById('reader'), pages = document.getElementById('pages');
-  let doc = null, zoom = 1, obs = null, task = null, back = 'capa', lastFocus = null;
+  const reader = document.getElementById('reader'), pages = document.getElementById('pages'), pg = document.getElementById('rPage');
+  let doc = null, zoom = 1, obs = null, task = null, lastFocus = null, pushed = false, curSlug = null;
   const widthFor = () => Math.min(pages.clientWidth - 32, 980) * zoom;
 
-  async function open(slug){
-    const x = byDoc[slug]; if (!x) return;
-    lastFocus = document.activeElement;
-    const h = location.hash.slice(1); if (!h.startsWith('doc=')) back = h || 'capa';
+  function openDoc(slug, viaHistory){
+    if (!byDoc[slug]) return;
+    if (!viaHistory) { history.pushState(null, '', '#doc=' + slug); pushed = true; }
+    load(slug);
+  }
+  async function load(slug){
+    const x = byDoc[slug]; if (!x || slug === curSlug && !reader.hidden) return;
+    curSlug = slug; lastFocus = document.activeElement;
     document.getElementById('rTitle').textContent = x.t;
     document.getElementById('rMeta').textContent = x.o + ' · ' + x.d;
+    pg.textContent = '';
     reader.hidden = false; document.body.style.overflow = 'hidden';
-    history.replaceState(null, '', '#doc=' + slug);
-    document.getElementById('rClose').focus();
-    pages.innerHTML = '<p class="reader-msg">Carregando…</p>'; zoom = 1;
+    document.getElementById('rBack').focus();
+    pages.innerHTML = '<p class="reader-msg">Carregando…</p>'; zoom = 1; pages.scrollTop = 0;
     if (!lib) { pages.innerHTML = '<p class="reader-msg">O leitor não carregou nesta conexão. Tente de novo em instantes.</p>'; return; }
     try {
       if (task) task.destroy();
@@ -622,7 +711,15 @@ document.addEventListener('keydown', e => {
     }
     obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) draw(e.target); }), {root: pages, rootMargin: '600px 0px'});
     pages.querySelectorAll('.page').forEach(p => obs.observe(p));
+    count();
   }
+  function count(){
+    if (!doc) return;
+    const mid = pages.scrollTop + pages.clientHeight / 3;
+    let n = 1; for (const b of pages.children) { if (b.offsetTop <= mid) n = +b.dataset.n || n; else break; }
+    pg.textContent = 'p. ' + n + ' de ' + doc.numPages;
+  }
+  pages.addEventListener('scroll', () => requestAnimationFrame(count), {passive: true});
   async function draw(b){
     if (b.dataset.done) return; b.dataset.done = '1';
     const page = await doc.getPage(+b.dataset.n), w = parseFloat(b.style.width), vp0 = page.getViewport({scale: 1});
@@ -631,32 +728,35 @@ document.addEventListener('keydown', e => {
     b.style.height = (w * vp0.height / vp0.width) + 'px'; b.appendChild(c);
     await page.render({canvasContext: c.getContext('2d'), viewport: vp}).promise;
   }
-  function close(){
-    reader.hidden = true; document.body.style.overflow = '';
+  function hide(){
+    reader.hidden = true; document.body.style.overflow = ''; curSlug = null;
     if (obs) obs.disconnect(); pages.innerHTML = '';
     if (task) { task.destroy(); task = null; } doc = null;
-    history.replaceState(null, '', '#' + back);
-    if (back === 'capa' || !document.getElementById(back)) show(back);
-    if (lastFocus) lastFocus.focus();
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+  }
+  function closeDoc(){
+    if (pushed) { pushed = false; history.back(); }
+    else { history.replaceState(null, '', '#' + (current && current !== 'capa' ? current : 'capa')); hide(); render(current || 'capa'); }
   }
   document.addEventListener('click', e => {
     const t = e.target.closest('[data-doc]'); if (!t) return;
-    e.preventDefault(); open(t.dataset.doc);
+    e.preventDefault(); index(false); openDoc(t.dataset.doc);
   });
-  document.getElementById('rClose').addEventListener('click', close);
+  document.getElementById('rBack').addEventListener('click', closeDoc);
   document.getElementById('zIn').addEventListener('click', () => { zoom = Math.min(zoom + .25, 2.5); layout(); });
   document.getElementById('zOut').addEventListener('click', () => { zoom = Math.max(zoom - .25, .5); layout(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !reader.hidden) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !reader.hidden) closeDoc(); });
   reader.addEventListener('contextmenu', e => e.preventDefault());
   let rt; window.addEventListener('resize', () => { if (reader.hidden) return; clearTimeout(rt); rt = setTimeout(layout, 250); });
 
-  /* abre pelo endereço: #capitulo ou #doc=slug (útil para o telão e para o João) */
+  /* endereço: #capitulo, #tema da biblioteca ou #doc=slug (o telão e o João podem apontar direto) */
   function route(){
-    const h = location.hash.slice(1);
-    if (h.startsWith('doc=')) { if (reader.hidden) { show(back); open(h.slice(4)); } return; }
-    if (!reader.hidden) close();
-    show(h || 'capa');
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (h.startsWith('doc=')) { if (!current) render('capa'); load(h.slice(4)); return; }
+    if (!reader.hidden) { pushed = false; hide(); }
+    render(h || 'capa');
   }
+  window.addEventListener('popstate', route);
   window.addEventListener('hashchange', route);
   route();
 })();
