@@ -30,14 +30,23 @@ body{font-family:Arial,Helvetica,sans-serif;overflow:hidden}
 .sw>section>*:not([style*="position:absolute"]){position:relative}
 .sw h1,.sw h2,.sw h3,.sw p{margin:0}
 .sw ul{margin:0;padding-left:1.1em}
-#bar{position:fixed;left:0;right:0;bottom:0;height:64px;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 16px;background:#1C0B0E;border-top:1px solid #4A1820;font:15px/1 Arial,Helvetica,sans-serif;color:#F6F0EE;z-index:5}
-#bar .grp{display:flex;gap:8px;align-items:center}
-#bar button{background:#F6F0EE;color:#4A1820;border:0;font:600 15px/1 Arial,Helvetica,sans-serif;padding:12px 16px;cursor:pointer;border-radius:6px;min-height:44px;white-space:nowrap}
+#bar{position:fixed;left:0;right:0;bottom:0;height:64px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;padding:0 16px;background:#1C0B0E;border-top:1px solid #4A1820;font:15px/1 Arial,Helvetica,sans-serif;color:#F6F0EE;z-index:5}
+#bar .grp{display:flex;gap:8px;align-items:center;min-width:0}
+#bar .l{justify-self:start} #bar .r{justify-self:end}
+#bar button{background:#F6F0EE;color:#4A1820;border:0;font:600 15px/1 Arial,Helvetica,sans-serif;padding:0 16px;height:44px;cursor:pointer;border-radius:6px;white-space:nowrap}
 #bar button.sec{background:transparent;color:#F6F0EE;border:1px solid #8E3742}
-#bar button:hover{background:#E4B8BE;color:#2A1518}
-#bar button:focus-visible{outline:3px solid #E4B8BE;outline-offset:2px}
-#count{font:600 15px/1 'Courier New',monospace;letter-spacing:.08em;color:#E4B8BE;min-width:64px;text-align:center}
-#where{color:#D9BFC3;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}
+#bar button:hover:not(:disabled){background:#E4B8BE;color:#2A1518}
+#bar button:disabled{opacity:.35;cursor:default}
+#bar button:focus-visible,.edge:focus-visible{outline:3px solid #E4B8BE;outline-offset:2px}
+#prev,#next{width:132px}
+#count{font:600 15px/1 'Courier New',monospace;color:#E4B8BE;width:84px;text-align:center;font-variant-numeric:tabular-nums}
+#where{color:#D9BFC3;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.edge{position:fixed;top:calc((100% - 64px)/2);transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:rgba(28,11,14,.55);color:#F6F0EE;font:400 26px/1 Arial,sans-serif;cursor:pointer;z-index:4;opacity:.55;transition:opacity .15s,background .15s;display:flex;align-items:center;justify-content:center}
+.edge:hover:not(:disabled){opacity:1;background:#7B2A33}
+.edge:disabled{opacity:0;pointer-events:none}
+#eprev{left:12px} #enext{right:12px}
+#rot{display:none;position:fixed;left:0;right:0;bottom:76px;text-align:center;font:13px/1.3 Arial,sans-serif;color:#D9BFC3;letter-spacing:.02em}
+@media (orientation:portrait) and (max-width:640px){#rot{display:block}}
 #notes{position:fixed;left:16px;right:16px;bottom:76px;max-width:960px;margin:0 auto;background:#F6F0EE;color:#2A1518;border-top:3px solid #7B2A33;padding:16px 20px;font:16px/1.5 Arial,sans-serif;display:none;z-index:6;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 #notes.on{display:block}
 #toc{position:fixed;top:0;left:0;bottom:64px;width:min(420px,92vw);background:#F6F0EE;color:#2A1518;overflow-y:auto;padding:28px 24px;transform:translateX(-105%);transition:transform .25s ease;z-index:7;box-shadow:10px 0 40px rgba(0,0,0,.35)}
@@ -49,7 +58,7 @@ body{font-family:Arial,Helvetica,sans-serif;overflow:hidden}
 #toc a:hover{background:#EFE3E5}
 #toc a.cur{color:#7B2A33;font-weight:700}
 #toc a.cur span{color:#7B2A33}
-@media (max-width:640px){#where{display:none} #bar button{padding:10px 10px;font-size:13px} #bar{gap:6px;padding:0 8px} #bar .opt{display:none}}
+@media (max-width:640px){#where,#bar .opt,.edge{display:none} #bar{gap:6px;padding:0 8px} #bar button{padding:0 10px;font-size:13px} #prev,#next{width:auto;min-width:72px} #count{width:64px} .lbl{display:none}}
 @media (prefers-reduced-motion:reduce){#toc{transition:none}}
 @media print{
   @page{size:1920px 1080px;margin:0}
@@ -1173,12 +1182,14 @@ body{font-family:Arial,Helvetica,sans-serif;overflow:hidden}
 </section>
 </div>
 </div></div>
+<button class="edge" id="eprev" aria-label="Slide anterior">‹</button><button class="edge" id="enext" aria-label="Próximo slide">›</button>
+<p id="rot">Gire o celular para ver o slide maior · deslize para navegar</p>
 <nav id="toc" aria-label="Índice"><h2>Índice</h2><div id="toclist"></div></nav>
 <div id="notes" role="note"></div>
 <div id="bar">
- <div class="grp"><button id="ti" aria-controls="toc">☰ Índice</button><span id="where"></span></div>
- <div class="grp"><button id="prev" aria-label="Slide anterior">← Anterior</button><span id="count"></span><button id="next" aria-label="Próximo slide">Próximo →</button></div>
- <div class="grp opt"><button class="sec" id="tn">Notas</button><button class="sec" id="fs">Tela cheia</button></div>
+ <div class="grp l"><button id="ti" aria-controls="toc">☰ Índice</button><span id="where"></span></div>
+ <div class="grp"><button id="prev" aria-label="Slide anterior">←<span class="lbl">&nbsp;Anterior</span></button><span id="count" aria-live="polite"></span><button id="next" aria-label="Próximo slide"><span class="lbl">Próximo&nbsp;</span>→</button></div>
+ <div class="grp r opt"><button class="sec" id="tn">Notas</button><button class="sec" id="fs">Tela cheia</button></div>
 </div>
 <script>
 const S=[...document.querySelectorAll('.sw')], N=["Abrir dizendo o objetivo da reunião: sair com clareza do que acontece no dia 21 e com as críticas do comitê já incorporadas. São cerca de 25 minutos de apresentação e 20 de conversa.", "Dizer o pedido logo no início. Explicar como ler os slides da noite: cada momento tem o mesmo molde, e no rodapé está o que ainda está aberto para o comitê opinar.", "Três slides: o pedido já foi dito; agora o tema e o que o participante leva.", "Âncoras tiradas do evento Agentes (15 de setembro): a frase de abertura é do anfitrião; “o cargo não morreu, só parou de ser a variável de decisão” e “os papéis seguem o trabalho” são da Cris; “de quem para quem ou o quê” é da palestra internacional; “virou agenda de decisão” é do fechamento. Se quiser um dado de contexto, o iFood foi citado no evento como tendo mais agentes de IA do que colaboradores; vale checar a fonte antes de usar.", "Ponte com o evento Agentes: a Cris retomou o trevo de Handy (1989) e disse que hoje ele tem quatro folhas, porque nasceu a dos agentes. A imagem dela é a organização molécula: um núcleo fixo e uma nuvem de talentos fracionada, que respira conforme o desafio, agora com agentes em órbita.", "A régua vem do evento Agentes. Da Cíntia Martins: mudar a unidade de análise da pessoa para a capacidade, com a pergunta “que resultado deixa de acontecer se a Maria não estiver lá?”, e trocar o risco de perda pelo risco de descontinuidade. Da palestra internacional: que talento, quão rápido, quão crítico, por quanto tempo, e clareza sobre onde o julgamento humano importa. É com essa régua que a mesa decide entre C, S, P e A.", "A beleza do projeto real: manter as caixas do organograma e deixar de tratar quem ocupa a caixa como sinônimo de CLT. Só a fábrica nova, para a discussão caber em 45 minutos.", "As descrições de cargo dão a base para decidir sem entregar a resposta. O detalhe da fábrica madura é a camada de sofisticação: a competência do outro lado da cerca, que o Caso B revela no fim.", "Cinco capacidades, escritas como capacidade de conselheiro. Cada uma tem um momento da noite que a exercita.", "A partir daqui, cada momento tem o mesmo molde: o que acontece, o que a Ana faz, o que ela aprende. No rodapé, a pergunta aberta para o comitê.", "Oito momentos. Sem pitch, sem rubrica, sem reviravolta: o tempo vai para o desenho e para a conversa sobre ele.", "A Ana, que aparece nos próximos slides, é uma participante qualquer, sentada numa das mesas. Ela não é uma pessoa real.", "Os três avisos: Sem Playbook é o nome da era, não a resposta; o Caso B vem de um projeto em que o Kiko trabalhou; as mesas foram compostas como um bom conselho. As regras: papel, IA liberada, defesa em áudio.", "O coração da noite e a discussão que quase ninguém na sala já teve. Os últimos dez minutos trazem a lente de conselho: o que o conselho assume se aprovar este desenho, e se não aprovar.", "Os prompts vão num cartão com QR code em cada mesa. O operador, de preferência, é quem se declara mais analógico. O risco é a mesa copiar o primeiro desenho da IA; a regra da defesa protege contra isso.", "A lente de conselho fica dentro do próprio exercício: a defesa é feita ao conselho, não sobre o desenho. Plano B: se o envio falhar, o relator defende ao vivo e o comitê do VAB fotografa a folha.", "O João não dá nota: devolve a pergunta que o conselho faria. Um membro do comitê do VAB lê cada retorno antes de liberar, para evitar que a máquina comente uma caixa mal lida na foto.", "A comparação é caixa por caixa, não recomendação contra recomendação. A pergunta-eixo do Kiko: qual das quatro forças vocês usaram sem medo, e qual travou?", "O voto acontece antes da revelação, para que cada um decida sem saber o que a Montadora fez. Quem desenhou passa a decidir; quem já é conselheiro recupera o assento.", "Um caso, não o modelo certo. A ordem é a do Caso B: primeiro o que custou e o que ficou em aberto, depois o que a Montadora decidiu.", "As perguntas de compromisso viram o checklist da comunidade e alimentam o Board Hack de 2027.", "Plataforma, como testamos, riscos, cronograma e as três decisões.", "A plataforma do encontro já existe; o envio de foto e áudio e o retorno por mesa entram até o dia 17. O ensaio do dia 19 testa tudo com celulares reais. Plano B: se o envio falhar, o relator defende ao vivo e o comitê do VAB fotografa a folha.", "Tudo tem uma saída de papel ou de viva voz. A noite não para se a tecnologia falhar.", "O que o comitê pedir hoje entra até o dia 17. Depois disso, o material congela para o ensaio do dia 19.", "Fechar pelas decisões e abrir a conversa. As perguntas em aberto de cada momento da noite podem ser retomadas aqui, na ordem que o comitê preferir."], T=[{"t": "Sem Playbook", "sec": "Abertura", "div": false}, {"t": "Quero sair daqui com a noite validada — e com a crítica de vocês já dentro dela.", "sec": "", "div": false}, {"t": "Por quê", "sec": "01 · Por quê", "div": true}, {"t": "Não tem playbook. E os playbooks que existem já não servem mais.", "sec": "", "div": false}, {"t": "O trevo ganhou a quarta folha", "sec": "", "div": false}, {"t": "Da pessoa à capacidade: a régua de cada caixa", "sec": "", "div": false}, {"t": "A fábrica nova precisa nascer atualizada", "sec": "", "div": false}, {"t": "O que cada mesa recebe", "sec": "", "div": false}, {"t": "O que cada participante leva da noite", "sec": "", "div": false}, {"t": "A noite", "sec": "02 · A noite", "div": true}, {"t": "A noite em uma página", "sec": "", "div": false}, {"t": "Quem é quem", "sec": "", "div": false}, {"t": "19h00 · Chegada e abertura", "sec": "", "div": false}, {"t": "19h30 · O desenho: do organograma antigo ao novo", "sec": "", "div": false}, {"t": "A IA na mesa", "sec": "", "div": false}, {"t": "20h15 · A defesa ao conselho", "sec": "", "div": false}, {"t": "20h20 · Galeria e o retorno do João", "sec": "", "div": false}, {"t": "20h35 · Plenária", "sec": "", "div": false}, {"t": "20h50 · “Agora vocês são o conselho. Votem.”", "sec": "", "div": false}, {"t": "20h55 · A revelação", "sec": "", "div": false}, {"t": "21h05 · Compromisso", "sec": "", "div": false}, {"t": "O que precisamos", "sec": "03 · O que precisamos", "div": true}, {"t": "A plataforma: do papel ao conselho", "sec": "", "div": false}, {"t": "O que pode dar errado, e o plano B", "sec": "", "div": false}, {"t": "Até o dia 21", "sec": "", "div": false}, {"t": "Três decisões do comitê", "sec": "", "div": false}];
@@ -1191,14 +1202,15 @@ T.forEach((x,j)=>{if(x.sec){const d=document.createElement('div');d.className='s
 function toggleToc(v){$('toc').classList.toggle('on',v);}
 function fit(){const st=$('stage');const s=Math.min(st.clientWidth/1920,st.clientHeight/1080);$('frame').style.transform='scale('+s+')';}
 function go(k){i=Math.max(0,Math.min(S.length-1,k));S.forEach((x,j)=>x.classList.toggle('on',j===i));$('count').textContent=(i+1)+' / '+S.length;$('where').textContent=T[i].t;$('notes').textContent=N[i]||'';
- [...list.querySelectorAll('a')].forEach((a,j)=>a.classList.toggle('cur',j===i));try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+ [...list.querySelectorAll('a')].forEach((a,j)=>a.classList.toggle('cur',j===i));$('prev').disabled=$('eprev').disabled=i===0;$('next').disabled=$('enext').disabled=i===S.length-1;try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
 addEventListener('resize',fit);
 addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);else if(e.key==='n'||e.key==='N')$('notes').classList.toggle('on');else if(e.key==='i'||e.key==='I')$('toc').classList.toggle('on');else if(e.key==='Escape')toggleToc(false);else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
-$('prev').onclick=()=>go(i-1);$('next').onclick=()=>go(i+1);
+$('prev').onclick=$('eprev').onclick=()=>go(i-1);$('next').onclick=$('enext').onclick=()=>go(i+1);
 $('ti').onclick=()=>$('toc').classList.toggle('on');
 $('tn').onclick=()=>$('notes').classList.toggle('on');
 $('fs').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
-$('stage').addEventListener('click',e=>{if($('toc').classList.contains('on')){toggleToc(false);return}if(e.clientX>innerWidth/2)go(i+1);else go(i-1)});
+$('stage').addEventListener('click',()=>toggleToc(false));
+let tx=null;$('stage').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});$('stage').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(i+(dx<0?1:-1));tx=null});
 fit();go((parseInt(location.hash.slice(1))||1)-1);
 </script>
 </body>
