@@ -263,6 +263,16 @@ main{padding:0 clamp(16px,4vw,3.2rem)}
 @media(max-width:860px){.jd .side{border-left:0;padding-left:0;border-top:1px solid var(--line);margin-top:1rem}}
 .fnote{font-size:.84rem;color:var(--mute);max-width:80ch}
 
+.org .legend em{flex-basis:100%;font-style:normal;font-family:var(--sans);font-size:.84rem;letter-spacing:0;text-transform:none;color:var(--ink2)}
+.paths h2,.lens h2{font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.15;margin-bottom:1.2rem}
+.paths .soft,.lens .soft{margin-top:1rem;font-size:.93rem}
+.lens ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(1.2rem,2.4vw,2.4rem);counter-reset:l}
+.lens li{border-top:1px solid var(--bordo);padding-top:.9rem;font-size:.95rem;color:var(--ink2);counter-increment:l}
+.lens li::before{content:"0" counter(l);display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--bordo);margin-bottom:.5rem}
+.lens li b{display:block;font-weight:500;color:var(--ink);margin-bottom:.2rem}
+@media(max-width:860px){.lens ol{grid-template-columns:1fr 1fr;row-gap:1.2rem}}
+.tabs{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:2rem}
+
 /* navegação de rodapé */
 /* doca de navegação, sempre visível */
 body:not(.on-cover){padding-bottom:76px}
@@ -339,7 +349,7 @@ body.on-cover .dock,body.on-cover main{display:none}
     <div>
       <p class="kick">Encontro VAB · Material de consulta</p>
       <h1>Sem Playbook</h1>
-      <p class="sub">Uma simulação de conselho para decidir dilemas humanos com IA.</p>
+      <p class="sub">Uma simulação de conselho sobre como desenhar o trabalho com CLT, as a service, PJ e agentes de IA.</p>
     </div>
     <div class="foot">
       <div class="meta"><span>21 de outubro de 2026</span><span>19h às 21h30</span><span>São Paulo</span></div>
@@ -380,7 +390,7 @@ body.on-cover .dock,body.on-cover main{display:none}
   </div>
   <nav id="toc"></nav>
   <div class="results" id="results" hidden></div>
-  <div class="df">Curadoria de Kiko Campos para o encontro VAB. Atualizado em 15 de outubro de 2026. Os direitos de cada relatório pertencem a seus autores.</div>
+  <div class="df">Curadoria de Kiko Campos para o encontro VAB. Atualizado em 16 de outubro de 2026. Os direitos de cada relatório pertencem a seus autores.</div>
 </aside>
 
 <div class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle">
@@ -650,7 +660,7 @@ const REPS = [
     hz:'Cargo permanente.', qd:'1 gerente + 3 de 9 especialistas', cu:'R$ 0,45 mi por especialista', mk:'Perfil raro.'}
 ];
 function node(x, cls){
-  return `<button class="node${x.open ? ' open' : ''}${cls ? ' ' + cls : ''}" type="button" data-jd="${x.k}"><span class="k">${esc(x.fam)}</span><h4>${esc(x.t)}</h4><span class="st">${esc(x.st)} · CLT</span></button>`;
+  return `<button class="node${x.open ? ' open' : ''}${cls ? ' ' + cls : ''}" type="button" data-jd="${x.k}"><span class="k">${esc(x.fam)}</span><h4>${esc(x.t)}</h4><span class="st">${esc(x.st)}</span></button>`;
 }
 function ficha(x, i){
   return `<details class="jd" id="jd-${x.k}">
@@ -679,6 +689,13 @@ function fabHTML(){
   return `<div class="opener"><div><span class="lbl">03 · A fábrica nova</span><h1>Dez caixas desenhadas <em>pelo playbook</em>.</h1></div>
     <p class="ld">É assim que a Montadora sempre estruturou suas plantas: todas as posições CLT. A mesa parte deste organograma e decide, caixa a caixa, que força de trabalho cada uma pede, e depois recomenda um caminho ao conselho.</p></div>
     <div class="ctx">${FAB_CTX.map(c => `<div><div class="v">${c.v}</div><p>${esc(c.p)}</p></div>`).join('')}</div>
+    <div class="paths"><h2>Três caminhos estão na mesa do conselho.</h2>
+      <div class="steps">
+        <div class="step"><span class="n">CAMINHO 1</span><h3>Contratar permanente</h3><p>Abrir as vagas CLT com search e cobrir a vacância acumulando funções. É a posição do presidente da Montadora.</p></div>
+        <div class="step"><span class="n">CAMINHO 2</span><h3>Esperar a venda</h3><p>Adiar o desenho até a venda da fábrica madura se definir. É a posição de um representante da matriz no conselho.</p></div>
+        <div class="step"><span class="n">CAMINHO 3</span><h3>Redesenhar com quatro forças</h3><p>Decidir, caixa a caixa, a força de trabalho que cada capacidade pede. É a posição do VP de Manufatura e da diretora de Pessoas.</p></div>
+      </div>
+      <p class="soft">A mesa pode recomendar qualquer um deles, ou combiná-los, desde que diga por quê.</p></div>
     <div class="org" aria-label="Organograma da fábrica nova">
       <div class="lead">
         <p class="vp"><b>Carlos Ferraz</b> · VP de Manufatura</p>
@@ -687,8 +704,11 @@ function fabHTML(){
       </div>
       <div class="reps">${REPS.map(x => node(x)).join('')}</div>
       <p class="mtx">Apoio matricial: Pessoas e Controladoria.</p>
-      <div class="legend"><span>Posição ocupada</span><span class="d">Vaga ou em search</span></div>
+      <div class="legend"><span>Posição ocupada</span><span class="d">Vaga ou em search</span><em>Todas as posições, hoje, CLT. Toque numa caixa para abrir a ficha.</em></div>
     </div>
+    <div class="lens"><h2>Como ler cada ficha</h2>
+      <ol><li><b>Duração</b> Por quanto tempo a capacidade é necessária?</li><li><b>Criticidade</b> O que acontece se faltar?</li><li><b>Especificidade</b> Quanto ela depende do jeito Montadora de fazer?</li><li><b>Mercado</b> Quão difícil é encontrá-la lá fora?</li></ol>
+      <p class="soft">As respostas apontam a força de trabalho. As fichas trazem os fatos; a escolha é da mesa.</p></div>
     <div class="jds">${[DIR, ...REPS].map((x, i) => ficha(x, i)).join('')}</div>
     <p class="fnote">Fichas no formato de descrição de cargo da Gartner for HR Leaders: resumo da posição, responsabilidades com exemplo, o que é desafiador, habilidades, qualificações e contexto. A empresa, as pessoas e os números são fictícios, compostos para o caso.</p>`;
 }
@@ -696,7 +716,7 @@ function fabHTML(){
 const CH = [
   {id:'tese', n:'01', g:'A noite', nav:'A tese', marg:'Quatro forças de trabalho já convivem. Nenhuma empresa tem o padrão de como combiná-las.', html:()=>`
     <div class="opener"><div><span class="lbl">01 · A tese</span><h1>Não há playbook para liderar <em>quatro forças</em> ao mesmo tempo.</h1></div>
-    <p class="ld">A empresa de hoje entrega resultado com empregados, prestadores, serviços contratados e agentes de IA. Cada força tem contrato, risco e lógica de gestão diferentes, e nenhuma consultoria publicou ainda o manual de como liderar as quatro juntas.</p></div>
+    <p class="ld">A empresa de hoje entrega resultado com empregados CLT, executivos as a service, profissionais PJ e agentes de IA. Cada força tem contrato, risco e lógica de gestão diferentes, e nenhuma consultoria publicou ainda o manual de como liderar as quatro juntas.</p></div>
     <div class="forces">
       <div class="force"><div class="ic">${IC.clt}<span class="L">C</span></div><h3>CLT</h3><p>O que é permanente e específico da empresa. A força para a qual todas as práticas de RH foram desenhadas.</p></div>
       <div class="force"><div class="ic">${IC.svc}<span class="L">S</span></div><h3>As a service</h3><p>Executivos e especialistas por mandato, para picos e transições. Contratados por resultado.</p></div>
@@ -706,7 +726,7 @@ const CH = [
     <p class="pull"><span>Sem Playbook é o nome da era.</span><b>Não é a resposta do caso.</b></p>`},
   {id:'noite', n:'02', g:'A noite', nav:'A atividade', marg:'Cada mesa desenha e recomenda. O conselho decide. Ninguém dá nota.', html:()=>`
     <div class="opener"><div><span class="lbl">02 · A atividade</span><h1>Cada mesa é uma <em>consultoria</em> contratada pelo conselho.</h1></div>
-    <p class="ld">As mesas recebem o organograma da fábrica nova e as fichas de cargo, redesenham a estrutura e entregam recomendação, não decisão. Quem decide é o conselho, presidido pelo João, conselheiro agêntico que pergunta e vota como faria um board de verdade, não como banca que dá nota.</p></div>
+    <p class="ld">As mesas recebem o organograma da fábrica nova e as fichas de cargo, redesenham a estrutura e recomendam um caminho. Quem decide é o conselho, presidido pelo João, um agente de IA que pergunta e vota como conselheiro, não como banca que dá nota.</p></div>
     <div class="steps">
       <div class="step"><span class="n">PASSO 1</span><h3>Desenho</h3><p>A mesa lê o caso e as fichas e, na folha A3, decide caixa a caixa se a posição fica CLT ou vira as a service, PJ ou agente de IA, com o porquê de cada escolha.</p></div>
       <div class="step"><span class="n">PASSO 2</span><h3>Recomendação</h3><p>A mesa fotografa o desenho e recomenda um caminho ao conselho, com o maior risco de aprovar, o maior risco de não aprovar e o indicador a cobrar. Poucas evidências desta biblioteca, bem escolhidas.</p></div>
@@ -717,10 +737,11 @@ const CH = [
       <div><b>As mesas</b><span>Consultorias formadas por perfis complementares de learning agility.</span></div>
       <div><b>Kiko Campos</b><span>Facilitador da noite e autor desta curadoria.</span></div>
     </div>
+    <p class="pull"><span>Antes da noite, leia o caso e as fichas.</span><b>Na mesa, o tempo é para desenhar.</b></p>
     <p class="note">A plataforma da atividade abre no dia do encontro.</p>`},
   {id:'fabrica', n:'03', g:'O caso', nav:'A fábrica nova', marg:'O organograma que a mesa recebe e as fichas de cada caixa. Toque numa caixa para abrir a ficha.', html:()=>fabHTML()},
-  {id:'dados', n:'04', g:'Evidência', nav:'A tese em dados', marg:'Oito números para abrir a conversa. Toque na fonte para abrir o relatório.', html:()=>`
-    <div class="opener"><div><span class="lbl">04 · A tese em dados</span><h1>A adoção correu na frente do <em>modelo de gestão</em>.</h1></div>
+  {id:'dados', n:'04', g:'Evidência', nav:'Os números', marg:'Oito números para abrir a conversa. Toque na fonte para abrir o relatório.', html:()=>`
+    <div class="opener"><div><span class="lbl">04 · Os números</span><h1>A adoção correu na frente do <em>modelo de gestão</em>.</h1></div>
     <p class="ld">As pessoas já usam IA e agentes. O elo que deveria liderar a transição é o que mais se desgastou. Quase nenhuma empresa redesenhou como lidera essa mistura.</p></div>
     <div class="stats">${STATS.map(s=>`<div class="stat"><div class="v">${s.v}<small>${s.s}</small></div><p>${esc(s.p)}</p>${s.doc?`<button class="src" type="button" data-doc="${s.doc}">${esc(s.src)}</button>`:`<a class="src" href="${s.u}" ${EXT}>${esc(s.src)}</a>`}</div>`).join('')}</div>`},
   {id:'biblioteca', n:'05', g:'Evidência', nav:'Biblioteca', marg:'Escolha um tema nas abas ou busque por autor, assunto ou número. Os materiais com capa abrem aqui mesmo.', html:()=>libHTML()},
