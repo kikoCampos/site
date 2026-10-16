@@ -207,6 +207,62 @@ main{padding:0 clamp(16px,4vw,3.2rem)}
 .cautions span{display:block;margin-top:.35rem;color:var(--ink2);font-size:.93rem}
 @media(max-width:760px){.cautions{grid-template-columns:1fr}}
 
+/* a fábrica nova: organograma e fichas de cargo */
+.ctx{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(1.2rem,2.4vw,2.4rem)}
+.ctx > div{border-top:1px solid var(--bordo);padding:1rem 0 .4rem}
+.ctx .v{font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:300;line-height:1;letter-spacing:-.03em;color:var(--wine)}
+.ctx p{margin-top:.55rem;font-size:.88rem;color:var(--ink2)}
+@media(max-width:860px){.ctx{grid-template-columns:1fr 1fr}}
+.org{border-top:1px solid var(--line);padding-top:1.4rem}
+.org .lead{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.org .vp{font-size:.88rem;color:var(--ink2);padding-bottom:.7rem}
+.org .vp b{font-weight:500;color:var(--ink)}
+.org .stem{width:1px;height:18px;background:var(--line2);margin-left:1.1rem}
+.node{display:flex;flex-direction:column;gap:.35rem;text-align:left;background:none;border:0;border-top:1px solid var(--bordo);padding:.8rem 0 .9rem;font:inherit;color:inherit;cursor:pointer;width:100%}
+.node:hover h4{color:var(--bordo)}
+.node h4{margin:0;font-size:1rem;font-weight:500;line-height:1.25;letter-spacing:-.01em}
+.node .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.node .st{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.node.open{border-top-style:dashed}
+.node.open .st{color:var(--bordo)}
+.org .dir{max-width:340px}
+.org .dir h4{font-size:1.2rem}
+.org .reps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 clamp(1rem,2vw,1.8rem);margin-top:1.4rem;border-top:1px solid var(--line);padding-top:1.2rem}
+@media(max-width:1000px){.org .reps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.org .reps{grid-template-columns:1fr 1fr}}
+.org .mtx{margin-top:1rem;font-size:.86rem;color:var(--ink2)}
+.org .legend{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;margin-top:.9rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.org .legend span::before{content:"";display:inline-block;width:18px;margin-right:.5rem;vertical-align:middle;border-top:1px solid var(--bordo)}
+.org .legend span.d::before{border-top-style:dashed}
+.jds{border-top:1px solid var(--bordo)}
+.jd{border-bottom:1px solid var(--line);scroll-margin-top:72px}
+.jd > summary{list-style:none;display:grid;grid-template-columns:2.4rem minmax(0,1fr) auto;gap:1rem;align-items:baseline;padding:1rem 0;cursor:pointer}
+.jd > summary::-webkit-details-marker{display:none}
+.jd > summary .n{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;color:var(--bordo)}
+.jd > summary h3{font-size:1.12rem;font-weight:500;letter-spacing:-.01em}
+.jd > summary small{display:block;margin-top:.2rem;font-size:.86rem;color:var(--ink2)}
+.jd > summary .pm{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bordo);white-space:nowrap}
+.jd > summary .pm::after{content:"Abrir"}
+.jd[open] > summary .pm::after{content:"Fechar"}
+.jd .in{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:0 clamp(1.6rem,3vw,3rem);padding:0 0 1.6rem 3.4rem}
+@media(max-width:860px){.jd .in{grid-template-columns:1fr;padding-left:0}}
+.jd .sec{padding-top:.9rem}
+.jd .sec + .sec{margin-top:.2rem}
+.jd .sec > b{display:block;font-family:var(--mono);font-weight:400;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bordo)}
+.jd .sec p,.jd .sec li{font-size:.94rem;color:var(--ink);line-height:1.55}
+.jd .sec p{margin-top:.4rem}
+.jd .sec ul{margin:.4rem 0 0;padding-left:1.05rem}
+.jd .sec li + li{margin-top:.15rem}
+.jd .sec .ex{color:var(--ink2);font-style:italic}
+.jd .sk{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.2rem .9rem;margin-top:.4rem;font-size:.94rem}
+.jd .sk i{font-style:normal;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-top:.25rem}
+.jd dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.35rem .9rem;margin:.5rem 0 0;font-size:.92rem}
+.jd dt{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-top:.28rem}
+.jd dd{margin:0;color:var(--ink)}
+.jd .side{border-left:1px solid var(--line);padding-left:clamp(1.2rem,2.4vw,2.2rem)}
+@media(max-width:860px){.jd .side{border-left:0;padding-left:0;border-top:1px solid var(--line);margin-top:1rem}}
+.fnote{font-size:.84rem;color:var(--mute);max-width:80ch}
+
 /* navegação de rodapé */
 /* doca de navegação, sempre visível */
 body:not(.on-cover){padding-bottom:76px}
@@ -478,6 +534,165 @@ const LIB = {
   brasil:{t:'A força PJ está sem <em>regra definitiva</em>.', ld:'O STF ainda não julgou o Tema 1389. Em 18 de junho de 2026, os processos represados voltaram a andar até a segunda instância; no TST seguem suspensos, e a tese valerá para todos.'}
 };
 
+/* A fábrica nova: organograma "pelo playbook" e fichas de cargo.
+   Estrutura de cada ficha: resumo da posição, responsabilidades com exemplo, o que é desafiador,
+   habilidades e experiências (essenciais e desejáveis), outras qualificações e contexto da posição.
+   Empresa, pessoas e números fictícios, compostos para o caso. */
+const FAB_CTX = [
+  {v:'R$ 2,4 bi', p:'Capex aprovado da fábrica de elétricos e híbridos.'},
+  {v:'out 2027', p:'Início de produção (SOP). Rampa até 100% em 12 meses.'},
+  {v:'380 → 1.600', p:'Pessoas hoje e pessoas previstas no SOP.'},
+  {v:'14 h', p:'Meta de horas por veículo. A fábrica madura opera com 22.'}
+];
+const DIR = {k:'diretor', t:'Diretor da Fábrica de Elétricos', fam:'Operações · Diretor', st:'Vaga', open:true, rep:'Carlos Ferraz, VP de Manufatura',
+  res:'Você vai levar uma fábrica de R$ 2,4 bilhões do comissionamento ao início de produção em outubro de 2027 e à capacidade plena em 12 meses. Responde ao VP de Manufatura e lidera dez áreas.',
+  resp:['Integrar engenharia, produção e supply num único programa.','Prestar contas do programa à matriz.','Formar a liderança permanente da fábrica.'],
+  ex:'Conduzir o try-out da carroceria com os integradores de robótica.',
+  des:'Cada mês de atraso no SOP custa de R$ 45 a 60 milhões, e metade das caixas abaixo de você está vazia.',
+  ess:'Lançamento de planta greenfield; gestão de integradores; liderança de equipe em formação; decisão com dados.',
+  dsj:'Eletrificação; gêmeo digital.',
+  qual:'Engenharia; mais de 15 anos em manufatura automotiva.',
+  hz:'Cargo permanente. O perfil de lançamento só é necessário por cerca de 30 meses.',
+  qd:'1 posição', cu:'R$ 2,1 mi por ano', mk:'Search de 4 a 6 meses.'};
+const REPS = [
+  {k:'engenharia', t:'Diretor de Engenharia de Manufatura e Lançamento', fam:'Engenharia · Diretor', st:'Vaga', open:true,
+    res:'Você vai entregar processo, ferramental e validação para que a fábrica chegue à rampa sem surpresa.',
+    resp:['Industrialização dos produtos.','Validação de capacidade por estação.','Aprovação de peças com fornecedores.'],
+    ex:'Fechar a validação da linha de baterias com o parceiro internacional de tecnologia.',
+    des:'A equipe tem 46 dos 70 engenheiros necessários, e o turnover voluntário é de 14%, contra 9% do mercado.',
+    ess:'Lançamento de elétricos; alta tensão; simulação de processo; liderança técnica.',
+    dsj:'Análise de falhas com IA.',
+    qual:'Engenharia, com lançamento completo de planta no currículo.',
+    hz:'Pico até o fim da rampa. Depois dela, só 40% da equipe continua necessária.',
+    qd:'Diretor + 46 de 70 engenheiros', cu:'R$ 2,4 mi por ano o diretor; R$ 0,3 mi por engenheiro', mk:'8 nomes no Brasil com lançamento de elétricos no currículo, 3 deles em concorrentes.'},
+  {k:'carroceria', t:'Gerente de Carroceria', fam:'Produção · Gerente', st:'Contratado',
+    res:'Você vai fazer o sistema de produção da Montadora funcionar numa linha de solda robotizada que ainda não existe.',
+    resp:['Rotina de turno.','Padrão de trabalho.','Formação de operadores.'],
+    ex:'Certificar a primeira turma de operadores de solda antes do SOP.',
+    des:'A linha tem a maior densidade de robôs da fábrica, e a convivência entre pessoas e robôs é intensa.',
+    ess:'Produção enxuta; liderança de grandes equipes; gestão de turno.',
+    dsj:'Robótica colaborativa.',
+    qual:'Mais de 10 anos de chão de fábrica automotivo.',
+    hz:'Cargo permanente.', qd:'1 gerente; 230 operadores previstos no SOP', cu:'R$ 0,9 mi por ano', mk:'Posição preenchida.'},
+  {k:'pintura', t:'Gerente de Pintura', fam:'Produção · Gerente', st:'Em search', open:true,
+    res:'Você vai colocar em operação a pintura, o processo de maior consumo de energia e de maior risco de retrabalho da fábrica.',
+    resp:['Rotina de turno.','Padrão de trabalho.','Formação de operadores.'],
+    ex:'Estabilizar a qualidade de acabamento nas primeiras mil carrocerias.',
+    des:'O search está aberto há três meses. A fábrica madura tem um gerente de pintura com 20 anos de casa.',
+    ess:'Produção enxuta; processos de pintura automotiva; liderança de equipe.',
+    dsj:'Eficiência energética industrial.',
+    qual:'Mais de 10 anos de chão de fábrica automotivo.',
+    hz:'Cargo permanente.', qd:'1 gerente; 150 operadores previstos no SOP', cu:'R$ 0,9 mi por ano', mk:'Search de 4 a 6 meses.'},
+  {k:'montagem', t:'Gerente de Montagem Final', fam:'Produção · Gerente', st:'Contratado',
+    res:'Você vai liderar a maior equipe da fábrica, no ponto em que o veículo fica pronto.',
+    resp:['Rotina de turno.','Padrão de trabalho.','Formação de operadores.'],
+    ex:'Montar o primeiro lote-piloto com operadores recém-formados.',
+    des:'São 380 operadores contratados de uma vez, quase todos sem experiência em veículo elétrico.',
+    ess:'Produção enxuta; liderança de grandes equipes; gestão de turno.',
+    dsj:'Montagem de componentes de alta tensão.',
+    qual:'Mais de 10 anos de chão de fábrica automotivo.',
+    hz:'Cargo permanente.', qd:'1 gerente; 380 operadores previstos no SOP', cu:'R$ 0,9 mi por ano', mk:'Posição preenchida.'},
+  {k:'baterias', t:'Gerente da Linha de Baterias', fam:'Produção · Gerente', st:'Vaga', open:true,
+    res:'Você vai operar a área de maior risco e de menor experiência da Montadora.',
+    resp:['Absorver a tecnologia do parceiro internacional.','Formar a equipe.','Controlar o risco térmico em processo.'],
+    ex:'Conduzir a transferência de conhecimento do parceiro até a primeira auditoria independente.',
+    des:'Hoje o conhecimento está fora de casa, com o parceiro.',
+    ess:'Química de células; segurança de alta tensão; formação técnica de equipes.',
+    dsj:'Experiência em fábricas de baterias na Ásia ou na Europa.',
+    qual:'Engenharia química ou elétrica.',
+    hz:'Cargo permanente.', qd:'1 gerente; 120 pessoas previstas no SOP', cu:'R$ 1,1 mi por ano', mk:'Perfil raríssimo. Search de mais de 6 meses.'},
+  {k:'qualidade', t:'Gerente de Qualidade', fam:'Qualidade · Gerente', st:'Contratado',
+    res:'Você vai garantir que o primeiro veículo saia no padrão global do grupo.',
+    resp:['Auditoria de produto.','Aprovação de peças.','Documentação de conformidade.'],
+    ex:'Aprovar as peças de 180 fornecedores antes do SOP.',
+    des:'60% do tempo da equipe vai para documentação de aprovação de peças.',
+    ess:'Sistemas de qualidade automotiva; estatística.',
+    dsj:'Inspeção visual com IA.',
+    qual:'Certificação em qualidade automotiva.',
+    hz:'Cargo permanente.', qd:'1 gerente + 24 de 60 profissionais', cu:'R$ 5,1 mi por ano a área', mk:'Mercado conhecido.'},
+  {k:'manutencao', t:'Gerente de Manutenção e Automação', fam:'Manutenção · Gerente', st:'Contratado',
+    res:'Você vai manter disponíveis cerca de 900 robôs e as linhas automatizadas.',
+    resp:['Manutenção preventiva e preditiva.','Interface com os integradores.','Gestão de peças.'],
+    ex:'Assumir dos integradores a manutenção das linhas quando terminar a garantia.',
+    des:'Há 30 dos 140 técnicos necessários. Formar um técnico leva 9 meses e custa R$ 85 mil.',
+    ess:'Robótica; controladores; manutenção preditiva.',
+    dsj:'Análise de dados de máquina.',
+    qual:'Engenharia mecatrônica ou elétrica.',
+    hz:'Cargo permanente. A garantia dos integradores cobre os primeiros 24 meses.',
+    qd:'1 gerente + 30 de 140 técnicos', cu:'R$ 6,8 mi por ano a área', mk:'A fábrica madura tem 40 técnicos com perfil para robótica.'},
+  {k:'supply', t:'Diretor de Supply Chain e Compras de Capex', fam:'Supply · Diretor', st:'Vaga', open:true,
+    res:'Você vai fechar o capex e montar a cadeia de fornecimento da fábrica.',
+    resp:['Negociação com integradores e fornecedores de células.','Gestão de pleitos.','Transição para o supply operacional.'],
+    ex:'Negociar dois pleitos de aditivo que somam R$ 38 milhões.',
+    des:'Os fornecedores têm mais poder de barganha do que a Montadora, e há R$ 640 milhões em contratos abertos.',
+    ess:'Contratos complexos de capex; gestão de pleitos; risco de fornecedor.',
+    dsj:'Cadeia de baterias.',
+    qual:'Engenharia ou administração; mais de 12 anos em compras industriais.',
+    hz:'Pico de 24 meses. Depois dele, a necessidade cai pela metade.',
+    qd:'Diretor + 18 profissionais', cu:'R$ 1,5 mi por ano o diretor', mk:'Search de 4 a 6 meses.'},
+  {k:'programa', t:'Coordenador de Controle do Programa e Contratos', fam:'PMO · Coordenação', st:'Contratado',
+    res:'Você vai dar ao diretor e à matriz a visão real do programa, todos os dias.',
+    resp:['Acompanhar 1.900 marcos e 340 contratos.','Consolidar relatórios.','Controlar mudanças.'],
+    ex:'Apresentar o painel semanal de desvios à matriz.',
+    des:'70% do tempo dos analistas vai para consolidação e follow-up.',
+    ess:'Gestão de programas; análise de dados.',
+    dsj:'Orquestração de agentes de IA.',
+    qual:'Certificação em gestão de projetos.',
+    hz:'Necessidade até o fim da rampa.', qd:'1 coordenador + 22 analistas', cu:'R$ 4,4 mi por ano a área', mk:'Mercado conhecido.'},
+  {k:'seguranca', t:'Gerente de Segurança, Alta Tensão e Risco Térmico', fam:'EHS · Gerente', st:'Contratado',
+    res:'Você vai garantir que ninguém se machuque numa fábrica com riscos que a Montadora nunca operou.',
+    resp:['Procedimentos de NR-10.','Resposta a incidente térmico.','Segurança na interação entre pessoas e robôs.'],
+    ex:'Certificar 1.600 pessoas em alta tensão antes do SOP.',
+    des:'A função responde legalmente pela segurança, e há 3 dos 9 especialistas necessários.',
+    ess:'Segurança elétrica; análise de risco de processo.',
+    dsj:'Experiência com baterias.',
+    qual:'Engenharia de segurança do trabalho.',
+    hz:'Cargo permanente.', qd:'1 gerente + 3 de 9 especialistas', cu:'R$ 0,45 mi por especialista', mk:'Perfil raro.'}
+];
+function node(x, cls){
+  return `<button class="node${x.open ? ' open' : ''}${cls ? ' ' + cls : ''}" type="button" data-jd="${x.k}"><span class="k">${esc(x.fam)}</span><h4>${esc(x.t)}</h4><span class="st">${esc(x.st)} · CLT</span></button>`;
+}
+function ficha(x, i){
+  return `<details class="jd" id="jd-${x.k}">
+    <summary><span class="n">${String(i).padStart(2, '0')}</span><div><h3>${esc(x.t)}</h3><small>${esc(x.fam)} · ${esc(x.st)}</small></div><span class="pm"></span></summary>
+    <div class="in">
+      <div>
+        <div class="sec"><b>Resumo da posição</b><p>${esc(x.res)}</p></div>
+        <div class="sec"><b>Responsabilidades</b><ul>${x.resp.map(r => `<li>${esc(r)}</li>`).join('')}</ul><p class="ex">Exemplo: ${esc(x.ex)}</p></div>
+        <div class="sec"><b>O que é desafiador</b><p>${esc(x.des)}</p></div>
+        <div class="sec"><b>Habilidades e experiências</b><div class="sk"><i>Essenciais</i><span>${esc(x.ess)}</span><i>Desejáveis</i><span>${esc(x.dsj)}</span></div></div>
+        <div class="sec"><b>Outras qualificações</b><p>${esc(x.qual)}</p></div>
+      </div>
+      <div class="side">
+        <div class="sec"><b>Contexto da posição</b><dl>
+          <dt>Reporta a</dt><dd>${esc(x.rep || 'Diretor da Fábrica de Elétricos')}</dd>
+          <dt>Horizonte</dt><dd>${esc(x.hz)}</dd>
+          <dt>Quadro</dt><dd>${esc(x.qd)}</dd>
+          <dt>Custo</dt><dd>${esc(x.cu)}</dd>
+          <dt>Mercado</dt><dd>${esc(x.mk)}</dd>
+        </dl></div>
+      </div>
+    </div>
+  </details>`;
+}
+function fabHTML(){
+  return `<div class="opener"><div><span class="lbl">03 · A fábrica nova</span><h1>Dez caixas desenhadas <em>pelo playbook</em>.</h1></div>
+    <p class="ld">É assim que a Montadora sempre estruturou suas plantas: todas as posições CLT. A mesa parte deste organograma e decide, caixa a caixa, que força de trabalho cada uma pede, e depois recomenda um caminho ao conselho.</p></div>
+    <div class="ctx">${FAB_CTX.map(c => `<div><div class="v">${c.v}</div><p>${esc(c.p)}</p></div>`).join('')}</div>
+    <div class="org" aria-label="Organograma da fábrica nova">
+      <div class="lead">
+        <p class="vp"><b>Carlos Ferraz</b> · VP de Manufatura</p>
+        <span class="stem" aria-hidden="true"></span>
+        <div class="dir">${node(DIR)}</div>
+      </div>
+      <div class="reps">${REPS.map(x => node(x)).join('')}</div>
+      <p class="mtx">Apoio matricial: Pessoas e Controladoria.</p>
+      <div class="legend"><span>Posição ocupada</span><span class="d">Vaga ou em search</span></div>
+    </div>
+    <div class="jds">${[DIR, ...REPS].map((x, i) => ficha(x, i)).join('')}</div>
+    <p class="fnote">Fichas no formato de descrição de cargo da Gartner for HR Leaders: resumo da posição, responsabilidades com exemplo, o que é desafiador, habilidades, qualificações e contexto. A empresa, as pessoas e os números são fictícios, compostos para o caso.</p>`;
+}
+
 const CH = [
   {id:'tese', n:'01', g:'A noite', nav:'A tese', marg:'Quatro forças de trabalho já convivem. Nenhuma empresa tem o padrão de como combiná-las.', html:()=>`
     <div class="opener"><div><span class="lbl">01 · A tese</span><h1>Não há playbook para liderar <em>quatro forças</em> ao mesmo tempo.</h1></div>
@@ -503,21 +718,22 @@ const CH = [
       <div><b>Kiko Campos</b><span>Facilitador da noite e autor desta curadoria.</span></div>
     </div>
     <p class="note">A plataforma da atividade abre no dia do encontro.</p>`},
-  {id:'dados', n:'03', g:'Evidência', nav:'A tese em dados', marg:'Oito números para abrir a conversa. Toque na fonte para abrir o relatório.', html:()=>`
-    <div class="opener"><div><span class="lbl">03 · A tese em dados</span><h1>A adoção correu na frente do <em>modelo de gestão</em>.</h1></div>
+  {id:'fabrica', n:'03', g:'O caso', nav:'A fábrica nova', marg:'O organograma que a mesa recebe e as fichas de cada caixa. Toque numa caixa para abrir a ficha.', html:()=>fabHTML()},
+  {id:'dados', n:'04', g:'Evidência', nav:'A tese em dados', marg:'Oito números para abrir a conversa. Toque na fonte para abrir o relatório.', html:()=>`
+    <div class="opener"><div><span class="lbl">04 · A tese em dados</span><h1>A adoção correu na frente do <em>modelo de gestão</em>.</h1></div>
     <p class="ld">As pessoas já usam IA e agentes. O elo que deveria liderar a transição é o que mais se desgastou. Quase nenhuma empresa redesenhou como lidera essa mistura.</p></div>
     <div class="stats">${STATS.map(s=>`<div class="stat"><div class="v">${s.v}<small>${s.s}</small></div><p>${esc(s.p)}</p>${s.doc?`<button class="src" type="button" data-doc="${s.doc}">${esc(s.src)}</button>`:`<a class="src" href="${s.u}" ${EXT}>${esc(s.src)}</a>`}</div>`).join('')}</div>`},
-  {id:'biblioteca', n:'04', g:'Evidência', nav:'Biblioteca', marg:'Escolha um tema nas abas ou busque por autor, assunto ou número. Os materiais com capa abrem aqui mesmo.', html:()=>libHTML()},
-  {id:'tensoes', n:'05', g:'Leitura crítica', nav:'Onde as fontes discordam', marg:'Nenhum conselho decide com evidência unânime.', html:()=>`
-    <div class="opener"><div><span class="lbl">05 · Onde as fontes discordam</span><h1>Escolher um lado faz parte do <em>trabalho</em>.</h1></div>
+  {id:'biblioteca', n:'05', g:'Evidência', nav:'Biblioteca', marg:'Escolha um tema nas abas ou busque por autor, assunto ou número. Os materiais com capa abrem aqui mesmo.', html:()=>libHTML()},
+  {id:'tensoes', n:'06', g:'Leitura crítica', nav:'Onde as fontes discordam', marg:'Nenhum conselho decide com evidência unânime.', html:()=>`
+    <div class="opener"><div><span class="lbl">06 · Onde as fontes discordam</span><h1>Escolher um lado faz parte do <em>trabalho</em>.</h1></div>
     <p class="ld">Quatro tensões em que pesquisas sérias apontam para lados diferentes, ou em que o mesmo dado sustenta leituras opostas.</p></div>
     <div>${TENSIONS.map(t=>`<div class="tension"><h3>${esc(t.h)}</h3><div class="s"><b>${esc(t.a.w)}</b><p>${esc(t.a.p)}</p></div><div class="s"><b>${esc(t.b.w)}</b><p>${esc(t.b.p)}</p></div></div>`).join('')}</div>`},
-  {id:'ouvir', n:'06', g:'Leitura crítica', nav:'Para ouvir', marg:'Podcasts, entrevistas e webcasts.', html:()=>`
-    <div class="opener"><div><span class="lbl">06 · Para ouvir</span><h1>Para quem prefere <em>ouvir</em>.</h1></div>
+  {id:'ouvir', n:'07', g:'Leitura crítica', nav:'Para ouvir', marg:'Podcasts, entrevistas e webcasts.', html:()=>`
+    <div class="opener"><div><span class="lbl">07 · Para ouvir</span><h1>Para quem prefere <em>ouvir</em>.</h1></div>
     <p class="ld">Dois bons pontos de partida: o episódio da McKinsey sobre a parceria entre pessoas e agentes e a entrevista de Bob Sternfels à HBR, em que ele descreve a própria firma como força de trabalho mista.</p></div>
     <div class="list">${LISTEN.map(l=>`<div><span class="f">${l.f} · ${l.d}</span><div><h3>${esc(l.t)}</h3><p>${esc(l.o)}. ${esc(l.i)}</p></div><a class="go ext" href="${l.u}" ${EXT}>Abrir</a></div>`).join('')}</div>`},
-  {id:'cautelas', n:'07', g:'Leitura crítica', nav:'Cautelas de leitura', marg:'Antes de citar um número, saiba de onde ele vem.', html:()=>`
-    <div class="opener"><div><span class="lbl">07 · Cautelas de leitura</span><h1>Antes de citar, <em>desconfie</em>.</h1></div>
+  {id:'cautelas', n:'08', g:'Leitura crítica', nav:'Cautelas de leitura', marg:'Antes de citar um número, saiba de onde ele vem.', html:()=>`
+    <div class="opener"><div><span class="lbl">08 · Cautelas de leitura</span><h1>Antes de citar, <em>desconfie</em>.</h1></div>
     <p class="ld">A força as a service é a menos estudada: nenhuma consultoria trata o serviço contratado por resultado como objeto de liderança. E boa parte dos números vem de quem vende a solução.</p></div>
     <ul class="cautions">
       <li><b>Viés de origem</b><span>Microsoft, Anthropic, IBM, Nvidia e Accenture vendem agentes ou sua implantação. Os números são úteis, mas não independentes.</span></li>
@@ -548,7 +764,7 @@ function card(x){
 let tab = 'todos';
 function libHTML(){
   const tabs = [{k:'todos', n:'Tudo'}, ...TABS.map(k => THEMES.find(t => t.k === k))];
-  return `<div class="opener"><div><span class="lbl">04 · Biblioteca</span><h1>O que as consultorias <em>já publicaram</em>.</h1></div>
+  return `<div class="opener"><div><span class="lbl">05 · Biblioteca</span><h1>O que as consultorias <em>já publicaram</em>.</h1></div>
     <p class="ld">${ITEMS.length} materiais de 2021 a outubro de 2026, organizados pela pergunta que respondem. ${ITEMS.filter(x=>x.doc).length} podem ser lidos aqui mesmo; os demais abrem na fonte original.</p></div>
     <div class="libbar">
       <div class="tabs" role="tablist" aria-label="Temas">${tabs.map(t => `<button type="button" role="tab" data-tab="${t.k}" aria-selected="${t.k === tab}">${esc(t.n)}<i>${t.k === 'todos' ? ITEMS.length : ITEMS.filter(x => x.k.includes(t.k)).length}</i></button>`).join('')}</div>
@@ -586,6 +802,7 @@ CH.forEach(c => {
 });
 fillLib();
 main.addEventListener('click', e => { const b = e.target.closest('.tabs button'); if (b) setTab(b.dataset.tab, true); });
+main.addEventListener('click', e => { const n = e.target.closest('[data-jd]'); if (!n) return; const d = document.getElementById('jd-' + n.dataset.jd); if (!d) return; d.open = true; d.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'}); });
 $('#libq').addEventListener('input', fillLib);
 $('#libhere').addEventListener('change', fillLib);
 
