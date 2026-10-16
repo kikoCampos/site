@@ -377,7 +377,7 @@ body.on-cover .dock,body.on-cover main{display:none}
 .tacts button:hover{border-color:var(--bordo);color:var(--bordo)}
 @media(max-width:860px){
   .tv{grid-template-columns:1fr;gap:0}
-  .tside{order:-1;top:57px;z-index:5;background:var(--paper);padding:.6rem 0 .5rem;border-bottom:1px solid var(--line);margin-bottom:1rem}
+  .tside{order:-1;top:48px;z-index:5;background:var(--paper);padding:.6rem 0 .5rem;border-bottom:1px solid var(--line);margin-bottom:1rem}
   .trevo svg{max-width:190px}
   .tstat{min-height:0;margin-top:.3rem;font-size:.85rem}
 }
@@ -757,21 +757,21 @@ function fabHTML(){
     <p class="fnote">Fichas no formato de descrição de cargo da Gartner for HR Leaders: resumo da posição, responsabilidades com exemplo, o que é desafiador, habilidades, qualificações e contexto. A empresa, as pessoas e os números são fictícios, compostos para o caso.</p>`;
 }
 
-/* trevo: a mesa responde por caixa e o trevo se acende conforme as respostas */
+/* trevo: a mesa olha capacidades, não caixas; o trevo acende conforme as respostas */
 const TF = {C:'CLT', S:'As a service', P:'PJ', A:'Agentes de IA'};
 const TQ = [
-  {l:'Duração', h:'Por quanto tempo a capacidade é necessária?', o:[['Permanente',{C:3,A:1}],['Pico ou transição',{S:3}],['Pontual ou fracionada',{P:3,S:1}]]},
+  {l:'Duração', h:'Por quanto tempo essa capacidade é necessária?', o:[['Permanente',{C:3,A:1}],['Pico ou transição',{S:3}],['Pontual ou fracionada',{P:3,S:1}]]},
+  {l:'Criticidade', h:'Se ela falhar, o que acontece?', o:[['Para a fábrica ou gera responsabilidade legal',{C:2,A:-2},'crit'],['Atrasa, mas se recupera',{}],['Pouco impacto',{A:1,S:1,P:1}]]},
   {l:'Especificidade', h:'Quanto ela depende do jeito Montadora de fazer?', o:[['Muito',{C:3}],['Em parte',{C:1,S:1}],['Pouco',{P:2,S:1,A:1}]]},
-  {l:'Mercado', h:'Quão difícil é encontrá-la lá fora?', o:[['Fácil',{C:2}],['Difícil',{S:1,P:1}],['Raríssima',{P:2,S:2}]]},
-  {l:'Criticidade', h:'Se essa capacidade falhar, o que acontece?', o:[['Para a fábrica ou gera responsabilidade legal',{C:2,A:-2},'crit'],['Atrasa, mas se recupera',{}],['Pouco impacto',{A:1,S:1,P:1}]]},
-  {l:'Agentes', h:'Boa parte do trabalho é informação repetível, com um padrão claro do que é certo?', o:[['Sim',{A:4}],['Em parte',{A:2}],['Não',{A:-2}]]},
-  {l:'Controle', h:'Vocês vão mandar no dia a dia de quem executa?', o:[['Sim',{C:2,P:-3,S:-1},'ctl'],['Em parte',{C:1,P:-1}],['Não',{S:1,P:1}]]}
+  {l:'Agentes', h:'Boa parte do trabalho é informação repetível, com um padrão claro do que é certo?', o:[['Sim',{A:4}],['Em parte',{A:2}],['Não',{A:-2}]]}
 ];
-const TBOX = () => [DIR, ...REPS];
-let TST = {}, tCur = 'diretor';
-try { TST = JSON.parse(localStorage.getItem('sp-trevo') || '{}') || {}; } catch (e) { TST = {}; }
-const tSave = () => { try { localStorage.setItem('sp-trevo', JSON.stringify(TST)); } catch (e) {} };
-const tGet = k => TST[k] || (TST[k] = {a: Array(TQ.length).fill(null), r: ''});
+const tNew = () => ({id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), n: '', a: Array(TQ.length).fill(null), r: ''});
+let TST = null;
+try { TST = JSON.parse(localStorage.getItem('sp-trevo2') || 'null'); } catch (e) { TST = null; }
+if (!TST || !Array.isArray(TST.list) || !TST.list.length) { const f = tNew(); TST = {list: [f], cur: f.id}; }
+const tSave = () => { try { localStorage.setItem('sp-trevo2', JSON.stringify(TST)); } catch (e) {} };
+const tCurr = () => TST.list.find(x => x.id === TST.cur) || TST.list[0];
+const tName = (x, i) => x.n.trim() || 'Capacidade ' + (i + 1);
 function tScore(st){
   const s = {C:0, S:0, P:0, A:0}, f = {};
   st.a.forEach((k, i) => { if (k === null) return; const o = TQ[i].o[k]; for (const x in o[1]) s[x] += o[1][x]; if (o[2]) f[o[2]] = 1; });
@@ -785,12 +785,13 @@ function tLeaf(rot, k, tx, ty){
     <text data-t="${k}" x="${tx}" y="${ty}" text-anchor="middle" fill="var(--bordo)">${esc(TF[k])}</text></g>`;
 }
 function trevoHTML(){
-  return `<div class="opener"><div><span class="lbl">04 · O trevo</span><h1>Caixa a caixa, o trevo mostra a <em>combinação</em>.</h1></div>
-    <p class="ld">O trevo de Charles Handy ganhou uma quarta folha. Para cada caixa do organograma, a mesa responde seis perguntas e vê quais folhas se acendem. O resultado abre a conversa; a escolha continua sendo da mesa.</p></div>
+  return `<div class="opener"><div><span class="lbl">04 · O trevo</span><h1>Olhem a <em>capacidade</em>, não a caixa.</h1></div>
+    <p class="ld">O organograma é só o ponto de partida. Uma caixa pode esconder mais de uma capacidade, e cada capacidade pode pedir uma força de trabalho diferente. Para cada uma, a mesa responde quatro perguntas e vê quais folhas do trevo se acendem.</p></div>
     <div class="tv">
       <div>
-        <div class="tv-pick"><label for="tbox">Caixa que a mesa está analisando</label>
-          <select id="tbox">${TBOX().map(x => `<option value="${x.k}">${esc(x.t)}</option>`).join('')}</select></div>
+        <div class="tv-pick"><label for="tname">Capacidade que a mesa está olhando</label>
+          <input id="tname" type="text" maxlength="90" autocomplete="off" placeholder="Negociar com integradores" style="width:100%;font:500 1rem var(--sans);padding:.75rem .8rem;border:1px solid var(--line2);border-radius:0;background:var(--paper);color:var(--ink)">
+          <p class="soft" style="font-size:.88rem">Escrevam com as próprias palavras o que precisa ser feito, não o nome do cargo.</p></div>
         <div id="tqs" style="margin-top:1.4rem">${TQ.map((q, i) => `<div class="tq"><span class="n">${String(i + 1).padStart(2, '0')} · ${esc(q.l)}</span><h3>${esc(q.h)}</h3>
           <div class="ops">${q.o.map((o, k) => `<button type="button" data-q="${i}" data-o="${k}" aria-pressed="false">${esc(o[0])}</button>`).join('')}</div></div>`).join('')}</div>
         <div class="tres" id="tres"></div>
@@ -803,50 +804,56 @@ function trevoHTML(){
         <p class="tstat" id="tstat"></p>
       </div>
     </div>
-    <div class="tsum"><h2>As dez caixas</h2><p class="soft" style="margin-top:.4rem;font-size:.93rem">Toque numa caixa para voltar a ela. As respostas ficam guardadas neste aparelho.</p>
+    <div class="tsum"><h2>As capacidades da mesa</h2><p class="soft" id="tcount" style="margin-top:.4rem;font-size:.93rem"></p>
       <ol id="tlist"></ol>
-      <div class="tacts"><button type="button" id="tcopy">Copiar resumo da mesa</button><button type="button" id="tclear">Recomeçar esta caixa</button></div>
+      <div class="tacts"><button type="button" id="tadd">Nova capacidade</button><button type="button" id="tcopy">Copiar resumo da mesa</button><button type="button" id="tdel">Apagar esta capacidade</button></div>
       <p class="soft" id="tmsg" style="margin-top:.6rem;font-size:.88rem" aria-live="polite"></p></div>`;
 }
 function tDraw(){
-  const st = tGet(tCur), r = tScore(st), mx = Math.max(8, r.s[r.top]);
+  const st = tCurr(), r = tScore(st), mx = Math.max(6, r.s[r.top]);
+  if (document.activeElement !== $('#tname')) $('#tname').value = st.n;
   document.querySelectorAll('#tqs button').forEach(b => b.setAttribute('aria-pressed', String(st.a[+b.dataset.q] === +b.dataset.o)));
   document.querySelectorAll('.trevo .lf').forEach(p => { const v = Math.max(0, r.s[p.dataset.f]) / mx; p.setAttribute('fill-opacity', (.05 + .85 * v).toFixed(2)); });
   document.querySelectorAll('.trevo text').forEach(t => { const v = Math.max(0, r.s[t.dataset.t]) / mx; t.setAttribute('fill', v > .55 ? 'var(--paper)' : 'var(--bordo)'); });
   const n = st.a.filter(k => k !== null).length;
   $('#tstat').innerHTML = !n ? 'As folhas se acendem conforme as respostas.' : r.done
     ? `<b>${esc(TF[r.top])}</b>${r.second ? ` com ${esc(TF[r.second])}` : ''}` : `${n} de ${TQ.length} respostas`;
-  let h = '';
+  let h;
   if (r.done) {
-    const al = [];
-    if (r.f.ctl && [r.top, r.second].includes('P')) al.push('Com controle do dia a dia, PJ vira vínculo empregatício. Revejam a escolha.');
-    if (r.f.ctl && [r.top, r.second].includes('S')) al.push('Quem é contratado por resultado não recebe ordens no dia a dia. Revejam a escolha.');
-    if (r.f.crit && [r.top, r.second].includes('A')) al.push('Agente numa capacidade crítica precisa de dono humano com nome e cargo.');
+    const al = [], two = [r.top, r.second];
+    if (two.includes('P') || two.includes('S')) al.push('Se a mesa vai mandar no dia a dia de quem executa, essa capacidade não pode ser PJ nem as a service. Aí ela é CLT.');
+    if (r.f.crit && two.includes('A')) al.push('Agente numa capacidade crítica precisa de dono humano, com nome e cargo.');
     h = `<span class="lbl">Leitura da mesa</span><p class="main">${esc(TF[r.top])}</p><p class="sub">${r.second ? 'Com ' + esc(TF[r.second]) + ' em meio tom.' : 'Sem uma segunda força forte.'}</p>
       ${al.map(a => `<p class="talert">${esc(a)}</p>`).join('')}
-      <p class="q">Quem responde se der errado?</p><textarea id="tresp" placeholder="Nome do cargo e o que ele responde">${esc(st.r)}</textarea>`;
+      <p class="q">Quem responde se der errado?</p><textarea id="tresp" placeholder="O cargo e o que ele responde">${esc(st.r)}</textarea>`;
   } else {
-    h = `<p class="soft" style="font-size:.95rem">Respondam as ${TQ.length} perguntas para ver a leitura desta caixa. Faltam ${TQ.length - n}.</p>`;
+    h = `<p class="soft" style="font-size:.95rem">Respondam as ${TQ.length} perguntas para ver a leitura desta capacidade. Faltam ${TQ.length - n}.</p>`;
   }
   $('#tres').innerHTML = h;
-  const ta = $('#tresp'); if (ta) ta.addEventListener('input', () => { tGet(tCur).r = ta.value; tSave(); });
-  $('#tlist').innerHTML = TBOX().map(x => { const s = TST[x.k], q = s ? tScore(s) : null;
-    const v = q && q.done ? TF[q.top] + (q.second ? ' + ' + TF[q.second] : '') : (s && s.a.some(k => k !== null) ? 'Em andamento' : '—');
-    return `<li><button type="button" data-tb="${x.k}" class="${x.k === tCur ? 'cur' : ''}"><span>${esc(x.t)}</span><span>${esc(v)}</span></button></li>`; }).join('');
+  const ta = $('#tresp'); if (ta) ta.addEventListener('input', () => { tCurr().r = ta.value; tSave(); });
+  const L = TST.list;
+  $('#tcount').textContent = L.length === 1 ? 'Uma capacidade até agora. Quando terminarem, abram a próxima.' : `${L.length} capacidades até agora. Toque numa delas para voltar.`;
+  $('#tlist').innerHTML = L.map((x, i) => { const q = tScore(x);
+    const v = q.done ? TF[q.top] + (q.second ? ' + ' + TF[q.second] : '') : (x.a.some(k => k !== null) ? 'Em andamento' : '—');
+    return `<li><button type="button" data-tb="${x.id}" class="${x.id === TST.cur ? 'cur' : ''}"><span>${esc(tName(x, i))}</span><span>${esc(v)}</span></button></li>`; }).join('');
 }
+function tTop(){ const t = $('#tname'); if (t) window.scrollTo({top: Math.max(0, t.getBoundingClientRect().top + window.scrollY - 90), behavior: 'smooth'}); }
 function tInit(){
-  const sel = $('#tbox'); sel.value = tCur;
-  sel.addEventListener('change', () => { tCur = sel.value; tDraw(); });
+  const nm = $('#tname');
+  nm.addEventListener('input', () => { tCurr().n = nm.value; tSave(); tDraw(); });
   $('#tqs').addEventListener('click', e => { const b = e.target.closest('button[data-q]'); if (!b) return;
-    const st = tGet(tCur), q = +b.dataset.q, o = +b.dataset.o; st.a[q] = st.a[q] === o ? null : o; tSave(); tDraw(); });
-  $('#tlist').addEventListener('click', e => { const b = e.target.closest('[data-tb]'); if (!b) return; tCur = b.dataset.tb; sel.value = tCur; tDraw();
-    const t = $('#tbox'); if (t) window.scrollTo({top: Math.max(0, t.getBoundingClientRect().top + window.scrollY - 90), behavior: 'smooth'}); });
-  $('#tclear').addEventListener('click', () => { delete TST[tCur]; tSave(); tDraw(); $('#tmsg').textContent = 'Caixa zerada.'; });
+    const st = tCurr(), q = +b.dataset.q, o = +b.dataset.o; st.a[q] = st.a[q] === o ? null : o; tSave(); tDraw(); });
+  $('#tlist').addEventListener('click', e => { const b = e.target.closest('[data-tb]'); if (!b) return; TST.cur = b.dataset.tb; tSave(); tDraw(); tTop(); });
+  $('#tadd').addEventListener('click', () => { const f = tNew(); TST.list.push(f); TST.cur = f.id; tSave(); tDraw(); $('#tmsg').textContent = ''; tTop(); setTimeout(() => nm.focus(), 300); });
+  $('#tdel').addEventListener('click', () => {
+    if (TST.list.length === 1) { const f = tNew(); TST.list = [f]; TST.cur = f.id; }
+    else { TST.list = TST.list.filter(x => x.id !== TST.cur); TST.cur = TST.list[TST.list.length - 1].id; }
+    tSave(); tDraw(); $('#tmsg').textContent = 'Capacidade apagada.'; });
   $('#tcopy').addEventListener('click', async () => {
-    const lines = TBOX().map(x => { const s = TST[x.k]; if (!s) return null; const q = tScore(s); if (!q.done) return null;
-      return `${x.t}: ${TF[q.top]}${q.second ? ' com ' + TF[q.second] : ''}${s.r ? '. Quem responde: ' + s.r : ''}`; }).filter(Boolean);
-    if (!lines.length) { $('#tmsg').textContent = 'Nenhuma caixa concluída ainda.'; return; }
-    const txt = 'Sem Playbook · Leitura da mesa\n\n' + lines.join('\n');
+    const lines = TST.list.map((x, i) => { const q = tScore(x); if (!q.done) return null;
+      return `${tName(x, i)}: ${TF[q.top]}${q.second ? ' com ' + TF[q.second] : ''}${x.r ? '. Quem responde: ' + x.r : ''}`; }).filter(Boolean);
+    if (!lines.length) { $('#tmsg').textContent = 'Nenhuma capacidade concluída ainda.'; return; }
+    const txt = 'Sem Playbook · Capacidades da mesa\n\n' + lines.join('\n');
     try { await navigator.clipboard.writeText(txt); $('#tmsg').textContent = 'Resumo copiado. Cole na mensagem ou nas notas da mesa.'; }
     catch (e) { $('#tmsg').textContent = 'Não foi possível copiar neste aparelho.'; }
   });
@@ -880,7 +887,7 @@ const CH = [
     <p class="pull"><span>Antes da noite, leia o caso e as fichas.</span><b>Na mesa, o tempo é para desenhar.</b></p>
     <p class="note">A plataforma da atividade abre no dia do encontro.</p>`},
   {id:'fabrica', n:'03', g:'O caso', nav:'A fábrica nova', marg:'O organograma que a mesa recebe e as fichas de cada caixa. Toque numa caixa para abrir a ficha.', html:()=>fabHTML()},
-  {id:'trevo', n:'04', g:'O caso', nav:'O trevo', marg:'Seis perguntas por caixa. As folhas acendem conforme a mesa responde; a escolha é da mesa.', html:()=>trevoHTML()},
+  {id:'trevo', n:'04', g:'O caso', nav:'O trevo', marg:'Quatro perguntas por capacidade. As folhas acendem conforme a mesa responde; a escolha é da mesa.', html:()=>trevoHTML()},
   {id:'dados', n:'05', g:'Evidência', nav:'Os números', marg:'Oito números para abrir a conversa. Toque na fonte para abrir o relatório.', html:()=>`
     <div class="opener"><div><span class="lbl">05 · Os números</span><h1>A adoção correu na frente do <em>modelo de gestão</em>.</h1></div>
     <p class="ld">As pessoas já usam IA e agentes. O elo que deveria liderar a transição é o que mais se desgastou. Quase nenhuma empresa redesenhou como lidera essa mistura.</p></div>
