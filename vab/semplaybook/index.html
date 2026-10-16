@@ -354,7 +354,8 @@ body.on-cover .dock,body.on-cover main{display:none}
 .tside{position:sticky;top:5.2rem}
 .trevo svg{display:block;width:100%;max-width:340px;height:auto;margin:0 auto}
 .trevo .lf{transition:fill-opacity .55s ease}
-.trevo text{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;transition:fill .55s ease}
+.trevo .iv{font-family:var(--sans);font-size:11px;letter-spacing:0;text-transform:none;font-style:italic}
+.trevo text{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;transition:fill .55s ease}
 .tstat{margin-top:.6rem;text-align:center;font-size:.92rem;color:var(--ink2);min-height:2.8em}
 .tstat b{font-weight:500;color:var(--wine)}
 .tres{border-top:1px solid var(--bordo);padding-top:1.2rem}
@@ -362,6 +363,8 @@ body.on-cover .dock,body.on-cover main{display:none}
 .tres .main{font-size:clamp(1.5rem,3vw,2rem);font-weight:300;line-height:1.15;color:var(--wine)}
 .tres .sub{margin-top:.3rem;color:var(--ink2)}
 .talert{border-left:2px solid var(--bordo);padding:.15rem 0 .15rem .9rem;margin-top:1rem;font-size:.95rem}
+.talert.stop{border-left:3px solid #A86400}
+.talert.stop b{display:block;font-family:var(--mono);font-weight:500;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#8A5200;margin-bottom:.25rem}
 .tres textarea{width:100%;margin-top:.6rem;min-height:5.5rem;font:400 1rem/1.5 var(--sans);padding:.7rem .8rem;border:1px solid var(--line2);border-radius:0;background:var(--paper);color:var(--ink);resize:vertical}
 .tres .q{margin-top:1.4rem;font-size:1.05rem}
 .tsum{border-top:1px solid var(--line);padding-top:1.2rem}
@@ -378,7 +381,7 @@ body.on-cover .dock,body.on-cover main{display:none}
 @media(max-width:860px){
   .tv{grid-template-columns:1fr;gap:0}
   .tside{order:-1;top:48px;z-index:5;background:var(--paper);padding:.6rem 0 .5rem;border-bottom:1px solid var(--line);margin-bottom:1rem}
-  .trevo svg{max-width:190px}
+  .trevo svg{max-width:220px}
   .tstat{min-height:0;margin-top:.3rem;font-size:.85rem}
 }
 @media print{body{display:none}}
@@ -782,7 +785,8 @@ function tScore(st){
 }
 function tLeaf(rot, k, tx, ty){
   return `<g><path class="lf" data-f="${k}" d="M0 0 C -40 -40 -112 -58 -98 -128 C -88 -176 -30 -182 0 -142 C 30 -182 88 -176 98 -128 C 112 -58 40 -40 0 0 Z" transform="translate(200 200) rotate(${rot}) translate(0 -16) scale(.55)" fill="var(--bordo)" fill-opacity=".05" stroke="var(--bordo)" stroke-width="1.6" stroke-linejoin="round"/>
-    <text data-t="${k}" x="${tx}" y="${ty}" text-anchor="middle" fill="var(--bordo)">${esc(TF[k])}</text></g>`;
+    <text data-t="${k}" x="${tx}" y="${ty - 4}" text-anchor="middle" fill="var(--bordo)">${esc(TF[k])}</text>
+    <text class="iv" data-i="${k}" x="${tx}" y="${ty + 10}" text-anchor="middle" fill="var(--bordo)"></text></g>`;
 }
 function trevoHTML(){
   return `<div class="opener"><div><span class="lbl">04 · O trevo</span><h1>Olhem a <em>capacidade</em>, não a caixa.</h1></div>
@@ -811,20 +815,21 @@ function trevoHTML(){
 }
 function tDraw(){
   const st = tCurr(), r = tScore(st), mx = Math.max(6, r.s[r.top]);
+  const n = st.a.filter(k => k !== null).length;
   if (document.activeElement !== $('#tname')) $('#tname').value = st.n;
   document.querySelectorAll('#tqs button').forEach(b => b.setAttribute('aria-pressed', String(st.a[+b.dataset.q] === +b.dataset.o)));
   document.querySelectorAll('.trevo .lf').forEach(p => { const v = Math.max(0, r.s[p.dataset.f]) / mx; p.setAttribute('fill-opacity', (.05 + .85 * v).toFixed(2)); });
-  document.querySelectorAll('.trevo text').forEach(t => { const v = Math.max(0, r.s[t.dataset.t]) / mx; t.setAttribute('fill', v > .55 ? 'var(--paper)' : 'var(--bordo)'); });
-  const n = st.a.filter(k => k !== null).length;
+  document.querySelectorAll('.trevo text').forEach(t => { const k = t.dataset.t || t.dataset.i, v = Math.max(0, r.s[k]) / mx; t.setAttribute('fill', v > .55 ? 'var(--paper)' : 'var(--bordo)');
+    if (t.dataset.i) t.textContent = !n ? '' : v > .66 ? 'forte' : v > .33 ? 'meio tom' : v > 0 ? 'fraca' : 'apagada'; });
   $('#tstat').innerHTML = !n ? 'As folhas se acendem conforme as respostas.' : r.done
     ? `<b>${esc(TF[r.top])}</b>${r.second ? ` com ${esc(TF[r.second])}` : ''}` : `${n} de ${TQ.length} respostas`;
   let h;
   if (r.done) {
     const al = [], two = [r.top, r.second];
-    if (two.includes('P') || two.includes('S')) al.push('Se a mesa vai mandar no dia a dia de quem executa, essa capacidade não pode ser PJ nem as a service. Aí ela é CLT.');
+    const stop = two.includes('P') || two.includes('S') ? '<p class="talert stop"><b>Atenção</b>Se a mesa vai mandar no dia a dia de quem executa, essa capacidade não pode ser PJ nem as a service. Aí ela é CLT.</p>' : '';
     if (r.f.crit && two.includes('A')) al.push('Agente numa capacidade crítica precisa de dono humano, com nome e cargo.');
     h = `<span class="lbl">Leitura da mesa</span><p class="main">${esc(TF[r.top])}</p><p class="sub">${r.second ? 'Com ' + esc(TF[r.second]) + ' em meio tom.' : 'Sem uma segunda força forte.'}</p>
-      ${al.map(a => `<p class="talert">${esc(a)}</p>`).join('')}
+      ${stop}${al.map(a => `<p class="talert">${esc(a)}</p>`).join('')}
       <p class="q">Quem responde se der errado?</p><textarea id="tresp" placeholder="O cargo e o que ele responde">${esc(st.r)}</textarea>`;
   } else {
     h = `<p class="soft" style="font-size:.95rem">Respondam as ${TQ.length} perguntas para ver a leitura desta capacidade. Faltam ${TQ.length - n}.</p>`;
