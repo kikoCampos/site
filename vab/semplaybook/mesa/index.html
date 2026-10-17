@@ -164,7 +164,7 @@ textarea.short{min-height:2.9rem}
       </div>
     </section>
 
-    <p class="foot">Se a plataforma falhar, a foto da página 3 impressa cumpre o envio: entregue ao operador.</p>
+    <p class="foot">Se a plataforma falhar, a foto da última página do Anexo 9 cumpre o envio: entregue ao operador.</p>
   </div>
 </main>
 
@@ -305,7 +305,7 @@ $('#enviar').addEventListener('click', async () => {
     S.sentAt = Date.now(); S.sentHash = hash(p); save(); sending = false; status();
   } catch (err) {
     sending = false;
-    status('Não enviou. Tentem de novo em instantes; se não der, entreguem a foto da página 3 ao operador.', 'err');
+    status('Não enviou. Tentem de novo em instantes; se não der, entreguem a foto da última página do Anexo 9 ao operador.', 'err');
   }
 });
 
