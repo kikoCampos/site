@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="theme-color" content="#4A161D">
+<title>Telão · Sem Playbook</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../comite/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Telão: o quadro da sala de caso. Uma coluna por mesa; três leituras visíveis ao mesmo tempo:
+   inclinação e recomendação, risco aceito e o que faria mudar de ideia. Toque numa mesa para ampliá-la. */
+:root{
+  --wine:#4A161D; --bordo:#7A2A33; --rose:#E3B9BF; --rose2:#F0D9DC;
+  --paper:#F6F1EF; --ink:#2B1418; --ink2:#6B5559; --mute:#9A8589; --line:#DCCFD1;
+  --sans:"Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", "Courier New", monospace;
+  --fs:clamp(13px,1.02vw,22px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--fs);line-height:1.38;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+p{margin:0}
+[hidden]{display:none!important}
+.top{display:flex;align-items:center;gap:1.4em;padding:.9em 2.2vw;background:var(--wine);color:#fff}
+.top svg{height:1.7em;width:auto;color:var(--rose)}
+.top h1{font-weight:400;font-size:1.35em;letter-spacing:-.01em;margin:0}
+.top .sp{flex:1}
+.top .st{font-family:var(--mono);font-size:.78em;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+.wrap{flex:1;overflow:auto;padding:1.2em 2.2vw 1.6em}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th,td{text-align:left;vertical-align:top;padding:.7em .9em .8em 0}
+thead th{font-weight:400;border-bottom:1px solid var(--bordo);padding-bottom:.6em}
+thead th button{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
+thead th .mn{font-size:1.9em;font-weight:300;letter-spacing:-.03em;color:var(--wine)}
+thead th .ok{display:block;font-family:var(--mono);font-size:.68em;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+thead th .ok.y{color:var(--bordo)}
+th.rl{width:10.5em;font-family:var(--mono);font-weight:400;font-size:.7em;letter-spacing:.16em;text-transform:uppercase;color:var(--bordo);padding-top:1.15em}
+tbody tr{border-bottom:1px solid var(--line)}
+tbody tr.k{border-bottom:1px solid var(--bordo)}
+td{color:var(--ink)}
+td .pr{font-size:2.2em;font-weight:300;line-height:1;color:var(--wine);letter-spacing:-.03em}
+td .pr small{font-size:.42em;letter-spacing:0;color:var(--ink2);margin-left:.3em}
+td .ch{font-family:var(--mono);font-size:.68em;letter-spacing:.12em;text-transform:uppercase;color:var(--bordo);margin-top:.35em}
+td .tag{display:block;font-family:var(--mono);font-size:.64em;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:.4em}
+td .tag:first-child{margin-top:0}
+td .wait{color:var(--mute)}
+td ol{margin:0;padding-left:1.1em}
+td li + li{margin-top:.25em}
+
+/* uma mesa ampliada, enquanto o João pergunta */
+.one{position:fixed;inset:0;z-index:20;background:var(--paper);display:flex;flex-direction:column}
+.one .body{flex:1;overflow:auto;padding:2.4vw 5vw;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:1.6em 4vw;align-content:start;font-size:1.45em}
+.one .big{font-size:4.2em;font-weight:300;line-height:1;color:var(--wine);letter-spacing:-.04em}
+.one .lb{font-family:var(--mono);font-size:.5em;letter-spacing:.18em;text-transform:uppercase;color:var(--bordo);display:block;margin-bottom:.35em}
+.one .blk{border-top:1px solid var(--bordo);padding-top:.7em}
+.one .blk + .blk{margin-top:1.1em}
+.one ol{margin:0;padding-left:1.1em}
+.one .x{background:none;border:1px solid rgba(255,255,255,.5);color:#fff;font:500 .8em var(--sans);padding:.45em 1em;cursor:pointer}
+
+.tools{display:flex;gap:1em;justify-content:flex-end;padding:0 2.2vw .8em;opacity:.35;transition:opacity .2s}
+.tools:hover{opacity:1}
+.tools button{background:none;border:1px solid var(--line);color:var(--ink2);font:500 .72em var(--sans);padding:.45em .9em;cursor:pointer}
+.msg{padding:2em 2.2vw;color:var(--ink2);max-width:60ch}
+</style>
+</head>
+<body>
+<header class="top">
+  <svg viewBox="0 0 24 40" aria-hidden="true"><path d="M3 2 L10 38 M9 2 L16 38 M15 8 L21 38" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+  <h1>Comitê de Pessoas · Recomendações ao conselho</h1><span class="sp"></span>
+  <span class="st" id="st"></span>
+</header>
+<div class="wrap" id="wrap"></div>
+<div class="tools"><button type="button" id="copy">Copiar para o João</button><button type="button" id="full">Tela cheia</button></div>
+<div class="one" id="one" hidden></div>
+
+<script>
+/* Mesmo endereço do Apps Script usado em mesa/index.html. O telão abre com ?k=CHAVE_TELAO.
+   ?n=5 fixa o número de mesas; ?demo=1 mostra dados de ensaio. */
+const ENDPOINT = "";
+const qs = new URLSearchParams(location.search);
+const KEY = qs.get('k') || '', DEMO = qs.get('demo') === '1';
+const NFIX = parseInt(qs.get('n') || '0', 10) || 0;
+const NOME = {A: 'Robotizada', B: 'Seletiva', C: 'Capital leve', Q: 'Quarta solução'};
+const LET = k => k === 'Q' ? '4ª' : (k || '');
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const hora = t => t ? new Date(t).toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'}).replace(':', 'h') : '';
+
+const SAMPLE = [
+  {mesa: 1, inclinacao: 'C', rec: {proposta: 'B', condicao1: 'Pedir ao Comitê global, até 4/11, a automação da linha de baterias como opção, para decidir em 2028.', condicao2: 'Coorte extra de reconversão já contratada se a adesão ficar abaixo de 72% dos interessados.', cap_operacao: 'Certificar técnicos de bateria em escala, dentro de casa.', cap_backoffice: 'Planejar a força de trabalho das duas fábricas como um só sistema.', risco: 'Atraso de três meses na rampa se a certificação não chegar a 1.250.', mudar: 'Adesão abaixo de 1.550 inscritos na primeira chamada, em janeiro.'}},
+  {mesa: 2, inclinacao: 'A', rec: {proposta: 'A', condicao1: 'Pedido completo ao Comitê global até 4/11, para a pauta de 18/11.', condicao2: 'Reconverter pelo menos 600 da Planta 1 até 2029, com metas por coorte.', cap_operacao: 'Comissionar e manter automação e agentes na linha.', cap_backoffice: 'Dono humano para cada agente, com limites e avaliação.', risco: 'Custo de conversão alto se a demanda vier no cenário pessimista.', mudar: 'Sinal do Comitê global de que a pauta de 18/11 não sai.'}},
+  {mesa: 3, inclinacao: 'B', rec: {proposta: 'Q', quarta: 'B na fábrica e C no back-office: núcleo CLT reconvertido na Planta 2 e serviços de back-office contratados por volume, com revisão em 2028.', cap_operacao: 'Transferir conhecimento de processo da Planta 1 para a Planta 2.', cap_backoffice: 'Gerir contratos por nível de serviço.', risco: 'Exposição à convenção dos metalúrgicos nos contratados.', mudar: 'Validação financeira mostrando que a combinação não bate a meta.'}},
+  {mesa: 4, inclinacao: 'B'}
+];
+
+let DATA = [], last = null;
+async function load(){
+  if (DEMO) { DATA = SAMPLE; last = Date.now(); return draw(); }
+  if (!ENDPOINT) { $('#wrap').innerHTML = '<p class="msg">O telão ainda não está ligado à planilha. Para ensaiar, abra com ?demo=1 no endereço.</p>'; return; }
+  if (!KEY) { $('#wrap').innerHTML = '<p class="msg">Falta a chave do telão no endereço (?k=…).</p>'; return; }
+  try {
+    const r = await fetch(ENDPOINT + '?k=' + encodeURIComponent(KEY) + '&t=' + Date.now());
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.erro || 'erro');
+    DATA = j.mesas; last = Date.now(); draw();
+  } catch (e) { $('#st').textContent = 'Sem conexão · última leitura ' + (hora(last) || '—'); }
+}
+
+function mesas(){
+  const n = Math.max(NFIX, ...DATA.map(m => +m.mesa), 1);
+  return Array.from({length: n}, (_, i) => DATA.find(m => +m.mesa === i + 1) || {mesa: i + 1});
+}
+function propCell(m){
+  const r = m.rec;
+  if (!r) return m.inclinacao ? `<p class="pr">${LET(m.inclinacao)}<small>inclinação</small></p><p class="tag">Recomendação a caminho</p>` : '<p class="wait">Aguardando</p>';
+  const mudou = m.inclinacao && m.inclinacao !== r.proposta;
+  return `<p class="pr">${LET(r.proposta)}<small>${esc(NOME[r.proposta] || '')}</small></p>
+    <p class="ch">${m.inclinacao ? (mudou ? `Começou em ${LET(m.inclinacao)}` : `Manteve a inclinação`) : ''}</p>`;
+}
+function condCell(r){
+  if (!r) return '';
+  if (r.proposta === 'Q') return esc(r.quarta);
+  const c = [r.condicao1, r.condicao2].filter(Boolean);
+  return c.length ? `<ol>${c.map(x => `<li>${esc(x)}</li>`).join('')}</ol>` : '<span class="wait">Sem condições</span>';
+}
+const capCell = r => r ? `<span class="tag">Operação</span>${esc(r.cap_operacao)}<span class="tag">Back-office</span>${esc(r.cap_backoffice)}` : '';
+
+function draw(){
+  const M = mesas(), env = M.filter(m => m.rec).length;
+  $('#st').textContent = `${env} de ${M.length} mesas enviaram · ${hora(last)}`;
+  const row = (lbl, f, cls) => `<tr class="${cls || ''}"><th class="rl" scope="row">${lbl}</th>${M.map(m => `<td>${f(m)}</td>`).join('')}</tr>`;
+  $('#wrap').innerHTML = `<table><thead><tr><th class="rl"></th>${M.map(m => `<th scope="col"><button type="button" data-m="${m.mesa}"><span class="mn">Mesa ${m.mesa}</span><span class="ok ${m.rec ? 'y' : ''}">${m.rec ? 'Enviada ' + hora(m.rec.at) : (m.inclinacao ? 'Em conversa' : '—')}</span></button></th>`).join('')}</tr></thead>
+    <tbody>
+      ${row('Recomendação', propCell, 'k')}
+      ${row('Condições ou quarta solução', m => condCell(m.rec))}
+      ${row('Capacidade crítica', m => capCell(m.rec))}
+      ${row('Risco aceito', m => m.rec ? esc(m.rec.risco) : '', 'k')}
+      ${row('Mudaria de ideia se', m => m.rec ? esc(m.rec.mudar) : '')}
+    </tbody></table>`;
+  if (!$('#one').hidden) openOne(+$('#one').dataset.m);
+}
+
+function openOne(n){
+  const m = mesas().find(x => +x.mesa === n); if (!m) return;
+  const r = m.rec, o = $('#one'); o.dataset.m = n; o.hidden = false;
+  o.innerHTML = `<header class="top"><h1>Mesa ${n}</h1><span class="sp"></span><button class="x" type="button" id="close">Voltar ao quadro</button></header>
+    <div class="body">${r ? `
+      <div><span class="lb">Recomendação</span><p class="big">${LET(r.proposta)}</p><p>${esc(NOME[r.proposta] || '')}</p>
+        ${m.inclinacao ? `<p class="lb" style="margin-top:1.2em">${m.inclinacao !== r.proposta ? 'Começou em ' + LET(m.inclinacao) : 'Manteve a inclinação'}</p>` : ''}</div>
+      <div>
+        <div class="blk"><span class="lb">${r.proposta === 'Q' ? 'A quarta solução' : 'Condições'}</span>${condCell(r)}</div>
+        <div class="blk"><span class="lb">Capacidade crítica · operação</span>${esc(r.cap_operacao)}</div>
+        <div class="blk"><span class="lb">Capacidade crítica · back-office</span>${esc(r.cap_backoffice)}</div>
+        <div class="blk"><span class="lb">Risco aceito</span>${esc(r.risco)}</div>
+        <div class="blk"><span class="lb">Mudaria de ideia se</span>${esc(r.mudar)}</div>
+      </div>` : '<p class="msg">Esta mesa ainda não enviou a recomendação.</p>'}</div>`;
+  $('#close').onclick = () => { o.hidden = true; };
+}
+$('#wrap').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (b) openOne(+b.dataset.m); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') $('#one').hidden = true;
+  if (/^[1-9]$/.test(e.key)) openOne(+e.key);
+});
+
+$('#copy').addEventListener('click', async () => {
+  const t = mesas().map(m => {
+    const r = m.rec; if (!r) return `Mesa ${m.mesa}: ainda não enviou${m.inclinacao ? ' (inclinação inicial ' + LET(m.inclinacao) + ')' : ''}.`;
+    const c = r.proposta === 'Q' ? 'Quarta solução: ' + r.quarta : [r.condicao1, r.condicao2].filter(Boolean).map((x, i) => `Condição ${i + 1}: ${x}`).join('\n') || 'Sem condições.';
+    return `Mesa ${m.mesa}\nInclinação inicial: ${LET(m.inclinacao) || '—'}\nRecomendação: ${LET(r.proposta)} · ${NOME[r.proposta]}\n${c}\nCapacidade crítica na operação: ${r.cap_operacao}\nCapacidade crítica no back-office: ${r.cap_backoffice}\nRisco aceito: ${r.risco}\nMudaria de ideia se: ${r.mudar}`;
+  }).join('\n\n');
+  try { await navigator.clipboard.writeText(t); $('#copy').textContent = 'Copiado'; } catch (e) { $('#copy').textContent = 'Não copiou'; }
+  setTimeout(() => { $('#copy').textContent = 'Copiar para o João'; }, 2000);
+});
+$('#full').addEventListener('click', () => { const d = document.documentElement; if (!document.fullscreenElement && d.requestFullscreen) d.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); });
+
+load();
+if (!DEMO) setInterval(load, 8000);
+</script>
+</body>
+</html>

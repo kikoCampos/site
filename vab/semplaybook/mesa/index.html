@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="theme-color" content="#4A161D">
+<title>Mesa · Sem Playbook</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../comite/favicon-32.png">
+<link rel="apple-touch-icon" href="../comite/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Formulário da mesa: inclinação inicial (um toque) e a recomendação em quatro itens.
+   Identidade VAB; uma coluna, pensada para o celular de uma pessoa por mesa. */
+:root{
+  --wine:#4A161D; --bordo:#7A2A33; --rose:#E3B9BF; --rose2:#F0D9DC;
+  --paper:#F6F1EF; --paper2:#EFE7E4; --ink:#2B1418; --ink2:#6B5559; --mute:#9A8589;
+  --line:#DCCFD1; --line2:#C9B4B8; --ok:#3F5E45;
+  --sans:"Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", "Courier New", monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:400;letter-spacing:-.02em;margin:0;text-wrap:balance}
+p{margin:0}
+[hidden]{display:none!important}
+.lbl{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bordo)}
+.lbl::before{content:"";width:12px;height:12px;background:var(--bordo);flex:none}
+.soft{color:var(--ink2)}
+
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:.8rem;padding:.75rem 16px;background:var(--wine);color:#fff}
+.top svg{height:20px;width:auto;color:var(--rose)}
+.top b{font-weight:500;font-size:.92rem}
+.top .sp{flex:1}
+.top .m{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--rose)}
+.top button{background:none;border:0;color:var(--rose);font:inherit;font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;padding:.3rem 0}
+
+main{max-width:640px;margin:0 auto;padding:1.4rem 16px 4rem}
+section + section{margin-top:2.6rem}
+.hd{border-bottom:1px solid var(--bordo);padding-bottom:1rem}
+.hd h1{font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.1;margin-top:.7rem}
+.hd p{margin-top:.6rem;color:var(--ink2);font-size:.95rem}
+.demo{margin-bottom:1.2rem;border-left:2px solid var(--bordo);padding:.2rem 0 .2rem .8rem;font-size:.86rem;color:var(--ink2)}
+
+/* escolha da mesa */
+.mesas{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-top:1.2rem}
+.mesas button{font:300 1.8rem var(--sans);min-height:72px;border:1px solid var(--line2);background:none;color:var(--ink);cursor:pointer}
+.mesas button:hover{border-color:var(--bordo);color:var(--bordo)}
+
+/* opções de proposta */
+.ops{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1.1rem}
+.ops button{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;text-align:left;min-height:76px;padding:.8rem .9rem;border:1px solid var(--line2);background:none;color:var(--ink);font:inherit;cursor:pointer}
+.ops button b{font:300 1.7rem/1 var(--sans);color:var(--bordo)}
+.ops button span{font-size:.92rem}
+.ops button:hover{border-color:var(--bordo)}
+.ops button[aria-pressed="true"]{border-color:var(--bordo);box-shadow:inset 0 0 0 1px var(--bordo);background:#fff}
+.ops button[aria-pressed="true"] span{font-weight:500}
+.ops button:disabled{cursor:default}
+
+.done{margin-top:1.1rem}
+.done .v{font-size:1.5rem;font-weight:300;color:var(--wine)}
+.done p{margin-top:.3rem;font-size:.92rem;color:var(--ink2)}
+.link{background:none;border:0;padding:0;margin-top:.7rem;font:500 .85rem var(--sans);color:var(--bordo);border-bottom:1px solid var(--rose);cursor:pointer}
+
+/* itens */
+.it{border-top:1px solid var(--line);padding:1.2rem 0 .4rem}
+.it:first-of-type{border-top:1px solid var(--bordo)}
+.it .n{font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bordo)}
+.it h3{font-size:1.15rem;line-height:1.3;margin-top:.35rem}
+.it .h{margin-top:.3rem;font-size:.86rem;color:var(--ink2)}
+.f{margin-top:.8rem}
+.f label{display:flex;justify-content:space-between;gap:1rem;font-size:.82rem;color:var(--ink2);margin-bottom:.3rem}
+.f label i{font-style:normal;font-family:var(--mono);font-size:.64rem;color:var(--mute)}
+.f label i.over{color:var(--bordo)}
+textarea{width:100%;min-height:4.4rem;font:400 1rem/1.45 var(--sans);padding:.65rem .75rem;border:1px solid var(--line2);border-radius:0;background:#fff;color:var(--ink);resize:vertical;-webkit-appearance:none}
+textarea:focus{outline:none;border-color:var(--bordo)}
+textarea.short{min-height:2.9rem}
+
+.send{margin-top:1.8rem;border-top:1px solid var(--bordo);padding-top:1.2rem}
+.btn{width:100%;min-height:54px;font:500 1rem var(--sans);background:var(--bordo);color:#fff;border:1px solid var(--bordo);cursor:pointer}
+.btn:hover{background:var(--wine)}
+.btn:disabled{opacity:.35;cursor:default}
+.msg{margin-top:.8rem;font-size:.92rem;color:var(--ink2);min-height:1.4em}
+.msg b{font-weight:500;color:var(--ink)}
+.msg.ok b{color:var(--ok)}
+.msg.err{color:var(--bordo)}
+.foot{margin-top:2.4rem;font-size:.8rem;color:var(--mute);border-top:1px solid var(--line);padding-top:1rem}
+@media print{body{display:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <svg viewBox="0 0 24 40" aria-hidden="true"><path d="M3 2 L10 38 M9 2 L16 38 M15 8 L21 38" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+  <b>Sem Playbook</b><span class="sp"></span>
+  <span class="m" id="mlabel"></span>
+  <button type="button" id="trocar" hidden>Trocar</button>
+</header>
+
+<main>
+  <p class="demo" id="demo" hidden>Modo ensaio: a plataforma ainda não está ligada à planilha. As respostas ficam só neste aparelho.</p>
+
+  <!-- escolha da mesa -->
+  <section id="pick" hidden>
+    <div class="hd"><span class="lbl">Comitê de Pessoas</span><h1>Qual é a sua mesa?</h1>
+      <p>Uma pessoa por mesa usa este formulário. O número está no cartão da mesa.</p></div>
+    <div class="mesas" id="mesas"></div>
+  </section>
+
+  <div id="form" hidden>
+    <!-- 1. inclinação -->
+    <section id="s1">
+      <div class="hd"><span class="lbl">Minuto 6 · Inclinação inicial</span><h1>Para onde a mesa pende agora?</h1>
+        <p>Depois da leitura, antes da conversa. Um toque, sem discussão: é a primeira impressão da mesa, não a decisão.</p></div>
+      <div class="ops" id="incl"></div>
+      <div class="done" id="inclDone" hidden></div>
+    </section>
+
+    <!-- 2. recomendação -->
+    <section id="s2">
+      <div class="hd"><span class="lbl">Minutos 6 a 34 · A recomendação</span><h1>Os quatro itens ao conselho.</h1>
+        <p>Preencham durante a conversa, não no fim. O João lê os quatro itens no telão e faz uma pergunta à mesa.</p></div>
+
+      <div class="it">
+        <span class="n">01 · A proposta</span>
+        <h3>A proposta escolhida, com até duas condições, ou a quarta solução.</h3>
+        <div class="ops" id="prop"></div>
+        <div id="conds">
+          <p class="h" style="margin-top:.9rem">Ajustes de composição, como mudar a força de trabalho de uma área, não contam como condição.</p>
+          <div class="f"><label for="c1">Condição 1 <i data-c="c1"></i></label><textarea id="c1" class="short" data-max="160" placeholder="Opcional"></textarea></div>
+          <div class="f"><label for="c2">Condição 2 <i data-c="c2"></i></label><textarea id="c2" class="short" data-max="160" placeholder="Opcional"></textarea></div>
+        </div>
+        <div id="quarta" hidden>
+          <div class="f"><label for="q4">A quarta solução e o que ela resolve que as três não resolvem <i data-c="q4"></i></label><textarea id="q4" data-max="320"></textarea></div>
+          <p class="h">Pode vir condicionada à validação financeira. Ninguém recalcula custos na mesa.</p>
+        </div>
+      </div>
+
+      <div class="it">
+        <span class="n">02 · A capacidade crítica</span>
+        <h3>A capacidade que sustenta a decisão.</h3>
+        <div class="f"><label for="cop">Na operação <i data-c="cop"></i></label><textarea id="cop" class="short" data-max="140"></textarea></div>
+        <div class="f"><label for="cbo">No back-office <i data-c="cbo"></i></label><textarea id="cbo" class="short" data-max="140"></textarea></div>
+      </div>
+
+      <div class="it">
+        <span class="n">03 · O risco</span>
+        <h3>O risco que o comitê aceita.</h3>
+        <div class="f"><label for="risco"><span></span><i data-c="risco"></i></label><textarea id="risco" data-max="220"></textarea></div>
+      </div>
+
+      <div class="it">
+        <span class="n">04 · O que faria mudar de ideia</span>
+        <h3>O que faria o comitê mudar de ideia.</h3>
+        <div class="f"><label for="mudar"><span></span><i data-c="mudar"></i></label><textarea id="mudar" data-max="220"></textarea></div>
+      </div>
+
+      <div class="send">
+        <button class="btn" type="button" id="enviar" disabled>Enviar ao João</button>
+        <p class="msg" id="msg" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <p class="foot">Se a plataforma falhar, a foto do verso impresso cumpre o envio: entregue ao operador.</p>
+  </div>
+</main>
+
+<script>
+/* Endereço do Apps Script publicado (planilha Sem Playbook · Mesas). Vazio = modo ensaio. */
+const ENDPOINT = "";
+const TOKEN = "sp21-mesa-7f3k";
+const NMESAS = 8;
+const OPS = [
+  {k:'A', n:'Robotizada'},
+  {k:'B', n:'Seletiva'},
+  {k:'C', n:'Capital leve'},
+  {k:'Q', n:'Quarta solução'}
+];
+const FIELDS = ['c1','c2','q4','cop','cbo','risco','mudar'];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const hora = t => new Date(t).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}).replace(':', 'h');
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+
+const qs = new URLSearchParams(location.search);
+let mesa = parseInt(qs.get('m') || store.get('sp-mesa', 0), 10) || 0;
+if (mesa < 1 || mesa > NMESAS) mesa = 0;
+let S = null;
+const key = () => 'sp-mesa-' + mesa;
+const blank = () => ({incl: null, inclAt: null, prop: null, v: {}, sentAt: null, sentHash: null});
+
+async function post(body){
+  if (!ENDPOINT) return {ok: true, ensaio: true};
+  const r = await fetch(ENDPOINT, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(Object.assign({token: TOKEN, mesa}, body))});
+  return r.json();
+}
+
+/* ---------- escolha da mesa ---------- */
+function showPick(){
+  $('#pick').hidden = false; $('#form').hidden = true; $('#trocar').hidden = true; $('#mlabel').textContent = '';
+  $('#mesas').innerHTML = Array.from({length: NMESAS}, (_, i) => `<button type="button" data-m="${i + 1}">${i + 1}</button>`).join('');
+}
+$('#mesas').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (!b) return; mesa = +b.dataset.m; store.set('sp-mesa', mesa); start(); });
+$('#trocar').addEventListener('click', () => { if (confirmTroca()) { mesa = 0; store.set('sp-mesa', 0); showPick(); } });
+function confirmTroca(){
+  const b = $('#trocar');
+  if (b.dataset.arm) { delete b.dataset.arm; b.textContent = 'Trocar'; return true; }
+  b.dataset.arm = '1'; b.textContent = 'Toque de novo';
+  setTimeout(() => { delete b.dataset.arm; b.textContent = 'Trocar'; }, 3000);
+  return false;
+}
+
+/* ---------- formulário ---------- */
+function start(){
+  S = Object.assign(blank(), store.get(key(), {}));
+  $('#pick').hidden = true; $('#form').hidden = false; $('#trocar').hidden = false;
+  $('#mlabel').textContent = 'Mesa ' + mesa;
+  document.title = 'Mesa ' + mesa + ' · Sem Playbook';
+  FIELDS.forEach(f => { $('#' + f).value = S.v[f] || ''; });
+  draw();
+}
+const save = () => store.set(key(), S);
+const opBtns = (sel) => OPS.map(o => `<button type="button" data-k="${o.k}" aria-pressed="${sel === o.k}"><b>${o.k === 'Q' ? '4ª' : o.k}</b><span>${esc(o.n)}</span></button>`).join('');
+const opName = k => { const o = OPS.find(x => x.k === k); return o ? (o.k === 'Q' ? '' : o.k + ' · ') + o.n : ''; };
+
+function payload(){
+  const v = {}; FIELDS.forEach(f => v[f] = ($('#' + f).value || '').trim());
+  if (S.prop === 'Q') { v.c1 = ''; v.c2 = ''; } else v.q4 = '';
+  return {proposta: S.prop, condicao1: v.c1, condicao2: v.c2, quarta: v.q4, cap_operacao: v.cop, cap_backoffice: v.cbo, risco: v.risco, mudar: v.mudar};
+}
+const hash = p => JSON.stringify(p);
+function ready(p){
+  if (!p.proposta) return 'Escolham a proposta.';
+  if (p.proposta === 'Q' && !p.quarta) return 'Descrevam a quarta solução.';
+  if (!p.cap_operacao || !p.cap_backoffice) return 'Falta a capacidade crítica na operação e no back-office.';
+  if (!p.risco) return 'Falta o risco que o comitê aceita.';
+  if (!p.mudar) return 'Falta o que faria o comitê mudar de ideia.';
+  return '';
+}
+
+function draw(){
+  // inclinação
+  $('#incl').innerHTML = opBtns(S.incl);
+  $('#incl').hidden = !!S.incl;
+  const d = $('#inclDone');
+  if (S.incl) {
+    d.hidden = false;
+    d.innerHTML = `<span class="lbl">Registrada às ${hora(S.inclAt)}</span><p class="v">${esc(opName(S.incl))}</p>
+      <p>Agora o celular fica na mesa. A conversa é entre vocês.</p>
+      <button class="link" type="button" id="inclFix">Toquei errado</button>`;
+    $('#inclFix').onclick = () => { S.incl = null; save(); draw(); };
+  } else d.hidden = true;
+  // proposta
+  $('#prop').innerHTML = opBtns(S.prop);
+  $('#conds').hidden = S.prop === 'Q';
+  $('#quarta').hidden = S.prop !== 'Q';
+  counters();
+  status();
+}
+function counters(){
+  document.querySelectorAll('[data-c]').forEach(i => {
+    const t = $('#' + i.dataset.c), max = +t.dataset.max, n = t.value.length;
+    i.textContent = n ? n + '/' + max : ''; i.classList.toggle('over', n > max);
+  });
+}
+function status(text, cls){
+  const p = payload(), miss = ready(p), m = $('#msg'), b = $('#enviar');
+  const over = [...document.querySelectorAll('textarea')].some(t => t.value.length > +t.dataset.max && !t.closest('[hidden]'));
+  b.disabled = !!miss || over || sending;
+  b.textContent = S.sentAt ? 'Reenviar ao João' : 'Enviar ao João';
+  m.className = 'msg' + (cls ? ' ' + cls : '');
+  if (text) { m.innerHTML = text; return; }
+  if (S.sentAt && S.sentHash === hash(p)) { m.className = 'msg ok'; m.innerHTML = `<b>Enviado às ${hora(S.sentAt)}.</b> O João confirma em voz alta.`; b.disabled = true; b.textContent = 'Enviado'; return; }
+  if (S.sentAt) { m.innerHTML = `Enviado às ${hora(S.sentAt)}. ` + (over ? 'Algum campo passou do limite.' : (miss || 'Há mudanças ainda não enviadas.')); return; }
+  m.innerHTML = over ? 'Algum campo passou do limite. Encurtem para caber no telão.' : (miss || 'Tudo pronto para enviar.');
+}
+
+/* eventos */
+$('#incl').addEventListener('click', async e => {
+  const b = e.target.closest('[data-k]'); if (!b || S.incl) return;
+  S.incl = b.dataset.k; S.inclAt = Date.now(); save(); draw();
+  try { const j = await post({acao: 'inclinacao', inclinacao: S.incl}); if (!j || !j.ok) throw 0; }
+  catch (err) { S.incl = null; save(); draw(); $('#incl').insertAdjacentHTML('afterend', '<p class="msg err" id="inclErr">Não registrou. Toquem de novo.</p>'); setTimeout(() => { const x = $('#inclErr'); if (x) x.remove(); }, 4000); }
+});
+$('#prop').addEventListener('click', e => {
+  const b = e.target.closest('[data-k]'); if (!b) return;
+  S.prop = b.dataset.k; save(); draw();
+});
+FIELDS.forEach(f => $('#' + f).addEventListener('input', () => { S.v[f] = $('#' + f).value; save(); counters(); status(); }));
+
+let sending = false;
+$('#enviar').addEventListener('click', async () => {
+  const p = payload(); if (ready(p)) return;
+  sending = true; status('Enviando…');
+  try {
+    const j = await post(Object.assign({acao: 'recomendacao', inclinacao: S.incl || ''}, p));
+    if (!j || !j.ok) throw 0;
+    S.sentAt = Date.now(); S.sentHash = hash(p); save(); sending = false; status();
+  } catch (err) {
+    sending = false;
+    status('Não enviou. Tentem de novo em instantes; se não der, entreguem a foto do verso ao operador.', 'err');
+  }
+});
+
+if (!ENDPOINT) $('#demo').hidden = false;
+if (mesa) { store.set('sp-mesa', mesa); start(); } else showPick();
+</script>
+</body>
+</html>
